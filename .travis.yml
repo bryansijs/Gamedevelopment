@@ -3,10 +3,3 @@ compiler:
   - gcc
   - clang
 script: make && make test
-notifications:
-  email:
-    recipients:
-      - user1@somewhere.com
-      - user2@somewhere.com
-    on_success: change
-    on_failure: always
