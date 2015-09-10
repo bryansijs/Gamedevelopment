@@ -1,14 +1,12 @@
 language: cpp
-
 compiler:
   - gcc
   - clang
-
-script: rake ci
-
-env:
-  - RVM=2.0.0 LANG="en_US.UTF-8"
-  
-os:
-  - linux
-  - osx
+script: make && make test
+notifications:
+  email:
+    recipients:
+      - user1@somewhere.com
+      - user2@somewhere.com
+    on_success: change
+    on_failure: always
