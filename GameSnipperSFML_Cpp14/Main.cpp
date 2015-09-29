@@ -12,6 +12,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <Box2d/Box2D.h>
+#include "LevelImporter.h"
 
 
 game_state coreState;
@@ -57,7 +58,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		std::cout << "Music not found" << std::endl;
 	}
 	
-	Music1.play();
+	//Music1.play();
 	// select the font
 	text.setFont(font); // font is a sf::Font
 	text.setPosition(180, 160);
@@ -70,6 +71,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	text.setRotation(20);
 	// set the text style
 	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+
+
+	LevelImporter l;
 
 	sf::Keyboard::Key d = sf::Keyboard::Key();
 	while (window.isOpen())

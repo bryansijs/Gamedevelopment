@@ -1,0 +1,73 @@
+{ "height":10,
+ "layers":[
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 19, 20, 19, 0, 0, 36, 35, 36, 35, 0, 0, 20, 19, 20, 19, 0, 0, 36, 35, 36, 35, 0, 0, 20, 19, 20, 19, 0, 0, 36, 35, 36, 35, 0, 0, 20, 19, 20, 19, 0, 0, 0, 2, 2, 0, 0],
+         "height":10,
+         "name":"Floor",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":6,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[199, 199, 199, 199, 199, 199, 199, 195, 195, 195, 196, 199, 199, 0, 0, 0, 0, 199, 199, 0, 0, 0, 0, 199, 199, 0, 0, 0, 0, 199, 199, 0, 0, 0, 0, 199, 199, 0, 0, 0, 0, 199, 199, 0, 0, 0, 0, 199, 199, 0, 0, 0, 0, 199, 199, 199, 0, 0, 199, 199],
+         "height":10,
+         "name":"Walls",
+         "opacity":1,
+         "properties":
+            {
+             "collision":"true"
+            },
+         "type":"tilelayer",
+         "visible":true,
+         "width":6,
+         "x":0,
+         "y":0
+        }],
+ "nextobjectid":1,
+ "orientation":"orthogonal",
+ "properties":
+    {
+
+    },
+ "renderorder":"right-down",
+ "tileheight":32,
+ "tilesets":[
+        {
+         "firstgid":1,
+         "image":"I:\/Game Resources\/Tiles\/Sc-fi\/Sci-Fi-Tiles_A1.png",
+         "imageheight":384,
+         "imagewidth":512,
+         "margin":0,
+         "name":"Sci-Fi-Tiles_A1",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tilecount":192,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":193,
+         "image":"I:\/Game Resources\/Tiles\/Sc-fi\/Sci-Fi-Tiles_A2.png",
+         "imageheight":384,
+         "imagewidth":512,
+         "margin":0,
+         "name":"Sci-Fi-Tiles_A2",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tilecount":192,
+         "tileheight":32,
+         "tilewidth":32
+        }],
+ "tilewidth":32,
+ "version":1,
+ "width":6
+}
