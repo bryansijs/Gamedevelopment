@@ -21,7 +21,7 @@ bool quitGame = false;
 
 
 int _tmain(int argc, _TCHAR* argv[])
-{
+{/*
 
 
 	sf::Texture bulletTexture;
@@ -32,10 +32,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	sf::Sprite bulletList[10];
 
 
+	*
 
-	sf::RenderWindow window(sf::VideoMode(640, 480), "Team Echo!");
 
-
+	/*
 	coreState.SetWindow(&window);
 	coreState.SetState(new test_state());
 
@@ -72,117 +72,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	// set the text style
 	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
 
-
+	*/
 	LevelImporter l;
 
-	sf::Keyboard::Key d = sf::Keyboard::Key();
-	while (window.isOpen())
-	{
+	//sf::Keyboard::Key d = sf::Keyboard::Key();
 
-		sf::Sprite sprite(menuTexture);
- 
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-
-			if (sf::Event::KeyPressed)
-			{
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
-				{
-					shape.setFillColor(sf::Color::Cyan);
-				}
-
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
-				{
-					shape.setFillColor(sf::Color::White);
-				}
-
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3))
-				{
-					shape.setFillColor(sf::Color::Red);
-				}
-
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4))
-				{
-					shape.setFillColor(sf::Color::Green);
-				}
-
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num5))
-				{
-					shape.setFillColor(sf::Color::Yellow);
-				}
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num6))
-				{
-					shape.setFillColor(sf::Color::Blue);
-				}
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num7))
-				{
-					shape.setFillColor(sf::Color::Black);
-				}
-
-
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-				{
-
-					for (int i = 0; i < 10; i++)
-					{
-						if (bulletList[i].getPosition().x < 0)
-						{
-							bulletList[i].setTexture(bulletTexture);
-							bulletList[i].setPosition(shape.getPosition().x + shape.getRadius(), shape.getPosition().y + shape.getRadius() / 2);
-					
-							break;
-						}
-					}
-
-				}
-
-
-			}
-		}
-
-
-
-		std::this_thread::sleep_for(std::chrono::milliseconds(10));
-
-		for (int i = 0; i < 9; i++)
-		{
-			if (bulletList[i].getPosition().x >= 0)
-			{
-				bulletList[i].setPosition(bulletList[i].getPosition().x + bulletSpeed, bulletList[i].getPosition().y);
-
-				if (bulletList[i].getPosition().x > window.getSize().x)
-				{
-					bulletList[i].setPosition(-100, -100);
-				}
-			}
-		}
-
-
-		window.clear();
-
-	
-		window.draw(sprite);
-		window.draw(shape);
-		window.draw(text);
-
-		coreState.Update();
-		coreState.Render();
-
-		for (int i = 0; i < 9; i++)
-		{
-			if (bulletList[i].getPosition().x >= 0)
-			{
-				window.draw(bulletList[i]);
-			}
-		}
-
-		window.display();
-
-	
-	}
 
 	
 	return 0;
