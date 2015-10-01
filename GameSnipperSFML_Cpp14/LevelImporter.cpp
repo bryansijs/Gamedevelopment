@@ -21,6 +21,8 @@ struct tileSets
 	int tilecounts;
 	int tilesize;
 	sf::Texture tileImage;
+
+
 };
 
 
@@ -30,6 +32,10 @@ struct  tile
 	int tilelaag; 
 	int x; 
 	int y; 
+	bool isCollision;
+	bool isHazard;
+	int hazardDamage;
+	bool hazardState;
 };
 
 std::vector<tile> tegel;
@@ -124,6 +130,17 @@ void LevelImporter::Prepare()
 				tegeltje.y = j;
 				tegeltje.x = i;
 				tegeltje.tilelaag = tileSetIndex;
+
+
+				/* 
+				collisions en hazards inladen;
+
+					
+					value["properties"] dan  properties = value["properties"] 
+					dan kijken of collison,hazard, hazard state aanwezig is.
+
+
+				*/
 
 				tegel.push_back(tegeltje);
 			}
