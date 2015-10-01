@@ -11,6 +11,7 @@
 
 using namespace std;
 
+sf::RenderWindow* window;
 
 struct tileSets
 {
@@ -22,68 +23,47 @@ struct tileSets
 	sf::Texture tileImage;
 };
 
+
 struct  tile
 {
 	sf::Sprite sprite;
+	int tilelaag; 
+	int x; 
+	int y; 
 };
 
-constexpr int n(int levelheight)
+std::vector<tile> tegel;
+std::ifstream st;
+std::vector<tileSets> tileset;
+bool parsingSuccessful = false;
+Json::Reader reader;
+Json::Value root;
+
+
+void LevelImporter::Prepare()
 {
-	return levelheight;
-}
-
-
-LevelImporter::LevelImporter()
-{
-	Json::Reader reader;
-
-	std::ifstream st("./Resources/levels/level1.json", std::ifstream::binary);
-
-	Json::Value root;   // will contains the root value after parsing.
-	bool parsingSuccessful = reader.parse(st, root, false);
-	if (!parsingSuccessful)
-	{
-		// report to the user the failure and their locations in the document.
-		std::cout << reader.getFormattedErrorMessages() << "\n";
-	}
-
-
-	//Tile 0 is een blanco;
-	//Meerdere tilesets verhooght het nummer dus als tileset 1 192 tiles heeft gaat die op 2 verder met 193;
-
-	//Eerst ophalen van de hoogte van tilecount
-		//"height":10,	 "width":6,  "tilewidth":32,
-	sf::Texture image;
-
-
-
-
-
 	int tilesize = root["tilewidth"].asInt();
 	int levelheight = root["height"].asInt();
 	int levelwidht = root["width"].asInt();
-
 
 	sf::IntRect subRect;
 	subRect.width = tilesize;
 	subRect.height = tilesize;
 
-	/*Probeer maar variable te krijgen*/
-	tileSets tileset[2];
-	tile tegel[2][10][10];
-
 	for (Json::Value::iterator it = root["tilesets"].begin(); it != root["tilesets"].end(); ++it)
 	{
 		Json::Value value = (*it);
-		tileset[it.key().asInt()].firstgrid = value["firstgid"].asInt();
-		tileset[it.key().asInt()].imageheight = value["imageheight"].asInt();
-		tileset[it.key().asInt()].imagewidth = value["imagewidth"].asInt();
-		tileset[it.key().asInt()].tilecounts = value["tilecount"].asInt();
-		tileset[it.key().asInt()].tilesize = value["tilewidth"].asInt();
-		tileset[it.key().asInt()].tileImage.loadFromFile(value["image"].asString());
+
+		tileSets t;
+		t.firstgrid = value["firstgid"].asInt();
+		t.imageheight = value["imageheight"].asInt();
+		t.imagewidth = value["imagewidth"].asInt();
+		t.tilecounts = value["tilecount"].asInt();
+		t.tilesize = value["tilewidth"].asInt();
+		t.tileImage.loadFromFile(value["image"].asString());
+
+		tileset.push_back(t);
 	}
-
-
 
 	for (Json::Value::iterator it = root["layers"].begin(); it != root["layers"].end(); ++it)
 	{
@@ -91,13 +71,16 @@ LevelImporter::LevelImporter()
 
 		const Json::Value array = value["data"];
 
-		//Moet variable worden;
-		int temp_array[10][6];
-
 		int indentifier = 0;
+		//Moet variable worden;
+		typedef	std::vector<std::vector<int> > temp_vector;
+
+		temp_vector temp_array(levelheight, vector<int>(levelwidht));
+
 		for (int i = 0; i < levelheight; i++)
 			for (int j = 0; j < levelwidht; j++)
 			{
+
 				temp_array[i][j] = array[indentifier].asInt();
 				indentifier++;
 			}
@@ -105,17 +88,14 @@ LevelImporter::LevelImporter()
 		for (int i = 0; i < levelheight; i++)
 			for (int j = 0; j < levelwidht; j++)
 			{
-
-			
 				int tileSetIndex = 0;
 				int tileStartIndex = 0;
 
 				int temp_int = temp_array[i][j];
 
-				for (int tileIndex = 0; tileIndex < (sizeof(tileset) / sizeof(*tileset)); tileIndex++)
+				for (size_t tileIndex = 0; tileIndex < tileset.size(); tileIndex++)
 				{
-					
-					if (temp_int >= tileset[tileIndex].firstgrid && temp_int <=( tileset[tileIndex].firstgrid + tileset[tileIndex].tilecounts))
+					if (temp_int >= tileset[tileIndex].firstgrid && temp_int < (tileset[tileIndex].firstgrid + tileset[tileIndex].tilecounts))
 					{
 						tileSetIndex = tileIndex;
 						tileStartIndex = tileset[tileIndex].firstgrid;
@@ -123,55 +103,59 @@ LevelImporter::LevelImporter()
 					}
 				}
 
-
-				tileStartIndex -= 1;
 				int widht_tileCount = tileset[tileSetIndex].imagewidth / tileset[tileSetIndex].tilesize;
 
+				if (temp_int == 0)
+					continue;
 
-			
-				if (temp_int == 0) continue;
+				int topindex = (temp_int - tileStartIndex) / (widht_tileCount);
 
+				int leftindex = (temp_int - tileStartIndex) - (widht_tileCount * topindex);
 
-				int topindex = (temp_int - tileStartIndex) / (widht_tileCount );
-				int leftindex = (temp_int-tileStartIndex) - (widht_tileCount * topindex);
+				tile tegeltje;
 
-				tegel[it.key().asInt()][i][j].sprite = sf::Sprite(tileset[tileSetIndex].tileImage);
-				subRect.left = (leftindex - 1) * tilesize;
+				tegeltje.sprite = sf::Sprite(tileset[tileSetIndex].tileImage);
+
+				subRect.left = (leftindex)* tilesize;
 				subRect.top = topindex * tilesize;
+				tegeltje.sprite.setTextureRect(subRect);
+				tegeltje.sprite.setPosition(float(j*tilesize), float(i*tilesize));
 
-				tegel[it.key().asInt()][i][j].sprite.setTextureRect(subRect);
-				tegel[it.key().asInt()][i][j].sprite.setPosition(j*tilesize, i*tilesize);
+				tegeltje.y = j;
+				tegeltje.x = i;
+				tegeltje.tilelaag = tileSetIndex;
+
+				tegel.push_back(tegeltje);
 			}
 
 
 	}
-	sf::RenderWindow window(sf::VideoMode(640, 480), "Team Echo!");
+}
 
-	while (window.isOpen())
+void LevelImporter::Import(std::string JSON)
+{
+		st.open(JSON, std::ifstream::binary);
+
+	bool parsingSuccessful = reader.parse(st, root, false);
+	if (!parsingSuccessful)
 	{
-
-		window.clear();
-		for (int a = 0; a < 2; a++)
-		for (int i = 0; i < levelheight; ++i) {
-			for (int j = 0; j < levelwidht; ++j) {
-				window.draw(tegel[a][i][j].sprite);
-			}
-		}
-
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-
-		}
-
-
-
-		window.display();
-
-
+		std::cout << reader.getFormattedErrorMessages() << "\n";
 	}
+}
+
+void LevelImporter::Teken(sf::RenderWindow* window)
+{
+	for (size_t i = 0; i < tegel.size(); i++)
+		window->draw(tegel.at(i).sprite);
+}
+
+
+LevelImporter::LevelImporter()
+{
+
+
+
+
 }
 
 

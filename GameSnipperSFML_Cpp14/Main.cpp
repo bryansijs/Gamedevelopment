@@ -13,72 +13,39 @@
 #include <SFML/Audio.hpp>
 #include <Box2d/Box2D.h>
 #include "LevelImporter.h"
+#include <string>
 
 
 game_state coreState;
 bool quitGame = false;
-
+using namespace std;
 
 
 int _tmain(int argc, _TCHAR* argv[])
-{/*
+{
+	LevelImporter* l = new LevelImporter();
+	l->Import("./Resources/levels/SpaceTest.json");
 
+	l->Prepare();
 
-	sf::Texture bulletTexture;
-	bulletTexture.loadFromFile("Resources/sprites/bullet.png");
-	sf::Sprite shapey(bulletTexture);
+	sf::RenderWindow window(sf::VideoMode(640, 480), "Team Echo!");
 
-	int bulletSpeed(20);
-	sf::Sprite bulletList[10];
-
-
-	*
-
-
-	/*
-	coreState.SetWindow(&window);
-	coreState.SetState(new test_state());
-
-
-	sf::Texture menuTexture;
-	menuTexture.loadFromFile("Resources/background/backgroundd.png");
-
-	sf::CircleShape shape(100.f);
-	shape.setPosition(400, 100);
-	sf::Font font;
-	font.loadFromFile("Resources/arial.ttf");
-	shape.setFillColor(sf::Color::Cyan);
-	std::cout << "Debug menu laat fouten zien." << std::endl;
-
-	sf::Text text;
-	sf::Music Music1;
-
-	if (!Music1.openFromFile("Resources/music/overworld.ogg"))
+	while (window.isOpen())
 	{
-		std::cout << "Music not found" << std::endl;
+		window.clear();
+
+		l->Teken(&window);
+
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+
+		window.display();
 	}
-	
-	//Music1.play();
-	// select the font
-	text.setFont(font); // font is a sf::Font
-	text.setPosition(180, 160);
-	// set the string to display
-	text.setString("Welcome team\nEcho");
-	// set the character size
-	text.setCharacterSize(24); // in pixels, not points!
-	// set the color
-	text.setColor(sf::Color::White);
-	text.setRotation(20);
-	// set the text style
-	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-
-	*/
-	LevelImporter l;
-
-	//sf::Keyboard::Key d = sf::Keyboard::Key();
-
-
-	
+		
 	return 0;
 }
 
