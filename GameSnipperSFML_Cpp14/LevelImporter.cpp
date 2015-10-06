@@ -7,6 +7,7 @@
 #include <vector>
 #include <string>
 #include <SFML\Graphics.hpp>
+#include <Box2D/Box2D.h>
 #define JSON_DLL
 
 using namespace std;
@@ -29,13 +30,16 @@ struct tileSets
 struct  tile
 {
 	sf::Sprite sprite;
-	int tilelaag; 
-	int x; 
-	int y; 
+	int tilelaag;
+	int x;
+	int y;
 	bool isCollision;
+	bool isVisible;
 	bool isHazard;
 	int hazardDamage;
+	int hazardIndex;
 	bool hazardState;
+	b2BodyDef* bodyDef;
 };
 
 std::vector<tile> tegel;
@@ -127,20 +131,62 @@ void LevelImporter::Prepare()
 				tegeltje.sprite.setTextureRect(subRect);
 				tegeltje.sprite.setPosition(float(j*tilesize), float(i*tilesize));
 
-				tegeltje.y = j;
-				tegeltje.x = i;
+				tegeltje.y = j*tilesize;
+				tegeltje.x = i*tilesize;
 				tegeltje.tilelaag = tileSetIndex;
 
 
-				/* 
-				collisions en hazards inladen;
+				tegeltje.isVisible = true;
 
-					
-					value["properties"] dan  properties = value["properties"] 
-					dan kijken of collison,hazard, hazard state aanwezig is.
+				tegeltje.isCollision = false;
+				tegeltje.isHazard = false;
+				tegeltje.hazardState = false;
+				tegeltje.hazardDamage = 0;
+				tegeltje.hazardIndex  = 0;
 
+				if (value.isMember("properties"))
+				{
+					Json::Value props = value["properties"];
 
-				*/
+					if (props.isMember("isCollision"))
+					{
+						if (value["properties"]["isCollision"].asString() == "true")
+						{
+							tegeltje.isCollision = true;
+							tegeltje.bodyDef = new b2BodyDef();
+
+							tegeltje.bodyDef->type = b2_staticBody;
+							tegeltje.bodyDef->position.Set(tegeltje.x, tegeltje.y);
+						}
+					}
+
+					if (props.isMember("isHazard"))
+					{
+						if (value["properties"]["isHazard"].asString() == "true")
+							tegeltje.isHazard = true;
+
+					}
+
+					if (props.isMember("hazardState"))
+					{
+						if (value["properties"]["hazardState"].asString() == "true")
+							tegeltje.hazardState = true;
+
+					}
+
+					if (props.isMember("hazardIndex"))
+					{
+						string index = value["properties"]["hazardIndex"].asString();
+						tegeltje.hazardIndex = atoi(index.c_str());
+					}
+
+					if (props.isMember("hazardDamage"))
+					{
+						string dps = value["properties"]["hazardDamage"].asString();
+						tegeltje.hazardDamage = atoi(dps.c_str());
+					}
+
+				}
 
 				tegel.push_back(tegeltje);
 			}
@@ -151,7 +197,7 @@ void LevelImporter::Prepare()
 
 void LevelImporter::Import(std::string JSON)
 {
-		st.open(JSON, std::ifstream::binary);
+	st.open(JSON, std::ifstream::binary);
 
 	bool parsingSuccessful = reader.parse(st, root, false);
 	if (!parsingSuccessful)
@@ -163,7 +209,20 @@ void LevelImporter::Import(std::string JSON)
 void LevelImporter::Teken(sf::RenderWindow* window)
 {
 	for (size_t i = 0; i < tegel.size(); i++)
-		window->draw(tegel.at(i).sprite);
+		if (tegel.at(i).isVisible)
+			window->draw(tegel.at(i).sprite);
+}
+
+
+void LevelImporter::Update()
+{ /*
+	for (size_t i = 0; i < tegel.size(); i++)
+		if (tegel.at(i).isHazard)
+			if (tegel.at(i).hazardIndex == 1) {
+				tegel.at(i).hazardState = !tegel.at(i).hazardState;
+				tegel.at(i).isVisible = !tegel.at(i).isVisible;
+			}*/
+	
 }
 
 

@@ -24,11 +24,11 @@ using namespace std;
 int _tmain(int argc, _TCHAR* argv[])
 {
 	LevelImporter* l = new LevelImporter();
-	l->Import("./Resources/levels/SpaceTest.json");
+	l->Import("./Resources/levels/Level_1.json");
 
 	l->Prepare();
 
-	sf::RenderWindow window(sf::VideoMode(640, 480), "Team Echo!");
+	sf::RenderWindow window(sf::VideoMode(1280, 960), "Team Echo!");
 
 	while (window.isOpen())
 	{
@@ -41,6 +41,13 @@ int _tmain(int argc, _TCHAR* argv[])
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+			{
+				l->Update();
+			}
+
+
 		}
 
 		window.display();

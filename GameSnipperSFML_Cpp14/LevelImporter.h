@@ -17,7 +17,7 @@ public:
 	void Teken(sf::RenderWindow* window);
 	void 	Import(std::string JSON);
 	void Prepare();
-
+	void Update();
 private :
 		sf::RenderWindow window;
 
