@@ -14,18 +14,18 @@
         {
          "draworder":"topdown",
          "height":0,
-         "name":"Enemies",
+         "name":"Objecten",
          "objects":[
                 {
                  "height":27,
                  "id":1,
-                 "name":"Enemy 4",
+                 "name":"Enemy4",
                  "properties":
                     {
-
+                     "EnemyType":"runner"
                     },
                  "rotation":0,
-                 "type":"Run",
+                 "type":"Enemy",
                  "visible":true,
                  "width":24,
                  "x":131,
@@ -34,13 +34,13 @@
                 {
                  "height":27,
                  "id":2,
-                 "name":"Enemy 3",
+                 "name":"Enemy3",
                  "properties":
                     {
-
+                     "EnemyType":"normal"
                     },
                  "rotation":0,
-                 "type":"Run",
+                 "type":"Enemy",
                  "visible":true,
                  "width":27,
                  "x":427,
@@ -49,13 +49,13 @@
                 {
                  "height":25,
                  "id":3,
-                 "name":"Enemy 2",
+                 "name":"Enemy2",
                  "properties":
                     {
-
+                     "EnemyType":"normal"
                     },
                  "rotation":0,
-                 "type":"Normal",
+                 "type":"Enemy",
                  "visible":true,
                  "width":28,
                  "x":248,
@@ -64,13 +64,13 @@
                 {
                  "height":35,
                  "id":4,
-                 "name":"Enemey 1",
+                 "name":"Enemy1",
                  "properties":
                     {
-
+                     "EnemyType":"runner"
                     },
                  "rotation":0,
-                 "type":"Normal",
+                 "type":"Enemy",
                  "visible":true,
                  "width":34,
                  "x":761,
@@ -79,17 +79,33 @@
                 {
                  "height":37,
                  "id":5,
-                 "name":"Enemy 0 ",
+                 "name":"Enemy0 ",
                  "properties":
                     {
-
+                     "EnemyType":"normal"
                     },
                  "rotation":0,
-                 "type":"Normal",
+                 "type":"Enemy",
                  "visible":true,
                  "width":32,
-                 "x":874,
-                 "y":200
+                 "x":967,
+                 "y":178
+                }, 
+                {
+                 "height":32,
+                 "id":19,
+                 "name":"Switch1",
+                 "properties":
+                    {
+                     "State":"false",
+                     "hazardIndex":"1"
+                    },
+                 "rotation":0,
+                 "type":"Switch",
+                 "visible":true,
+                 "width":32,
+                 "x":479,
+                 "y":640
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -160,7 +176,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":7,
+ "nextobjectid":20,
  "orientation":"orthogonal",
  "properties":
     {

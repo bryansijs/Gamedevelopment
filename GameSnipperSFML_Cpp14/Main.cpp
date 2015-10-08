@@ -46,6 +46,14 @@ int _tmain(int argc, _TCHAR* argv[])
 			{
 				l->Update();
 			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+			{
+				for (int i = 0; i < l->getObject().size(); i++)
+				{
+					l->ObjectOfEnemy(i);
+					cout << l->getThis(i)->name << endl;
+				}
+			}
 
 
 		}

@@ -27,6 +27,8 @@ struct tileSets
 };
 
 
+
+
 struct  tile
 {
 	sf::Sprite sprite;
@@ -48,6 +50,8 @@ std::vector<tileSets> tileset;
 bool parsingSuccessful = false;
 Json::Reader reader;
 Json::Value root;
+
+
 
 
 void LevelImporter::Prepare()
@@ -81,8 +85,31 @@ void LevelImporter::Prepare()
 
 		const Json::Value array = value["data"];
 
+		if (value.isMember("objects"))
+		{
+			int qi = 0;
+			for (Json::Value::iterator oit = value["objects"].begin(); oit != value["objects"].end(); ++oit)	
+			{
+
+			
+				Json::Value val = (*oit);
+				
+				if (val["type"].asString() == "Enemy")
+				{
+					cout << val["EnemyType"] << endl;
+					t_Enemy *e = new t_Enemy();
+					e->setExtra("enemy " + to_string(qi));
+					objecten.push_back(e); qi++;
+				}
+				else
+				{
+					t_Object *e = new t_Object();
+					e->name = "Hello";
+					objecten.push_back(e); ;
+				}
+			}
+		}
 		int indentifier = 0;
-		//Moet variable worden;
 		typedef	std::vector<std::vector<int> > temp_vector;
 
 		temp_vector temp_array(levelheight, vector<int>(levelwidht));
