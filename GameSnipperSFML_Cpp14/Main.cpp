@@ -24,17 +24,44 @@ using namespace std;
 int _tmain(int argc, _TCHAR* argv[])
 {
 	LevelImporter* l = new LevelImporter();
-	l->Import("./Resources/levels/Level_1.json");
+	l->Import("./Resources/levels/Level_New.json");
 
 	l->Prepare();
 
-	sf::RenderWindow window(sf::VideoMode(1280, 960), "Team Echo!");
+	sf::RenderWindow window(sf::VideoMode(960, 640), "Team Echo!");
+
+	int value = 0;
+	int max = 0;
+	sf::FloatRect rect(value, 0, 960, 640);
+	sf::View view;
+	view.reset(rect);
+	bool moveDown = true;
+
+	window.setView(view);
 
 	while (window.isOpen())
 	{
 		window.clear();
 
 		l->Teken(&window);
+
+		if (moveDown)
+		{
+			if (value < max)
+			{
+				view.move(0, 2.0f);
+				value++;
+			}
+		}
+		else
+		{
+			if (value > max)
+			{
+				view.move(0, -2.0f);
+				value--;
+			}
+		}
+		
 
 		sf::Event event;
 		while (window.pollEvent(event))
@@ -44,7 +71,13 @@ int _tmain(int argc, _TCHAR* argv[])
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 			{
-				l->Update();
+				max += 320;
+				moveDown = true;
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+			{
+				max -= 320;
+				moveDown = false;
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 			{
@@ -54,10 +87,8 @@ int _tmain(int argc, _TCHAR* argv[])
 					cout << l->getThis(i)->name << endl;
 				}
 			}
-
-
 		}
-
+		window.setView(view);
 		window.display();
 	}
 		
