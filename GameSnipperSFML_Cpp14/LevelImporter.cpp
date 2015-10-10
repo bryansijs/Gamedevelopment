@@ -90,10 +90,7 @@ void LevelImporter::Prepare()
 			int qi = 0;
 			for (Json::Value::iterator oit = value["objects"].begin(); oit != value["objects"].end(); ++oit)	
 			{
-
-			
-				Json::Value val = (*oit);
-				
+				Json::Value val = (*oit);	
 				if (val["type"].asString() == "Enemy")
 				{
 					cout << val["EnemyType"] << endl;
