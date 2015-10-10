@@ -161,6 +161,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="game_state.h" />
     <ClInclude Include="LevelImporter.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="test_state.h" />
@@ -179,6 +180,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="test_state.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GameSnipperSFML_Cpp14.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\levels\Level_New.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

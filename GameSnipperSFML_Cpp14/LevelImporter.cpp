@@ -74,7 +74,7 @@ void LevelImporter::Prepare()
 		t.imagewidth = value["imagewidth"].asInt();
 		t.tilecounts = value["tilecount"].asInt();
 		t.tilesize = value["tilewidth"].asInt();
-		t.tileImage.loadFromFile(value["image"].asString());
+		t.tileImage.loadFromFile("./Resources/tiles/" + value["name"].asString() + ".png");
 
 		tileset.push_back(t);
 	}
