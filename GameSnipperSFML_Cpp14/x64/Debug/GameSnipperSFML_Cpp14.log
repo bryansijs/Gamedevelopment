@@ -1,20 +1,15 @@
-﻿Build started 29-9-2015 09:38:58.
-Project "C:\Users\Bryan\Source\Repos\Gamedevelopment\GameSnipperSFML_Cpp14\GameSnipperSFML_Cpp14.vcxproj" on node 2 (Build target(s)).
-ClCompile:
-  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\x86_amd64\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"x64\Debug\GameSnipperSFML_Cpp14.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc140.pdb" /Gd /TP /errorReport:prompt GameObject.cpp Main.cpp Object_Manager.cpp game_state.cpp test_state.cpp
-  test_state.cpp
-c:\users\bryan\source\repos\gamedevelopment\gamesnippersfml_cpp14\object_manager.h(6): fatal error C1083: Cannot open include file: 'Box2D/Box2D.h': No such file or directory
-  game_state.cpp
-c:\users\bryan\source\repos\gamedevelopment\gamesnippersfml_cpp14\game_state.h(3): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
-  Object_Manager.cpp
-c:\users\bryan\source\repos\gamedevelopment\gamesnippersfml_cpp14\object_manager.h(6): fatal error C1083: Cannot open include file: 'Box2D/Box2D.h': No such file or directory
-  Main.cpp
-c:\users\bryan\source\repos\gamedevelopment\gamesnippersfml_cpp14\game_state.h(3): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
-  GameObject.cpp
-c:\users\bryan\source\repos\gamedevelopment\gamesnippersfml_cpp14\gameobject.h(3): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
-  Generating Code...
-Done Building Project "C:\Users\Bryan\Source\Repos\Gamedevelopment\GameSnipperSFML_Cpp14\GameSnipperSFML_Cpp14.vcxproj" (Build target(s)) -- FAILED.
+﻿Build started 29-9-2015 11:28:34.
+     1>Project "D:\Projects\C++\Gamedevelopment\GameSnipperSFML_Cpp14\GameSnipperSFML_Cpp14.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         D:\Programming\visual studio\Visual Studio 2015\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Projects\C++\Gamedevelopment\x64\Debug\GameSnipperSFML_Cpp14.exe" /INCREMENTAL /NOLOGO box2d.lib "sfml-audio-d.lib" "sfml-graphics-d.lib" "sfml-main-d.lib" "sfml-network-d.lib" "sfml-system-d.lib" "sfml-window-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"D:\Projects\C++\Gamedevelopment\x64\Debug\GameSnipperSFML_Cpp14.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Projects\C++\Gamedevelopment\x64\Debug\GameSnipperSFML_Cpp14.lib" /MACHINE:X64 x64\Debug\GameObject.obj
+         x64\Debug\game_state.obj
+         x64\Debug\Main.obj
+         x64\Debug\Object_Manager.obj
+         x64\Debug\stdafx.obj
+         x64\Debug\test_state.obj
+     1>sfml-graphics-d.lib(sfml-graphics-d-2.dll) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64'
+     1>Done Building Project "D:\Projects\C++\Gamedevelopment\GameSnipperSFML_Cpp14\GameSnipperSFML_Cpp14.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:00.75
+Time Elapsed 00:00:00.09

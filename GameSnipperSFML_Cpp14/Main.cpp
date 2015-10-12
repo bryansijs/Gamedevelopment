@@ -12,175 +12,198 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <Box2d/Box2D.h>
+#include "LevelImporter.h"
+#include <string>
 
 
 game_state coreState;
 bool quitGame = false;
+using namespace std;
+
+bool doEvents = true;
+
+bool moveDown = true;
+int t_value = 0;
+int t_max = 0;
+
+bool moveRight = true;
+int r_value = 0;
+int r_max = 0;
+
+
+void updateViewPort(sf::Vector2i &worldPos)
+{
+	//updateVP
+	if (worldPos.y > 640)
+	{
+		doEvents = false;
+		t_max += 320;
+		moveDown = true;
+	}
+
+	if (worldPos.y < 0)
+	{
+		doEvents = false;
+		t_max -= 320;
+		moveDown = false;
+	}
+
+	if (worldPos.x > 960)
+	{
+		doEvents = false;
+		r_max += 480;
+		moveRight = true;
+	}
+
+	if (worldPos.x < 0)
+	{
+		doEvents = false;
+		r_max -= 480;
+		moveRight = false;
+	}
+}
+
+void MoveView(sf::View &view)
+{
+	if (moveDown)
+	{
+		if (t_value < t_max)
+		{
+			view.move(0, 2.0f);
+			t_value++;
+		}
+	}
+	else
+	{
+		if (t_value > t_max)
+		{
+			view.move(0, -2.0f);
+			t_value--;
+		}
+	}
+
+	if (moveRight)
+	{
+		if (r_value < r_max)
+		{
+			view.move(2.0f, 0);
+			r_value++;
+		}
+	}
+	else
+	{
+		if (r_value > r_max)
+		{
+			view.move(-2.0f, 0);
+			r_value--;
+		}
+	}
+
+	if (t_value == t_max && r_value == r_max)
+	{
+		doEvents = true;
+	}
+}
 
 
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	LevelImporter* l = new LevelImporter();
+	l->Import("./Resources/levels/Level_New.json");
+
+	l->Prepare();
+
+	sf::RenderWindow window(sf::VideoMode(960, 640), "Team Echo!");
 
 
-	sf::Texture bulletTexture;
-	bulletTexture.loadFromFile("Resources/sprites/bullet.png");
-	sf::Sprite shapey(bulletTexture);
-
-	int bulletSpeed(20);
-	sf::Sprite bulletList[10];
+	sf::FloatRect rect(0, 0, 960, 640);
+	sf::View view;
 
 
+	sf::CircleShape shape(25.0f);
+	shape.setFillColor(sf::Color::Magenta);
+	shape.setPosition(50, 50);
 
-	sf::RenderWindow window(sf::VideoMode(640, 480), "Team Echo!");
+	view.reset(rect);
 
+	window.setView(view);
 
-	coreState.SetWindow(&window);
-	coreState.SetState(new test_state());
-
-
-	sf::Texture menuTexture;
-	menuTexture.loadFromFile("Resources/background/backgroundd.png");
-
-	sf::CircleShape shape(100.f);
-	shape.setPosition(400, 100);
-	sf::Font font;
-	font.loadFromFile("Resources/arial.ttf");
-	shape.setFillColor(sf::Color::Cyan);
-	std::cout << "Debug menu laat fouten zien." << std::endl;
-
-	sf::Text text;
-	sf::Music Music1;
-
-	if (!Music1.openFromFile("Resources/music/overworld.ogg"))
-	{
-		std::cout << "Music not found" << std::endl;
-	}
-	
-	Music1.play();
-	// select the font
-	text.setFont(font); // font is a sf::Font
-	text.setPosition(180, 160);
-	// set the string to display
-	text.setString("Welcome team\nEcho");
-	// set the character size
-	text.setCharacterSize(24); // in pixels, not points!
-	// set the color
-	text.setColor(sf::Color::White);
-	text.setRotation(20);
-	// set the text style
-	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-
-	sf::Keyboard::Key d = sf::Keyboard::Key();
 	while (window.isOpen())
 	{
-
-		sf::Sprite sprite(menuTexture);
- 
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-
-			if (sf::Event::KeyPressed)
-			{
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
-				{
-					shape.setFillColor(sf::Color::Cyan);
-				}
-
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
-				{
-					shape.setFillColor(sf::Color::White);
-				}
-
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3))
-				{
-					shape.setFillColor(sf::Color::Red);
-				}
-
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4))
-				{
-					shape.setFillColor(sf::Color::Green);
-				}
-
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num5))
-				{
-					shape.setFillColor(sf::Color::Yellow);
-				}
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num6))
-				{
-					shape.setFillColor(sf::Color::Blue);
-				}
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num7))
-				{
-					shape.setFillColor(sf::Color::Black);
-				}
-
-
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-				{
-
-					for (int i = 0; i < 10; i++)
-					{
-						if (bulletList[i].getPosition().x < 0)
-						{
-							bulletList[i].setTexture(bulletTexture);
-							bulletList[i].setPosition(shape.getPosition().x + shape.getRadius(), shape.getPosition().y + shape.getRadius() / 2);
-					
-							break;
-						}
-					}
-
-				}
-
-
-			}
-		}
-
-
-
-		std::this_thread::sleep_for(std::chrono::milliseconds(10));
-
-		for (int i = 0; i < 9; i++)
-		{
-			if (bulletList[i].getPosition().x >= 0)
-			{
-				bulletList[i].setPosition(bulletList[i].getPosition().x + bulletSpeed, bulletList[i].getPosition().y);
-
-				if (bulletList[i].getPosition().x > window.getSize().x)
-				{
-					bulletList[i].setPosition(-100, -100);
-				}
-			}
-		}
-
-
 		window.clear();
 
-	
-		window.draw(sprite);
-		window.draw(shape);
-		window.draw(text);
+		l->Teken(&window);
 
-		coreState.Update();
-		coreState.Render();
+		MoveView(view);
+		
+		sf::Vector2f s = shape.getPosition();
+		sf::Vector2i worldPos = window.mapCoordsToPixel(s);
 
-		for (int i = 0; i < 9; i++)
-		{
-			if (bulletList[i].getPosition().x >= 0)
+		sf::Event event;
+
+		if (doEvents) {
+			while (window.pollEvent(event))
 			{
-				window.draw(bulletList[i]);
+				if (event.type == sf::Event::Closed)
+					window.close();
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+				{
+					t_max += 160;
+					moveDown = true;
+				}
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+				{
+					t_max -= 160;
+					moveDown = false;
+				}
+
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+				{
+					shape.setPosition(shape.getPosition().x, shape.getPosition().y - 10);
+				}
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+				{
+					shape.setPosition(shape.getPosition().x, shape.getPosition().y + 10);
+				}
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+				{
+					shape.setPosition(shape.getPosition().x - 10, shape.getPosition().y);
+				}
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+				{
+					shape.setPosition(shape.getPosition().x + 10, shape.getPosition().y);
+				}
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+				{
+					cout << "x: " << worldPos.x << " y: " << worldPos.y << endl;
+
+				}
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+				{
+					for (int i = 0; i < l->getObject().size(); i++)
+					{
+						l->ObjectOfEnemy(i);
+						cout << l->getThis(i)->name << endl;
+					}
+				}
+
+				updateViewPort(worldPos);
 			}
 		}
 
+		window.setView(view);
+
+		window.draw(shape);
+
 		window.display();
-
-	
 	}
-
-	
+		
 	return 0;
 }
 
