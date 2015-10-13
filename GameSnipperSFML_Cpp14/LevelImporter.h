@@ -94,8 +94,6 @@ public:
 
 
 private:
-	sf::RenderWindow window;
-
 	void PrepareGameObjects();
 	void PrepareTileSets();
 	void PrepareTiles();
