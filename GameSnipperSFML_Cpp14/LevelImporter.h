@@ -23,7 +23,7 @@ public:
 	void setHazardState(int hazardIndex, bool hazardState);
 	void setLayerVisibility(int layerIndex, bool isVisible);
 
-	//Tijdelijke Objecten Struct Deze zullen compleet verdwijnen als de baseGame objecten ofzijns
+	//Tijdelijke Objecten Struct Deze zullen compleet verdwijnen als de baseGame objecten af zijn
 	struct t_Object
 	{
 
@@ -78,9 +78,6 @@ public:
 	struct t_Enemy : t_Object
 	{
 		std::string extra;
-
-		
-
 		t_Enemy()
 		{
 			color = sf::Color::Green;
@@ -124,6 +121,7 @@ public:
 			color =sf::Color::Red;
 		}
 	};
+
 	//Tijdelijke objecten functies ombouwen naar de base
 	std::vector<t_Object*> game_objects;
 
@@ -161,9 +159,5 @@ private:
 	int levelHeight;
 	int levelWidht;
 	sf::IntRect subRect;
-
-
-
-
 };
 

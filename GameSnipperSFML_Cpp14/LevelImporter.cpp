@@ -77,11 +77,8 @@ enum string_code {
 	Door,
 	StartTile,
 	EndTile,
-	WarpTile,
-
-
+	WarpTile
 };
-
 
 string_code hashit(std::string const& inString) {
 	if (inString == "Enemy") return Enemy;
@@ -91,8 +88,6 @@ string_code hashit(std::string const& inString) {
 	if (inString == "EndTile") return EndTile;
 	if (inString == "WarpTile") return WarpTile;
 }
-
-
 
 void LevelImporter::PrepareGameObjects()
 {
@@ -209,7 +204,7 @@ void LevelImporter::PrepareTiles()
 		Json::Value temp_data_array = value["data"];
 
 		int indentifier = 0;
-		typedef	std::vector<std::vector<int> > multi_Vector;
+		typedef	std::vector<std::vector<int>> multi_Vector;
 
 		multi_Vector data_vector(levelHeight, vector<int>(levelWidht));
 
@@ -293,7 +288,6 @@ void LevelImporter::PrepareTiles()
 						if (value["properties"]["isEnemyCollidable"].asString() == "true")
 						{
 							insert_tile.isEnemyCollidable = true;
-
 							insert_tile.enemyBodyDef = new b2BodyDef();
 
 							insert_tile.enemyBodyDef->type = b2_staticBody;

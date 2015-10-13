@@ -1,6 +1,3 @@
-// GameSnippet.cpp : Defines the entry point for the console application.
-//
-
 #include "stdafx.h"
 #include "game_state.h"
 #include "test_state.h"
@@ -14,7 +11,6 @@
 #include <Box2d/Box2D.h>
 #include "LevelImporter.h"
 #include <string>
-
 
 game_state coreState;
 bool quitGame = false;
@@ -111,26 +107,20 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	LevelImporter* l = new LevelImporter();
 	l->Import("./Resources/levels/Level_New.json");
-
 	l->Prepare();
 
 	sf::RenderWindow window(sf::VideoMode(960, 640), "Team Echo!");
-
-
 	sf::FloatRect rect(0, 0, 960, 640);
 	sf::View view;
-
 
 	sf::CircleShape shape(25.0f);
 	shape.setFillColor(sf::Color::Magenta);
 	shape.setPosition(50, 50);
 
 	view.reset(rect);
-
 	window.setView(view);
-
-
 	l->Start(&shape);
+
 	while (window.isOpen())
 	{
 		window.clear();
@@ -145,10 +135,6 @@ int _tmain(int argc, _TCHAR* argv[])
 		sf::Event event;
 
 		if (doEvents) {
-
-
-			
-
 			while (window.pollEvent(event))
 			{
 				if (event.type == sf::Event::Closed)
@@ -165,7 +151,6 @@ int _tmain(int argc, _TCHAR* argv[])
 					t_max -= 160;
 					moveDown = false;
 				}
-
 
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 				{
@@ -187,12 +172,6 @@ int _tmain(int argc, _TCHAR* argv[])
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 				{
 					cout << "x: " << worldPos.x << " y: " << worldPos.y << endl;
-
-				}
-
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-				{
-					
 				}
 
 				updateViewPort(worldPos);
@@ -200,9 +179,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 
 		window.setView(view);
-
 		window.draw(shape);
-
 		window.display();
 	}
 		
