@@ -19,20 +19,54 @@ public:
 	void Import(std::string JSON);
 	void Prepare();
 	void Update();
+	void Start(sf::CircleShape* player);
 	void setHazardState(int hazardIndex, bool hazardState);
 	void setLayerVisibility(int layerIndex, bool isVisible);
 
 	//Tijdelijke Objecten Struct Deze zullen compleet verdwijnen als de baseGame objecten ofzijns
 	struct t_Object
 	{
+
+		t_Object()
+		{
+
+		}
+		~t_Object()
+		{
+
+		}
+
 		std::string name;
 		std::string type;
 		int x_loc;
 		int y_loc;
 
+		sf::CircleShape looks;
+
+
 		virtual void print()
 		{
 			std::cout << "Object: " << name << std::endl;
+		}
+
+		sf::CircleShape Draw()
+		{
+			return looks;
+		}
+
+		void setPosition(int x, int y)
+		{
+			x_loc = x;
+			y_loc = y;
+
+
+			looks.setPosition(x_loc, y_loc);
+		
+		}
+
+		void Update()
+		{
+			setPosition(x_loc, y_loc);
 		}
 	};
 
@@ -40,51 +74,72 @@ public:
 	{
 		std::string extra;
 
-
-		void print() override
+		t_Enemy()
 		{
-			std::cout << "Enemy: " << extra << std::endl;
+			looks = sf::CircleShape(25.0f);
+			looks.setFillColor(sf::Color::Green);
 		}
-
-		void setExtra(std::string e)
-		{
-			extra = e;
-		}
-
 	};
 
 	struct t_Door : t_Object
-	{};
+	{
+		t_Door()
+		{
+			looks = sf::CircleShape(15.0f);
+			looks.setFillColor(sf::Color::Yellow);
+		}
+	};
 	struct t_Switch : t_Object
-	{};
+	{
+		t_Switch()
+		{
+			looks = sf::CircleShape(15.0f);
+			looks.setFillColor(sf::Color::Blue);
+		}
+	};
 
+	struct t_StartTile : t_Object
+	{
+		t_StartTile()
+		{
+			looks = sf::CircleShape(15.0f);
+			looks.setFillColor(sf::Color::Cyan);
+		}
+	};
 	struct t_EndTile : t_Object
-	{};
+	{
+		t_EndTile()
+		{
+			looks = sf::CircleShape(15.0f);
+			looks.setFillColor(sf::Color::White);
+		}
+	};
 
 	struct t_WarpTile : t_Object
-	{};
-	//Tijdelijke objecten functies ombouwen naar de base
-	std::vector<t_Object*> objecten;
-
-	std::vector<t_Object*> getObject() { return objecten; }
-	t_Object* getThis(int i) { return objecten.at(i); }
-
-	void ObjectOfEnemy(int i)
 	{
-		objecten.at(i)->print();
-	}
+		t_WarpTile()
+		{
+			looks = sf::CircleShape(15.0f);
+			looks.setFillColor(sf::Color::Red);
+		}
+	};
+	//Tijdelijke objecten functies ombouwen naar de base
+	std::vector<t_Object*> game_objects;
+
+	std::vector<t_Object*> getGame_Objects() { return game_objects; }
+	t_Object* getObject(int i) { return game_objects.at(i); }
 
 	std::string getObjectType(int i)
 	{
-		if (dynamic_cast<t_Enemy*> (getThis(i)))
+		if (dynamic_cast<t_Enemy*> (getObject(i)))
 			return "Enemy";
-		if (dynamic_cast<t_Door*> (getThis(i)))
+		if (dynamic_cast<t_Door*> (getObject(i)))
 			return "Door";
-		if (dynamic_cast<t_Switch*> (getThis(i)))
+		if (dynamic_cast<t_Switch*> (getObject(i)))
 			return "Switch";
-		if (dynamic_cast<t_EndTile*> (getThis(i)))
+		if (dynamic_cast<t_EndTile*> (getObject(i)))
 			return "EndTile";
-		if (dynamic_cast<t_WarpTile*> (getThis(i)))
+		if (dynamic_cast<t_WarpTile*> (getObject(i)))
 			return "WarpTile";
 		return "Object";
 	}

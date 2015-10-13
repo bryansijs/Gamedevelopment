@@ -71,6 +71,29 @@ void LevelImporter::PrepareTileSets()
 	}
 }
 
+enum string_code {
+	Enemy,
+	Switch,
+	Door,
+	StartTile,
+	EndTile,
+	WarpTile,
+
+
+};
+
+
+string_code hashit(std::string const& inString) {
+	if (inString == "Enemy") return Enemy;
+	if (inString == "Switch") return Switch;
+	if (inString == "Door") return Door;
+	if (inString == "StartTile") return StartTile;
+	if (inString == "EndTile") return EndTile;
+	if (inString == "WarpTile") return WarpTile;
+}
+
+
+
 void LevelImporter::PrepareGameObjects()
 {
 	for (Json::Value::iterator it = jsonRoot["layers"].begin(); it != jsonRoot["layers"].end(); ++it)
@@ -83,21 +106,74 @@ void LevelImporter::PrepareGameObjects()
 			for (Json::Value::iterator object = value["objects"].begin(); object != value["objects"].end(); ++object)
 			{
 				Json::Value val = (*object);
-				//Dit zal moeten worden herschreven naar gameObjects als deze classes erzijn
-				if (val["type"].asString() == "Enemy")
+				int x, y;
+				switch (hashit(val["type"].asString()))
 				{
-					cout << val["EnemyType"] << endl;
-					t_Enemy *e = new t_Enemy();
-					e->setExtra("enemy " + to_string(qi));
-					objecten.push_back(e);
-					qi++;
+					case Enemy:
+					{
+						t_Enemy *enemy = new t_Enemy();
+						x = val["x"].asInt();
+						y = val["y"].asInt();
+						enemy->setPosition(x, y);
+						game_objects.push_back(enemy);
+						qi++;
+					}
+					break;
+					case Switch:
+					{
+						t_Switch *_switch = new t_Switch();
+						x = val["x"].asInt();
+						y = val["y"].asInt();
+						_switch->setPosition(x, y);
+						game_objects.push_back(_switch);
+					}
+					break;
+					case Door:
+					{
+						t_Door *Door = new t_Door();
+						x = val["x"].asInt();
+						y = val["y"].asInt();
+						Door->setPosition(x, y);
+						game_objects.push_back(Door);
+					}
+					break;
+					case StartTile:
+					{
+						t_StartTile *StartTile = new t_StartTile();
+						x = val["x"].asInt();
+						y = val["y"].asInt();
+						StartTile->setPosition(x, y);
+						game_objects.push_back(StartTile);
+					}
+					break;
+					case EndTile:
+					{
+						t_EndTile *EndTile = new t_EndTile();
+						x = val["x"].asInt();
+						y = val["y"].asInt();
+						EndTile->setPosition(x, y);
+						game_objects.push_back(EndTile);
+					}
+					break;
+					case WarpTile: {
+						t_WarpTile *WarpTile = new t_WarpTile();
+						x = val["x"].asInt();
+						y = val["y"].asInt();
+						WarpTile->setPosition(x, y);
+						game_objects.push_back(WarpTile);
+					}
+					break;
+					default:
+					{
+						t_Object *Object = new t_Object();
+						x = val["x"].asInt();
+						y = val["y"].asInt();
+						Object->setPosition(x, y);
+						game_objects.push_back(Object);
+					}
+					break;
 				}
-				else
-				{
-					t_Object *e = new t_Object();
-					e->name = "";//
-					objecten.push_back(e); ;
-				}
+
 			}
 		}
 	}
@@ -255,6 +331,26 @@ void LevelImporter::Prepare()
 	PrepareTiles();
 }
 
+void LevelImporter::Start(sf::CircleShape* player)
+{
+	t_StartTile* start = nullptr;
+
+	for (size_t i = 0; i < getGame_Objects().size(); i++)
+	{
+		if (dynamic_cast<t_StartTile*> (getObject(i)))
+			start = dynamic_cast<t_StartTile*> (getObject(i));
+	}
+
+	if (start == nullptr)
+	{
+		start = new t_StartTile();
+		start->x_loc = 25;
+		start->y_loc = 25;
+	}
+
+	player->setPosition(start->x_loc, start->y_loc);
+}
+
 void LevelImporter::Import(std::string JSON)
 {
 	inputFileStream.open(JSON, std::ifstream::binary);
@@ -271,6 +367,10 @@ void LevelImporter::Draw(sf::RenderWindow* window)
 	for (size_t i = 0; i < tiles.size(); i++)
 		if (tiles.at(i).isVisible)
 			window->draw(tiles.at(i).sprite);
+
+	for (size_t i = 0; i < getGame_Objects().size(); i++)
+		window->draw((getObject(i))->Draw());
+
 }
 
 void LevelImporter::setHazardState(int hazardIndex, bool hazardState)
@@ -290,15 +390,14 @@ void LevelImporter::setLayerVisibility(int layerIndex, bool isVisible)
 	for (int i = 0; i < tiles.size(); i++)
 	{
 		if (tiles.at(i).tileLayer == layerIndex)
-		{
 			tiles.at(i).isVisible = isVisible;
-		}
 	}
 }
 
 void LevelImporter::Update()
-{ 
-
+{
+	for (size_t i = 0; i < getGame_Objects().size(); i++)
+		getObject(i)->Update();
 }
 
 

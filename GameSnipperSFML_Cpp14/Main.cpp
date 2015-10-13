@@ -129,12 +129,14 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	window.setView(view);
 
+
+	l->Start(&shape);
 	while (window.isOpen())
 	{
 		window.clear();
 
 		l->Draw(&window);
-
+		l->Update();
 		MoveView(view);
 		
 		sf::Vector2f s = shape.getPosition();
@@ -143,6 +145,10 @@ int _tmain(int argc, _TCHAR* argv[])
 		sf::Event event;
 
 		if (doEvents) {
+
+
+			
+
 			while (window.pollEvent(event))
 			{
 				if (event.type == sf::Event::Closed)
@@ -186,11 +192,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 				{
-					for (int i = 0; i < l->getObject().size(); i++)
-					{
-						l->ObjectOfEnemy(i);
-						cout << l->getThis(i)->name << endl;
-					}
+					
 				}
 
 				updateViewPort(worldPos);
