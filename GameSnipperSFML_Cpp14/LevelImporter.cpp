@@ -106,7 +106,7 @@ void LevelImporter::PrepareGameObjects()
 			for (Json::Value::iterator object = value["objects"].begin(); object != value["objects"].end(); ++object)
 			{
 				Json::Value val = (*object);
-				int x, y;
+				int x, y, widht, height;
 				switch (hashit(val["type"].asString()))
 				{
 					case Enemy:
@@ -114,18 +114,25 @@ void LevelImporter::PrepareGameObjects()
 						t_Enemy *enemy = new t_Enemy();
 						x = val["x"].asInt();
 						y = val["y"].asInt();
+
+						widht = val["width"].asInt();
+						height = val["height"].asInt();
 						enemy->setPosition(x, y);
+						enemy->setSize(widht, height);
 						game_objects.push_back(enemy);
 						qi++;
 					}
 					break;
 					case Switch:
 					{
-						t_Switch *_switch = new t_Switch();
+						t_Switch *_Switch = new t_Switch();
 						x = val["x"].asInt();
 						y = val["y"].asInt();
-						_switch->setPosition(x, y);
-						game_objects.push_back(_switch);
+						widht = val["width"].asInt();
+						height = val["height"].asInt();
+						_Switch->setPosition(x, y);
+						_Switch->setSize(widht, height);
+						game_objects.push_back(_Switch);
 					}
 					break;
 					case Door:
@@ -133,7 +140,10 @@ void LevelImporter::PrepareGameObjects()
 						t_Door *Door = new t_Door();
 						x = val["x"].asInt();
 						y = val["y"].asInt();
+						widht = val["width"].asInt();
+						height = val["height"].asInt();
 						Door->setPosition(x, y);
+						Door->setSize(widht, height);
 						game_objects.push_back(Door);
 					}
 					break;
@@ -142,7 +152,10 @@ void LevelImporter::PrepareGameObjects()
 						t_StartTile *StartTile = new t_StartTile();
 						x = val["x"].asInt();
 						y = val["y"].asInt();
+						widht = val["width"].asInt();
+						height = val["height"].asInt();
 						StartTile->setPosition(x, y);
+						StartTile->setSize(widht, height);
 						game_objects.push_back(StartTile);
 					}
 					break;
@@ -151,7 +164,10 @@ void LevelImporter::PrepareGameObjects()
 						t_EndTile *EndTile = new t_EndTile();
 						x = val["x"].asInt();
 						y = val["y"].asInt();
+						widht = val["width"].asInt();
+						height = val["height"].asInt();
 						EndTile->setPosition(x, y);
+						EndTile->setSize(widht, height);
 						game_objects.push_back(EndTile);
 					}
 					break;
@@ -159,7 +175,10 @@ void LevelImporter::PrepareGameObjects()
 						t_WarpTile *WarpTile = new t_WarpTile();
 						x = val["x"].asInt();
 						y = val["y"].asInt();
+						widht = val["width"].asInt();
+						height = val["height"].asInt();
 						WarpTile->setPosition(x, y);
+						WarpTile->setSize(widht, height);
 						game_objects.push_back(WarpTile);
 					}
 					break;
@@ -168,7 +187,10 @@ void LevelImporter::PrepareGameObjects()
 						t_Object *Object = new t_Object();
 						x = val["x"].asInt();
 						y = val["y"].asInt();
+						widht = val["width"].asInt();
+						height = val["height"].asInt();
 						Object->setPosition(x, y);
+						Object->setSize(widht, height);
 						game_objects.push_back(Object);
 					}
 					break;
@@ -369,7 +391,7 @@ void LevelImporter::Draw(sf::RenderWindow* window)
 			window->draw(tiles.at(i).sprite);
 
 	for (size_t i = 0; i < getGame_Objects().size(); i++)
-		window->draw((getObject(i))->Draw());
+		window->draw((getObject(i))->getShape());
 
 }
 

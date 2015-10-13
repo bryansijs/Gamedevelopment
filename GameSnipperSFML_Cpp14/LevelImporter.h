@@ -29,7 +29,6 @@ public:
 
 		t_Object()
 		{
-
 		}
 		~t_Object()
 		{
@@ -38,28 +37,34 @@ public:
 
 		std::string name;
 		std::string type;
+		sf::Color color;
 		int x_loc;
 		int y_loc;
 
-		sf::CircleShape looks;
+	//	sf::CircleShape looks;
 
 
+		sf::RectangleShape looks;
 		virtual void print()
 		{
 			std::cout << "Object: " << name << std::endl;
 		}
 
-		sf::CircleShape Draw()
+		sf::RectangleShape getShape()
 		{
 			return looks;
+		}
+
+		void setSize(int widht, int height)
+		{
+			looks = sf::RectangleShape(sf::Vector2f(widht, height));
+			looks.setFillColor(color);
 		}
 
 		void setPosition(int x, int y)
 		{
 			x_loc = x;
 			y_loc = y;
-
-
 			looks.setPosition(x_loc, y_loc);
 		
 		}
@@ -74,10 +79,11 @@ public:
 	{
 		std::string extra;
 
+		
+
 		t_Enemy()
 		{
-			looks = sf::CircleShape(25.0f);
-			looks.setFillColor(sf::Color::Green);
+			color = sf::Color::Green;
 		}
 	};
 
@@ -85,16 +91,14 @@ public:
 	{
 		t_Door()
 		{
-			looks = sf::CircleShape(15.0f);
-			looks.setFillColor(sf::Color::Yellow);
+			color = sf::Color::Yellow;
 		}
 	};
 	struct t_Switch : t_Object
 	{
 		t_Switch()
 		{
-			looks = sf::CircleShape(15.0f);
-			looks.setFillColor(sf::Color::Blue);
+			color =sf::Color::Blue;
 		}
 	};
 
@@ -102,16 +106,14 @@ public:
 	{
 		t_StartTile()
 		{
-			looks = sf::CircleShape(15.0f);
-			looks.setFillColor(sf::Color::Cyan);
+			color =  sf::Color::Cyan;
 		}
 	};
 	struct t_EndTile : t_Object
 	{
 		t_EndTile()
 		{
-			looks = sf::CircleShape(15.0f);
-			looks.setFillColor(sf::Color::White);
+			color = sf::Color::White;
 		}
 	};
 
@@ -119,8 +121,7 @@ public:
 	{
 		t_WarpTile()
 		{
-			looks = sf::CircleShape(15.0f);
-			looks.setFillColor(sf::Color::Red);
+			color =sf::Color::Red;
 		}
 	};
 	//Tijdelijke objecten functies ombouwen naar de base
@@ -141,6 +142,9 @@ public:
 			return "EndTile";
 		if (dynamic_cast<t_WarpTile*> (getObject(i)))
 			return "WarpTile";
+		if (dynamic_cast<t_StartTile*> (getObject(i)))
+			return "StartTile";
+
 		return "Object";
 	}
 

@@ -257,6 +257,21 @@
                  "width":14,
                  "x":552,
                  "y":737
+                }, 
+                {
+                 "height":36,
+                 "id":18,
+                 "name":"EndTile",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"EndTile",
+                 "visible":true,
+                 "width":62.6666666666667,
+                 "x":97.3333333333333,
+                 "y":4
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -342,7 +357,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":18,
+ "nextobjectid":21,
  "orientation":"orthogonal",
  "properties":
     {
