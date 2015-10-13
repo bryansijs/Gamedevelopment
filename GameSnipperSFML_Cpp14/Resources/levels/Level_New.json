@@ -102,7 +102,7 @@
 
                     },
                  "rotation":0,
-                 "type":"startTile",
+                 "type":"StartTile",
                  "visible":true,
                  "width":28,
                  "x":65,
@@ -117,7 +117,7 @@
 
                     },
                  "rotation":0,
-                 "type":"",
+                 "type":"Switch",
                  "visible":true,
                  "width":34,
                  "x":510,
@@ -162,7 +162,7 @@
 
                     },
                  "rotation":0,
-                 "type":"",
+                 "type":"Enemy",
                  "visible":true,
                  "width":43,
                  "x":459,
@@ -177,7 +177,7 @@
 
                     },
                  "rotation":0,
-                 "type":"",
+                 "type":"Switch",
                  "visible":true,
                  "width":26,
                  "x":69,
@@ -192,7 +192,7 @@
 
                     },
                  "rotation":0,
-                 "type":"",
+                 "type":"Enemy",
                  "visible":true,
                  "width":54,
                  "x":582,
@@ -207,7 +207,7 @@
 
                     },
                  "rotation":0,
-                 "type":"",
+                 "type":"Enemy",
                  "visible":true,
                  "width":71,
                  "x":135,
