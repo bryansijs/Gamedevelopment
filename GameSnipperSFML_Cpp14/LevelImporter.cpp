@@ -12,241 +12,293 @@
 
 using namespace std;
 
-sf::RenderWindow* window;
 
-struct tileSets
+struct TileSet
 {
-	int firstgrid;
-	int imageheight;
-	int imagewidth;
-	int tilecounts;
-	int tilesize;
+	int firstGrid;
+	int imageHeight;
+	int imageWidth;
+	int tileAmount;
+	int tileSize;
 	sf::Texture tileImage;
-
-
 };
 
-
-
-
-struct  tile
+struct  Tile
 {
 	sf::Sprite sprite;
-	int tilelaag;
-	int x;
-	int y;
-	bool isCollision;
-	bool isVisible;
+	int tileLayer;
+	int x_Position;
+	int y_Position;
+
 	bool isHazard;
-	int hazardDamage;
-	int hazardIndex;
 	bool hazardState;
+	int hazardValue;
+	int hazardIndex;
+	int hazardType;
+
+	bool isEnemyCollidable;
+	bool isCollidable;
+	bool isVisible;
+
 	b2BodyDef* bodyDef;
+	b2BodyDef* enemyBodyDef;
 };
 
-std::vector<tile> tegel;
-std::ifstream st;
-std::vector<tileSets> tileset;
+std::vector<Tile> tiles;
+std::ifstream inputFileStream;
+std::vector<TileSet> tileSets;
+
 bool parsingSuccessful = false;
-Json::Reader reader;
-Json::Value root;
 
+Json::Reader jsonReader;
+Json::Value jsonRoot;
 
-
-
-void LevelImporter::Prepare()
+void LevelImporter::PrepareTileSets()
 {
-	int tilesize = root["tilewidth"].asInt();
-	int levelheight = root["height"].asInt();
-	int levelwidht = root["width"].asInt();
-
-	sf::IntRect subRect;
-	subRect.width = tilesize;
-	subRect.height = tilesize;
-
-	for (Json::Value::iterator it = root["tilesets"].begin(); it != root["tilesets"].end(); ++it)
+	for (Json::Value::iterator it = jsonRoot["tilesets"].begin(); it != jsonRoot["tilesets"].end(); ++it)
 	{
 		Json::Value value = (*it);
 
-		tileSets t;
-		t.firstgrid = value["firstgid"].asInt();
-		t.imageheight = value["imageheight"].asInt();
-		t.imagewidth = value["imagewidth"].asInt();
-		t.tilecounts = value["tilecount"].asInt();
-		t.tilesize = value["tilewidth"].asInt();
-		t.tileImage.loadFromFile("./Resources/tiles/" + value["name"].asString() + ".png");
+		TileSet tileset;
+		tileset.firstGrid = value["firstgid"].asInt();
+		tileset.imageHeight = value["imageheight"].asInt();
+		tileset.imageWidth = value["imagewidth"].asInt();
+		tileset.tileAmount = value["tilecount"].asInt();
+		tileset.tileSize = value["tilewidth"].asInt();
+		tileset.tileImage.loadFromFile("./Resources/tiles/" + value["name"].asString() + ".png");
 
-		tileset.push_back(t);
+		tileSets.push_back(tileset);
 	}
+}
 
-	for (Json::Value::iterator it = root["layers"].begin(); it != root["layers"].end(); ++it)
+void LevelImporter::PrepareGameObjects()
+{
+	for (Json::Value::iterator it = jsonRoot["layers"].begin(); it != jsonRoot["layers"].end(); ++it)
 	{
 		Json::Value value = (*it);
-
-		const Json::Value array = value["data"];
 
 		if (value.isMember("objects"))
 		{
 			int qi = 0;
-			for (Json::Value::iterator oit = value["objects"].begin(); oit != value["objects"].end(); ++oit)	
+			for (Json::Value::iterator object = value["objects"].begin(); object != value["objects"].end(); ++object)
 			{
-				Json::Value val = (*oit);	
+				Json::Value val = (*object);
+				//Dit zal moeten worden herschreven naar gameObjects als deze classes erzijn
 				if (val["type"].asString() == "Enemy")
 				{
 					cout << val["EnemyType"] << endl;
 					t_Enemy *e = new t_Enemy();
 					e->setExtra("enemy " + to_string(qi));
-					objecten.push_back(e); qi++;
+					objecten.push_back(e);
+					qi++;
 				}
 				else
 				{
 					t_Object *e = new t_Object();
-					e->name = "Hello";
+					e->name = "";//
 					objecten.push_back(e); ;
 				}
 			}
 		}
+	}
+}
+
+void LevelImporter::PrepareTiles()
+{
+	for (Json::Value::iterator it = jsonRoot["layers"].begin(); it != jsonRoot["layers"].end(); ++it)
+	{
+		Json::Value value = (*it);
+		Json::Value temp_data_array = value["data"];
+
 		int indentifier = 0;
-		typedef	std::vector<std::vector<int> > temp_vector;
+		typedef	std::vector<std::vector<int> > multi_Vector;
 
-		temp_vector temp_array(levelheight, vector<int>(levelwidht));
+		multi_Vector data_vector(levelHeight, vector<int>(levelWidht));
 
-		for (int i = 0; i < levelheight; i++)
-			for (int j = 0; j < levelwidht; j++)
+		for (int i = 0; i < levelHeight; i++)
+		{
+			for (int j = 0; j < levelWidht; j++)
 			{
-
-				temp_array[i][j] = array[indentifier].asInt();
+				data_vector[i][j] = temp_data_array[indentifier].asInt();
 				indentifier++;
 			}
+		}
 
-		for (int i = 0; i < levelheight; i++)
-			for (int j = 0; j < levelwidht; j++)
+		for (int i = 0; i < levelHeight; i++)
+			for (int j = 0; j < levelWidht; j++)
 			{
 				int tileSetIndex = 0;
 				int tileStartIndex = 0;
 
-				int temp_int = temp_array[i][j];
+				//Deze integer bevat welke tile getekend moet worden vanuit tiled;
+				int data_index = data_vector[i][j];
 
-				for (size_t tileIndex = 0; tileIndex < tileset.size(); tileIndex++)
+				if (data_index == 0)
+					continue;
+
+				for (size_t tileIndex = 0; tileIndex < tileSets.size(); tileIndex++)
 				{
-					if (temp_int >= tileset[tileIndex].firstgrid && temp_int < (tileset[tileIndex].firstgrid + tileset[tileIndex].tilecounts))
+					if (data_index >= tileSets[tileIndex].firstGrid && data_index < (tileSets[tileIndex].firstGrid + tileSets[tileIndex].tileAmount))
 					{
 						tileSetIndex = tileIndex;
-						tileStartIndex = tileset[tileIndex].firstgrid;
+						tileStartIndex = tileSets[tileIndex].firstGrid;
 						break;
 					}
 				}
 
-				int widht_tileCount = tileset[tileSetIndex].imagewidth / tileset[tileSetIndex].tilesize;
+				int tileCount_widht = tileSets[tileSetIndex].imageWidth / tileSets[tileSetIndex].tileSize;
+				int topIndex = (data_index - tileStartIndex) / (tileCount_widht);
+				int leftIndex = (data_index - tileStartIndex) - (tileCount_widht * topIndex);
 
-				if (temp_int == 0)
-					continue;
+				Tile insert_tile;
 
-				int topindex = (temp_int - tileStartIndex) / (widht_tileCount);
+				insert_tile.sprite = sf::Sprite(tileSets[tileSetIndex].tileImage);
 
-				int leftindex = (temp_int - tileStartIndex) - (widht_tileCount * topindex);
+				subRect.left = (leftIndex)* tileSize;
+				subRect.top = topIndex * tileSize;
+				insert_tile.sprite.setTextureRect(subRect);
+				insert_tile.sprite.setPosition(float(j*tileSize), float(i*tileSize));
 
-				tile tegeltje;
+				insert_tile.y_Position = j*tileSize;
+				insert_tile.x_Position = i*tileSize;
+				insert_tile.tileLayer = tileSetIndex;
 
-				tegeltje.sprite = sf::Sprite(tileset[tileSetIndex].tileImage);
+				if (value["visible"].asString() == "true")
+					insert_tile.isVisible = true;
+				else
+					insert_tile.isVisible = false;
 
-				subRect.left = (leftindex)* tilesize;
-				subRect.top = topindex * tilesize;
-				tegeltje.sprite.setTextureRect(subRect);
-				tegeltje.sprite.setPosition(float(j*tilesize), float(i*tilesize));
-
-				tegeltje.y = j*tilesize;
-				tegeltje.x = i*tilesize;
-				tegeltje.tilelaag = tileSetIndex;
-
-
-				tegeltje.isVisible = true;
-
-				tegeltje.isCollision = false;
-				tegeltje.isHazard = false;
-				tegeltje.hazardState = false;
-				tegeltje.hazardDamage = 0;
-				tegeltje.hazardIndex  = 0;
+				insert_tile.isCollidable = false;
+				insert_tile.isHazard = false;
+				insert_tile.hazardState = false;
+				insert_tile.hazardValue = 0;
+				insert_tile.hazardIndex = 0;
 
 				if (value.isMember("properties"))
 				{
 					Json::Value props = value["properties"];
 
-					if (props.isMember("isCollision"))
+					if (props.isMember("isCollidable"))
 					{
-						if (value["properties"]["isCollision"].asString() == "true")
+						if (value["properties"]["isCollidable"].asString() == "true")
 						{
-							tegeltje.isCollision = true;
-							tegeltje.bodyDef = new b2BodyDef();
+							insert_tile.isCollidable = true;
+							insert_tile.bodyDef = new b2BodyDef();
 
-							tegeltje.bodyDef->type = b2_staticBody;
-							tegeltje.bodyDef->position.Set(tegeltje.x, tegeltje.y);
+							insert_tile.bodyDef->type = b2_staticBody;
+							insert_tile.bodyDef->position.Set(insert_tile.x_Position, insert_tile.y_Position);
+						}
+					}
+
+					if (props.isMember("isEnemyCollidable"))
+					{
+						if (value["properties"]["isEnemyCollidable"].asString() == "true")
+						{
+							insert_tile.isEnemyCollidable = true;
+
+							insert_tile.enemyBodyDef = new b2BodyDef();
+
+							insert_tile.enemyBodyDef->type = b2_staticBody;
+							insert_tile.enemyBodyDef->position.Set(insert_tile.x_Position, insert_tile.y_Position);
 						}
 					}
 
 					if (props.isMember("isHazard"))
 					{
 						if (value["properties"]["isHazard"].asString() == "true")
-							tegeltje.isHazard = true;
-
+							insert_tile.isHazard = true;
 					}
 
 					if (props.isMember("hazardState"))
 					{
 						if (value["properties"]["hazardState"].asString() == "true")
-							tegeltje.hazardState = true;
-
+							insert_tile.hazardState = true;
 					}
 
 					if (props.isMember("hazardIndex"))
 					{
-						string index = value["properties"]["hazardIndex"].asString();
-						tegeltje.hazardIndex = atoi(index.c_str());
+						string hazardIndex = value["properties"]["hazardIndex"].asString();
+						insert_tile.hazardIndex = atoi(hazardIndex.c_str());
 					}
 
-					if (props.isMember("hazardDamage"))
+					if (props.isMember("hazardValue"))
 					{
-						string dps = value["properties"]["hazardDamage"].asString();
-						tegeltje.hazardDamage = atoi(dps.c_str());
+						string hazardValue = value["properties"]["hazardValue"].asString();
+						insert_tile.hazardValue = atoi(hazardValue.c_str());
 					}
 
+					if (props.isMember("hazardType"))
+					{
+						string hazardType = value["properties"]["hazardType"].asString();
+						insert_tile.hazardType = atoi(hazardType.c_str());
+					}
 				}
 
-				tegel.push_back(tegeltje);
+				tiles.push_back(insert_tile);
 			}
-
-
 	}
+}
+
+
+
+void LevelImporter::Prepare()
+{
+	tileSize = jsonRoot["tilewidth"].asInt();
+	levelHeight = jsonRoot["height"].asInt();
+	levelWidht = jsonRoot["width"].asInt();
+
+	subRect.width = tileSize;
+	subRect.height = tileSize;
+
+	PrepareTileSets();
+	PrepareGameObjects();
+	PrepareTiles();
 }
 
 void LevelImporter::Import(std::string JSON)
 {
-	st.open(JSON, std::ifstream::binary);
+	inputFileStream.open(JSON, std::ifstream::binary);
 
-	bool parsingSuccessful = reader.parse(st, root, false);
+	bool parsingSuccessful = jsonReader.parse(inputFileStream, jsonRoot, false);
 	if (!parsingSuccessful)
 	{
-		std::cout << reader.getFormattedErrorMessages() << "\n";
+		std::cout << jsonReader.getFormattedErrorMessages() << "\n";
 	}
 }
 
-void LevelImporter::Teken(sf::RenderWindow* window)
+void LevelImporter::Draw(sf::RenderWindow* window)
 {
-	for (size_t i = 0; i < tegel.size(); i++)
-		if (tegel.at(i).isVisible)
-			window->draw(tegel.at(i).sprite);
+	for (size_t i = 0; i < tiles.size(); i++)
+		if (tiles.at(i).isVisible)
+			window->draw(tiles.at(i).sprite);
 }
 
+void LevelImporter::setHazardState(int hazardIndex, bool hazardState)
+{
+	for (int i = 0; i < tiles.size(); i++)
+	{
+		if (tiles.at(i).hazardIndex == hazardIndex)
+		{
+			tiles.at(i).hazardState = hazardState;
+			tiles.at(i).isVisible = !hazardState;
+		}
+	}
+}
+
+void LevelImporter::setLayerVisibility(int layerIndex, bool isVisible)
+{
+	for (int i = 0; i < tiles.size(); i++)
+	{
+		if (tiles.at(i).tileLayer == layerIndex)
+		{
+			tiles.at(i).isVisible = isVisible;
+		}
+	}
+}
 
 void LevelImporter::Update()
-{ /*
-	for (size_t i = 0; i < tegel.size(); i++)
-		if (tegel.at(i).isHazard)
-			if (tegel.at(i).hazardIndex == 1) {
-				tegel.at(i).hazardState = !tegel.at(i).hazardState;
-				tegel.at(i).isVisible = !tegel.at(i).isVisible;
-			}*/
-	
+{ 
+
 }
 
 
@@ -261,5 +313,6 @@ LevelImporter::LevelImporter()
 
 LevelImporter::~LevelImporter()
 {
+
 }
 #undef JSON_DLL

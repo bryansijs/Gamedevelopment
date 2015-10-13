@@ -133,7 +133,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	{
 		window.clear();
 
-		l->Teken(&window);
+		l->Draw(&window);
 
 		MoveView(view);
 		

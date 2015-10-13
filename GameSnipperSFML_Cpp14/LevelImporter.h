@@ -15,16 +15,18 @@ class LevelImporter
 public:
 	LevelImporter();
 	~LevelImporter();
-	void Teken(sf::RenderWindow* window);
-	void 	Import(std::string JSON);
+	void Draw(sf::RenderWindow* window);
+	void Import(std::string JSON);
 	void Prepare();
 	void Update();
+	void setHazardState(int hazardIndex, bool hazardState);
+	void setLayerVisibility(int layerIndex, bool isVisible);
 
-	//Tijdelijke Objecten Struct
-		struct t_Object
+	//Tijdelijke Objecten Struct Deze zullen compleet verdwijnen als de baseGame objecten ofzijns
+	struct t_Object
 	{
-std::string name;
-std::string type;
+		std::string name;
+		std::string type;
 		int x_loc;
 		int y_loc;
 
@@ -38,11 +40,11 @@ std::string type;
 	{
 		std::string extra;
 
-		
+
 		void print() override
 		{
 			std::cout << "Enemy: " << extra << std::endl;
-		} 
+		}
 
 		void setExtra(std::string e)
 		{
@@ -51,34 +53,60 @@ std::string type;
 
 	};
 
-	
+	struct t_Door : t_Object
+	{};
+	struct t_Switch : t_Object
+	{};
 
+	struct t_EndTile : t_Object
+	{};
+
+	struct t_WarpTile : t_Object
+	{};
+	//Tijdelijke objecten functies ombouwen naar de base
 	std::vector<t_Object*> objecten;
 
-
-	std::vector<t_Object*> getObject() { return objecten;}
-
-
+	std::vector<t_Object*> getObject() { return objecten; }
 	t_Object* getThis(int i) { return objecten.at(i); }
 
 	void ObjectOfEnemy(int i)
 	{
 		objecten.at(i)->print();
-		
-		if (dynamic_cast<t_Enemy*> (getThis(i))) {
-			std::cout << "Enemy" << std::endl;
-			std::cout << dynamic_cast<t_Enemy*> (getThis(i))->extra << std::endl;
-		}
-		else
-			std::cout << "Different object" << std::endl;
-
 	}
 
-private :
-		sf::RenderWindow window;
+	std::string getObjectType(int i)
+	{
+		if (dynamic_cast<t_Enemy*> (getThis(i)))
+			return "Enemy";
+		if (dynamic_cast<t_Door*> (getThis(i)))
+			return "Door";
+		if (dynamic_cast<t_Switch*> (getThis(i)))
+			return "Switch";
+		if (dynamic_cast<t_EndTile*> (getThis(i)))
+			return "EndTile";
+		if (dynamic_cast<t_WarpTile*> (getThis(i)))
+			return "WarpTile";
+		return "Object";
+	}
 
-	
-		
+	//Tijdelijk Objecten voorbij
+
+
+
+private:
+	sf::RenderWindow window;
+
+	void PrepareGameObjects();
+	void PrepareTileSets();
+	void PrepareTiles();
+
+	int tileSize;
+	int levelHeight;
+	int levelWidht;
+	sf::IntRect subRect;
+
+
+
 
 };
 
