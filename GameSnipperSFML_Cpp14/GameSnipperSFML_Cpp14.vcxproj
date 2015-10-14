@@ -95,7 +95,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\Bryan\Source\Repos\Gamedevelopment\GameSnipperSFML_Cpp14\library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>box2d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-audio-d.lib;sfml-system-d.lib;sfml-window-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>awesomium.lib;box2d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-audio-d.lib;sfml-system-d.lib;sfml-window-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -153,8 +153,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\ProjectEcho\GameSnippetSFML\GameSnippet\Object_Manager.h" />
+    <ClInclude Include="application.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="game_state.h" />
+    <ClInclude Include="js_delegate.h" />
+    <ClInclude Include="method_dispatcher.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="test_state.h" />
@@ -171,6 +174,18 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="test_state.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menuHtml\menu.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\menuHtml\images\bg.png" />
+    <Image Include="Resources\menuHtml\images\border.png" />
+    <Image Include="Resources\menuHtml\images\cat.png" />
+    <Image Include="Resources\menuHtml\images\menuBorder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Resources\menuHtml\font\moonhouse.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
