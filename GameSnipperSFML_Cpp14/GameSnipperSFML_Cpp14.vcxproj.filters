@@ -79,14 +79,17 @@
     <Filter Include="Source Files\Factories">
       <UniqueIdentifier>{4d55206a-44cb-4334-8ca1-4b0f48dbc9ab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Levels">
-      <UniqueIdentifier>{6b9dcf89-de13-429e-b6d2-d95ffc16809b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Managers">
       <UniqueIdentifier>{5ece21e3-21b4-4ec9-a332-92fcade5d4c6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\States">
       <UniqueIdentifier>{416abce3-86b2-4989-b212-43f9eececa9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Oude code">
+      <UniqueIdentifier>{8cbf5a47-42d4-4fab-bc50-82b8341b160e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Oude code">
+      <UniqueIdentifier>{064e954f-fd1c-4247-afbc-c047eb66e0d1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -99,16 +102,22 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="game_state.h">
+    <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_state.h">
+      <Filter>Header Files\Oude code</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Oude code</Filter>
     </ClInclude>
     <ClInclude Include="test_state.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Oude code</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ProjectEcho\GameSnippetSFML\GameSnippet\Object_Manager.h">
+    <ClInclude Include="LevelImporter.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="resource1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -116,20 +125,31 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="game_state.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="jsoncpp.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelImporter.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="game_state.cpp">
+      <Filter>Source Files\Oude code</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\Oude code</Filter>
+    </ClCompile>
     <ClCompile Include="Object_Manager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Oude code</Filter>
     </ClCompile>
     <ClCompile Include="test_state.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Oude code</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\levels\Level_New.json">
+      <Filter>Resource Files\Levels</Filter>
+    </None>
   </ItemGroup>
 </Project>

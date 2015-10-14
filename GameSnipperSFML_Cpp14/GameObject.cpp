@@ -101,7 +101,7 @@ void GameObject::MoveUnit(float x, float y)
 	vel.y = y;
 	vel.x = x;
 
-	std::cout << vel.y << std::endl;
+	
 
 	this->body->SetLinearVelocity(vel);
 
