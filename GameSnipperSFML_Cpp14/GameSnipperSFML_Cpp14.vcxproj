@@ -172,7 +172,6 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\ProjectEcho\GameSnippetSFML\GameSnippet\Object_Manager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="game_state.h" />
     <ClInclude Include="LevelImporter.h" />

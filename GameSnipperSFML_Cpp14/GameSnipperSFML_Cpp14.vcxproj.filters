@@ -111,9 +111,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\Oude code</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\ProjectEcho\GameSnippetSFML\GameSnippet\Object_Manager.h">
-      <Filter>Header Files\Oude code</Filter>
-    </ClInclude>
     <ClInclude Include="test_state.h">
       <Filter>Header Files\Oude code</Filter>
     </ClInclude>
