@@ -6,7 +6,7 @@
 class DrawBehaviour
 {
 public:
-	virtual void getCurrentImage();
+	virtual sf::Sprite getCurrentImage();
 	Unit* getUnit();
 
 protected:

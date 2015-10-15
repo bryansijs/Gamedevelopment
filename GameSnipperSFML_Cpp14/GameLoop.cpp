@@ -5,6 +5,7 @@
 #include "Unit.h"
 #include "DrawBehaviour.h"
 #include "NormalDrawBehaviour.h"
+#include "MoveBehaviour.h"
 
 
 GameLoop::GameLoop(Context* c)
@@ -30,23 +31,25 @@ void GameLoop::run()
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-			
+			context->allUnits.at(0)->moveBehaviour->Move(0.0f, 5.0f, 0.0f, 0.0f, 0.017f);
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-			
+			context->allUnits.at(0)->moveBehaviour->Move(5.0f, 0.0f, 0.0f, 0.0f, 0.017f);
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-			
+			context->allUnits.at(0)->moveBehaviour->Move(0.0f, 0.0f, 5.0f, 0.0f, 0.017f);
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-			
+			context->allUnits.at(0)->moveBehaviour->Move(0.0f, 0.0f, 0.0f, 5.0f, 0.017f);
 		}
 
 		for (int i = 0; i < context->getUnits().size(); i++) {
 			Unit* u = context->getUnits().at(i);
-			//u->drawBehaviour->
+			context->window.draw(u->drawBehaviour->getCurrentImage());
 			
 		}
+		context->window.display();
+		context->window.clear();
 
 	}
 }

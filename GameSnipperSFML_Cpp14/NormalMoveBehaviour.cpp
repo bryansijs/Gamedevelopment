@@ -15,16 +15,16 @@ void NormalMoveBehaviour::Move(float DOWN, float UP, float RIGHT, float LEFT, fl
 {
 	if (this->checkVisible(0.0f, 0.0f)) {
 		float moveDOWN = DOWN * deltaTime;
-		xPosition += moveDOWN;
+		this->unit->positions.y += moveDOWN;
 
 		float moveUP = UP * deltaTime;
-		xPosition -= moveUP;
+		this->unit->positions.y -= moveUP;
 
 		float moveRIGHT = RIGHT * deltaTime;
-		yPosition += moveRIGHT;
+		this->unit->positions.x += moveRIGHT;
 
 		float moveLEFT = LEFT * deltaTime;
-		yPosition -= moveLEFT;
+		this->unit->positions.x -= moveLEFT;
 	}
 }
 

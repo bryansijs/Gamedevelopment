@@ -7,6 +7,6 @@ public:
 	NormalDrawBehaviour(Unit* u, int refreshRate, std::string playerTextureURL);
 	~NormalDrawBehaviour();
 
-	virtual void getCurrentImage();
+	sf::Sprite getCurrentImage();
 };
 

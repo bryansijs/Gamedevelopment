@@ -6,6 +6,7 @@
 
 Player::Player(std::vector<MoveBehaviour*>* moves, std::vector<DrawBehaviour*>* draws, std::vector<Unit*>* units)
 {
+	this->setPosition(400.0f, 400.0f);
 	this->allMoveBehaviours = moves;
 	this->allDrawBehaviours = draws;
 	this->allUnits = units;

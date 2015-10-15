@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <SFML\Graphics.hpp>
 
 class MoveBehaviour;
 class DrawBehaviour;
@@ -9,7 +10,8 @@ class Unit
 {
 public:
 	int id;
-	enum direction { UP, RIGHT, DOWN, LEFT };
+	enum direction {Down, Left, Right, Up};
+	sf::Vector2f positions;
 
 	UnitState* currentState;
 	MoveBehaviour* moveBehaviour;
@@ -22,5 +24,7 @@ public:
 	void setCurrentState(UnitState* state);
 	void setMoveBehaviour(MoveBehaviour* newMoveBehaviour);
 	void setDrawBehaviour(DrawBehaviour* newDrawBehaviour);
+
+	void setPosition(float x, float y) { positions.x = x; positions.y = y; };
 };
 

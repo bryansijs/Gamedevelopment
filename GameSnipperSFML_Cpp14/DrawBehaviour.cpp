@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "DrawBehaviour.h"
 
-void DrawBehaviour::getCurrentImage(){ }
+sf::Sprite DrawBehaviour::getCurrentImage() { return this->unitImage; }
 
 Unit* DrawBehaviour::getUnit()
 {

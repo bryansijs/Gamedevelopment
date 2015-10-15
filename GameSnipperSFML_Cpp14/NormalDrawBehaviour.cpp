@@ -16,6 +16,10 @@ NormalDrawBehaviour::~NormalDrawBehaviour()
 {
 }
 
-void NormalDrawBehaviour::getCurrentImage()
+sf::Sprite NormalDrawBehaviour::getCurrentImage()
 {
+	this->unitImage.setTextureRect(sf::IntRect(32, 32, 32, 32));
+
+	this->unitImage.setPosition(this->unit->positions);
+	return this->unitImage;
 }
