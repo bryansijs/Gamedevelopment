@@ -347,7 +347,7 @@ void LevelImporter::Prepare()
 	PrepareTiles();
 }
 
-void LevelImporter::Start(sf::CircleShape* player)
+void LevelImporter::Start(Unit* player)
 {
 	t_StartTile* start = nullptr;
 
