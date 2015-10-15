@@ -9,6 +9,7 @@
 #include <string>
 #include <SFML\Graphics.hpp>
 #include <typeinfo>
+#include "Unit.h"
 
 class LevelImporter
 {
@@ -19,7 +20,7 @@ public:
 	void Import(std::string JSON);
 	void Prepare();
 	void Update();
-	void Start(sf::CircleShape* player);
+	void Start(Unit* player);
 	void setHazardState(int hazardIndex, bool hazardState);
 	void setLayerVisibility(int layerIndex, bool isVisible);
 
