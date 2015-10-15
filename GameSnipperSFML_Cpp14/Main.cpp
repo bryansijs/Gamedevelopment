@@ -64,7 +64,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 
 
-	sf::RenderWindow window(sf::VideoMode(640, 480), "Team Echo!");
+	sf::RenderWindow window(sf::VideoMode(960, 640), "Team Echo!");
 
 
 	coreState.SetWindow(&window);
@@ -73,7 +73,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	// Awesomium
 	WebCore* web_core = WebCore::Initialize(WebConfig());
 
-	WebView* view = web_core->CreateWebView(640, 480, 0, kWebViewType_Offscreen);
+	WebView* view = web_core->CreateWebView(960, 640, 0, kWebViewType_Offscreen);
 	//BindMethods(view);
 
 	WebURL url(WSLit("file:///Resources/menuHTML/menu.html"));
@@ -93,42 +93,15 @@ int _tmain(int argc, _TCHAR* argv[])
 	BitmapSurface* surface = static_cast<BitmapSurface*>(view->surface());
 
 	sf::Texture uiTexture;
-	uiTexture.create(640, 480);
+	uiTexture.create(960, 640);
 
 	sf::Texture menuTexture;
 	menuTexture.loadFromFile("Resources/background/backgroundd.png");
 
-	sf::CircleShape shape(100.f);
-	shape.setPosition(400, 100);
-	sf::Font font;
-	font.loadFromFile("Resources/arial.ttf");
-	shape.setFillColor(sf::Color::Cyan);
 	std::cout << "Debug menu laat fouten zien." << std::endl;
 
-	sf::Text text;
-	sf::Music Music1;
-
-	if (!Music1.openFromFile("Resources/music/overworld.ogg"))
-	{
-		std::cout << "Music not found" << std::endl;
-	}
-	
-	Music1.play();
-	// select the font
-	text.setFont(font); // font is a sf::Font
-	text.setPosition(180, 160);
-	// set the string to display
-	text.setString("Welcome team\nEcho");
-	// set the character size
-	text.setCharacterSize(24); // in pixels, not points!
-	// set the color
-	text.setColor(sf::Color::White);
-	text.setRotation(20);
-	// set the text style
-	text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-
 	sf::Keyboard::Key d = sf::Keyboard::Key();
-	sf::Uint8* pixels = new sf::Uint8[640 * 480 * 4];
+	sf::Uint8* pixels = new sf::Uint8[960 * 640 * 50];
 
 	while (window.isOpen())
 	{
@@ -140,87 +113,23 @@ int _tmain(int argc, _TCHAR* argv[])
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-
-			if (sf::Event::KeyPressed)
-			{
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
-				{
-					shape.setFillColor(sf::Color::Cyan);
-				}
-
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2))
-				{
-					shape.setFillColor(sf::Color::White);
-				}
-
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3))
-				{
-					shape.setFillColor(sf::Color::Red);
-				}
-
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4))
-				{
-					shape.setFillColor(sf::Color::Green);
-				}
-
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num5))
-				{
-					shape.setFillColor(sf::Color::Yellow);
-				}
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num6))
-				{
-					shape.setFillColor(sf::Color::Blue);
-				}
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num7))
-				{
-					shape.setFillColor(sf::Color::Black);
-				}
-
-
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-				{
-
-					for (int i = 0; i < 10; i++)
-					{
-						if (bulletList[i].getPosition().x < 0)
-						{
-							bulletList[i].setTexture(bulletTexture);
-							bulletList[i].setPosition(shape.getPosition().x + shape.getRadius(), shape.getPosition().y + shape.getRadius() / 2);
-					
-							break;
-						}
-					}
-
-				}
-
-
-			}
 		}
 
 
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
-		for (int i = 0; i < 9; i++)
-		{
-			if (bulletList[i].getPosition().x >= 0)
-			{
-				bulletList[i].setPosition(bulletList[i].getPosition().x + bulletSpeed, bulletList[i].getPosition().y);
-
-				if (bulletList[i].getPosition().x > window.getSize().x)
-				{
-					bulletList[i].setPosition(-100, -100);
-				}
-			}
-		}
-
 
 		window.clear();
+		
+		const unsigned char* tempBuffer = surface->buffer();
 
-	
-		window.draw(sprite);
-		window.draw(shape);
-		window.draw(text);
+		for (register int i = 0; i < 960 * 640 * 4; i += 4) {
+			pixels[i] = tempBuffer[i + 2]; // B
+			pixels[i + 1] = tempBuffer[i + 1]; // G
+			pixels[i + 2] = tempBuffer[i]; // R
+			pixels[i + 3] = tempBuffer[i + 3]; // Alpha
+		}
 
 		coreState.Update();
 		coreState.Render();
@@ -233,20 +142,12 @@ int _tmain(int argc, _TCHAR* argv[])
 			}
 		}
 
-		const unsigned char* tempBuffer = surface->buffer();
-
-		for (register int i = 0; i < 640 * 480 * 4; i += 4) {
-			pixels[i] = tempBuffer[i + 2]; // B
-			pixels[i + 1] = tempBuffer[i + 1]; // G
-			pixels[i + 2] = tempBuffer[i]; // R
-			pixels[i + 3] = tempBuffer[i + 3]; // Alpha
-		}
+		
 
 		sf::Sprite ui(uiTexture);
 		uiTexture.update(pixels);
 
 		window.draw(ui);
-
 		window.display();
 	}
 

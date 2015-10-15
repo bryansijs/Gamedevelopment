@@ -6,22 +6,22 @@
 
 GameObject::GameObject(b2World* world)
 {
-	this->texture = new sf::Texture();
+	/*this->texture = new sf::Texture();
 	this->active = 1;
 	this->groupId = 0;
 	this->world = world;
-
+	*/
 }
 
 void GameObject::setSounds(std::string fileName)
 {
-	this->sbuffer.loadFromFile("Resources/sfx/hit.ogg");
-	this->sfx.setBuffer(this->sbuffer);
+	//this->sbuffer.loadFromFile("Resources/sfx/hit.ogg");
+	//this->sfx.setBuffer(this->sbuffer);
 }
 
 void GameObject::Load(std::string filename, bool dynamic)
 {
-	this->texture->loadFromFile("Resources/sprites/" + filename);
+	/*this->texture->loadFromFile("Resources/sprites/" + filename);
 	this->setTexture(*this->texture);
 
 	this->bodyDef = new b2BodyDef();
@@ -51,13 +51,13 @@ void GameObject::Load(std::string filename, bool dynamic)
 	else
 	{
 		this->body->CreateFixture(this->shape, 0);
-	}
+	}*/
 }
 
 
 void GameObject::Handle()
 {
-	float x = 0, y = 0;
+	/*float x = 0, y = 0;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
@@ -86,24 +86,26 @@ void GameObject::Handle()
 
 
 	MoveUnit(x, y);
+	*/
 }
 
 void GameObject::MoveUnit(float x, float y)
 {
-	b2Vec2 vel = body->GetLinearVelocity();
+	/*b2Vec2 vel = body->GetLinearVelocity();
 
 /*	switch (moveState)
 	{
 	case MS_LEFT:  desiredVel = -5; break;
 	case MS_STOP:  desiredVel = 0; break;
 	case MS_RIGHT: desiredVel = 5; break;
-	}*/
+	}
 	vel.y = y;
 	vel.x = x;
 
 	std::cout << vel.y << std::endl;
 
 	this->body->SetLinearVelocity(vel);
+	*/
 
 }
 
@@ -111,10 +113,10 @@ bool GameObject::Update(sf::RenderWindow* window)
 {
 	
 
-	b2Vec2 pos = this->body->GetPosition();
+	/*b2Vec2 pos = this->body->GetPosition();
 	float32 rot = this->body->GetAngle();
 this->setPosition(pos.x, -pos.y);
-	this->setRotation(rot);
+	this->setRotation(rot);*/
 	return true;
 }
 void GameObject::Collision(GameObject* entity)
@@ -143,8 +145,8 @@ void GameObject::Destroy()
 
 GameObject::~GameObject()
 {
-	delete this->texture;
+	/*delete this->texture;
 	delete this->bodyDef;
 	delete this->shape;
-	delete this->fixtureDef;
+	delete this->fixtureDef;*/
 }
