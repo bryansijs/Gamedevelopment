@@ -1,0 +1,147 @@
+{ "height":50,
+ "layers":[
+        {
+         "compression":"zlib",
+         "data":"eJzt00EKwCAMBEDtD\/T\/j60HAyWntpdqmYFlg6dAsBQAvlRHjge9qjbSZ8euPb1fe1Wxe6Smebd7RFqad7vHn\/7HnQYAAAAAAADgnROX7QKP",
+         "encoding":"base64",
+         "height":50,
+         "name":"Vloer",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":50,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "compression":"zlib",
+         "data":"eJzt1bENg0AQBMCDVnADCPfi9mjRrsBHSvA6OfmTPCOtNiDZ0wdEABV7xPlLZu++uza9sz+Zane9Y1ki1ky1u96x5bZHptpd7zhy2zNT7a53eI8+vEcvo3\/da\/B99m4AAAAAAADgv3wBeck7Zw==",
+         "encoding":"base64",
+         "height":50,
+         "name":"Muren + Plafon",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":50,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":0,
+         "name":"Objectlaag 1",
+         "objects":[
+                {
+                 "height":62,
+                 "id":6,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":383,
+                 "x":127,
+                 "y":161
+                }, 
+                {
+                 "height":0,
+                 "id":22,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":175,
+                 "y":719
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":0,
+         "x":0,
+         "y":0
+        }],
+ "nextobjectid":23,
+ "orientation":"orthogonal",
+ "properties":
+    {
+
+    },
+ "renderorder":"right-down",
+ "tileheight":32,
+ "tilesets":[
+        {
+         "firstgid":1,
+         "image":"I:\/Game Resources\/Tiles\/Sc-fi\/Sci-Fi-Tiles_A2.png",
+         "imageheight":384,
+         "imagewidth":512,
+         "margin":0,
+         "name":"Sci-Fi-Tiles_A2",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tilecount":192,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":193,
+         "image":"I:\/Game Resources\/Tiles\/Sc-fi\/Sci-Fi-Tiles_A4.png",
+         "imageheight":480,
+         "imagewidth":512,
+         "margin":0,
+         "name":"Sci-Fi-Tiles_A4",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tilecount":240,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":433,
+         "image":"I:\/Game Resources\/Tiles\/Sc-fi\/Z18-TileA3.png",
+         "imageheight":256,
+         "imagewidth":512,
+         "margin":0,
+         "name":"Z18-TileA3",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tilecount":128,
+         "tileheight":32,
+         "tilewidth":32
+        }, 
+        {
+         "firstgid":561,
+         "image":"I:\/Game Resources\/Tiles\/Sc-fi\/Z18-TileA5.png",
+         "imageheight":512,
+         "imagewidth":256,
+         "margin":0,
+         "name":"Z18-TileA5",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tilecount":128,
+         "tileheight":32,
+         "tilewidth":32
+        }],
+ "tilewidth":32,
+ "version":1,
+ "width":50
+}
