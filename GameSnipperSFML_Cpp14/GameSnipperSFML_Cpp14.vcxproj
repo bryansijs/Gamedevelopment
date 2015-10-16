@@ -73,6 +73,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>./include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LibraryWPath>./library;$(WindowsSDK_MetadataPath);</LibraryWPath>
+    <GenerateManifest>true</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -102,6 +103,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>./library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Box2D.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-audio-d.lib;sfml-system-d.lib;sfml-window-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AllowIsolation>true</AllowIsolation>
+      <IgnoreEmbeddedIDL>false</IgnoreEmbeddedIDL>
     </Link>
     <PostBuildEvent>
       <Command>xcopy $(ProjectDir)DLL $(TargetDir) /E /Y /D
@@ -174,7 +177,11 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
   <ItemGroup>
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="game_state.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="KeyMapping.h" />
+    <ClInclude Include="KeyMappingImporter.h" />
     <ClInclude Include="LevelImporter.h" />
+    <ClInclude Include="PlayerMovement.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="resource1.h" />
     <ClInclude Include="stdafx.h" />
@@ -184,10 +191,14 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="game_state.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="jsoncpp.cpp" />
+    <ClCompile Include="KeyMapping.cpp" />
+    <ClCompile Include="KeyMappingImporter.cpp" />
     <ClCompile Include="LevelImporter.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Object_Manager.cpp" />
+    <ClCompile Include="PlayerMovement.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

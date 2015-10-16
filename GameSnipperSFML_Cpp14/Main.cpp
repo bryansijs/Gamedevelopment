@@ -1,16 +1,24 @@
 #include "stdafx.h"
 #include "game_state.h"
 #include "test_state.h"
+#include "LevelImporter.h"
+#include "Input.h"
+#include "KeyMapping.h"
+#include "KeyMappingImporter.h"
+#include "PlayerInput.h"
+
 #include <iostream>
 #include <conio.h>
 #include <thread>
 #include <chrono> 
 #include <cstdio>
+#include <string>
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+
 #include <Box2d/Box2D.h>
-#include "LevelImporter.h"
-#include <string>
+
 
 game_state coreState;
 bool quitGame = false;
@@ -105,6 +113,7 @@ void MoveView(sf::View &view)
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	// TODO: Question about pointer
 	LevelImporter* l = new LevelImporter();
 	l->Import("./Resources/levels/Level_New.json");
 	l->Prepare();
@@ -121,66 +130,97 @@ int _tmain(int argc, _TCHAR* argv[])
 	window.setView(view);
 	l->Start(&shape);
 
-	while (window.isOpen())
+	try
 	{
-		window.clear();
+		// Generate keymap from json file
+		unique_ptr<KeyMappingImporter> keyMappingImporter(new KeyMappingImporter());
+		keyMappingImporter->Import("./Resources/key-mapping.json");
 
-		l->Draw(&window);
-		l->Update();
-		MoveView(view);
-		
-		sf::Vector2f s = shape.getPosition();
-		sf::Vector2i worldPos = window.mapCoordsToPixel(s);
+		// Save keymap to keymapping
+		multimap<string, string> mapping = keyMappingImporter->GetMapping();
+		KeyMapping::ReloadMapping(mapping);
 
-		sf::Event event;
+		// Create playermovement
+		unique_ptr<PlayerInput> playerInput(new PlayerInput());
 
-		if (doEvents) {
-			while (window.pollEvent(event))
-			{
-				if (event.type == sf::Event::Closed)
-					window.close();
+		while (window.isOpen())
+		{
+			window.clear();
 
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+			l->Draw(&window);
+			l->Update();
+			MoveView(view);
+
+			sf::Vector2f s = shape.getPosition();
+			sf::Vector2i worldPos = window.mapCoordsToPixel(s);
+
+			sf::Event event;
+
+			if (doEvents) {
+				while (window.pollEvent(event))
 				{
-					t_max += 160;
-					moveDown = true;
-				}
+					if (event.type == sf::Event::Closed)
+						window.close();
 
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-				{
-					t_max -= 160;
-					moveDown = false;
-				}
+					if (event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased)
+					{
+						Input::EventOccured(event);
+						if (playerInput->MoveEvent())
+						{
+							cout << "Move event";
+						}
+					}
 
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-				{
-					shape.setPosition(shape.getPosition().x, shape.getPosition().y - 10);
-				}
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-				{
-					shape.setPosition(shape.getPosition().x, shape.getPosition().y + 10);
-				}
+					/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+					{
+						t_max += 160;
+						moveDown = true;
+					}
 
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-				{
-					shape.setPosition(shape.getPosition().x - 10, shape.getPosition().y);
-				}
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-				{
-					shape.setPosition(shape.getPosition().x + 10, shape.getPosition().y);
-				}
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-				{
-					cout << "x: " << worldPos.x << " y: " << worldPos.y << endl;
-				}
+					if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+					{
+						t_max -= 160;
+						moveDown = false;
+					}
 
-				updateViewPort(worldPos);
+					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+					{
+						shape.setPosition(shape.getPosition().x, shape.getPosition().y - 10);
+					}
+					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+					{
+						shape.setPosition(shape.getPosition().x, shape.getPosition().y + 10);
+					}
+
+					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+					{
+						shape.setPosition(shape.getPosition().x - 10, shape.getPosition().y);
+					}
+					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+					{
+						shape.setPosition(shape.getPosition().x + 10, shape.getPosition().y);
+					}
+					if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+					{
+						cout << "x: " << worldPos.x << " y: " << worldPos.y << endl;
+					}
+
+					updateViewPort(worldPos);*/
+				}
 			}
-		}
 
-		window.setView(view);
-		window.draw(shape);
-		window.display();
+			//window.setView(view);
+			//window.draw(shape);
+			//window.display();
+		}
+	}
+	catch (exception e)
+	{
+		cerr << e.what();
+	}
+	catch (...)
+	{
+		cerr << "Default exception";
 	}
 		
 	return 0;

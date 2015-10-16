@@ -1,70 +1,10 @@
-﻿Build started 14/10/2015 04:53:00 PM.
-     1>Project "C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\GameSnipperSFML_Cpp14.vcxproj" on node 2 (Build target(s)).
-     1>Link:
-         GameSnipperSFML_Cpp14.vcxproj -> C:\Users\Patrick\Documents\GitHub\Gamedevelopment\Debug\GameSnipperSFML_Cpp14.exe
-       PostBuildEvent:
-         xcopy C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\DLL C:\Users\Patrick\Documents\GitHub\Gamedevelopment\Debug\ /E /Y /D
-         
-         cmd /x /c mkdir "C:\Users\Patrick\Documents\GitHub\Gamedevelopment\Debug\Resources\"
-         xcopy C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources C:\Users\Patrick\Documents\GitHub\Gamedevelopment\Debug\Resources /E /Y /D
-         :VCEnd
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\DLL\openal32.dll
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\DLL\sfml-audio-2.dll
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\DLL\sfml-audio-d-2.dll
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\DLL\sfml-graphics-2.dll
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\DLL\sfml-graphics-d-2.dll
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\DLL\sfml-network-2.dll
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\DLL\sfml-network-d-2.dll
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\DLL\sfml-system-2.dll
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\DLL\sfml-system-d-2.dll
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\DLL\sfml-window-2.dll
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\DLL\sfml-window-d-2.dll
-         11 File(s) copied
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\arial.ttf
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\background\backgroundd.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\levels\Level1.json
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\levels\Level_1.json
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\levels\Level_New.json
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\levels\Level_old.json
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\levels\SpaceTest.json
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\music\overworld.ogg
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\sfx\hit.ogg
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\sprites\bullet.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\sprites\floor.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\sprites\paddle1.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\sprites\paddle2.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\sprites\ship.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\1240753373019659800.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\2iiv8rs.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\52775193tilee10-png.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\Environment_SpriteSheet.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\Environment_SpriteSheet_Transparent.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\future-joy-tilee.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\FuturisticTileEcrEB.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\GC_SciFi.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\Sci-Fi-Tiles_A1.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\Sci-Fi-Tiles_A2.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\Sci-Fi-Tiles_A4.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\Sci-Fi-Tiles_A5.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\Sci-Fi-Tiles_B.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\Sci-Fi-Tiles_C.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\Sci-Fi-Tiles_D.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\Sci-Fi-Tiles_E.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\scifiexample01.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\scifiexample02.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\t9dn2Ic.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\Z18-TileA1.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\Z18-TileA2-2.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\Z18-TileA2.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\Z18-TileA3.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\Z18-TileA4.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\Z18-TileA5.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\Z18-TileB.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\Z18-TileC.png
-         C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\Resources\tiles\Z18-TileD.png
-         42 File(s) copied
-     1>Done Building Project "C:\Users\Patrick\Documents\GitHub\Gamedevelopment\GameSnipperSFML_Cpp14\GameSnipperSFML_Cpp14.vcxproj" (Build target(s)).
-
-Build succeeded.
-
-Time Elapsed 00:00:00.25
+﻿  PlayerMovement.cpp
+  Main.cpp
+d:\workspace\c++\gamedevelopment\gamesnippersfml_cpp14\levelimporter.h(60): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\workspace\c++\gamedevelopment\gamesnippersfml_cpp14\levelimporter.h(68): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  GameSnipperSFML_Cpp14.vcxproj -> D:\Workspace\C++\Gamedevelopment\Debug\GameSnipperSFML_Cpp14.exe
+  0 File(s) copied
+  File not found - DLL
+  A subdirectory or file D:\Workspace\C++\Gamedevelopment\Debug\Resources\ already exists.
+  0 File(s) copied
