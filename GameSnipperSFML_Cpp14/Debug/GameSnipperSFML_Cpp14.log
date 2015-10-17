@@ -1,10 +1,6 @@
-﻿  PlayerMovement.cpp
-  Main.cpp
-d:\workspace\c++\gamedevelopment\gamesnippersfml_cpp14\levelimporter.h(60): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-d:\workspace\c++\gamedevelopment\gamesnippersfml_cpp14\levelimporter.h(68): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
+﻿  PlayerInput.cpp
   GameSnipperSFML_Cpp14.vcxproj -> D:\Workspace\C++\Gamedevelopment\Debug\GameSnipperSFML_Cpp14.exe
-  0 File(s) copied
   File not found - DLL
+  0 File(s) copied
   A subdirectory or file D:\Workspace\C++\Gamedevelopment\Debug\Resources\ already exists.
   0 File(s) copied

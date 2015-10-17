@@ -18,6 +18,7 @@ public:
 	static void ReloadMapping(multimap<string, string> mapping);
 
 	static string GetMap(string key);
+	static string GetKey(string map);
 	static multimap<string, string> GetMapping();
 private:
 	static multimap<string, string> mapping;

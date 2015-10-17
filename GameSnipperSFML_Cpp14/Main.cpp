@@ -165,9 +165,10 @@ int _tmain(int argc, _TCHAR* argv[])
 					if (event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased)
 					{
 						Input::EventOccured(event);
+
 						if (playerInput->MoveEvent())
 						{
-							cout << "Move event";
+							
 						}
 					}
 

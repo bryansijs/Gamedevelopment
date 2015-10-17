@@ -48,6 +48,19 @@ string KeyMapping::GetMap(string key)
 	}
 }
 
+string KeyMapping::GetKey(string map)
+{
+	multimap<string, string>::iterator it;
+
+	for (it = mapping.begin(); it != mapping.end(); ++it)
+	{
+		if (it->first == map)
+		{
+			return it->second;
+		}
+	}
+}
+
 multimap<string, string> KeyMapping::GetMapping()
 {
 	return mapping;
