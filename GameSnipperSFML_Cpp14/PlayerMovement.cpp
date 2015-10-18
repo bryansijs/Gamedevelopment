@@ -11,26 +11,28 @@ PlayerMovement::~PlayerMovement()
 {
 }
 
-void PlayerMovement::Move(float deltaTime)
+void PlayerMovement::Move(float deltaTime, Player* player)
 {
 	if (Input::GetKeyDown(KeyMapping::GetKey("move-up")))
 	{
-		x += 1.0f;
+		cout << "Move up\n";
+		player->positions.y += -1.0f * (deltaTime / 10000);
 	}
 	if (Input::GetKeyDown(KeyMapping::GetKey("move-down")))
 	{
-		x += -1.0f;
+		cout << "Move down\n";
+		player->positions.y += 1.0f * (deltaTime / 10000);
 	}
 	if (Input::GetKeyDown(KeyMapping::GetKey("move-left")))
 	{
-		y += -1.0f;
+		cout << "Move left\n";
+		player->positions.x += -1.0f * (deltaTime / 10000);
 	}
 	if (Input::GetKeyDown(KeyMapping::GetKey("move-right")))
 	{
-		y += 1.0f;
+		cout << "Move right\n";
+		player->positions.x += 1.0f * (deltaTime / 10000);
 	}
-
-
 }
 
 void PlayerMovement::SetX(float x)

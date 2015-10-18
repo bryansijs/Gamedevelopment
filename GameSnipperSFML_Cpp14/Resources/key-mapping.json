@@ -2,15 +2,7 @@
   "mapping" : [
     {
       "map": "move-up",
-      "key": "W"
-    },
-    {
-      "map": "move-up",
       "key": "Up"
-    },
-    {
-      "map": "move-down",
-      "key": "S"
     },
     {
       "map": "move-down",
@@ -18,15 +10,7 @@
     },
     {
       "map": "move-left",
-      "key": "A"
-    },
-    {
-      "map": "move-left",
       "key": "Left"
-    },
-    {
-      "map": "move-right",
-      "key": "D"
     },
     {
       "map": "move-right",
