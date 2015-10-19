@@ -73,6 +73,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>./include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LibraryWPath>./library;$(WindowsSDK_MetadataPath);</LibraryWPath>
+    <GenerateManifest>true</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -102,12 +103,16 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>./library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>awesomium.lib;Box2D.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-audio-d.lib;sfml-system-d.lib;sfml-window-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AllowIsolation>true</AllowIsolation>
+      <IgnoreEmbeddedIDL>false</IgnoreEmbeddedIDL>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(ProjectDir)DLL $(TargetDir) /E /Y /D
+      <Command>
+        xcopy $(ProjectDir)DLL $(TargetDir) /E /Y /D
 
-cmd /x /c mkdir "$(TargetDir)Resources\"
-xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
+        cmd /x /c mkdir "$(TargetDir)Resources\"
+        xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -145,10 +150,12 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
       <AdditionalDependencies>Box2D-r.lib;sfml-graphics.lib;sfml-main.lib;sfml-audio.lib;sfml-system.lib;sfml-window.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(ProjectDir)DLL $(TargetDir) /E /Y /D
+      <Command>
+        xcopy $(ProjectDir)DLL $(TargetDir) /E /Y /D
 
-cmd /x /c mkdir "$(TargetDir)Resources\"
-xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
+        cmd /x /c mkdir "$(TargetDir)Resources\"
+        xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -172,22 +179,56 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Context.h" />
+    <ClInclude Include="DrawBehaviour.h" />
+    <ClInclude Include="gameloop.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="game_state.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="KeyMapping.h" />
+    <ClInclude Include="KeyMappingImporter.h" />
     <ClInclude Include="LevelImporter.h" />
+    <ClInclude Include="MoveBehaviour.h" />
+    <ClInclude Include="MoveBehaviourFactory.h" />
+    <ClInclude Include="MoveContainer.h" />
+    <ClInclude Include="NormalDrawBehaviour.h" />
+    <ClInclude Include="NormalMoveBehaviour.h" />
+    <ClInclude Include="NormalState.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerInput.h" />
+    <ClInclude Include="PlayerMovement.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="resource1.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="test_state.h" />
+    <ClInclude Include="Unit.h" />
+    <ClInclude Include="UnitState.h" />
+    <ClInclude Include="UpdateLogic.h" />
+    <ClInclude Include="UpdateUI.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Context.cpp" />
+    <ClCompile Include="DrawBehaviour.cpp" />
+    <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="game_state.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="jsoncpp.cpp" />
+    <ClCompile Include="KeyMapping.cpp" />
+    <ClCompile Include="KeyMappingImporter.cpp" />
     <ClCompile Include="LevelImporter.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MoveBehaviour.cpp" />
+    <ClCompile Include="MoveBehaviourFactory.cpp" />
+    <ClCompile Include="MoveContainer.cpp" />
+    <ClCompile Include="NormalDrawBehaviour.cpp" />
+    <ClCompile Include="NormalMoveBehaviour.cpp" />
     <ClCompile Include="Object_Manager.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerInput.cpp" />
+    <ClCompile Include="PlayerMovement.cpp" />
+    <ClCompile Include="SetupState.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -195,6 +236,10 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="test_state.cpp" />
+    <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="UnitState.cpp" />
+    <ClCompile Include="UpdateLogic.cpp" />
+    <ClCompile Include="UpdateUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\menuHtml\menu.html" />

@@ -347,7 +347,7 @@ void LevelImporter::Prepare()
 	PrepareTiles();
 }
 
-void LevelImporter::Start(sf::CircleShape* player)
+void LevelImporter::Start(Player* player)
 {
 	t_StartTile* start = nullptr;
 
@@ -378,6 +378,7 @@ void LevelImporter::Import(std::string JSON)
 	}
 }
 
+// TODO: Is het drawen in de importer tijdelijk?
 void LevelImporter::Draw(sf::RenderWindow* window)
 {
 	for (size_t i = 0; i < tiles.size(); i++)
@@ -410,6 +411,7 @@ void LevelImporter::setLayerVisibility(int layerIndex, bool isVisible)
 	}
 }
 
+// TODO: Is het updaten in de importer tijdelijk?
 void LevelImporter::Update()
 {
 	for (size_t i = 0; i < getGame_Objects().size(); i++)

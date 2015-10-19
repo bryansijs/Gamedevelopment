@@ -1,39 +1,275 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="game_state.cpp" />
-    <ClCompile Include="jsoncpp.cpp" />
-    <ClCompile Include="LevelImporter.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Object_Manager.cpp" />
-    <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="test_state.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="game_state.h" />
-    <ClInclude Include="LevelImporter.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="resource1.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
-    <ClInclude Include="test_state.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Resources\menuHtml\images\bg.png" />
-    <Image Include="Resources\menuHtml\images\border.png" />
-    <Image Include="Resources\menuHtml\images\cat.png" />
-    <Image Include="Resources\menuHtml\images\menuBorder.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="Resources\menuHtml\font\moonhouse.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\menuHtml\menu.html" />
-    <None Include="Resources\levels\Level_New.json" />
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Views">
+      <UniqueIdentifier>{a139710f-0894-4e7f-bed6-c34883db38a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Levels">
+      <UniqueIdentifier>{d9e0a1da-74f3-4bea-8bb4-552bbcf32761}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Sprites">
+      <UniqueIdentifier>{295f7395-4e8f-4653-add4-21f524474d0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Sprites\Items">
+      <UniqueIdentifier>{b876c80e-4d5e-4c0a-ac2f-bf4edfaee36c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Sprites\Projectiles">
+      <UniqueIdentifier>{d9cfb341-8efe-4db2-aadb-87e3a2dc75d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Sprites\Units">
+      <UniqueIdentifier>{623bb4e1-f3ab-4983-ba8b-c327d9e85621}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Tiles">
+      <UniqueIdentifier>{a4e4db64-8bee-4d73-baf0-4fae5fa1f057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{cb408143-5888-4c9e-8d66-bd16302ff9a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{4814df0d-9e24-4218-8393-4af53a311360}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Behaviours">
+      <UniqueIdentifier>{d5224c3d-4ffb-4a06-bf3b-9d7a0710d1e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Containers">
+      <UniqueIdentifier>{fa06be8c-3b0e-4a9b-a499-15ac208f5fe6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Factories">
+      <UniqueIdentifier>{dfeed7dc-2791-4446-96df-f0eb785b14ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Levels">
+      <UniqueIdentifier>{d957c8ee-1cb7-4222-8cc3-b1969892c137}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Managers">
+      <UniqueIdentifier>{f7298107-a209-4160-b743-fb05f28b9ffb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\States">
+      <UniqueIdentifier>{21ccf40d-ef38-484e-91fe-b37e5905f657}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Units">
+      <UniqueIdentifier>{c4634945-a2dc-41cc-b520-c617ca639c54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Units\Items">
+      <UniqueIdentifier>{f2640498-25be-4db8-b116-a7d158b1959e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Units">
+      <UniqueIdentifier>{010f8a06-87ee-4f41-8ad0-37e2330126f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Units\Items">
+      <UniqueIdentifier>{c08e5997-e60f-4b19-acea-b945440548df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Behaviours">
+      <UniqueIdentifier>{34398989-877c-4b8a-8434-235379828296}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Containers">
+      <UniqueIdentifier>{fd86b006-4c27-48ae-b65c-b9ced2444d91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Factories">
+      <UniqueIdentifier>{4d55206a-44cb-4334-8ca1-4b0f48dbc9ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers">
+      <UniqueIdentifier>{5ece21e3-21b4-4ec9-a332-92fcade5d4c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\States">
+      <UniqueIdentifier>{416abce3-86b2-4989-b212-43f9eececa9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Oude code">
+      <UniqueIdentifier>{8cbf5a47-42d4-4fab-bc50-82b8341b160e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Oude code">
+      <UniqueIdentifier>{064e954f-fd1c-4247-afbc-c047eb66e0d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Player">
+      <UniqueIdentifier>{e539d8a4-326b-4023-848a-188f87bc1e9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Player">
+      <UniqueIdentifier>{45b690a4-2e46-4d14-b4f7-8257e42e5895}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_state.h">
+      <Filter>Header Files\Oude code</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\Oude code</Filter>
+    </ClInclude>
+    <ClInclude Include="test_state.h">
+      <Filter>Header Files\Oude code</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelImporter.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="resource1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyMapping.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyMappingImporter.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveBehaviourFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Context.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gameloop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdateLogic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdateUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalDrawBehaviour.h">
+      <Filter>Header Files\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalMoveBehaviour.h">
+      <Filter>Header Files\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveBehaviour.h">
+      <Filter>Header Files\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawBehaviour.h">
+      <Filter>Header Files\Behaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveContainer.h">
+      <Filter>Header Files\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalState.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>Header Files\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitState.h">
+      <Filter>Header Files\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerInput.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMovement.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="jsoncpp.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelImporter.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="game_state.cpp">
+      <Filter>Source Files\Oude code</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\Oude code</Filter>
+    </ClCompile>
+    <ClCompile Include="Object_Manager.cpp">
+      <Filter>Source Files\Oude code</Filter>
+    </ClCompile>
+    <ClCompile Include="test_state.cpp">
+      <Filter>Source Files\Oude code</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyMapping.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyMappingImporter.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveBehaviourFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Context.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLoop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UpdateLogic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UpdateUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawBehaviour.cpp">
+      <Filter>Source Files\Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveBehaviour.cpp">
+      <Filter>Source Files\Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalDrawBehaviour.cpp">
+      <Filter>Source Files\Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalMoveBehaviour.cpp">
+      <Filter>Source Files\Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerInput.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMovement.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveContainer.cpp">
+      <Filter>Source Files\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitState.cpp">
+      <Filter>Source Files\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>Source Files\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="SetupState.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\levels\Level_New.json">
+      <Filter>Resource Files\Levels</Filter>
+    </None>
   </ItemGroup>
 </Project>
