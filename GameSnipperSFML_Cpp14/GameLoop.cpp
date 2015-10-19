@@ -118,9 +118,10 @@ GameLoop::~GameLoop()
 
 void GameLoop::run()
 {
-	PlayerInput* playerInput = new PlayerInput();
-	PlayerMovement* playerMovement = new PlayerMovement();
 	Player* player = new Player();
+
+	PlayerInput playerInput;
+	PlayerMovement playerMovement(player);
 
 	KeyMappingImporter keyMappingImporter;
 	keyMappingImporter.Import("./Resources/key-mapping.json");
@@ -157,14 +158,13 @@ void GameLoop::run()
 					context->window.close();
 			}
 
-			if (event.type == sf::Event::KeyPressed)
+			if (event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased)
 			{
 				Input::EventOccured(event);
-				
-				if (playerInput->MoveEvent())
-				{
-					playerMovement->Move(deltaTime.asMicroseconds(), player);
-				}
+
+				playerInput.CatchInput();
+				playerMovement.SetActiveKeys(playerInput.GetActiveKeys());
+				playerMovement.Move(deltaTime.asMicroseconds());
 			}
 
 			context->window.draw(player->drawBehaviour->getCurrentImage());
@@ -194,4 +194,6 @@ void GameLoop::run()
 		context->window.display();
 		context->window.clear();
 	}
+
+	delete(player);
 }

@@ -3,14 +3,17 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-using namespace std;
-
 class PlayerInput
 {
 public:
 	PlayerInput();
 	~PlayerInput();
 
-	bool MoveEvent();
+	void CatchInput();
+	void AddActiveKey(std::string key);
+	void RemoveActiveKey(std::string key);
+	std::vector<std::string> GetActiveKeys();
+private:
+	std::vector<std::string> activeKeys;
 };
 

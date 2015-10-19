@@ -17,23 +17,41 @@ PlayerInput::~PlayerInput()
 {
 }
 
-bool PlayerInput::MoveEvent()
+void PlayerInput::CatchInput()
 {
-	multimap<string, string> keyMapping = KeyMapping::GetMapping();
-	multimap<string, string>::iterator it;
+	multimap<string, string> mapping = KeyMapping::GetMapping();
+	multimap<string, string>::iterator iterator;
 
-	for (it = keyMapping.begin(); it != keyMapping.end(); ++it)
+	for (iterator = mapping.begin(); iterator != mapping.end(); ++iterator)
 	{
-		string map = it->first;
-		if (map.find("move-") != string::npos)
+		std::string key = iterator->second;
+
+		if (Input::GetKeyDown(key))
 		{
-			if (Input::GetKeyDown(it->second))
-			{
-				return true;
-			}
+			AddActiveKey(key);
+		}
+
+		if (Input::GetKeyUp(key))
+		{
+			RemoveActiveKey(key);
 		}
 	}
-
-	return false;
 }
 
+void PlayerInput::AddActiveKey(std::string key)
+{
+	if (std::find(activeKeys.begin(), activeKeys.end(), key) == activeKeys.end())
+	{
+		activeKeys.push_back(key);
+	}
+}
+
+void PlayerInput::RemoveActiveKey(std::string key)
+{
+	activeKeys.erase(std::remove(activeKeys.begin(), activeKeys.end(), key), activeKeys.end());
+}
+
+std::vector<std::string> PlayerInput::GetActiveKeys()
+{
+	return activeKeys;
+}

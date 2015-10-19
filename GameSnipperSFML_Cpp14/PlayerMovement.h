@@ -1,20 +1,20 @@
 #pragma once
 
 #include <iostream>
+#include <vector>
 
 #include "Player.h"
-
-using namespace std;
 
 class PlayerMovement
 {
 public:
-	PlayerMovement();
+	PlayerMovement(Player* player);
 	~PlayerMovement();
 
-	void Move(float deltaTime, Player* player);
-	void SetX(float x);
-	void SetY(float y);
+	void Move(float deltaTime);
+	void SetActiveKeys(std::vector<std::string> keys);
 private:
-	int x, y = 0;
+	void SetPosition(float deltaTime, std::string direction);
+	std::vector<std::string> activeKeys;
+	Player* player;
 };

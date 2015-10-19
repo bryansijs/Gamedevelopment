@@ -3,44 +3,51 @@
 #include "KeyMapping.h"
 #include "Input.h"
 
-PlayerMovement::PlayerMovement()
+#include <algorithm>
+
+PlayerMovement::PlayerMovement(Player* activePlayer)
 {
+	player = activePlayer;
 }
 
 PlayerMovement::~PlayerMovement()
 {
+	delete(player);
 }
 
-void PlayerMovement::Move(float deltaTime, Player* player)
+void PlayerMovement::Move(float deltaTime)
 {
-	if (Input::GetKeyDown(KeyMapping::GetKey("move-up")))
+	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
+		std::string map = KeyMapping::GetMap(activeKeys[i]);
+
+		if (map.find("move-") != std::string::npos)
+		{
+			SetPosition(deltaTime, map);
+		}
+	}
+}
+
+void PlayerMovement::SetPosition(float deltaTime, std::string direction)
+{
+	if (direction == "move-up")
 	{
-		cout << "Move up\n";
 		player->positions.y += -1.0f * (deltaTime / 10000);
 	}
-	if (Input::GetKeyDown(KeyMapping::GetKey("move-down")))
+	if (direction == "move-down")
 	{
-		cout << "Move down\n";
 		player->positions.y += 1.0f * (deltaTime / 10000);
 	}
-	if (Input::GetKeyDown(KeyMapping::GetKey("move-left")))
+	if (direction == "move-left")
 	{
-		cout << "Move left\n";
 		player->positions.x += -1.0f * (deltaTime / 10000);
 	}
-	if (Input::GetKeyDown(KeyMapping::GetKey("move-right")))
+	if (direction == "move-right")
 	{
-		cout << "Move right\n";
 		player->positions.x += 1.0f * (deltaTime / 10000);
 	}
 }
 
-void PlayerMovement::SetX(float x)
+void PlayerMovement::SetActiveKeys(std::vector<std::string> keys)
 {
-
-}
-
-void PlayerMovement::SetY(float y)
-{
-
+	activeKeys = keys;
 }
