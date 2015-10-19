@@ -9,20 +9,22 @@
 #include <string>
 #include <SFML\Graphics.hpp>
 #include <typeinfo>
-
+#include "Unit.h"
+#include <math.h> 
 class LevelImporter
 {
 public:
 	LevelImporter();
 	~LevelImporter();
-	void Draw(sf::RenderWindow* window);
+	void Draw(sf::RenderWindow* window, sf::View* view);
 	void Import(std::string JSON);
 	void Prepare();
 	void Update();
-	void Start(sf::CircleShape* player);
+	void updateViewPort(sf::Vector2i &worldPos);
+	void Start(Unit* player, sf::Vector2u* size);
 	void setHazardState(int hazardIndex, bool hazardState);
 	void setLayerVisibility(int layerIndex, bool isVisible);
-
+	void MoveView(sf::View &view);
 	//Tijdelijke Objecten Struct Deze zullen compleet verdwijnen als de baseGame objecten af zijn
 	struct t_Object
 	{
@@ -148,16 +150,30 @@ public:
 
 	//Tijdelijk Objecten voorbij
 
-
+	bool getDoEvents() { return doEvents; }
+	int getViewPortX() { return viewPortX; }
+	int getViewPortY() { return viewPortY; }
 
 private:
 	void PrepareGameObjects();
 	void PrepareTileSets();
 	void PrepareTiles();
-
 	int tileSize;
 	int levelHeight;
 	int levelWidht;
 	sf::IntRect subRect;
+
+	bool doEvents = true;
+	bool moveDown = true;
+	bool moveRight = true;
+
+	int t_value = 0;
+	int t_max = 0;
+
+	int r_value = 0;
+	int r_max = 0;
+
+	int viewPortX = 0;
+	int viewPortY = 0;
 };
 

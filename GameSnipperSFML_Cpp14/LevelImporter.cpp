@@ -53,6 +53,82 @@ bool parsingSuccessful = false;
 Json::Reader jsonReader;
 Json::Value jsonRoot;
 
+
+void  LevelImporter::updateViewPort(sf::Vector2i &worldPos)
+{
+	//updateVP
+	if (worldPos.y > 640)
+	{
+		doEvents = false;
+		t_max += 320;
+		moveDown = true;
+	}
+
+	if (worldPos.y < 0)
+	{
+		doEvents = false;
+		t_max -= 320;
+		moveDown = false;
+	}
+
+	if (worldPos.x > 960)
+	{
+		doEvents = false;
+		r_max += 480;
+		moveRight = true;
+	}
+
+	if (worldPos.x < 0)
+	{
+		doEvents = false;
+		r_max -= 480;
+		moveRight = false;
+	}
+}
+
+
+void LevelImporter::MoveView(sf::View& view)
+{
+	if (moveDown)
+	{
+		if (t_value < t_max)
+		{
+			view.move(0, 2.0f);
+			t_value++;
+		}
+	}
+	else
+	{
+		if (t_value > t_max)
+		{
+			view.move(0, -2.0f);
+			t_value--;
+		}
+	}
+
+	if (moveRight)
+	{
+		if (r_value < r_max)
+		{
+			view.move(2.0f, 0);
+			r_value++;
+		}
+	}
+	else
+	{
+		if (r_value > r_max)
+		{
+			view.move(-2.0f, 0);
+			r_value--;
+		}
+	}
+
+	if (t_value == t_max && r_value == r_max)
+	{
+		doEvents = true;
+	}
+}
+
 void LevelImporter::PrepareTileSets()
 {
 	for (Json::Value::iterator it = jsonRoot["tilesets"].begin(); it != jsonRoot["tilesets"].end(); ++it)
@@ -347,8 +423,9 @@ void LevelImporter::Prepare()
 	PrepareTiles();
 }
 
-void LevelImporter::Start(sf::CircleShape* player)
+void LevelImporter::Start(Unit* player, sf::Vector2u* size)
 {
+
 	t_StartTile* start = nullptr;
 
 	for (size_t i = 0; i < getGame_Objects().size(); i++)
@@ -364,6 +441,11 @@ void LevelImporter::Start(sf::CircleShape* player)
 		start->y_loc = 25;
 	}
 
+	int map_yLocation = start->y_loc / size->y;
+	int map_xLocation = start->x_loc / size->x;
+	viewPortY = (map_yLocation * size->y);
+	viewPortX = (map_xLocation * size->x);
+
 	player->setPosition(start->x_loc, start->y_loc);
 }
 
@@ -378,7 +460,7 @@ void LevelImporter::Import(std::string JSON)
 	}
 }
 
-void LevelImporter::Draw(sf::RenderWindow* window)
+void LevelImporter::Draw(sf::RenderWindow* window, sf::View* view)
 {
 	for (size_t i = 0; i < tiles.size(); i++)
 		if (tiles.at(i).isVisible)
@@ -387,6 +469,8 @@ void LevelImporter::Draw(sf::RenderWindow* window)
 	for (size_t i = 0; i < getGame_Objects().size(); i++)
 		window->draw((getObject(i))->getShape());
 
+
+	MoveView(*view);
 }
 
 void LevelImporter::setHazardState(int hazardIndex, bool hazardState)
