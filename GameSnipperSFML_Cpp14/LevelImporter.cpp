@@ -1,133 +1,23 @@
+#pragma once
 #include "stdafx.h"
 #include "LevelImporter.h"
-#include <json\json.h>
-#include <io.h>
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <string>
-#include <SFML\Graphics.hpp>
-#include <Box2D/Box2D.h>
+#include "NormalDrawBehaviour.h"
+#include "StartTile.h"
+#include "Door.h"
+#include "Game_Switch.h"
+#include "WarpTile.h"
+#include "EndTile.h"
 #define JSON_DLL
 
 using namespace std;
 
-
-struct TileSet
-{
-	int firstGrid;
-	int imageHeight;
-	int imageWidth;
-	int tileAmount;
-	int tileSize;
-	sf::Texture tileImage;
-};
-
-struct  Tile
-{
-	sf::Sprite sprite;
-	int tileLayer;
-	int x_Position;
-	int y_Position;
-
-	bool isHazard;
-	bool hazardState;
-	int hazardValue;
-	int hazardIndex;
-	int hazardType;
-
-	bool isEnemyCollidable;
-	bool isCollidable;
-	bool isVisible;
-
-	b2BodyDef* bodyDef;
-	b2BodyDef* enemyBodyDef;
-};
-
-std::vector<Tile> tiles;
 std::ifstream inputFileStream;
-std::vector<TileSet> tileSets;
+
 
 bool parsingSuccessful = false;
 
 Json::Reader jsonReader;
 Json::Value jsonRoot;
-
-
-void  LevelImporter::updateViewPort(sf::Vector2i &worldPos)
-{
-	//updateVP
-	if (worldPos.y > 640)
-	{
-		doEvents = false;
-		t_max += 320;
-		moveDown = true;
-	}
-
-	if (worldPos.y < 0)
-	{
-		doEvents = false;
-		t_max -= 320;
-		moveDown = false;
-	}
-
-	if (worldPos.x > 960)
-	{
-		doEvents = false;
-		r_max += 480;
-		moveRight = true;
-	}
-
-	if (worldPos.x < 0)
-	{
-		doEvents = false;
-		r_max -= 480;
-		moveRight = false;
-	}
-}
-
-
-void LevelImporter::MoveView(sf::View& view)
-{
-	if (moveDown)
-	{
-		if (t_value < t_max)
-		{
-			view.move(0, 2.0f);
-			t_value++;
-		}
-	}
-	else
-	{
-		if (t_value > t_max)
-		{
-			view.move(0, -2.0f);
-			t_value--;
-		}
-	}
-
-	if (moveRight)
-	{
-		if (r_value < r_max)
-		{
-			view.move(2.0f, 0);
-			r_value++;
-		}
-	}
-	else
-	{
-		if (r_value > r_max)
-		{
-			view.move(-2.0f, 0);
-			r_value--;
-		}
-	}
-
-	if (t_value == t_max && r_value == r_max)
-	{
-		doEvents = true;
-	}
-}
 
 void LevelImporter::PrepareTileSets()
 {
@@ -148,21 +38,21 @@ void LevelImporter::PrepareTileSets()
 }
 
 enum string_code {
-	Enemy,
-	Switch,
-	Door,
-	StartTile,
-	EndTile,
-	WarpTile
+	s_Enemy,
+	s_Switch,
+	s_Door,
+	s_StartTile,
+	s_EndTile,
+	s_WarpTile
 };
 
 string_code hashit(std::string const& inString) {
-	if (inString == "Enemy") return Enemy;
-	if (inString == "Switch") return Switch;
-	if (inString == "Door") return Door;
-	if (inString == "StartTile") return StartTile;
-	if (inString == "EndTile") return EndTile;
-	if (inString == "WarpTile") return WarpTile;
+	if (inString == "Enemy") return s_Enemy;
+	if (inString == "Switch") return s_Switch;
+	if (inString == "Door") return s_Door;
+	if (inString == "StartTile") return s_StartTile;
+	if (inString == "EndTile") return s_EndTile;
+	if (inString == "WarpTile") return s_WarpTile;
 }
 
 void LevelImporter::PrepareGameObjects()
@@ -178,96 +68,122 @@ void LevelImporter::PrepareGameObjects()
 			{
 				Json::Value val = (*object);
 				int x, y, widht, height;
+
 				switch (hashit(val["type"].asString()))
 				{
-					case Enemy:
-					{
-						t_Enemy *enemy = new t_Enemy();
-						x = val["x"].asInt();
-						y = val["y"].asInt();
 
-						widht = val["width"].asInt();
-						height = val["height"].asInt();
-						enemy->setPosition(x, y);
-						enemy->setSize(widht, height);
-						game_objects.push_back(enemy);
-						qi++;
-					}
+				case s_Enemy:
+				{
+					std::string v = val["type"].asString();
+					std::string imgurl = val["properties"]["image"].asString();
+					Game_Object *enemy = new Game_Object(&draws, imgurl);
+					x = val["x"].asInt();
+					y = val["y"].asInt();
+
+					widht = val["width"].asInt();
+					height = val["height"].asInt();
+					enemy->setPosition(sf::Vector2f(x, y));
+					enemy->setSize(widht, height);
+					enemy->set_Image_x(qi);
+					enemy->set_Image_y(qi);
+					qi++;
+					game_objects.push_back(enemy);
+
 					break;
-					case Switch:
-					{
-						t_Switch *_Switch = new t_Switch();
-						x = val["x"].asInt();
-						y = val["y"].asInt();
-						widht = val["width"].asInt();
-						height = val["height"].asInt();
-						_Switch->setPosition(x, y);
-						_Switch->setSize(widht, height);
-						game_objects.push_back(_Switch);
-					}
-					break;
-					case Door:
-					{
-						t_Door *Door = new t_Door();
-						x = val["x"].asInt();
-						y = val["y"].asInt();
-						widht = val["width"].asInt();
-						height = val["height"].asInt();
-						Door->setPosition(x, y);
-						Door->setSize(widht, height);
-						game_objects.push_back(Door);
-					}
-					break;
-					case StartTile:
-					{
-						t_StartTile *StartTile = new t_StartTile();
-						x = val["x"].asInt();
-						y = val["y"].asInt();
-						widht = val["width"].asInt();
-						height = val["height"].asInt();
-						StartTile->setPosition(x, y);
-						StartTile->setSize(widht, height);
-						game_objects.push_back(StartTile);
-					}
-					break;
-					case EndTile:
-					{
-						t_EndTile *EndTile = new t_EndTile();
-						x = val["x"].asInt();
-						y = val["y"].asInt();
-						widht = val["width"].asInt();
-						height = val["height"].asInt();
-						EndTile->setPosition(x, y);
-						EndTile->setSize(widht, height);
-						game_objects.push_back(EndTile);
-					}
-					break;
-					case WarpTile: {
-						t_WarpTile *WarpTile = new t_WarpTile();
-						x = val["x"].asInt();
-						y = val["y"].asInt();
-						widht = val["width"].asInt();
-						height = val["height"].asInt();
-						WarpTile->setPosition(x, y);
-						WarpTile->setSize(widht, height);
-						game_objects.push_back(WarpTile);
-					}
-					break;
-					default:
-					{
-						t_Object *Object = new t_Object();
-						x = val["x"].asInt();
-						y = val["y"].asInt();
-						widht = val["width"].asInt();
-						height = val["height"].asInt();
-						Object->setPosition(x, y);
-						Object->setSize(widht, height);
-						game_objects.push_back(Object);
-					}
+				}
+				case s_EndTile:
+				{
+					EndTile * endTile = new EndTile();
+					x = val["x"].asInt();
+					y = val["y"].asInt();
+					widht = val["width"].asInt();
+					height = val["height"].asInt();
+
+					endTile->setSize(widht, height);
+					game_objects.push_back(endTile);
 					break;
 				}
 
+				case s_WarpTile: {
+					WarpTile *warpTile = new WarpTile();
+					x = val["x"].asInt();
+					y = val["y"].asInt();
+					widht = val["width"].asInt();
+					height = val["height"].asInt();
+					warpTile->setPosition(sf::Vector2f(x, y));
+					warpTile->setSize(widht, height);
+					game_objects.push_back(warpTile);
+					break;
+				}
+
+
+
+				case s_StartTile:
+				{
+					StartTile *startTile = new StartTile();
+					x = val["x"].asInt();
+					y = val["y"].asInt();
+					widht = val["width"].asInt();
+					height = val["height"].asInt();
+					startTile->setPosition(sf::Vector2f(x, y));
+					game_objects.push_back(startTile);
+					break;
+				}
+
+				case s_Switch:
+				{
+					Game_Switch *_Switch = new Game_Switch();
+					x = val["x"].asInt();
+					y = val["y"].asInt();
+					widht = val["width"].asInt();
+					height = val["height"].asInt();
+					_Switch->setPosition(sf::Vector2f(x, y));
+					_Switch->setSize(widht, height);
+					game_objects.push_back(_Switch);
+					break;
+				}
+
+				case s_Door:
+				{
+					Door *door = new Door();
+					x = val["x"].asInt();
+					y = val["y"].asInt();
+					widht = val["width"].asInt();
+					height = val["height"].asInt();
+					door->setPosition(sf::Vector2f(x, y));
+					door->setSize(widht, height);
+					game_objects.push_back(door);
+
+				}
+
+
+
+				default:
+				{
+					std::string imgurl = val["properties"]["image"].asString();
+
+					Game_Object* Object = nullptr;
+					if (imgurl == "")
+					{
+						Object = new Game_Object();
+					}
+					else
+					{
+						Object = new Game_Object(&draws, imgurl);
+					}
+
+					x = val["x"].asInt();
+					y = val["y"].asInt();
+					widht = val["width"].asInt();
+					height = val["height"].asInt();
+					Object->setPosition(sf::Vector2f(x, y));
+					Object->setSize(widht, height);
+					game_objects.push_back(Object);
+					break;
+				}
+				}
 			}
+
 		}
 	}
 }
@@ -423,32 +339,6 @@ void LevelImporter::Prepare()
 	PrepareTiles();
 }
 
-void LevelImporter::Start(Unit* player, sf::Vector2u* size)
-{
-
-	t_StartTile* start = nullptr;
-
-	for (size_t i = 0; i < getGame_Objects().size(); i++)
-	{
-		if (dynamic_cast<t_StartTile*> (getObject(i)))
-			start = dynamic_cast<t_StartTile*> (getObject(i));
-	}
-
-	if (start == nullptr)
-	{
-		start = new t_StartTile();
-		start->x_loc = 25;
-		start->y_loc = 25;
-	}
-
-	int map_yLocation = start->y_loc / size->y;
-	int map_xLocation = start->x_loc / size->x;
-	viewPortY = (map_yLocation * size->y);
-	viewPortX = (map_xLocation * size->x);
-
-	player->setPosition(start->x_loc, start->y_loc);
-}
-
 void LevelImporter::Import(std::string JSON)
 {
 	inputFileStream.open(JSON, std::ifstream::binary);
@@ -460,55 +350,33 @@ void LevelImporter::Import(std::string JSON)
 	}
 }
 
-void LevelImporter::Draw(sf::RenderWindow* window, sf::View* view)
+void LevelImporter::Clear()
 {
-	for (size_t i = 0; i < tiles.size(); i++)
-		if (tiles.at(i).isVisible)
-			window->draw(tiles.at(i).sprite);
-
-	for (size_t i = 0; i < getGame_Objects().size(); i++)
-		window->draw((getObject(i))->getShape());
-
-
-	MoveView(*view);
+	game_objects.clear();
+	tileSets.clear();
+	tiles.clear();
 }
 
-void LevelImporter::setHazardState(int hazardIndex, bool hazardState)
+Level* LevelImporter::getLevel()
 {
-	for (int i = 0; i < tiles.size(); i++)
-	{
-		if (tiles.at(i).hazardIndex == hazardIndex)
-		{
-			tiles.at(i).hazardState = hazardState;
-			tiles.at(i).isVisible = !hazardState;
-		}
-	}
+	Level* level = new Level();
+	level->setGameObjects(game_objects);
+	level->setTileSets(tileSets);
+	level->setTiles(tiles);
+
+	return level;
+
+
 }
 
-void LevelImporter::setLayerVisibility(int layerIndex, bool isVisible)
+LevelImporter::LevelImporter(std::vector<DrawBehaviour*> draws)
 {
-	for (int i = 0; i < tiles.size(); i++)
-	{
-		if (tiles.at(i).tileLayer == layerIndex)
-			tiles.at(i).isVisible = isVisible;
-	}
+	this->draws = draws;
 }
-
-void LevelImporter::Update()
-{
-	for (size_t i = 0; i < getGame_Objects().size(); i++)
-		getObject(i)->Update();
-}
-
 
 LevelImporter::LevelImporter()
 {
-
-
-
-
 }
-
 
 LevelImporter::~LevelImporter()
 {
