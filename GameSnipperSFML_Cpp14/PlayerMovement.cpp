@@ -5,14 +5,18 @@
 
 #include <algorithm>
 
-PlayerMovement::PlayerMovement(Player* activePlayer)
+PlayerMovement::PlayerMovement()
 {
-	player = activePlayer;
 }
 
 PlayerMovement::~PlayerMovement()
 {
 	delete(player);
+}
+
+void PlayerMovement::SetPlayer(Player * activePlayer)
+{
+	player = activePlayer;
 }
 
 void PlayerMovement::Move(float deltaTime)

@@ -13,10 +13,6 @@
 #include "MoveBehaviour.h"
 #include "LevelImporter.h"
 #include "Input.h"
-#include "PlayerInput.h"
-#include "PlayerMovement.h"
-#include "KeyMappingImporter.h"
-#include "KeyMapping.h"
 
 bool doEvents = true;
 
@@ -118,23 +114,13 @@ GameLoop::~GameLoop()
 
 void GameLoop::run()
 {
-	Player* player = new Player();
-
-	PlayerInput playerInput;
-	PlayerMovement playerMovement(player);
-
-	KeyMappingImporter keyMappingImporter;
-	keyMappingImporter.Import("./Resources/key-mapping.json");
-
-	KeyMapping::ReloadMapping(keyMappingImporter.GetMapping());
-
 	//context->allUnits.at(0)
 	sf::FloatRect rect(0, 0, 960, 640);
 	sf::View view;
 	view.reset(rect);
 	context->window.setView(view);
 	//l->Start(context->allUnits.at(0));
-	l->Start(player);
+	l->Start(context->player);
 
 	sf::Clock deltaClock;
 
@@ -144,7 +130,7 @@ void GameLoop::run()
 		sf::Time deltaTime = deltaClock.restart();
 
 		//sf::Vector2f s = context->allUnits.at(0)->positions;
-		sf::Vector2i worldPos = context->window.mapCoordsToPixel(player->positions);
+		sf::Vector2i worldPos = context->window.mapCoordsToPixel(context->player->positions);
 
 		sf::Event event;
 		l->Draw(&context->window);
@@ -162,38 +148,18 @@ void GameLoop::run()
 			{
 				Input::EventOccured(event);
 
-				playerInput.CatchInput();
-				playerMovement.SetActiveKeys(playerInput.GetActiveKeys());
-				playerMovement.Move(deltaTime.asMicroseconds());
+				context->playerInput.CatchInput();
+				context->playerMovement.SetActiveKeys(context->playerInput.GetActiveKeys());
+				context->playerMovement.Move(deltaTime.asMicroseconds());
 			}
-
-			context->window.draw(player->drawBehaviour->getCurrentImage());
-
-			/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-				context->allUnits.at(0)->moveBehaviour->Move(0.0f, 5.0f, 0.0f, 0.0f, 0.017f);
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-				context->allUnits.at(0)->moveBehaviour->Move(5.0f, 0.0f, 0.0f, 0.0f, 0.017f);
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-				context->allUnits.at(0)->moveBehaviour->Move(0.0f, 0.0f, 5.0f, 0.0f, 0.017f);
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-				context->allUnits.at(0)->moveBehaviour->Move(0.0f, 0.0f, 0.0f, 5.0f, 0.017f);
-			}*/
-
-			/*for (int i = 0; i < context->getUnits().size(); i++) {
-				Unit* u = context->getUnits().at(i);
-				context->window.draw(u->drawBehaviour->getCurrentImage());			
-			}*/
 
 			updateViewPort(worldPos);
 		}
+
+		context->window.draw(context->player->drawBehaviour->getCurrentImage());
 
 		context->window.setView(view);
 		context->window.display();
 		context->window.clear();
 	}
-
-	delete(player);
 }

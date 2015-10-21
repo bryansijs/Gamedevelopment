@@ -8,9 +8,10 @@
 class PlayerMovement
 {
 public:
-	PlayerMovement(Player* player);
+	PlayerMovement();
 	~PlayerMovement();
 
+	void SetPlayer(Player* activePlayer);
 	void Move(float deltaTime);
 	void SetActiveKeys(std::vector<std::string> keys);
 private:

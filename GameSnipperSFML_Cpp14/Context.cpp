@@ -4,6 +4,7 @@
 #include "MoveBehaviour.h"
 #include "DrawBehaviour.h"
 #include "Player.h"
+#include "KeyMapping.h"
 
 Context::Context(int screenHeight, int screenWidth)
 {
@@ -11,15 +12,15 @@ Context::Context(int screenHeight, int screenWidth)
 	window.create(sf::VideoMode(screenDimensions->x, screenDimensions->y), "ECHO GAME!!!!");
 	window.setKeyRepeatEnabled(false);
 
+	player = new Player();
+	playerMovement.SetPlayer(player);
 
-
-	//Unit* p{ new Player(&this->allMoveBehaviours, &this->allDrawBehaviours, &this->allUnits)};
-	
-
+	keyMappingImporter.Import("./Resources/key-mapping.json");
+	KeyMapping::ReloadMapping(keyMappingImporter.GetMapping());
 }
-
 
 Context::~Context()
 {
+	delete(player);
 }
 
