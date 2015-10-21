@@ -22,6 +22,7 @@
 #include <Awesomium/BitmapSurface.h>
 #include "LevelImporter.h"
 #include <string>
+#include "MenuState.h"
 
 game_state coreState;
 bool quitGame = false;
@@ -37,8 +38,13 @@ int _tmain(int argc, _TCHAR* argv[])
 		Context* context{ new Context(960,640) };
 		//TODO: State manager
 		//TODO: Only if game start with state
-		GameLoop* loop{ new GameLoop(context) };
-		loop->run();
+		
+		//GameLoop* loop{ new GameLoop(context) };
+		//loop->run();
+		
+		MenuState* menu{ new MenuState(context) };
+		menu->run();
+
 	}
 	catch (std::exception e)
 	{

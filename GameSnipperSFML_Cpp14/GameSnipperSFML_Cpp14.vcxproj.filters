@@ -183,6 +183,12 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files\Player</Filter>
     </ClInclude>
+    <ClInclude Include="resource2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -266,10 +272,36 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Player</Filter>
     </ClCompile>
+    <ClCompile Include="MenuState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\levels\Level_New.json">
       <Filter>Resource Files\Levels</Filter>
     </None>
+    <None Include="Resources\menuHtml\menu.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\menuHtml\images\bg.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\menuHtml\images\border.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\menuHtml\images\cat.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\menuHtml\images\menuBorder.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Resources\menuHtml\font\moonhouse.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GameSnipperSFML_Cpp14.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
