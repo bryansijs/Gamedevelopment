@@ -28,7 +28,7 @@ void GameLoop::run()
 {
 	Level* lev = l->getLevel();
 	l->Clear();
-	lev->Start(context->allUnits.at(0), &context->window.getSize());
+	lev->Start(context->player, &context->window.getSize());
 
 	sf::FloatRect rect(lev->getViewPortX(), lev->getViewPortY(), context->window.getSize().x, context->window.getSize().y);
 	sf::View view;
@@ -43,7 +43,7 @@ void GameLoop::run()
 
 		sf::Time deltaTime = deltaClock.restart();
 
-		sf::Vector2f s = context->allUnits.at(0)->positions;
+		sf::Vector2f s = context->player->positions;
 		sf::Vector2i worldPos = context->window.mapCoordsToPixel(s);
 
 		sf::Event event;
