@@ -97,6 +97,27 @@
     <Filter Include="Header Files\Player">
       <UniqueIdentifier>{45b690a4-2e46-4d14-b4f7-8257e42e5895}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Model\Objecten">
+      <UniqueIdentifier>{01ece0ca-fa55-4a4a-a97b-4df46818a1a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Objects">
+      <UniqueIdentifier>{346371ed-fad1-41dd-9829-b6c8b8b7b6df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Levels">
+      <UniqueIdentifier>{403bbd60-4027-4bb6-a540-2bcd34d05e85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\GameTiles">
+      <UniqueIdentifier>{8fc7cd3c-2f41-46c2-a7df-a57296d67302}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\GameTiles">
+      <UniqueIdentifier>{b2704795-25a5-4875-8c1c-ba76379e972e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Level">
+      <UniqueIdentifier>{efb65d1f-3f9d-4d01-8862-5562316e6b92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Level">
+      <UniqueIdentifier>{b44c6a4e-f349-47c2-bbc4-993941421aab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -112,9 +133,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game_state.h">
-      <Filter>Header Files\Oude code</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
       <Filter>Header Files\Oude code</Filter>
     </ClInclude>
     <ClInclude Include="test_state.h">
@@ -182,6 +200,36 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\Oude code</Filter>
+    </ClInclude>
+    <ClInclude Include="Game_Object.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Header Files\Model\Objecten</Filter>
+    </ClInclude>
+    <ClInclude Include="WarpTile.h">
+      <Filter>Header Files\Model\GameTiles</Filter>
+    </ClInclude>
+    <ClInclude Include="EndTile.h">
+      <Filter>Header Files\Model\GameTiles</Filter>
+    </ClInclude>
+    <ClInclude Include="StartTile.h">
+      <Filter>Header Files\Model\GameTiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Game_Switch.h">
+      <Filter>Header Files\Model\Objecten</Filter>
+    </ClInclude>
+    <ClInclude Include="TileSet.h">
+      <Filter>Header Files\Model\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Header Files\Model\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Header Files\Levels</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +313,33 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>Source Files\Model\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="EndTile.cpp">
+      <Filter>Source Files\Model\GameTiles</Filter>
+    </ClCompile>
+    <ClCompile Include="StartTile.cpp">
+      <Filter>Source Files\Model\GameTiles</Filter>
+    </ClCompile>
+    <ClCompile Include="WarpTile.cpp">
+      <Filter>Source Files\Model\GameTiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Game_Object.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Game_Switch.cpp">
+      <Filter>Source Files\Model\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Source Files\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="TileSet.cpp">
+      <Filter>Source Files\Model\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Source Files\Model\Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

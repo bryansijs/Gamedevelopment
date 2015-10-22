@@ -8,3 +8,9 @@ Unit* DrawBehaviour::getUnit()
 	
 	return unit;
 }
+
+Game_Object* DrawBehaviour::getObject()
+{
+
+	return game_Object;
+}

@@ -114,7 +114,7 @@
                  "name":"switch",
                  "properties":
                     {
-
+                     "image":"switch1.png"
                     },
                  "rotation":0,
                  "type":"Switch",
@@ -154,17 +154,17 @@
                  "y":1346
                 }, 
                 {
-                 "height":38,
+                 "height":64,
                  "id":9,
                  "name":"Enemy",
                  "properties":
                     {
-
+                     "image":"enemy1.png"
                     },
                  "rotation":0,
                  "type":"Enemy",
                  "visible":true,
-                 "width":43,
+                 "width":64,
                  "x":459,
                  "y":847
                 }, 
@@ -174,7 +174,7 @@
                  "name":"Switch",
                  "properties":
                     {
-
+                     "image":"switch2.png"
                     },
                  "rotation":0,
                  "type":"Switch",
@@ -184,42 +184,42 @@
                  "y":94
                 }, 
                 {
-                 "height":51,
+                 "height":48,
                  "id":13,
                  "name":"Enemy",
                  "properties":
                     {
-
+                     "image":"enemy2.png"
                     },
                  "rotation":0,
                  "type":"Enemy",
                  "visible":true,
-                 "width":54,
+                 "width":36,
                  "x":582,
                  "y":169
                 }, 
                 {
-                 "height":65,
+                 "height":64,
                  "id":14,
                  "name":"Enemy",
                  "properties":
                     {
-
+                     "image":"enemy3.png"
                     },
                  "rotation":0,
                  "type":"Enemy",
                  "visible":true,
-                 "width":71,
+                 "width":64,
                  "x":135,
                  "y":491
                 }, 
                 {
-                 "height":11,
+                 "height":16,
                  "id":15,
                  "name":"KeyRed",
                  "properties":
                     {
-
+                     "image":"redkey.png"
                     },
                  "rotation":0,
                  "type":"",
@@ -244,19 +244,19 @@
                  "y":1340
                 }, 
                 {
-                 "height":12,
+                 "height":24,
                  "id":17,
                  "name":"HealPot",
                  "properties":
                     {
-
+                     "image":"healpot.png"
                     },
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":14,
-                 "x":552,
-                 "y":737
+                 "width":24,
+                 "x":548,
+                 "y":729
                 }, 
                 {
                  "height":36,
@@ -357,7 +357,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":21,
+ "nextobjectid":22,
  "orientation":"orthogonal",
  "properties":
     {
