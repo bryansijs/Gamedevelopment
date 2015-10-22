@@ -9,13 +9,15 @@
 #include "LevelImporter.h"
 
 LevelImporter* l;
-
+Level* lev;
 GameLoop::GameLoop(Context* c)
 {
 	this->context = c;
-	l = new LevelImporter();
+	l = new LevelImporter(this->context->allDrawBehaviours);
+
 	l->Import("./Resources/levels/Level_New.json");
 	l->Prepare();
+	this->context->allDrawBehaviours.swap(l->draws);
 }
 
 GameLoop::~GameLoop()
@@ -24,8 +26,11 @@ GameLoop::~GameLoop()
 
 void GameLoop::run()
 {
-	l->Start(context->allUnits.at(0), &context->window.getSize());
-	sf::FloatRect rect(l->getViewPortX(), l->getViewPortY(), context->window.getSize().x, context->window.getSize().y);
+	Level* lev = l->getLevel();
+	l->Clear();
+	lev->Start(context->allUnits.at(0), &context->window.getSize());
+
+	sf::FloatRect rect(lev->getViewPortX(), lev->getViewPortY(), context->window.getSize().x, context->window.getSize().y);
 	sf::View view;
 	view.reset(rect);
 
@@ -39,10 +44,10 @@ void GameLoop::run()
 
 
 		sf::Event Event;
-		l->Draw(&context->window, &view);
-		l->Update();
+		lev->draw(&context->window, &view);
+		lev->update();
 
-		if (l->getDoEvents()) {
+		if (lev->getDoEvents()) {
 			while (context->window.pollEvent(Event)) {
 				switch (Event.type) {
 				case sf::Event::Closed:
@@ -69,7 +74,11 @@ void GameLoop::run()
 				context->window.draw(u->drawBehaviour->getCurrentImage());			
 			}
 
-			l->updateViewPort(worldPos);
+			for (int i = 0; i < context->allDrawBehaviours.size(); i++) {
+				context->window.draw(context->allDrawBehaviours.at(i)->getCurrentImage());
+			}
+
+			lev->updateViewPort(worldPos);
 		}
 
 		context->window.setView(view);
