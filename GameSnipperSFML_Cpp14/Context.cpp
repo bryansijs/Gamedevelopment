@@ -1,9 +1,6 @@
 #include "stdafx.h"
 #include "Context.h"
-#include "Unit.h"
-#include "MoveBehaviour.h"
-#include "DrawBehaviour.h"
-#include "Player.h"
+
 #include "KeyMapping.h"
 
 Context::Context(int screenHeight, int screenWidth)

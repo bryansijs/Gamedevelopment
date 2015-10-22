@@ -3,6 +3,10 @@
 #include <vector>
 #include <SFML\Graphics.hpp>
 
+#include "MoveBehaviour.h"
+#include "DrawBehaviour.h"
+
+#include "Player.h"
 #include "PlayerInput.h"
 #include "PlayerMovement.h"
 #include "KeyMappingImporter.h"
