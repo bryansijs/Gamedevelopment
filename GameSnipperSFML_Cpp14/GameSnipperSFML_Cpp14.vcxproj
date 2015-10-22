@@ -179,6 +179,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="application.h" />
     <ClInclude Include="Context.h" />
     <ClInclude Include="DrawBehaviour.h" />
     <ClInclude Include="gameloop.h" />
@@ -189,6 +190,7 @@
     <ClInclude Include="KeyMappingImporter.h" />
     <ClInclude Include="LevelImporter.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="method_dispatcher.h" />
     <ClInclude Include="MoveBehaviour.h" />
     <ClInclude Include="MoveBehaviourFactory.h" />
     <ClInclude Include="MoveContainer.h" />
@@ -208,6 +210,7 @@
     <ClInclude Include="UnitState.h" />
     <ClInclude Include="UpdateLogic.h" />
     <ClInclude Include="UpdateUI.h" />
+    <ClInclude Include="view.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Context.cpp" />

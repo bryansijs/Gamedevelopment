@@ -14,12 +14,8 @@
 #include <Box2d/Box2D.h>
 
 #include "application.h"
-#include "method_dispatcher.h"
 #include "js_delegate.h"
 
-#include <Awesomium/WebCore.h>
-#include <Awesomium/STLHelpers.h>
-#include <Awesomium/BitmapSurface.h>
 #include "LevelImporter.h"
 #include <string>
 #include "MenuState.h"
@@ -31,6 +27,8 @@ using namespace std;
 
 using namespace Awesomium;	
 
+
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	try
@@ -39,11 +37,11 @@ int _tmain(int argc, _TCHAR* argv[])
 		//TODO: State manager
 		//TODO: Only if game start with state
 		
-		//GameLoop* loop{ new GameLoop(context) };
-		//loop->run();
+		GameLoop* loop{ new GameLoop(context) };
+		loop->run();
 		
-		MenuState* menu{ new MenuState(context) };
-		menu->run();
+		//MenuState* menu{ new MenuState(context) };
+		//menu->run();
 
 	}
 	catch (std::exception e)

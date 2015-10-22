@@ -1,22 +1,27 @@
 #include "stdafx.h"
+#include "Context.h"
 #include "MenuState.h"
-#include <Awesomium/WebView.h>
-#include <Awesomium/STLHelpers.h>
+
 #include <Awesomium/WebCore.h>
 #include <Awesomium/BitmapSurface.h>
+#include <Awesomium/STLHelpers.h>
+
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/View.hpp>
-#include <SFML/System/Clock.hpp>
 #include <SFML/Graphics/Sprite.hpp>
-#include "Context.h"
+
+#include <iostream>
+
 
 using namespace Awesomium;
+
+
 void MenuState::run()
 {
-
 	// Awesomium init
 	WebCore* web_core = WebCore::Initialize(WebConfig());
-	WebView* webView = web_core->CreateWebView(940, 640, 0, kWebViewType_Offscreen);
+	int i = 0;
+	WebView* webView = web_core->CreateWebView(960, 640);
 
 	// Load Page
 	WebURL url(WSLit("file:///Resources/menuHTML/menu.html"));
@@ -53,6 +58,7 @@ void MenuState::run()
 		context->window.draw(ui);
 		context->window.display();
 	}
+	
 }
 
 MenuState::MenuState(Context* c)
