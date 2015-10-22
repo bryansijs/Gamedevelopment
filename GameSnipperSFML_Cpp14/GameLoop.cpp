@@ -37,6 +37,7 @@ void GameLoop::run()
 	context->window.setView(view);
 
 	sf::Clock deltaClock;
+	sf::Event event;
 
 	while (context->window.isOpen()) {
 		context->window.clear();
@@ -46,7 +47,6 @@ void GameLoop::run()
 		sf::Vector2f s = context->player->positions;
 		sf::Vector2i worldPos = context->window.mapCoordsToPixel(s);
 
-		sf::Event event;
 		lev->draw(&context->window, &view);
 		lev->update();
 
@@ -57,17 +57,17 @@ void GameLoop::run()
 					context->window.close();
 					break;
 				}
+
+				if (event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased)
+				{
+					Input::EventOccured(event);
+
+					context->playerInput.CatchInput();
+					context->playerMovement.SetActiveKeys(context->playerInput.GetActiveKeys());
+				}
 			}
 
-			if (event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased)
-			{
-				Input::EventOccured(event);
-
-				context->playerInput.CatchInput();
-				context->playerMovement.SetActiveKeys(context->playerInput.GetActiveKeys());
-				context->playerMovement.Move(deltaTime.asMicroseconds());
-			}
-
+			context->playerMovement.Move(deltaTime.asMicroseconds());
 			lev->updateViewPort(worldPos);
 		}
 
