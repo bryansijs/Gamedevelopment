@@ -11,10 +11,36 @@
 #include <SFML/Graphics/Sprite.hpp>
 
 #include <iostream>
+#include "js_delegate.h"
+#include "method_dispatcher.h"
+#include "application.h"
 
 
 using namespace Awesomium;
 
+Application* app_;
+MethodDispatcher method_dispatcher_;
+
+void BindMethods(WebView* web_view) {
+	// Create a global js object named 'app'
+	JSValue result = web_view->CreateGlobalJavascriptObject(WSLit("app"));
+	if (result.IsObject()) {
+		// Bind our custom method to it.
+		JSObject& app_object = result.ToObject();
+		method_dispatcher_.Bind(app_object,
+			WSLit("sayHello"),
+			JSDelegate(this, &this->OnSayHello));
+	}
+
+	// Bind our method dispatcher to the WebView
+	web_view->set_js_method_handler(&method_dispatcher_);
+}
+
+// Bound to app.sayHello() in JavaScript
+void OnSayHello(WebView* caller,
+	const JSArray& args) {
+	app_->ShowMessage("Hello!");
+}
 
 void MenuState::run()
 {

@@ -37,11 +37,11 @@ int _tmain(int argc, _TCHAR* argv[])
 		//TODO: State manager
 		//TODO: Only if game start with state
 		
-		GameLoop* loop{ new GameLoop(context) };
-		loop->run();
+		//GameLoop* loop{ new GameLoop(context) };
+		//loop->run();
 		
-		//MenuState* menu{ new MenuState(context) };
-		//menu->run();
+		MenuState* menu{ new MenuState(context) };
+		menu->run();
 
 	}
 	catch (std::exception e)
