@@ -193,6 +193,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="NormalState.h" />
     <ClInclude Include="Object_Manager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerActions.h" />
     <ClInclude Include="PlayerInput.h" />
     <ClInclude Include="PlayerMovement.h" />
     <ClInclude Include="resource.h" />
@@ -232,6 +233,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="NormalDrawBehaviour.cpp" />
     <ClCompile Include="NormalMoveBehaviour.cpp" />
     <ClCompile Include="Object_Manager.cpp" />
+    <ClCompile Include="PlayerActions.cpp" />
     <ClCompile Include="PlayerInput.cpp" />
     <ClCompile Include="PlayerMovement.cpp" />
     <ClCompile Include="SetupState.cpp" />

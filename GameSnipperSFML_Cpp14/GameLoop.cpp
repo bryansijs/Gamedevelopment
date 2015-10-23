@@ -7,6 +7,7 @@
 #include "NormalDrawBehaviour.h"
 #include "MoveBehaviour.h"
 #include "LevelImporter.h"
+#include "PlayerActions.h"
 
 LevelImporter* l;
 Level* lev;
@@ -39,6 +40,8 @@ void GameLoop::run()
 	sf::Clock deltaClock;
 	sf::Event event;
 
+	PlayerActions *actions = new PlayerActions(context->player);
+
 	while (context->window.isOpen()) {
 		context->window.clear();
 
@@ -61,17 +64,13 @@ void GameLoop::run()
 				if (event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased)
 				{
 					Input::EventOccured(event);
-
 					context->playerInput.CatchInput();
-					context->playerMovement.SetActiveKeys(context->playerInput.GetActiveKeys());
 				}
 			}
 
-			context->playerMovement.Move(deltaTime.asMicroseconds());
+			actions->ProcessActions(context->playerInput.GetActiveKeys(), deltaTime.asMicroseconds());
 			lev->updateViewPort(worldPos);
 		}
-
-		context->window.draw(context->player->drawBehaviour->getCurrentImage());
 		
 		for (int i = 0; i < context->allDrawBehaviours.size(); i++) {
 			context->window.draw(context->allDrawBehaviours.at(i)->getCurrentImage());
