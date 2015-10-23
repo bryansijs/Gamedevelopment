@@ -10,6 +10,7 @@
 #include "PlayerInput.h"
 #include "PlayerMovement.h"
 #include "KeyMappingImporter.h"
+#include "PlayerActions.h"
 
 class MoveBehaviour;
 class DrawBehaviour;
@@ -31,6 +32,7 @@ public:
 
 	Player* player;
 	PlayerInput playerInput;
+	PlayerActions playerActions;
 	PlayerMovement playerMovement;
 	KeyMappingImporter keyMappingImporter;
 private:

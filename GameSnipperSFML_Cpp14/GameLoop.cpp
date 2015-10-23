@@ -41,8 +41,6 @@ void GameLoop::run()
 	sf::Clock deltaClock;
 	sf::Event event;
 
-	PlayerActions *actions = new PlayerActions(context->player);
-
 	while (context->window.isOpen()) {
 		Time::deltaTime = (float)deltaClock.restart().asMicroseconds() / 10000;
 
@@ -67,7 +65,7 @@ void GameLoop::run()
 				}
 			}
 
-			actions->ProcessActions(context->playerInput.GetActiveKeys());
+			context->playerActions.ProcessActions(context->playerInput.GetActiveKeys());
 			lev->updateViewPort(worldPos);
 		}
 		

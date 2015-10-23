@@ -10,6 +10,7 @@ Context::Context(int screenHeight, int screenWidth)
 	window.setKeyRepeatEnabled(false);
 
 	player = new Player();
+	playerActions.SetPlayer(player);
 	allDrawBehaviours.push_back(player->drawBehaviour);
 
 	keyMappingImporter.Import("./Resources/key-mapping.json");

@@ -9,9 +9,10 @@
 class PlayerActions
 {
 public:
-	PlayerActions(Player *player);
+	PlayerActions();
 	~PlayerActions();
 
+	void SetPlayer(Player *activePlayer);
 	void ProcessActions(std::vector<std::string> &newActiveKeys);
 	void Move();
 	void Shoot();

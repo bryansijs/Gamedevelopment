@@ -3,13 +3,18 @@
 #include "KeyMapping.h"
 #include "Time.h"
 
-PlayerActions::PlayerActions(Player *activePlayer)
+PlayerActions::PlayerActions()
 {
-	player = activePlayer;
+	
 }
 
 PlayerActions::~PlayerActions()
 {
+}
+
+void PlayerActions::SetPlayer(Player *player)
+{
+	this->player = player;
 }
 
 void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys)
