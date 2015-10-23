@@ -6,5 +6,7 @@ public:
 	~Time();
 
 	static float deltaTime;
+private:
+	
 };
 

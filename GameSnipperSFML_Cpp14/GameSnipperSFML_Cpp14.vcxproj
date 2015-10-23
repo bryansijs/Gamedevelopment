@@ -205,6 +205,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="test_state.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileSet.h" />
+    <ClInclude Include="Time.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitState.h" />
     <ClInclude Include="UpdateLogic.h" />
@@ -249,6 +250,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="test_state.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileSet.cpp" />
+    <ClCompile Include="Time.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitState.cpp" />
     <ClCompile Include="UpdateLogic.cpp" />

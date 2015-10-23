@@ -38,19 +38,19 @@ void PlayerActions::Move()
 {
 	if (currentMap == "move-up")
 	{
-		player->positions.y += -1.0f * (Time::deltaTime / 10000);
+		player->positions.y += -1.0f * Time::deltaTime;
 	}
 	if (currentMap == "move-down")
 	{
-		player->positions.y += 1.0f * (Time::deltaTime / 10000);
+		player->positions.y += 1.0f * Time::deltaTime;
 	}
 	if (currentMap == "move-left")
 	{
-		player->positions.x += -1.0f * (Time::deltaTime / 10000);
+		player->positions.x += -1.0f * Time::deltaTime;
 	}
 	if (currentMap == "move-right")
 	{
-		player->positions.x += 1.0f * (Time::deltaTime / 10000);
+		player->positions.x += 1.0f * Time::deltaTime;
 	}
 }
 

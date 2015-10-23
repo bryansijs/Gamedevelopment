@@ -44,9 +44,7 @@ void GameLoop::run()
 	PlayerActions *actions = new PlayerActions(context->player);
 
 	while (context->window.isOpen()) {
-		Time::deltaTime = deltaClock.restart().asMicroseconds();
-
-		sf::Time deltaTime = deltaClock.restart();
+		Time::deltaTime = (float)deltaClock.restart().asMicroseconds() / 10000;
 
 		sf::Vector2f s = context->player->positions;
 		sf::Vector2i worldPos = context->window.mapCoordsToPixel(s);

@@ -8,3 +8,5 @@ Time::Time()
 Time::~Time()
 {
 }
+
+float Time::deltaTime;
