@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "PlayerActions.h"
 #include "KeyMapping.h"
+#include "Time.h"
 
 PlayerActions::PlayerActions(Player *activePlayer)
 {
@@ -11,10 +12,9 @@ PlayerActions::~PlayerActions()
 {
 }
 
-void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys, float newDeltaTime)
+void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys)
 {
 	activeKeys = newActiveKeys;
-	deltaTime = newDeltaTime;
 
 	std::map<std::string, void(PlayerActions::*)()>::iterator it;
 
@@ -38,19 +38,19 @@ void PlayerActions::Move()
 {
 	if (currentMap == "move-up")
 	{
-		player->positions.y += -1.0f * (deltaTime / 10000);
+		player->positions.y += -1.0f * (Time::deltaTime / 10000);
 	}
 	if (currentMap == "move-down")
 	{
-		player->positions.y += 1.0f * (deltaTime / 10000);
+		player->positions.y += 1.0f * (Time::deltaTime / 10000);
 	}
 	if (currentMap == "move-left")
 	{
-		player->positions.x += -1.0f * (deltaTime / 10000);
+		player->positions.x += -1.0f * (Time::deltaTime / 10000);
 	}
 	if (currentMap == "move-right")
 	{
-		player->positions.x += 1.0f * (deltaTime / 10000);
+		player->positions.x += 1.0f * (Time::deltaTime / 10000);
 	}
 }
 

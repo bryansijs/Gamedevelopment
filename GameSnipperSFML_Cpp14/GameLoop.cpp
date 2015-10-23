@@ -8,6 +8,7 @@
 #include "MoveBehaviour.h"
 #include "LevelImporter.h"
 #include "PlayerActions.h"
+#include "Time.h"
 
 LevelImporter* l;
 Level* lev;
@@ -43,7 +44,7 @@ void GameLoop::run()
 	PlayerActions *actions = new PlayerActions(context->player);
 
 	while (context->window.isOpen()) {
-		context->window.clear();
+		Time::deltaTime = deltaClock.restart().asMicroseconds();
 
 		sf::Time deltaTime = deltaClock.restart();
 
@@ -68,7 +69,7 @@ void GameLoop::run()
 				}
 			}
 
-			actions->ProcessActions(context->playerInput.GetActiveKeys(), deltaTime.asMicroseconds());
+			actions->ProcessActions(context->playerInput.GetActiveKeys());
 			lev->updateViewPort(worldPos);
 		}
 		

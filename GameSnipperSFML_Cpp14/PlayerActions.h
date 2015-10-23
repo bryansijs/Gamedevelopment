@@ -12,7 +12,7 @@ public:
 	PlayerActions(Player *player);
 	~PlayerActions();
 
-	void ProcessActions(std::vector<std::string> &newActiveKeys, float newDeltaTime);
+	void ProcessActions(std::vector<std::string> &newActiveKeys);
 	void Move();
 	void Shoot();
 	void Use();
@@ -25,8 +25,6 @@ private:
 
 	std::vector<std::string> activeKeys;
 	std::string currentMap;
-
-	float deltaTime;
 
 	Player *player;
 };
