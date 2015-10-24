@@ -5,49 +5,35 @@
 #include <Awesomium/WebCore.h>
 #include <Awesomium/BitmapSurface.h>
 #include <Awesomium/STLHelpers.h>
+#include "method_dispatcher.h"
 
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/View.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
 #include <iostream>
-#include "js_delegate.h"
-#include "method_dispatcher.h"
-#include "application.h"
+#include "Input.h"
 
 
 using namespace Awesomium;
 
-Application* app_;
-MethodDispatcher method_dispatcher_;
-
-void BindMethods(WebView* web_view) {
-	// Create a global js object named 'app'
-	JSValue result = web_view->CreateGlobalJavascriptObject(WSLit("app"));
-	if (result.IsObject()) {
-		// Bind our custom method to it.
-		JSObject& app_object = result.ToObject();
-		method_dispatcher_.Bind(app_object,
-			WSLit("sayHello"),
-			JSDelegate(this, &this->OnSayHello));
-	}
-
-	// Bind our method dispatcher to the WebView
-	web_view->set_js_method_handler(&method_dispatcher_);
-}
-
-// Bound to app.sayHello() in JavaScript
-void OnSayHello(WebView* caller,
-	const JSArray& args) {
-	app_->ShowMessage("Hello!");
-}
-
 void MenuState::run()
 {
+
+	sf::Event event;
+
 	// Awesomium init
+	MethodDispatcher dispatcher;
 	WebCore* web_core = WebCore::Initialize(WebConfig());
 	int i = 0;
 	WebView* webView = web_core->CreateWebView(960, 640);
+
+	//Bind
+	std::cout << "binding" << std::endl;
+	Awesomium::JSValue result = webView->CreateGlobalJavascriptObject(Awesomium::WSLit("app"));
+	Awesomium::JSObject& app_object = result.ToObject();
+	dispatcher.Bind(app_object,WSLit("app"),JSDelegate(this, &MenuState::OnSayHello));
+	webView->set_js_method_handler(&dispatcher);
 
 	// Load Page
 	WebURL url(WSLit("file:///Resources/menuHTML/menu.html"));
@@ -69,7 +55,50 @@ void MenuState::run()
 	while (context->window.isOpen()) {
 		context->window.clear();
 
+		while (context->window.pollEvent(event)) {
+			if (event.type == sf::Event::Closed)
+				context->window.close();
+		}
+
+		if (event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased)
+		{
+			Input::EventOccured(event);
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+				std::cout << "up key pressed" << std::endl;
+				
+				WebURL url(WSLit("file:///Resources/menuHTML/menu.html"));
+				webView->LoadURL(url);
+				
+				while (webView->IsLoading())
+					web_core->Update();
+
+				Sleep(300);
+				web_core->Update();
+
+				
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+				std::cout << "down key pressed" << std::endl;
+				
+				WebURL url(WSLit("file:///Resources/menuHTML/menu2.html"));
+				webView->LoadURL(url);
+				//webView->ExecuteJavascript(WebString::CreateFromUTF8("myfunc()",9), WebString());
+
+				WebKeyboardEvent keyEvent;
+				keyEvent.type = WebKeyboardEvent::kTypeKeyDown;
+				webView->InjectKeyboardEvent(keyEvent);
+
+				while (webView->IsLoading())
+					web_core->Update();
+
+				Sleep(300);
+				web_core->Update();
+			}
+		}
+
 		// Create image from Bitmap
+		surface = static_cast<Awesomium::BitmapSurface*>(webView->surface());
 		const unsigned char* tempBuffer = surface->buffer();
 		for (register int i = 0; i < 960 * 640 * 4; i += 4) {
 			pixels[i] = tempBuffer[i + 2]; // B
@@ -95,4 +124,5 @@ MenuState::MenuState(Context* c)
 
 MenuState::~MenuState()
 {
+	delete context;
 }

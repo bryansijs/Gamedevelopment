@@ -1,4 +1,9 @@
 #pragma once
+#include "application.h"
+#include "view.h"
+#include <iostream>
+#include <Awesomium/STLHelpers.h>
+
 namespace Awesomium{
 	class WebView;
 	class JSArray;
@@ -11,6 +16,11 @@ class MenuState
 public:
 	void run();
 	MenuState(Context* context);
-	~MenuState();
+	virtual ~MenuState();
+
+	void MenuState::OnSayHello(Awesomium::WebView* caller, const Awesomium::JSArray& args)
+	{
+		std::cout << "clicked!" << std::endl;
+	}
 };
 
