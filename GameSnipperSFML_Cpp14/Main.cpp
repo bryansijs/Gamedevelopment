@@ -10,6 +10,8 @@
 
 #include "LevelImporter.h"
 #include "MenuState.h"
+#include "StateManager.h"
+#include "GameState.h"
 
 bool quitGame = false;
 
@@ -23,15 +25,12 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	try
 	{
+		StateManager* stateManager = new StateManager();
 		Context* context{ new Context(960,640) };
-		//TODO: State manager
-		//TODO: Only if game start with state
-		
-		//GameLoop* loop{ new GameLoop(context) };
-		//loop->run();
-		
-		MenuState* menu{ new MenuState(context) };
-		menu->run();
+
+		MenuState* state = new MenuState(context, stateManager);
+		stateManager->AddState(state);
+		stateManager->RunState();
 	}
 	catch (std::exception e)
 	{

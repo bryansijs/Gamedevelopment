@@ -13,7 +13,9 @@
 
 #include <iostream>
 #include "Input.h"
-#include "StateFactory.h"
+#include "GameLoop.h"
+#include "GameState.h"
+#include "StateManager.h"
 
 
 using namespace Awesomium;
@@ -35,14 +37,19 @@ void callDirectJSFunction(WebView* webView, WebCore* web_core , int currentLevel
 	web_core->Update();
 }
 
-void MenuState::run()
+void MenuState::Terminate()
+{
+	delete this;
+}
+
+void MenuState::Run()
 {
 	std::map <string, string> my_map;
 	my_map["1"] = "newGame";
-	my_map["2"] = "loadGame";
+	my_map["2"] = "loadGame"; //TODO binnen Menu
 	my_map["3"] = "level editor";
-	my_map["4"] = "instruction";
-	my_map["5"] = "about";
+	my_map["4"] = "instruction";// in Menu
+	my_map["5"] = "about";// in Menu
 
 	std::cout << my_map.at("1") << std::endl;
 
@@ -101,9 +108,16 @@ void MenuState::run()
 				}
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
-				StateFactory factory;
+				BaseState* gameState = new GameState(this->context, this->stateManager);
+				stateManager->AddState(gameState);
+				stateManager->PopState();
+				stateManager->RunState();
+
+
+				/*StateFactory factory;
 				std::string s = std::to_string(currentLevel);
 				factory.startNextState(my_map.at(s),context,this);
+				*/
 			}
 		}
 
@@ -126,13 +140,14 @@ void MenuState::run()
 	
 }
 
-MenuState::MenuState(Context* c)
+MenuState::MenuState(Context* c, StateManager* manager)
 {
 	this->context = c;
+	this->stateManager = manager;
 }
 
 
 MenuState::~MenuState()
 {
-	delete context;
+	//delete context;
 }

@@ -2,6 +2,7 @@
 class BaseState
 {
 public:
-	virtual void run() {};
+	virtual void Run() {};
+	virtual void Terminate() {};
 };
 

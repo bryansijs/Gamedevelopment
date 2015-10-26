@@ -5,6 +5,8 @@
 #include <Awesomium/STLHelpers.h>
 #include "BaseState.h"
 
+class StateManager;
+
 namespace Awesomium{
 	class WebView;
 	class JSArray;
@@ -12,16 +14,13 @@ namespace Awesomium{
 
 class Context;
 class MenuState : public BaseState
-{
+{	
 	Context* context;
+	StateManager* stateManager;
 public:
-	void run();
-	MenuState(Context* context);
+	void Terminate();
+	void Run();
+	MenuState(Context* context, StateManager* stateManager);
 	~MenuState();
-
-	void MenuState::OnSayHello(Awesomium::WebView* caller, const Awesomium::JSArray& args)
-	{
-		std::cout << "clicked!" << std::endl;
-	}
 };
 

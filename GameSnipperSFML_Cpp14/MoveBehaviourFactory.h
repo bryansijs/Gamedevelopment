@@ -4,7 +4,5 @@ class MoveBehaviourFactory
 public:
 	MoveBehaviourFactory();
 	~MoveBehaviourFactory();
-
-
 };
 
