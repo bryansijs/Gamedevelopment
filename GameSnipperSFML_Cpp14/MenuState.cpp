@@ -17,9 +17,32 @@
 
 using namespace Awesomium;
 
+void callDirectJSFunction(WebView* webView, WebCore* web_core , int currentLevel)
+{
+	JSValue window = webView->ExecuteJavascriptWithResult(
+		WSLit("window"), WSLit(""));
+
+	if (window.IsObject())
+	{
+		JSArray args;
+		JSValue val = JSValue(currentLevel);
+		args.Push(val);
+		window.ToObject().Invoke(WSLit("myfunc"), args);
+	}
+
+	Sleep(300);
+	web_core->Update();
+}
+
 void MenuState::run()
 {
+	std::map <string, string> my_map;
+	my_map["1"] = "newGame";
+	my_map["2"] = "loadGame";
 
+	std::cout << my_map.at("1") << std::endl;
+
+	int currentLevel = 1;
 	sf::Event event;
 
 	// Awesomium init
@@ -27,13 +50,6 @@ void MenuState::run()
 	WebCore* web_core = WebCore::Initialize(WebConfig());
 	int i = 0;
 	WebView* webView = web_core->CreateWebView(960, 640);
-
-	//Bind
-	std::cout << "binding" << std::endl;
-	Awesomium::JSValue result = webView->CreateGlobalJavascriptObject(Awesomium::WSLit("app"));
-	Awesomium::JSObject& app_object = result.ToObject();
-	dispatcher.Bind(app_object,WSLit("app"),JSDelegate(this, &MenuState::OnSayHello));
-	webView->set_js_method_handler(&dispatcher);
 
 	// Load Page
 	WebURL url(WSLit("file:///Resources/menuHTML/menu.html"));
@@ -65,35 +81,20 @@ void MenuState::run()
 			Input::EventOccured(event);
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-				std::cout << "up key pressed" << std::endl;
-				
-				WebURL url(WSLit("file:///Resources/menuHTML/menu.html"));
-				webView->LoadURL(url);
-				
-				while (webView->IsLoading())
-					web_core->Update();
-
-				Sleep(300);
-				web_core->Update();
-
-				
+				if(currentLevel > 1)
+				{
+					currentLevel = currentLevel - 1;
+					std::cout << currentLevel << std::endl;
+					callDirectJSFunction(webView, web_core, currentLevel);
+				}
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-				std::cout << "down key pressed" << std::endl;
-				
-				WebURL url(WSLit("file:///Resources/menuHTML/menu2.html"));
-				webView->LoadURL(url);
-				//webView->ExecuteJavascript(WebString::CreateFromUTF8("myfunc()",9), WebString());
-
-				WebKeyboardEvent keyEvent;
-				keyEvent.type = WebKeyboardEvent::kTypeKeyDown;
-				webView->InjectKeyboardEvent(keyEvent);
-
-				while (webView->IsLoading())
-					web_core->Update();
-
-				Sleep(300);
-				web_core->Update();
+				if (currentLevel < 5)
+				{
+					currentLevel = currentLevel + 1;
+					std::cout << currentLevel << std::endl;
+					callDirectJSFunction(webView, web_core, currentLevel);
+				}
 			}
 		}
 

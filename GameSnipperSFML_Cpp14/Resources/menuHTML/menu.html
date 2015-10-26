@@ -36,20 +36,20 @@
         <div style="position:absolute; width: 192px; height: 302px; top: 175px;left: 393px; background-color: #161616">
             <h3 style="text-align: center; font-family: moonhouse;">Dungeon Crawler</h3>
             <table>
-                <tr class="selected">
-                    <td onclick="app.sayHello()">new game</td><td><img class="selector" src="images/cat.png"/></td>
+                <tr id ="1" class="selected">
+                    <td>new game</td><td><img class="selector" src="images/cat.png"/></td>
                 </tr>
-                <tr>
-                    <td onclick="loadGame()">load game</td><td><img class="selector" src="images/cat.png"/></td>
+                <tr id="2">
+                    <td>load game</td><td><img class="selector" src="images/cat.png"/></td>
                 </tr>
-                <tr>
-                    <td onclick="levelEditor()">level editor</td><td><img class="selector" src="images/cat.png"/></td>
+                <tr id="3">
+                    <td>level editor</td><td><img class="selector" src="images/cat.png"/></td>
                 </tr>
-                <tr>
-                    <td onclick="showInstructions()">instructions</td><td><img class="selector" src="images/cat.png"/></td>
+                <tr id="4">
+                    <td>instructions</td><td><img class="selector" src="images/cat.png"/></td>
                 </tr>
-                <tr>
-                    <td onclick="showAbout()">about</td><td><img class="selector" src="images/cat.png"/></td>
+                <tr id="5">
+                    <td>about</td><td><img class="selector" src="images/cat.png"/></td>
                 </tr>
             </table>
             <div id="test"></div>
@@ -57,18 +57,17 @@
         </div>
     </div>
     <script>
-        function myfunc() {
-            document.getElementById("test").appendChild(document.createTextNode('hello'));
-        }
-        document.addEventListener('keydown', function(event) {
-        if(event.keyCode == 37) {
-                alert('Left was pressed');
-            }
-            else if(event.keyCode == 40) {
-                document.getElementById("test").appendChild(document.createTextNode('hello'));
-            }
-        });
 
+        function myfunc(level) {
+
+            //delete current selected
+            var old = document.getElementsByClassName("selected")[0];
+            old.firstChild.parentElement.className = "";
+
+            //make new item selected
+            var elem = document.getElementById(level);
+            elem.className = "selected";
+        }
     </script>
 </body>
 </html>
