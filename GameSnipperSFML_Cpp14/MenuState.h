@@ -3,6 +3,7 @@
 #include "view.h"
 #include <iostream>
 #include <Awesomium/STLHelpers.h>
+#include "BaseState.h"
 
 namespace Awesomium{
 	class WebView;
@@ -10,13 +11,13 @@ namespace Awesomium{
 }
 
 class Context;
-class MenuState
+class MenuState : public BaseState
 {
 	Context* context;
 public:
 	void run();
 	MenuState(Context* context);
-	virtual ~MenuState();
+	~MenuState();
 
 	void MenuState::OnSayHello(Awesomium::WebView* caller, const Awesomium::JSArray& args)
 	{

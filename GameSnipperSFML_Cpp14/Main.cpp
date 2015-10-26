@@ -6,16 +6,21 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <Box2d/Box2D.h>
+#include <gtest/gtest.h>
 
 #include "LevelImporter.h"
 #include "MenuState.h"
 
 bool quitGame = false;
 
-using namespace std;	
+using namespace std;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	//testing::InitGoogleTest(&argc, argv);
+	
+	//RUN_ALL_TESTS();
+
 	try
 	{
 		Context* context{ new Context(960,640) };
@@ -38,5 +43,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 
 	return 0;
+	
 }
 

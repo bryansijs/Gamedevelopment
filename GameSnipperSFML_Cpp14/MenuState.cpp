@@ -13,6 +13,7 @@
 
 #include <iostream>
 #include "Input.h"
+#include "StateFactory.h"
 
 
 using namespace Awesomium;
@@ -39,6 +40,9 @@ void MenuState::run()
 	std::map <string, string> my_map;
 	my_map["1"] = "newGame";
 	my_map["2"] = "loadGame";
+	my_map["3"] = "level editor";
+	my_map["4"] = "instruction";
+	my_map["5"] = "about";
 
 	std::cout << my_map.at("1") << std::endl;
 
@@ -66,7 +70,7 @@ void MenuState::run()
 	BitmapSurface* surface = static_cast<Awesomium::BitmapSurface*>(webView->surface());
 	sf::Texture uiTexture;
 	uiTexture.create(960, 640);
-	sf::Uint8* pixels = new sf::Uint8[960 * 640 * 4];
+	sf:: Uint8* pixels = new sf::Uint8[960 * 640 * 4];
 
 	while (context->window.isOpen()) {
 		context->window.clear();
@@ -95,6 +99,11 @@ void MenuState::run()
 					std::cout << currentLevel << std::endl;
 					callDirectJSFunction(webView, web_core, currentLevel);
 				}
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
+				StateFactory factory;
+				std::string s = std::to_string(currentLevel);
+				factory.startNextState(my_map.at(s),context,this);
 			}
 		}
 
