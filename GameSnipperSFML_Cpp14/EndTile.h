@@ -1,6 +1,6 @@
 #pragma once
-#include "Game_Object.h"
-class EndTile : public Game_Object
+#include "GameObject.h"
+class EndTile : public GameObject
 {
 public:
 	EndTile();

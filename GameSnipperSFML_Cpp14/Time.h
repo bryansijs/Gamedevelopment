@@ -6,6 +6,7 @@ public:
 	~Time();
 
 	static float deltaTime;
+	static float runningTime;
 private:
 	
 };

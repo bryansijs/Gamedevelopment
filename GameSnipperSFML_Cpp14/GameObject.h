@@ -1,47 +1,63 @@
 #pragma once
-
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 #include <string>
-#include <Box2D/Box2D.h>
+#include <vector>
+#include <SFML\Graphics.hpp>
+#include <iostream>
 
-class GameObject : public sf::Sprite
+class DrawContainer;
+class MoveContainer;
+class DrawBehaviour;
+class MoveBehaviour;
+
+class GameObject
 {
 public:
-	sf::Vector2f velocity;
-
-	GameObject(b2World* world);
-
-	virtual void Load(std::string filename, bool dynamic);
-
-	virtual bool Update(sf::RenderWindow* window);
-
-	bool CheckCollision(GameObject* gameObject);
-
-	virtual void Collision(GameObject* gameObject);
-
-	void setSounds(std::string fileName);
-
-	void Handle();
-	void MoveUnit(float x, float y);
-
-	int GroupID();
-
-	int Active();
-
-	void Destroy();
-	b2Body* body;
-
+	GameObject(DrawContainer *drawContainer, std::string textureUrl);
+	GameObject();
 	~GameObject();
-protected:
-	int active;
-	int groupId;
-	b2World* world;
-	b2BodyDef* bodyDef;
-	b2PolygonShape* shape;
-	b2FixtureDef* fixtureDef;
-	sf::SoundBuffer sbuffer;
-	sf::Sound sfx;
-private:
-	sf::Texture* texture;
+
+	std::string name;
+	std::string type;
+
+	DrawContainer* drawContainer;
+	MoveContainer* moveContainer;
+	DrawBehaviour* drawBehaviour;
+	MoveBehaviour* moveBehaviour;
+
+	sf::Vector2f position;
+
+	void setPosition(sf::Vector2f position) { this->position = position; };
+
+	virtual void Update();
+	void setDrawBehaviour(DrawBehaviour* newDrawBehaviour);
+	void SetMoveBehaviour(MoveBehaviour* moveBehaviour);
+
+	sf::IntRect imageRect =  sf::IntRect(0, 0, 0, 0);
+
+	int x_index = 0;
+	int y_index = 0;
+	int width = 0;
+	int height = 0;
+
+	void set_Image_x(int x)
+	{
+		this->x_index = x;
+	}
+
+	void set_Image_y(int y)
+	{
+		this->y_index = y;
+	}
+
+	int get_Image_y() { return y_index * height; }
+	int get_Image_x() { return x_index * width; }
+
+	void setSize(int width, int height)
+	{
+		this->width = width;
+		this->height = height;
+		imageRect.height = height;
+		imageRect.width = width;
+	}
 };
+

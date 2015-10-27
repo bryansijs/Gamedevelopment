@@ -1,7 +1,12 @@
 #include "stdafx.h"
 #include "PlayerActions.h"
+
+#include <vector>
+
+#include "Player.h"
+#include "DrawBehaviour.h"
 #include "KeyMapping.h"
-#include "Time.h"
+#include "GameObject.h"
 
 PlayerActions::PlayerActions()
 {
@@ -15,6 +20,12 @@ PlayerActions::~PlayerActions()
 void PlayerActions::SetPlayer(Player *player)
 {
 	this->player = player;
+}
+
+void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer)
+{
+	this->drawContainer = drawContainer;
+	this->moveContainer = moveContainer;
 }
 
 void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys)
@@ -41,27 +52,13 @@ void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys)
 
 void PlayerActions::Move()
 {
-	if (currentMap == "move-up")
-	{
-		player->positions.y += -1.0f * Time::deltaTime;
-	}
-	if (currentMap == "move-down")
-	{
-		player->positions.y += 1.0f * Time::deltaTime;
-	}
-	if (currentMap == "move-left")
-	{
-		player->positions.x += -1.0f * Time::deltaTime;
-	}
-	if (currentMap == "move-right")
-	{
-		player->positions.x += 1.0f * Time::deltaTime;
-	}
+	direction = currentMap;
+	moveAction.Move(direction, player);
 }
 
 void PlayerActions::Shoot()
 {
-	
+	shootAction.Shoot(drawContainer, moveContainer, player, direction);
 }
 
 void PlayerActions::Use()

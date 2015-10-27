@@ -1,12 +1,13 @@
 #pragma once
 #include "MoveBehaviour.h"
+
 class NormalMoveBehaviour : public MoveBehaviour
 {
 public:
-	NormalMoveBehaviour(Unit* unit);
+	NormalMoveBehaviour(GameObject* gameObject);
 	~NormalMoveBehaviour();
 
-	void Move(float DOWN, float UP, float RIGHT, float LEFT, float deltaTime);
+	void Update();
 	bool checkVisible(int screenX, int screenY);
 };
 

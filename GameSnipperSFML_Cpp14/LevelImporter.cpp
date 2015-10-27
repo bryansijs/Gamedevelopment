@@ -1,6 +1,8 @@
 #pragma once
 #include "stdafx.h"
 #include "LevelImporter.h"
+
+#include "DrawContainer.h"
 #include "NormalDrawBehaviour.h"
 #include "StartTile.h"
 #include "Door.h"
@@ -76,7 +78,7 @@ void LevelImporter::PrepareGameObjects()
 				{
 					std::string v = val["type"].asString();
 					std::string imgurl = val["properties"]["image"].asString();
-					Game_Object *enemy = new Game_Object(&draws, imgurl);
+					GameObject *enemy = new GameObject(drawContainer, imgurl);
 					x = val["x"].asInt();
 					y = val["y"].asInt();
 
@@ -162,14 +164,14 @@ void LevelImporter::PrepareGameObjects()
 				{
 					std::string imgurl = val["properties"]["image"].asString();
 
-					Game_Object* Object = nullptr;
+					GameObject* Object = nullptr;
 					if (imgurl == "")
 					{
-						Object = new Game_Object();
+						Object = new GameObject();
 					}
 					else
 					{
-						Object = new Game_Object(&draws, imgurl);
+						Object = new GameObject(drawContainer, imgurl);
 					}
 
 					x = val["x"].asInt();
@@ -369,9 +371,9 @@ Level* LevelImporter::getLevel()
 
 }
 
-LevelImporter::LevelImporter(std::vector<DrawBehaviour*> draws)
+LevelImporter::LevelImporter(DrawContainer *drawContainer)
 {
-	this->draws = draws;
+	this->drawContainer = drawContainer;
 }
 
 LevelImporter::LevelImporter()

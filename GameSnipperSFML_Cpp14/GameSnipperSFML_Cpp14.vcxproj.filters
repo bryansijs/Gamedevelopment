@@ -79,12 +79,6 @@
     <Filter Include="Source Files\States">
       <UniqueIdentifier>{416abce3-86b2-4989-b212-43f9eececa9b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Oude code">
-      <UniqueIdentifier>{8cbf5a47-42d4-4fab-bc50-82b8341b160e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Oude code">
-      <UniqueIdentifier>{064e954f-fd1c-4247-afbc-c047eb66e0d1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Model">
       <UniqueIdentifier>{c1705d65-2f16-40b9-bd88-953e0e09e369}</UniqueIdentifier>
     </Filter>
@@ -94,23 +88,11 @@
     <Filter Include="Header Files\Model">
       <UniqueIdentifier>{4ecc77c1-5294-4efb-ada3-434de99dcc6b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Model\DrawBehaviours">
-      <UniqueIdentifier>{8fc2357a-db48-40ec-93c6-65d008a5a90f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Model\MoveBehaviours">
-      <UniqueIdentifier>{dab5a324-aad1-4874-acc2-ab91867e19dc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Model\Units">
       <UniqueIdentifier>{9c6807b9-c709-4752-b3af-65b669d0b770}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Model\UnitStates">
       <UniqueIdentifier>{080d5506-5fdd-488e-8d00-b48f20a17cdc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Model\DrawBehaviours">
-      <UniqueIdentifier>{035fc295-24aa-4c2d-987d-bf23d73241f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Model\MoveBehaviours">
-      <UniqueIdentifier>{f305c2d3-a696-4e20-bf2c-a010c8d2c9e2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Model\UnitStates">
       <UniqueIdentifier>{02c3f483-fbc5-4065-848c-010f3d81881c}</UniqueIdentifier>
@@ -148,6 +130,24 @@
     <Filter Include="Header Files\Model\Units\Player">
       <UniqueIdentifier>{82541f94-746d-413f-8327-8469e8ed6357}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Behaviours\Move">
+      <UniqueIdentifier>{281900af-e30a-4546-82c4-33a2d131cb3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Behaviours\Draw">
+      <UniqueIdentifier>{f276e73e-3551-4213-bd15-58551d6337bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Behaviours\Move">
+      <UniqueIdentifier>{14640608-f8f0-46c8-bcf5-c2c976bde7ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Behaviours\Draw">
+      <UniqueIdentifier>{79421e08-c3b0-4f51-9fce-c72b6615dce3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Units\Player\Actions">
+      <UniqueIdentifier>{3801c665-0cc6-49f1-a1ed-38e7ef47b608}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Units\Player\Actions">
+      <UniqueIdentifier>{4939c030-b679-460a-9a53-24bf045ef60b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -162,29 +162,11 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="game_state.h">
-      <Filter>Header Files\Oude code</Filter>
-    </ClInclude>
-    <ClInclude Include="test_state.h">
-      <Filter>Header Files\Oude code</Filter>
-    </ClInclude>
     <ClInclude Include="LevelImporter.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="resource1.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawBehaviour.h">
-      <Filter>Header Files\Model\DrawBehaviours</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveBehaviour.h">
-      <Filter>Header Files\Model\MoveBehaviours</Filter>
-    </ClInclude>
-    <ClInclude Include="NormalDrawBehaviour.h">
-      <Filter>Header Files\Model\DrawBehaviours</Filter>
-    </ClInclude>
-    <ClInclude Include="NormalMoveBehaviour.h">
-      <Filter>Header Files\Model\MoveBehaviours</Filter>
     </ClInclude>
     <ClInclude Include="NormalState.h">
       <Filter>Header Files\Model\UnitStates</Filter>
@@ -206,12 +188,6 @@
     </ClInclude>
     <ClInclude Include="UpdateUI.h">
       <Filter>Header Files\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files\Oude code</Filter>
-    </ClInclude>
-    <ClInclude Include="Game_Object.h">
-      <Filter>Header Files\Model</Filter>
     </ClInclude>
     <ClInclude Include="Door.h">
       <Filter>Header Files\Model\Objecten</Filter>
@@ -252,9 +228,6 @@
     <ClInclude Include="MoveContainer.h">
       <Filter>Header Files\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="Object_Manager.h">
-      <Filter>Header Files\Oude code</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files\Model\Units\Player</Filter>
     </ClInclude>
@@ -270,6 +243,36 @@
     <ClInclude Include="Time.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="MoveBehaviour.h">
+      <Filter>Header Files\Behaviours\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalMoveBehaviour.h">
+      <Filter>Header Files\Behaviours\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawContainer.h">
+      <Filter>Header Files\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawBehaviour.h">
+      <Filter>Header Files\Behaviours\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalDrawBehaviour.h">
+      <Filter>Header Files\Behaviours\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveAction.h">
+      <Filter>Header Files\Model\Units\Player\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="ShootAction.h">
+      <Filter>Header Files\Model\Units\Player\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotMoveBehaviour.h">
+      <Filter>Header Files\Behaviours\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDrawBehaviour.h">
+      <Filter>Header Files\Behaviours\Draw</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -284,24 +287,6 @@
     <ClCompile Include="LevelImporter.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="game_state.cpp">
-      <Filter>Source Files\Oude code</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files\Oude code</Filter>
-    </ClCompile>
-    <ClCompile Include="test_state.cpp">
-      <Filter>Source Files\Oude code</Filter>
-    </ClCompile>
-    <ClCompile Include="DrawBehaviour.cpp">
-      <Filter>Source Files\Model\DrawBehaviours</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveBehaviour.cpp">
-      <Filter>Source Files\Model\MoveBehaviours</Filter>
-    </ClCompile>
-    <ClCompile Include="NormalMoveBehaviour.cpp">
-      <Filter>Source Files\Model\MoveBehaviours</Filter>
-    </ClCompile>
     <ClCompile Include="Unit.cpp">
       <Filter>Source Files\Model\Units</Filter>
     </ClCompile>
@@ -310,9 +295,6 @@
     </ClCompile>
     <ClCompile Include="SetupState.cpp">
       <Filter>Source Files\Model\UnitStates</Filter>
-    </ClCompile>
-    <ClCompile Include="NormalDrawBehaviour.cpp">
-      <Filter>Source Files\Model\DrawBehaviours</Filter>
     </ClCompile>
     <ClCompile Include="UpdateUI.cpp">
       <Filter>Source Files\Controller</Filter>
@@ -337,9 +319,6 @@
     </ClCompile>
     <ClCompile Include="WarpTile.cpp">
       <Filter>Source Files\Model\GameTiles</Filter>
-    </ClCompile>
-    <ClCompile Include="Game_Object.cpp">
-      <Filter>Source Files\Model</Filter>
     </ClCompile>
     <ClCompile Include="Game_Switch.cpp">
       <Filter>Source Files\Model\Objects</Filter>
@@ -368,9 +347,6 @@
     <ClCompile Include="Input.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Object_Manager.cpp">
-      <Filter>Source Files\Oude code</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Model\Units\Player</Filter>
     </ClCompile>
@@ -385,6 +361,36 @@
     </ClCompile>
     <ClCompile Include="Time.cpp">
       <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveBehaviour.cpp">
+      <Filter>Source Files\Behaviours\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalMoveBehaviour.cpp">
+      <Filter>Source Files\Behaviours\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawContainer.cpp">
+      <Filter>Source Files\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawBehaviour.cpp">
+      <Filter>Source Files\Behaviours\Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalDrawBehaviour.cpp">
+      <Filter>Source Files\Behaviours\Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveAction.cpp">
+      <Filter>Source Files\Model\Units\Player\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="ShootAction.cpp">
+      <Filter>Source Files\Model\Units\Player\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotMoveBehaviour.cpp">
+      <Filter>Source Files\Behaviours\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDrawBehaviour.cpp">
+      <Filter>Source Files\Behaviours\Draw</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

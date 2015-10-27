@@ -10,3 +10,4 @@ Time::~Time()
 }
 
 float Time::deltaTime;
+float Time::runningTime;

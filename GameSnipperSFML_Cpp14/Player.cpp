@@ -1,29 +1,28 @@
 #include "stdafx.h"
 #include "Player.h"
+
+#include "MoveContainer.h"
+#include "DrawContainer.h"
+
 #include "NormalMoveBehaviour.h"
-#include "NormalDrawBehaviour.h"
+#include "PlayerDrawBehaviour.h"
 
-
-//Player::Player(std::vector<MoveBehaviour*>* moves, std::vector<DrawBehaviour*>* draws, std::vector<Unit*>* units)
-Player::Player()
+Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer)
 {
-	this->setPosition(400.0f, 400.0f);
-	//this->allMoveBehaviours = moves;
-	//this->allDrawBehaviours = draws;
-	//this->allUnits = units;
+	this->moveContainer = moveContainer;
+	this->drawContainer = drawContainer;
 
 	this->moveBehaviour = { new NormalMoveBehaviour(this) };
-	this->drawBehaviour = { new NormalDrawBehaviour(this, 10, "Player.png") };
+	this->drawBehaviour = { new PlayerDrawBehaviour(this, 10, "Player.png") };
 
-	//this->allMoveBehaviours->push_back(this->moveBehaviour);
-	//this->allDrawBehaviours->push_back(this->drawBehaviour);
-	//this->allUnits->push_back(this);
+	this->drawContainer->AddBehaviour(drawBehaviour);
 }
 
-//Player::Player()
-//{
-//
-//}
+Player::Player()
+{
+	this->moveBehaviour = { new NormalMoveBehaviour(this) };
+	this->drawBehaviour = { new PlayerDrawBehaviour(this, 10, "Player.png") };
+}
 
 Player::~Player()
 {

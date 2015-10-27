@@ -9,9 +9,12 @@ Context::Context(int screenHeight, int screenWidth)
 	window.create(sf::VideoMode(screenDimensions->x, screenDimensions->y), "ECHO GAME!!!!");
 	window.setKeyRepeatEnabled(false);
 
-	player = new Player();
+	moveContainer = new MoveContainer();
+	drawContainer = new DrawContainer();
+
+	player = new Player(moveContainer, drawContainer);
 	playerActions.SetPlayer(player);
-	allDrawBehaviours.push_back(player->drawBehaviour);
+	playerActions.SetContainers(drawContainer, moveContainer);
 
 	keyMappingImporter.Import("./Resources/key-mapping.json");
 	KeyMapping::ReloadMapping(keyMappingImporter.GetMapping());
@@ -21,4 +24,3 @@ Context::~Context()
 {
 	delete(player);
 }
-

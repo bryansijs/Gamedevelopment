@@ -3,6 +3,8 @@
 #include <vector>
 #include <SFML\Graphics.hpp>
 
+#include "MoveContainer.h"
+#include "DrawContainer.h"
 #include "MoveBehaviour.h"
 #include "DrawBehaviour.h"
 
@@ -23,10 +25,15 @@ public:
 	~Context();
 
 	sf::RenderWindow window;
-	std::vector<MoveBehaviour*> allMoveBehaviours;
+
+	MoveContainer* moveContainer;
+	DrawContainer* drawContainer;
+
+	//std::vector<MoveBehaviour*> allMoveBehaviours;
 	std::vector<DrawBehaviour*> allDrawBehaviours;
+
 	std::vector<Unit*> allUnits;
-	std::vector<Unit*> getUnits() { return allUnits;  };
+	std::vector<Unit*> getUnits() { return allUnits; };
 
 	Unit* getUnitAt(int i) { return allUnits.at(i); };
 
@@ -38,6 +45,5 @@ public:
 private:
 	sf::Vector2i* screenDimensions;
 	sf::Clock clock;
-
 };
 
