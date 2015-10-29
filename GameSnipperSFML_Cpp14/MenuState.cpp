@@ -59,6 +59,7 @@ void MenuState::ShowAbout()
 
 void MenuState::Run()
 {
+	running = true;
 	std::map <int, void(MenuState::*)()> my_map;
 	my_map[1] = &MenuState::RunGame;
 	//my_map["2"] = "loadGame"; //TODO binnen Menu
@@ -91,7 +92,7 @@ void MenuState::Run()
 	uiTexture.create(960, 640);
 	sf:: Uint8* pixels = new sf::Uint8[960 * 640 * 4];
 
-	while (context->window.isOpen()) {
+	while (running) {
 		context->window.clear();
 
 		while (context->window.pollEvent(event)) {
@@ -120,8 +121,8 @@ void MenuState::Run()
 				}
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
+				
 				std::map <int, void(MenuState::*)()>::iterator it;
-
 				for (it = my_map.begin(); it != my_map.end(); ++it)
 				{
 					if(it->first == currentLevel)
