@@ -22,14 +22,28 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 	{
 		nextShot = (float)Time::runningTime + (float)shotRate;
 
-		GameObject* shot = new GameObject(drawContainer, "bullet.png");
+		GameObject* shot = new GameObject(drawContainer, "bullet-red.png");
 		ShotMoveBehaviour* shotBehaviour = new ShotMoveBehaviour(shot);
 		shotBehaviour->SetDirection(direction);
 		moveContainer->AddBehaviour(shotBehaviour);
 
-		shot->setPosition(sf::Vector2f(player->position.x, player->position.y));
-		shot->setSize(16, 17);
-		shot->set_Image_x(16);
-		shot->set_Image_y(17);
+		if (direction == "move-up")
+		{
+			shot->setPosition(sf::Vector2f(player->position.x + 12, player->position.y));
+		}
+		if (direction == "move-down")
+		{
+			shot->setPosition(sf::Vector2f(player->position.x + 12, player->position.y + 24));
+		}
+		if (direction == "move-left")
+		{
+			shot->setPosition(sf::Vector2f(player->position.x, player->position.y + 12));
+		}
+		if (direction == "move-right")
+		{
+			shot->setPosition(sf::Vector2f(player->position.x + 24, player->position.y + 12));
+		}
+		
+		shot->setSize(8, 8);
 	}
 }

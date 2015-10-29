@@ -15,6 +15,8 @@ Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer)
 	this->moveBehaviour = { new NormalMoveBehaviour(this) };
 	this->drawBehaviour = { new PlayerDrawBehaviour(this, 10, "Player.png") };
 
+	this->setSize(32, 32);
+
 	this->drawContainer->AddBehaviour(drawBehaviour);
 }
 
