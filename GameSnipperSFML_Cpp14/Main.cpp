@@ -6,7 +6,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <Box2d/Box2D.h>
-#include <gtest/gtest.h>
 
 #include "LevelImporter.h"
 #include "MenuState.h"

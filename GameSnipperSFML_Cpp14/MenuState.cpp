@@ -106,6 +106,8 @@ void MenuState::Run()
 				}
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
+
+				//TODO function pointer 
 				BaseState* gameState = new GameState(this->context, this->stateManager);
 				stateManager->AddState(gameState);
 				stateManager->StartNextState();

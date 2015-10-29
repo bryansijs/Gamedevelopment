@@ -1,8 +1,4 @@
 #pragma once
-#include "application.h"
-#include "view.h"
-#include <iostream>
-#include <Awesomium/STLHelpers.h>
 #include "BaseState.h"
 
 class StateManager;
@@ -23,4 +19,3 @@ public:
 	MenuState(Context* context, StateManager* stateManager);
 	~MenuState();
 };
-
