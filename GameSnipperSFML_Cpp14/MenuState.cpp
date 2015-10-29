@@ -42,12 +42,12 @@ void MenuState::Terminate()
 
 void MenuState::ShowIntruction()
 {
+	//TODO create instructions
 	std::cout << "Show instructions.";
 }
 
 void MenuState::RunGame()
 {
-	//TODO function pointer 
 	BaseState* gameState = new GameState(this->context, this->stateManager);
 	stateManager->AddState(gameState);
 	stateManager->StartNextState();
@@ -55,6 +55,7 @@ void MenuState::RunGame()
 
 void MenuState::ShowAbout()
 {
+	//TODO create About
 }
 
 void MenuState::Run()
@@ -62,10 +63,8 @@ void MenuState::Run()
 	running = true;
 	std::map <int, void(MenuState::*)()> my_map;
 	my_map[1] = &MenuState::RunGame;
-	//my_map["2"] = "loadGame"; //TODO binnen Menu
-	//my_map["3"] = "level editor";
-	my_map[2] = &MenuState::ShowIntruction;// in Menu
-	my_map[3] = &MenuState::ShowAbout;// in Menu
+	my_map[2] = &MenuState::ShowIntruction;
+	my_map[3] = &MenuState::ShowAbout;
 
 	int currentLevel = 1;
 	sf::Event event;
@@ -96,7 +95,6 @@ void MenuState::Run()
 
 		context->window.clear();
 
-		
 		while (context->window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed)
 				context->window.close();
@@ -111,7 +109,6 @@ void MenuState::Run()
 					if (currentLevel > 1)
 					{
 						currentLevel = currentLevel - 1;
-						std::cout << currentLevel << std::endl;
 						callDirectJSFunction(webView, web_core, currentLevel);
 					}
 				}
@@ -119,7 +116,6 @@ void MenuState::Run()
 					if (currentLevel < 3)
 					{
 						currentLevel = currentLevel + 1;
-						std::cout << currentLevel << std::endl;
 						callDirectJSFunction(webView, web_core, currentLevel);
 					}
 				}
@@ -134,30 +130,28 @@ void MenuState::Run()
 						}
 					}
 				}
-
 			}; break;
 			default: break;
 			}
 			
 		}
 		
+		//Create image from Bitmap
+		surface = static_cast<Awesomium::BitmapSurface*>(webView->surface());
+		const unsigned char* tempBuffer = surface->buffer();
+		for (register int i = 0; i < 960 * 640 * 4; i += 4) {
+			pixels[i] = tempBuffer[i + 2]; // B
+			pixels[i + 1] = tempBuffer[i + 1]; // G
+			pixels[i + 2] = tempBuffer[i]; // R
+			pixels[i + 3] = tempBuffer[i + 3]; // Alpha
+		}
 
-	//Create image from Bitmap
-	surface = static_cast<Awesomium::BitmapSurface*>(webView->surface());
-	const unsigned char* tempBuffer = surface->buffer();
-	for (register int i = 0; i < 960 * 640 * 4; i += 4) {
-		pixels[i] = tempBuffer[i + 2]; // B
-		pixels[i + 1] = tempBuffer[i + 1]; // G
-		pixels[i + 2] = tempBuffer[i]; // R
-		pixels[i + 3] = tempBuffer[i + 3]; // Alpha
+		sf::Sprite ui(uiTexture);
+		uiTexture.update(pixels);
+
+		context->window.draw(ui);
+		context->window.display();
 	}
-
-	sf::Sprite ui(uiTexture);
-	uiTexture.update(pixels);
-
-	context->window.draw(ui);
-	context->window.display();
-}
 
 }
 
