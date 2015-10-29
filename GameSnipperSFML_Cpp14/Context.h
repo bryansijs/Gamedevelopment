@@ -1,6 +1,16 @@
 #pragma once
+
 #include <vector>
 #include <SFML\Graphics.hpp>
+
+#include "MoveBehaviour.h"
+#include "DrawBehaviour.h"
+
+#include "Player.h"
+#include "PlayerInput.h"
+#include "PlayerMovement.h"
+#include "KeyMappingImporter.h"
+
 class MoveBehaviour;
 class DrawBehaviour;
 class Unit;
@@ -19,7 +29,10 @@ public:
 
 	Unit* getUnitAt(int i) { return allUnits.at(i); };
 
-
+	Player* player;
+	PlayerInput playerInput;
+	PlayerMovement playerMovement;
+	KeyMappingImporter keyMappingImporter;
 private:
 	sf::Vector2i* screenDimensions;
 	sf::Clock clock;

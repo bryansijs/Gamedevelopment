@@ -44,4 +44,3 @@ private:
 	int levelWidht;
 	sf::IntRect subRect;
 };
-

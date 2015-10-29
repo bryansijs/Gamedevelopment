@@ -7,6 +7,7 @@
 #include "NormalDrawBehaviour.h"
 #include "MoveBehaviour.h"
 #include "LevelImporter.h"
+#include "PlayerActions.h"
 
 LevelImporter* l;
 Level* lev;
@@ -28,7 +29,7 @@ void GameLoop::run()
 {
 	Level* lev = l->getLevel();
 	l->Clear();
-	lev->Start(context->allUnits.at(0), &context->window.getSize());
+	lev->Start(context->player, &context->window.getSize());
 
 	sf::FloatRect rect(lev->getViewPortX(), lev->getViewPortY(), context->window.getSize().x, context->window.getSize().y);
 	sf::View view;
@@ -36,49 +37,43 @@ void GameLoop::run()
 
 	context->window.setView(view);
 
+	sf::Clock deltaClock;
+	sf::Event event;
+
+	PlayerActions *actions = new PlayerActions(context->player);
+
 	while (context->window.isOpen()) {
 		context->window.clear();
 
-		sf::Vector2f s = context->allUnits.at(0)->positions;
+		sf::Time deltaTime = deltaClock.restart();
+
+		sf::Vector2f s = context->player->positions;
 		sf::Vector2i worldPos = context->window.mapCoordsToPixel(s);
 
-
-		sf::Event Event;
 		lev->draw(&context->window, &view);
 		lev->update();
 
 		if (lev->getDoEvents()) {
-			while (context->window.pollEvent(Event)) {
-				switch (Event.type) {
+			while (context->window.pollEvent(event)) {
+				switch (event.type) {
 				case sf::Event::Closed:
 					context->window.close();
 					break;
 				}
+
+				if (event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased)
+				{
+					Input::EventOccured(event);
+					context->playerInput.CatchInput();
+				}
 			}
 
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-				context->allUnits.at(0)->moveBehaviour->Move(0.0f, 5.0f, 0.0f, 0.0f, 0.017f);
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-				context->allUnits.at(0)->moveBehaviour->Move(5.0f, 0.0f, 0.0f, 0.0f, 0.017f);
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-				context->allUnits.at(0)->moveBehaviour->Move(0.0f, 0.0f, 5.0f, 0.0f, 0.017f);
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-				context->allUnits.at(0)->moveBehaviour->Move(0.0f, 0.0f, 0.0f, 5.0f, 0.017f);
-			}
-
-			for (int i = 0; i < context->getUnits().size(); i++) {
-				Unit* u = context->getUnits().at(i);
-				context->window.draw(u->drawBehaviour->getCurrentImage());			
-			}
-
-			for (int i = 0; i < context->allDrawBehaviours.size(); i++) {
-				context->window.draw(context->allDrawBehaviours.at(i)->getCurrentImage());
-			}
-
+			actions->ProcessActions(context->playerInput.GetActiveKeys(), deltaTime.asMicroseconds());
 			lev->updateViewPort(worldPos);
+		}
+		
+		for (int i = 0; i < context->allDrawBehaviours.size(); i++) {
+			context->window.draw(context->allDrawBehaviours.at(i)->getCurrentImage());
 		}
 
 		context->window.setView(view);

@@ -142,6 +142,12 @@
     <Filter Include="Header Files\Model\Level">
       <UniqueIdentifier>{b44c6a4e-f349-47c2-bbc4-993941421aab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Model\Units\Player">
+      <UniqueIdentifier>{1fec7a84-57d3-42e3-be79-01a4316277f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Units\Player">
+      <UniqueIdentifier>{82541f94-746d-413f-8327-8469e8ed6357}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -182,9 +188,6 @@
     </ClInclude>
     <ClInclude Include="NormalState.h">
       <Filter>Header Files\Model\UnitStates</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files\Model\Units</Filter>
     </ClInclude>
     <ClInclude Include="Unit.h">
       <Filter>Header Files\Model\Units</Filter>
@@ -234,6 +237,36 @@
     <ClInclude Include="Level.h">
       <Filter>Header Files\Levels</Filter>
     </ClInclude>
+    <ClInclude Include="KeyMapping.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyMappingImporter.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveBehaviourFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveContainer.h">
+      <Filter>Header Files\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Object_Manager.h">
+      <Filter>Header Files\Oude code</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Model\Units\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerInput.h">
+      <Filter>Header Files\Model\Units\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMovement.h">
+      <Filter>Header Files\Model\Units\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerActions.h">
+      <Filter>Header Files\Model\Units\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -254,9 +287,6 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\Oude code</Filter>
     </ClCompile>
-    <ClCompile Include="Object_Manager.cpp">
-      <Filter>Source Files\Oude code</Filter>
-    </ClCompile>
     <ClCompile Include="test_state.cpp">
       <Filter>Source Files\Oude code</Filter>
     </ClCompile>
@@ -274,9 +304,6 @@
     </ClCompile>
     <ClCompile Include="UnitState.cpp">
       <Filter>Source Files\Model\UnitStates</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Model\Units</Filter>
     </ClCompile>
     <ClCompile Include="SetupState.cpp">
       <Filter>Source Files\Model\UnitStates</Filter>
@@ -322,6 +349,36 @@
     </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>Source Files\Model\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyMapping.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyMappingImporter.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveBehaviourFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveContainer.cpp">
+      <Filter>Source Files\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Object_Manager.cpp">
+      <Filter>Source Files\Oude code</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Model\Units\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerInput.cpp">
+      <Filter>Source Files\Model\Units\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMovement.cpp">
+      <Filter>Source Files\Model\Units\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerActions.cpp">
+      <Filter>Source Files\Model\Units\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
