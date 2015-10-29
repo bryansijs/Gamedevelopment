@@ -43,8 +43,8 @@ void MenuState::Terminate()
 void MenuState::ShowIntruction()
 {
 	inMenu = false;
-	//TODO create instructions
-	std::cout << "Show instructions.";
+	pathToFile = "file:///Resources/menuHTML/instruction.html";
+	ReloadPage();
 }
 
 void MenuState::RunGame()
