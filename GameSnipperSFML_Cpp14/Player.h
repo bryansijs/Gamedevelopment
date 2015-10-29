@@ -1,10 +1,13 @@
 #pragma once
 #include "Unit.h"
 
+class MoveContainer;
+class DrawContainer;
+
 class Player : public Unit
 {
 public:
-	//Player(std::vector<MoveBehaviour*>* moves, std::vector<DrawBehaviour*>* draws, std::vector<Unit*>* units);
+	Player(MoveContainer* moveContainer, DrawContainer* drawContainer);
 	Player();
 	~Player();
 };

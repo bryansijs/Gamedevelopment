@@ -4,10 +4,11 @@
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
 #include "Tile.h"
-#include "Unit.h"
-#include "Game_Object.h"
+#include "GameObject.h"
+#include "GameObject.h"
 #include "TileSet.h"
 #include "StartTile.h"
+#include "Time.h"
 
 class Level
 {
@@ -17,19 +18,19 @@ public:
 	Level();
 	~Level();
 
-	std::vector<Game_Object*> game_objects;
+	std::vector<GameObject*> game_objects;
 	std::vector<Tile> tiles;
 	std::vector<TileSet> tileSets;
 
 
 	void updateViewPort(sf::Vector2i &worldPos);
-	void MoveView(sf::View &view);
+	void MoveView(sf::View &view, sf::Window& window);
 
 	void draw(sf::RenderWindow* window, sf::View* view);
 	void update();
 
 	void setHazardState(int hazardIndex, bool hazardState);
-	void Start(Unit* player, sf::Vector2u* size);
+	void Start(GameObject* player, sf::Vector2u* size);
 	void setLayerVisibility(int layerIndex, bool isVisible);
 	bool getDoEvents() { return doEvents; }
 	int getViewPortX() { return viewPortX; }
@@ -37,13 +38,13 @@ public:
 	void setMusic(sf::Sound music) { this->music = music; }
 	
 
-	void setGameObjects(std::vector<Game_Object*>& game_objects) { this->game_objects.swap(game_objects); }
+	void setGameObjects(std::vector<GameObject*>& game_objects) { this->game_objects.swap(game_objects); }
 	void setTileSets(std::vector<TileSet>& tileSets) { this->tileSets.swap(tileSets); }
 	void setTiles(std::vector<Tile>& tiles) { this->tiles.swap(tiles);}
 
 
-	std::vector<Game_Object*> getGame_Objects() { return game_objects; }
-	Game_Object* getObject(int i) { return game_objects.at(i); }
+	std::vector<GameObject*> getGame_Objects() { return game_objects; }
+	GameObject* getObject(int i) { return game_objects.at(i); }
 
 	/*std::string getObjectType(int i)
 	{
@@ -68,11 +69,11 @@ private:
 	bool moveDown = true;
 	bool moveRight = true;
 
-	int t_value = 0;
-	int t_max = 0;
+	float t_value = 0.0f;
+	float t_max = 0.0f;
 
-	int r_value = 0;
-	int r_max = 0;
+	float r_value = 0.0f;
+	float r_max = 0.0f;
 
 	int viewPortX = 0;
 	int viewPortY = 0;

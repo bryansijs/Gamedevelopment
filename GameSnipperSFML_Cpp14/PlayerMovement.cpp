@@ -35,19 +35,19 @@ void PlayerMovement::SetPosition(float deltaTime, std::string direction)
 {
 	if (direction == "move-up")
 	{
-		player->positions.y += -1.0f * (deltaTime / 10000);
+		player->position.y += -1.0f * (deltaTime / 10000);
 	}
 	if (direction == "move-down")
 	{
-		player->positions.y += 1.0f * (deltaTime / 10000);
+		player->position.y += 1.0f * (deltaTime / 10000);
 	}
 	if (direction == "move-left")
 	{
-		player->positions.x += -1.0f * (deltaTime / 10000);
+		player->position.x += -1.0f * (deltaTime / 10000);
 	}
 	if (direction == "move-right")
 	{
-		player->positions.x += 1.0f * (deltaTime / 10000);
+		player->position.x += 1.0f * (deltaTime / 10000);
 	}
 }
 
