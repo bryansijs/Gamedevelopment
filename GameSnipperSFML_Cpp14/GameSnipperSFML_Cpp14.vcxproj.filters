@@ -130,23 +130,35 @@
     <Filter Include="Header Files\Model\Units\Player">
       <UniqueIdentifier>{82541f94-746d-413f-8327-8469e8ed6357}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\UnitTest">
+      <UniqueIdentifier>{0a7daa73-0a8d-4638-b0e2-fabf9f4c8b9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UnitTest\Tests">
+      <UniqueIdentifier>{5b4325fc-7d6c-41b2-8050-a4da1292904e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UnitTest">
+      <UniqueIdentifier>{38a4530d-d904-4054-af96-6ee7ef5f6f05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UnitTest\Tests">
+      <UniqueIdentifier>{0b3d2887-6c2a-4caa-b52f-0ca58b7eeafb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Units\Player\Action">
+      <UniqueIdentifier>{4781ab13-eb86-4298-8071-7fb2180d5e35}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Header Files\Behaviours\Move">
-      <UniqueIdentifier>{281900af-e30a-4546-82c4-33a2d131cb3c}</UniqueIdentifier>
+      <UniqueIdentifier>{993ac1fc-50ef-4984-9960-bb8b20dc4fa5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Behaviours\Draw">
-      <UniqueIdentifier>{f276e73e-3551-4213-bd15-58551d6337bc}</UniqueIdentifier>
+      <UniqueIdentifier>{a3847174-d46c-4a07-87dd-ff4bf682db55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Units\Player\Action">
+      <UniqueIdentifier>{5398b0e7-83c0-42a3-b93d-ec9c1d339179}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Behaviours\Move">
-      <UniqueIdentifier>{14640608-f8f0-46c8-bcf5-c2c976bde7ab}</UniqueIdentifier>
+      <UniqueIdentifier>{1a00c204-68e0-4916-9138-803a72359a03}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Behaviours\Draw">
-      <UniqueIdentifier>{79421e08-c3b0-4f51-9fce-c72b6615dce3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Model\Units\Player\Actions">
-      <UniqueIdentifier>{3801c665-0cc6-49f1-a1ed-38e7ef47b608}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Model\Units\Player\Actions">
-      <UniqueIdentifier>{4939c030-b679-460a-9a53-24bf045ef60b}</UniqueIdentifier>
+      <UniqueIdentifier>{c4bdbab4-42a4-4565-8b88-e95b54119538}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -240,17 +252,26 @@
     <ClInclude Include="PlayerActions.h">
       <Filter>Header Files\Model\Units\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Time.h">
-      <Filter>Header Files\Utils</Filter>
+    <ClInclude Include="TestDemo.h">
+      <Filter>Header Files\UnitTest\Tests</Filter>
     </ClInclude>
-    <ClInclude Include="MoveBehaviour.h">
-      <Filter>Header Files\Behaviours\Move</Filter>
+    <ClInclude Include="UnitTest.h">
+      <Filter>Header Files\UnitTest</Filter>
     </ClInclude>
-    <ClInclude Include="NormalMoveBehaviour.h">
-      <Filter>Header Files\Behaviours\Move</Filter>
+    <ClInclude Include="UnitTestMain.h">
+      <Filter>Header Files\UnitTest</Filter>
     </ClInclude>
     <ClInclude Include="DrawContainer.h">
       <Filter>Header Files\Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveAction.h">
+      <Filter>Header Files\Model\Units\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="ShootAction.h">
+      <Filter>Header Files\Model\Units\Player\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerDrawBehaviour.h">
+      <Filter>Header Files\Behaviours\Draw</Filter>
     </ClInclude>
     <ClInclude Include="DrawBehaviour.h">
       <Filter>Header Files\Behaviours\Draw</Filter>
@@ -258,20 +279,20 @@
     <ClInclude Include="NormalDrawBehaviour.h">
       <Filter>Header Files\Behaviours\Draw</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveAction.h">
-      <Filter>Header Files\Model\Units\Player\Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="ShootAction.h">
-      <Filter>Header Files\Model\Units\Player\Actions</Filter>
-    </ClInclude>
     <ClInclude Include="ShotMoveBehaviour.h">
       <Filter>Header Files\Behaviours\Move</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerDrawBehaviour.h">
-      <Filter>Header Files\Behaviours\Draw</Filter>
+    <ClInclude Include="MoveBehaviour.h">
+      <Filter>Header Files\Behaviours\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalMoveBehaviour.h">
+      <Filter>Header Files\Behaviours\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -359,13 +380,25 @@
     <ClCompile Include="PlayerActions.cpp">
       <Filter>Source Files\Model\Units\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Time.cpp">
-      <Filter>Source Files\Utils</Filter>
+    <ClCompile Include="UnitTest.cpp">
+      <Filter>Source Files\UnitTest</Filter>
     </ClCompile>
-    <ClCompile Include="MoveBehaviour.cpp">
-      <Filter>Source Files\Behaviours\Move</Filter>
+    <ClCompile Include="UnitTestMain.cpp">
+      <Filter>Source Files\UnitTest</Filter>
     </ClCompile>
-    <ClCompile Include="NormalMoveBehaviour.cpp">
+    <ClCompile Include="TestDemo.cpp">
+      <Filter>Source Files\UnitTest\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveAction.cpp">
+      <Filter>Source Files\Model\Units\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="ShootAction.cpp">
+      <Filter>Source Files\Model\Units\Player\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerDrawBehaviour.cpp">
+      <Filter>Source Files\Behaviours\Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotMoveBehaviour.cpp">
       <Filter>Source Files\Behaviours\Move</Filter>
     </ClCompile>
     <ClCompile Include="DrawContainer.cpp">
@@ -377,20 +410,17 @@
     <ClCompile Include="NormalDrawBehaviour.cpp">
       <Filter>Source Files\Behaviours\Draw</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveAction.cpp">
-      <Filter>Source Files\Model\Units\Player\Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="ShootAction.cpp">
-      <Filter>Source Files\Model\Units\Player\Actions</Filter>
-    </ClCompile>
-    <ClCompile Include="ShotMoveBehaviour.cpp">
+    <ClCompile Include="MoveBehaviour.cpp">
       <Filter>Source Files\Behaviours\Move</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerDrawBehaviour.cpp">
-      <Filter>Source Files\Behaviours\Draw</Filter>
+    <ClCompile Include="NormalMoveBehaviour.cpp">
+      <Filter>Source Files\Behaviours\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
