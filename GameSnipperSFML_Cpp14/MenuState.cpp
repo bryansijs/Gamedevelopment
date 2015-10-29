@@ -18,7 +18,7 @@
 
 using namespace Awesomium;
 
-void callDirectJSFunction(WebView* webView, WebCore* web_core , int currentLevel)
+void callDirectJSFunction(WebView* webView, WebCore* web_core, int currentLevel)
 {
 	JSValue window = webView->ExecuteJavascriptWithResult(
 		WSLit("window"), WSLit(""));
@@ -90,67 +90,75 @@ void MenuState::Run()
 	BitmapSurface* surface = static_cast<Awesomium::BitmapSurface*>(webView->surface());
 	sf::Texture uiTexture;
 	uiTexture.create(960, 640);
-	sf:: Uint8* pixels = new sf::Uint8[960 * 640 * 4];
+	sf::Uint8* pixels = new sf::Uint8[960 * 640 * 4];
 
 	while (running) {
+
 		context->window.clear();
 
+		
 		while (context->window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed)
 				context->window.close();
-		}
 
-		if (event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased)
-		{
-			Input::EventOccured(event);
+			switch(event.type)
+			{
+			case sf::Event::KeyPressed: {
 
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-				if(currentLevel > 1)
-				{
-					currentLevel = currentLevel - 1;
-					std::cout << currentLevel << std::endl;
-					callDirectJSFunction(webView, web_core, currentLevel);
-				}
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-				if (currentLevel < 3)
-				{
-					currentLevel = currentLevel + 1;
-					std::cout << currentLevel << std::endl;
-					callDirectJSFunction(webView, web_core, currentLevel);
-				}
-			}
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
-				
-				std::map <int, void(MenuState::*)()>::iterator it;
-				for (it = my_map.begin(); it != my_map.end(); ++it)
-				{
-					if(it->first == currentLevel)
+				Input::EventOccured(event);
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+					if (currentLevel > 1)
 					{
-						auto function = it->second;
-						(this->*function)();
+						currentLevel = currentLevel - 1;
+						std::cout << currentLevel << std::endl;
+						callDirectJSFunction(webView, web_core, currentLevel);
 					}
 				}
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+					if (currentLevel < 3)
+					{
+						currentLevel = currentLevel + 1;
+						std::cout << currentLevel << std::endl;
+						callDirectJSFunction(webView, web_core, currentLevel);
+					}
+				}
+				if ((event.key.code == sf::Keyboard::Return)) {
+					std::map <int, void(MenuState::*)()>::iterator it;
+					for (it = my_map.begin(); it != my_map.end(); ++it)
+					{
+						if (it->first == currentLevel)
+						{
+							auto function = it->second;
+							(this->*function)();
+						}
+					}
+				}
+
+			}; break;
+			default: break;
 			}
+			
 		}
+		
 
-		// Create image from Bitmap
-		surface = static_cast<Awesomium::BitmapSurface*>(webView->surface());
-		const unsigned char* tempBuffer = surface->buffer();
-		for (register int i = 0; i < 960 * 640 * 4; i += 4) {
-			pixels[i] = tempBuffer[i + 2]; // B
-			pixels[i + 1] = tempBuffer[i + 1]; // G
-			pixels[i + 2] = tempBuffer[i]; // R
-			pixels[i + 3] = tempBuffer[i + 3]; // Alpha
-		}
-
-		sf::Sprite ui(uiTexture);
-		uiTexture.update(pixels);
-
-		context->window.draw(ui);
-		context->window.display();
+	//Create image from Bitmap
+	surface = static_cast<Awesomium::BitmapSurface*>(webView->surface());
+	const unsigned char* tempBuffer = surface->buffer();
+	for (register int i = 0; i < 960 * 640 * 4; i += 4) {
+		pixels[i] = tempBuffer[i + 2]; // B
+		pixels[i + 1] = tempBuffer[i + 1]; // G
+		pixels[i + 2] = tempBuffer[i]; // R
+		pixels[i + 3] = tempBuffer[i + 3]; // Alpha
 	}
-	
+
+	sf::Sprite ui(uiTexture);
+	uiTexture.update(pixels);
+
+	context->window.draw(ui);
+	context->window.display();
+}
+
 }
 
 MenuState::MenuState(Context* c, StateManager* manager)
