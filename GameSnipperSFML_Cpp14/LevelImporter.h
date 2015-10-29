@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include <SFML\Graphics.hpp>
+#include <SFML\Audio.hpp>
 #include <typeinfo>
 #include "Unit.h"
 #include <math.h> 
@@ -19,6 +20,9 @@
 
 class LevelImporter
 {
+protected:
+	sf::SoundBuffer sbuffer;
+	sf::Sound music;
 public:
 	LevelImporter(std::vector<DrawBehaviour*> draws);
 	LevelImporter();
@@ -39,6 +43,7 @@ private:
 	void PrepareGameObjects();
 	void PrepareTileSets();
 	void PrepareTiles();
+	void PrepareMusic(std::string musicName);
 	int tileSize;
 	int levelHeight;
 	int levelWidht;

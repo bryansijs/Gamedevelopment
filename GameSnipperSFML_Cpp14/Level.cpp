@@ -149,5 +149,5 @@ void Level::Start(Unit* player, sf::Vector2u* size)
 	viewPortX = (map_xLocation * size->x);
 
 	player->setPosition(start->position.x, start->position.y);
-
+	music.play();
 }

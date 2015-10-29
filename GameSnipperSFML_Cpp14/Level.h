@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <SFML\Graphics.hpp>
+#include <SFML\Audio.hpp>
 #include "Tile.h"
 #include "Unit.h"
 #include "Game_Object.h"
@@ -10,6 +11,8 @@
 
 class Level
 {
+protected:
+	sf::Sound music;
 public:
 	Level();
 	~Level();
@@ -31,6 +34,7 @@ public:
 	bool getDoEvents() { return doEvents; }
 	int getViewPortX() { return viewPortX; }
 	int getViewPortY() { return viewPortY; }
+	void setMusic(sf::Sound music) { this->music = music; }
 	
 
 	void setGameObjects(std::vector<Game_Object*>& game_objects) { this->game_objects.swap(game_objects); }
