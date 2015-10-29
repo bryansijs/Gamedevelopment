@@ -202,11 +202,14 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Game_Switch.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TestDemo.h" />
     <ClInclude Include="test_state.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileSet.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitState.h" />
+    <ClInclude Include="UnitTest.h" />
+    <ClInclude Include="UnitTestMain.h" />
     <ClInclude Include="UpdateLogic.h" />
     <ClInclude Include="UpdateUI.h" />
     <ClInclude Include="WarpTile.h" />
@@ -246,11 +249,14 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Game_Switch.cpp" />
+    <ClCompile Include="TestDemo.cpp" />
     <ClCompile Include="test_state.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileSet.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitState.cpp" />
+    <ClCompile Include="UnitTest.cpp" />
+    <ClCompile Include="UnitTestMain.cpp" />
     <ClCompile Include="UpdateLogic.cpp" />
     <ClCompile Include="UpdateUI.cpp" />
     <ClCompile Include="WarpTile.cpp" />
