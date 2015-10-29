@@ -15,7 +15,11 @@ class MenuState : public BaseState
 	StateManager* stateManager;
 public:
 	void Terminate();
+	void ShowIntruction();
+	void RunGame();
+	void ShowAbout();
 	void Run();
+
 	MenuState(Context* context, StateManager* stateManager);
 	~MenuState();
 };

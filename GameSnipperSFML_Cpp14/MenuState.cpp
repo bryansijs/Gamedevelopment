@@ -40,16 +40,31 @@ void MenuState::Terminate()
 	delete this;
 }
 
+void MenuState::ShowIntruction()
+{
+	std::cout << "Show instructions.";
+}
+
+void MenuState::RunGame()
+{
+	//TODO function pointer 
+	BaseState* gameState = new GameState(this->context, this->stateManager);
+	stateManager->AddState(gameState);
+	stateManager->StartNextState();
+}
+
+void MenuState::ShowAbout()
+{
+}
+
 void MenuState::Run()
 {
-	std::map <string, string> my_map;
-	my_map["1"] = "newGame";
-	my_map["2"] = "loadGame"; //TODO binnen Menu
-	my_map["3"] = "level editor";
-	my_map["4"] = "instruction";// in Menu
-	my_map["5"] = "about";// in Menu
-
-	std::cout << my_map.at("1") << std::endl;
+	std::map <int, void(MenuState::*)()> my_map;
+	my_map[1] = &MenuState::RunGame;
+	//my_map["2"] = "loadGame"; //TODO binnen Menu
+	//my_map["3"] = "level editor";
+	my_map[2] = &MenuState::ShowIntruction;// in Menu
+	my_map[3] = &MenuState::ShowAbout;// in Menu
 
 	int currentLevel = 1;
 	sf::Event event;
@@ -57,7 +72,6 @@ void MenuState::Run()
 	// Awesomium init
 	MethodDispatcher dispatcher;
 	WebCore* web_core = WebCore::Initialize(WebConfig());
-	int i = 0;
 	WebView* webView = web_core->CreateWebView(960, 640);
 
 	// Load Page
@@ -98,7 +112,7 @@ void MenuState::Run()
 				}
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-				if (currentLevel < 5)
+				if (currentLevel < 3)
 				{
 					currentLevel = currentLevel + 1;
 					std::cout << currentLevel << std::endl;
@@ -106,11 +120,16 @@ void MenuState::Run()
 				}
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
+				std::map <int, void(MenuState::*)()>::iterator it;
 
-				//TODO function pointer 
-				BaseState* gameState = new GameState(this->context, this->stateManager);
-				stateManager->AddState(gameState);
-				stateManager->StartNextState();
+				for (it = my_map.begin(); it != my_map.end(); ++it)
+				{
+					if(it->first == currentLevel)
+					{
+						auto function = it->second;
+						(this->*function)();
+					}
+				}
 			}
 		}
 
