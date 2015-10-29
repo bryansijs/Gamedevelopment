@@ -64,12 +64,6 @@
     <Filter Include="Header Files\Units\Items">
       <UniqueIdentifier>{f2640498-25be-4db8-b116-a7d158b1959e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Units">
-      <UniqueIdentifier>{010f8a06-87ee-4f41-8ad0-37e2330126f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Units\Items">
-      <UniqueIdentifier>{c08e5997-e60f-4b19-acea-b945440548df}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Behaviours">
       <UniqueIdentifier>{34398989-877c-4b8a-8434-235379828296}</UniqueIdentifier>
     </Filter>
@@ -91,11 +85,68 @@
     <Filter Include="Header Files\Oude code">
       <UniqueIdentifier>{064e954f-fd1c-4247-afbc-c047eb66e0d1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Player">
-      <UniqueIdentifier>{e539d8a4-326b-4023-848a-188f87bc1e9a}</UniqueIdentifier>
+    <Filter Include="Source Files\Model">
+      <UniqueIdentifier>{c1705d65-2f16-40b9-bd88-953e0e09e369}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Player">
-      <UniqueIdentifier>{45b690a4-2e46-4d14-b4f7-8257e42e5895}</UniqueIdentifier>
+    <Filter Include="Source Files\Model\Units">
+      <UniqueIdentifier>{010f8a06-87ee-4f41-8ad0-37e2330126f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model">
+      <UniqueIdentifier>{4ecc77c1-5294-4efb-ada3-434de99dcc6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\DrawBehaviours">
+      <UniqueIdentifier>{8fc2357a-db48-40ec-93c6-65d008a5a90f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\MoveBehaviours">
+      <UniqueIdentifier>{dab5a324-aad1-4874-acc2-ab91867e19dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Units">
+      <UniqueIdentifier>{9c6807b9-c709-4752-b3af-65b669d0b770}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\UnitStates">
+      <UniqueIdentifier>{080d5506-5fdd-488e-8d00-b48f20a17cdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\DrawBehaviours">
+      <UniqueIdentifier>{035fc295-24aa-4c2d-987d-bf23d73241f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\MoveBehaviours">
+      <UniqueIdentifier>{f305c2d3-a696-4e20-bf2c-a010c8d2c9e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\UnitStates">
+      <UniqueIdentifier>{02c3f483-fbc5-4065-848c-010f3d81881c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controller">
+      <UniqueIdentifier>{5dc2e5eb-bed5-4a96-8e2f-d8d26c8870f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Controller">
+      <UniqueIdentifier>{91cd3392-782d-4571-85c4-24447d34273c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Objecten">
+      <UniqueIdentifier>{01ece0ca-fa55-4a4a-a97b-4df46818a1a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Objects">
+      <UniqueIdentifier>{346371ed-fad1-41dd-9829-b6c8b8b7b6df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Levels">
+      <UniqueIdentifier>{403bbd60-4027-4bb6-a540-2bcd34d05e85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\GameTiles">
+      <UniqueIdentifier>{8fc7cd3c-2f41-46c2-a7df-a57296d67302}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\GameTiles">
+      <UniqueIdentifier>{b2704795-25a5-4875-8c1c-ba76379e972e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Level">
+      <UniqueIdentifier>{efb65d1f-3f9d-4d01-8862-5562316e6b92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Level">
+      <UniqueIdentifier>{b44c6a4e-f349-47c2-bbc4-993941421aab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Units\Player">
+      <UniqueIdentifier>{1fec7a84-57d3-42e3-be79-01a4316277f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Units\Player">
+      <UniqueIdentifier>{82541f94-746d-413f-8327-8469e8ed6357}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -114,9 +165,6 @@
     <ClInclude Include="game_state.h">
       <Filter>Header Files\Oude code</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files\Oude code</Filter>
-    </ClInclude>
     <ClInclude Include="test_state.h">
       <Filter>Header Files\Oude code</Filter>
     </ClInclude>
@@ -126,8 +174,68 @@
     <ClInclude Include="resource1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Header Files\Utils</Filter>
+    <ClInclude Include="DrawBehaviour.h">
+      <Filter>Header Files\Model\DrawBehaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveBehaviour.h">
+      <Filter>Header Files\Model\MoveBehaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalDrawBehaviour.h">
+      <Filter>Header Files\Model\DrawBehaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalMoveBehaviour.h">
+      <Filter>Header Files\Model\MoveBehaviours</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalState.h">
+      <Filter>Header Files\Model\UnitStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>Header Files\Model\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitState.h">
+      <Filter>Header Files\Model\UnitStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Context.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLoop.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdateLogic.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdateUI.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\Oude code</Filter>
+    </ClInclude>
+    <ClInclude Include="Game_Object.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Header Files\Model\Objecten</Filter>
+    </ClInclude>
+    <ClInclude Include="WarpTile.h">
+      <Filter>Header Files\Model\GameTiles</Filter>
+    </ClInclude>
+    <ClInclude Include="EndTile.h">
+      <Filter>Header Files\Model\GameTiles</Filter>
+    </ClInclude>
+    <ClInclude Include="StartTile.h">
+      <Filter>Header Files\Model\GameTiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Game_Switch.h">
+      <Filter>Header Files\Model\Objecten</Filter>
+    </ClInclude>
+    <ClInclude Include="TileSet.h">
+      <Filter>Header Files\Model\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Header Files\Model\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Header Files\Levels</Filter>
     </ClInclude>
     <ClInclude Include="KeyMapping.h">
       <Filter>Header Files\Utils</Filter>
@@ -135,53 +243,29 @@
     <ClInclude Include="KeyMappingImporter.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
     <ClInclude Include="MoveBehaviourFactory.h">
       <Filter>Header Files\Factories</Filter>
-    </ClInclude>
-    <ClInclude Include="Context.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gameloop.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UpdateLogic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UpdateUI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NormalDrawBehaviour.h">
-      <Filter>Header Files\Behaviours</Filter>
-    </ClInclude>
-    <ClInclude Include="NormalMoveBehaviour.h">
-      <Filter>Header Files\Behaviours</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveBehaviour.h">
-      <Filter>Header Files\Behaviours</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawBehaviour.h">
-      <Filter>Header Files\Behaviours</Filter>
     </ClInclude>
     <ClInclude Include="MoveContainer.h">
       <Filter>Header Files\Containers</Filter>
     </ClInclude>
-    <ClInclude Include="NormalState.h">
-      <Filter>Header Files\States</Filter>
-    </ClInclude>
-    <ClInclude Include="Unit.h">
-      <Filter>Header Files\Units</Filter>
-    </ClInclude>
-    <ClInclude Include="UnitState.h">
-      <Filter>Header Files\Units</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerInput.h">
-      <Filter>Header Files\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerMovement.h">
-      <Filter>Header Files\Player</Filter>
+    <ClInclude Include="Object_Manager.h">
+      <Filter>Header Files\Oude code</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Header Files\Player</Filter>
+      <Filter>Header Files\Model\Units\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerInput.h">
+      <Filter>Header Files\Model\Units\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerMovement.h">
+      <Filter>Header Files\Model\Units\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerActions.h">
+      <Filter>Header Files\Model\Units\Player</Filter>
     </ClInclude>
     <ClInclude Include="resource2.h">
       <Filter>Header Files</Filter>
@@ -227,14 +311,68 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\Oude code</Filter>
     </ClCompile>
-    <ClCompile Include="Object_Manager.cpp">
-      <Filter>Source Files\Oude code</Filter>
-    </ClCompile>
     <ClCompile Include="test_state.cpp">
       <Filter>Source Files\Oude code</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Source Files\Utils</Filter>
+    <ClCompile Include="DrawBehaviour.cpp">
+      <Filter>Source Files\Model\DrawBehaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveBehaviour.cpp">
+      <Filter>Source Files\Model\MoveBehaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalMoveBehaviour.cpp">
+      <Filter>Source Files\Model\MoveBehaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>Source Files\Model\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitState.cpp">
+      <Filter>Source Files\Model\UnitStates</Filter>
+    </ClCompile>
+    <ClCompile Include="SetupState.cpp">
+      <Filter>Source Files\Model\UnitStates</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalDrawBehaviour.cpp">
+      <Filter>Source Files\Model\DrawBehaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="UpdateUI.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="UpdateLogic.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Context.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLoop.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>Source Files\Model\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="EndTile.cpp">
+      <Filter>Source Files\Model\GameTiles</Filter>
+    </ClCompile>
+    <ClCompile Include="StartTile.cpp">
+      <Filter>Source Files\Model\GameTiles</Filter>
+    </ClCompile>
+    <ClCompile Include="WarpTile.cpp">
+      <Filter>Source Files\Model\GameTiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Game_Object.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Game_Switch.cpp">
+      <Filter>Source Files\Model\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Source Files\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="TileSet.cpp">
+      <Filter>Source Files\Model\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Source Files\Model\Level</Filter>
     </ClCompile>
     <ClCompile Include="KeyMapping.cpp">
       <Filter>Source Files\Utils</Filter>
@@ -245,50 +383,26 @@
     <ClCompile Include="MoveBehaviourFactory.cpp">
       <Filter>Source Files\Factories</Filter>
     </ClCompile>
-    <ClCompile Include="Context.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameLoop.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UpdateLogic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UpdateUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DrawBehaviour.cpp">
-      <Filter>Source Files\Behaviours</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveBehaviour.cpp">
-      <Filter>Source Files\Behaviours</Filter>
-    </ClCompile>
-    <ClCompile Include="NormalDrawBehaviour.cpp">
-      <Filter>Source Files\Behaviours</Filter>
-    </ClCompile>
-    <ClCompile Include="NormalMoveBehaviour.cpp">
-      <Filter>Source Files\Behaviours</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerInput.cpp">
-      <Filter>Source Files\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerMovement.cpp">
-      <Filter>Source Files\Player</Filter>
-    </ClCompile>
     <ClCompile Include="MoveContainer.cpp">
       <Filter>Source Files\Containers</Filter>
     </ClCompile>
-    <ClCompile Include="UnitState.cpp">
-      <Filter>Source Files\Units</Filter>
+    <ClCompile Include="Input.cpp">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Unit.cpp">
-      <Filter>Source Files\Units</Filter>
-    </ClCompile>
-    <ClCompile Include="SetupState.cpp">
-      <Filter>Source Files\States</Filter>
+    <ClCompile Include="Object_Manager.cpp">
+      <Filter>Source Files\Oude code</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Player</Filter>
+      <Filter>Source Files\Model\Units\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerInput.cpp">
+      <Filter>Source Files\Model\Units\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMovement.cpp">
+      <Filter>Source Files\Model\Units\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerActions.cpp">
+      <Filter>Source Files\Model\Units\Player</Filter>
     </ClCompile>
     <ClCompile Include="MenuState.cpp">
       <Filter>Source Files\States</Filter>

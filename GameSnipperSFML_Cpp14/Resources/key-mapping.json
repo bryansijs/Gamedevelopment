@@ -15,6 +15,14 @@
     {
       "map": "move-right",
       "key": "Right"
+    },
+    {
+      "map": "shoot",
+      "key": "Space"
+    },
+    {
+      "map": "use",
+      "key": "E"
     }
   ]
 }
