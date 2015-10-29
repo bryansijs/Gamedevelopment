@@ -48,7 +48,7 @@ void PlayerInput::AddActiveKey(std::string key)
 
 void PlayerInput::RemoveActiveKey(std::string key)
 {
-	activeKeys.erase(std::remove(activeKeys.begin(), activeKeys.end(), key), activeKeys.end());
+	activeKeys.erase(std::remove(activeKeys.begin(), activeKeys.end(), key));
 }
 
 std::vector<std::string> PlayerInput::GetActiveKeys()

@@ -1,19 +1,21 @@
 #pragma once
+
 #include <string>
+#include <SFML\Graphics.hpp>
+
 #include "Unit.h"
-#include "Game_Object.h"
+#include "GameObject.h"
 
 class DrawBehaviour
 {
 public:
+	virtual void Draw(sf::RenderWindow *window);
 	virtual sf::Sprite getCurrentImage();
-	Unit* getUnit();
-	Game_Object* getObject();
+	GameObject* getGameObject();
 
 protected:
 	int refreshRate;
-	Unit* unit;
-	Game_Object* game_Object;
+	GameObject* gameObject;
 	sf::Texture unitTexture;
 	sf::Sprite unitImage;
 };

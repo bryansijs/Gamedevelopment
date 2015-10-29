@@ -1,19 +1,17 @@
 #pragma once
-#include "Unit.h"
+
+#include "GameObject.h"
 
 class MoveBehaviour
 {
 public:
-
-	virtual void Move(float DOWN, float UP, float RIGHT, float LEFT, float deltaTime); //in pixelsaSecond (DOWN, UP, RIGHT, LEFT)
+	virtual void Update();
 	virtual bool checkVisible(int screenX, int screenY);
 
-	Unit* getUnit() { return unit; };
-
+	GameObject* getGameObject() { return gameObject; };
 protected:
-	Unit* unit;
+	GameObject* gameObject;
 	float xPosition = 0;
 	float yPosition = 0;
-
 };
 

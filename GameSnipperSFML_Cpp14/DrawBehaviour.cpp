@@ -1,16 +1,19 @@
 #include "stdafx.h"
 #include "DrawBehaviour.h"
 
-sf::Sprite DrawBehaviour::getCurrentImage() { return this->unitImage; }
+#include <SFML\Graphics.hpp>
 
-Unit* DrawBehaviour::getUnit()
+void DrawBehaviour::Draw(sf::RenderWindow *window)
 {
-	
-	return unit;
+	window->draw(getCurrentImage());
 }
 
-Game_Object* DrawBehaviour::getObject()
+sf::Sprite DrawBehaviour::getCurrentImage()
 {
+	return this->unitImage;
+}
 
-	return game_Object;
+GameObject* DrawBehaviour::getGameObject()
+{
+	return gameObject;
 }

@@ -1,6 +1,6 @@
 #pragma once
-#include "Game_Object.h"
-class Game_Switch : public Game_Object
+#include "GameObject.h"
+class Game_Switch : public GameObject
 {
 public:
 	Game_Switch();

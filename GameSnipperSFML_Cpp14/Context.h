@@ -3,6 +3,8 @@
 #include <vector>
 #include <SFML\Graphics.hpp>
 
+#include "MoveContainer.h"
+#include "DrawContainer.h"
 #include "MoveBehaviour.h"
 #include "DrawBehaviour.h"
 
@@ -10,6 +12,7 @@
 #include "PlayerInput.h"
 #include "PlayerMovement.h"
 #include "KeyMappingImporter.h"
+#include "PlayerActions.h"
 
 class MoveBehaviour;
 class DrawBehaviour;
@@ -22,20 +25,25 @@ public:
 	~Context();
 
 	sf::RenderWindow window;
-	std::vector<MoveBehaviour*> allMoveBehaviours;
+
+	MoveContainer* moveContainer;
+	DrawContainer* drawContainer;
+
+	//std::vector<MoveBehaviour*> allMoveBehaviours;
 	std::vector<DrawBehaviour*> allDrawBehaviours;
+
 	std::vector<Unit*> allUnits;
-	std::vector<Unit*> getUnits() { return allUnits;  };
+	std::vector<Unit*> getUnits() { return allUnits; };
 
 	Unit* getUnitAt(int i) { return allUnits.at(i); };
 
 	Player* player;
 	PlayerInput playerInput;
+	PlayerActions playerActions;
 	PlayerMovement playerMovement;
 	KeyMappingImporter keyMappingImporter;
 private:
 	sf::Vector2i* screenDimensions;
 	sf::Clock clock;
-
 };
 
