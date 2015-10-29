@@ -1,7 +1,7 @@
 #pragma once
-#include "Game_Object.h"
+#include "GameObject.h"
 
-class Door : public Game_Object
+class Door : public GameObject
 {
 public:
 	Door();

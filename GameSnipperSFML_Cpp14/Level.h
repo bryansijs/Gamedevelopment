@@ -3,8 +3,8 @@
 #include <string>
 #include <SFML\Graphics.hpp>
 #include "Tile.h"
-#include "Unit.h"
-#include "Game_Object.h"
+#include "GameObject.h"
+#include "GameObject.h"
 #include "TileSet.h"
 #include "StartTile.h"
 
@@ -14,7 +14,7 @@ public:
 	Level();
 	~Level();
 
-	std::vector<Game_Object*> game_objects;
+	std::vector<GameObject*> game_objects;
 	std::vector<Tile> tiles;
 	std::vector<TileSet> tileSets;
 
@@ -26,20 +26,20 @@ public:
 	void update();
 
 	void setHazardState(int hazardIndex, bool hazardState);
-	void Start(Unit* player, sf::Vector2u* size);
+	void Start(GameObject* player, sf::Vector2u* size);
 	void setLayerVisibility(int layerIndex, bool isVisible);
 	bool getDoEvents() { return doEvents; }
 	int getViewPortX() { return viewPortX; }
 	int getViewPortY() { return viewPortY; }
 	
 
-	void setGameObjects(std::vector<Game_Object*>& game_objects) { this->game_objects.swap(game_objects); }
+	void setGameObjects(std::vector<GameObject*>& game_objects) { this->game_objects.swap(game_objects); }
 	void setTileSets(std::vector<TileSet>& tileSets) { this->tileSets.swap(tileSets); }
 	void setTiles(std::vector<Tile>& tiles) { this->tiles.swap(tiles);}
 
 
-	std::vector<Game_Object*> getGame_Objects() { return game_objects; }
-	Game_Object* getObject(int i) { return game_objects.at(i); }
+	std::vector<GameObject*> getGame_Objects() { return game_objects; }
+	GameObject* getObject(int i) { return game_objects.at(i); }
 
 	/*std::string getObjectType(int i)
 	{

@@ -4,15 +4,25 @@
 #include <iostream>
 #include <map>
 
-#include "Player.h"
+#include "DrawBehaviour.h"
+#include "MoveBehaviour.h"
+
+#include "MoveAction.h"
+#include "ShootAction.h"
+
+class Player;
+class MoveContainer;
+class DrawContainer;
 
 class PlayerActions
 {
 public:
-	PlayerActions(Player *player);
+	PlayerActions();
 	~PlayerActions();
 
-	void ProcessActions(std::vector<std::string> &newActiveKeys, float newDeltaTime);
+	void SetPlayer(Player *activePlayer);
+	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer);
+	void ProcessActions(std::vector<std::string> &newActiveKeys);
 	void Move();
 	void Shoot();
 	void Use();
@@ -24,10 +34,21 @@ private:
 	};
 
 	std::vector<std::string> activeKeys;
+	std::string direction = "move-left";
 	std::string currentMap;
 
-	float deltaTime;
+	DrawContainer *drawContainer;
+	MoveContainer *moveContainer;
+
+	DrawBehaviour drawBehaviour;
+	MoveBehaviour moveBehaviour;
+
+	MoveAction moveAction;
+	ShootAction shootAction;
 
 	Player *player;
+
+	bool fired = false;
+
 };
 

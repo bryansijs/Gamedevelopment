@@ -126,7 +126,7 @@ void Level::setLayerVisibility(int layerIndex, bool isVisible)
 	}
 }
 
-void Level::Start(Unit* player, sf::Vector2u* size)
+void Level::Start(GameObject* player, sf::Vector2u* size)
 {
 	StartTile* start = nullptr;
 
@@ -140,7 +140,6 @@ void Level::Start(Unit* player, sf::Vector2u* size)
 	{
 		start = new StartTile();
 		start->setPosition(sf::Vector2f(25, 25));
-
 	}
 
 	int map_yLocation = start->position.y / size->y;
@@ -148,6 +147,5 @@ void Level::Start(Unit* player, sf::Vector2u* size)
 	viewPortY = (map_yLocation * size->y);
 	viewPortX = (map_xLocation * size->x);
 
-	player->setPosition(start->position.x, start->position.y);
-
+	player->setPosition(sf::Vector2f(start->position.x, start->position.y));
 }

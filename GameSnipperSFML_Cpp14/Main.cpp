@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Context.h"
 #include <iostream>
+#include "UnitTestMain.h"
 
 #include <cstdio>
 #include <SFML/Graphics.hpp>
@@ -21,6 +22,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	try
 	{
 		StateManager* stateManager = new StateManager();
+
+		UnitTestMain utm;
 		Context* context{ new Context(960,640) };
 
 		MenuState* state = new MenuState(context, stateManager);

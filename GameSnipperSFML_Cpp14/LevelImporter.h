@@ -11,16 +11,18 @@
 #include <typeinfo>
 #include "Unit.h"
 #include <math.h> 
-#include "Game_Object.h"
+#include "GameObject.h"
 #include <Box2D/Box2D.h>
 #include "Tile.h"
 #include "TileSet.h"
 #include "Level.h"
 
+class DrawContainer;
+
 class LevelImporter
 {
 public:
-	LevelImporter(std::vector<DrawBehaviour*> draws);
+	LevelImporter(DrawContainer *drawContainer);
 	LevelImporter();
 	~LevelImporter();
 
@@ -28,11 +30,13 @@ public:
 	void Prepare();
 
 	void Clear();
-	std::vector<Game_Object*> game_objects;
+	std::vector<GameObject*> game_objects;
 
 	std::vector<Tile> tiles;
 	std::vector<TileSet> tileSets;
-	std::vector<DrawBehaviour*> draws;
+
+	DrawContainer *drawContainer;
+
 	Level* LevelImporter::getLevel();
 
 private:

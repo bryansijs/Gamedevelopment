@@ -1,20 +1,36 @@
 #include "stdafx.h"
 #include "PlayerActions.h"
-#include "KeyMapping.h"
 
-PlayerActions::PlayerActions(Player *activePlayer)
+#include <vector>
+
+#include "Player.h"
+#include "DrawBehaviour.h"
+#include "KeyMapping.h"
+#include "GameObject.h"
+
+PlayerActions::PlayerActions()
 {
-	player = activePlayer;
+	
 }
 
 PlayerActions::~PlayerActions()
 {
 }
 
-void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys, float newDeltaTime)
+void PlayerActions::SetPlayer(Player *player)
+{
+	this->player = player;
+}
+
+void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer)
+{
+	this->drawContainer = drawContainer;
+	this->moveContainer = moveContainer;
+}
+
+void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys)
 {
 	activeKeys = newActiveKeys;
-	deltaTime = newDeltaTime;
 
 	std::map<std::string, void(PlayerActions::*)()>::iterator it;
 
@@ -36,27 +52,13 @@ void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys, floa
 
 void PlayerActions::Move()
 {
-	if (currentMap == "move-up")
-	{
-		player->positions.y += -1.0f * (deltaTime / 10000);
-	}
-	if (currentMap == "move-down")
-	{
-		player->positions.y += 1.0f * (deltaTime / 10000);
-	}
-	if (currentMap == "move-left")
-	{
-		player->positions.x += -1.0f * (deltaTime / 10000);
-	}
-	if (currentMap == "move-right")
-	{
-		player->positions.x += 1.0f * (deltaTime / 10000);
-	}
+	direction = currentMap;
+	moveAction.Move(direction, player);
 }
 
 void PlayerActions::Shoot()
 {
-	
+	shootAction.Shoot(drawContainer, moveContainer, player, direction);
 }
 
 void PlayerActions::Use()

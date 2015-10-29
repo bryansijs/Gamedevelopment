@@ -1,19 +1,20 @@
 #include "stdafx.h"
 #include "GameObject.h"
-#include <iostream>
 
-#include <SFML/Audio.hpp>
+#include "DrawContainer.h"
+#include "MoveContainer.h"
+#include "NormalDrawBehaviour.h"
+#include "MoveBehaviour.h"
 
-GameObject::GameObject(b2World* world)
+//GameObject::GameObject(std::vector<DrawBehaviour*>* draws, std::string textureUrl)
+GameObject::GameObject(DrawContainer *drawContainer, std::string textureUrl)
 {
-	/*this->texture = new sf::Texture();
-	this->active = 1;
-	this->groupId = 0;
-	this->world = world;
-	*/
+	this->drawContainer = drawContainer;
+	this->drawBehaviour = { new NormalDrawBehaviour(this, 10, "./Resources/sprites/"+textureUrl) };
+	this->drawContainer->AddBehaviour(this->drawBehaviour);
 }
 
-void GameObject::setSounds(std::string fileName)
+GameObject::GameObject()
 {
 	//this->sbuffer.loadFromFile("Resources/sfx/hit.ogg");
 	//this->sfx.setBuffer(this->sbuffer);
@@ -123,24 +124,25 @@ void GameObject::Collision(GameObject* entity)
 {
 }
 
-bool GameObject::CheckCollision(GameObject* entity)
-{
-	return this->getGlobalBounds().intersects(entity->getGlobalBounds());
+bool GameObject::CheckCollision(GameObject* entity){
 }
 
-int GameObject::GroupID()
+GameObject::~GameObject()
 {
-	return this->groupId;
 }
 
-int GameObject::Active()
+void GameObject::Update()
 {
-	return this->active;
 }
 
-void GameObject::Destroy()
+void GameObject::setDrawBehaviour(DrawBehaviour* newDrawBehaviour)
 {
-	this->active = 0;
+	this->drawBehaviour = newDrawBehaviour;
+}
+
+void GameObject::SetMoveBehaviour(MoveBehaviour* moveBehaviour)
+{
+	this->moveBehaviour = moveBehaviour;
 }
 
 GameObject::~GameObject()

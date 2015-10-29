@@ -8,17 +8,17 @@
 #include "MoveBehaviour.h"
 #include "LevelImporter.h"
 #include "PlayerActions.h"
+#include "Time.h"
 
 LevelImporter* l;
 Level* lev;
 GameLoop::GameLoop(Context* c)
 {
 	this->context = c;
-	l = new LevelImporter(this->context->allDrawBehaviours);
+	l = new LevelImporter(context->drawContainer);
 
 	l->Import("./Resources/levels/Level_New.json");
 	l->Prepare();
-	this->context->allDrawBehaviours.swap(l->draws);
 }
 
 GameLoop::~GameLoop()
@@ -40,14 +40,11 @@ void GameLoop::run()
 	sf::Clock deltaClock;
 	sf::Event event;
 
-	PlayerActions *actions = new PlayerActions(context->player);
-
 	while (context->window.isOpen()) {
-		context->window.clear();
+		Time::deltaTime = (float)deltaClock.restart().asMilliseconds() / 10;
+		Time::runningTime += Time::deltaTime;
 
-		sf::Time deltaTime = deltaClock.restart();
-
-		sf::Vector2f s = context->player->positions;
+		sf::Vector2f s = context->player->position;
 		sf::Vector2i worldPos = context->window.mapCoordsToPixel(s);
 
 		lev->draw(&context->window, &view);
@@ -68,13 +65,12 @@ void GameLoop::run()
 				}
 			}
 
-			actions->ProcessActions(context->playerInput.GetActiveKeys(), deltaTime.asMicroseconds());
+			context->playerActions.ProcessActions(context->playerInput.GetActiveKeys());
 			lev->updateViewPort(worldPos);
 		}
-		
-		for (int i = 0; i < context->allDrawBehaviours.size(); i++) {
-			context->window.draw(context->allDrawBehaviours.at(i)->getCurrentImage());
-		}
+
+		context->moveContainer->Update();
+		context->drawContainer->Draw(&context->window);
 
 		context->window.setView(view);
 		context->window.display();
