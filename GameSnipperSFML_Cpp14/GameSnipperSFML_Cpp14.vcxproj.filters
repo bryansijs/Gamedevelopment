@@ -82,6 +82,9 @@
     <Filter Include="Source Files\Model">
       <UniqueIdentifier>{c1705d65-2f16-40b9-bd88-953e0e09e369}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Model\Units">
+      <UniqueIdentifier>{010f8a06-87ee-4f41-8ad0-37e2330126f2}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Header Files\Model">
       <UniqueIdentifier>{4ecc77c1-5294-4efb-ada3-434de99dcc6b}</UniqueIdentifier>
     </Filter>
@@ -121,14 +124,12 @@
     <Filter Include="Header Files\Model\Level">
       <UniqueIdentifier>{b44c6a4e-f349-47c2-bbc4-993941421aab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Model\Units\Player">
+      <UniqueIdentifier>{1fec7a84-57d3-42e3-be79-01a4316277f1}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Header Files\Model\Units\Player">
       <UniqueIdentifier>{82541f94-746d-413f-8327-8469e8ed6357}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Model\Units">
-      <UniqueIdentifier>{010f8a06-87ee-4f41-8ad0-37e2330126f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Model\Units\Player">
-      <UniqueIdentifier>{1fec7a84-57d3-42e3-be79-01a4316277f1}</UniqueIdentifier>
     <Filter Include="Header Files\UnitTest">
       <UniqueIdentifier>{0a7daa73-0a8d-4638-b0e2-fabf9f4c8b9b}</UniqueIdentifier>
     </Filter>
@@ -200,9 +201,6 @@
     <ClInclude Include="UpdateUI.h">
       <Filter>Header Files\Controller</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files\Oude code</Filter>
-    </ClInclude>
     <ClInclude Include="Door.h">
       <Filter>Header Files\Model\Objecten</Filter>
     </ClInclude>
@@ -254,27 +252,6 @@
     <ClInclude Include="PlayerActions.h">
       <Filter>Header Files\Model\Units\Player</Filter>
     </ClInclude>
-    <ClInclude Include="resource2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuState.h">
-      <Filter>Header Files\States</Filter>
-    </ClInclude>
-    <ClInclude Include="application.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="method_dispatcher.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseState.h">
-      <Filter>Header Files\States</Filter>
-    </ClInclude>
-    <ClInclude Include="StateManager.h">
-      <Filter>Header Files\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>Header Files\States</Filter>
-    </ClInclude>
     <ClInclude Include="TestDemo.h">
       <Filter>Header Files\UnitTest\Tests</Filter>
     </ClInclude>
@@ -316,6 +293,30 @@
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_state.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="method_dispatcher.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuState.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.h">
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -403,15 +404,6 @@
     <ClCompile Include="PlayerActions.cpp">
       <Filter>Source Files\Model\Units\Player</Filter>
     </ClCompile>
-    <ClCompile Include="MenuState.cpp">
-      <Filter>Source Files\States</Filter>
-    </ClCompile>
-    <ClCompile Include="StateManager.cpp">
-      <Filter>Source Files\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="GameState.cpp">
-      <Filter>Source Files\States</Filter>
-    </ClCompile>
     <ClCompile Include="UnitTest.cpp">
       <Filter>Source Files\UnitTest</Filter>
     </ClCompile>
@@ -454,12 +446,29 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
+    <ClCompile Include="game_state.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuState.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="StateManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\levels\Level_New.json">
       <Filter>Resource Files\Levels</Filter>
     </None>
     <None Include="Resources\menuHtml\menu.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GameSnipperSFML_Cpp14.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\menuHtml\images\bg.png">
@@ -477,10 +486,5 @@
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\menuHtml\font\moonhouse.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="GameSnipperSFML_Cpp14.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
   </ItemGroup>
 </Project>

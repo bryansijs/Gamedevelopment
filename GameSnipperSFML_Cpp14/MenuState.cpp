@@ -42,6 +42,7 @@ void MenuState::Terminate()
 
 void MenuState::ShowIntruction()
 {
+	inMenu = false;
 	//TODO create instructions
 	std::cout << "Show instructions.";
 }
@@ -55,27 +56,22 @@ void MenuState::RunGame()
 
 void MenuState::ShowAbout()
 {
-	//TODO create About
+	inMenu = false;
+	pathToFile = "file:///Resources/menuHTML/about.html";
+	ReloadPage();
 }
 
-void MenuState::Run()
+void MenuState::BackToMenu()
 {
-	running = true;
-	std::map <int, void(MenuState::*)()> my_map;
-	my_map[1] = &MenuState::RunGame;
-	my_map[2] = &MenuState::ShowIntruction;
-	my_map[3] = &MenuState::ShowAbout;
+	inMenu = true;
+	pathToFile = "file:///Resources/menuHTML/menu.html";
+	ReloadPage();
+	currentLevel = 1;
+}
 
-	int currentLevel = 1;
-	sf::Event event;
-
-	// Awesomium init
-	MethodDispatcher dispatcher;
-	WebCore* web_core = WebCore::Initialize(WebConfig());
-	WebView* webView = web_core->CreateWebView(960, 640);
-
-	// Load Page
-	WebURL url(WSLit("file:///Resources/menuHTML/menu.html"));
+void MenuState::ReloadPage()
+{
+	WebURL url(WSLit(pathToFile));
 	webView->LoadURL(url);
 	webView->SetTransparent(true);
 
@@ -84,6 +80,28 @@ void MenuState::Run()
 
 	Sleep(300);
 	web_core->Update();
+}
+
+void MenuState::Run()
+{
+	inMenu = true;
+	running = true;
+	std::map <int, void(MenuState::*)()> my_map;
+	my_map[1] = &MenuState::RunGame;
+	my_map[2] = &MenuState::ShowIntruction;
+	my_map[3] = &MenuState::ShowAbout;
+
+	currentLevel = 1;
+	sf::Event event;
+
+	// Awesomium init
+	MethodDispatcher dispatcher;
+	web_core = WebCore::Initialize(WebConfig());
+	webView = web_core->CreateWebView(960, 640);
+
+	// Load Page
+	pathToFile = "file:///Resources/menuHTML/menu.html";
+	ReloadPage();
 
 	//Create Bitmap
 	BitmapSurface* surface = static_cast<Awesomium::BitmapSurface*>(webView->surface());
@@ -119,7 +137,13 @@ void MenuState::Run()
 						callDirectJSFunction(webView, web_core, currentLevel);
 					}
 				}
-				if ((event.key.code == sf::Keyboard::Return)) {
+				if (event.key.code == sf::Keyboard::Escape) {
+					if(!inMenu)
+					{
+						BackToMenu();
+					}
+				}
+				if (event.key.code == sf::Keyboard::Return) {
 					std::map <int, void(MenuState::*)()>::iterator it;
 					for (it = my_map.begin(); it != my_map.end(); ++it)
 					{
