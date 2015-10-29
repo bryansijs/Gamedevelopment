@@ -88,9 +88,6 @@
     <Filter Include="Source Files\Model">
       <UniqueIdentifier>{c1705d65-2f16-40b9-bd88-953e0e09e369}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Model\Units">
-      <UniqueIdentifier>{010f8a06-87ee-4f41-8ad0-37e2330126f2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Model">
       <UniqueIdentifier>{4ecc77c1-5294-4efb-ada3-434de99dcc6b}</UniqueIdentifier>
     </Filter>
@@ -142,11 +139,14 @@
     <Filter Include="Header Files\Model\Level">
       <UniqueIdentifier>{b44c6a4e-f349-47c2-bbc4-993941421aab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Model\Units\Player">
-      <UniqueIdentifier>{1fec7a84-57d3-42e3-be79-01a4316277f1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Model\Units\Player">
       <UniqueIdentifier>{82541f94-746d-413f-8327-8469e8ed6357}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Units">
+      <UniqueIdentifier>{010f8a06-87ee-4f41-8ad0-37e2330126f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Units\Player">
+      <UniqueIdentifier>{1fec7a84-57d3-42e3-be79-01a4316277f1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -209,9 +209,6 @@
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\Oude code</Filter>
-    </ClInclude>
-    <ClInclude Include="Game_Object.h">
-      <Filter>Header Files\Model</Filter>
     </ClInclude>
     <ClInclude Include="Door.h">
       <Filter>Header Files\Model\Objecten</Filter>
@@ -276,9 +273,6 @@
     <ClInclude Include="application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="view.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="method_dispatcher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -290,6 +284,9 @@
     </ClInclude>
     <ClInclude Include="GameState.h">
       <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game_Object.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -359,9 +356,6 @@
     <ClCompile Include="WarpTile.cpp">
       <Filter>Source Files\Model\GameTiles</Filter>
     </ClCompile>
-    <ClCompile Include="Game_Object.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
     <ClCompile Include="Game_Switch.cpp">
       <Filter>Source Files\Model\Objects</Filter>
     </ClCompile>
@@ -412,6 +406,9 @@
     </ClCompile>
     <ClCompile Include="GameState.cpp">
       <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Game_Object.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

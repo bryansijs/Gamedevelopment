@@ -183,6 +183,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="GameLoop.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="Game_Object.h" />
     <ClInclude Include="game_state.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="KeyMapping.h" />
@@ -227,6 +228,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="Game_Object.cpp" />
     <ClCompile Include="game_state.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="jsoncpp.cpp" />
