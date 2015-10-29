@@ -19,10 +19,6 @@ using namespace std;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	//testing::InitGoogleTest(&argc, argv);
-	
-	//RUN_ALL_TESTS();
-
 	try
 	{
 		StateManager* stateManager = new StateManager();
@@ -42,6 +38,5 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 
 	return 0;
-	
 }
 

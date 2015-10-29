@@ -8,12 +8,10 @@
 #include "method_dispatcher.h"
 
 #include <SFML/Graphics/Texture.hpp>
-#include <SFML/Graphics/View.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
 #include <iostream>
 #include "Input.h"
-#include "GameLoop.h"
 #include "GameState.h"
 #include "StateManager.h"
 
@@ -110,14 +108,7 @@ void MenuState::Run()
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
 				BaseState* gameState = new GameState(this->context, this->stateManager);
 				stateManager->AddState(gameState);
-				stateManager->PopState();
-				stateManager->RunState();
-
-
-				/*StateFactory factory;
-				std::string s = std::to_string(currentLevel);
-				factory.startNextState(my_map.at(s),context,this);
-				*/
+				stateManager->StartNextState();
 			}
 		}
 

@@ -13,6 +13,19 @@ void StateManager::RemoveState(BaseState state)
 	
 }
 
+void StateManager::StartNextState()
+{
+	if (!states.empty())
+	{
+		states.front()->Terminate();
+		states.pop();
+		if (!states.empty())
+		{
+			RunState();
+		}
+	}
+}
+
 void StateManager::PopState()
 {
 	if(!states.empty())
@@ -23,10 +36,7 @@ void StateManager::PopState()
 
 void StateManager::RunState()
 {
-	if(!states.empty())
-	{
-		states.front()->Run();
-	}
+	states.front()->Run();
 }
 
 StateManager::StateManager()

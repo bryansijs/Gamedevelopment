@@ -305,7 +305,6 @@
       <Filter>Resource Files\Levels</Filter>
     </None>
     <None Include="Resources\menuHtml\menu.html" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\menuHtml\images\bg.png">

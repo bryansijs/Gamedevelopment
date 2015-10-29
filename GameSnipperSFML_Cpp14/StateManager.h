@@ -10,6 +10,7 @@ class StateManager
 public:
 	void AddState(BaseState* state);
 	void RemoveState(BaseState state);
+	void StartNextState();
 	//void TerminateState(BaseState state);
 	void PopState();
 	void RunState();
