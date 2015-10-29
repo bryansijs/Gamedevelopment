@@ -81,7 +81,7 @@ void Level::MoveView(sf::View& view, sf::Window& window)
 			view.move(time, 0);
 			if (r_value > r_max)
 			{
-				view.move(0, -(r_value - r_max));
+				view.move(-(r_value - r_max), 0);
 				r_value = r_max;
 			}
 		}
@@ -94,7 +94,7 @@ void Level::MoveView(sf::View& view, sf::Window& window)
 			view.move(-time, 0);
 			if (r_value < r_max)
 			{
-				view.move(0, (r_value - r_max));
+				view.move(-(r_value - r_max), 0);
 				r_value = r_max;
 			}
 		}
