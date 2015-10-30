@@ -17,7 +17,7 @@ Context::Context(int screenHeight, int screenWidth)
 
 	l = new LevelImporter(drawContainer);
 
-	l->Import("./Resources/levels/Level_New.json");
+	l->Import("./Resources/levels/CollideTest.json");
 	l->Prepare();
 	Level* lev = l->getLevel();
 
