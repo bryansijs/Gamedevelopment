@@ -115,7 +115,11 @@ void MenuState::Run()
 
 		while (context->window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed)
+			{
 				context->window.close();
+				running = false;
+			}
+				
 
 			switch(event.type)
 			{
