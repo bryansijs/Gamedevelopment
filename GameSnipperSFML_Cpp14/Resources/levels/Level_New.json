@@ -5,6 +5,10 @@
          "height":62,
          "name":"Floor",
          "opacity":1,
+         "properties":
+            {
+             "music":"level1.ogg"
+            },
          "type":"tilelayer",
          "visible":true,
          "width":30,
