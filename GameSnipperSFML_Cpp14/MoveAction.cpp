@@ -3,6 +3,7 @@
 
 #include "Player.h"
 #include "Time.h"
+#include "Tile.h"
 
 #include <iostream>
 
@@ -14,8 +15,13 @@ MoveAction::~MoveAction()
 {
 }
 
-void MoveAction::Move(std::string direction, Player *player)
+void MoveAction::Move(std::string direction, Player *player, std::vector<Tile>* tiles)
 {
+	if(!player->isColliding(*tiles, 5.0f, 5.0f))
+	{
+		std::cout << "Coliding testing nog impmementeren. " << std::endl;
+	}
+
 	if (direction == "move-up")
 	{
 		player->set_Image_y(3);

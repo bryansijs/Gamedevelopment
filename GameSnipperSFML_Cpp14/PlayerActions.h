@@ -13,6 +13,7 @@
 class Player;
 class MoveContainer;
 class DrawContainer;
+class Tile;
 
 class PlayerActions
 {
@@ -21,8 +22,9 @@ public:
 	~PlayerActions();
 
 	void SetPlayer(Player *activePlayer);
-	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer);
+	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile>* tiles);
 	void ProcessActions(std::vector<std::string> &newActiveKeys);
+	void setTiles(std::vector<Tile>* t) { tiles = t; };
 	void Move();
 	void Shoot();
 	void Use();
@@ -47,6 +49,7 @@ private:
 	ShootAction shootAction;
 
 	Player *player;
+	std::vector<Tile>* tiles;
 
 	bool fired = false;
 
