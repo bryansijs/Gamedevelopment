@@ -61,7 +61,6 @@ public:
 		imageRect.width = width;
 	}
 
-	bool isone = false;
 	bool isColliding(std::vector<Tile> tiles, float newX, float newY);
 };
 
