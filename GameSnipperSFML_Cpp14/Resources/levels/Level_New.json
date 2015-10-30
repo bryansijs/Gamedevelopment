@@ -16,6 +16,10 @@
          "height":62,
          "name":"Walls",
          "opacity":1,
+         "properties":
+            {
+             "isCollidable":"true"
+            },
          "type":"tilelayer",
          "visible":true,
          "width":30,
