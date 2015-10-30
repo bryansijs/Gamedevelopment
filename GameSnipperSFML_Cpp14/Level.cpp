@@ -169,5 +169,6 @@ void Level::Start(GameObject* player, sf::Vector2u* size)
 	viewPortX = (map_xLocation * size->x);
 
 	player->setPosition(sf::Vector2f(start->position.x, start->position.y));
+	music.setLoop(true);
 	music.play();
 }
