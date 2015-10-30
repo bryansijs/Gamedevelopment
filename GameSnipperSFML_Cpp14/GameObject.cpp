@@ -42,23 +42,39 @@ bool GameObject::isColliding(std::vector<Tile> tiles, float newX, float newY)
 	for (int i = 0; i < tiles.size(); i++) {
 
 		if (tiles.at(i).isCollidable) {
-			std::cout << "Tile Position:" << "X:" << tiles.at(i).x_Position << " Y:" << tiles.at(i).y_Position << std::endl;
 			if (newX > tiles.at(i).x_Position) {
-
+				std::cout << "2" << std::endl;
 				if (newX < (tiles.at(i).x_Position + 32)) {
-
+					std::cout << "3" << std::endl;
 					if (newY > tiles.at(i).y_Position) {
+						std::cout << "4" << std::endl;
 						if (newY < (tiles.at(i).y_Position + 32)) {
-							std::cout << "Tile Position:" << "X:" << tiles.at(i).x_Position << " Y:" << tiles.at(i).y_Position << std::endl;
-							std::cout << "Colliding" << std::endl;
+							std::cout << "5" << std::endl;
+							//std::cout << "Tile Position:" << "X:" << tiles.at(i).x_Position << " Y:" << tiles.at(i).y_Position << std::endl;
+							//std::cout << "Colliding" << std::endl;
 							return true;
 						}
 					}
 				}
 			}
-			return false;
+
+			else if (newX + 32 > tiles.at(i).x_Position) {
+					if (newX + 32 < (tiles.at(i).x_Position + 32)) {
+						
+						if (newY + 32 > tiles.at(i).y_Position) {
+							std::cout << "4" << std::endl;
+							if (newY + 32 < (tiles.at(i).y_Position + 32)) {
+								std::cout << "5" << std::endl;
+								//std::cout << "Tile Position:" << "X:" << tiles.at(i).x_Position << " Y:" << tiles.at(i).y_Position << std::endl;
+								//std::cout << "Colliding" << std::endl;
+								return true;
+							}
+						}
+					}
+			}
 		}
 	}
+	std::cout << "done" << std::endl;
 	return false;
 }
 
