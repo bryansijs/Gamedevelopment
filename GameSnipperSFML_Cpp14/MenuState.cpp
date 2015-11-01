@@ -109,18 +109,19 @@ void MenuState::Run()
 	uiTexture.create(960, 640);
 	sf::Uint8* pixels = new sf::Uint8[960 * 640 * 4];
 
-	while (running) {
+	while (running && context->window.isOpen()) {
 
 		context->window.clear();
 
 		while (context->window.pollEvent(event)) {
+			
+			
 			if (event.type == sf::Event::Closed)
 			{
 				context->window.close();
-				running = false;
+				//running = false;
 			}
-				
-
+			
 			switch(event.type)
 			{
 			case sf::Event::KeyPressed: {

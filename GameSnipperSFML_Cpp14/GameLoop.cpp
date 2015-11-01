@@ -55,7 +55,9 @@ void GameLoop::run()
 				switch (event.type) {
 				case sf::Event::Closed:
 					context->window.close();
+					exit(0);
 					break;
+
 				}
 
 				if (event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased)
