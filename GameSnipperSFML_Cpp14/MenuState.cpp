@@ -49,6 +49,8 @@ void MenuState::ShowIntruction()
 
 void MenuState::RunGame()
 {
+	music->stop();
+	delete(music);
 	BaseState* gameState = new GameState(this->context, this->stateManager);
 	stateManager->AddState(gameState);
 	stateManager->StartNextState();
@@ -111,10 +113,10 @@ void MenuState::Run()
 
 	sf::SoundBuffer sfx;
 	sfx.loadFromFile("./Resources/Music/title.ogg");
-	sf::Sound music(sfx);
-	music.setVolume(50.0f);
-	music.setLoop(true);
-	music.play();
+	this->music = new sf::Sound(sfx);
+	music->setVolume(50.0f);
+	music->setLoop(true);
+	music->play();
 
 
 	while (running && context->window.isOpen()) {
@@ -163,7 +165,6 @@ void MenuState::Run()
 					{
 						if (it->first == currentLevel)
 						{
-							music.stop();
 							auto function = it->second;
 							(this->*function)();
 						}

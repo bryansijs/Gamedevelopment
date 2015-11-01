@@ -19,6 +19,7 @@ class MenuState : public BaseState
 	Awesomium::WebCore* web_core;
 	Context* context;
 	StateManager* stateManager;
+	sf::Sound* music;
 
 	void ReloadPage();
 	void ShowAbout();
