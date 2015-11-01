@@ -247,8 +247,8 @@ void LevelImporter::PrepareTiles()
 				insert_tile.sprite.setTextureRect(subRect);
 				insert_tile.sprite.setPosition(float(j*tileSize), float(i*tileSize));
 
-				insert_tile.y_Position = j*tileSize;
-				insert_tile.x_Position = i*tileSize;
+				insert_tile.y_Position = i*tileSize;
+				insert_tile.x_Position = j*tileSize;
 				insert_tile.tileLayer = tileSetIndex;
 
 				if (value["visible"].asString() == "true")

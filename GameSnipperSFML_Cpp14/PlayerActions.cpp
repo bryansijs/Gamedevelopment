@@ -7,6 +7,7 @@
 #include "DrawBehaviour.h"
 #include "KeyMapping.h"
 #include "GameObject.h"
+#include "Tile.h"
 
 PlayerActions::PlayerActions()
 {
@@ -22,10 +23,11 @@ void PlayerActions::SetPlayer(Player *player)
 	this->player = player;
 }
 
-void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer)
+void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile>* tiles)
 {
 	this->drawContainer = drawContainer;
 	this->moveContainer = moveContainer;
+	this->tiles = tiles;
 }
 
 void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys)
@@ -53,7 +55,7 @@ void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys)
 void PlayerActions::Move()
 {
 	direction = currentMap;
-	moveAction.Move(direction, player);
+	moveAction.Move(direction, player, tiles);
 }
 
 void PlayerActions::Shoot()

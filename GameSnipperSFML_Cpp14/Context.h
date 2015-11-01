@@ -13,6 +13,8 @@
 #include "PlayerMovement.h"
 #include "KeyMappingImporter.h"
 #include "PlayerActions.h"
+#include "LevelImporter.h"
+#include "Level.h"
 
 class MoveBehaviour;
 class DrawBehaviour;
@@ -42,6 +44,10 @@ public:
 	PlayerActions playerActions;
 	PlayerMovement playerMovement;
 	KeyMappingImporter keyMappingImporter;
+	
+	LevelImporter* l;
+	Level* lev;
+
 private:
 	sf::Vector2i* screenDimensions;
 	sf::Clock clock;
