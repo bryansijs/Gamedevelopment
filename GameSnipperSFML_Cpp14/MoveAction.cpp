@@ -20,6 +20,7 @@ void MoveAction::Move(std::string direction, Player *player, std::vector<Tile>* 
 	float temp = 0;
 	if (direction == "move-up")
 	{
+		player->set_Image_y(3);
 		temp = player->position.y;
 		temp += -velocity * Time::deltaTime;
 
@@ -29,6 +30,7 @@ void MoveAction::Move(std::string direction, Player *player, std::vector<Tile>* 
 	}
 	if (direction == "move-down")
 	{
+		player->set_Image_y(0);
 		temp = player->position.y;
 		temp += velocity * Time::deltaTime;
 		if (!player->isColliding(*tiles, player->position.x, temp)) {
@@ -37,6 +39,7 @@ void MoveAction::Move(std::string direction, Player *player, std::vector<Tile>* 
 	}
 	if (direction == "move-left")
 	{
+		player->set_Image_y(1);
 		temp = player->position.x;
 		temp += -velocity * Time::deltaTime;
 		if (!player->isColliding(*tiles, temp, player->position.y)) {
@@ -45,6 +48,7 @@ void MoveAction::Move(std::string direction, Player *player, std::vector<Tile>* 
 	}
 	if (direction == "move-right")
 	{
+		player->set_Image_y(2);
 		temp = player->position.x;
 		temp += velocity * Time::deltaTime;
 		if (!player->isColliding(*tiles, temp, player->position.y)) {
