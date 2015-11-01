@@ -109,6 +109,14 @@ void MenuState::Run()
 	uiTexture.create(960, 640);
 	sf::Uint8* pixels = new sf::Uint8[960 * 640 * 4];
 
+	sf::SoundBuffer sfx;
+	sfx.loadFromFile("./Resources/Music/title.ogg");
+	sf::Sound music(sfx);
+	music.setVolume(50.0f);
+	music.setLoop(true);
+	music.play();
+
+
 	while (running && context->window.isOpen()) {
 
 		context->window.clear();
@@ -132,6 +140,7 @@ void MenuState::Run()
 					if (currentLevel > 1)
 					{
 						currentLevel = currentLevel - 1;
+				
 						callDirectJSFunction(webView, web_core, currentLevel);
 					}
 				}
@@ -154,6 +163,7 @@ void MenuState::Run()
 					{
 						if (it->first == currentLevel)
 						{
+							music.stop();
 							auto function = it->second;
 							(this->*function)();
 						}
