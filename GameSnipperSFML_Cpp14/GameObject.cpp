@@ -2,7 +2,6 @@
 #include "GameObject.h"
 
 #include "DrawContainer.h"
-#include "MoveContainer.h"
 #include "NormalDrawBehaviour.h"
 #include "MoveBehaviour.h"
 #include "Tile.h"
@@ -25,7 +24,9 @@ GameObject::~GameObject()
 
 void GameObject::Update()
 {
+	
 }
+
 
 void GameObject::setDrawBehaviour(DrawBehaviour* newDrawBehaviour)
 {
@@ -50,4 +51,3 @@ bool GameObject::isColliding(std::vector<Tile> tiles, float newX, float newY)
 	}
 	return false;
 }
-

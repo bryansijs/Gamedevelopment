@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    @font-face {
+        font-family: moonhouse;
+        src: local("moonhouse"),
+        local("moonhouse"),
+        url(font/moonhouse.ttf);
+        font-weight: normal;
+    }
+
+    .frame{
+        font-family: moonhouse;
+        background-image: url('images/bg.png');
+        height: 640px;
+        width: 960px;
+        color: white;
+    }
+    .selected{
+        color: #992424;
+    }
+    .selector{
+        display: none;
+    }
+    .selected .selector{
+        display: block!important;
+    }
+</style>
+<body>
+    <div class="frame">
+        <img src="images/border.png" style="z-index: 99"/>
+        <div style="position:absolute; width: 192px; height: 302px; top: 175px;left: 393px; background-color: #161616">
+            <h3 style="text-align: center; font-family: moonhouse;">Dungeon Crawler</h3>
+            <table>
+                <tr id ="1" class="selected">
+                    <td>new game</td><td><img class="selector" src="images/cat.png"/></td>
+                </tr>
+                <!--<tr id="2">
+                    <td>load game</td><td><img class="selector" src="images/cat.png"/></td>
+                </tr>
+                <tr id="3">
+                    <td>level editor</td><td><img class="selector" src="images/cat.png"/></td>
+                </tr>-->
+                <tr id="2">
+                    <td>instructions</td><td><img class="selector" src="images/cat.png"/></td>
+                </tr>
+                <tr id="3">
+                    <td>about</td><td><img class="selector" src="images/cat.png"/></td>
+                </tr>
+            </table>
+            <div id="test"></div>
+        </div>
+    </div>
+    <script>
+
+        function myfunc(level) {
+
+            //delete current selected
+            var old = document.getElementsByClassName("selected")[0];
+            old.firstChild.parentElement.className = "";
+
+            //make new item selected
+            var elem = document.getElementById(level);
+            elem.className = "selected";
+        }
+    </script>
+</body>
+</html>

@@ -9,6 +9,6 @@ class MoveBehaviourFactory
 public:
 	MoveBehaviourFactory();
 	~MoveBehaviourFactory();
-
 	MoveBehaviour* Create(GameObject* gameObject);
 };
+

@@ -160,6 +160,9 @@
     <Filter Include="Source Files\Behaviours\Draw">
       <UniqueIdentifier>{c4bdbab4-42a4-4565-8b88-e95b54119538}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Html">
+      <UniqueIdentifier>{13920de8-27fc-4a7c-8201-5eb9a31e914a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -294,6 +297,30 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
+    <ClInclude Include="application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_state.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="method_dispatcher.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuState.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -422,10 +449,53 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
+    <ClCompile Include="game_state.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuState.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="StateManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\levels\Level_New.json">
       <Filter>Resource Files\Levels</Filter>
     </None>
+    <None Include="Resources\menuHTML\about.html">
+      <Filter>Resource Files\Html</Filter>
+    </None>
+    <None Include="Resources\menuHTML\instruction.html">
+      <Filter>Resource Files\Html</Filter>
+    </None>
+    <None Include="Resources\menuHtml\menu.html">
+      <Filter>Resource Files\Html</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GameSnipperSFML_Cpp14.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\menuHtml\images\bg.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\menuHtml\images\border.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\menuHtml\images\cat.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\menuHtml\images\menuBorder.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Resources\menuHtml\font\moonhouse.ttf" />
   </ItemGroup>
 </Project>
