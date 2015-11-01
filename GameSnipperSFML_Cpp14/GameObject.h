@@ -8,6 +8,7 @@ class DrawContainer;
 class MoveContainer;
 class DrawBehaviour;
 class MoveBehaviour;
+class Tile;
 
 class GameObject
 {
@@ -59,5 +60,7 @@ public:
 		imageRect.height = height;
 		imageRect.width = width;
 	}
+
+	bool isColliding(std::vector<Tile> tiles, float newX, float newY);
 };
 

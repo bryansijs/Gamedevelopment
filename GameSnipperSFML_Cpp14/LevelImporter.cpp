@@ -20,6 +20,7 @@ bool parsingSuccessful = false;
 
 Json::Reader jsonReader;
 Json::Value jsonRoot;
+std::string musicName;
 
 void LevelImporter::PrepareTileSets()
 {
@@ -246,8 +247,8 @@ void LevelImporter::PrepareTiles()
 				insert_tile.sprite.setTextureRect(subRect);
 				insert_tile.sprite.setPosition(float(j*tileSize), float(i*tileSize));
 
-				insert_tile.y_Position = j*tileSize;
-				insert_tile.x_Position = i*tileSize;
+				insert_tile.y_Position = i*tileSize;
+				insert_tile.x_Position = j*tileSize;
 				insert_tile.tileLayer = tileSetIndex;
 
 				if (value["visible"].asString() == "true")
@@ -318,6 +319,11 @@ void LevelImporter::PrepareTiles()
 						string hazardType = value["properties"]["hazardType"].asString();
 						insert_tile.hazardType = atoi(hazardType.c_str());
 					}
+
+					if (props.isMember("music"))
+					{
+						musicName = value["properties"]["music"].asString();
+					}
 				}
 
 				tiles.push_back(insert_tile);
@@ -325,7 +331,11 @@ void LevelImporter::PrepareTiles()
 	}
 }
 
-
+void LevelImporter::PrepareMusic(string music)
+{
+	sbuffer.loadFromFile("./Resources/music/" + music);
+	this->music.setBuffer(sbuffer);
+}
 
 void LevelImporter::Prepare()
 {
@@ -339,6 +349,7 @@ void LevelImporter::Prepare()
 	PrepareTileSets();
 	PrepareGameObjects();
 	PrepareTiles();
+	PrepareMusic(musicName);
 }
 
 void LevelImporter::Import(std::string JSON)
@@ -357,6 +368,7 @@ void LevelImporter::Clear()
 	game_objects.clear();
 	tileSets.clear();
 	tiles.clear();
+	music.resetBuffer();
 }
 
 Level* LevelImporter::getLevel()
@@ -365,10 +377,9 @@ Level* LevelImporter::getLevel()
 	level->setGameObjects(game_objects);
 	level->setTileSets(tileSets);
 	level->setTiles(tiles);
+	level->setMusic(music);
 
 	return level;
-
-
 }
 
 LevelImporter::LevelImporter(DrawContainer *drawContainer)

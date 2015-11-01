@@ -17,48 +17,59 @@ void  Level::updateViewPort(sf::Vector2i &worldPos)
 	if (worldPos.y > 640)
 	{
 		doEvents = false;
-		t_max += 320;
+		t_max += 640;
 		moveDown = true;
 	}
 
 	if (worldPos.y < 0)
 	{
 		doEvents = false;
-		t_max -= 320;
+		t_max -= 640;
 		moveDown = false;
 	}
 
 	if (worldPos.x > 960)
 	{
 		doEvents = false;
-		r_max += 480;
+		r_max += 960;
 		moveRight = true;
 	}
 
 	if (worldPos.x < 0)
 	{
 		doEvents = false;
-		r_max -= 480;
+		r_max -= 960;
 		moveRight = false;
 	}
 }
 
-void Level::MoveView(sf::View& view)
+void Level::MoveView(sf::View& view, sf::Window& window)
 {
+	float time = 4.0f * Time::deltaTime;
 	if (moveDown)
 	{
 		if (t_value < t_max)
 		{
-			view.move(0, 2.0f);
-			t_value++;
+			t_value += time;
+			view.move(0, +time);
+			if (t_value > t_max)
+			{
+				view.move(0, -(t_value - t_max));
+				t_value = t_max;
+			}
 		}
 	}
 	else
 	{
 		if (t_value > t_max)
 		{
-			view.move(0, -2.0f);
-			t_value--;
+			t_value -= time;
+			view.move(0, -time);
+			if (t_value < t_max)
+			{
+				view.move(0, -(t_value - t_max));
+				t_value = t_max;
+			}
 		}
 	}
 
@@ -66,16 +77,26 @@ void Level::MoveView(sf::View& view)
 	{
 		if (r_value < r_max)
 		{
-			view.move(2.0f, 0);
-			r_value++;
+			r_value += time;
+			view.move(time, 0);
+			if (r_value > r_max)
+			{
+				view.move(-(r_value - r_max), 0);
+				r_value = r_max;
+			}
 		}
 	}
 	else
 	{
 		if (r_value > r_max)
 		{
-			view.move(-2.0f, 0);
-			r_value--;
+			r_value -= time;
+			view.move(-time, 0);
+			if (r_value < r_max)
+			{
+				view.move(-(r_value - r_max), 0);
+				r_value = r_max;
+			}
 		}
 	}
 
@@ -101,7 +122,7 @@ void Level::draw(sf::RenderWindow* window, sf::View* view)
 		window->draw((getObject(i))->getShape());
 	*/
 
-	MoveView(*view);
+	MoveView(*view, *window);
 }
 
 void Level::setHazardState(int hazardIndex, bool hazardState)
@@ -148,4 +169,6 @@ void Level::Start(GameObject* player, sf::Vector2u* size)
 	viewPortX = (map_xLocation * size->x);
 
 	player->setPosition(sf::Vector2f(start->position.x, start->position.y));
+	music.setLoop(true);
+	music.play();
 }

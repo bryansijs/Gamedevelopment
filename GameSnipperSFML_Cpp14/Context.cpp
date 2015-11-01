@@ -14,7 +14,9 @@ Context::Context(int screenHeight, int screenWidth)
 
 	player = new Player(moveContainer, drawContainer);
 	playerActions.SetPlayer(player);
-	playerActions.SetContainers(drawContainer, moveContainer);
+
+	//playerActions.SetContainers(drawContainer, moveContainer, &lev->tiles);
+
 
 	keyMappingImporter.Import("./Resources/key-mapping.json");
 	KeyMapping::ReloadMapping(keyMappingImporter.GetMapping());

@@ -29,6 +29,8 @@ void GameLoop::run()
 {
 	Level* lev = l->getLevel();
 	l->Clear();
+
+	context->playerActions.SetContainers(context->drawContainer, context->moveContainer, &lev->tiles);
 	lev->Start(context->player, &context->window.getSize());
 
 	sf::FloatRect rect(lev->getViewPortX(), lev->getViewPortY(), context->window.getSize().x, context->window.getSize().y);
