@@ -71,12 +71,18 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>./include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryWPath>./library;$(WindowsSDK_MetadataPath);</LibraryWPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>./include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>./library;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>./include;$(IncludePath)</IncludePath>
+    <LibraryPath>./library;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -88,15 +94,23 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Bryan\Source\Repos\Gamedevelopment\GameSnipperSFML_Cpp14\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalUsingDirectories>C:\Users\Bryan\Source\Repos\Gamedevelopment\GameSnipperSFML_Cpp14\include;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
+      <AdditionalIncludeDirectories>./include;%(AdditionalUsingDirectories)</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>./include</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Bryan\Source\Repos\Gamedevelopment\GameSnipperSFML_Cpp14\library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>box2d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-audio-d.lib;sfml-system-d.lib;sfml-window-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>./library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>awesomium.lib;Box2D.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-audio-d.lib;sfml-system-d.lib;sfml-window-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AllowIsolation>true</AllowIsolation>
+      <IgnoreEmbeddedIDL>false</IgnoreEmbeddedIDL>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(ProjectDir)DLL $(TargetDir) /E /Y /D
+
+cmd /x /c mkdir "$(TargetDir)Resources\"
+xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -109,6 +123,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>box2d.lib;sfml-audio-d.lib;sfml-graphics-d.lib;sfml-main-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-window-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -129,7 +144,14 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>C:\Users\Bryan\Source\Repos\Gamedevelopment\GameSnipperSFML_Cpp14\library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D-r.lib;sfml-graphics.lib;sfml-main.lib;sfml-audio.lib;sfml-system.lib;sfml-window.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(ProjectDir)DLL $(TargetDir) /E /Y /D
+
+cmd /x /c mkdir "$(TargetDir)Resources\"
+xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -152,27 +174,129 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\ProjectEcho\GameSnippetSFML\GameSnippet\Object_Manager.h" />
+    <ClInclude Include="application.h" />
+    <ClInclude Include="BaseState.h" />
+    <ClInclude Include="Context.h" />
+    <ClInclude Include="Door.h" />
+    <ClInclude Include="DrawBehaviour.h" />
+    <ClInclude Include="DrawContainer.h" />
+    <ClInclude Include="EndTile.h" />
+    <ClInclude Include="GameLoop.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="game_state.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="KeyMapping.h" />
+    <ClInclude Include="KeyMappingImporter.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelImporter.h" />
+    <ClInclude Include="MenuState.h" />
+    <ClInclude Include="method_dispatcher.h" />
+    <ClInclude Include="MoveAction.h" />
+    <ClInclude Include="MoveBehaviour.h" />
+    <ClInclude Include="MoveBehaviourFactory.h" />
+    <ClInclude Include="MoveContainer.h" />
+    <ClInclude Include="NormalDrawBehaviour.h" />
+    <ClInclude Include="NormalMoveBehaviour.h" />
+    <ClInclude Include="NormalState.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerActions.h" />
+    <ClInclude Include="PlayerDrawBehaviour.h" />
+    <ClInclude Include="PlayerInput.h" />
+    <ClInclude Include="PlayerMovement.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="resource1.h" />
+    <ClInclude Include="resource2.h" />
+    <ClInclude Include="StateManager.h" />
+    <ClInclude Include="ShootAction.h" />
+    <ClInclude Include="ShotMoveBehaviour.h" />
+    <ClInclude Include="StartTile.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Game_Switch.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="test_state.h" />
+    <ClInclude Include="TestDemo.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileSet.h" />
+    <ClInclude Include="Time.h" />
+    <ClInclude Include="Unit.h" />
+    <ClInclude Include="UnitState.h" />
+    <ClInclude Include="UnitTest.h" />
+    <ClInclude Include="UnitTestMain.h" />
+    <ClInclude Include="UpdateLogic.h" />
+    <ClInclude Include="UpdateUI.h" />
+    <ClInclude Include="WarpTile.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Context.cpp" />
+    <ClCompile Include="Door.cpp" />
+    <ClCompile Include="DrawBehaviour.cpp" />
+    <ClCompile Include="DrawContainer.cpp" />
+    <ClCompile Include="EndTile.cpp" />
+    <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="game_state.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="jsoncpp.cpp" />
+    <ClCompile Include="KeyMapping.cpp" />
+    <ClCompile Include="KeyMappingImporter.cpp" />
+    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="LevelImporter.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Object_Manager.cpp" />
+    <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="MoveAction.cpp" />
+    <ClCompile Include="MoveBehaviour.cpp" />
+    <ClCompile Include="MoveBehaviourFactory.cpp" />
+    <ClCompile Include="MoveContainer.cpp" />
+    <ClCompile Include="NormalDrawBehaviour.cpp" />
+    <ClCompile Include="NormalMoveBehaviour.cpp" />
+    <ClCompile Include="PlayerActions.cpp" />
+    <ClCompile Include="PlayerDrawBehaviour.cpp" />
+    <ClCompile Include="PlayerInput.cpp" />
+    <ClCompile Include="PlayerMovement.cpp" />
+    <ClCompile Include="SetupState.cpp" />
+    <ClCompile Include="StateManager.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ShootAction.cpp" />
+    <ClCompile Include="ShotMoveBehaviour.cpp" />
+    <ClCompile Include="StartTile.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="test_state.cpp" />
+    <ClCompile Include="Game_Switch.cpp" />
+    <ClCompile Include="TestDemo.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileSet.cpp" />
+    <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="UnitState.cpp" />
+    <ClCompile Include="UnitTest.cpp" />
+    <ClCompile Include="UnitTestMain.cpp" />
+    <ClCompile Include="UpdateLogic.cpp" />
+    <ClCompile Include="UpdateUI.cpp" />
+    <ClCompile Include="WarpTile.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menuHTML\about.html" />
+    <None Include="Resources\menuHTML\instruction.html" />
+    <None Include="Resources\menuHtml\menu.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\menuHtml\images\bg.png" />
+    <Image Include="Resources\menuHtml\images\border.png" />
+    <Image Include="Resources\menuHtml\images\cat.png" />
+    <Image Include="Resources\menuHtml\images\menuBorder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Resources\menuHtml\font\moonhouse.ttf" />
+    <None Include="Resources\levels\Level_New.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GameSnipperSFML_Cpp14.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>
