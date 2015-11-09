@@ -23,7 +23,7 @@ class Unit;
 class Context
 {
 public:
-	Context(int screenHeight, int screenWidth);
+	Context();
 	~Context();
 
 	sf::RenderWindow window;
@@ -49,6 +49,9 @@ public:
 	Level* lev;
 
 private:
+	int screenWidth = 960;
+	int screenHeight = 640;
+
 	sf::Vector2i* screenDimensions;
 	sf::Clock clock;
 };

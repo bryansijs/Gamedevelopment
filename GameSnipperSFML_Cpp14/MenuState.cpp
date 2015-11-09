@@ -11,12 +11,26 @@
 #include <SFML/Graphics/Sprite.hpp>
 
 #include <iostream>
+
+#include "Context.h"
+#include "MenuContext.h"
+
 #include "Input.h"
 #include "GameState.h"
 #include "StateManager.h"
 
-
 using namespace Awesomium;
+
+void MenuState::Create(Context* context)
+{
+	menuContext = new MenuContext(context);
+}
+
+void MenuState::Terminate()
+{
+	delete menuContext;
+	delete this;
+}
 
 void callDirectJSFunction(WebView* webView, WebCore* web_core, int currentLevel)
 {
@@ -35,100 +49,94 @@ void callDirectJSFunction(WebView* webView, WebCore* web_core, int currentLevel)
 	web_core->Update();
 }
 
-void MenuState::Terminate()
-{
-	delete this;
-}
-
 void MenuState::ShowIntruction()
 {
-	inMenu = false;
-	pathToFile = "file:///Resources/menuHTML/instruction.html";
+	menuContext->inMenu = false;
+	menuContext->pathToFile = "file:///Resources/menuHTML/instruction.html";
 	ReloadPage();
 }
 
 void MenuState::RunGame()
 {
-	music->stop();
-	delete(music);
-	BaseState* gameState = new GameState(this->context, this->stateManager);
+	menuContext->music->stop();
+	BaseState* gameState = new GameState(menuContext->context, stateManager);
 	stateManager->AddState(gameState);
 	stateManager->StartNextState();
 }
 
 void MenuState::ShowAbout()
 {
-	inMenu = false;
-	pathToFile = "file:///Resources/menuHTML/about.html";
+	menuContext->inMenu = false;
+	menuContext->pathToFile = "file:///Resources/menuHTML/about.html";
 	ReloadPage();
 }
 
 void MenuState::BackToMenu()
 {
-	inMenu = true;
-	pathToFile = "file:///Resources/menuHTML/menu.html";
+	menuContext->inMenu = true;
+	menuContext->pathToFile = "file:///Resources/menuHTML/menu.html";
 	ReloadPage();
-	currentLevel = 1;
+	menuContext->currentLevel = 1;
 }
 
 void MenuState::ReloadPage()
 {
-	WebURL url(WSLit(pathToFile));
-	webView->LoadURL(url);
-	webView->SetTransparent(true);
+	WebURL url(WSLit(menuContext->pathToFile));
+	menuContext->webView->LoadURL(url);
+	menuContext->webView->SetTransparent(true);
 
-	while (webView->IsLoading())
-		web_core->Update();
+	while (menuContext->webView->IsLoading())
+		menuContext->web_core->Update();
 
 	Sleep(300);
-	web_core->Update();
+	menuContext->web_core->Update();
 }
 
 void MenuState::Run()
 {
-	inMenu = true;
+	menuContext->inMenu = true;
 	running = true;
 	std::map <int, void(MenuState::*)()> my_map;
 	my_map[1] = &MenuState::RunGame;
 	my_map[2] = &MenuState::ShowIntruction;
 	my_map[3] = &MenuState::ShowAbout;
 
-	currentLevel = 1;
+	menuContext->currentLevel = 1;
 	sf::Event event;
 
 	// Awesomium init
 	MethodDispatcher dispatcher;
-	web_core = WebCore::Initialize(WebConfig());
-	webView = web_core->CreateWebView(960, 640);
+	menuContext->web_core = WebCore::Initialize(WebConfig());
+	menuContext->webView = menuContext->web_core->CreateWebView(960, 640);
 
 	// Load Page
-	pathToFile = "file:///Resources/menuHTML/menu.html";
+	menuContext->pathToFile = "file:///Resources/menuHTML/menu.html";
 	ReloadPage();
 
 	//Create Bitmap
-	BitmapSurface* surface = static_cast<Awesomium::BitmapSurface*>(webView->surface());
+	BitmapSurface* surface = static_cast<Awesomium::BitmapSurface*>(menuContext->webView->surface());
 	sf::Texture uiTexture;
 	uiTexture.create(960, 640);
 	sf::Uint8* pixels = new sf::Uint8[960 * 640 * 4];
 
 	sf::SoundBuffer sfx;
 	sfx.loadFromFile("./Resources/Music/title.ogg");
-	this->music = new sf::Sound(sfx);
-	music->setVolume(50.0f);
-	music->setLoop(true);
-	music->play();
+	menuContext->music = new sf::Sound(sfx);
+	menuContext->music->setVolume(50.0f);
+	menuContext->music->setLoop(true);
+	menuContext->music->play();
 
 
-	while (running && context->window.isOpen()) {
+	while (running && menuContext->context->window.isOpen()) {
 
-		context->window.clear();
+		menuContext->context->window.clear();
 
-		while (context->window.pollEvent(event)) {
+		while (menuContext->context->window.pollEvent(event)) {
 			
 			
 			if (event.type == sf::Event::Closed)
 			{
-				context->window.close();
+				menuContext->context->window.close();
 				//running = false;
 			}
 			
@@ -139,22 +147,22 @@ void MenuState::Run()
 				Input::EventOccured(event);
 
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-					if (currentLevel > 1)
+					if (menuContext->currentLevel > 1)
 					{
-						currentLevel = currentLevel - 1;
+						menuContext->currentLevel = menuContext->currentLevel - 1;
 				
-						callDirectJSFunction(webView, web_core, currentLevel);
+						callDirectJSFunction(menuContext->webView, menuContext->web_core, menuContext->currentLevel);
 					}
 				}
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-					if (currentLevel < 3)
+					if (menuContext->currentLevel < 3)
 					{
-						currentLevel = currentLevel + 1;
-						callDirectJSFunction(webView, web_core, currentLevel);
+						menuContext->currentLevel = menuContext->currentLevel + 1;
+						callDirectJSFunction(menuContext->webView, menuContext->web_core, menuContext->currentLevel);
 					}
 				}
 				if (event.key.code == sf::Keyboard::Escape) {
-					if(!inMenu)
+					if(!menuContext->inMenu)
 					{
 						BackToMenu();
 					}
@@ -163,7 +171,7 @@ void MenuState::Run()
 					std::map <int, void(MenuState::*)()>::iterator it;
 					for (it = my_map.begin(); it != my_map.end(); ++it)
 					{
-						if (it->first == currentLevel)
+						if (it->first == menuContext->currentLevel)
 						{
 							auto function = it->second;
 							(this->*function)();
@@ -177,7 +185,7 @@ void MenuState::Run()
 		}
 		
 		//Create image from Bitmap
-		surface = static_cast<Awesomium::BitmapSurface*>(webView->surface());
+		surface = static_cast<Awesomium::BitmapSurface*>(menuContext->webView->surface());
 		const unsigned char* tempBuffer = surface->buffer();
 		for (register int i = 0; i < 960 * 640 * 4; i += 4) {
 			pixels[i] = tempBuffer[i + 2]; // B
@@ -189,16 +197,16 @@ void MenuState::Run()
 		sf::Sprite ui(uiTexture);
 		uiTexture.update(pixels);
 
-		context->window.draw(ui);
-		context->window.display();
+		menuContext->context->window.draw(ui);
+		menuContext->context->window.display();
 	}
 
 }
 
 MenuState::MenuState(Context* c, StateManager* manager)
 {
-	this->context = c;
-	this->stateManager = manager;
+	menuContext->context = c;
+	stateManager = manager;
 }
 
 

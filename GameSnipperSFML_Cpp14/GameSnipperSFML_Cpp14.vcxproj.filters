@@ -163,6 +163,12 @@
     <Filter Include="Resource Files\Html">
       <UniqueIdentifier>{13920de8-27fc-4a7c-8201-5eb9a31e914a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Context">
+      <UniqueIdentifier>{5df19aa1-fb22-4600-8526-bb79d08738a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Context">
+      <UniqueIdentifier>{605dcda8-042e-4e5e-8326-eca701f86586}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -191,9 +197,6 @@
     </ClInclude>
     <ClInclude Include="UnitState.h">
       <Filter>Header Files\Model\UnitStates</Filter>
-    </ClInclude>
-    <ClInclude Include="Context.h">
-      <Filter>Header Files\Controller</Filter>
     </ClInclude>
     <ClInclude Include="GameLoop.h">
       <Filter>Header Files\Controller</Filter>
@@ -300,9 +303,6 @@
     <ClInclude Include="application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BaseState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="game_state.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -320,6 +320,18 @@
     </ClInclude>
     <ClInclude Include="StateManager.h">
       <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuContext.h">
+      <Filter>Header Files\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="Context.h">
+      <Filter>Header Files\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContext.h">
+      <Filter>Header Files\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseState.h">
+      <Filter>Header Files\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -348,9 +360,6 @@
       <Filter>Source Files\Controller</Filter>
     </ClCompile>
     <ClCompile Include="UpdateLogic.cpp">
-      <Filter>Source Files\Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="Context.cpp">
       <Filter>Source Files\Controller</Filter>
     </ClCompile>
     <ClCompile Include="GameLoop.cpp">
@@ -460,6 +469,15 @@
     </ClCompile>
     <ClCompile Include="GameState.cpp">
       <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Context.cpp">
+      <Filter>Source Files\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuContext.cpp">
+      <Filter>Source Files\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContext.cpp">
+      <Filter>Source Files\Context</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

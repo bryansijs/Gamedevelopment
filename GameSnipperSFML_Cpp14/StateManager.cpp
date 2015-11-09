@@ -36,6 +36,7 @@ void StateManager::PopState()
 
 void StateManager::RunState()
 {
+	states.front()->Create();
 	states.front()->Run();
 }
 

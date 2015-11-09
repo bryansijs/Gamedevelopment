@@ -3,7 +3,7 @@
 
 #include "KeyMapping.h"
 
-Context::Context(int screenHeight, int screenWidth)
+Context::Context()
 {
 	screenDimensions = { new sf::Vector2i(screenHeight, screenWidth)};
 	window.create(sf::VideoMode(screenDimensions->x, screenDimensions->y), "ECHO GAME!!!!");
