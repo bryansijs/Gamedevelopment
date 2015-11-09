@@ -25,6 +25,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		UnitTestMain utm;
 		Context* context{ new Context(960,640) };
+		context->window.setMouseCursorVisible(false);
 
 		MenuState* state = new MenuState(context, stateManager);
 		stateManager->AddState(state);
