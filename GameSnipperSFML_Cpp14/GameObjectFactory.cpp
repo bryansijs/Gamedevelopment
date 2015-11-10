@@ -38,7 +38,7 @@ string_code hashit(std::string const& inString) {
 
 
 GameObject* GameObjectFactory::Create(Json::Value root) {
-GameObject* object = nullptr;
+	GameObject* object = nullptr;
 	//object = std::unique_ptr<EndTile>();
 	std::string imgurl = root["properties"]["image"].asString();
 	int x, y, widht, height;
@@ -46,36 +46,28 @@ GameObject* object = nullptr;
 	switch (hashit(root["type"].asString()))
 	{
 
-		case s_Enemy:{
-		//	GameObject* temp = new GameObject(drawContainer,imgurl);
-			//object = std::unique_ptr<GameObject>(this->drawContainer, imgurl);
-		//	object = std::unique_ptr<GameObject>(temp);
-			//	GameObject(DrawContainer *drawContainer, std::string textureUrl);
-			
-			x = root["x"].asInt();
-			y = root["y"].asInt();
+	case s_Enemy: {
+		object = new GameObject(drawContainer, imgurl);
+		break;
+	}
 
-		/*	widht = root["width"].asInt();
-			height = root["height"].asInt();
-			object->setPosition(sf::Vector2f(x, y));
-			object->setSize(widht, height);*/
-			break;
-		}
+	case s_StartTile:
+	{
+		object = new StartTile();
+		break;
+	}
 
-					 case s_StartTile:
-					 {
-					object = new StartTile();
-				//		 object = std::unique_ptr<GameObject>(temp);
-					
-					 		x = root["x"].asInt();
-					 		y = root["y"].asInt();
-					 		widht = root["width"].asInt();
-					 		height = root["height"].asInt();
-							object->setPosition(sf::Vector2f(x, y));
 
-					 	break;
-					 }
+	}
 
+	if (object != nullptr) {
+
+		x = root["x"].asInt();
+		y = root["y"].asInt();
+		widht = root["width"].asInt();
+		height = root["height"].asInt();
+		object->setPosition(sf::Vector2f(x, y));
+		object->setSize(widht, height);
 
 	}
 
