@@ -17,7 +17,7 @@
 #include "Tile.h"
 #include "TileSet.h"
 #include "Level.h"
-
+#include "GameObjectFactory.h"
 class DrawContainer;
 
 class LevelImporter
@@ -44,6 +44,7 @@ public:
 	Level* LevelImporter::getLevel();
 
 private:
+	GameObjectFactory* objectFactory;
 	void PrepareGameObjects();
 	void PrepareTileSets();
 	void PrepareTiles();

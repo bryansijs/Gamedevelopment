@@ -40,26 +40,31 @@ void LevelImporter::PrepareTileSets()
 	}
 }
 
+/*
 enum string_code {
-	s_Enemy,
-	s_Switch,
-	s_Door,
-	s_StartTile,
-	s_EndTile,
-	s_WarpTile
+s_Enemy,
+s_Switch,
+s_Door,
+s_StartTile,
+s_EndTile,
+s_WarpTile
 };
 
 string_code hashit(std::string const& inString) {
-	if (inString == "Enemy") return s_Enemy;
-	if (inString == "Switch") return s_Switch;
-	if (inString == "Door") return s_Door;
-	if (inString == "StartTile") return s_StartTile;
-	if (inString == "EndTile") return s_EndTile;
-	if (inString == "WarpTile") return s_WarpTile;
+if (inString == "Enemy") return s_Enemy;
+if (inString == "Switch") return s_Switch;
+if (inString == "Door") return s_Door;
+if (inString == "StartTile") return s_StartTile;
+if (inString == "EndTile") return s_EndTile;
+if (inString == "WarpTile") return s_WarpTile;
 }
+*/
 
 void LevelImporter::PrepareGameObjects()
 {
+	objectFactory = new GameObjectFactory(drawContainer);
+
+
 	for (Json::Value::iterator it = jsonRoot["layers"].begin(); it != jsonRoot["layers"].end(); ++it)
 	{
 		Json::Value value = (*it);
@@ -70,9 +75,12 @@ void LevelImporter::PrepareGameObjects()
 			for (Json::Value::iterator object = value["objects"].begin(); object != value["objects"].end(); ++object)
 			{
 				Json::Value val = (*object);
-				int x, y, widht, height;
+				game_objects.push_back(objectFactory->Create(val));
 
-				switch (hashit(val["type"].asString()))
+
+			//	int x, y, widht, height;
+
+			/*	switch (hashit(val["type"].asString()))
 				{
 
 				case s_Enemy:
@@ -184,7 +192,7 @@ void LevelImporter::PrepareGameObjects()
 					game_objects.push_back(Object);
 					break;
 				}
-				}
+				}*/
 			}
 
 		}
