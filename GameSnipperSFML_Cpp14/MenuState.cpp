@@ -31,7 +31,7 @@ void callDirectJSFunction(WebView* webView, WebCore* web_core, int currentLevel)
 		window.ToObject().Invoke(WSLit("myfunc"), args);
 	}
 
-	Sleep(300);
+	Sleep(50);
 	web_core->Update();
 }
 
@@ -80,7 +80,7 @@ void MenuState::ReloadPage()
 	while (webView->IsLoading())
 		web_core->Update();
 
-	Sleep(300);
+	Sleep(100);
 	web_core->Update();
 }
 
@@ -88,10 +88,10 @@ void MenuState::Run()
 {
 	inMenu = true;
 	running = true;
-	std::map <int, void(MenuState::*)()> my_map;
-	my_map[1] = &MenuState::RunGame;
-	my_map[2] = &MenuState::ShowIntruction;
-	my_map[3] = &MenuState::ShowAbout;
+	std::map <int, void(MenuState::*)()> menuItems;
+	menuItems[1] = &MenuState::RunGame;
+	menuItems[2] = &MenuState::ShowIntruction;
+	menuItems[3] = &MenuState::ShowAbout;
 
 	currentLevel = 1;
 	sf::Event event;
@@ -119,49 +119,47 @@ void MenuState::Run()
 	music->play();
 
 
-	while (running && context->window.isOpen()) {
-
+	while (running && context->window.isOpen())
+	{
 		context->window.clear();
 
-		while (context->window.pollEvent(event)) {
-			
-			
+		while (context->window.pollEvent(event))
+		{
 			if (event.type == sf::Event::Closed)
 			{
 				context->window.close();
-				//running = false;
 			}
-			
-			switch(event.type)
-			{
-			case sf::Event::KeyPressed: {
 
+			if (sf::Event::KeyPressed)
+			{
 				Input::EventOccured(event);
 
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+				if (Input::GetKeyDown("Up")) {
 					if (currentLevel > 1)
 					{
 						currentLevel = currentLevel - 1;
-				
 						callDirectJSFunction(webView, web_core, currentLevel);
 					}
 				}
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-					if (currentLevel < 3)
+
+				if (Input::GetKeyDown("Down")) {
+					if (currentLevel < menuItems.size())
 					{
 						currentLevel = currentLevel + 1;
 						callDirectJSFunction(webView, web_core, currentLevel);
 					}
 				}
-				if (event.key.code == sf::Keyboard::Escape) {
-					if(!inMenu)
+
+				if (Input::GetKeyDown("Esc")) {
+					if (!inMenu)
 					{
 						BackToMenu();
 					}
 				}
-				if (event.key.code == sf::Keyboard::Return) {
+
+				if (Input::GetKeyDown("Return")) {
 					std::map <int, void(MenuState::*)()>::iterator it;
-					for (it = my_map.begin(); it != my_map.end(); ++it)
+					for (it = menuItems.begin(); it != menuItems.end(); ++it)
 					{
 						if (it->first == currentLevel)
 						{
@@ -170,10 +168,7 @@ void MenuState::Run()
 						}
 					}
 				}
-			}; break;
-			default: break;
 			}
-			
 		}
 		
 		//Create image from Bitmap
