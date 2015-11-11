@@ -2,11 +2,9 @@
 class BaseState
 {
 public:
-	bool running = false;
-	void SetRunning(bool boolean) { running = boolean; };
+	bool terminate = false;
 
-	virtual void Create() {};
-	virtual void Run() {};
+	virtual void Update() {};
 	virtual void Terminate() {};
 };
 

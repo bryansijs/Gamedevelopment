@@ -198,9 +198,6 @@
     <ClInclude Include="UnitState.h">
       <Filter>Header Files\Model\UnitStates</Filter>
     </ClInclude>
-    <ClInclude Include="GameLoop.h">
-      <Filter>Header Files\Controller</Filter>
-    </ClInclude>
     <ClInclude Include="UpdateLogic.h">
       <Filter>Header Files\Controller</Filter>
     </ClInclude>
@@ -360,9 +357,6 @@
       <Filter>Source Files\Controller</Filter>
     </ClCompile>
     <ClCompile Include="UpdateLogic.cpp">
-      <Filter>Source Files\Controller</Filter>
-    </ClCompile>
-    <ClCompile Include="GameLoop.cpp">
       <Filter>Source Files\Controller</Filter>
     </ClCompile>
     <ClCompile Include="Door.cpp">

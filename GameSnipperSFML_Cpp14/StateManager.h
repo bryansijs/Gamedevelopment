@@ -5,13 +5,14 @@ class BaseState;
 
 class StateManager
 {
-	//std::vector<BaseState*> states;
+private:
 	std::queue<BaseState*> states;
+
+	bool running = false;
 public:
 	void AddState(BaseState* state);
 	void RemoveState(BaseState state);
 	void StartNextState();
-	//void TerminateState(BaseState state);
 	void PopState();
 	void RunState();
 	

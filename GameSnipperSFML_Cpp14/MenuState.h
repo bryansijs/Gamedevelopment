@@ -6,12 +6,6 @@ class StateManager;
 class Context;
 class MenuContext;
 
-namespace Awesomium{
-	class WebView;
-	class JSArray;
-}
-
-class Context;
 class MenuState : public BaseState
 {
 private:
@@ -21,13 +15,20 @@ private:
 	void ShowIntruction();
 
 	StateManager* stateManager;
+
+	Context* context;
 	MenuContext* menuContext;
 public:
-	void Create(Context* context);
-	void Run();
+	void Update();
 	void Terminate();
 
 	void BackToMenu();
+
+	std::map <int, void(MenuState::*)()> menuItems{
+		{ 1, &MenuState::RunGame },
+		{ 2, &MenuState::ShowIntruction },
+		{ 3, &MenuState::ShowAbout }
+	};
 
 	MenuState(Context* context, StateManager* stateManager);
 	~MenuState();

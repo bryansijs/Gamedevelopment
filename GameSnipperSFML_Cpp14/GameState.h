@@ -1,16 +1,20 @@
 #pragma once
 #include "BaseState.h"
-#include "Context.h"
 
 class StateManager;
+class Context;
+class GameContext;
 
 class GameState: public BaseState
 {
-	Context* context;
+private:
 	StateManager* stateManager;
+
+	GameContext* gameContext;
 public:
-	void Run();
+	void Update();
 	void Terminate();
+
 	GameState(Context* context, StateManager* stateManager);
 	~GameState();
 };

@@ -1,12 +1,15 @@
 #include "stdafx.h"
-#include "Context.h"
-#include <iostream>
+
 #include "UnitTestMain.h"
 
+#include <iostream>
 #include <cstdio>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <Box2d/Box2D.h>
+
+#include "Context.h"
+#include "MenuContext.h"
 
 #include "LevelImporter.h"
 #include "MenuState.h"
@@ -25,7 +28,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		UnitTestMain utm;
 
-		Context* context = new Context();
+		Context* context = new Context(960, 640);
 		MenuState* state = new MenuState(context, stateManager);
 
 		stateManager->AddState(state);

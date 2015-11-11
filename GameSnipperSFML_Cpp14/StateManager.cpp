@@ -19,9 +19,10 @@ void StateManager::StartNextState()
 	{
 		states.front()->Terminate();
 		states.pop();
-		if (!states.empty())
+
+		if (states.empty())
 		{
-			RunState();
+			running = false;
 		}
 	}
 }
@@ -30,14 +31,24 @@ void StateManager::PopState()
 {
 	if(!states.empty())
 	{
+		states.front()->Terminate();
 		states.pop();
 	}
 }
 
 void StateManager::RunState()
 {
-	states.front()->Create();
-	states.front()->Run();
+	running = true;
+
+	while(running)
+	{
+		if (states.empty())
+		{
+			break;
+		}
+
+		states.front()->Update();
+	}
 }
 
 StateManager::StateManager()
