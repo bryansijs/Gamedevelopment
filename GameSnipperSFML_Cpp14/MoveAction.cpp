@@ -1,15 +1,9 @@
 #include "stdafx.h"
 #include "MoveAction.h"
-
 #include "Player.h"
 #include "Time.h"
 #include "Tile.h"
-
 #include <iostream>
-
-MoveAction::MoveAction()
-{
-}
 
 MoveAction::~MoveAction()
 {
@@ -17,7 +11,7 @@ MoveAction::~MoveAction()
 
 void MoveAction::Move(std::string direction, Player *player, std::vector<Tile>* tiles)
 {
-	float temp = 0;
+	float temp;
 	if (direction == "move-up")
 	{
 		player->set_Image_y(3);
@@ -55,4 +49,27 @@ void MoveAction::Move(std::string direction, Player *player, std::vector<Tile>* 
 			player->position.x += velocity * Time::deltaTime;
 		}
 	}
+	AnimateMovement(player);
+}
+
+void MoveAction::AnimateMovement(Player *player)
+{
+	if (animationDelay > 0)
+	{
+		animationDelay = animationDelay - Time::deltaTime;
+		return;
+	}
+
+	if (animateState == 3)
+		animateState = 0;
+
+	player->set_Image_x(animateState);
+	animateState++;
+	animationDelay = 5;
+}
+
+void MoveAction::AnimateMovement(Player* player, int state)
+{
+	animateState = state;
+	AnimateMovement(player);
 }

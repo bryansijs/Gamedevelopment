@@ -9,12 +9,15 @@ class Tile;
 class MoveAction
 {
 public:
-	MoveAction();
 	~MoveAction();
 
 	void Move(std::string direction, Player *player, std::vector<Tile>* tiles);
+	void AnimateMovement(Player *player, int state);
 private:
-	Player *player;
 
 	float velocity = 1.0f;
+
+	int animateState = 1;
+	float animationDelay;
+	void AnimateMovement(Player *player);
 };

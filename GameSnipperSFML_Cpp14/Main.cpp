@@ -1,20 +1,9 @@
 #include "stdafx.h"
-
 #include "UnitTestMain.h"
-
 #include <iostream>
-#include <cstdio>
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include <Box2d/Box2D.h>
-
 #include "Context.h"
-#include "MenuContext.h"
-
-#include "LevelImporter.h"
 #include "MenuState.h"
 #include "StateManager.h"
-#include "GameState.h"
 
 bool quitGame = false;
 
@@ -26,7 +15,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	{
 		StateManager* stateManager = new StateManager();
 
-		UnitTestMain utm;
+		new UnitTestMain;
 
 		Context* context = new Context(960, 640);
 		MenuState* state = new MenuState(context, stateManager);
