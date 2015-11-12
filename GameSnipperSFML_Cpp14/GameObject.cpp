@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "GameObject.h"
-
 #include "DrawContainer.h"
 #include "NormalDrawBehaviour.h"
 #include "MoveBehaviour.h"
@@ -26,7 +25,6 @@ void GameObject::Update()
 {
 	
 }
-
 
 void GameObject::setDrawBehaviour(DrawBehaviour* newDrawBehaviour)
 {

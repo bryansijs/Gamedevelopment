@@ -49,8 +49,10 @@ private:
 	void PrepareTileSets();
 	void PrepareTiles();
 	void PrepareMusic(std::string musicName);
+	void addTile(int dataIndex, Json::Value& value, int i, int j);
 	int tileSize;
 	int levelHeight;
 	int levelWidht;
 	sf::IntRect subRect;
+	std::map<std::string, std::string> JSONtoMap(Json::Value& properties);
 };

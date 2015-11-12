@@ -163,6 +163,9 @@
     <Filter Include="Resource Files\Html">
       <UniqueIdentifier>{13920de8-27fc-4a7c-8201-5eb9a31e914a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Model\Units\Enemy">
+      <UniqueIdentifier>{0c5365ff-7f58-4dd6-b3db-98e39932bed4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -324,6 +327,9 @@
     <ClInclude Include="GameObjectFactory.h">
       <Filter>Header Files\Factories</Filter>
     </ClInclude>
+    <ClInclude Include="GameTileFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -466,6 +472,9 @@
     </ClCompile>
     <ClCompile Include="GameObjectFactory.cpp">
       <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTileFactory.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

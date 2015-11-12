@@ -5,7 +5,6 @@
 #include <SFML\Audio.hpp>
 #include "Tile.h"
 #include "GameObject.h"
-#include "GameObject.h"
 #include "TileSet.h"
 #include "StartTile.h"
 #include "Time.h"

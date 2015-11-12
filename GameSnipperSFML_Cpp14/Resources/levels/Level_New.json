@@ -107,10 +107,10 @@
                  "name":"startTile",
                  "properties":
                     {
-
+					"sType":"StartTile"
                     },
                  "rotation":0,
-                 "type":"StartTile",
+                 "type":"GameTile",
                  "visible":true,
                  "width":28,
                  "x":65,
@@ -272,10 +272,10 @@
                  "name":"EndTile",
                  "properties":
                     {
-
+					"sType":"EndTile"
                     },
                  "rotation":0,
-                 "type":"EndTile",
+                 "type":"GameTile",
                  "visible":true,
                  "width":62.6666666666667,
                  "x":97.3333333333333,

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GameObjectFactory.h"
+#include "GameObject.h"
 
-#include "StartTile.h"
 GameObjectFactory::GameObjectFactory()
 {
 }
@@ -14,156 +14,42 @@ GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer)
 GameObjectFactory::~GameObjectFactory()
 {
 }
+//TODO REF
+GameObject* GameObjectFactory::Create(std::map<std::string, std::string> properties) {
 
-enum string_code {
-	s_Enemy,
-	s_Switch,
-	s_Door,
-	s_StartTile,
-	s_EndTile,
-	s_WarpTile
+	std::map<std::string, GameObject*(GameObjectFactory::*)(std::map<std::string, std::string>&)>::iterator  it;
+	for (it = possibleObjects.begin(); it != possibleObjects.end(); it++) {
+		if (it->first == properties["type"]) {
+			auto function = it->second;
+			return (this->*function)(properties);
+		}
+	}
 
-};
-
-string_code hashit(std::string const& inString) {
-	if (inString == "Enemy") return s_Enemy;
-	if (inString == "Switch") return s_Switch;
-	if (inString == "Door") return s_Door;
-	if (inString == "StartTile") return s_StartTile;
-	if (inString == "EndTile") return s_EndTile;
-	if (inString == "WarpTile") return s_WarpTile;
+	return nullptr;
 }
 
-
-
-
-GameObject* GameObjectFactory::Create(Json::Value root) {
-	GameObject* object = nullptr;
-	//object = std::unique_ptr<EndTile>();
-	std::string imgurl = root["properties"]["image"].asString();
+//TODO: EnemyFactory
+GameObject* GameObjectFactory::CreateEnemy(std::map<std::string, std::string>& properties)
+{
+	std::string imgurl = properties["image"];
+	GameObject* obj = new GameObject(drawContainer, imgurl);
 	int x, y, widht, height;
+	x = std::stoi( properties["x"]);
+	y = std::stoi(properties["y"]);
+	widht = std::stoi(properties["width"]);
+	height = std::stoi(properties["height"]);
+	obj->setPosition(sf::Vector2f(x, y));
+	obj->setSize(widht, height);
 
-	switch (hashit(root["type"].asString()))
-	{
+	return obj;
+}
 
-	case s_Enemy: {
-		object = new GameObject(drawContainer, imgurl);
-		break;
-	}
+GameObject* GameObjectFactory::CreateObject(std::map<std::string, std::string>& properties)
+{
+	return new GameObject();
+}
 
-	case s_StartTile:
-	{
-		object = new StartTile();
-		break;
-	}
-
-
-	}
-
-	if (object != nullptr) {
-
-		x = root["x"].asInt();
-		y = root["y"].asInt();
-		widht = root["width"].asInt();
-		height = root["height"].asInt();
-		object->setPosition(sf::Vector2f(x, y));
-		object->setSize(widht, height);
-
-	}
-
-	return object;
-	//case s_EndTile:
-	//{
-	//	/*	EndTile * endTile = new EndTile();
-	//		x = val["x"].asInt();
-	//		y = val["y"].asInt();
-	//		widht = val["width"].asInt();
-	//		height = val["height"].asInt();
-
-	//		endTile->setSize(widht, height);*/
-
-	//	break;
-	//}
-
-	//case s_WarpTile: {
-	//	/*	WarpTile *warpTile = new WarpTile();
-	//		x = val["x"].asInt();
-	//		y = val["y"].asInt();
-	//		widht = val["width"].asInt();
-	//		height = val["height"].asInt();
-	//		warpTile->setPosition(sf::Vector2f(x, y));
-	//		warpTile->setSize(widht, height);*/
-
-	//	break;
-	//}
-
-
-
-	//case s_StartTile:
-	//{
-	//	/*	StartTile *startTile = new StartTile();
-	//		x = val["x"].asInt();
-	//		y = val["y"].asInt();
-	//		widht = val["width"].asInt();
-	//		height = val["height"].asInt();
-	//		startTile->setPosition(sf::Vector2f(x, y));*/
-
-	//	break;
-	//}
-
-	//case s_Switch:
-	//{
-	//	/*	Game_Switch *_Switch = new Game_Switch();
-	//		x = val["x"].asInt();
-	//		y = val["y"].asInt();
-	//		widht = val["width"].asInt();
-	//		height = val["height"].asInt();
-	//		_Switch->setPosition(sf::Vector2f(x, y));
-	//		_Switch->setSize(widht, height);*/
-
-	//	break;
-	//}
-
-	//case s_Door:
-	//{
-	//	/*	Door *door = new Door();
-	//		x = val["x"].asInt();
-	//		y = val["y"].asInt();
-	//		widht = val["width"].asInt();
-	//		height = val["height"].asInt();
-	//		door->setPosition(sf::Vector2f(x, y));
-	//		door->setSize(widht, height);
-	//		*/
-
-	//}
-
-
-
-	//default:
-	//{
-	//	/*	std::string imgurl = val["properties"]["image"].asString();
-
-	//		GameObject* Object = nullptr;
-	//		if (imgurl == "")
-	//		{
-	//			Object = new GameObject();
-	//		}
-	//		else
-	//		{
-	//			Object = new GameObject(drawContainer, imgurl);
-	//		}
-
-	//		x = val["x"].asInt();
-	//		y = val["y"].asInt();
-	//		widht = val["width"].asInt();
-	//		height = val["height"].asInt();
-	//		Object->setPosition(sf::Vector2f(x, y));
-	//		Object->setSize(widht, height);
-	//		break;*/
-	//}
-
-
-
-	//}
-
+GameObject* GameObjectFactory::CreateTile(std::map<std::string, std::string>& properties)
+{
+	return  this->fac.Create(properties);
 }

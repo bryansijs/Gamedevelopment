@@ -23,6 +23,7 @@ GameLoop::GameLoop(Context* c)
 
 GameLoop::~GameLoop()
 {
+
 }
 
 void GameLoop::run()

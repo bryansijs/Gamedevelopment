@@ -4,7 +4,7 @@
 
 UnitTestMain::UnitTestMain()
 {
-	RunTests(true);
+	RunTests(false);
 }
 
 void UnitTestMain::RunTests(bool enabled)
