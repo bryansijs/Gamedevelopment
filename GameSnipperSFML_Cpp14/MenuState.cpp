@@ -5,23 +5,63 @@
 #include <Awesomium/WebCore.h>
 #include <Awesomium/BitmapSurface.h>
 #include <Awesomium/STLHelpers.h>
-#include "method_dispatcher.h"
 
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
 #include <iostream>
+
+#include "Context.h"
+#include "MenuContext.h"
+
 #include "Input.h"
 #include "GameState.h"
 #include "StateManager.h"
 
-
 using namespace Awesomium;
+
+MenuState::MenuState(Context* context, StateManager* stateManager)
+{
+	menuContext = new MenuContext(context);
+	this->stateManager = stateManager;
+
+	menuContext->inMenu = true;
+	menuContext->currentLevel = 1;
+
+	// Awesomium init
+	menuContext->web_core = WebCore::Initialize(WebConfig());
+	menuContext->webView = menuContext->web_core->CreateWebView(960, 640);
+
+	// Load Page
+	menuContext->pathToFile = "file:///Resources/menuHTML/menu.html";
+	ReloadPage();
+
+	//Create Bitmap
+	menuContext->surface = static_cast<Awesomium::BitmapSurface*>(menuContext->webView->surface());
+
+	menuContext->texture.create(960, 640);
+	menuContext->pixels = new sf::Uint8[menuContext->context->window.getSize().x * menuContext->context->window.getSize().y * 4];
+
+	menuContext->sfx.loadFromFile("./Resources/Music/title.ogg");
+	menuContext->music = new sf::Sound(menuContext->sfx);
+	menuContext->music->setVolume(50.0f);
+	menuContext->music->setLoop(true);
+	menuContext->music->play();
+}
+
+MenuState::~MenuState()
+{
+	delete menuContext;
+}
+
+void MenuState::Terminate()
+{
+	terminate = true;
+}
 
 void callDirectJSFunction(WebView* webView, WebCore* web_core, int currentLevel)
 {
-	JSValue window = webView->ExecuteJavascriptWithResult(
-		WSLit("window"), WSLit(""));
+	JSValue window = webView->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));
 
 	if (window.IsObject())
 	{
@@ -35,169 +75,125 @@ void callDirectJSFunction(WebView* webView, WebCore* web_core, int currentLevel)
 	web_core->Update();
 }
 
-void MenuState::Terminate()
-{
-	delete this;
-}
-
 void MenuState::ShowIntruction()
 {
-	inMenu = false;
-	pathToFile = "file:///Resources/menuHTML/instruction.html";
+	menuContext->inMenu = false;
+	menuContext->pathToFile = "file:///Resources/menuHTML/instruction.html";
 	ReloadPage();
 }
 
 void MenuState::RunGame()
 {
-	music->stop();
-	delete(music);
-	BaseState* gameState = new GameState(this->context, this->stateManager);
+	menuContext->music->stop();
+
+	GameState* gameState = new GameState(menuContext->context, stateManager);
 	stateManager->AddState(gameState);
 	stateManager->StartNextState();
 }
 
 void MenuState::ShowAbout()
 {
-	inMenu = false;
-	pathToFile = "file:///Resources/menuHTML/about.html";
+	menuContext->inMenu = false;
+	menuContext->pathToFile = "file:///Resources/menuHTML/about.html";
 	ReloadPage();
 }
 
 void MenuState::BackToMenu()
 {
-	inMenu = true;
-	pathToFile = "file:///Resources/menuHTML/menu.html";
+	menuContext->inMenu = true;
+	menuContext->pathToFile = "file:///Resources/menuHTML/menu.html";
 	ReloadPage();
-	currentLevel = 1;
+	menuContext->currentLevel = 1;
 }
 
 void MenuState::ReloadPage()
 {
-	WebURL url(WSLit(pathToFile));
-	webView->LoadURL(url);
-	webView->SetTransparent(true);
+	WebURL url(WSLit(menuContext->pathToFile));
+	menuContext->webView->LoadURL(url);
+	menuContext->webView->SetTransparent(true);
 
-	while (webView->IsLoading())
-		web_core->Update();
-
+	while (menuContext->webView->IsLoading())
+	{
+		menuContext->web_core->Update();
+	}
+		
 	Sleep(100);
-	web_core->Update();
+	menuContext->web_core->Update();
 }
 
-void MenuState::Run()
+void MenuState::Update()
 {
-	inMenu = true;
-	running = true;
-	std::map <int, void(MenuState::*)()> menuItems;
-	menuItems[1] = &MenuState::RunGame;
-	menuItems[2] = &MenuState::ShowIntruction;
-	menuItems[3] = &MenuState::ShowAbout;
+	menuContext->context->window.clear();
 
-	currentLevel = 1;
-	sf::Event event;
-
-	// Awesomium init
-	MethodDispatcher dispatcher;
-	web_core = WebCore::Initialize(WebConfig());
-	webView = web_core->CreateWebView(960, 640);
-
-	// Load Page
-	pathToFile = "file:///Resources/menuHTML/menu.html";
-	ReloadPage();
-
-	//Create Bitmap
-	BitmapSurface* surface = static_cast<Awesomium::BitmapSurface*>(webView->surface());
-	sf::Texture uiTexture;
-	uiTexture.create(960, 640);
-	sf::Uint8* pixels = new sf::Uint8[960 * 640 * 4];
-
-	sf::SoundBuffer sfx;
-	sfx.loadFromFile("./Resources/Music/title.ogg");
-	this->music = new sf::Sound(sfx);
-	music->setVolume(50.0f);
-	music->setLoop(true);
-	music->play();
-
-
-	while (running && context->window.isOpen())
-	{
-		context->window.clear();
-
-		while (context->window.pollEvent(event))
+	while (menuContext->context->window.pollEvent(menuContext->event)) {
+		if (menuContext->event.type == sf::Event::Closed)
 		{
-			if (event.type == sf::Event::Closed)
-			{
-				context->window.close();
+			menuContext->context->window.close();
+			stateManager->PopState();
+			return;
+		}
+
+		if (menuContext->event.type == sf::Event::KeyPressed)
+		{
+			Input::EventOccured(menuContext->event);
+
+			if (Input::GetKeyDown("Up")) {
+				if (menuContext->currentLevel > 1)
+				{
+					menuContext->currentLevel -= 1;
+					callDirectJSFunction(menuContext->webView, menuContext->web_core, menuContext->currentLevel);
+				}
 			}
 
-			if (sf::Event::KeyPressed)
-			{
-				Input::EventOccured(event);
-
-				if (Input::GetKeyDown("Up")) {
-					if (currentLevel > 1)
-					{
-						currentLevel = currentLevel - 1;
-						callDirectJSFunction(webView, web_core, currentLevel);
-					}
+			if (Input::GetKeyDown("Down")) {
+				if (menuContext->currentLevel < menuItems.size())
+				{
+					menuContext->currentLevel += 1;
+					callDirectJSFunction(menuContext->webView, menuContext->web_core, menuContext->currentLevel);
 				}
+			}
 
-				if (Input::GetKeyDown("Down")) {
-					if (currentLevel < menuItems.size())
-					{
-						currentLevel = currentLevel + 1;
-						callDirectJSFunction(webView, web_core, currentLevel);
-					}
+			if (Input::GetKeyDown("Esc")) {
+				if (!menuContext->inMenu)
+				{
+					BackToMenu();
 				}
+			}
 
-				if (Input::GetKeyDown("Esc")) {
-					if (!inMenu)
+			if (Input::GetKeyDown("Return")) {
+				std::map <int, void(MenuState::*)()>::iterator it;
+				for (it = menuItems.begin(); it != menuItems.end(); ++it)
+				{
+					if (it->first == menuContext->currentLevel)
 					{
-						BackToMenu();
-					}
-				}
-
-				if (Input::GetKeyDown("Return")) {
-					std::map <int, void(MenuState::*)()>::iterator it;
-					for (it = menuItems.begin(); it != menuItems.end(); ++it)
-					{
-						if (it->first == currentLevel)
-						{
-							auto function = it->second;
-							(this->*function)();
-						}
+						auto function = it->second;
+						(this->*function)();
+						break;
 					}
 				}
 			}
 		}
+	}
 		
-		//Create image from Bitmap
-		surface = static_cast<Awesomium::BitmapSurface*>(webView->surface());
-		const unsigned char* tempBuffer = surface->buffer();
-		for (register int i = 0; i < 960 * 640 * 4; i += 4) {
-			pixels[i] = tempBuffer[i + 2]; // B
-			pixels[i + 1] = tempBuffer[i + 1]; // G
-			pixels[i + 2] = tempBuffer[i]; // R
-			pixels[i + 3] = tempBuffer[i + 3]; // Alpha
-		}
+	//Create image from Bitmap
+	menuContext->surface = static_cast<Awesomium::BitmapSurface*>(menuContext->webView->surface());
+	const unsigned char* tempBuffer = menuContext->surface->buffer();
 
-		sf::Sprite ui(uiTexture);
-		uiTexture.update(pixels);
-
-		context->window.draw(ui);
-		context->window.display();
+	for (register int i = 0; i < 960 * 640 * 4; i += 4) {
+		menuContext->pixels[i] = tempBuffer[i + 2]; // B
+		menuContext->pixels[i + 1] = tempBuffer[i + 1]; // G
+		menuContext->pixels[i + 2] = tempBuffer[i]; // R
+		menuContext->pixels[i + 3] = tempBuffer[i + 3]; // Alpha
 	}
 
-}
+	sf::Sprite ui(menuContext->texture);
+	menuContext->texture.update(menuContext->pixels);
 
-MenuState::MenuState(Context* c, StateManager* manager)
-{
-	this->context = c;
-	this->stateManager = manager;
-}
+	menuContext->context->window.draw(ui);
+	menuContext->context->window.display();
 
-
-MenuState::~MenuState()
-{
-	//delete context;
+	if (terminate)
+	{
+		delete this;
+	}
 }
