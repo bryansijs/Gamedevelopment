@@ -166,6 +166,9 @@
     <Filter Include="Header Files\Model\Units\Enemy">
       <UniqueIdentifier>{0c5365ff-7f58-4dd6-b3db-98e39932bed4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Model\Units\Enemies">
+      <UniqueIdentifier>{4c350cee-5904-4585-9794-44df4ceae29a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -177,14 +180,8 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="LevelImporter.h">
       <Filter>Header Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="resource1.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NormalState.h">
       <Filter>Header Files\Model\UnitStates</Filter>
@@ -312,9 +309,6 @@
     <ClInclude Include="method_dispatcher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
@@ -327,8 +321,20 @@
     <ClInclude Include="GameObjectFactory.h">
       <Filter>Header Files\Factories</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
     <ClInclude Include="GameTileFactory.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicEnemy.h">
+      <Filter>Header Files\Model\Units\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="RunnerEnemy.h">
+      <Filter>Header Files\Model\Units\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="TankEnemy.h">
+      <Filter>Header Files\Model\Units\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -473,8 +479,20 @@
     <ClCompile Include="GameObjectFactory.cpp">
       <Filter>Source Files\Factories</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
     <ClCompile Include="GameTileFactory.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicEnemy.cpp">
+      <Filter>Source Files\Model\Units\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="RunnerEnemy.cpp">
+      <Filter>Source Files\Model\Units\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="TankEnemy.cpp">
+      <Filter>Source Files\Model\Units\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

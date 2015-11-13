@@ -5,7 +5,7 @@
 #include "MoveBehaviour.h"
 #include "Tile.h"
 
-//GameObject::GameObject(std::vector<DrawBehaviour*>* draws, std::string textureUrl)
+
 GameObject::GameObject(DrawContainer *drawContainer, std::string textureUrl)
 {
 	this->drawContainer = drawContainer;
@@ -13,6 +13,9 @@ GameObject::GameObject(DrawContainer *drawContainer, std::string textureUrl)
 	this->drawContainer->AddBehaviour(this->drawBehaviour);
 }
 
+GameObject::GameObject(DrawContainer *drawContainer)
+{
+}
 GameObject::GameObject()
 {
 }

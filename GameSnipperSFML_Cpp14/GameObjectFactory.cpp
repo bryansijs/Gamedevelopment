@@ -9,13 +9,20 @@ GameObjectFactory::GameObjectFactory()
 GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer)
 {
 	this->drawContainer = drawContainer;
+	this->moveContainer = nullptr;
+}
+
+GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer)
+{
+	this->drawContainer = drawContainer;
+	this->moveContainer = moveContainer;
 }
 
 GameObjectFactory::~GameObjectFactory()
 {
 }
-//TODO REF
-GameObject* GameObjectFactory::Create(std::map<std::string, std::string> properties) {
+
+GameObject* GameObjectFactory::Create(std::map<std::string, std::string>& properties) {
 
 	std::map<std::string, GameObject*(GameObjectFactory::*)(std::map<std::string, std::string>&)>::iterator  it;
 	for (it = possibleObjects.begin(); it != possibleObjects.end(); it++) {
@@ -28,28 +35,18 @@ GameObject* GameObjectFactory::Create(std::map<std::string, std::string> propert
 	return nullptr;
 }
 
-//TODO: EnemyFactory
 GameObject* GameObjectFactory::CreateEnemy(std::map<std::string, std::string>& properties)
 {
-	std::string imgurl = properties["image"];
-	GameObject* obj = new GameObject(drawContainer, imgurl);
-	int x, y, widht, height;
-	x = std::stoi( properties["x"]);
-	y = std::stoi(properties["y"]);
-	widht = std::stoi(properties["width"]);
-	height = std::stoi(properties["height"]);
-	obj->setPosition(sf::Vector2f(x, y));
-	obj->setSize(widht, height);
-
-	return obj;
+return	this->enemyFactory.Create(properties, drawContainer, moveContainer);
 }
 
 GameObject* GameObjectFactory::CreateObject(std::map<std::string, std::string>& properties)
 {
+	//TODO Andy:drawcontainer & movecontainer & ObjectFactory
 	return new GameObject();
 }
 
 GameObject* GameObjectFactory::CreateTile(std::map<std::string, std::string>& properties)
 {
-	return  this->fac.Create(properties);
+	return  this->gametTileFactory.Create(properties);
 }

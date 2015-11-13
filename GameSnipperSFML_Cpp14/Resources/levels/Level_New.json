@@ -167,7 +167,9 @@
                  "name":"Enemy",
                  "properties":
                     {
-                     "image":"enemy1.png"
+                     "image":"enemy1.png",
+					
+					"eType":"Basic"
                     },
                  "rotation":0,
                  "type":"Enemy",
@@ -197,7 +199,8 @@
                  "name":"Enemy",
                  "properties":
                     {
-                     "image":"enemy2.png"
+                     "image":"enemy2.png",
+					 		"eType":"Runner"
                     },
                  "rotation":0,
                  "type":"Enemy",
@@ -212,7 +215,8 @@
                  "name":"Enemy",
                  "properties":
                     {
-                     "image":"enemy3.png"
+                     "image":"enemy3.png",
+					 "eType":"Tank"
                     },
                  "rotation":0,
                  "type":"Enemy",

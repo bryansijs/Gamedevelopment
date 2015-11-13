@@ -14,6 +14,7 @@ class GameObject
 {
 public:
 	GameObject(DrawContainer *drawContainer, std::string textureUrl);
+	GameObject(DrawContainer *drawContainer);
 	GameObject();
 	~GameObject();
 
