@@ -336,6 +336,9 @@
     <ClInclude Include="TankEnemy.h">
       <Filter>Header Files\Model\Units\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="InteractiveFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -493,6 +496,9 @@
     </ClCompile>
     <ClCompile Include="TankEnemy.cpp">
       <Filter>Source Files\Model\Units\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractiveFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

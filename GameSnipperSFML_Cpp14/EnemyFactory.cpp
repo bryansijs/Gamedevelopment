@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "EnemyFactory.h"
 #include "BasicEnemy.h"
+#include "RunnerEnemy.h"
+#include "TankEnemy.h"
 
 EnemyFactory::EnemyFactory()
 {
@@ -40,28 +42,25 @@ GameObject* EnemyFactory::CreateBasic(std::map<std::string, std::string>& proper
 //TODO Andy:Enemy verder uitwerken
 GameObject* EnemyFactory::CreateRunner(std::map<std::string, std::string>&properties, DrawContainer* container, MoveContainer* mContainer) {
 	std::string imgurl = properties["image"];
-	GameObject* obj = new GameObject(container, imgurl);
+
 	int x, y, widht, height;
 	x = std::stoi(properties["x"]);
 	y = std::stoi(properties["y"]);
 	widht = std::stoi(properties["width"]);
 	height = std::stoi(properties["height"]);
-	obj->setPosition(sf::Vector2f(x, y));
-	obj->setSize(widht, height);
 
-	return obj;
+
+	return new RunnerEnemy(container, imgurl, mContainer, sf::Vector2f(x, y), widht, height);
 }
 //TODO Andy:Enemy verder uitwerken
 GameObject* EnemyFactory::CreateTank(std::map<std::string, std::string>& properties, DrawContainer* container, MoveContainer* mContainer) {
 	std::string imgurl = properties["image"];
-	GameObject* obj = new GameObject(container, imgurl);
 	int x, y, widht, height;
 	x = std::stoi(properties["x"]);
 	y = std::stoi(properties["y"]);
 	widht = std::stoi(properties["width"]);
 	height = std::stoi(properties["height"]);
-	obj->setPosition(sf::Vector2f(x, y));
-	obj->setSize(widht, height);
 
-	return obj;
+
+	return new TankEnemy(container, imgurl, mContainer, sf::Vector2f(x, y), widht, height);
 }

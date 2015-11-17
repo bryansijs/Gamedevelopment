@@ -190,6 +190,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="GameTileFactory.h" />
     <ClInclude Include="game_state.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="InteractiveFactory.h" />
     <ClInclude Include="KeyMapping.h" />
     <ClInclude Include="KeyMappingImporter.h" />
     <ClInclude Include="Level.h" />
@@ -244,6 +245,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="GameTileFactory.cpp" />
     <ClCompile Include="game_state.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="InteractiveFactory.cpp" />
     <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="KeyMapping.cpp" />
     <ClCompile Include="KeyMappingImporter.cpp" />
