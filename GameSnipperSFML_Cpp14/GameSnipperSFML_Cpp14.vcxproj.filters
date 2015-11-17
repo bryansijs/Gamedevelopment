@@ -330,6 +330,9 @@
     <ClInclude Include="BaseState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
+    <ClInclude Include="TestLevelImporter.h">
+      <Filter>Header Files\UnitTest\Tests</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -472,6 +475,9 @@
     </ClCompile>
     <ClCompile Include="GameContext.cpp">
       <Filter>Source Files\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="TestLevelImporter.cpp">
+      <Filter>Source Files\UnitTest\Tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

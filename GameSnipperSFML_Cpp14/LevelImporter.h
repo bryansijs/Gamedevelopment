@@ -30,8 +30,10 @@ public:
 	LevelImporter();
 	~LevelImporter();
 
-	void Import(std::string JSON);
+	bool Import(std::string JSON);
 	void Prepare();
+	bool PrepareMusic(std::string musicName);
+	sf::Sound getMusic() { return music; };
 
 	void Clear();
 	std::vector<GameObject*> game_objects;
@@ -47,7 +49,6 @@ private:
 	void PrepareGameObjects();
 	void PrepareTileSets();
 	void PrepareTiles();
-	void PrepareMusic(std::string musicName);
 	int tileSize;
 	int levelHeight;
 	int levelWidht;

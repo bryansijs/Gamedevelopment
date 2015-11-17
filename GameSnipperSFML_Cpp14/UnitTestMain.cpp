@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "UnitTestMain.h"
 #include "TestDemo.h"
+#include "TestLevelImporter.h"
 
 UnitTestMain::UnitTestMain()
 {
@@ -13,4 +14,5 @@ void UnitTestMain::RunTests(bool enabled)
 		return;
 
 	TestDemo td1;
+	TestLevelImporter tli;
 }

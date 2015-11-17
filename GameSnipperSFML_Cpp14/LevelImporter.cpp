@@ -331,10 +331,15 @@ void LevelImporter::PrepareTiles()
 	}
 }
 
-void LevelImporter::PrepareMusic(string music)
+bool LevelImporter::PrepareMusic(string music)
 {
-	sbuffer.loadFromFile("./Resources/music/" + music);
-	this->music.setBuffer(sbuffer);
+	if (sbuffer.loadFromFile("./Resources/music/" + music))
+	{
+		this->music.setBuffer(sbuffer);
+		return true;
+	}
+	
+	return false;
 }
 
 void LevelImporter::Prepare()
@@ -352,7 +357,7 @@ void LevelImporter::Prepare()
 	PrepareMusic(musicName);
 }
 
-void LevelImporter::Import(std::string JSON)
+bool LevelImporter::Import(std::string JSON)
 {
 	inputFileStream.open(JSON, std::ifstream::binary);
 
@@ -360,7 +365,9 @@ void LevelImporter::Import(std::string JSON)
 	if (!parsingSuccessful)
 	{
 		std::cout << jsonReader.getFormattedErrorMessages() << "\n";
+		return false;
 	}
+	return true;
 }
 
 void LevelImporter::Clear()
