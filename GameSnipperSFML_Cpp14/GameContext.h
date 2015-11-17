@@ -3,7 +3,6 @@
 #include "Player.h"
 #include "PlayerInput.h"
 #include "PlayerActions.h"
-#include "PlayerMovement.h"
 #include "KeyMappingImporter.h"
 
 #include "LevelImporter.h"
@@ -27,7 +26,6 @@ public:
 	Player* player;
 	PlayerInput playerInput;
 	PlayerActions playerActions;
-	PlayerMovement playerMovement;
 	KeyMappingImporter keyMappingImporter;
 
 	LevelImporter* levelImporter;

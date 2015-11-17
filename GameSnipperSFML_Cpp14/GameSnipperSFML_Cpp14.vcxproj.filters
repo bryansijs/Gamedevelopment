@@ -249,9 +249,6 @@
     <ClInclude Include="PlayerInput.h">
       <Filter>Header Files\Model\Units\Player</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerMovement.h">
-      <Filter>Header Files\Model\Units\Player</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerActions.h">
       <Filter>Header Files\Model\Units\Player</Filter>
     </ClInclude>
@@ -402,9 +399,6 @@
       <Filter>Source Files\Model\Units\Player</Filter>
     </ClCompile>
     <ClCompile Include="PlayerInput.cpp">
-      <Filter>Source Files\Model\Units\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerMovement.cpp">
       <Filter>Source Files\Model\Units\Player</Filter>
     </ClCompile>
     <ClCompile Include="PlayerActions.cpp">

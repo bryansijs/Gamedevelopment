@@ -29,13 +29,18 @@ public:
 	void Shoot();
 	void Use();
 private:
+	void ExecuteActions();
+
 	std::map<std::string, void(PlayerActions::*)()> possibleActions = {
 		{ "move", &PlayerActions::Move },
 		{ "shoot", &PlayerActions::Shoot },
 		{ "use", &PlayerActions::Use }
 	};
 
+	std::vector<void(PlayerActions::*)()> activeActions;
+
 	std::vector<std::string> activeKeys;
+
 	std::string direction = "move-left";
 	std::string currentMap;
 
@@ -52,6 +57,5 @@ private:
 	std::vector<Tile>* tiles;
 
 	bool fired = false;
-
 };
 

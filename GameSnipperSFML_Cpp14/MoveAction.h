@@ -2,6 +2,9 @@
 
 #include <iostream>
 #include <vector>
+#include <map>
+
+#include <SFML\System\Vector2.hpp>
 
 class Player;
 class Tile;
@@ -12,9 +15,9 @@ public:
 	MoveAction();
 	~MoveAction();
 
-	void Move(std::string direction, Player *player, std::vector<Tile>* tiles);
+	void Move(std::vector<std::string> activeKeys, Player *player, std::vector<Tile>* tiles);
 private:
 	Player *player;
-
-	float velocity = 1.0f;
+	sf::Vector2f velocity;
+	float speed = 1.5f;
 };

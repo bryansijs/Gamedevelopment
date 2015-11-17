@@ -43,19 +43,41 @@ void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys)
 		{
 			if (map.find(it->first) != std::string::npos)
 			{
-				currentMap = map;
-
-				auto function = it->second;
-				(this->*function)();
+				if (std::find(activeActions.begin(), activeActions.end(), it->second) == activeActions.end())
+				{
+					activeActions.push_back(it->second);
+				}
 			}
 		}
 	}
+
+	ExecuteActions();
+}
+
+void PlayerActions::ExecuteActions()
+{
+	std::vector<void(PlayerActions::*)()>::iterator it;
+
+	for (it = activeActions.begin(); it != activeActions.end(); ++it)
+	{
+		auto function = *it;
+		(this->*function)();
+	}
+
+	activeActions.clear();
 }
 
 void PlayerActions::Move()
 {
-	direction = currentMap;
-	moveAction.Move(direction, player, tiles);
+	std::vector<std::string> directions;
+
+	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
+		std::string map = KeyMapping::GetMap(activeKeys[i]);
+
+		directions.push_back(map);
+	}
+
+	moveAction.Move(directions, player, tiles);
 }
 
 void PlayerActions::Shoot()
