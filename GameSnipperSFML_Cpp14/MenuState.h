@@ -3,33 +3,32 @@
 #include <Awesomium/WebCore.h>
 
 class StateManager;
-
-namespace Awesomium{
-	class WebView;
-	class JSArray;
-}
-
 class Context;
+class MenuContext;
+
 class MenuState : public BaseState
 {
-	int currentLevel;
-	char const* pathToFile;
-	bool inMenu = false;
-	Awesomium::WebView* webView;
-	Awesomium::WebCore* web_core;
-	Context* context;
-	StateManager* stateManager;
-	sf::Sound* music;
-
+private:
 	void ReloadPage();
 	void ShowAbout();
 	void RunGame();
 	void ShowIntruction();
 
+	StateManager* stateManager;
+
+	Context* context;
+	MenuContext* menuContext;
 public:
+	void Update();
 	void Terminate();
+
 	void BackToMenu();
-	void Run();
+
+	std::map <int, void(MenuState::*)()> menuItems{
+		{ 1, &MenuState::RunGame },
+		{ 2, &MenuState::ShowIntruction },
+		{ 3, &MenuState::ShowAbout }
+	};
 
 	MenuState(Context* context, StateManager* stateManager);
 	~MenuState();

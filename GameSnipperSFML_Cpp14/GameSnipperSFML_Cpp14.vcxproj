@@ -184,6 +184,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="EndTile.h" />
     <ClInclude Include="EnemyFactory.h" />
     <ClInclude Include="GameLoop.h" />
+    <ClInclude Include="GameContext.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectFactory.h" />
     <ClInclude Include="GameState.h" />
@@ -196,6 +197,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="KeyMappingImporter.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelImporter.h" />
+    <ClInclude Include="MenuContext.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="method_dispatcher.h" />
     <ClInclude Include="MoveAction.h" />
@@ -241,6 +243,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="EndTile.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="GameLoop.cpp" />
+    <ClCompile Include="GameContext.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
     <ClCompile Include="GameState.cpp" />
@@ -255,6 +258,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelImporter.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MenuContext.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="MoveAction.cpp" />
     <ClCompile Include="MoveBehaviour.cpp" />

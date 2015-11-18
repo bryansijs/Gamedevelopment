@@ -1,11 +1,10 @@
 #pragma once
 class BaseState
 {
-	
 public:
-	bool running = false;
-	void SetRunning(bool boolean) { running = boolean;};
-	virtual void Run() {};
+	bool terminate = false;
+
+	virtual void Update() {};
 	virtual void Terminate() {};
 };
 
