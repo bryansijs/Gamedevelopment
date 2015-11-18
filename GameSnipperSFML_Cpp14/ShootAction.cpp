@@ -16,7 +16,7 @@ ShootAction::~ShootAction()
 {
 }
  
-void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContainer, Player* player, std::string direction)
+void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContainer, Unit* player, std::string direction)
 {
 	if (Time::runningTime > nextShot)
 	{
