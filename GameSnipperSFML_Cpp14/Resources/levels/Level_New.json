@@ -122,10 +122,10 @@
                  "name":"switch",
                  "properties":
                     {
-                     "image":"switch1.png"
+					 "iType":"Switch"
                     },
                  "rotation":0,
-                 "type":"Switch",
+                 "type":"Object",
                  "visible":true,
                  "width":34,
                  "x":510,
@@ -140,7 +140,7 @@
 
                     },
                  "rotation":0,
-                 "type":"",
+                 "type":"Item",
                  "visible":true,
                  "width":24,
                  "x":610,
@@ -155,7 +155,7 @@
 
                     },
                  "rotation":0,
-                 "type":"",
+                 "type":"Item",
                  "visible":true,
                  "width":24,
                  "x":645,
@@ -168,7 +168,6 @@
                  "properties":
                     {
                      "image":"enemy1.png",
-					
 					"eType":"Basic"
                     },
                  "rotation":0,
@@ -184,10 +183,10 @@
                  "name":"Switch",
                  "properties":
                     {
-                     "image":"switch2.png"
+					 "iType":"Switch"
                     },
                  "rotation":0,
-                 "type":"Switch",
+                 "type":"Object",
                  "visible":true,
                  "width":26,
                  "x":69,
@@ -200,7 +199,7 @@
                  "properties":
                     {
                      "image":"enemy2.png",
-					 		"eType":"Runner"
+					 "eType":"Runner"
                     },
                  "rotation":0,
                  "type":"Enemy",
@@ -231,10 +230,11 @@
                  "name":"KeyRed",
                  "properties":
                     {
-                     "image":"redkey.png"
+                     "image":"redkey.png",
+					 "iType":"Key"
                     },
                  "rotation":0,
-                 "type":"",
+                 "type":"Item",
                  "visible":true,
                  "width":17,
                  "x":901,
@@ -261,10 +261,11 @@
                  "name":"HealPot",
                  "properties":
                     {
-                     "image":"healpot.png"
+                     "image":"healpot.png",
+					 "iType":"Potion"
                     },
                  "rotation":0,
-                 "type":"",
+                 "type":"Item",
                  "visible":true,
                  "width":24,
                  "x":548,

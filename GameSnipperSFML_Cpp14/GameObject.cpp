@@ -29,6 +29,11 @@ void GameObject::Update()
 	
 }
 
+void GameObject::setProperties(std::map<std::string, std::string>& properties)
+{
+
+}
+
 void GameObject::setDrawBehaviour(DrawBehaviour* newDrawBehaviour)
 {
 	this->drawBehaviour = newDrawBehaviour;

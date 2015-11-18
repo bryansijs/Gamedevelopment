@@ -169,6 +169,12 @@
     <Filter Include="Source Files\Model\Units\Enemies">
       <UniqueIdentifier>{4c350cee-5904-4585-9794-44df4ceae29a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Model\Items">
+      <UniqueIdentifier>{5bc207ba-3514-47b2-a92c-4fbf7ea69853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Items">
+      <UniqueIdentifier>{0071e50c-7eec-4892-b457-d9248802c3e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -339,6 +345,12 @@
     <ClInclude Include="InteractiveFactory.h">
       <Filter>Header Files\Factories</Filter>
     </ClInclude>
+    <ClInclude Include="ItemFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Potion.h">
+      <Filter>Header Files\Model\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -499,6 +511,12 @@
     </ClCompile>
     <ClCompile Include="InteractiveFactory.cpp">
       <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Potion.cpp">
+      <Filter>Source Files\Model\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

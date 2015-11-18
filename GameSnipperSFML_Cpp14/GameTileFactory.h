@@ -17,16 +17,15 @@ public:
 	~GameTileFactory();
 
 	GameObject* Create(std::map<std::string, std::string> properties);
+private:
+	GameObject* CreateStart(std::map<std::string, std::string> properties);
+	GameObject* CreateWarp(std::map<std::string, std::string>properties);
+	GameObject* CreateEnd(std::map<std::string, std::string> properties);
 
 	std::map<std::string, GameObject*(GameTileFactory::*)(std::map<std::string, std::string>)> possibleTiles = {
 		{ "StartTile", &GameTileFactory::CreateStart },
 		{ "Warp", &GameTileFactory::CreateWarp },
 		{ "End", &GameTileFactory::CreateEnd },
 	};
-private:
-	GameObject* CreateStart(std::map<std::string, std::string> properties);
-	GameObject* CreateWarp(std::map<std::string, std::string>properties);
-	GameObject* CreateEnd(std::map<std::string, std::string> properties);
-
 };
 

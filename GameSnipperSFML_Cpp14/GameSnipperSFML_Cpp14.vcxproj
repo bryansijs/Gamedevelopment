@@ -191,6 +191,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="game_state.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="InteractiveFactory.h" />
+    <ClInclude Include="ItemFactory.h" />
     <ClInclude Include="KeyMapping.h" />
     <ClInclude Include="KeyMappingImporter.h" />
     <ClInclude Include="Level.h" />
@@ -209,6 +210,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="PlayerDrawBehaviour.h" />
     <ClInclude Include="PlayerInput.h" />
     <ClInclude Include="PlayerMovement.h" />
+    <ClInclude Include="Potion.h" />
     <ClInclude Include="RunnerEnemy.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="ShootAction.h" />
@@ -246,6 +248,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="game_state.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="InteractiveFactory.cpp" />
+    <ClCompile Include="ItemFactory.cpp" />
     <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="KeyMapping.cpp" />
     <ClCompile Include="KeyMappingImporter.cpp" />
@@ -263,6 +266,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="PlayerDrawBehaviour.cpp" />
     <ClCompile Include="PlayerInput.cpp" />
     <ClCompile Include="PlayerMovement.cpp" />
+    <ClCompile Include="Potion.cpp" />
     <ClCompile Include="RunnerEnemy.cpp" />
     <ClCompile Include="SetupState.cpp" />
     <ClCompile Include="StateManager.cpp" />

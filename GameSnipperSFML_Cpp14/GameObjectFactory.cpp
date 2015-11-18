@@ -37,16 +37,21 @@ GameObject* GameObjectFactory::Create(std::map<std::string, std::string>& proper
 
 GameObject* GameObjectFactory::CreateEnemy(std::map<std::string, std::string>& properties)
 {
-return	this->enemyFactory.Create(properties, drawContainer, moveContainer);
+	return	this->enemyFactory.Create(properties, drawContainer, moveContainer);
 }
 
 GameObject* GameObjectFactory::CreateObject(std::map<std::string, std::string>& properties)
 {
-	//TODO Andy:drawcontainer & movecontainer & ObjectFactory
-	return new GameObject();
+	return this->interactiveFactory.Create(properties, drawContainer);
 }
 
 GameObject* GameObjectFactory::CreateTile(std::map<std::string, std::string>& properties)
 {
 	return  this->gametTileFactory.Create(properties);
+}
+
+
+GameObject* GameObjectFactory::CreateItem(std::map<std::string, std::string>& properties)
+{
+	return this->itemFactory.Create(properties, drawContainer);
 }
