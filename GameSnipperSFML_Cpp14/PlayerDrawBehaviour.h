@@ -8,6 +8,6 @@ public:
 	~PlayerDrawBehaviour();
 
 	void Draw(sf::RenderWindow *window) override;
-	sf::Sprite getCurrentImage();
+	sf::Sprite getCurrentImage() override;
 };
 

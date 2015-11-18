@@ -34,6 +34,12 @@ void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys)
 {
 	activeKeys = newActiveKeys;
 
+	if(activeKeys.size() == 0)
+	{
+		DoNothing();
+		return;
+	}
+
 	std::map<std::string, void(PlayerActions::*)()>::iterator it;
 
 	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
@@ -61,6 +67,11 @@ void PlayerActions::Move()
 void PlayerActions::Shoot()
 {
 	shootAction.Shoot(drawContainer, moveContainer, player, direction);
+}
+
+void PlayerActions::DoNothing()
+{
+	moveAction.AnimateMovement(player, 1);
 }
 
 void PlayerActions::Use()

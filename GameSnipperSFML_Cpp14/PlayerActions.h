@@ -28,6 +28,7 @@ public:
 	void Move();
 	void Shoot();
 	void Use();
+	void DoNothing();
 private:
 	std::map<std::string, void(PlayerActions::*)()> possibleActions = {
 		{ "move", &PlayerActions::Move },
