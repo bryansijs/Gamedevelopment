@@ -193,6 +193,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="Input.h" />
     <ClInclude Include="InteractiveFactory.h" />
     <ClInclude Include="ItemFactory.h" />
+    <ClInclude Include="Key.h" />
     <ClInclude Include="KeyMapping.h" />
     <ClInclude Include="KeyMappingImporter.h" />
     <ClInclude Include="Level.h" />
@@ -254,6 +255,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="InteractiveFactory.cpp" />
     <ClCompile Include="ItemFactory.cpp" />
     <ClCompile Include="jsoncpp.cpp" />
+    <ClCompile Include="Key.cpp" />
     <ClCompile Include="KeyMapping.cpp" />
     <ClCompile Include="KeyMappingImporter.cpp" />
     <ClCompile Include="Level.cpp" />

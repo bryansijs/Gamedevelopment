@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ItemFactory.h"
 #include "Potion.h"
-
+#include "Key.h"
 ItemFactory::ItemFactory()
 {
 }
@@ -48,5 +48,11 @@ GameObject* ItemFactory::CreateAmmo(std::map<std::string, std::string>& properti
 
 GameObject* ItemFactory::CreateKey(std::map<std::string, std::string>& properties, DrawContainer* container)
 {
-	return nullptr;
+	std::string imgurl = properties["image"];
+	int x, y, widht, height;
+	x = std::stoi(properties["x"]);
+	y = std::stoi(properties["y"]);
+	widht = std::stoi(properties["width"]);
+	height = std::stoi(properties["height"]);
+	return new Key(container, imgurl, sf::Vector2f(x, y), widht, height);
 }

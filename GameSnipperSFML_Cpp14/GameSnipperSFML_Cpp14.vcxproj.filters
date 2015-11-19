@@ -366,6 +366,9 @@
     <ClInclude Include="UnitTestImport.h">
       <Filter>Header Files\UnitTest\Tests</Filter>
     </ClInclude>
+    <ClInclude Include="Key.h">
+      <Filter>Header Files\Model\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -541,6 +544,9 @@
     </ClCompile>
     <ClCompile Include="UnitTestImport.cpp">
       <Filter>Source Files\UnitTest\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Key.cpp">
+      <Filter>Source Files\Model\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
