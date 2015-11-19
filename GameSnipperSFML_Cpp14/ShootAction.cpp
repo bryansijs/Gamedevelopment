@@ -24,6 +24,7 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 
 		GameObject* shot = new GameObject(drawContainer, "bullet-red.png");
 		ShotMoveBehaviour* shotBehaviour = new ShotMoveBehaviour(shot);
+
 		shotBehaviour->SetDirection(direction);
 		moveContainer->AddBehaviour(shotBehaviour);
 

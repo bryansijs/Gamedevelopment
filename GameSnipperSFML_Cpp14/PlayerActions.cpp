@@ -74,7 +74,11 @@ void PlayerActions::Move()
 	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
 		std::string map = KeyMapping::GetMap(activeKeys[i]);
 
-		directions.push_back(map);
+		if (map.find("move") != std::string::npos)
+		{
+			directions.push_back(map);
+			direction = map;
+		}
 	}
 
 	moveAction.Move(directions, player, tiles);

@@ -142,17 +142,11 @@
     <Filter Include="Source Files\UnitTest\Tests">
       <UniqueIdentifier>{0b3d2887-6c2a-4caa-b52f-0ca58b7eeafb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Model\Units\Player\Action">
-      <UniqueIdentifier>{4781ab13-eb86-4298-8071-7fb2180d5e35}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Behaviours\Move">
       <UniqueIdentifier>{993ac1fc-50ef-4984-9960-bb8b20dc4fa5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Behaviours\Draw">
       <UniqueIdentifier>{a3847174-d46c-4a07-87dd-ff4bf682db55}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Model\Units\Player\Action">
-      <UniqueIdentifier>{5398b0e7-83c0-42a3-b93d-ec9c1d339179}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Behaviours\Move">
       <UniqueIdentifier>{1a00c204-68e0-4916-9138-803a72359a03}</UniqueIdentifier>
@@ -168,6 +162,12 @@
     </Filter>
     <Filter Include="Header Files\Context">
       <UniqueIdentifier>{605dcda8-042e-4e5e-8326-eca701f86586}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Units\Player\Action">
+      <UniqueIdentifier>{4781ab13-eb86-4298-8071-7fb2180d5e35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Units\Player\Action">
+      <UniqueIdentifier>{5398b0e7-83c0-42a3-b93d-ec9c1d339179}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -249,9 +249,6 @@
     <ClInclude Include="PlayerInput.h">
       <Filter>Header Files\Model\Units\Player</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerActions.h">
-      <Filter>Header Files\Model\Units\Player</Filter>
-    </ClInclude>
     <ClInclude Include="TestDemo.h">
       <Filter>Header Files\UnitTest\Tests</Filter>
     </ClInclude>
@@ -327,6 +324,9 @@
     <ClInclude Include="BaseState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerActions.h">
+      <Filter>Header Files\Model\Units\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -398,12 +398,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Model\Units\Player</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerInput.cpp">
-      <Filter>Source Files\Model\Units\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerActions.cpp">
-      <Filter>Source Files\Model\Units\Player</Filter>
-    </ClCompile>
     <ClCompile Include="UnitTest.cpp">
       <Filter>Source Files\UnitTest</Filter>
     </ClCompile>
@@ -466,6 +460,12 @@
     </ClCompile>
     <ClCompile Include="GameContext.cpp">
       <Filter>Source Files\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerInput.cpp">
+      <Filter>Source Files\Model\Units\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerActions.cpp">
+      <Filter>Source Files\Model\Units\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

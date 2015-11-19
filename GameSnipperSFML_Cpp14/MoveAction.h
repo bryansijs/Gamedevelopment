@@ -16,8 +16,13 @@ public:
 	~MoveAction();
 
 	void Move(std::vector<std::string> activeKeys, Player *player, std::vector<Tile>* tiles);
+	void AnimateMovement(Player *player, int state);
 private:
 	Player *player;
 	sf::Vector2f velocity;
-	float speed = 1.5f;
+	float speed = 1.0f;
+
+	int animateState = 1;
+	float animationDelay;
+	void AnimateMovement(Player *player);
 };
