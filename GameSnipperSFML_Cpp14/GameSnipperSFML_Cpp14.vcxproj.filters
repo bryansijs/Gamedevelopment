@@ -363,11 +363,11 @@
     <ClInclude Include="Potion.h">
       <Filter>Header Files\Model\Items</Filter>
     </ClInclude>
-    <ClInclude Include="UnitTestImport.h">
-      <Filter>Header Files\UnitTest\Tests</Filter>
-    </ClInclude>
     <ClInclude Include="Key.h">
       <Filter>Header Files\Model\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitTestGameObjectFactory.h">
+      <Filter>Header Files\UnitTest\Tests</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -542,11 +542,11 @@
     <ClCompile Include="Potion.cpp">
       <Filter>Source Files\Model\Items</Filter>
     </ClCompile>
-    <ClCompile Include="UnitTestImport.cpp">
-      <Filter>Source Files\UnitTest\Tests</Filter>
-    </ClCompile>
     <ClCompile Include="Key.cpp">
       <Filter>Source Files\Model\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitTestGameObjectFactory.cpp">
+      <Filter>Source Files\UnitTest\Tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
