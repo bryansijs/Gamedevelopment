@@ -39,7 +39,7 @@ void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys)
 	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
 		std::string map = KeyMapping::GetMap(activeKeys[i]);
 
-		for (it = possibleActions.begin(); it != possibleActions.end(); ++it)
+		for (it = actions.begin(); it != actions.end(); ++it)
 		{
 			if (map.find(it->first) != std::string::npos)
 			{

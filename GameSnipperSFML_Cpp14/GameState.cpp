@@ -35,7 +35,7 @@ GameState::~GameState()
 
 void GameState::Update()
 {
-	Time::deltaTime = (float)gameContext->deltaClock.restart().asMilliseconds() / 10;
+	Time::deltaTime = (float)gameContext->deltaClock.restart().asSeconds();
 	Time::runningTime += Time::deltaTime;
 
 	gameContext->context->window.clear();

@@ -50,6 +50,9 @@ void MoveAction::Move(std::vector<std::string> directions, Player *player, std::
 		velocity.y *= sin(45 * 3.14159265359 / 180);
 	}
 
+	std::cout << "X: " << velocity.x << "\n";
+	std::cout << "Y: " << velocity.y << "\n";
+
 	if (player->isColliding(*tiles, velocity))
 	{
 		return;
@@ -76,7 +79,7 @@ void MoveAction::AnimateMovement(Player *player)
 
 	player->set_Image_x(animateState);
 	animateState++;
-	animationDelay = 5;
+	animationDelay = 0.05;
 }
 
 void MoveAction::AnimateMovement(Player* player, int state)

@@ -31,7 +31,7 @@ public:
 private:
 	void ExecuteActions();
 
-	std::map<std::string, void(PlayerActions::*)()> possibleActions = {
+	std::map<std::string, void(PlayerActions::*)()> actions = {
 		{ "move", &PlayerActions::Move },
 		{ "shoot", &PlayerActions::Shoot },
 		{ "use", &PlayerActions::Use }

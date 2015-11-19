@@ -27,7 +27,7 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 
 		shotBehaviour->SetDirection(direction);
 		moveContainer->AddBehaviour(shotBehaviour);
-
+		
 		if (direction == "move-up")
 		{
 			shot->setPosition(sf::Vector2f(player->position.x + 12, player->position.y));

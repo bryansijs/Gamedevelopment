@@ -20,7 +20,7 @@ public:
 private:
 	Player *player;
 	sf::Vector2f velocity;
-	float speed = 1.0f;
+	float speed = 150.0f;
 
 	int animateState = 1;
 	float animationDelay;
