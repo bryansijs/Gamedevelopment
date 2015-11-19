@@ -229,6 +229,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitState.h" />
     <ClInclude Include="UnitTest.h" />
+    <ClInclude Include="UnitTestImport.h" />
     <ClInclude Include="UnitTestMain.h" />
     <ClInclude Include="UpdateLogic.h" />
     <ClInclude Include="UpdateUI.h" />
@@ -293,6 +294,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitState.cpp" />
     <ClCompile Include="UnitTest.cpp" />
+    <ClCompile Include="UnitTestImport.cpp" />
     <ClCompile Include="UnitTestMain.cpp" />
     <ClCompile Include="UpdateLogic.cpp" />
     <ClCompile Include="UpdateUI.cpp" />

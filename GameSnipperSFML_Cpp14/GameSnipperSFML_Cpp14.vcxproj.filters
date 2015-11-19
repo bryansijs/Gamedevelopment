@@ -363,6 +363,9 @@
     <ClInclude Include="Potion.h">
       <Filter>Header Files\Model\Items</Filter>
     </ClInclude>
+    <ClInclude Include="UnitTestImport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -535,6 +538,9 @@
     </ClCompile>
     <ClCompile Include="Potion.cpp">
       <Filter>Source Files\Model\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitTestImport.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
