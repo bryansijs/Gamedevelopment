@@ -76,8 +76,6 @@ void PlayerActions::Use()
 		//zojah dan gaan zijn actie uitvoeren;
 		//anders nope nope
 
-		
-
 
 		object->doAction();
 	}
