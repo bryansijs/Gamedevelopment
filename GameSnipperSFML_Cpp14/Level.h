@@ -23,6 +23,12 @@ public:
 
 	std::map<int, bool> hazardMap;
 
+
+	void setHazardMap(std::map<int, bool> hazardMap)
+	{
+		this->hazardMap = hazardMap;
+	}
+
 	void updateViewPort(sf::Vector2i &worldPos);
 	void MoveView(sf::View &view, sf::Window& window);
 

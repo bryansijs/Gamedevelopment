@@ -36,7 +36,7 @@ void LevelImporter::PrepareTileSets()
 
 void LevelImporter::PrepareGameObjects()
 {
-	objectFactory = new GameObjectFactory(drawContainer,useContainer);
+	objectFactory = new GameObjectFactory(drawContainer, useContainer);
 
 	for (Json::Value::iterator it = jsonRoot["layers"].begin(); it != jsonRoot["layers"].end(); ++it)
 	{
@@ -86,9 +86,9 @@ void LevelImporter::PrepareTiles()
 
 		multi_Vector data_vector(levelHeight, vector<int>(levelWidht));
 
-		for (int y = 0;y < levelHeight; y++)
+		for (int y = 0; y < levelHeight; y++)
 		{
-			for (int x = 0;x < levelWidht; x++)
+			for (int x = 0; x < levelWidht; x++)
 			{
 				data_vector[y][x] = temp_data_array[indentifier].asInt();
 				indentifier++;
@@ -96,7 +96,7 @@ void LevelImporter::PrepareTiles()
 		}
 
 		for (int y = 0; y < levelHeight; y++)
-			for (int x= 0; x < levelWidht; x++)
+			for (int x = 0; x < levelWidht; x++)
 			{
 				//Deze integer bevat welke tile getekend moet worden vanuit tiled;
 				int dataIndex = data_vector[y][x];
@@ -105,7 +105,7 @@ void LevelImporter::PrepareTiles()
 					continue;
 
 				//Vaaag geeft enorme perform problems
-				addTile(dataIndex, (*it) , x, y);
+				addTile(dataIndex, (*it), x, y);
 			}
 	}
 }
@@ -159,6 +159,16 @@ void LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 	{
 		Json::Value props = value["properties"];
 
+
+
+		if (props.isMember("hazardLinkIndex"))
+		{
+			string hazardIndex = value["properties"]["hazardLinkIndex"].asString();
+			insert_tile.hazardLinkIndex = atoi(hazardIndex.c_str());
+
+		}
+
+
 		if (props.isMember("isCollidable"))
 		{
 			if (value["properties"]["isCollidable"].asString() == "true")
@@ -189,17 +199,34 @@ void LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 				insert_tile.isHazard = true;
 		}
 
-		if (props.isMember("hazardState"))
-		{
-			if (value["properties"]["hazardState"].asString() == "true")
-				insert_tile.hazardState = true;
-		}
 
 		if (props.isMember("hazardIndex"))
 		{
 			string hazardIndex = value["properties"]["hazardIndex"].asString();
 			insert_tile.hazardIndex = atoi(hazardIndex.c_str());
+
+			if (!hazardMap.count(insert_tile.hazardIndex))
+				hazardMap.insert(std::pair<int, bool>(insert_tile.hazardIndex, false));
 		}
+
+
+
+		if (props.isMember("hazardState"))
+		{
+			if (value["properties"]["hazardState"].asString() == "true")
+				insert_tile.hazardState = true;
+
+			if (hazardMap.count(insert_tile.hazardIndex)) {
+				auto search = hazardMap.find(insert_tile.hazardIndex);
+				if (search != hazardMap.end()) {
+					if (search->second != insert_tile.hazardState) {
+						search->second = insert_tile.hazardState;
+					}
+				}
+			}
+		}
+
+
 
 		if (props.isMember("hazardValue"))
 		{
@@ -271,6 +298,7 @@ Level* LevelImporter::getLevel()
 	level->setTileSets(tileSets);
 	level->setTiles(tiles);
 	level->setMusic(music);
+	level->setHazardMap(hazardMap);
 
 	return level;
 }

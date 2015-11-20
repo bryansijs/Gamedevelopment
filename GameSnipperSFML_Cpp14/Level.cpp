@@ -113,7 +113,7 @@ void Level::update()
 	{
 		if (dynamic_cast<Game_Switch*>(getObject(i)))
 		{
-			dynamic_cast<Game_Switch*>(getObject(i))->update(this->tiles, this->hazardMap);
+			dynamic_cast<Game_Switch*>(getObject(i))->Update(this->tiles, this->hazardMap);
 		}
 	}
 }
@@ -124,11 +124,6 @@ void Level::draw(sf::RenderWindow* window, sf::View* view)
 		if (tiles.at(i).isVisible)
 			window->draw(tiles.at(i).sprite);
 	MoveView(*view, *window);
-}
-
-void Level::setHazardState(int hazardIndex, bool hazardState)
-{
-	
 }
 
 void Level::setLayerVisibility(int layerIndex, bool isVisible)
@@ -151,9 +146,6 @@ void Level::Start(GameObject* player, sf::Vector2u* size)
 			break;
 		}
 	}
-
-
-	hazardMap.insert(std::pair<int, bool>(1, false));
 	if (start == nullptr)
 	{
 		start = new StartTile();

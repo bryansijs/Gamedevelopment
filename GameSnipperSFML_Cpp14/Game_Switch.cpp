@@ -14,7 +14,7 @@ Game_Switch::~Game_Switch()
 
 
 void Game_Switch::setProperties(std::map<std::string, std::string>& properties) {
-	//SetHazard index;
+	
 	hazardIndex = (properties.count("hazardIndex")) ? std::stoi(properties["hazardIndex"]) : -1;
 	doorIndex = (properties.count("doorIndex")) ? std::stoi(properties["doorIndex"]) : -1;
 }
@@ -56,19 +56,14 @@ Game_Switch::Game_Switch(UseContainer *useContainer, sf::Vector2f position, int 
 void Game_Switch::doAction()
 {
 	setState();
-
-
-
 }
 
 
-void Game_Switch::update(std::vector<Tile>& tiles, std::map<int, bool>& hazardMap)
+void Game_Switch::Update(std::vector<Tile>& tiles, std::map<int, bool>& hazardMap)
 {
 	if (hazardIndex >= 0) {
 		setHazardState(tiles, hazardMap);
 	}
-
-
 }
 
 void Game_Switch::setHazardState(std::vector<Tile>& tiles, std::map<int, bool>& hazardMap)
@@ -86,8 +81,12 @@ void Game_Switch::setHazardState(std::vector<Tile>& tiles, std::map<int, bool>& 
 					tiles.at(i).hazardState = !this->getState();
 					tiles.at(i).isVisible = !this->getState();
 				}
+
+				if (tiles.at(i).hazardLinkIndex == hazardIndex)
+					tiles.at(i).isVisible = this->getState();
 			}
 		}
 	}
 
 }
+

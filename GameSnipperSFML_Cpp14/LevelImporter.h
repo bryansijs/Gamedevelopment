@@ -1,5 +1,4 @@
 #pragma once
-
 #include "stdafx.h"
 #include <json\json.h>
 #include <io.h>
@@ -18,6 +17,7 @@
 #include "TileSet.h"
 #include "Level.h"
 #include "GameObjectFactory.h"
+
 class DrawContainer;
 
 class LevelImporter
@@ -59,5 +59,5 @@ private:
 	std::vector<Tile> tiles;
 	std::vector<TileSet> tileSets;
 
-
+	std::map<int, bool> hazardMap;
 };

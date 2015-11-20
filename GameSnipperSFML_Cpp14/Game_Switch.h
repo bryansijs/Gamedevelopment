@@ -14,7 +14,7 @@ private:
 	}
 
 	void setHazardState(std::vector<Tile>& tiles, std::map<int, bool>& hazardMap);
-	void setDoorState(int doorIndex, bool doorState);
+	void setDoorState(int doorIndex);
 
 
 public:
@@ -33,14 +33,9 @@ public:
 	virtual void setProperties(std::map<std::string, std::string>& properties);
 	virtual void doAction();
 
+	bool getState(){return this->isOn;	}
 
-
-	bool getState()
-	{
-		return this->isOn;
-	}
-
-	void update(std::vector<Tile>& tiles, std::map<int, bool>& hazardMap);
+	virtual void Update(std::vector<Tile>& tiles, std::map<int, bool>& hazardMap);
 	
 };
 
