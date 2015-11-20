@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    @font-face {
+        font-family: moonhouse;
+        src: local("moonhouse"),
+        local("moonhouse"),
+        url(font/moonhouse.ttf);
+        font-weight: normal;
+    }
+
+    html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .frame{
+        font-family: moonhouse;
+        font-size: 20;
+        background-color: #161616;
+        background-image: url('images/defeat.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 640px;
+        width: 960px;
+        color: white;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease-in 1 forwards;
+      opacity: 0;
+    }
+
+    .fade-out {
+      animation: fadeOut 2s ease-out 1 forwards;
+      opacity: 1;
+    }
+</style>
+<body>
+    <div class="frame">
+        <div class="js-fade fade-in" style="position:absolute; width: 310px; height: 50px; top: 400px;left: 325px;">
+            <h1 style="text-align: center; font-family: moonhouse;">Press any key to continue</h1>
+        </div>
+    </div>
+    <script>
+        var el = document.querySelector('.js-fade');
+        setInterval(function() {
+           if (el.classList.contains('fade-in'))
+           {
+             el.classList.remove('fade-in')
+             el.classList.add('fade-out')
+           }
+           else
+           {
+              el.classList.remove('fade-out')
+              el.classList.add('fade-in')
+           }
+        }, 2000); 
+    </script>
+</body>
+</html>
