@@ -72,9 +72,9 @@ UnitTestGameObjectFactory::UnitTestGameObjectFactory()
 	object = factory.Create(propertymap);
 	UnitTest::Compare("Item is a potion: ", dynamic_cast<Potion*>(object), true);
 	UnitTest::Compare("Item is not an enemy: ", dynamic_cast<RunnerEnemy*>(object), false);
-	UnitTest::Compare("both x are 20: ",int(object->position.x),20);
-	UnitTest::Compare("both y are 80: ", int(object->position.y), 80);
-	UnitTest::Compare("Vector equals: " ,object->position, sf::Vector2f(20,80));
+	UnitTest::Compare("both x are 20: ",int(object->getPosition().x),20);
+	UnitTest::Compare("both y are 80: ", int(object->getPosition().y), 80);
+	UnitTest::Compare("Vector equals: " ,object->getPosition(), sf::Vector2f(20,80));
 	
 	propertymap.clear();
 	object->~GameObject();

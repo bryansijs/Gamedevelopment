@@ -40,7 +40,7 @@ void GameState::Update()
 
 	gameContext->context->window.clear();
 
-	sf::Vector2f playerPosition = gameContext->player->position;
+	sf::Vector2f playerPosition = gameContext->player->getPosition();
 	sf::Vector2i worldPosition = gameContext->context->window.mapCoordsToPixel(playerPosition);
 
 	gameContext->level->draw(&gameContext->context->window, &gameContext->view);

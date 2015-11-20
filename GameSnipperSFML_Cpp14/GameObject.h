@@ -29,6 +29,7 @@ private:
 	int width = 0;
 	int height = 0;
 
+
 public:
 	GameObject(DrawContainer *drawContainer, std::string textureUrl);
 	GameObject(DrawContainer *drawContainer);
@@ -40,7 +41,10 @@ public:
 
 	sf::Vector2f position;
 
+
 	void setPosition(sf::Vector2f position) { this->position = position; };
+
+	sf::Vector2f getPosition() { return position; }
 	virtual void Update();
 	
 	virtual void doAction();

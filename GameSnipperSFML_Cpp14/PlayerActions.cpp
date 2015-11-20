@@ -72,10 +72,12 @@ void PlayerActions::Use()
 	
 	for (GameObject* object : this->player->getUseContainer()->getObjects())
 	{
-
 		//Check zit ik wel bij dit object in de beurt?
 		//zojah dan gaan zijn actie uitvoeren;
 		//anders nope nope
+
+		
+
 
 		object->doAction();
 	}

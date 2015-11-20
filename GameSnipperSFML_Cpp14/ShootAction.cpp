@@ -29,7 +29,7 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 
 		if (direction == "move-up")
 		{
-			shot->setPosition(sf::Vector2f(player->position.x + 12, player->position.y));
+		shot->setPosition(sf::Vector2f(player->position.x + 12, player->position.y));
 		}
 		if (direction == "move-down")
 		{

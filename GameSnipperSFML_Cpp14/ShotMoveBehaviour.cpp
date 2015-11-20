@@ -14,6 +14,9 @@ ShotMoveBehaviour::~ShotMoveBehaviour()
 
 void ShotMoveBehaviour::Update()
 {
+	//TODO wat er word hier per direct iets aangepast?
+	//position van het object word een private die je later kunt opvragenmet een getter
+	//Daarna zul je deze moeten zetten door middel van een setter!
 	if (direction == "move-up")
 	{
 		gameObject->position.y += -velocity * Time::deltaTime;

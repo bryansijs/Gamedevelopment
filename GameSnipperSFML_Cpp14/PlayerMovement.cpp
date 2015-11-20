@@ -33,6 +33,9 @@ void PlayerMovement::Move(float deltaTime)
 
 void PlayerMovement::SetPosition(float deltaTime, std::string direction)
 {
+	//TODO wat er word hier per direct iets aangepast?
+	//position van het object word een private die je later kunt opvragenmet een getter
+	//Daarna zul je deze moeten zetten door middel van een setter!
 	if (direction == "move-up")
 	{
 		player->position.y += -1.0f * (deltaTime / 10000);

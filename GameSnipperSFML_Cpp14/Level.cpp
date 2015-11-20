@@ -165,12 +165,12 @@ void Level::Start(GameObject* player, sf::Vector2u* size)
 		start->setPosition(sf::Vector2f(25, 25));
 	}
 
-	int map_yLocation = start->position.y / size->y;
-	int map_xLocation = start->position.x / size->x;
+	int map_yLocation = start->getPosition().y / size->y;
+	int map_xLocation = start->getPosition().x / size->x;
 	viewPortY = (map_yLocation * size->y);
 	viewPortX = (map_xLocation * size->x);
 
-	player->setPosition(sf::Vector2f(start->position.x, start->position.y));
+	player->setPosition(sf::Vector2f(start->getPosition().x, start->getPosition().y));
 	music.setLoop(true);
 	music.play();
 }
