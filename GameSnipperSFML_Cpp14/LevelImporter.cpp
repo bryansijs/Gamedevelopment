@@ -239,9 +239,10 @@ void LevelImporter::Prepare()
 	subRect.height = tileSize;
 
 	PrepareTileSets();
-	PrepareGameObjects();
+
 	PrepareTiles();
 	PrepareMusic(musicName);
+	PrepareGameObjects();
 }
 
 void LevelImporter::Import(std::string JSON)

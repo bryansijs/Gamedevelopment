@@ -20,7 +20,7 @@ class PlayerActions
 public:
 	PlayerActions();
 	~PlayerActions();
-
+	float useDelay; 
 	void SetPlayer(Player *activePlayer);
 	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile>* tiles);
 	void ProcessActions(std::vector<std::string> &newActiveKeys);

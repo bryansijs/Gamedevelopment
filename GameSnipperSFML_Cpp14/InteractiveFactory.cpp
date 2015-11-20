@@ -27,6 +27,7 @@ GameObject* InteractiveFactory::Create(std::map<std::string, std::string> proper
 
 
 GameObject* InteractiveFactory::CreateSwitch(std::map<std::string, std::string>& properties, DrawContainer* container, UseContainer* uContainer) {
+	GameObject *obj = nullptr;
 	std::string imgurl = properties["image"];
 	int x, y, widht, height;
 	x = std::stoi(properties["x"]);
@@ -34,9 +35,12 @@ GameObject* InteractiveFactory::CreateSwitch(std::map<std::string, std::string>&
 	widht = std::stoi(properties["width"]);
 	height = std::stoi(properties["height"]);
 	if(imgurl != "")
-		return  new Game_Switch(container, uContainer, imgurl, sf::Vector2f(x, y), widht, height);
+		obj = new Game_Switch(container, uContainer, imgurl, sf::Vector2f(x, y), widht, height);
 	else
-		return  new Game_Switch(uContainer,sf::Vector2f(x, y), widht, height);
+		obj=  new Game_Switch(uContainer,sf::Vector2f(x, y), widht, height);
+
+	obj->setProperties(properties);
+	return obj;
 }
 GameObject* InteractiveFactory::CreateDoor(std::map<std::string, std::string>& properties, DrawContainer* container, UseContainer* uContainer) {
 	std::string imgurl = properties["image"];

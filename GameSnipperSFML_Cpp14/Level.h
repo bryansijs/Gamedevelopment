@@ -17,10 +17,11 @@ public:
 	Level();
 	~Level();
 
-	std::vector<	GameObject*> game_objects;
+	std::vector<GameObject*> game_objects;
 	std::vector<Tile> tiles;
 	std::vector<TileSet> tileSets;
 
+	std::map<int, bool> hazardMap;
 
 	void updateViewPort(sf::Vector2i &worldPos);
 	void MoveView(sf::View &view, sf::Window& window);
@@ -42,7 +43,7 @@ public:
 	void setTiles(std::vector<Tile>& tiles) { this->tiles.swap(tiles);}
 
 
-	std::vector<	GameObject*> getGame_Objects() { return game_objects; }
+	std::vector<GameObject*> getGame_Objects() { return game_objects; }
 	GameObject* getObject(int i) { return game_objects.at(i); }
 
 private:

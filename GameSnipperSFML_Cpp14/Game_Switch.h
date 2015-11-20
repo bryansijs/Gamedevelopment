@@ -5,12 +5,16 @@ class Game_Switch : public GameObject
 
 private:
 	bool isOn;
-
+	int hazardIndex = -1;
+	int doorIndex = -1;
 	void setState()
 	{
 		this->isOn = !this->isOn;
-		std::cout << "I switched the state state: " << isOn << std::endl;
+		std::cout << "I switched the state state: " << isOn <<  " at location x y" << this->getPosition().x << " " << this->getPosition().y  << std::endl;
 	}
+
+	void setHazardState(std::vector<Tile>& tiles, std::map<int, bool>& hazardMap);
+	void setDoorState(int doorIndex, bool doorState);
 
 
 public:
@@ -35,5 +39,8 @@ public:
 	{
 		return this->isOn;
 	}
+
+	void update(std::vector<Tile>& tiles, std::map<int, bool>& hazardMap);
+	
 };
 

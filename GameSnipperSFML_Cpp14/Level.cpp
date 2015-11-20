@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Level.h"
-
+#include "Game_Switch.h"
 
 Level::Level()
 {
@@ -108,8 +108,14 @@ void Level::MoveView(sf::View& view, sf::Window& window)
 
 void Level::update()
 {
-	/*for (size_t i = 0; i < getGame_Objects().size(); i++)
-		getObject(i)->Update();*/
+
+	for (size_t i = 0; i < getGame_Objects().size() - 1; i++)
+	{
+		if (dynamic_cast<Game_Switch*>(getObject(i)))
+		{
+			dynamic_cast<Game_Switch*>(getObject(i))->update(this->tiles, this->hazardMap);
+		}
+	}
 }
 
 void Level::draw(sf::RenderWindow* window, sf::View* view)
@@ -117,25 +123,12 @@ void Level::draw(sf::RenderWindow* window, sf::View* view)
 	for (size_t i = 0; i < tiles.size(); i++)
 		if (tiles.at(i).isVisible)
 			window->draw(tiles.at(i).sprite);
-	/*
-	for (size_t i = 0; i < getGame_Objects().size(); i++)
-		window->draw((getObject(i))->getShape());
-	*/
-
 	MoveView(*view, *window);
 }
 
 void Level::setHazardState(int hazardIndex, bool hazardState)
 {
-
-	for (int i = 0; i < tiles.size(); i++)
-	{
-		if (tiles.at(i).hazardIndex == hazardIndex)
-		{
-			tiles.at(i).hazardState = hazardState;
-			tiles.at(i).isVisible = !hazardState;
-		}
-	}
+	
 }
 
 void Level::setLayerVisibility(int layerIndex, bool isVisible)
@@ -159,6 +152,8 @@ void Level::Start(GameObject* player, sf::Vector2u* size)
 		}
 	}
 
+
+	hazardMap.insert(std::pair<int, bool>(1, false));
 	if (start == nullptr)
 	{
 		start = new StartTile();
