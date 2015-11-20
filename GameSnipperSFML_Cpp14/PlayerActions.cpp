@@ -64,11 +64,18 @@ void PlayerActions::ExecuteActions()
 		(this->*function)();
 	}
 
+	if (resetAnimation)
+	{
+		moveAction.AnimateMovement(player, 1);
+	}
+
 	activeActions.clear();
+	resetAnimation = true;
 }
 
 void PlayerActions::Move()
 {
+	resetAnimation = false;
 	std::vector<std::string> directions;
 
 	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {

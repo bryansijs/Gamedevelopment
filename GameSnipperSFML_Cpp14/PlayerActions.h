@@ -25,6 +25,7 @@ public:
 	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile>* tiles);
 	void ProcessActions(std::vector<std::string> &newActiveKeys);
 	void setTiles(std::vector<Tile>* t) { tiles = t; };
+
 	void Move();
 	void Shoot();
 	void Use();
@@ -57,5 +58,6 @@ private:
 	std::vector<Tile>* tiles;
 
 	bool fired = false;
+	bool resetAnimation = true;
 };
 
