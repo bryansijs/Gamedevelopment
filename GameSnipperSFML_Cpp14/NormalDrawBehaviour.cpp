@@ -27,8 +27,8 @@ sf::Sprite NormalDrawBehaviour::getCurrentImage()
 	this->unitImage.setTextureRect(sf::IntRect(
 		this->gameObject->getImageX(),
 		this->gameObject->getImageY(),
-		this->gameObject->width,
-		this->gameObject->height));
+		this->gameObject->getWidth(),
+		this->gameObject->getHeight()));
 
 	this->unitImage.setPosition(this->gameObject->position);
 

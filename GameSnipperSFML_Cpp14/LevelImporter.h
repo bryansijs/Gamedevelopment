@@ -27,6 +27,7 @@ protected:
 	sf::Sound music;
 public:
 	LevelImporter(DrawContainer *drawContainer);
+	LevelImporter(DrawContainer *drawContainer, UseContainer *useContainer);
 	LevelImporter();
 	~LevelImporter();
 
@@ -34,12 +35,6 @@ public:
 	void Prepare();
 
 	void Clear();
-	std::vector<GameObject*> game_objects;
-
-	std::vector<Tile> tiles;
-	std::vector<TileSet> tileSets;
-
-	DrawContainer *drawContainer;
 
 	Level* LevelImporter::getLevel();
 
@@ -55,4 +50,14 @@ private:
 	int levelWidht;
 	sf::IntRect subRect;
 	std::map<std::string, std::string> JSONtoMap(Json::Value& properties);
+
+	DrawContainer *drawContainer;
+	MoveContainer *moveContainer;
+	UseContainer *useContainer;
+
+	std::vector<GameObject*> game_objects;
+	std::vector<Tile> tiles;
+	std::vector<TileSet> tileSets;
+
+
 };

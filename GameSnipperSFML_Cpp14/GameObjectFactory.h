@@ -8,8 +8,11 @@
 #include "EnemyFactory.h"
 #include "ItemFactory.h"
 #include "InteractiveFactory.h"
+
+
 class GameObject;
 class DrawContainer;
+class UseContainer;
 
 class GameObjectFactory
 {
@@ -17,6 +20,7 @@ private:
 
 	DrawContainer *drawContainer;
 	MoveContainer *moveContainer;
+	UseContainer *useContainer;
 	std::map<std::string, GameObject*(GameObjectFactory::*)(std::map<std::string, std::string>&)> possibleObjects = {
 		{ "Enemy", &GameObjectFactory::CreateEnemy },
 		{ "Object", &GameObjectFactory::CreateObject },
@@ -38,6 +42,7 @@ private:
 public:
 	GameObjectFactory(DrawContainer *drawContainer);
 	GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer);
+	GameObjectFactory(DrawContainer *drawContainer, UseContainer* useContainer);
 	GameObjectFactory();
 	~GameObjectFactory();
 
@@ -45,6 +50,8 @@ public:
 
 	void setDrawContainer(DrawContainer* drawContainer) { this->drawContainer = drawContainer; };
 	void setMoveContainer(MoveContainer* moveContainer) { this->moveContainer = moveContainer; };
+	void setUseContainer(UseContainer* useContainer) { this->useContainer = useContainer; }
+
 
 	static GameObjectFactory& getInstance()
 	{

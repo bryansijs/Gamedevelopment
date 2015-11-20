@@ -9,21 +9,39 @@
 
 Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer)
 {
-	this->moveContainer = moveContainer;
-	this->drawContainer = drawContainer;
+	this->setMoveContainer(moveContainer);
+	this->setDrawContainer(drawContainer);
 
-	this->moveBehaviour = { new NormalMoveBehaviour(this) };
-	this->drawBehaviour = { new PlayerDrawBehaviour(this, 10, "Player.png") };
+	this->SetMoveBehaviour( new NormalMoveBehaviour(this) );
+	this->setDrawBehaviour( new PlayerDrawBehaviour(this, 10, "Player.png"));
 
 	this->setSize(32, 32);
 
-	this->drawContainer->AddBehaviour(drawBehaviour);
+	this->getDrawContainer()->AddBehaviour(getDrawBehaviour());
 }
+
+
+Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, UseContainer* useContainer)
+{
+	this->setMoveContainer(moveContainer);
+	this->setDrawContainer(drawContainer);
+
+	this->SetMoveBehaviour(new NormalMoveBehaviour(this));
+	this->setDrawBehaviour(new PlayerDrawBehaviour(this, 10, "Player.png"));
+
+	this->setSize(32, 32);
+
+	this->getDrawContainer()->AddBehaviour(getDrawBehaviour());
+
+	this->setUseContainer(useContainer);
+}
+
+
 
 Player::Player()
 {
-	this->moveBehaviour = { new NormalMoveBehaviour(this) };
-	this->drawBehaviour = { new PlayerDrawBehaviour(this, 10, "Player.png") };
+	this->SetMoveBehaviour ( new NormalMoveBehaviour(this) );
+	this->setDrawBehaviour(new PlayerDrawBehaviour(this, 10, "Player.png"));
 }
 
 Player::~Player()

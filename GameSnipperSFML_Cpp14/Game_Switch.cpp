@@ -31,7 +31,21 @@ Game_Switch::Game_Switch(DrawContainer* container, std::string img, sf::Vector2f
 	this->setSize(widht, height);
 };
 
+
+
+Game_Switch::Game_Switch(DrawContainer* container, UseContainer *useContainer, std::string img, sf::Vector2f position, int widht, int height) :GameObject{ container,useContainer, img } {
+	this->setPosition(position);
+	this->setSize(widht, height);
+};
+
+
+
 Game_Switch::Game_Switch(sf::Vector2f position, int widht, int height) :GameObject{  } {
+	this->setPosition(position);
+	this->setSize(widht, height);
+};
+
+Game_Switch::Game_Switch(UseContainer *useContainer, sf::Vector2f position, int widht, int height) :GameObject{useContainer} {
 	this->setPosition(position);
 	this->setSize(widht, height);
 };

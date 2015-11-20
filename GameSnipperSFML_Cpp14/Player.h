@@ -8,6 +8,7 @@ class Player : public Unit
 {
 public:
 	Player(MoveContainer* moveContainer, DrawContainer* drawContainer);
+	Player(MoveContainer* moveContainer, DrawContainer* drawContainer, UseContainer *useContainer);
 	Player();
 	~Player();
 };

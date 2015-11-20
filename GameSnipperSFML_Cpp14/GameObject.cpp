@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GameObject.h"
 #include "DrawContainer.h"
+#include "UseContainer.h"
 #include "NormalDrawBehaviour.h"
 #include "MoveBehaviour.h"
 #include "Tile.h"
@@ -16,6 +17,25 @@ GameObject::GameObject(DrawContainer *drawContainer, std::string textureUrl)
 GameObject::GameObject(DrawContainer *drawContainer)
 {
 }
+
+
+GameObject::GameObject(UseContainer *useContainer)
+{
+	this->useContainer = useContainer;
+	this->useContainer->AddObject(this);
+}
+
+GameObject::GameObject(DrawContainer *drawContainer, UseContainer *useContainer,std::string textureUrl)
+{
+	this->drawContainer = drawContainer;
+	this->drawBehaviour = { new NormalDrawBehaviour(this, 10, "./Resources/sprites/" + textureUrl) };
+	this->drawContainer->AddBehaviour(this->drawBehaviour);
+	this->useContainer = useContainer;
+	this->useContainer->AddObject(this);
+}
+
+
+
 GameObject::GameObject()
 {
 }
@@ -43,6 +63,9 @@ void GameObject::SetMoveBehaviour(MoveBehaviour* moveBehaviour)
 {
 	this->moveBehaviour = moveBehaviour;
 }
+
+
+
 
 bool GameObject::isColliding(std::vector<Tile> tiles, float newX, float newY)
 {

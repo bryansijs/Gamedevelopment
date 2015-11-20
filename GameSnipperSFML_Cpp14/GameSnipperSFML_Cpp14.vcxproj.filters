@@ -369,6 +369,9 @@
     <ClInclude Include="UnitTestGameObjectFactory.h">
       <Filter>Header Files\UnitTest\Tests</Filter>
     </ClInclude>
+    <ClInclude Include="UseContainer.h">
+      <Filter>Header Files\Containers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -547,6 +550,9 @@
     </ClCompile>
     <ClCompile Include="UnitTestGameObjectFactory.cpp">
       <Filter>Source Files\UnitTest\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="UseContainer.cpp">
+      <Filter>Source Files\Containers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

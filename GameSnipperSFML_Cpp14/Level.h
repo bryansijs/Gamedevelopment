@@ -45,24 +45,6 @@ public:
 	std::vector<	GameObject*> getGame_Objects() { return game_objects; }
 	GameObject* getObject(int i) { return game_objects.at(i); }
 
-	/*std::string getObjectType(int i)
-	{
-		if (dynamic_cast<t_Enemy*> (getObject(i)))
-			return "Enemy";
-		if (dynamic_cast<t_Door*> (getObject(i)))
-			return "Door";
-		if (dynamic_cast<t_Switch*> (getObject(i)))
-			return "Switch";
-		if (dynamic_cast<t_EndTile*> (getObject(i)))
-			return "EndTile";
-		if (dynamic_cast<t_WarpTile*> (getObject(i)))
-			return "WarpTile";
-		if (dynamic_cast<t_StartTile*> (getObject(i)))
-			return "StartTile";
-
-		return "Object";
-	}*/
-
 private:
 	bool doEvents = true;
 	bool moveDown = true;

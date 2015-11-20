@@ -13,12 +13,12 @@ InteractiveFactory::~InteractiveFactory()
 }
 
 
-GameObject* InteractiveFactory::Create(std::map<std::string, std::string> properties, DrawContainer* container) {
-	std::map<std::string, GameObject*(InteractiveFactory::*)(std::map<std::string, std::string>&, DrawContainer* container)>::iterator  it;
+GameObject* InteractiveFactory::Create(std::map<std::string, std::string> properties, DrawContainer* container, UseContainer* uContainer) {
+	std::map<std::string, GameObject*(InteractiveFactory::*)(std::map<std::string, std::string>&, DrawContainer* container, UseContainer* uContainer)>::iterator  it;
 	for (it = possibleObjects.begin(); it != possibleObjects.end(); it++) {
 		if (it->first == properties["iType"]) {
 			auto function = it->second;
-			return (this->*function)(properties, container);
+			return (this->*function)(properties, container, uContainer);
 		}
 	}
 
@@ -26,7 +26,7 @@ GameObject* InteractiveFactory::Create(std::map<std::string, std::string> proper
 }
 
 
-GameObject* InteractiveFactory::CreateSwitch(std::map<std::string, std::string>& properties, DrawContainer* container) {
+GameObject* InteractiveFactory::CreateSwitch(std::map<std::string, std::string>& properties, DrawContainer* container, UseContainer* uContainer) {
 	std::string imgurl = properties["image"];
 	int x, y, widht, height;
 	x = std::stoi(properties["x"]);
@@ -34,11 +34,11 @@ GameObject* InteractiveFactory::CreateSwitch(std::map<std::string, std::string>&
 	widht = std::stoi(properties["width"]);
 	height = std::stoi(properties["height"]);
 	if(imgurl != "")
-		return  new Game_Switch(container, imgurl, sf::Vector2f(x, y), widht, height);
+		return  new Game_Switch(container, uContainer, imgurl, sf::Vector2f(x, y), widht, height);
 	else
-		return  new Game_Switch(sf::Vector2f(x, y), widht, height);
+		return  new Game_Switch(uContainer,sf::Vector2f(x, y), widht, height);
 }
-GameObject* InteractiveFactory::CreateDoor(std::map<std::string, std::string>& properties, DrawContainer* container) {
+GameObject* InteractiveFactory::CreateDoor(std::map<std::string, std::string>& properties, DrawContainer* container, UseContainer* uContainer) {
 	std::string imgurl = properties["image"];
 	int x, y, widht, height;
 	x = std::stoi(properties["x"]);
@@ -48,6 +48,6 @@ GameObject* InteractiveFactory::CreateDoor(std::map<std::string, std::string>& p
 	return  new Door(container, imgurl, sf::Vector2f(x, y), widht, height);
 
 }
-GameObject* InteractiveFactory::CreateKeyHole(std::map<std::string, std::string>& properties, DrawContainer* container) {
+GameObject* InteractiveFactory::CreateKeyHole(std::map<std::string, std::string>& properties, DrawContainer* container, UseContainer* uContainer) {
 	return nullptr;
 }

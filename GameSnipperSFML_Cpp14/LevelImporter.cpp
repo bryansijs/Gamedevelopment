@@ -36,7 +36,7 @@ void LevelImporter::PrepareTileSets()
 
 void LevelImporter::PrepareGameObjects()
 {
-	objectFactory = new GameObjectFactory(drawContainer);
+	objectFactory = new GameObjectFactory(drawContainer,useContainer);
 
 	for (Json::Value::iterator it = jsonRoot["layers"].begin(); it != jsonRoot["layers"].end(); ++it)
 	{
@@ -277,6 +277,12 @@ Level* LevelImporter::getLevel()
 LevelImporter::LevelImporter(DrawContainer *drawContainer)
 {
 	this->drawContainer = drawContainer;
+}
+
+LevelImporter::LevelImporter(DrawContainer *drawContainer, UseContainer *useContainer)
+{
+	this->drawContainer = drawContainer;
+	this->useContainer = useContainer;
 }
 
 LevelImporter::LevelImporter()

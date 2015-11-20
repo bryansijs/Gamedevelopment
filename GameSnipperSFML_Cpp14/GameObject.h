@@ -8,19 +8,17 @@ class DrawContainer;
 class MoveContainer;
 class DrawBehaviour;
 class MoveBehaviour;
+class UseContainer;
 class Tile;
 
 class GameObject
 {
 
 private:
-	
-
-public:
-	//TODO deze moeten private worden, maar aangezien dit al word gebruikt moeten we dit even naar een merge doen;
 	std::string name;
 	std::string type;
 
+	UseContainer*  useContainer;
 	DrawContainer* drawContainer;
 	MoveContainer* moveContainer;
 	DrawBehaviour* drawBehaviour;
@@ -30,11 +28,13 @@ public:
 	int yIndex = 0;
 	int width = 0;
 	int height = 0;
-	//TOT hier
 
+public:
 	GameObject(DrawContainer *drawContainer, std::string textureUrl);
 	GameObject(DrawContainer *drawContainer);
 	GameObject();
+	GameObject(UseContainer *useContainer);
+	GameObject::GameObject(DrawContainer *drawContainer, UseContainer *useContainer, std::string textureUrl);
 	~GameObject();
 
 
@@ -49,6 +49,17 @@ public:
 
 	void setDrawContainer(DrawContainer* newDrawContainer) {this->drawContainer = newDrawContainer	;}
 	void setMoveContainer(MoveContainer* newMoveContainer) { this->moveContainer = newMoveContainer; }
+
+
+	DrawContainer* getDrawContainer() { return this->drawContainer; }
+	MoveContainer* getMoveContainer() { return this->moveContainer; }
+	UseContainer* getUseContainer() { return this->useContainer; }
+
+
+	DrawBehaviour* getDrawBehaviour() { return this->drawBehaviour; }
+	MoveBehaviour* getMoveBehaviour() { return this->moveBehaviour; }
+
+	void setUseContainer(UseContainer* useContainer) { this->useContainer = useContainer; }
 	sf::IntRect imageRect =  sf::IntRect(0, 0, 0, 0);
 
 	void setImageX(int x)
@@ -63,6 +74,8 @@ public:
 
 	int getImageY() { return yIndex * height; }
 	int getImageX() { return xIndex * width; }
+	int getHeight() { return height; }
+	int getWidth() { return width; }
 
 	void setSize(int width, int height)
 	{

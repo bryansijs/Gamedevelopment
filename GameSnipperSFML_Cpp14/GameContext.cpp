@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "GameContext.h"
-
+#include "UseContainer.h"
 #include "MoveContainer.h"
 #include "DrawContainer.h"
 #include "KeyMapping.h"
@@ -11,8 +11,8 @@ GameContext::GameContext(Context* context)
 
 	moveContainer = new MoveContainer();
 	drawContainer = new DrawContainer();
-
-	player = new Player(moveContainer, drawContainer);
+	useContainer = new UseContainer();
+	player = new Player(moveContainer, drawContainer,useContainer);
 	playerActions.SetPlayer(player);
 
 	keyMappingImporter.Import("./Resources/key-mapping.json");

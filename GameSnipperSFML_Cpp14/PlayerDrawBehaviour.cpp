@@ -25,13 +25,10 @@ sf::Sprite PlayerDrawBehaviour::getCurrentImage()
 	this->unitImage.setTextureRect(sf::IntRect(
 		this->gameObject->getImageX(),
 		this->gameObject->getImageY(),
-		this->gameObject->width,
-		this->gameObject->height));
+		this->gameObject->getWidth(),
+		this->gameObject->getHeight()));
 
 	this->unitImage.setPosition(this->gameObject->position);
-
-	/*this->unitImage.setTextureRect(sf::IntRect(0, 0, 32, 32));
-	this->unitImage.setPosition(this->gameObject->position);*/
 
 	return this->unitImage;
 }

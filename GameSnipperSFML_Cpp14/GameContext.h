@@ -12,10 +12,16 @@
 class Context;
 class MoveContainer;
 class DrawContainer;
+class UseContainer;
 
 class GameContext
 {
-public:
+private: 
+
+
+
+
+public: 
 	GameContext(Context* context);
 	~GameContext();
 
@@ -23,6 +29,7 @@ public:
 
 	MoveContainer* moveContainer;
 	DrawContainer* drawContainer;
+	UseContainer *useContainer;
 
 	Player* player;
 	PlayerInput playerInput;
@@ -36,5 +43,7 @@ public:
 	sf::Clock deltaClock;
 	sf::Event event;
 	sf::View view;
+
+	
 };
 

@@ -5,6 +5,7 @@
 
 #include "Player.h"
 #include "DrawBehaviour.h"
+#include "UseContainer.h"
 #include "KeyMapping.h"
 #include "GameObject.h"
 #include "Tile.h"
@@ -63,7 +64,13 @@ void PlayerActions::Shoot()
 	shootAction.Shoot(drawContainer, moveContainer, player, direction);
 }
 
+
 void PlayerActions::Use()
 {
+	int b = this->player->getUseContainer()->getObjects().size();
 	
+	for (GameObject* object : this->player->getUseContainer()->getObjects())
+	{
+			
+	}
 }
