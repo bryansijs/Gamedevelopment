@@ -25,8 +25,8 @@ void NormalDrawBehaviour::Draw(sf::RenderWindow *window)
 sf::Sprite NormalDrawBehaviour::getCurrentImage()
 {
 	this->unitImage.setTextureRect(sf::IntRect(
-		this->gameObject->get_Image_x(),
-		this->gameObject->get_Image_y(),
+		this->gameObject->getImageX(),
+		this->gameObject->getImageY(),
 		this->gameObject->width,
 		this->gameObject->height));
 

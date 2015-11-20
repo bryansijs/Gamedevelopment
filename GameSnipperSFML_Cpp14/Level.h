@@ -5,7 +5,6 @@
 #include <SFML\Audio.hpp>
 #include "Tile.h"
 #include "GameObject.h"
-#include "GameObject.h"
 #include "TileSet.h"
 #include "StartTile.h"
 #include "Time.h"
@@ -18,7 +17,7 @@ public:
 	Level();
 	~Level();
 
-	std::vector<GameObject*> game_objects;
+	std::vector<	GameObject*> game_objects;
 	std::vector<Tile> tiles;
 	std::vector<TileSet> tileSets;
 
@@ -43,7 +42,7 @@ public:
 	void setTiles(std::vector<Tile>& tiles) { this->tiles.swap(tiles);}
 
 
-	std::vector<GameObject*> getGame_Objects() { return game_objects; }
+	std::vector<	GameObject*> getGame_Objects() { return game_objects; }
 	GameObject* getObject(int i) { return game_objects.at(i); }
 
 	/*std::string getObjectType(int i)

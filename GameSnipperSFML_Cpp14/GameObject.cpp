@@ -1,12 +1,11 @@
 #include "stdafx.h"
 #include "GameObject.h"
-
 #include "DrawContainer.h"
 #include "NormalDrawBehaviour.h"
 #include "MoveBehaviour.h"
 #include "Tile.h"
 
-//GameObject::GameObject(std::vector<DrawBehaviour*>* draws, std::string textureUrl)
+
 GameObject::GameObject(DrawContainer *drawContainer, std::string textureUrl)
 {
 	this->drawContainer = drawContainer;
@@ -14,6 +13,9 @@ GameObject::GameObject(DrawContainer *drawContainer, std::string textureUrl)
 	this->drawContainer->AddBehaviour(this->drawBehaviour);
 }
 
+GameObject::GameObject(DrawContainer *drawContainer)
+{
+}
 GameObject::GameObject()
 {
 }
@@ -27,6 +29,10 @@ void GameObject::Update()
 	
 }
 
+void GameObject::setProperties(std::map<std::string, std::string>& properties)
+{
+
+}
 
 void GameObject::setDrawBehaviour(DrawBehaviour* newDrawBehaviour)
 {

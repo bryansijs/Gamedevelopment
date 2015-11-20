@@ -10,6 +10,14 @@ bool UnitTest::Compare(std::string identifier, int result, int expected)
 	return PrintFalse(identifier);
 }
 
+bool UnitTest::Compare(std::string identifier, sf::Vector2f result, sf::Vector2f expected)
+{
+	if (result.x == expected.x && result.y == expected.y)
+		return PrintTrue(identifier);
+	return PrintFalse(identifier);
+}
+
+
 bool UnitTest::Compare(std::string identifier, float result, float expected)
 {
 	if (result == expected)
@@ -56,3 +64,5 @@ bool UnitTest::PrintFalse(std::string identifier)
 	std::cout << white << identifier << ": " << red << "false" << white << std::endl;
 	return false;
 }
+
+

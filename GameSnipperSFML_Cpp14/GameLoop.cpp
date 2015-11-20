@@ -15,7 +15,7 @@ Level* lev;
 GameLoop::GameLoop(Context* c)
 {
 	this->context = c;
-	l = new LevelImporter(context->drawContainer);
+	//l = new LevelImporter(context->drawContainer);
 
 	l->Import("./Resources/levels/Level_New.json");
 	l->Prepare();
@@ -23,6 +23,7 @@ GameLoop::GameLoop(Context* c)
 
 GameLoop::~GameLoop()
 {
+
 }
 
 void GameLoop::run()

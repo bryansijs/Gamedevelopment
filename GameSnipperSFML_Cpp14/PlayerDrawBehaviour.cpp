@@ -23,8 +23,8 @@ void PlayerDrawBehaviour::Draw(sf::RenderWindow *window)
 sf::Sprite PlayerDrawBehaviour::getCurrentImage()
 {
 	this->unitImage.setTextureRect(sf::IntRect(
-		this->gameObject->get_Image_x(),
-		this->gameObject->get_Image_y(),
+		this->gameObject->getImageX(),
+		this->gameObject->getImageY(),
 		this->gameObject->width,
 		this->gameObject->height));
 

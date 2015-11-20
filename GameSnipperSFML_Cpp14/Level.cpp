@@ -153,8 +153,10 @@ void Level::Start(GameObject* player, sf::Vector2u* size)
 
 	for (size_t i = 0; i < game_objects.size(); i++)
 	{
-		if (dynamic_cast<StartTile*> (getObject(i)))
+		if (dynamic_cast<StartTile*> (getObject(i))) {
 			start = dynamic_cast<StartTile*> (getObject(i));
+			break;
+		}
 	}
 
 	if (start == nullptr)
