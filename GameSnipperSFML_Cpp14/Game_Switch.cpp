@@ -49,3 +49,8 @@ Game_Switch::Game_Switch(UseContainer *useContainer, sf::Vector2f position, int 
 	this->setPosition(position);
 	this->setSize(widht, height);
 };
+
+void Game_Switch::doAction()
+{
+	setState();
+}

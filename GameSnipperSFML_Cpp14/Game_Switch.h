@@ -6,6 +6,13 @@ class Game_Switch : public GameObject
 private:
 	bool isOn;
 
+	void setState()
+	{
+		this->isOn = !this->isOn;
+		std::cout << "I switched the state state: " << isOn << std::endl;
+	}
+
+
 public:
 	Game_Switch();
 	~Game_Switch();
@@ -20,13 +27,9 @@ public:
 	Game_Switch(sf::Vector2f position, int widht, int height);
 	Game_Switch(UseContainer *useContainer,sf::Vector2f position, int widht, int height);
 	virtual void setProperties(std::map<std::string, std::string>& properties);
+	virtual void doAction();
 
 
-	void setState()
-	{
-		this->isOn = !this->isOn;
-		std::cout << "I switched the state state: " << isOn << std::endl;
-	}
 
 	bool getState()
 	{

@@ -65,7 +65,10 @@ void GameObject::SetMoveBehaviour(MoveBehaviour* moveBehaviour)
 }
 
 
+void GameObject::doAction()
+{
 
+}
 
 bool GameObject::isColliding(std::vector<Tile> tiles, float newX, float newY)
 {

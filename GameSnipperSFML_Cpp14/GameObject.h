@@ -42,6 +42,8 @@ public:
 
 	void setPosition(sf::Vector2f position) { this->position = position; };
 	virtual void Update();
+	
+	virtual void doAction();
 	virtual void setProperties(std::map<std::string, std::string>& properties);
 
 	void setDrawBehaviour(DrawBehaviour* newDrawBehaviour);

@@ -67,10 +67,16 @@ void PlayerActions::Shoot()
 
 void PlayerActions::Use()
 {
+	//TODO ervoro zorgen dat deze maar een keer word uitgevoerd;
 	int b = this->player->getUseContainer()->getObjects().size();
 	
 	for (GameObject* object : this->player->getUseContainer()->getObjects())
 	{
-			
+
+		//Check zit ik wel bij dit object in de beurt?
+		//zojah dan gaan zijn actie uitvoeren;
+		//anders nope nope
+
+		object->doAction();
 	}
 }
