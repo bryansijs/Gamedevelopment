@@ -22,22 +22,22 @@ void MoveAction::Move(std::vector<std::string> directions, Player *player, std::
 	{
 		if (*it == "move-up")
 		{
-			player->set_Image_y(3);
+			player->setImageY(3);
 			velocity.y -= speed;
 		}
 		if (*it == "move-down")
 		{
-			player->set_Image_y(0);
+			player->setImageY(0);
 			velocity.y += speed;
 		}
 		if (*it == "move-left")
 		{
-			player->set_Image_y(1);
+			player->setImageY(1);
 			velocity.x -= speed;
 		}
 		if (*it == "move-right")
 		{
-			player->set_Image_y(2);
+			player->setImageY(2);
 			velocity.x += speed;
 		}
 	}
@@ -74,7 +74,7 @@ void MoveAction::AnimateMovement(Player *player)
 	if (animateState == 3)
 		animateState = 0;
 
-	player->set_Image_x(animateState);
+	player->setImageX(animateState);
 	animateState++;
 	animationDelay = 0.05;
 }

@@ -14,4 +14,8 @@ TestDemo::TestDemo()
 	std::string test = "een";
 	UnitTest::Compare("TestDemo, voorbeeld 7", test, "een");
 	UnitTest::Compare("TestDemo, voorbeeld 8", test, "twee");
+
+
+
+
 }

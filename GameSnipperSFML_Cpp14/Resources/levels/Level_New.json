@@ -107,10 +107,10 @@
                  "name":"startTile",
                  "properties":
                     {
-
+					"sType":"StartTile"
                     },
                  "rotation":0,
-                 "type":"StartTile",
+                 "type":"GameTile",
                  "visible":true,
                  "width":28,
                  "x":65,
@@ -122,10 +122,10 @@
                  "name":"switch",
                  "properties":
                     {
-                     "image":"switch1.png"
+					 "iType":"Switch"
                     },
                  "rotation":0,
-                 "type":"Switch",
+                 "type":"Object",
                  "visible":true,
                  "width":34,
                  "x":510,
@@ -140,7 +140,7 @@
 
                     },
                  "rotation":0,
-                 "type":"",
+                 "type":"Item",
                  "visible":true,
                  "width":24,
                  "x":610,
@@ -155,7 +155,7 @@
 
                     },
                  "rotation":0,
-                 "type":"",
+                 "type":"Item",
                  "visible":true,
                  "width":24,
                  "x":645,
@@ -167,7 +167,8 @@
                  "name":"Enemy",
                  "properties":
                     {
-                     "image":"enemy1.png"
+                     "image":"enemy1.png",
+					"eType":"Basic"
                     },
                  "rotation":0,
                  "type":"Enemy",
@@ -182,10 +183,10 @@
                  "name":"Switch",
                  "properties":
                     {
-                     "image":"switch2.png"
+					 "iType":"Switch"
                     },
                  "rotation":0,
-                 "type":"Switch",
+                 "type":"Object",
                  "visible":true,
                  "width":26,
                  "x":69,
@@ -197,7 +198,8 @@
                  "name":"Enemy",
                  "properties":
                     {
-                     "image":"enemy2.png"
+                     "image":"enemy2.png",
+					 "eType":"Runner"
                     },
                  "rotation":0,
                  "type":"Enemy",
@@ -212,7 +214,8 @@
                  "name":"Enemy",
                  "properties":
                     {
-                     "image":"enemy3.png"
+                     "image":"enemy3.png",
+					 "eType":"Tank"
                     },
                  "rotation":0,
                  "type":"Enemy",
@@ -227,10 +230,11 @@
                  "name":"KeyRed",
                  "properties":
                     {
-                     "image":"redkey.png"
+                     "image":"redkey.png",
+					 "iType":"Key"
                     },
                  "rotation":0,
-                 "type":"",
+                 "type":"Item",
                  "visible":true,
                  "width":17,
                  "x":901,
@@ -257,10 +261,11 @@
                  "name":"HealPot",
                  "properties":
                     {
-                     "image":"healpot.png"
+                     "image":"healpot.png",
+					 "iType":"Potion"
                     },
                  "rotation":0,
-                 "type":"",
+                 "type":"Item",
                  "visible":true,
                  "width":24,
                  "x":548,
@@ -272,10 +277,10 @@
                  "name":"EndTile",
                  "properties":
                     {
-
+					"sType":"EndTile"
                     },
                  "rotation":0,
-                 "type":"EndTile",
+                 "type":"GameTile",
                  "visible":true,
                  "width":62.6666666666667,
                  "x":97.3333333333333,

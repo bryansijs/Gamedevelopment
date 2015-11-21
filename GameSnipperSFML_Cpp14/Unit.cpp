@@ -5,6 +5,27 @@
 #include "DrawBehaviour.h"
 #include "UnitState.h"
 
+
+Unit::Unit():GameObject()
+{
+
+}
+
+Unit::Unit(DrawContainer* container, std::string img) : GameObject{ container, img }
+{
+
+}
+
+Unit::Unit(DrawContainer* dContainer, std::string img, MoveContainer* mContainer) : GameObject{ dContainer, img }
+{
+	//Wat voor behavoir heeft deze dan als basic?
+	//this->SetMoveBehaviour()
+}
+
+Unit::Unit(DrawContainer* container) : GameObject{ container}
+{
+
+}
 void Unit::setCurrentState(UnitState* newState)
 {
 	//Verwijder uit lijst. 
