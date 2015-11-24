@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GameObject.h"
 #include "DrawContainer.h"
-#include "UseContainer.h"
+#include "GameObjectContainer.h"
 #include "NormalDrawBehaviour.h"
 #include "MoveBehaviour.h"
 #include "Tile.h"
@@ -19,19 +19,19 @@ GameObject::GameObject(DrawContainer *drawContainer)
 }
 
 
-GameObject::GameObject(UseContainer *useContainer)
+GameObject::GameObject(GameObjectContainer *gameObjectContainer)
 {
-	this->useContainer = useContainer;
-	this->useContainer->AddObject(this);
+	this->gameObjectContainer = gameObjectContainer;
+	this->gameObjectContainer->AddObject(this);
 }
 
-GameObject::GameObject(DrawContainer *drawContainer, UseContainer *useContainer,std::string textureUrl)
+GameObject::GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer,std::string textureUrl)
 {
 	this->drawContainer = drawContainer;
 	this->drawBehaviour = { new NormalDrawBehaviour(this, 10, "./Resources/sprites/" + textureUrl) };
 	this->drawContainer->AddBehaviour(this->drawBehaviour);
-	this->useContainer = useContainer;
-	this->useContainer->AddObject(this);
+	this->gameObjectContainer = gameObjectContainer;
+	this->gameObjectContainer->AddObject(this);
 }
 
 

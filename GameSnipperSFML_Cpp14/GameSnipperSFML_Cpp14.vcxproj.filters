@@ -369,7 +369,7 @@
     <ClInclude Include="UnitTestGameObjectFactory.h">
       <Filter>Header Files\UnitTest\Tests</Filter>
     </ClInclude>
-    <ClInclude Include="UseContainer.h">
+    <ClInclude Include="GameObjectContainer.h">
       <Filter>Header Files\Containers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -551,7 +551,7 @@
     <ClCompile Include="UnitTestGameObjectFactory.cpp">
       <Filter>Source Files\UnitTest\Tests</Filter>
     </ClCompile>
-    <ClCompile Include="UseContainer.cpp">
+    <ClCompile Include="GameObjectContainer.cpp">
       <Filter>Source Files\Containers</Filter>
     </ClCompile>
   </ItemGroup>

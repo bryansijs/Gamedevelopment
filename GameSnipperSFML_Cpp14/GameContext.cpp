@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "GameContext.h"
-#include "UseContainer.h"
+#include "GameObjectContainer.h"
 #include "MoveContainer.h"
 #include "DrawContainer.h"
 #include "KeyMapping.h"
@@ -11,7 +11,7 @@ GameContext::GameContext(Context* context)
 
 	moveContainer = new MoveContainer();
 	drawContainer = new DrawContainer();
-	useContainer = new UseContainer();
+	useContainer = new GameObjectContainer();
 	player = new Player(moveContainer, drawContainer,useContainer);
 	playerActions.SetPlayer(player);
 

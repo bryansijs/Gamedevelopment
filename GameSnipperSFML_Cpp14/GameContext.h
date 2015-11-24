@@ -12,7 +12,7 @@
 class Context;
 class MoveContainer;
 class DrawContainer;
-class UseContainer;
+class GameObjectContainer;
 
 class GameContext
 {
@@ -29,7 +29,7 @@ public:
 
 	MoveContainer* moveContainer;
 	DrawContainer* drawContainer;
-	UseContainer *useContainer;
+	GameObjectContainer *useContainer;
 
 	Player* player;
 	PlayerInput playerInput;

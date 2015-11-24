@@ -8,7 +8,7 @@ class DrawContainer;
 class MoveContainer;
 class DrawBehaviour;
 class MoveBehaviour;
-class UseContainer;
+class GameObjectContainer;
 class Tile;
 
 class GameObject
@@ -18,7 +18,7 @@ private:
 	std::string name;
 	std::string type;
 
-	UseContainer*  useContainer;
+	GameObjectContainer*  gameObjectContainer;
 	DrawContainer* drawContainer;
 	MoveContainer* moveContainer;
 	DrawBehaviour* drawBehaviour;
@@ -34,8 +34,8 @@ public:
 	GameObject(DrawContainer *drawContainer, std::string textureUrl);
 	GameObject(DrawContainer *drawContainer);
 	GameObject();
-	GameObject(UseContainer *useContainer);
-	GameObject::GameObject(DrawContainer *drawContainer, UseContainer *useContainer, std::string textureUrl);
+	GameObject(GameObjectContainer *useContainer);
+	GameObject::GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, std::string textureUrl);
 	~GameObject();
 
 
@@ -59,13 +59,13 @@ public:
 
 	DrawContainer* getDrawContainer() { return this->drawContainer; }
 	MoveContainer* getMoveContainer() { return this->moveContainer; }
-	UseContainer* getUseContainer() { return this->useContainer; }
+	GameObjectContainer* getgameObjectContainer() { return this->gameObjectContainer; }
 
 
 	DrawBehaviour* getDrawBehaviour() { return this->drawBehaviour; }
 	MoveBehaviour* getMoveBehaviour() { return this->moveBehaviour; }
 
-	void setUseContainer(UseContainer* useContainer) { this->useContainer = useContainer; }
+	void setUseContainer(GameObjectContainer* gameObjectContainer) { this->gameObjectContainer = gameObjectContainer; }
 	sf::IntRect imageRect =  sf::IntRect(0, 0, 0, 0);
 
 	void setImageX(int x)

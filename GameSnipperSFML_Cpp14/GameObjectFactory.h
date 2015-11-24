@@ -12,15 +12,15 @@
 
 class GameObject;
 class DrawContainer;
-class UseContainer;
+class GameObjectContainer;
 
 class GameObjectFactory
 {
 private:
 
-	DrawContainer *drawContainer;
-	MoveContainer *moveContainer;
-	UseContainer *useContainer;
+	DrawContainer* drawContainer;
+	MoveContainer* moveContainer;
+	GameObjectContainer* gameObjectContainer;
 	std::map<std::string, GameObject*(GameObjectFactory::*)(std::map<std::string, std::string>&)> possibleObjects = {
 		{ "Enemy", &GameObjectFactory::CreateEnemy },
 		{ "Object", &GameObjectFactory::CreateObject },
@@ -42,7 +42,7 @@ private:
 public:
 	GameObjectFactory(DrawContainer *drawContainer);
 	GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer);
-	GameObjectFactory(DrawContainer *drawContainer, UseContainer* useContainer);
+	GameObjectFactory(DrawContainer *drawContainer, GameObjectContainer* gameObjectContainer);
 	GameObjectFactory();
 	~GameObjectFactory();
 
@@ -50,8 +50,8 @@ public:
 
 	void setDrawContainer(DrawContainer* drawContainer) { this->drawContainer = drawContainer; };
 	void setMoveContainer(MoveContainer* moveContainer) { this->moveContainer = moveContainer; };
-	void setUseContainer(UseContainer* useContainer) { this->useContainer = useContainer; }
-
+	void setGameObjectContainer(GameObjectContainer* gameObjectContainer) { this->gameObjectContainer = gameObjectContainer; }
+	
 
 	static GameObjectFactory& getInstance()
 	{

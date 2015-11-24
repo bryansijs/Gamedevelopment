@@ -18,10 +18,10 @@ GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer, MoveContainer
 	this->moveContainer = moveContainer;
 }
 
-GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer, UseContainer* useContainer)
+GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer, GameObjectContainer* gameObjectContainer)
 {
 	this->drawContainer = drawContainer;
-	this->useContainer = useContainer;
+	this->gameObjectContainer = gameObjectContainer;
 }
 
 GameObjectFactory::~GameObjectFactory()
@@ -48,7 +48,7 @@ GameObject* GameObjectFactory::CreateEnemy(std::map<std::string, std::string>& p
 
 GameObject* GameObjectFactory::CreateObject(std::map<std::string, std::string>& properties)
 {
-	return this->interactiveFactory.Create(properties, drawContainer,useContainer);
+	return this->interactiveFactory.Create(properties, drawContainer, gameObjectContainer);
 }
 
 GameObject* GameObjectFactory::CreateTile(std::map<std::string, std::string>& properties)

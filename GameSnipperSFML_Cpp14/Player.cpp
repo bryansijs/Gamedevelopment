@@ -21,7 +21,7 @@ Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer)
 }
 
 
-Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, UseContainer* useContainer)
+Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameObjectContainer* useContainer)
 {
 	this->setMoveContainer(moveContainer);
 	this->setDrawContainer(drawContainer);

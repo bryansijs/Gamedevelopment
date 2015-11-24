@@ -27,7 +27,7 @@ protected:
 	sf::Sound music;
 public:
 	LevelImporter(DrawContainer *drawContainer);
-	LevelImporter(DrawContainer *drawContainer, UseContainer *useContainer);
+	LevelImporter(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer);
 	LevelImporter();
 	~LevelImporter();
 
@@ -53,7 +53,7 @@ private:
 
 	DrawContainer *drawContainer;
 	MoveContainer *moveContainer;
-	UseContainer *useContainer;
+	GameObjectContainer *gameObjectContainer;
 
 	std::vector<GameObject*> game_objects;
 	std::vector<Tile> tiles;

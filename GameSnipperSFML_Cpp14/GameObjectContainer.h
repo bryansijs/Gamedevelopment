@@ -3,11 +3,11 @@
 
 #include "GameObject.h"
 
-class UseContainer
+class GameObjectContainer
 {
 public:
-	UseContainer();
-	~UseContainer();
+	GameObjectContainer();
+	~GameObjectContainer();
 
 	void AddObject(GameObject* object);
 	void RemoveObject(GameObject* object);
