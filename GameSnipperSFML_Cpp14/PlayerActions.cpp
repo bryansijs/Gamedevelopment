@@ -73,13 +73,13 @@ void PlayerActions::Use()
 		return;
 	}
 
-	int b = this->player->getUseContainer()->getObjects().size();
+	int b = this->player->getgameObjectContainer()->getObjects().size();
 	std::cout << "Aantal " << b << std::endl;
 	std::cout << "My current location x y " << player->getPosition().x << " " << player->getPosition().y << std::endl;
 
 	float playery = this->player->getPosition().y;
 	float playerx = this->player->getPosition().x;
-	for (GameObject* object : this->player->getUseContainer()->getObjects())
+	for (GameObject* object : this->player->getgameObjectContainer()->getObjects())
 	{
 		//Check zit ik wel bij dit object in de beurt?
 		//zojah dan gaan zijn actie uitvoeren;
