@@ -5,6 +5,7 @@
 #include  <memory>
 
 class GameObject;
+class GameObjectContainer;
 class StartTile;
 class WarpTile;
 class EndTile;
@@ -16,13 +17,14 @@ public:
 	GameTileFactory();
 	~GameTileFactory();
 
-	GameObject* Create(std::map<std::string, std::string> properties);
+	GameObject* Create(std::map<std::string, std::string>& properties, 
+		GameObjectContainer* gameObjectContainer);
 private:
-	GameObject* CreateStart(std::map<std::string, std::string> properties);
-	GameObject* CreateWarp(std::map<std::string, std::string>properties);
-	GameObject* CreateEnd(std::map<std::string, std::string> properties);
+	GameObject* CreateStart(std::map<std::string, std::string>& properties, GameObjectContainer* gameObjectContainer);
+	GameObject* CreateWarp(std::map<std::string, std::string>& properties, GameObjectContainer* gameObjectContainer);
+	GameObject* CreateEnd(std::map<std::string, std::string>& properties, GameObjectContainer* gameObjectContainer);
 
-	std::map<std::string, GameObject*(GameTileFactory::*)(std::map<std::string, std::string>)> possibleTiles = {
+	std::map<std::string, GameObject*(GameTileFactory::*)(std::map<std::string, std::string>&,  GameObjectContainer*)> possibleTiles = {
 		{ "StartTile", &GameTileFactory::CreateStart },
 		{ "Warp", &GameTileFactory::CreateWarp },
 		{ "End", &GameTileFactory::CreateEnd },

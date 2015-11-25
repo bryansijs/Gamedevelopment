@@ -16,11 +16,18 @@ protected:
 public:
 	Level();
 	~Level();
+	Level(GameObjectContainer* gameObjectContainer);
 
-	std::vector<	GameObject*> game_objects;
-	std::vector<Tile> tiles;
-	std::vector<TileSet> tileSets;
+	std::vector<GameObject*> game_objects;
+	std::vector<Tile*> tiles;
+	std::vector<TileSet*> tileSets;
 
+	std::map<int, bool> hazardMap;
+
+	void setHazardMap(std::map<int, bool> hazardMap)
+	{
+		this->hazardMap = hazardMap;
+	}
 
 	void updateViewPort(sf::Vector2i &worldPos);
 	void MoveView(sf::View &view, sf::Window& window);
@@ -28,7 +35,6 @@ public:
 	void draw(sf::RenderWindow* window, sf::View* view);
 	void update();
 
-	void setHazardState(int hazardIndex, bool hazardState);
 	void Start(GameObject* player, sf::Vector2u* size);
 	void setLayerVisibility(int layerIndex, bool isVisible);
 	bool getDoEvents() { return doEvents; }
@@ -38,30 +44,20 @@ public:
 	
 
 	void setGameObjects(std::vector<GameObject*>& game_objects) { this->game_objects.swap(game_objects); }
-	void setTileSets(std::vector<TileSet>& tileSets) { this->tileSets.swap(tileSets); }
-	void setTiles(std::vector<Tile>& tiles) { this->tiles.swap(tiles);}
+	void setTileSets(std::vector<TileSet*>& tileSets) { this->tileSets.swap(tileSets); }
+	void setTiles(std::vector<Tile*>& tiles) { this->tiles.swap(tiles);}
 
 
-	std::vector<	GameObject*> getGame_Objects() { return game_objects; }
+	std::vector<GameObject*> getGame_Objects() { return game_objects; }
 	GameObject* getObject(int i) { return game_objects.at(i); }
 
-	/*std::string getObjectType(int i)
-	{
-		if (dynamic_cast<t_Enemy*> (getObject(i)))
-			return "Enemy";
-		if (dynamic_cast<t_Door*> (getObject(i)))
-			return "Door";
-		if (dynamic_cast<t_Switch*> (getObject(i)))
-			return "Switch";
-		if (dynamic_cast<t_EndTile*> (getObject(i)))
-			return "EndTile";
-		if (dynamic_cast<t_WarpTile*> (getObject(i)))
-			return "WarpTile";
-		if (dynamic_cast<t_StartTile*> (getObject(i)))
-			return "StartTile";
 
-		return "Object";
-	}*/
+	void setGameObjectContainer(GameObjectContainer* container)
+	{
+		this->gameObjectContainer = container;
+	}
+
+	GameObjectContainer* getGameObjectContainer() { return this->gameObjectContainer; }
 
 private:
 	bool doEvents = true;
@@ -76,6 +72,8 @@ private:
 
 	int viewPortX = 0;
 	int viewPortY = 0;
+
+	GameObjectContainer* gameObjectContainer;
 
 };
 

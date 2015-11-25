@@ -22,6 +22,20 @@ Unit::Unit(DrawContainer* dContainer, std::string img, MoveContainer* mContainer
 	//this->SetMoveBehaviour()
 }
 
+Unit::Unit(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* goContainer) : GameObject{ dContainer,goContainer, img }
+{
+	//Wat voor behavoir heeft deze dan als basic?
+	//this->SetMoveBehaviour()
+}
+
+
+Unit::Unit(DrawContainer* dContainer, std::string img, GameObjectContainer* goContainer) : GameObject{ dContainer,goContainer, img, }
+{
+	//Wat voor behavoir heeft deze dan als basic?
+	//this->SetMoveBehaviour()
+}
+
+
 Unit::Unit(DrawContainer* container) : GameObject{ container}
 {
 

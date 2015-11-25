@@ -3,7 +3,7 @@
 class EndTile : public GameObject
 {
 public:
-	EndTile();
+	EndTile(GameObjectContainer* gameObjectContainer);
 	~EndTile();
 };
 

@@ -14,8 +14,9 @@ GameState::GameState(Context* context, StateManager* stateManager)
 	this->stateManager = stateManager;
 	this->levelManager = new LevelManager();
 
-	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer);
-	gameContext->levelImporter->Import("./Resources/levels/Level_1.json");
+	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->useContainer);
+	gameContext->levelImporter->Import("./Resources/levels/OnTopTempGuus.json");
+
 	gameContext->levelImporter->Prepare();
 
 	gameContext->level = gameContext->levelImporter->getLevel();
@@ -36,12 +37,12 @@ GameState::~GameState()
 
 void GameState::Update()
 {
-	Time::deltaTime = (float)gameContext->deltaClock.restart().asMilliseconds() / 10;
+	Time::deltaTime = (float)gameContext->deltaClock.restart().asSeconds();
 	Time::runningTime += Time::deltaTime;
 
 	gameContext->context->window.clear();
 
-	sf::Vector2f playerPosition = gameContext->player->position;
+	sf::Vector2f playerPosition = gameContext->player->getPosition();
 	sf::Vector2i worldPosition = gameContext->context->window.mapCoordsToPixel(playerPosition);
 
 	gameContext->level->draw(&gameContext->context->window, &gameContext->view);

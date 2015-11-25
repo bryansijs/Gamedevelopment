@@ -17,8 +17,7 @@ TankEnemy::TankEnemy(DrawContainer* container, std::string img, sf::Vector2f pos
 };
 
 
-TankEnemy::TankEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, sf::Vector2f position, int widht, int height) :Unit{ dContainer, img } {
-	this->setMoveContainer(mContainer);
+TankEnemy::TankEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer, sf::Vector2f position, int widht, int height) :Unit{ dContainer, img,mContainer,gameObjectContainer } {
 
 	//TODO Iemand:Basic moveBahavoir for this Enemy;
 	this->SetMoveBehaviour(nullptr);

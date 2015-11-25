@@ -255,9 +255,6 @@
     <ClInclude Include="PlayerInput.h">
       <Filter>Header Files\Model\Units\Player</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerMovement.h">
-      <Filter>Header Files\Model\Units\Player</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerActions.h">
       <Filter>Header Files\Model\Units\Player</Filter>
     </ClInclude>
@@ -306,12 +303,6 @@
     <ClInclude Include="application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="game_state.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="method_dispatcher.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
@@ -332,9 +323,6 @@
     </ClInclude>
     <ClInclude Include="BaseState.h">
       <Filter>Header Files\States</Filter>
-    </ClInclude>
-    <ClInclude Include="GameLoop.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EnemyFactory.h">
       <Filter>Header Files\Factories</Filter>
@@ -371,6 +359,18 @@
     </ClInclude>
     <ClInclude Include="LevelManager.h">
       <Filter>Header Files\Managers</Filter>
+	</ClInclude>
+    <ClInclude Include="GameObjectContainer.h">
+      <Filter>Header Files\Containers</Filter>
+	</ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource2.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -446,9 +446,6 @@
     <ClCompile Include="PlayerInput.cpp">
       <Filter>Source Files\Model\Units\Player</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerMovement.cpp">
-      <Filter>Source Files\Model\Units\Player</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerActions.cpp">
       <Filter>Source Files\Model\Units\Player</Filter>
     </ClCompile>
@@ -494,9 +491,6 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
-    <ClCompile Include="game_state.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MenuState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
@@ -514,9 +508,6 @@
     </ClCompile>
     <ClCompile Include="GameContext.cpp">
       <Filter>Source Files\Context</Filter>
-    </ClCompile>
-    <ClCompile Include="GameLoop.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameTileFactory.cpp">
       <Filter>Source Files\Factories</Filter>
@@ -553,6 +544,9 @@
     </ClCompile>
     <ClCompile Include="LevelManager.cpp">
       <Filter>Source Files\Managers</Filter>
+	</ClCompile>
+    <ClCompile Include="GameObjectContainer.cpp">
+      <Filter>Source Files\Containers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
