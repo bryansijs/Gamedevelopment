@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseState.h"
+#include "LevelManager.h"
 
 class StateManager;
 class Context;
@@ -9,11 +10,13 @@ class GameState: public BaseState
 {
 private:
 	StateManager* stateManager;
+	LevelManager* levelManager;
 
 	GameContext* gameContext;
 public:
 	void Update();
 	void Terminate();
+	void StartNextLevel();
 
 	GameState(Context* context, StateManager* stateManager);
 	~GameState();

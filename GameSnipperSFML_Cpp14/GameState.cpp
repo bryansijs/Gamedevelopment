@@ -12,9 +12,10 @@ GameState::GameState(Context* context, StateManager* stateManager)
 {
 	gameContext = new GameContext(context);
 	this->stateManager = stateManager;
+	this->levelManager = new LevelManager();
 
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer);
-	gameContext->levelImporter->Import("./Resources/levels/Level_New.json");
+	gameContext->levelImporter->Import("./Resources/levels/Level_1.json");
 	gameContext->levelImporter->Prepare();
 
 	gameContext->level = gameContext->levelImporter->getLevel();
@@ -82,4 +83,24 @@ void GameState::Update()
 void GameState::Terminate()
 {
 	terminate = true;
+}
+
+void GameState::StartNextLevel()
+{
+	gameContext->levelImporter->Clear();
+
+	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer);
+	gameContext->levelImporter->Import("./Resources/levels/Level_1.json");//TODO: Get NExt level from levelmanager
+	gameContext->levelImporter->Prepare();
+
+	gameContext->level = gameContext->levelImporter->getLevel();
+	gameContext->levelImporter->Clear();
+
+	gameContext->playerActions.SetContainers(gameContext->drawContainer, gameContext->moveContainer, &gameContext->level->tiles);
+	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
+
+	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
+
+	gameContext->view.reset(rect);
+	gameContext->context->window.setView(gameContext->view);
 }
