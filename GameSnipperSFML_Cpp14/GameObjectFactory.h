@@ -8,12 +8,12 @@
 #include "EnemyFactory.h"
 #include "ItemFactory.h"
 #include "InteractiveFactory.h"
-
+#include "Tile.h"
 
 class GameObject;
 class DrawContainer;
 class GameObjectContainer;
-
+class Tile;
 class GameObjectFactory
 {
 private:
@@ -37,7 +37,7 @@ private:
 	EnemyFactory enemyFactory;
 	InteractiveFactory interactiveFactory;
 	ItemFactory itemFactory;
-
+	std::vector<Tile*> tileList;
 
 public:
 	GameObjectFactory(DrawContainer *drawContainer);
@@ -48,6 +48,12 @@ public:
 	~GameObjectFactory();
 
 	GameObject* Create(std::map<std::string, std::string>&);
+
+
+	void setTile(std::vector<Tile*> tileList)
+	{
+		this->tileList = tileList;
+	}
 
 	void setDrawContainer(DrawContainer* drawContainer) { this->drawContainer = drawContainer; };
 	void setMoveContainer(MoveContainer* moveContainer) { this->moveContainer = moveContainer; };

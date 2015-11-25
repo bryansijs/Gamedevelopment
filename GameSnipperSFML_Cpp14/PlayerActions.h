@@ -22,9 +22,9 @@ public:
 	~PlayerActions();
 	float useDelay; 
 	void SetPlayer(Player *activePlayer);
-	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile>* tiles);
+	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile*>* tiles);
 	void ProcessActions(std::vector<std::string> &newActiveKeys);
-	void setTiles(std::vector<Tile>* t) { tiles = t; };
+	void setTiles(std::vector<Tile*>* t) { tiles = t; };
 	void Move();
 	void Shoot();
 	void Use();
@@ -49,7 +49,7 @@ private:
 	ShootAction shootAction;
 
 	Player *player;
-	std::vector<Tile>* tiles;
+	std::vector<Tile*>* tiles;
 
 	bool fired = false;
 

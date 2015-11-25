@@ -56,8 +56,8 @@ private:
 	GameObjectContainer *gameObjectContainer;
 
 	std::vector<GameObject*> game_objects;
-	std::vector<Tile> tiles;
-	std::vector<TileSet> tileSets;
+	std::vector<Tile*> tiles;
+	std::vector<TileSet*> tileSets;
 
 	std::map<int, bool> hazardMap;
 };

@@ -12,7 +12,7 @@ public:
 	MoveAction();
 	~MoveAction();
 
-	void Move(std::string direction, Player *player, std::vector<Tile>* tiles);
+	void Move(std::string direction, Player *player, std::vector<Tile*>* tiles);
 private:
 	Player *player;
 

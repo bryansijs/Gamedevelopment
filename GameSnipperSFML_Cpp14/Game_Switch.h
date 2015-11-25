@@ -1,10 +1,15 @@
 #pragma once
 #include "GameObject.h"
+#include "Tile.h"
+
+class Tile;
 class Game_Switch : public GameObject
 {
 
 private:
+	bool shouldUpdate = false;
 	bool isOn;
+	bool hazardOn;
 	int hazardIndex = -1;
 	int doorIndex = -1;
 	void setState()
@@ -13,8 +18,11 @@ private:
 		std::cout << "I switched the state state: " << isOn <<  " at location x y" << this->getPosition().x << " " << this->getPosition().y  << std::endl;
 	}
 
-	void setHazardState(std::vector<Tile>& tiles, std::map<int, bool>& hazardMap);
-	void setDoorState(int doorIndex);
+	void setHazardState();
+	void setDoorState();
+
+	std::vector<Tile*> HazardList;
+	std::vector<Tile*> ofHazardList;
 
 
 public:
@@ -35,7 +43,19 @@ public:
 
 	bool getState(){return this->isOn;	}
 
-	virtual void Update(std::vector<Tile>& tiles, std::map<int, bool>& hazardMap);
+	virtual void Update();
+	void setTiles(std::vector<Tile*>& tiles)
+	{
+
+		for (int i = 0; i < tiles.size(); i++)
+		{
+			if (tiles.at(i)->hazardIndex == hazardIndex)
+			this->HazardList.push_back(tiles.at(i));
+
+			if (tiles.at(i)->hazardLinkIndex == hazardIndex)
+				ofHazardList.push_back(tiles.at(i));
+		}
+	}
 	
 };
 
