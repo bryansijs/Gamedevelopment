@@ -152,7 +152,7 @@ void MenuState::Update()
 			}
 
 			if (Input::GetKeyDown("Down")) {
-				if (menuContext->currentLevel < menuItems.size() +1 )
+				if (menuContext->currentLevel < menuItems.size())
 				{
 					menuContext->currentLevel += 1;
 					callDirectJSFunction(menuContext->webView, menuContext->web_core, menuContext->currentLevel);
