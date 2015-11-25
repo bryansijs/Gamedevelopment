@@ -24,7 +24,7 @@ void PlayerActions::SetPlayer(Player *player)
 	this->player = player;
 }
 
-void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile>* tiles)
+void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile*>* tiles)
 {
 	this->drawContainer = drawContainer;
 	this->moveContainer = moveContainer;

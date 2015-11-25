@@ -15,7 +15,7 @@ MoveAction::~MoveAction()
 {
 }
 
-void MoveAction::Move(std::string direction, Player *player, std::vector<Tile>* tiles)
+void MoveAction::Move(std::string direction, Player *player, std::vector<Tile*>* tiles)
 {
 	//TODO wat er word hier per direct iets aangepast?
 	//position van het object word een private die je later kunt opvragenmet een getter

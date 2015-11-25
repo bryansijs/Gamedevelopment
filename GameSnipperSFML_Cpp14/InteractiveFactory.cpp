@@ -13,7 +13,8 @@ InteractiveFactory::~InteractiveFactory()
 }
 
 
-GameObject* InteractiveFactory::Create(std::map<std::string, std::string> properties, DrawContainer* container, GameObjectContainer* gameObjectContainer) {
+GameObject* InteractiveFactory::Create(std::map<std::string, std::string> properties, DrawContainer* container, GameObjectContainer* gameObjectContainer, std::vector<Tile*> tileList) {
+	this->tileList = tileList;
 	std::map<std::string, GameObject*(InteractiveFactory::*)(std::map<std::string, std::string>&, DrawContainer* container, GameObjectContainer* gameObjectContainer)>::iterator  it;
 	for (it = possibleObjects.begin(); it != possibleObjects.end(); it++) {
 		if (it->first == properties["iType"]) {
@@ -27,7 +28,7 @@ GameObject* InteractiveFactory::Create(std::map<std::string, std::string> proper
 
 
 GameObject* InteractiveFactory::CreateSwitch(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer) {
-	GameObject *obj = nullptr;
+	Game_Switch *obj = nullptr;
 	std::string imgurl = properties["image"];
 	int x, y, widht, height;
 	x = std::stoi(properties["x"]);
@@ -40,6 +41,7 @@ GameObject* InteractiveFactory::CreateSwitch(std::map<std::string, std::string>&
 		obj=  new Game_Switch(gameObjectContainer,sf::Vector2f(x, y), widht, height);
 
 	obj->setProperties(properties);
+	obj->setTiles(tileList);
 	return obj;
 }
 GameObject* InteractiveFactory::CreateDoor(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer) {

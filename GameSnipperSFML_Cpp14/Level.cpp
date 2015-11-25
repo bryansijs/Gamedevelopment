@@ -113,7 +113,7 @@ void Level::update()
 	{
 		if (dynamic_cast<Game_Switch*>(getObject(i)))
 		{
-			dynamic_cast<Game_Switch*>(getObject(i))->Update(this->tiles, this->hazardMap);
+			dynamic_cast<Game_Switch*>(getObject(i))->Update();
 		}
 	}
 }
@@ -121,8 +121,8 @@ void Level::update()
 void Level::draw(sf::RenderWindow* window, sf::View* view)
 {
 	for (size_t i = 0; i < tiles.size(); i++)
-		if (tiles.at(i).isVisible)
-			window->draw(tiles.at(i).sprite);
+		if (tiles.at(i)->isVisible)
+			window->draw(tiles.at(i)->sprite);
 	MoveView(*view, *window);
 }
 
@@ -130,8 +130,8 @@ void Level::setLayerVisibility(int layerIndex, bool isVisible)
 {
 	for (int i = 0; i < tiles.size(); i++)
 	{
-		if (tiles.at(i).tileLayer == layerIndex)
-			tiles.at(i).isVisible = isVisible;
+		if (tiles.at(i)->tileLayer == layerIndex)
+			tiles.at(i)->isVisible = isVisible;
 	}
 }
 

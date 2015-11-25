@@ -48,7 +48,7 @@ GameObject* GameObjectFactory::CreateEnemy(std::map<std::string, std::string>& p
 
 GameObject* GameObjectFactory::CreateObject(std::map<std::string, std::string>& properties)
 {
-	return this->interactiveFactory.Create(properties, drawContainer, gameObjectContainer);
+	return this->interactiveFactory.Create(properties, drawContainer, gameObjectContainer, this->tileList);
 }
 
 GameObject* GameObjectFactory::CreateTile(std::map<std::string, std::string>& properties)
