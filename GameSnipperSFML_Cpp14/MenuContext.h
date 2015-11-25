@@ -11,6 +11,7 @@
 
 class Context;
 class StateManager;
+class LevelManager;
 
 class MenuContext
 {
@@ -25,6 +26,7 @@ public:
 	char const* pathToFile;
 
 	StateManager* stateManager;
+	LevelManager* levelManager;
 
 	Awesomium::WebView* webView;
 	Awesomium::WebCore* web_core;

@@ -75,6 +75,22 @@ void callDirectJSFunction(WebView* webView, WebCore* web_core, int currentLevel)
 	web_core->Update();
 }
 
+void addLevelToMenu(WebView* webView, WebCore* web_core, char* naam)
+{
+	JSValue window = webView->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));
+
+	if (window.IsObject())
+	{
+		JSArray args;
+		JSValue val = JSValue(naam);
+		args.Push(val);
+		window.ToObject().Invoke(WSLit("insertRow"), args);
+	}
+
+	Sleep(50);
+	web_core->Update();
+}
+
 void MenuState::ShowIntruction()
 {
 	menuContext->inMenu = false;
@@ -84,7 +100,10 @@ void MenuState::ShowIntruction()
 
 void MenuState::ShowLevels()
 {
-	//TODO create show level screen
+	menuContext->inMenu = false;
+	menuContext->pathToFile = "file:///Resources/menuHTML/levels.html";
+	ReloadPage();
+	addLevelToMenu(menuContext->webView, menuContext->web_core, menuContext->levelManager->getAllLevels());//TODO Get all levels as list
 }
 
 

@@ -19,6 +19,7 @@ private:
 
 	Context* context;
 	MenuContext* menuContext;
+
 public:
 	void Update();
 	void Terminate();
