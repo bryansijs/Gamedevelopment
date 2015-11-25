@@ -29,22 +29,17 @@ void LevelManager::getAllLevels()
 		while ((ent = readdir(dir)) != NULL) {
 			switch (ent->d_type) {
 			case DT_REG:
-				std::cout << ent->d_name;
-				char* newFile = new char (ent->d_name);
-				allLevels.push_back(ent->d_name);
+				allLevels.push_back(std::string(ent->d_name));
 				break;
 			default:
 				break;
-				//printf("%s*\n", ent->d_name);
 			}
 		}
-
 		closedir(dir);
-
 	}
 	else {
 		/* Could not open directory */
-		printf("Cannot open directory ./Resources/levels/Level_1.json");
+		std::cerr << "Cannot open directory ./Resources/levels/";
 		exit(EXIT_FAILURE);
 	}
 }

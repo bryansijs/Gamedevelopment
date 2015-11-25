@@ -4,7 +4,7 @@
 class Level;
 class LevelManager
 {
-	std::vector<char*> allLevels;
+	std::vector<std::string> allLevels;
 
 	void getAllLevels();
 

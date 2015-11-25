@@ -13,6 +13,7 @@ private:
 	void ShowAbout();
 	void RunGame();
 	void ShowIntruction();
+	void ShowLevels();
 
 	StateManager* stateManager;
 
@@ -26,8 +27,9 @@ public:
 
 	std::map <int, void(MenuState::*)()> menuItems{
 		{ 1, &MenuState::RunGame },
-		{ 2, &MenuState::ShowIntruction },
-		{ 3, &MenuState::ShowAbout }
+		{ 2, &MenuState::ShowLevels },
+		{ 3, &MenuState::ShowIntruction },
+		{ 4, &MenuState::ShowAbout }
 	};
 
 	MenuState(Context* context, StateManager* stateManager);

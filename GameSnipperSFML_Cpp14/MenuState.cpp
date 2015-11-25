@@ -82,6 +82,12 @@ void MenuState::ShowIntruction()
 	ReloadPage();
 }
 
+void MenuState::ShowLevels()
+{
+	//TODO create show level screen
+}
+
+
 void MenuState::RunGame()
 {
 	menuContext->music->stop();
@@ -146,7 +152,7 @@ void MenuState::Update()
 			}
 
 			if (Input::GetKeyDown("Down")) {
-				if (menuContext->currentLevel < menuItems.size())
+				if (menuContext->currentLevel < menuItems.size() +1 )
 				{
 					menuContext->currentLevel += 1;
 					callDirectJSFunction(menuContext->webView, menuContext->web_core, menuContext->currentLevel);
