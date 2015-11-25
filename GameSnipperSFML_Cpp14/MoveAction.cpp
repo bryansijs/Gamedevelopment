@@ -28,21 +28,21 @@ void MoveAction::Move(std::string direction, Player *player, std::vector<Tile*>*
 		temp += -velocity * Time::deltaTime;
 
 		if (!player->isColliding(*tiles, player->getPosition().x, temp)) {
-			float temp = player->getPositionY() + -velocity * Time::deltaTime;
+			float s_temp = player->getPositionY() + (-velocity * Time::deltaTime);
 
-			player->setPosition(sf::Vector2f(player->getPositionX(), temp));	
+			player->setPosition(sf::Vector2f(player->getPositionX(), s_temp));
 		}
 	}
 	if (direction == "move-down")
 	{
 		player->setImageY(0);
 		temp = player->getPosition().y;
-		temp += velocity * Time::deltaTime;
+		temp += (velocity * Time::deltaTime);
 		if (!player->isColliding(*tiles, player->getPosition().x, temp)) {
 
-			float temp = player->getPositionY() + velocity * Time::deltaTime;
+			float s_temp = player->getPosition().y + (velocity * Time::deltaTime);
 
-			player->setPosition(sf::Vector2f(player->getPositionX(), temp));
+			player->setPosition(sf::Vector2f(player->getPositionX(), s_temp));
 		}
 	}
 	if (direction == "move-left")
@@ -52,9 +52,9 @@ void MoveAction::Move(std::string direction, Player *player, std::vector<Tile*>*
 		temp += -velocity * Time::deltaTime;
 		if (!player->isColliding(*tiles, temp, player->getPosition().y)) {
 	
-			float temp = player->getPositionX() + -velocity * Time::deltaTime;
+			float s_temp = player->getPositionX() + (-velocity * Time::deltaTime);
 
-			player->setPosition(sf::Vector2f(temp, player->getPositionY()));
+			player->setPosition(sf::Vector2f(s_temp, player->getPositionY()));
 
 		}
 	}
@@ -62,10 +62,10 @@ void MoveAction::Move(std::string direction, Player *player, std::vector<Tile*>*
 	{
 		player->setImageY(2);
 		temp = player->getPosition().x;
-		temp += velocity * Time::deltaTime;
+		temp += (velocity * Time::deltaTime);
 		if (!player->isColliding(*tiles, temp, player->getPosition().y)) {
-			float temp = player->getPositionX() + velocity * Time::deltaTime;
-			player->setPosition(sf::Vector2f(temp, player->getPositionY()));
+			float s_temp = player->getPosition().x + (velocity * Time::deltaTime);
+			player->setPosition(sf::Vector2f(s_temp, player->getPositionY()));
 		}
 	}
 }

@@ -38,27 +38,29 @@ void PlayerMovement::SetPosition(float deltaTime, std::string direction)
 	//Daarna zul je deze moeten zetten door middel van een setter!
 	if (direction == "move-up")
 	{
-		float temp = player->getPositionY()  - 1.0f * (deltaTime / 10000);
+		float temp = player->getPositionY()  + (-1.0f * (deltaTime / 10000));
 		player->setPosition(sf::Vector2f(player->getPositionX(), temp));
 	}
 	if (direction == "move-down")
 	{
-		float temp = player->getPositionY() + 1.0f * (deltaTime / 10000);
+		float temp = player->getPositionY() - (-1.0f * (deltaTime / 10000));
 		player->setPosition(sf::Vector2f(player->getPositionX(), temp));
 	}
 	if (direction == "move-left")
 	{
 
-		float temp = player->getPositionX() - 1.0f * (deltaTime / 10000);
+		float temp = player->getPositionX();
+			temp += -1.0f * (deltaTime / 10000);
 		player->setPosition(sf::Vector2f(temp,player->getPositionY() ));
 
-
+		
 	}
 	if (direction == "move-right")
 	{
 
-		float temp = player->getPositionX() + 1.0f * (deltaTime / 10000);
-		player->setPosition(sf::Vector2f(temp, player->getPositionY()));
+		float temp = player->getPosition().x;
+		temp -= 1.0f * (deltaTime / 10000);
+		player->setPosition(sf::Vector2f(int(temp), player->getPositionY()));
 	}
 }
 
