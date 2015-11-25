@@ -74,8 +74,7 @@ void PlayerActions::Use()
 	}
 
 	int b = this->player->getgameObjectContainer()->getObjects().size();
-	std::cout << "Aantal " << b << std::endl;
-	std::cout << "My current location x y " << player->getPosition().x << " " << player->getPosition().y << std::endl;
+	/*std::cout << "My current location x y " << player->getPosition().x << " " << player->getPosition().y << std::endl;*/
 
 	float playery = this->player->getPosition().y;
 	float playerx = this->player->getPosition().x;

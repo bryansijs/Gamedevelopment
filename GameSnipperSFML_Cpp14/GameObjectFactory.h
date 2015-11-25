@@ -50,7 +50,7 @@ public:
 	GameObject* Create(std::map<std::string, std::string>&);
 
 
-	void setTile(std::vector<Tile*> tileList)
+	void setTile(std::vector<Tile*>& tileList)
 	{
 		this->tileList = tileList;
 	}

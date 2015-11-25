@@ -89,12 +89,7 @@ void Game_Switch::setHazardState()
 void Game_Switch::setDoorState()
 {
 	for (int i = 0; i < this->getgameObjectContainer()->getObjects().size(); i++)
-	{
 		if (dynamic_cast<Door*>(this->getgameObjectContainer()->getObjects().at(i)))
-		{
-			if (dynamic_cast<Door*>(this->getgameObjectContainer()->getObjects().at(i))->getDoorId() == doorIndex) {
+			if (dynamic_cast<Door*>(this->getgameObjectContainer()->getObjects().at(i))->getDoorId() == doorIndex)
 				dynamic_cast<Door*>(this->getgameObjectContainer()->getObjects().at(i))->doAction();
-			}
-		}
-	}
 }

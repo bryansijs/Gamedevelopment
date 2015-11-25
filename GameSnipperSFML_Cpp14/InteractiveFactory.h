@@ -12,7 +12,7 @@ class InteractiveFactory
 public:
 	InteractiveFactory();
 	~InteractiveFactory();
-	GameObject* Create(std::map<std::string, std::string> properties, DrawContainer* container, GameObjectContainer* gameObjectContainer, std::vector<Tile*> tileList);
+	GameObject* Create(std::map<std::string, std::string> properties, DrawContainer* container, GameObjectContainer* gameObjectContainer, std::vector<Tile*>& tileList);
 
 
 private:
