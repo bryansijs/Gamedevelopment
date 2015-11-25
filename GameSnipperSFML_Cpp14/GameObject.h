@@ -24,6 +24,8 @@ private:
 	DrawBehaviour* drawBehaviour;
 	MoveBehaviour* moveBehaviour;
 
+
+	sf::Vector2f position;
 	int xIndex = 0;
 	int yIndex = 0;
 	int width = 0;
@@ -39,14 +41,14 @@ public:
 	~GameObject();
 
 
-	sf::Vector2f position;
-
-
-	void setPosition(sf::Vector2f position) { this->position = position; };
-
-	sf::Vector2f getPosition() { return position; }
-	virtual void Update();
 	
+	void setPosition(sf::Vector2f position) { this->position = position; };
+	sf::Vector2f getPosition() { return position; }
+
+	int getPositionX() { return position.x; }
+	int getPositionY() { return position.y; }
+
+	virtual void Update();
 	virtual void doAction();
 	virtual void setProperties(std::map<std::string, std::string>& properties);
 

@@ -18,6 +18,13 @@ GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer, MoveContainer
 	this->moveContainer = moveContainer;
 }
 
+GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer,GameObjectContainer* gameObjectContainer)
+{
+	this->drawContainer = drawContainer;
+	this->moveContainer = moveContainer;
+	this->gameObjectContainer = gameObjectContainer;
+}
+
 GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer, GameObjectContainer* gameObjectContainer)
 {
 	this->drawContainer = drawContainer;

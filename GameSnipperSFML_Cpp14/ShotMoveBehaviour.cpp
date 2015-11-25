@@ -19,19 +19,26 @@ void ShotMoveBehaviour::Update()
 	//Daarna zul je deze moeten zetten door middel van een setter!
 	if (direction == "move-up")
 	{
-		gameObject->position.y += -velocity * Time::deltaTime;
+		float temp = gameObject->getPositionY() - velocity * Time::deltaTime;
+		gameObject->setPosition(sf::Vector2f(gameObject->getPositionX(), temp));
 	}
 	if (direction == "move-down")
 	{
-		gameObject->position.y += velocity * Time::deltaTime;
+		float temp = gameObject->getPositionY() + velocity * Time::deltaTime;
+		gameObject->setPosition(sf::Vector2f(gameObject->getPositionX(), temp));
 	}
 	if (direction == "move-left")
 	{
-		gameObject->position.x += -velocity * Time::deltaTime;
-	}
+
+		float temp = gameObject->getPositionX() - velocity * Time::deltaTime;
+		gameObject->setPosition(sf::Vector2f(temp, gameObject->getPositionY()));
+
+}
 	if (direction == "move-right")
 	{
-		gameObject->position.x += velocity * Time::deltaTime;
+		float temp = gameObject->getPositionX() + velocity * Time::deltaTime;
+		gameObject->setPosition(sf::Vector2f(temp, gameObject->getPositionY()));
+
 	}
 }
 

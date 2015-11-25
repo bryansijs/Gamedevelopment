@@ -43,6 +43,7 @@ public:
 	GameObjectFactory(DrawContainer *drawContainer);
 	GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer);
 	GameObjectFactory(DrawContainer *drawContainer, GameObjectContainer* gameObjectContainer);
+	GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer);
 	GameObjectFactory();
 	~GameObjectFactory();
 
@@ -51,11 +52,11 @@ public:
 	void setDrawContainer(DrawContainer* drawContainer) { this->drawContainer = drawContainer; };
 	void setMoveContainer(MoveContainer* moveContainer) { this->moveContainer = moveContainer; };
 	void setGameObjectContainer(GameObjectContainer* gameObjectContainer) { this->gameObjectContainer = gameObjectContainer; }
-	
+
 
 	static GameObjectFactory& getInstance()
 	{
-		static GameObjectFactory    instance; 			
+		static GameObjectFactory    instance;
 		return instance;
 	}
 

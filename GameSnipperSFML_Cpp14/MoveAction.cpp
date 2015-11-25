@@ -28,7 +28,9 @@ void MoveAction::Move(std::string direction, Player *player, std::vector<Tile>* 
 		temp += -velocity * Time::deltaTime;
 
 		if (!player->isColliding(*tiles, player->getPosition().x, temp)) {
-			player->position.y += -velocity * Time::deltaTime;
+			float temp = player->getPositionY() + -velocity * Time::deltaTime;
+
+			player->setPosition(sf::Vector2f(player->getPositionX(), temp));	
 		}
 	}
 	if (direction == "move-down")
@@ -37,7 +39,10 @@ void MoveAction::Move(std::string direction, Player *player, std::vector<Tile>* 
 		temp = player->getPosition().y;
 		temp += velocity * Time::deltaTime;
 		if (!player->isColliding(*tiles, player->getPosition().x, temp)) {
-			player->position.y += velocity * Time::deltaTime;
+
+			float temp = player->getPositionY() + velocity * Time::deltaTime;
+
+			player->setPosition(sf::Vector2f(player->getPositionX(), temp));
 		}
 	}
 	if (direction == "move-left")
@@ -46,7 +51,11 @@ void MoveAction::Move(std::string direction, Player *player, std::vector<Tile>* 
 		temp = player->getPosition().x;
 		temp += -velocity * Time::deltaTime;
 		if (!player->isColliding(*tiles, temp, player->getPosition().y)) {
-			player->position.x += -velocity * Time::deltaTime;
+	
+			float temp = player->getPositionX() + -velocity * Time::deltaTime;
+
+			player->setPosition(sf::Vector2f(temp, player->getPositionY()));
+
 		}
 	}
 	if (direction == "move-right")
@@ -55,7 +64,8 @@ void MoveAction::Move(std::string direction, Player *player, std::vector<Tile>* 
 		temp = player->getPosition().x;
 		temp += velocity * Time::deltaTime;
 		if (!player->isColliding(*tiles, temp, player->getPosition().y)) {
-			player->position.x += velocity * Time::deltaTime;
+			float temp = player->getPositionX() + velocity * Time::deltaTime;
+			player->setPosition(sf::Vector2f(temp, player->getPositionY()));
 		}
 	}
 }
