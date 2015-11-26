@@ -149,8 +149,13 @@
                  "name":"switch",
                  "properties":
                     {
+					  "image":"switches.png",
 					 "iType":"Switch",
-					 "hazardIndex": "1"
+					 "hazardIndex": "1",
+					 "ofIndex": "0",
+					 "onIndex": "2",
+					 "xIndex": "0",
+					 "switchState": "1"
                     },
                  "rotation":0,
                  "type":"Object",

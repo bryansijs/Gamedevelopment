@@ -29,7 +29,7 @@ GameObject* InteractiveFactory::Create(std::map<std::string, std::string> proper
 
 GameObject* InteractiveFactory::CreateSwitch(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer) {
 	Game_Switch *obj = nullptr;
-	std::string imgurl = properties["image"];
+	std::string imgurl =properties["image"];
 	int x, y, widht, height;
 	x = std::stoi(properties["x"]);
 	y = std::stoi(properties["y"]);
