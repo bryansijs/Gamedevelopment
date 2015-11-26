@@ -8,15 +8,15 @@
 #include "MoveContainer.h"
 #include "DrawContainer.h"
 
-GameState::GameState(Context* context, StateManager* stateManager)
+GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager)
 {
 	maincontext = context;
 	gameContext = new GameContext(context);
 	this->stateManager = stateManager;
-	this->levelManager = new LevelManager();
+	this->levelManager = levelmanager;
 
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->useContainer);
-	gameContext->levelImporter->Import("./Resources/levels/OnTopTempGuus.json");
+	gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
 
 	gameContext->levelImporter->Prepare();
 
@@ -95,14 +95,13 @@ void GameState::Terminate()
 
 void GameState::StartNextLevel()
 {
-	//delete(gameContext);
+	delete(gameContext);
 
 	gameContext = new GameContext(maincontext);
-	this->stateManager = stateManager;
-	this->levelManager = new LevelManager();
 
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->useContainer);
-	gameContext->levelImporter->Import("./Resources/levels/Level_1.json");
+	gameContext->levelImporter->Clear();
+	gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
 
 	gameContext->levelImporter->Prepare();
 
@@ -116,4 +115,6 @@ void GameState::StartNextLevel()
 	
 	gameContext->view.reset(rect);
 	gameContext->context->window.setView(gameContext->view);
+
+	Update();
 }

@@ -7,7 +7,6 @@
 MenuContext::MenuContext(Context* context)
 {
 	this->context = context;
-	this->levelManager = new LevelManager();
 }
 
 MenuContext::~MenuContext()

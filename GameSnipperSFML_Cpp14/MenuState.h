@@ -2,6 +2,7 @@
 #include "BaseState.h"
 #include <Awesomium/WebCore.h>
 
+class LevelManager;
 class StateManager;
 class Context;
 class MenuContext;
@@ -16,6 +17,7 @@ private:
 	void ShowLevels();
 
 	StateManager* stateManager;
+	LevelManager* levelManager;
 
 	Context* context;
 	MenuContext* menuContext;
@@ -33,6 +35,6 @@ public:
 		{ 4, &MenuState::ShowAbout }
 	};
 
-	MenuState(Context* context, StateManager* stateManager);
+	MenuState(Context* context, StateManager* stateManager, LevelManager* levelmanager);
 	~MenuState();
 };

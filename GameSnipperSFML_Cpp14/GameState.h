@@ -18,7 +18,7 @@ public:
 	void Terminate();
 	void StartNextLevel();
 
-	GameState(Context* context, StateManager* stateManager);
+	GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager);
 	~GameState();
 };
 

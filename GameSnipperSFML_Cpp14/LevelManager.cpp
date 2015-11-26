@@ -8,7 +8,7 @@
 
 LevelManager::LevelManager()
 {
-	getAllLevels();
+	LoadAllLevels();
 }
 
 
@@ -16,7 +16,7 @@ LevelManager::~LevelManager()
 {
 }
 
-void LevelManager::getAllLevels()
+void LevelManager::LoadAllLevels()
 {
 	DIR *dir;
 	struct dirent *ent;
@@ -53,6 +53,16 @@ void LevelManager::swapSequence(int first, int second)
 	allLevels[first] = temp;
 }
 
+std::vector<std::string> LevelManager::getAllLevels()
+{
+	std::vector<std::string> levels;
+	for (int i = 0; i < allLevels.size(); i++)
+	{
+		levels.push_back(allLevels[i]);
+	}
+	return levels;
+}
+
 const char* LevelManager::getCurrentLevel()
 {
 	return allLevels[currentLevelNumber].c_str();
@@ -60,9 +70,9 @@ const char* LevelManager::getCurrentLevel()
 
 const char* LevelManager::getNextLevelName()
 {
-	if(allLevels.size() > 1)
+	if(!allLevels.empty())
 	{
-		currentLevelNumber =+ 1;
+		currentLevelNumber += 1;
 		return allLevels[currentLevelNumber].c_str();
 	}
 	return nullptr;

@@ -20,10 +20,11 @@
 
 using namespace Awesomium;
 
-MenuState::MenuState(Context* context, StateManager* stateManager)
+MenuState::MenuState(Context* context, StateManager* stateManager, LevelManager* levelManager)
 {
 	menuContext = new MenuContext(context);
 	this->stateManager = stateManager;
+	this->levelManager = levelManager;
 
 	menuContext->inMenu = true;
 	menuContext->currentLevel = 1;
@@ -103,7 +104,7 @@ void MenuState::ShowLevels()
 	menuContext->inMenu = false;
 	menuContext->pathToFile = "file:///Resources/menuHTML/levels.html";
 	ReloadPage();
-	addLevelToMenu(menuContext->webView, menuContext->web_core, menuContext->levelManager->getNextLevelName());
+	addLevelToMenu(menuContext->webView, menuContext->web_core, this->levelManager->getNextLevelName());
 }
 
 
@@ -111,7 +112,7 @@ void MenuState::RunGame()
 {
 	menuContext->music->stop();
 
-	GameState* gameState = new GameState(menuContext->context, stateManager);
+	GameState* gameState = new GameState(menuContext->context, stateManager,this->levelManager);
 	stateManager->AddState(gameState);
 	stateManager->StartNextState();
 }
