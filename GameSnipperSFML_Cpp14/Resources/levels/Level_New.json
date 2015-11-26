@@ -164,6 +164,25 @@
                  "x":510,
                  "y":1728
                 }, 
+				{
+                 "height":128,
+                 "id":112,
+                 "name":"door",
+                 "properties":
+                    {
+					 "image":"Doors.png",
+					 "iType":"Door",
+					 "xIndex": "0",
+					 "state": "0",
+					 "keyNeed": "1"
+                    },
+                 "rotation":0,
+                 "type":"Object",
+                 "visible":true,
+                 "width":128,
+                 "x":510,
+                 "y":1400
+                }, 
                 {
                  "height":24,
                  "id":7,
@@ -303,22 +322,8 @@
                  "width":24,
                  "x":548,
                  "y":729
-                }, 
-                {
-                 "height":36,
-                 "id":18,
-                 "name":"EndTile",
-                 "properties":
-                    {
-					"sType":"EndTile"
-                    },
-                 "rotation":0,
-                 "type":"GameTile",
-                 "visible":true,
-                 "width":62.6666666666667,
-                 "x":97.3333333333333,
-                 "y":4
-                }],
+                }
+               ],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,

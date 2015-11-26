@@ -32,9 +32,8 @@ Key::Key(DrawContainer* container, std::string img, GameObjectContainer* gameObj
 
 void Key::doAction(Player* player)
 {
-	std::cout << "Test" << std::endl;
-//	player->addKey();
+	player->AddKey();
 	getDrawContainer()->RemoveBehaviour(this->getDrawBehaviour());
 	getgameObjectContainer()->RemoveObject(this);
-
+	this->~Key();
 }

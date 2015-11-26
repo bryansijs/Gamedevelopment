@@ -4,6 +4,10 @@
 class Door : public GameObject
 {
 	int doorId=0;
+	bool keyNeed = false;
+	bool isOpen = false;
+
+
 public:
 	Door();
 	~Door();
@@ -13,5 +17,7 @@ public:
 	Door(DrawContainer* container, std::string img, sf::Vector2f position, int widht, int height);
 	int getDoorId() { return doorId; };
 	virtual void setProperties(std::map<std::string, std::string>& properties);
+
+	void setOpen() { isOpen = true; }
 };
 

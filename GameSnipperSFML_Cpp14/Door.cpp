@@ -14,6 +14,10 @@ Door::~Door()
 
 void Door::setProperties(std::map<std::string, std::string>& properties) {
 
+	this->keyNeed = (properties.count("keyNeed")) ? std::stoi(properties["xIndex"]) : 0;
+	this->setImageX((properties.count("xIndex")) ? std::stoi(properties["xIndex"]) : 0);
+
+
 }
 
 
