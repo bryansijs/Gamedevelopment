@@ -1,12 +1,9 @@
 #pragma once
 
 #include <vector>
-#include <iostream>
 #include <map>
-
 #include "DrawBehaviour.h"
 #include "MoveBehaviour.h"
-
 #include "MoveAction.h"
 #include "ShootAction.h"
 
@@ -18,10 +15,9 @@ class Tile;
 class PlayerActions
 {
 public:
-	PlayerActions();
+	PlayerActions(Player* activePlayer);
 	~PlayerActions();
 	float useDelay; 
-	void SetPlayer(Player *activePlayer);
 	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile*>* tiles);
 	void ProcessActions(std::vector<std::string> &newActiveKeys);
 	void setTiles(std::vector<Tile*>* t) { tiles = t; };

@@ -20,7 +20,7 @@ GameState::GameState(Context* context, StateManager* stateManager)
 	gameContext->level = gameContext->levelImporter->getLevel();
 	gameContext->levelImporter->Clear();
 
-	gameContext->playerActions.SetContainers(gameContext->drawContainer, gameContext->moveContainer, &gameContext->level->tiles);
+	gameContext->player->GetActions()->SetContainers(gameContext->drawContainer, gameContext->moveContainer, &gameContext->level->tiles);
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
 
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
@@ -62,7 +62,7 @@ void GameState::Update()
 			}
 		}
 
-		gameContext->playerActions.ProcessActions(gameContext->playerInput.GetActiveKeys());
+		gameContext->player->GetActions()->ProcessActions(gameContext->playerInput.GetActiveKeys());
 		gameContext->level->updateViewPort(worldPosition);
 	}
 

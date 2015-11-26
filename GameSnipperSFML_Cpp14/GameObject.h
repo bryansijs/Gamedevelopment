@@ -38,7 +38,7 @@ public:
 	GameObject();
 	GameObject(GameObjectContainer *useContainer);
 	GameObject::GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, std::string textureUrl);
-	~GameObject();
+	virtual ~GameObject();
 
 
 	

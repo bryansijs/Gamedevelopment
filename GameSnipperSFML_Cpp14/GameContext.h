@@ -33,7 +33,6 @@ public:
 
 	Player* player;
 	PlayerInput playerInput;
-	PlayerActions playerActions;
 	PlayerMovement playerMovement;
 	KeyMappingImporter keyMappingImporter;
 

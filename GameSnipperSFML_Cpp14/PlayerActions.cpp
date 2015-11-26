@@ -10,18 +10,13 @@
 #include "GameObject.h"
 #include "Tile.h"
 
-PlayerActions::PlayerActions()
+PlayerActions::PlayerActions(Player* player)
 {
-
+	this->player = player;
 }
 
 PlayerActions::~PlayerActions()
 {
-}
-
-void PlayerActions::SetPlayer(Player *player)
-{
-	this->player = player;
 }
 
 void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile*>* tiles)
@@ -72,8 +67,6 @@ void PlayerActions::Use()
 		useDelay -= Time::deltaTime;
 		return;
 	}
-
-	int b = this->player->getgameObjectContainer()->getObjects().size();
 	//std::cout << b <<  std::endl;
 	/*std::cout << "My current location x y " << player->getPosition().x << " " << player->getPosition().y << std::endl;*/
 

@@ -46,5 +46,6 @@ Player::Player()
 
 Player::~Player()
 {
+	delete &actions;
 }
 
