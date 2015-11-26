@@ -1,9 +1,14 @@
 #include "stdafx.h"
 #include "Level.h"
-
+#include "Game_Switch.h"
 
 Level::Level()
 {
+}
+
+Level::Level(GameObjectContainer* gameObjectContainer)
+{
+	this->gameObjectContainer = gameObjectContainer;
 }
 
 
@@ -45,7 +50,7 @@ void  Level::updateViewPort(sf::Vector2i &worldPos)
 
 void Level::MoveView(sf::View& view, sf::Window& window)
 {
-	float time = 4.0f * Time::deltaTime;
+	float time = 600.0f * Time::deltaTime;
 	if (moveDown)
 	{
 		if (t_value < t_max)
@@ -108,42 +113,30 @@ void Level::MoveView(sf::View& view, sf::Window& window)
 
 void Level::update()
 {
-	/*for (size_t i = 0; i < getGame_Objects().size(); i++)
-		getObject(i)->Update();*/
+
+	for (size_t i = 0; i < getGame_Objects().size(); i++)
+	{
+		if (dynamic_cast<Game_Switch*>(getObject(i)))
+		{
+			dynamic_cast<Game_Switch*>(getObject(i))->Update();
+		}
+	}
 }
 
 void Level::draw(sf::RenderWindow* window, sf::View* view)
 {
 	for (size_t i = 0; i < tiles.size(); i++)
-		if (tiles.at(i).isVisible)
-			window->draw(tiles.at(i).sprite);
-	/*
-	for (size_t i = 0; i < getGame_Objects().size(); i++)
-		window->draw((getObject(i))->getShape());
-	*/
-
+		if (tiles.at(i)->isVisible)
+			window->draw(tiles.at(i)->sprite);
 	MoveView(*view, *window);
-}
-
-void Level::setHazardState(int hazardIndex, bool hazardState)
-{
-
-	for (int i = 0; i < tiles.size(); i++)
-	{
-		if (tiles.at(i).hazardIndex == hazardIndex)
-		{
-			tiles.at(i).hazardState = hazardState;
-			tiles.at(i).isVisible = !hazardState;
-		}
-	}
 }
 
 void Level::setLayerVisibility(int layerIndex, bool isVisible)
 {
 	for (int i = 0; i < tiles.size(); i++)
 	{
-		if (tiles.at(i).tileLayer == layerIndex)
-			tiles.at(i).isVisible = isVisible;
+		if (tiles.at(i)->tileLayer == layerIndex)
+			tiles.at(i)->isVisible = isVisible;
 	}
 }
 
@@ -158,19 +151,18 @@ void Level::Start(GameObject* player, sf::Vector2u* size)
 			break;
 		}
 	}
-
 	if (start == nullptr)
 	{
-		start = new StartTile();
+		start = new StartTile(gameObjectContainer);
 		start->setPosition(sf::Vector2f(25, 25));
 	}
 
-	int map_yLocation = start->position.y / size->y;
-	int map_xLocation = start->position.x / size->x;
+	int map_yLocation = start->getPosition().y / size->y;
+	int map_xLocation = start->getPosition().x / size->x;
 	viewPortY = (map_yLocation * size->y);
 	viewPortX = (map_xLocation * size->x);
 
-	player->setPosition(sf::Vector2f(start->position.x, start->position.y));
+	player->setPosition(sf::Vector2f(start->getPosition().x, start->getPosition().y));
 	music.setLoop(true);
 	music.play();
 }

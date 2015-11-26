@@ -2,7 +2,7 @@
 #include "StartTile.h"
 
 
-StartTile::StartTile()
+StartTile::StartTile(GameObjectContainer* gameObjectContainer) : GameObject{ gameObjectContainer }
 {
 }
 

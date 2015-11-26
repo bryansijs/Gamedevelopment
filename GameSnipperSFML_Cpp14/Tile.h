@@ -19,7 +19,7 @@ public:
 	int hazardValue;
 	int hazardIndex;
 	int hazardType;
-
+	int hazardLinkIndex;
 	bool isEnemyCollidable;
 	bool isCollidable;
 	bool isVisible;
