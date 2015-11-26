@@ -40,23 +40,56 @@ void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys)
 	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
 		std::string map = KeyMapping::GetMap(activeKeys[i]);
 
-		for (it = possibleActions.begin(); it != possibleActions.end(); ++it)
+		for (it = actions.begin(); it != actions.end(); ++it)
 		{
 			if (map.find(it->first) != std::string::npos)
 			{
-				currentMap = map;
-
-				auto function = it->second;
-				(this->*function)();
+				if (std::find(activeActions.begin(), activeActions.end(), it->second) == activeActions.end())
+				{
+					activeActions.push_back(it->second);
+				}
 			}
 		}
 	}
+
+	ExecuteActions();
+}
+
+void PlayerActions::ExecuteActions()
+{
+	std::vector<void(PlayerActions::*)()>::iterator it;
+
+	for (it = activeActions.begin(); it != activeActions.end(); ++it)
+	{
+		auto function = *it;
+		(this->*function)();
+	}
+
+	if (resetAnimation)
+	{
+		moveAction.AnimateMovement(player, 1);
+	}
+
+	activeActions.clear();
+	resetAnimation = true;
 }
 
 void PlayerActions::Move()
 {
-	direction = currentMap;
-	moveAction.Move(direction, player, tiles);
+	resetAnimation = false;
+	std::vector<std::string> directions;
+
+	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
+		std::string map = KeyMapping::GetMap(activeKeys[i]);
+
+		if (map.find("move") != std::string::npos)
+		{
+			directions.push_back(map);
+			direction = map;
+		}
+	}
+
+	moveAction.Move(directions, player, tiles);
 }
 
 void PlayerActions::Shoot()
