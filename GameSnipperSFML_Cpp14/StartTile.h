@@ -3,7 +3,7 @@
 class StartTile : public GameObject
 {
 public:
-	StartTile();
+	StartTile(GameObjectContainer* gameObjectContainer);
 	~StartTile();
 };
 

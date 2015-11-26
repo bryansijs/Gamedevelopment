@@ -16,8 +16,7 @@ RunnerEnemy::RunnerEnemy(DrawContainer* container, std::string img, sf::Vector2f
 };
 
 
-RunnerEnemy::RunnerEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, sf::Vector2f position, int widht, int height) :Unit{ dContainer, img } {
-	this->setMoveContainer(mContainer);
+RunnerEnemy::RunnerEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer, sf::Vector2f position, int widht, int height) :Unit{ dContainer,img,mContainer,gameObjectContainer } {
 
 	//TODO Iemand:Basic moveBahavoir for this Enemy;
 	this->SetMoveBehaviour(nullptr);

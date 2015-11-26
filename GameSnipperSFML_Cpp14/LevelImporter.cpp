@@ -293,7 +293,7 @@ void LevelImporter::Clear()
 
 Level* LevelImporter::getLevel()
 {
-	Level* level = new Level();
+	Level* level = new Level(gameObjectContainer);
 	level->setGameObjects(game_objects);
 	level->setTileSets(tileSets);
 	level->setTiles(tiles);

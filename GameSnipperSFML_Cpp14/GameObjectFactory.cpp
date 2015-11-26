@@ -50,7 +50,7 @@ GameObject* GameObjectFactory::Create(std::map<std::string, std::string>& proper
 
 GameObject* GameObjectFactory::CreateEnemy(std::map<std::string, std::string>& properties)
 {
-	return	this->enemyFactory.Create(properties, drawContainer, moveContainer);
+	return	this->enemyFactory.Create(properties, drawContainer, moveContainer, gameObjectContainer);
 }
 
 GameObject* GameObjectFactory::CreateObject(std::map<std::string, std::string>& properties)
@@ -60,11 +60,11 @@ GameObject* GameObjectFactory::CreateObject(std::map<std::string, std::string>& 
 
 GameObject* GameObjectFactory::CreateTile(std::map<std::string, std::string>& properties)
 {
-	return  this->gametTileFactory.Create(properties);
+	return  this->gametTileFactory.Create(properties, gameObjectContainer);
 }
 
 
 GameObject* GameObjectFactory::CreateItem(std::map<std::string, std::string>& properties)
 {
-	return this->itemFactory.Create(properties, drawContainer);
+	return this->itemFactory.Create(properties, drawContainer, gameObjectContainer);
 }

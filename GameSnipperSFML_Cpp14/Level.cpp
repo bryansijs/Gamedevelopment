@@ -6,6 +6,11 @@ Level::Level()
 {
 }
 
+Level::Level(GameObjectContainer* gameObjectContainer)
+{
+	this->gameObjectContainer = gameObjectContainer;
+}
+
 
 Level::~Level()
 {
@@ -148,7 +153,7 @@ void Level::Start(GameObject* player, sf::Vector2u* size)
 	}
 	if (start == nullptr)
 	{
-		start = new StartTile();
+		start = new StartTile(gameObjectContainer);
 		start->setPosition(sf::Vector2f(25, 25));
 	}
 

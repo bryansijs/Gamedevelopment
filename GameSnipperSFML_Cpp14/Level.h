@@ -16,13 +16,13 @@ protected:
 public:
 	Level();
 	~Level();
+	Level(GameObjectContainer* gameObjectContainer);
 
 	std::vector<GameObject*> game_objects;
 	std::vector<Tile*> tiles;
 	std::vector<TileSet*> tileSets;
 
 	std::map<int, bool> hazardMap;
-
 
 	void setHazardMap(std::map<int, bool> hazardMap)
 	{
@@ -35,7 +35,6 @@ public:
 	void draw(sf::RenderWindow* window, sf::View* view);
 	void update();
 
-	void setHazardState(int hazardIndex, bool hazardState);
 	void Start(GameObject* player, sf::Vector2u* size);
 	void setLayerVisibility(int layerIndex, bool isVisible);
 	bool getDoEvents() { return doEvents; }
@@ -52,6 +51,14 @@ public:
 	std::vector<GameObject*> getGame_Objects() { return game_objects; }
 	GameObject* getObject(int i) { return game_objects.at(i); }
 
+
+	void setGameObjectContainer(GameObjectContainer* container)
+	{
+		this->gameObjectContainer = container;
+	}
+
+	GameObjectContainer* getGameObjectContainer() { return this->gameObjectContainer; }
+
 private:
 	bool doEvents = true;
 	bool moveDown = true;
@@ -65,6 +72,8 @@ private:
 
 	int viewPortX = 0;
 	int viewPortY = 0;
+
+	GameObjectContainer* gameObjectContainer;
 
 };
 
