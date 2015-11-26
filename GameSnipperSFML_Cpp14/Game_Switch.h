@@ -12,10 +12,19 @@ private:
 	bool hazardOn;
 	int hazardIndex = -1;
 	int doorIndex = -1;
+
+
+	int ofState = 0;
+	int onState = 0;
+
 	void setState()
 	{
 		this->isOn = !this->isOn;
-		/*std::cout << "I switched the state state: " << isOn <<  " at location x y" << this->getPosition().x << " " << this->getPosition().y  << std::endl;*/
+
+		if(this->isOn)
+			this->setImageY(onState);
+		else
+			this->setImageY(ofState);
 	}
 
 	void setHazardState();

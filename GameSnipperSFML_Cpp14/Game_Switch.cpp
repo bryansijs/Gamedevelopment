@@ -16,8 +16,20 @@ Game_Switch::~Game_Switch()
 
 void Game_Switch::setProperties(std::map<std::string, std::string>& properties) {
 
-	hazardIndex = (properties.count("hazardIndex")) ? std::stoi(properties["hazardIndex"]) : -1;
-	doorIndex = (properties.count("doorIndex")) ? std::stoi(properties["doorIndex"]) : -1;
+	this->hazardIndex = (properties.count("hazardIndex")) ? std::stoi(properties["hazardIndex"]) : -1;
+	this->doorIndex = (properties.count("doorIndex")) ? std::stoi(properties["doorIndex"]) : -1;
+
+	this->isOn = (properties.count("state")) ? std::stoi(properties["state"]) : 0;
+	this->ofState = (properties.count("ofIndex")) ? std::stoi(properties["ofIndex"]) : 0;
+	this->onState = (properties.count("onIndex")) ? std::stoi(properties["onIndex"]) : 2;
+	this->setImageX((properties.count("xIndex")) ? std::stoi(properties["xIndex"]) : 0);
+
+	if (this->isOn)
+		this->setImageY(onState);
+	else
+		this->setImageY(ofState);
+
+	this->shouldUpdate = true;
 }
 
 
@@ -30,7 +42,7 @@ Game_Switch::Game_Switch(DrawContainer* container, std::string img) :GameObject{
 };
 
 
-Game_Switch::Game_Switch(DrawContainer* container, std::string img, sf::Vector2f position, int widht, int height) :GameObject{ container, img } {
+Game_Switch::Game_Switch(DrawContainer* container, std::string img, sf::Vector2f position, int widht, int height) :GameObject{ container, "switches.png" } {
 	this->setPosition(position);
 	this->setSize(widht, height);
 };

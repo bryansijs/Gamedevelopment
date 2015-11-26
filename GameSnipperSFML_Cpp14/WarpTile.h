@@ -3,7 +3,7 @@
 class WarpTile : public GameObject
 {
 public:
-	WarpTile();
+	WarpTile(GameObjectContainer* gameObjectContainer);
 	~WarpTile();
 };
 

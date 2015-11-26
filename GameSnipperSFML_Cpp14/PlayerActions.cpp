@@ -74,6 +74,7 @@ void PlayerActions::Use()
 	}
 
 	int b = this->player->getgameObjectContainer()->getObjects().size();
+	//std::cout << b <<  std::endl;
 	/*std::cout << "My current location x y " << player->getPosition().x << " " << player->getPosition().y << std::endl;*/
 
 	float playery = this->player->getPosition().y;
@@ -84,8 +85,8 @@ void PlayerActions::Use()
 		//zojah dan gaan zijn actie uitvoeren;
 		//anders nope nope
 		//Dit moet worden afgevangen doormiddel van is colliding en de juiste directe!
-		//Als we op dezelfde y zitten met een 32 verschil;
-		//Als we op dezelfde x zittten met en 32 verschil; 
+		//Als we op dezelfde y zitten met een 32 ~48 verschil;
+		//Als we op dezelfde x zittten met en 32 ~48 verschil; 
 		if (playery + 32 > object->getPosition().y && playery - 48 < object->getPosition().y)
 		{
 			if (playerx + 32 > object->getPosition().x && playerx - 48 < object->getPosition().x)
