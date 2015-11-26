@@ -3,7 +3,6 @@
 #include "GameObjectContainer.h"
 #include "MoveContainer.h"
 #include "DrawContainer.h"
-#include "KeyMapping.h"
 
 GameContext::GameContext(Context* context)
 {
@@ -13,8 +12,6 @@ GameContext::GameContext(Context* context)
 	drawContainer = new DrawContainer();
 	useContainer = new GameObjectContainer();
 	player = new Player(moveContainer, drawContainer,useContainer);
-	keyMappingImporter.Import("./Resources/key-mapping.json");
-	KeyMapping::ReloadMapping(keyMappingImporter.GetMapping());
 }
 
 GameContext::~GameContext()

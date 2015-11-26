@@ -175,6 +175,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.h" />
+    <ClInclude Include="BaseInput.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="BasicEnemy.h" />
     <ClInclude Include="Context.h" />
@@ -183,6 +184,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="DrawContainer.h" />
     <ClInclude Include="EndTile.h" />
     <ClInclude Include="EnemyFactory.h" />
+    <ClInclude Include="GameInput.h" />
     <ClInclude Include="GameLoop.h" />
     <ClInclude Include="GameContext.h" />
     <ClInclude Include="GameObject.h" />
@@ -238,6 +240,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="WarpTile.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BaseInput.cpp" />
     <ClCompile Include="BasicEnemy.cpp" />
     <ClCompile Include="Context.cpp" />
     <ClCompile Include="Door.cpp" />
@@ -245,6 +248,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="DrawContainer.cpp" />
     <ClCompile Include="EndTile.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
+    <ClCompile Include="GameInput.cpp" />
     <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="GameContext.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -273,7 +277,6 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="PlayerActions.cpp" />
     <ClCompile Include="PlayerDrawBehaviour.cpp" />
     <ClCompile Include="PlayerInput.cpp" />
-    <ClCompile Include="PlayerMovement.cpp" />
     <ClCompile Include="Potion.cpp" />
     <ClCompile Include="RunnerEnemy.cpp" />
     <ClCompile Include="SetupState.cpp" />
@@ -305,6 +308,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="WarpTile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\key-mapping.json" />
     <None Include="Resources\menuHTML\about.html" />
     <None Include="Resources\menuHTML\instruction.html" />
     <None Include="Resources\menuHtml\menu.html" />

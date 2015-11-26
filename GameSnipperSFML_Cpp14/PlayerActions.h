@@ -19,21 +19,12 @@ public:
 	~PlayerActions();
 	float useDelay; 
 	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile*>* tiles);
-	void ProcessActions(std::vector<std::string> &newActiveKeys);
 	void setTiles(std::vector<Tile*>* t) { tiles = t; };
-	void Move();
+	void Move(std::string direction);
 	void Shoot();
 	void Use();
 private:
-	std::map<std::string, void(PlayerActions::*)()> possibleActions = {
-		{ "move", &PlayerActions::Move },
-		{ "shoot", &PlayerActions::Shoot },
-		{ "use", &PlayerActions::Use }
-	};
-
-	std::vector<std::string> activeKeys;
 	std::string direction = "move-left";
-	std::string currentMap;
 
 	DrawContainer *drawContainer;
 	MoveContainer *moveContainer;

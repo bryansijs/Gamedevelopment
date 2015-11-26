@@ -1,13 +1,9 @@
 #pragma once
-
 #include "Player.h"
 #include "PlayerInput.h"
-#include "PlayerActions.h"
-#include "PlayerMovement.h"
-#include "KeyMappingImporter.h"
-
 #include "LevelImporter.h"
 #include "Level.h"
+#include "GameInput.h"
 
 class Context;
 class MoveContainer;
@@ -16,11 +12,6 @@ class GameObjectContainer;
 
 class GameContext
 {
-private: 
-
-
-
-
 public: 
 	GameContext(Context* context);
 	~GameContext();
@@ -32,9 +23,8 @@ public:
 	GameObjectContainer *useContainer;
 
 	Player* player;
-	PlayerInput playerInput;
-	PlayerMovement playerMovement;
-	KeyMappingImporter keyMappingImporter;
+	PlayerInput playerInput = PlayerInput(this);
+	GameInput gameInput = GameInput(this);
 
 	LevelImporter* levelImporter;
 	Level* level;
@@ -42,7 +32,5 @@ public:
 	sf::Clock deltaClock;
 	sf::Event event;
 	sf::View view;
-
-	
 };
 

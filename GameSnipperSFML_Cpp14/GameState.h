@@ -7,15 +7,14 @@ class GameContext;
 
 class GameState: public BaseState
 {
-private:
-	StateManager* stateManager;
-
-	GameContext* gameContext;
 public:
-	void Update();
-	void Terminate();
+	void Update() override;
+	void Terminate() override;
 
 	GameState(Context* context, StateManager* stateManager);
 	~GameState();
+private:
+	StateManager* stateManager;
+	GameContext* gameContext;
 };
 

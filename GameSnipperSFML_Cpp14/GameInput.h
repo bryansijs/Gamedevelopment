@@ -3,10 +3,10 @@
 
 class GameContext;
 
-class PlayerInput : public BaseInput
+class GameInput : public BaseInput
 {
 public:
-	PlayerInput(GameContext* gContext);
+	GameInput(GameContext* gContext);
 	void ProcessKeyActions();
 private:
 	GameContext* gContext;

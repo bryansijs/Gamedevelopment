@@ -7,6 +7,7 @@
 #include "GameContext.h"
 #include "MoveContainer.h"
 #include "DrawContainer.h"
+#include "input.h"
 
 GameState::GameState(Context* context, StateManager* stateManager)
 {
@@ -58,11 +59,12 @@ void GameState::Update()
 			if (gameContext->event.type == sf::Event::KeyPressed || gameContext->event.type == sf::Event::KeyReleased)
 			{
 				Input::EventOccured(gameContext->event);
+				gameContext->gameInput.CatchInput();
 				gameContext->playerInput.CatchInput();
 			}
 		}
-
-		gameContext->player->GetActions()->ProcessActions(gameContext->playerInput.GetActiveKeys());
+		gameContext->gameInput.ProcessKeyActions();
+		gameContext->playerInput.ProcessKeyActions();
 		gameContext->level->updateViewPort(worldPosition);
 	}
 

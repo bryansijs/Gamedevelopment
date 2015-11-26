@@ -1,19 +1,20 @@
 #include "stdafx.h"
-#include "PlayerInput.h"
 #include "GameContext.h"
 #include "KeyMapping.h"
+#include "GameInput.h"
 
-PlayerInput::PlayerInput(GameContext* gContext) : BaseInput()
+GameInput::GameInput(GameContext* gContext) : BaseInput()
 {
-	PlayerInput::gContext = gContext;
+	GameInput::gContext = gContext;
 }
 
-void PlayerInput::ProcessKeyActions()
+void GameInput::ProcessKeyActions()
 {
 	for (int i = 0; i < activeKeys.size(); i++)
 	{
 		string key = KeyMapping::GetMap(activeKeys[i]);
 
+		/* EXAMPLES:
 		if (key.find("move") != string::npos)
 			gContext->player->GetActions()->Move(key);
 
@@ -22,5 +23,6 @@ void PlayerInput::ProcessKeyActions()
 
 		if (key == "use")
 			gContext->player->GetActions()->Use();
+			*/
 	}
 }
