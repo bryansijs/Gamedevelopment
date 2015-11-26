@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Key.h"
-
-
+#include "DrawContainer.h"
+#include "GameObjectContainer.h"
 Key::Key()
 {
 }
@@ -29,3 +29,12 @@ Key::Key(DrawContainer* container, std::string img, GameObjectContainer* gameObj
 	this->setSize(widht, height);
 };
 
+
+void Key::doAction(Player* player)
+{
+	std::cout << "Test" << std::endl;
+//	player->addKey();
+	getDrawContainer()->RemoveBehaviour(this->getDrawBehaviour());
+	getgameObjectContainer()->RemoveObject(this);
+
+}

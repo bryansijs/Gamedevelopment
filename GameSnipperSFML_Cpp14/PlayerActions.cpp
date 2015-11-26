@@ -9,7 +9,7 @@
 #include "KeyMapping.h"
 #include "GameObject.h"
 #include "Tile.h"
-
+#include"Key.h"
 PlayerActions::PlayerActions()
 {
 
@@ -74,7 +74,7 @@ void PlayerActions::Use()
 	}
 
 	int b = this->player->getgameObjectContainer()->getObjects().size();
-	//std::cout << b <<  std::endl;
+	std::cout << b <<  std::endl;
 	/*std::cout << "My current location x y " << player->getPosition().x << " " << player->getPosition().y << std::endl;*/
 
 	float playery = this->player->getPosition().y;
@@ -91,7 +91,10 @@ void PlayerActions::Use()
 		{
 			if (playerx + 32 > object->getPosition().x && playerx - 48 < object->getPosition().x)
 			{
-				object->doAction();
+				if (dynamic_cast<Key*>(object))
+					dynamic_cast<Key*>(object)->doAction(this->player);
+				else
+					object->doAction();
 			}
 		}
 	}
