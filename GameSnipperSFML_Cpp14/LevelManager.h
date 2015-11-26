@@ -1,15 +1,19 @@
 #pragma once
-#include <vector>
+#include <map>
 
 class Level;
 class LevelManager
 {
-	std::vector<std::string> allLevels;
+	int currentLevelNumber = -1;
+
+	std::map<int,std::string> allLevels;
 
 	void getAllLevels();
 
 public:
+	void swapSequence(int first, int second);
+	const char* getCurrentLevel();
+	const char* getNextLevelName();
 	LevelManager();
 	~LevelManager();
 };
-

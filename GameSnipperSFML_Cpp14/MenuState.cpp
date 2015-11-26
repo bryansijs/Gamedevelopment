@@ -75,7 +75,7 @@ void callDirectJSFunction(WebView* webView, WebCore* web_core, int currentLevel)
 	web_core->Update();
 }
 
-void addLevelToMenu(WebView* webView, WebCore* web_core, char* naam)
+void addLevelToMenu(WebView* webView, WebCore* web_core, const char* naam)
 {
 	JSValue window = webView->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));
 
@@ -103,7 +103,7 @@ void MenuState::ShowLevels()
 	menuContext->inMenu = false;
 	menuContext->pathToFile = "file:///Resources/menuHTML/levels.html";
 	ReloadPage();
-	addLevelToMenu(menuContext->webView, menuContext->web_core, menuContext->levelManager->getAllLevels());//TODO Get all levels as list
+	addLevelToMenu(menuContext->webView, menuContext->web_core, menuContext->levelManager->getNextLevelName());
 }
 
 

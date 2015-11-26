@@ -11,7 +11,7 @@ class GameState: public BaseState
 private:
 	StateManager* stateManager;
 	LevelManager* levelManager;
-
+	Context* maincontext;
 	GameContext* gameContext;
 public:
 	void Update();

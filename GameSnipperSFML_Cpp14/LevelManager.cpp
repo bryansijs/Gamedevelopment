@@ -26,10 +26,12 @@ void LevelManager::getAllLevels()
 	if (dir != NULL) {
 
 		/* Print all files and directories within the directory */
+		int i = 0;
 		while ((ent = readdir(dir)) != NULL) {
 			switch (ent->d_type) {
 			case DT_REG:
-				allLevels.push_back(std::string(ent->d_name));
+				allLevels[i] = std::string(ent->d_name);
+				i++;
 				break;
 			default:
 				break;
@@ -44,3 +46,24 @@ void LevelManager::getAllLevels()
 	}
 }
 
+void LevelManager::swapSequence(int first, int second)
+{
+	std::string temp = allLevels[second];
+	allLevels[second] = allLevels[first];
+	allLevels[first] = temp;
+}
+
+const char* LevelManager::getCurrentLevel()
+{
+	return allLevels[currentLevelNumber].c_str();
+}
+
+const char* LevelManager::getNextLevelName()
+{
+	if(allLevels.size() > 1)
+	{
+		currentLevelNumber =+ 1;
+		return allLevels[currentLevelNumber].c_str();
+	}
+	return nullptr;
+}

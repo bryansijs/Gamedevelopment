@@ -10,6 +10,7 @@
 
 GameState::GameState(Context* context, StateManager* stateManager)
 {
+	maincontext = context;
 	gameContext = new GameContext(context);
 	this->stateManager = stateManager;
 	this->levelManager = new LevelManager();
@@ -33,6 +34,8 @@ GameState::GameState(Context* context, StateManager* stateManager)
 
 GameState::~GameState()
 {
+	delete(gameContext);
+	delete(levelManager);
 }
 
 void GameState::Update()
@@ -61,6 +64,10 @@ void GameState::Update()
 			{
 				Input::EventOccured(gameContext->event);
 				gameContext->playerInput.CatchInput();
+
+				if (Input::GetKeyDown("K")) {
+					StartNextLevel();
+				}
 			}
 		}
 
@@ -88,10 +95,15 @@ void GameState::Terminate()
 
 void GameState::StartNextLevel()
 {
-	gameContext->levelImporter->Clear();
+	//delete(gameContext);
 
-	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer);
-	gameContext->levelImporter->Import("./Resources/levels/Level_1.json");//TODO: Get NExt level from levelmanager
+	gameContext = new GameContext(maincontext);
+	this->stateManager = stateManager;
+	this->levelManager = new LevelManager();
+
+	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->useContainer);
+	gameContext->levelImporter->Import("./Resources/levels/Level_1.json");
+
 	gameContext->levelImporter->Prepare();
 
 	gameContext->level = gameContext->levelImporter->getLevel();
@@ -101,7 +113,7 @@ void GameState::StartNextLevel()
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
 
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
-
+	
 	gameContext->view.reset(rect);
 	gameContext->context->window.setView(gameContext->view);
 }
