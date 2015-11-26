@@ -51,7 +51,7 @@ GameObject* InteractiveFactory::CreateDoor(std::map<std::string, std::string>& p
 	y = std::stoi(properties["y"]);
 	widht = std::stoi(properties["width"]);
 	height = std::stoi(properties["height"]);
-	return  new Door(container, imgurl, sf::Vector2f(x, y), widht, height);
+	return  new Door(container, imgurl, gameObjectContainer, sf::Vector2f(x, y), widht, height);
 
 }
 GameObject* InteractiveFactory::CreateKeyHole(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer) {

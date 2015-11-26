@@ -307,6 +307,18 @@ LevelImporter::LevelImporter(DrawContainer *drawContainer)
 {
 	this->drawContainer = drawContainer;
 }
+LevelImporter::LevelImporter(DrawContainer *drawContainer, MoveContainer *moveContaine)
+{
+	this->drawContainer = drawContainer;
+	this->moveContainer = moveContainer;
+}
+
+LevelImporter::LevelImporter(DrawContainer *drawContainer, MoveContainer *moveContainer, GameObjectContainer *gameObjectContainer)
+{
+	this->drawContainer = drawContainer;
+	this->gameObjectContainer = gameObjectContainer;
+	this->moveContainer = moveContainer;
+}
 
 LevelImporter::LevelImporter(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer)
 {

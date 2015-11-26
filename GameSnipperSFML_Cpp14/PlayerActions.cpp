@@ -10,6 +10,7 @@
 #include "GameObject.h"
 #include "Tile.h"
 #include"Key.h"
+#include "Door.h"
 PlayerActions::PlayerActions()
 {
 
@@ -91,10 +92,8 @@ void PlayerActions::Use()
 		{
 			if (playerx + 32 > object->getPosition().x && playerx - 48 < object->getPosition().x)
 			{
-				if (dynamic_cast<Key*>(object))
-					dynamic_cast<Key*>(object)->doAction(this->player);
-				else
-					object->doAction();
+
+					object->doAction(player);
 			}
 		}
 	}

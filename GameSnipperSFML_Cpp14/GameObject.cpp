@@ -65,8 +65,11 @@ void GameObject::SetMoveBehaviour(MoveBehaviour* moveBehaviour)
 	this->moveBehaviour = moveBehaviour;
 }
 
-
 void GameObject::doAction()
+{
+
+}
+void GameObject::doAction(Player* player)
 {
 
 }

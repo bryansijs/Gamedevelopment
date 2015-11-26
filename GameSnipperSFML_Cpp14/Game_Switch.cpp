@@ -66,7 +66,7 @@ Game_Switch::Game_Switch(GameObjectContainer *gameObjectContainer, sf::Vector2f 
 	this->setSize(widht, height);
 };
 
-void Game_Switch::doAction()
+void Game_Switch::doAction(Player* player)
 {
 	setState();
 	shouldUpdate = true;

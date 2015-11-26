@@ -27,7 +27,9 @@ protected:
 	sf::Sound music;
 public:
 	LevelImporter(DrawContainer *drawContainer);
+	LevelImporter(DrawContainer *drawContainer, MoveContainer *moveContainer);
 	LevelImporter(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer);
+	LevelImporter(DrawContainer *drawContainer, MoveContainer *moveContainer, GameObjectContainer *gameObjectContainer);
 	LevelImporter();
 	~LevelImporter();
 
