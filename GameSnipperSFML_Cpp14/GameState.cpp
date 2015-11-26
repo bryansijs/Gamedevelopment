@@ -14,7 +14,7 @@ GameState::GameState(Context* context, StateManager* stateManager)
 	this->stateManager = stateManager;
 
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->useContainer);
-	gameContext->levelImporter->Import("./Resources/levels/Level_New.json");
+	gameContext->levelImporter->Import("./Resources/levels/OnTopTempGuus.json");
 	gameContext->levelImporter->Prepare();
 
 	gameContext->level = gameContext->levelImporter->getLevel();
