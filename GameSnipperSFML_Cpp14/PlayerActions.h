@@ -24,18 +24,24 @@ public:
 	void SetPlayer(Player *activePlayer);
 	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile*>* tiles);
 	void ProcessActions(std::vector<std::string> &newActiveKeys);
-	void setTiles(std::vector<Tile*>* t) { tiles = t; };
+	void SetTiles(std::vector<Tile*>* t) { tiles = t; };
+
 	void Move();
 	void Shoot();
 	void Use();
 private:
-	std::map<std::string, void(PlayerActions::*)()> possibleActions = {
+	void ExecuteActions();
+
+	std::map<std::string, void(PlayerActions::*)()> actions = {
 		{ "move", &PlayerActions::Move },
 		{ "shoot", &PlayerActions::Shoot },
 		{ "use", &PlayerActions::Use }
 	};
 
+	std::vector<void(PlayerActions::*)()> activeActions;
+
 	std::vector<std::string> activeKeys;
+
 	std::string direction = "move-left";
 	std::string currentMap;
 
@@ -52,6 +58,6 @@ private:
 	std::vector<Tile*>* tiles;
 
 	bool fired = false;
-
+	bool resetAnimation = true;
 };
 
