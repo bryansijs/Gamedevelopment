@@ -114,13 +114,27 @@
 			if(pagination[currentPage+1] != 0)
 			{
 				currentPage ++;
-				var table = document.getElementById("levelTable");
-				table.innerHTML = "";
-				
-				var arrayLength = pagination[currentPage].length;
-				for (var i = 0; i < arrayLength; i++) {
-					table.appendChild(pagination[currentPage][i]);
-				}
+				loadTable();
+			}
+		}
+		
+		function prevPage()
+		{
+			if(currentPage > 0)
+			{
+				currentPage --;
+				loadTable();
+			}
+		}
+		
+		function loadTable()
+		{
+			var table = document.getElementById("levelTable");
+			table.innerHTML = "";
+			
+			var arrayLength = pagination[currentPage].length;
+			for (var i = 0; i < arrayLength; i++) {
+				table.appendChild(pagination[currentPage][i]);
 			}
 		}
     </script>
