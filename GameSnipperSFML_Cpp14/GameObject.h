@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <SFML\System\Vector2.hpp>
 #include <SFML\Graphics.hpp>
 #include <iostream>
 
@@ -8,50 +9,82 @@ class DrawContainer;
 class MoveContainer;
 class DrawBehaviour;
 class MoveBehaviour;
+class GameObjectContainer;
 class Tile;
 
 class GameObject
 {
-public:
-	GameObject(DrawContainer *drawContainer, std::string textureUrl);
-	GameObject();
-	~GameObject();
 
+private:
 	std::string name;
 	std::string type;
 
+	GameObjectContainer*  gameObjectContainer;
 	DrawContainer* drawContainer;
 	MoveContainer* moveContainer;
 	DrawBehaviour* drawBehaviour;
 	MoveBehaviour* moveBehaviour;
 
+
 	sf::Vector2f position;
-
-	void setPosition(sf::Vector2f position) { this->position = position; };
-
-	virtual void Update();
-	void setDrawBehaviour(DrawBehaviour* newDrawBehaviour);
-	void SetMoveBehaviour(MoveBehaviour* moveBehaviour);
-
-	sf::IntRect imageRect =  sf::IntRect(0, 0, 0, 0);
-
-	int x_index = 0;
-	int y_index = 0;
+	int xIndex = 0;
+	int yIndex = 0;
 	int width = 0;
 	int height = 0;
 
-	void set_Image_x(int x)
+
+public:
+	GameObject(DrawContainer *drawContainer, std::string textureUrl);
+	GameObject(DrawContainer *drawContainer);
+	GameObject();
+	GameObject(GameObjectContainer *useContainer);
+	GameObject::GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, std::string textureUrl);
+	~GameObject();
+
+
+	
+	void setPosition(sf::Vector2f position) { this->position = position; };
+	sf::Vector2f getPosition() { return position; }
+
+	int getPositionX() { return position.x; }
+	int getPositionY() { return position.y; }
+
+	virtual void Update();
+	virtual void doAction();
+	virtual void setProperties(std::map<std::string, std::string>& properties);
+
+	void setDrawBehaviour(DrawBehaviour* newDrawBehaviour);
+	void SetMoveBehaviour(MoveBehaviour* moveBehaviour);
+
+	void setDrawContainer(DrawContainer* newDrawContainer) {this->drawContainer = newDrawContainer	;}
+	void setMoveContainer(MoveContainer* newMoveContainer) { this->moveContainer = newMoveContainer; }
+
+
+	DrawContainer* getDrawContainer() { return this->drawContainer; }
+	MoveContainer* getMoveContainer() { return this->moveContainer; }
+	GameObjectContainer* getgameObjectContainer() { return this->gameObjectContainer; }
+
+
+	DrawBehaviour* getDrawBehaviour() { return this->drawBehaviour; }
+	MoveBehaviour* getMoveBehaviour() { return this->moveBehaviour; }
+
+	void setUseContainer(GameObjectContainer* gameObjectContainer) { this->gameObjectContainer = gameObjectContainer; }
+	sf::IntRect imageRect =  sf::IntRect(0, 0, 0, 0);
+
+	void setImageX(int x)
 	{
-		this->x_index = x;
+		this->xIndex = x;
 	}
 
-	void set_Image_y(int y)
+	void setImageY(int y)
 	{
-		this->y_index = y;
+		this->yIndex = y;
 	}
 
-	int get_Image_y() { return y_index * height; }
-	int get_Image_x() { return x_index * width; }
+	int getImageY() { return yIndex * height; }
+	int getImageX() { return xIndex * width; }
+	int getHeight() { return height; }
+	int getWidth() { return width; }
 
 	void setSize(int width, int height)
 	{
@@ -61,6 +94,7 @@ public:
 		imageRect.width = width;
 	}
 
-	bool isColliding(std::vector<Tile> tiles, float newX, float newY);
+
+	bool isColliding(std::vector<Tile*> tiles, sf::Vector2f velocity);
 };
 

@@ -2,6 +2,7 @@
 #include "UnitTestMain.h"
 #include "TestDemo.h"
 #include "TestLevelImporter.h"
+#include "UnitTestGameObjectFactory.h"
 
 UnitTestMain::UnitTestMain()
 {
@@ -13,6 +14,6 @@ void UnitTestMain::RunTests(bool enabled)
 	if (!enabled)
 		return;
 
-	TestDemo td1;
 	TestLevelImporter tli;
+	UnitTestGameObjectFactory td2;
 }

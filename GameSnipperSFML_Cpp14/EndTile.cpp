@@ -2,7 +2,7 @@
 #include "EndTile.h"
 
 
-EndTile::EndTile()
+EndTile::EndTile(GameObjectContainer* gameObjectContainer) : GameObject{ gameObjectContainer }
 {
 }
 

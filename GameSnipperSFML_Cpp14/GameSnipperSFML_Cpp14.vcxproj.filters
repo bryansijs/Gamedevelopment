@@ -169,6 +169,18 @@
     <Filter Include="Header Files\Context">
       <UniqueIdentifier>{605dcda8-042e-4e5e-8326-eca701f86586}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Model\Units\Enemies">
+      <UniqueIdentifier>{621a1a64-de1d-4a68-84f3-c578c66b3105}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Items">
+      <UniqueIdentifier>{82efc176-0910-44d9-a27f-e0783e9a787c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Units\Enemies">
+      <UniqueIdentifier>{66757107-ae12-4824-831c-69f5d2a4e76b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Items">
+      <UniqueIdentifier>{374d5c0c-2551-4b15-b054-3b4bbdf8ff57}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -180,14 +192,8 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="LevelImporter.h">
       <Filter>Header Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="resource1.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NormalState.h">
       <Filter>Header Files\Model\UnitStates</Filter>
@@ -249,9 +255,6 @@
     <ClInclude Include="PlayerInput.h">
       <Filter>Header Files\Model\Units\Player</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerMovement.h">
-      <Filter>Header Files\Model\Units\Player</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerActions.h">
       <Filter>Header Files\Model\Units\Player</Filter>
     </ClInclude>
@@ -300,15 +303,6 @@
     <ClInclude Include="application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="game_state.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="method_dispatcher.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
@@ -332,6 +326,53 @@
     </ClInclude>
     <ClInclude Include="TestLevelImporter.h">
       <Filter>Header Files\UnitTest\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTileFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="InteractiveFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicEnemy.h">
+      <Filter>Header Files\Model\Units\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="RunnerEnemy.h">
+      <Filter>Header Files\Model\Units\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="TankEnemy.h">
+      <Filter>Header Files\Model\Units\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Potion.h">
+      <Filter>Header Files\Model\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Key.h">
+      <Filter>Header Files\Model\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitTestGameObjectFactory.h">
+      <Filter>Header Files\UnitTest\Tests</Filter>
+    </ClInclude>
+
+    <ClInclude Include="GameObjectContainer.h">
+      <Filter>Header Files\Containers</Filter>
+	</ClInclude>
+
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource2.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -407,9 +448,6 @@
     <ClCompile Include="PlayerInput.cpp">
       <Filter>Source Files\Model\Units\Player</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerMovement.cpp">
-      <Filter>Source Files\Model\Units\Player</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerActions.cpp">
       <Filter>Source Files\Model\Units\Player</Filter>
     </ClCompile>
@@ -455,9 +493,6 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
-    <ClCompile Include="game_state.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MenuState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
@@ -478,6 +513,42 @@
     </ClCompile>
     <ClCompile Include="TestLevelImporter.cpp">
       <Filter>Source Files\UnitTest\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTileFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractiveFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicEnemy.cpp">
+      <Filter>Source Files\Model\Units\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="RunnerEnemy.cpp">
+      <Filter>Source Files\Model\Units\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="TankEnemy.cpp">
+      <Filter>Source Files\Model\Units\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Potion.cpp">
+      <Filter>Source Files\Model\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Key.cpp">
+      <Filter>Source Files\Model\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitTestGameObjectFactory.cpp">
+      <Filter>Source Files\UnitTest\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectContainer.cpp">
+      <Filter>Source Files\Containers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

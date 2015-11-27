@@ -3,7 +3,6 @@
 #include "Player.h"
 #include "PlayerInput.h"
 #include "PlayerActions.h"
-#include "PlayerMovement.h"
 #include "KeyMappingImporter.h"
 
 #include "LevelImporter.h"
@@ -12,10 +11,16 @@
 class Context;
 class MoveContainer;
 class DrawContainer;
+class GameObjectContainer;
 
 class GameContext
 {
-public:
+private: 
+
+
+
+
+public: 
 	GameContext(Context* context);
 	~GameContext();
 
@@ -23,11 +28,11 @@ public:
 
 	MoveContainer* moveContainer;
 	DrawContainer* drawContainer;
+	GameObjectContainer *useContainer;
 
 	Player* player;
 	PlayerInput playerInput;
 	PlayerActions playerActions;
-	PlayerMovement playerMovement;
 	KeyMappingImporter keyMappingImporter;
 
 	LevelImporter* levelImporter;
@@ -36,5 +41,7 @@ public:
 	sf::Clock deltaClock;
 	sf::Event event;
 	sf::View view;
+
+	
 };
 

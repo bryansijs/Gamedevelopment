@@ -9,7 +9,8 @@ TestLevelImporter::TestLevelImporter()
 	UnitTest::Compare("TestLevelImporter, LevelImported", levelImporter->Import("./Resources/levels/UnitTestLevel.json"), true);
 	UnitTest::Compare("TestLevelImporter, MusicPrepared", levelImporter->PrepareMusic("level1.ogg"), true);
 	levelImporter->Prepare();
-	UnitTest::Compare("TestLevelImporter, TileSets", levelImporter->tileSets.size(), 2);
-	UnitTest::Compare("TestLevelImporter, Tiles", levelImporter->tiles.size(), 640);
-	UnitTest::Compare("TestLevelImporter, GameObjects", levelImporter->game_objects.size(), 4);
+	Level* level = levelImporter->getLevel();
+	UnitTest::Compare("TestLevelImporter, TileSets", level->tileSets.size(), 2);
+	UnitTest::Compare("TestLevelImporter, Tiles", level->tiles.size(), 640);
+	UnitTest::Compare("TestLevelImporter, GameObjects", level->game_objects.size(), 4);
 }
