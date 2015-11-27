@@ -22,8 +22,7 @@
     .frame{
         font-family: moonhouse;
         font-size: 20;
-        background-color: #161616;
-        background-image: url('images/victory.png');
+        background-image: url('images/hold.png');
         background-repeat: no-repeat;
         background-position: center;
         height: 640px;
@@ -55,13 +54,16 @@
 </style>
 <body>
     <div class="frame">
-        <div class="js-fade fade-in" style="position:absolute; width: 310px; height: 50px; top: 400px;left: 325px;">
+	    <div align="middle">
+	    	<img src="images/victory.png">
+	    </div>
+        <div class="js-fade fade-out" style="position:absolute; width: 310px; height: 50px; top: 400px;left: 325px;">
             <h1 style="text-align: center; font-family: moonhouse;">Press any key to continue</h1>
         </div>
     </div>
     <script>
         var el = document.querySelector('.js-fade');
-        setInterval(function() {
+        setInterval(function myfunc() {
            if (el.classList.contains('fade-in'))
            {
              el.classList.remove('fade-in')

@@ -18,6 +18,10 @@
 #include "GameState.h"
 #include "StateManager.h"
 
+//temp stuff ----------------------------------------------------------------------------------------
+#include "WinState.h"
+#include "LoseState.h"
+
 using namespace Awesomium;
 
 MenuState::MenuState(Context* context, StateManager* stateManager)
@@ -29,7 +33,7 @@ MenuState::MenuState(Context* context, StateManager* stateManager)
 	menuContext->currentLevel = 1;
 
 	// Awesomium init
-	menuContext->web_core = WebCore::Initialize(WebConfig());
+	menuContext->web_core = context->web_core;
 	menuContext->webView = menuContext->web_core->CreateWebView(960, 640);
 
 	// Load Page
@@ -157,6 +161,22 @@ void MenuState::Update()
 				if (!menuContext->inMenu)
 				{
 					BackToMenu();
+				}
+				// temp stuff -------------------------------------------------------------------------------------------
+				else
+				{
+					menuContext->music->stop();
+
+					//Dit is nodig om een afbeelding te maken van wat er op dit moment word getoont. Deze word dan in de win/lose screen gebruikt als achtergrond omdat het niet met transparantie wil lukken
+					((BitmapSurface*)menuContext->webView->surface())->SaveToPNG(Awesomium::WebString::CreateFromUTF8("./Resources/menuHTML/images/hold.png", strlen("./Resources/menuHTML/images/hold.png")));
+
+					LoseState* loseState = new LoseState(menuContext->context, stateManager);
+					stateManager->AddState(loseState);
+					stateManager->StartNextState();
+
+					/*WinState* winState = new WinState(menuContext->context, stateManager);
+					stateManager->AddState(winState);
+					stateManager->StartNextState();*/
 				}
 			}
 

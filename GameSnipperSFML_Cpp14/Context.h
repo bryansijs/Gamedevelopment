@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <SFML\Graphics.hpp>
+#include <Awesomium/WebCore.h>
 
 class Unit;
 
@@ -17,6 +18,8 @@ public:
 	std::vector<Unit*> getUnits() { return allUnits; };
 
 	Unit* getUnitAt(int i) { return allUnits.at(i); };
+
+	Awesomium::WebCore* web_core;
 private:
 	sf::Vector2i* screenDimensions;
 	sf::Clock clock;
