@@ -61,6 +61,30 @@ void MenuState::Terminate()
 	terminate = true;
 }
 
+void MenuState::CallLevelEditMenuFunction(WebView* webView, WebCore* web_core, std::string action)
+{
+	JSValue window = webView->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));
+
+	if (window.IsObject())
+	{
+		JSArray args;
+		if (action == "switchToUp" || action == "switchToDown") {
+			int level = menuContext->currentLevelIndex - ((menuContext->currentLevelPage-1) * 8);
+			JSValue val = JSValue(level);
+			args.Push(val);
+		}
+		if (action == "switchToUp" && menuContext->currentLevelIndex == ((menuContext->currentLevelPage - 1) * 8) + 1) {
+			//bijvoorbeeld nummer 9 naar 8 
+			window.ToObject().Invoke(WSLit("switchToUpAndPage"), args);
+		}
+		window.ToObject().Invoke(WSLit(action.c_str()), args);
+	}
+
+	Sleep(50);
+	web_core->Update();
+
+}
+
 void callDirectJSFunction(WebView* webView, WebCore* web_core, int currentLevel)
 {
 	JSValue window = webView->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));
@@ -83,7 +107,6 @@ void addLevelToMenu(WebView* webView, WebCore* web_core, const char* naam)
 
 	if (window.IsObject())
 	{
-		std::cout << naam;
 		JSArray args;
 		WebString string = WebString::CreateFromUTF8(naam, strlen(naam) +1);
 		JSValue val = JSValue(string);
@@ -105,12 +128,14 @@ void MenuState::ShowIntruction()
 
 void MenuState::ShowLevels()
 {
+	menuContext->currentLevelPage = 1;
+	menuContext->currentLevelIndex = 1;
+	menuContext->inLevels = true;
 	menuContext->inMenu = false;
 	menuContext->pathToFile = "file:///Resources/menuHTML/levels.html";
 	ReloadPage();
 	std::vector<std::string> levelCollection = this->levelManager->getAllLevels();
 	for (std::vector<std::string>::iterator it = levelCollection.begin(); it != levelCollection.end(); ++it) {
-		std::cout << (*it).c_str();
 		addLevelToMenu(menuContext->webView, menuContext->web_core, (*it).c_str());
 	}
 }
@@ -134,6 +159,7 @@ void MenuState::ShowAbout()
 
 void MenuState::BackToMenu()
 {
+	menuContext->inLevels = false;
 	menuContext->inMenu = true;
 	menuContext->pathToFile = "file:///Resources/menuHTML/menu.html";
 	ReloadPage();
@@ -174,7 +200,16 @@ void MenuState::Update()
 			Input::EventOccured(menuContext->event);
 
 			if (Input::GetKeyDown("Up")) {
-				if (menuContext->currentLevel > 1 && menuContext->inMenu)
+				if(menuContext->inLevels)
+				{
+					int minLevel = ((menuContext->currentLevelPage-1) * 8 ) + 1;
+					if(menuContext->currentLevelIndex > minLevel)
+					{
+						menuContext->currentLevelIndex--;
+						CallLevelEditMenuFunction(menuContext->webView, menuContext->web_core, std::string("selectionUp"));
+					}					
+				}
+				else if (menuContext->currentLevel > 1 && menuContext->inMenu)
 				{
 					menuContext->currentLevel -= 1;
 					callDirectJSFunction(menuContext->webView, menuContext->web_core, menuContext->currentLevel);
@@ -182,10 +217,57 @@ void MenuState::Update()
 			}
 
 			if (Input::GetKeyDown("Down")) {
-				if (menuContext->currentLevel < menuItems.size() && menuContext->inMenu)
+				if (menuContext->inLevels)
+				{
+					int maxLevel = 0;
+					if (menuContext->currentLevelPage * 8 < this->levelManager->getAllLevels().size())
+						maxLevel = menuContext->currentLevelPage * 8;
+					else
+						maxLevel = this->levelManager->getAllLevels().size();
+					
+					if (menuContext->currentLevelIndex < maxLevel)
+					{
+						menuContext->currentLevelIndex++;
+						CallLevelEditMenuFunction(menuContext->webView, menuContext->web_core, std::string("selectionDown"));
+					}
+				}
+				else if (menuContext->currentLevel < menuItems.size() && menuContext->inMenu)
 				{
 					menuContext->currentLevel += 1;
 					callDirectJSFunction(menuContext->webView, menuContext->web_core, menuContext->currentLevel);
+				}
+			}
+			if (Input::GetKeyDown("Left")) {
+				if (menuContext->inLevels) {
+					CallLevelEditMenuFunction(menuContext->webView, menuContext->web_core, std::string("prevPage"));
+					menuContext->currentLevelPage--;
+					menuContext->currentLevelIndex = (menuContext->currentLevelPage-1) * 8 + 1;
+				}
+			}
+			if (Input::GetKeyDown("Right")) {
+				if (menuContext->inLevels) {
+					CallLevelEditMenuFunction(menuContext->webView, menuContext->web_core, std::string("nextPage"));
+					menuContext->currentLevelIndex = (menuContext->currentLevelPage * 8) + 1;
+					menuContext->currentLevelPage++;
+				}
+			}
+			if (Input::GetKeyDown("K")) {
+				if (menuContext->inLevels && menuContext->currentLevelIndex > 1) {
+					CallLevelEditMenuFunction(menuContext->webView, menuContext->web_core, std::string("switchToUp"));
+					this->levelManager->swapSequence(menuContext->currentLevelIndex, menuContext->currentLevelIndex - 1);
+					if (menuContext->currentLevelIndex == ((menuContext->currentLevelPage - 1) * 8) + 1){
+						menuContext->currentLevelPage --;
+						menuContext->currentLevelIndex = menuContext->currentLevelPage * 8;
+					}
+					else
+						menuContext->currentLevelIndex--;
+				}
+			}
+			if (Input::GetKeyDown("L")) {
+				if (menuContext->inLevels && menuContext->currentLevelIndex < 8) {
+					CallLevelEditMenuFunction(menuContext->webView, menuContext->web_core, std::string("switchToDown"));
+					this->levelManager->swapSequence(menuContext->currentLevelIndex, menuContext->currentLevelIndex + 1);
+					menuContext->currentLevelIndex++;
 				}
 			}
 

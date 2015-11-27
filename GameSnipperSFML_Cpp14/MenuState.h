@@ -15,6 +15,7 @@ private:
 	void RunGame();
 	void ShowIntruction();
 	void ShowLevels();
+	void CallLevelEditMenuFunction(Awesomium::WebView* webView, Awesomium::WebCore* web_core, std::string action);
 
 	StateManager* stateManager;
 	LevelManager* levelManager;
@@ -25,7 +26,7 @@ private:
 public:
 	void Update();
 	void Terminate();
-
+	
 	void BackToMenu();
 
 	std::map <int, void(MenuState::*)()> menuItems{

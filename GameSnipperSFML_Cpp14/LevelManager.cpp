@@ -48,6 +48,8 @@ void LevelManager::LoadAllLevels()
 
 void LevelManager::swapSequence(int first, int second)
 {
+	first--;
+	second--;
 	std::string temp = allLevels[second];
 	allLevels[second] = allLevels[first];
 	allLevels[first] = temp;
