@@ -45,6 +45,16 @@
 		left: 384px; 
 		background-color: #161616;
 	}
+	.instruct{
+		bottom:0;
+		position:absolute;
+	}
+	#instruction{
+	margin-top:10px;
+	}
+	#pagination{
+	margin-top:10px;
+	}
 	
 </style>
 <body>
@@ -57,7 +67,10 @@
                     <td></td>
                 </tr>
             </table>
-            <div id="test"></div>
+			<div class="instruct">
+				<div id="pagination">Page 1 of 1</div>
+				<div id="instruction"> &#8596; = page search<br/> K/L = up/down</div>
+			</div>
         </div>
     </div>
     <script>
@@ -111,7 +124,7 @@
 				console.log(elementsInPage);
 				levelNumber++;
 			}
-			console.log("pagination in next " +pagination[currentPage+1]);
+			document.getElementById("pagination").innerHTML = "Page " + (currentPage + 1) + " of " + (pageFillIndex +1);
         }
 		
 		function nextPage()
@@ -141,6 +154,8 @@
 			for (var i = 0; i < arrayLength; i++) {
 				table.appendChild(pagination[currentPage][i]);
 			}
+			//Pagination level
+			document.getElementById("pagination").innerHTML = "Page " + (currentPage + 1) + " of " + (pageFillIndex +1);
 		}
 		
 		function selectionDown()
