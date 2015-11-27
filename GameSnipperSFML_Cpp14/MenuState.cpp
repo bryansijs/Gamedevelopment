@@ -77,7 +77,12 @@ void MenuState::CallLevelEditMenuFunction(WebView* webView, WebCore* web_core, s
 			//bijvoorbeeld nummer 9 naar 8 
 			window.ToObject().Invoke(WSLit("switchToUpAndPage"), args);
 		}
-		window.ToObject().Invoke(WSLit(action.c_str()), args);
+		else if (action == "switchToDown" && menuContext->currentLevelIndex == menuContext->currentLevelPage * 8) {
+			//bijvoorbeeld nummer 8 naar 9 
+			window.ToObject().Invoke(WSLit("switchToUpAndPageDown"), args);
+		}
+		else
+			window.ToObject().Invoke(WSLit(action.c_str()), args);
 	}
 
 	Sleep(50);
@@ -264,10 +269,17 @@ void MenuState::Update()
 				}
 			}
 			if (Input::GetKeyDown("L")) {
-				if (menuContext->inLevels && menuContext->currentLevelIndex < 8) {
+					int maxLevel = this->levelManager->getAllLevels().size();
+				if (menuContext->inLevels && menuContext->currentLevelIndex < maxLevel) {
 					CallLevelEditMenuFunction(menuContext->webView, menuContext->web_core, std::string("switchToDown"));
 					this->levelManager->swapSequence(menuContext->currentLevelIndex, menuContext->currentLevelIndex + 1);
-					menuContext->currentLevelIndex++;
+					if(menuContext->currentLevelIndex == menuContext->currentLevelPage *8)
+					{
+						menuContext->currentLevelPage++;
+						menuContext->currentLevelIndex = ((menuContext->currentLevelPage - 1) * 8) + 1;
+					}
+					else
+						menuContext->currentLevelIndex++;
 				}
 			}
 

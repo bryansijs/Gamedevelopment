@@ -187,9 +187,26 @@
 		
 		function switchToUpAndPage(from)
 		{
+			var from = document.getElementsByClassName("selected")[0].children[1].innerHTML;
+			
+			var temp = pagination[currentPage-1][7].children[1].innerHTML;
+			pagination[currentPage-1][7].children[1].innerHTML = from;
+			pagination[currentPage][0].children[1].innerHTML = temp;
+			
 			prevPage();
 			document.getElementsByClassName("selected")[0].className = "";
 			document.getElementById('levelTable').lastChild.className = "selected"
+		}
+		function switchToUpAndPageDown(from)
+		{
+			var from = document.getElementsByClassName("selected")[0].children[1].innerHTML;
+			var temp = pagination[currentPage+1][0].children[1].innerHTML;
+			pagination[currentPage+1][0].children[1].innerHTML = from;
+			pagination[currentPage][7].children[1].innerHTML = temp;
+			
+			nextPage();
+			document.getElementsByClassName("selected")[0].className = "";
+			document.getElementById('levelTable').firstChild.className = "selected"
 		}
 		
 		function switchToDown(from)
