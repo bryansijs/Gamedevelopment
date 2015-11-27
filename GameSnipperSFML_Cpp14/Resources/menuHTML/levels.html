@@ -61,23 +61,68 @@
         </div>
     </div>
     <script>
-
+		var levelNumber = 1;
+		var maxLevelsPerPage = 8;
+		var currentPage = 0;
+		var pageFillIndex = 0;
+		var elementsInPage = 0;
+		var pagination = [];
+		
+		var numInternalArrays = 10;
+		for (var i = 0; i < numInternalArrays; i++) {
+			pagination[i] = [];
+		}
+		
         function insertRow(naam) {
-			// Find a <table> element with id="levelTable":
-			var table = document.getElementById("levelTable");
+		
+			if(elementsInPage < maxLevelsPerPage)
+			{
+				// Find a <table> element with id="levelTable":
+				var table = document.getElementById("levelTable");
 
-			// Create an empty <tr> element and add it to the 1st position of the table:
-			var row = table.insertRow(table.rows.length);
+				// Create an empty <tr> element and add it to the 1st position of the table:
+				var row = document.createElement("tr");
 
-			// Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
-			var cell2 = row.insertCell(0);
-			var cell1 = row.insertCell(1);
-			
-
-			// Add some text to the new cells:
-			cell1.innerHTML = naam;
-			cell2.innerHTML = table.rows.length -1;
+				// Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+				var cell2 = row.insertCell(0);
+				var cell1 = row.insertCell(1);
+				
+				// Add some text to the new cells:
+				cell1.innerHTML = naam;
+				cell2.innerHTML = levelNumber;
+				
+				if(currentPage == pageFillIndex)
+				{
+					table.appendChild(row);
+				}
+				
+				pagination[pageFillIndex][elementsInPage] = row; 
+				elementsInPage ++;
+				if(elementsInPage == maxLevelsPerPage){
+					// Add new page
+					pageFillIndex ++;
+					elementsInPage = 0;
+				}
+				console.log(elementsInPage);
+				levelNumber++;
+			}
+			console.log("pagination in next " +pagination[currentPage+1]);
         }
+		
+		function nextPage()
+		{
+			if(pagination[currentPage+1] != 0)
+			{
+				currentPage ++;
+				var table = document.getElementById("levelTable");
+				table.innerHTML = "";
+				
+				var arrayLength = pagination[currentPage].length;
+				for (var i = 0; i < arrayLength; i++) {
+					table.appendChild(pagination[currentPage][i]);
+				}
+			}
+		}
     </script>
 </body>
 </html>
