@@ -27,5 +27,8 @@ public:
 	b2BodyDef* bodyDef;
 	b2BodyDef* enemyBodyDef;
 
+	int doorId;
+	int ofDoorId;
+
 };
 

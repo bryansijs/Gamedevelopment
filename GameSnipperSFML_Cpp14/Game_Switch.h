@@ -13,6 +13,8 @@ private:
 	int hazardIndex = -1;
 	int doorIndex = -1;
 
+	bool needKey = false;
+	bool usedKey = false;
 
 	int ofState = 0;
 	int onState = 0;
@@ -32,8 +34,7 @@ private:
 
 	std::vector<Tile*> HazardList;
 	std::vector<Tile*> ofHazardList;
-	std::vector<Tile*> DoorList;
-	std::vector<Tile*> ofDoorList;
+
 
 public:
 	Game_Switch();
@@ -63,6 +64,7 @@ public:
 				this->ofHazardList.push_back(tiles.at(i));
 		}
 	}
+
 	
 };
 

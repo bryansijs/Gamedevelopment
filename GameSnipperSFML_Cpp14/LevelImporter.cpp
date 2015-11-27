@@ -110,8 +110,6 @@ void LevelImporter::PrepareTiles()
 	}
 }
 
-
-
 void LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 {
 	int tileSetIndex = 0;
@@ -159,15 +157,11 @@ void LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 	{
 		Json::Value props = value["properties"];
 
-
-
 		if (props.isMember("hazardLinkIndex"))
 		{
 			string hazardIndex = value["properties"]["hazardLinkIndex"].asString();
 			insert_tile->hazardLinkIndex = atoi(hazardIndex.c_str());
-
 		}
-
 
 		if (props.isMember("isCollidable"))
 		{
@@ -179,6 +173,18 @@ void LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 				insert_tile->bodyDef->type = b2_staticBody;
 				insert_tile->bodyDef->position.Set(insert_tile->x_Position, insert_tile->y_Position);
 			}
+		}
+
+		if (props.isMember("doorId"))
+		{
+			string doorId = value["properties"]["doorId"].asString();
+			insert_tile->doorId = atoi(doorId.c_str());
+		}
+
+		if (props.isMember("ofDoorId"))
+		{
+			string ofDoorId = value["properties"]["ofDoorId"].asString();
+			insert_tile->ofDoorId = atoi(ofDoorId.c_str());
 		}
 
 		if (props.isMember("isEnemyCollidable"))
@@ -199,7 +205,6 @@ void LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 				insert_tile->isHazard = true;
 		}
 
-
 		if (props.isMember("hazardIndex"))
 		{
 			string hazardIndex = value["properties"]["hazardIndex"].asString();
@@ -208,8 +213,6 @@ void LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 			if (!hazardMap.count(insert_tile->hazardIndex))
 				hazardMap.insert(std::pair<int, bool>(insert_tile->hazardIndex, false));
 		}
-
-
 
 		if (props.isMember("hazardState"))
 		{
@@ -225,8 +228,6 @@ void LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 				}
 			}
 		}
-
-
 
 		if (props.isMember("hazardValue"))
 		{
@@ -274,6 +275,10 @@ void LevelImporter::Prepare()
 
 void LevelImporter::Import(std::string JSON)
 {
+	if (inputFileStream.is_open())
+		inputFileStream.close();
+
+
 	inputFileStream.open(JSON, std::ifstream::binary);
 
 	bool parsingSuccessful = jsonReader.parse(inputFileStream, jsonRoot, false);

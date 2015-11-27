@@ -131,5 +131,5 @@ void PlayerActions::Use()
 		}
 	}
 
-	useDelay = 7;
+	useDelay = 0.1;
 }

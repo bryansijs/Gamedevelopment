@@ -10,13 +10,13 @@
 GameObject::GameObject(DrawContainer *drawContainer, std::string textureUrl)
 {
 	this->drawContainer = drawContainer;
-	this->drawBehaviour = { new NormalDrawBehaviour(this, 10, "./Resources/sprites/"+textureUrl) };
+	this->drawBehaviour = { new NormalDrawBehaviour(this, 10, "./Resources/sprites/" + textureUrl) };
 	this->drawContainer->AddBehaviour(this->drawBehaviour);
 }
 
 GameObject::GameObject(DrawContainer *drawContainer)
 {
-	
+
 }
 
 
@@ -26,7 +26,7 @@ GameObject::GameObject(GameObjectContainer *gameObjectContainer)
 	this->gameObjectContainer->AddObject(this);
 }
 
-GameObject::GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer,std::string textureUrl)
+GameObject::GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, std::string textureUrl)
 {
 	this->drawContainer = drawContainer;
 	this->drawBehaviour = { new NormalDrawBehaviour(this, 10, "./Resources/sprites/" + textureUrl) };
@@ -47,7 +47,7 @@ GameObject::~GameObject()
 
 void GameObject::Update()
 {
-	
+
 }
 
 void GameObject::setProperties(std::map<std::string, std::string>& properties)

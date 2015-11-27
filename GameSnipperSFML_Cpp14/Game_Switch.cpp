@@ -17,12 +17,14 @@ Game_Switch::~Game_Switch()
 void Game_Switch::setProperties(std::map<std::string, std::string>& properties) {
 
 	this->hazardIndex = (properties.count("hazardIndex")) ? std::stoi(properties["hazardIndex"]) : -1;
-	this->doorIndex = (properties.count("doorIndex")) ? std::stoi(properties["doorIndex"]) : -1;
+	this->doorIndex = (properties.count("doorId")) ? std::stoi(properties["doorId"]) : -1;
 
 	this->isOn = (properties.count("state")) ? std::stoi(properties["state"]) : 0;
 	this->ofState = (properties.count("ofIndex")) ? std::stoi(properties["ofIndex"]) : 0;
 	this->onState = (properties.count("onIndex")) ? std::stoi(properties["onIndex"]) : 2;
 	this->setImageX((properties.count("xIndex")) ? std::stoi(properties["xIndex"]) : 0);
+	this->needKey = (properties.count("needKey")) ? std::stoi(properties["needKey"]) : 0;
+
 
 	if (this->isOn)
 		this->setImageY(onState);
@@ -68,6 +70,18 @@ Game_Switch::Game_Switch(GameObjectContainer *gameObjectContainer, sf::Vector2f 
 
 void Game_Switch::doAction(Player* player)
 {
+
+
+	if (needKey && !usedKey)
+	{
+		if (player->getKey() > 0) {
+			player->removeKey();
+			this->usedKey = true;
+		}
+		else
+			return;
+	}
+
 	setState();
 	shouldUpdate = true;
 }
