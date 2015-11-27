@@ -191,6 +191,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="Input.h" />
     <ClInclude Include="InteractiveFactory.h" />
     <ClInclude Include="ItemFactory.h" />
+    <ClInclude Include="JSConsole.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="KeyMapping.h" />
     <ClInclude Include="KeyMappingImporter.h" />

@@ -5,18 +5,19 @@
 #include <Awesomium/WebCore.h>
 #include <Awesomium/BitmapSurface.h>
 #include <Awesomium/STLHelpers.h>
+#include <Awesomium/WebString.h>
 
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
 #include <iostream>
 
-#include "Context.h"
 #include "MenuContext.h"
 
 #include "Input.h"
 #include "GameState.h"
 #include "StateManager.h"
+#include "JSConsole.h"
 
 using namespace Awesomium;
 
@@ -82,8 +83,11 @@ void addLevelToMenu(WebView* webView, WebCore* web_core, const char* naam)
 
 	if (window.IsObject())
 	{
+		std::cout << naam;
 		JSArray args;
-		JSValue val = JSValue(naam);
+		WebString string = WebString::CreateFromUTF8(naam, strlen(naam) +1);
+		JSValue val = JSValue(string);
+		bool test = val.IsString();
 		args.Push(val);
 		window.ToObject().Invoke(WSLit("insertRow"), args);
 	}
@@ -104,12 +108,16 @@ void MenuState::ShowLevels()
 	menuContext->inMenu = false;
 	menuContext->pathToFile = "file:///Resources/menuHTML/levels.html";
 	ReloadPage();
-	addLevelToMenu(menuContext->webView, menuContext->web_core, this->levelManager->getNextLevelName());
+	std::vector<std::string> levelCollection = this->levelManager->getAllLevels();
+	for (std::vector<std::string>::iterator it = levelCollection.begin(); it != levelCollection.end(); ++it) {
+		std::cout << (*it).c_str();
+		addLevelToMenu(menuContext->webView, menuContext->web_core, (*it).c_str());
+	}
 }
-
 
 void MenuState::RunGame()
 {
+	menuContext->inMenu = false;
 	menuContext->music->stop();
 
 	GameState* gameState = new GameState(menuContext->context, stateManager,this->levelManager);
@@ -134,9 +142,11 @@ void MenuState::BackToMenu()
 
 void MenuState::ReloadPage()
 {
+	JSConsole* listener = new JSConsole();
 	WebURL url(WSLit(menuContext->pathToFile));
 	menuContext->webView->LoadURL(url);
 	menuContext->webView->SetTransparent(true);
+	menuContext->webView->set_view_listener(listener);
 
 	while (menuContext->webView->IsLoading())
 	{
@@ -164,7 +174,7 @@ void MenuState::Update()
 			Input::EventOccured(menuContext->event);
 
 			if (Input::GetKeyDown("Up")) {
-				if (menuContext->currentLevel > 1)
+				if (menuContext->currentLevel > 1 && menuContext->inMenu)
 				{
 					menuContext->currentLevel -= 1;
 					callDirectJSFunction(menuContext->webView, menuContext->web_core, menuContext->currentLevel);
@@ -172,7 +182,7 @@ void MenuState::Update()
 			}
 
 			if (Input::GetKeyDown("Down")) {
-				if (menuContext->currentLevel < menuItems.size())
+				if (menuContext->currentLevel < menuItems.size() && menuContext->inMenu)
 				{
 					menuContext->currentLevel += 1;
 					callDirectJSFunction(menuContext->webView, menuContext->web_core, menuContext->currentLevel);
@@ -187,14 +197,18 @@ void MenuState::Update()
 			}
 
 			if (Input::GetKeyDown("Return")) {
-				std::map <int, void(MenuState::*)()>::iterator it;
-				for (it = menuItems.begin(); it != menuItems.end(); ++it)
+
+				if(menuContext->inMenu)
 				{
-					if (it->first == menuContext->currentLevel)
+					std::map <int, void(MenuState::*)()>::iterator it;
+					for (it = menuItems.begin(); it != menuItems.end(); ++it)
 					{
-						auto function = it->second;
-						(this->*function)();
-						break;
+						if (it->first == menuContext->currentLevel)
+						{
+							auto function = it->second;
+							(this->*function)();
+							break;
+						}
 					}
 				}
 			}

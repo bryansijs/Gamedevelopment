@@ -36,13 +36,23 @@
     .selected .selector{
         display: block!important;
     }
+	.canvas{
+		overflow: hidden;
+		position:absolute; 
+		width: 192px; 
+		height: 302px; 
+		top: 168px;
+		left: 384px; 
+		background-color: #161616;
+	}
+	
 </style>
 <body>
     <div class="frame">
         <img src="images/border.png" style="z-index: 99"/>
-        <div style="position:absolute; width: 192px; height: 302px; top: 168px;left: 384px; background-color: #161616">
+        <div class="canvas">
             <h3 style="text-align: center; font-family: moonhouse;">Levels:</h3>
-            <table>
+            <table id=levelTable>
                 <tr>
                     <td></td>
                 </tr>
@@ -53,14 +63,20 @@
     <script>
 
         function insertRow(naam) {
+			// Find a <table> element with id="levelTable":
+			var table = document.getElementById("levelTable");
 
-            //delete current selected
-            var old = document.getElementsByClassName("selected")[0];
-            old.firstChild.parentElement.className = "";
+			// Create an empty <tr> element and add it to the 1st position of the table:
+			var row = table.insertRow(table.rows.length);
 
-            //make new item selected
-            var elem = document.getElementById(level);
-            elem.className = "selected";
+			// Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+			var cell2 = row.insertCell(0);
+			var cell1 = row.insertCell(1);
+			
+
+			// Add some text to the new cells:
+			cell1.innerHTML = naam;
+			cell2.innerHTML = table.rows.length -1;
         }
     </script>
 </body>
