@@ -26,8 +26,8 @@ protected:
 	sf::SoundBuffer sbuffer;
 	sf::Sound music;
 public:
-	LevelImporter(DrawContainer *drawContainer);
-	LevelImporter(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer);
+	LevelImporter(DrawContainer *drawContainer, b2World* world);
+	LevelImporter(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, b2World* world);
 	LevelImporter();
 	~LevelImporter();
 
@@ -44,7 +44,8 @@ private:
 	void PrepareTileSets();
 	void PrepareTiles();
 	void PrepareMusic(std::string musicName);
-	void addTile(int dataIndex, Json::Value& value, int i, int j);
+	Tile* addTile(int dataIndex, Json::Value& value, int i, int j);
+	void addTileToContainer(Tile* tile);
 	int tileSize;
 	int levelHeight;
 	int levelWidht;
@@ -56,8 +57,11 @@ private:
 	GameObjectContainer *gameObjectContainer;
 
 	std::vector<GameObject*> game_objects;
+	std::vector<Tile*> groundTiles;
+	std::vector<Tile*> roofTiles;
 	std::vector<Tile*> tiles;
 	std::vector<TileSet*> tileSets;
 
 	std::map<int, bool> hazardMap;
+	b2World* world;
 };

@@ -35,7 +35,7 @@ GameObject* ItemFactory::CreatePotion(std::map<std::string, std::string>& proper
 	y = std::stoi(properties["y"]);
 	widht = std::stoi(properties["width"]);
 	height = std::stoi(properties["height"]);
-	return new Potion(container, imgurl, gameObjectContainer, sf::Vector2f(x, y), widht, height);
+	return new Potion(container, imgurl, gameObjectContainer, b2Vec2(x, y), widht, height);
 }
 GameObject* ItemFactory::CreateGun(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer)
 {
@@ -54,5 +54,5 @@ GameObject* ItemFactory::CreateKey(std::map<std::string, std::string>& propertie
 	y = std::stoi(properties["y"]);
 	widht = std::stoi(properties["width"]);
 	height = std::stoi(properties["height"]);
-	return new Key(container, imgurl, gameObjectContainer, sf::Vector2f(x, y), widht, height);
+	return new Key(container, imgurl, gameObjectContainer, b2Vec2(x, y), widht, height);
 }

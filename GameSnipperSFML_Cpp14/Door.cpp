@@ -25,7 +25,7 @@ Door::Door(DrawContainer* container, std::string img) :GameObject{ container, im
 };
 
 
-Door::Door(DrawContainer* container, std::string img, sf::Vector2f position, int widht, int height) :GameObject{ container, img } {
+Door::Door(DrawContainer* container, std::string img, b2Vec2 position, int widht, int height) :GameObject{ container, img } {
 	this->setPosition(position);
 	this->setSize(widht, height);
 };

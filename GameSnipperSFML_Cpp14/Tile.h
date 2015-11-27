@@ -11,8 +11,8 @@ public:
 
 	sf::Sprite sprite;
 	int tileLayer;
-	int x_Position;
-	int y_Position;
+	//int x_Position;
+	//int y_Position;
 
 	bool isHazard;
 	bool hazardState;
@@ -23,9 +23,23 @@ public:
 	bool isEnemyCollidable;
 	bool isCollidable;
 	bool isVisible;
+	bool topTile = false;
 
-	b2BodyDef* bodyDef;
-	b2BodyDef* enemyBodyDef;
+	//b2BodyDef* bodyDef;
+	//b2BodyDef* enemyBodyDef;
+	void createStaticBody(b2World& world);
+
+	float getPositionX() { return this->myBodyDef.position.x; }
+	float getPositionY() { return this->myBodyDef.position.y; }
+
+	void setPositionX(float x) { this->myBodyDef.position.x = x; };
+	void setPositionY(float y) { this->myBodyDef.position.y = y; };
+protected:
+	b2BodyDef myBodyDef;
+	b2PolygonShape Shape;
+	b2Body* Body;
+	b2FixtureDef boxFixtureDef;
+
 
 };
 

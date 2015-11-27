@@ -3,6 +3,7 @@
 #include <vector>
 #include <SFML\System\Vector2.hpp>
 #include <SFML\Graphics.hpp>
+#include <Box2D/Box2D.h>
 #include <iostream>
 
 class DrawContainer;
@@ -25,8 +26,6 @@ private:
 	DrawBehaviour* drawBehaviour;
 	MoveBehaviour* moveBehaviour;
 
-
-	sf::Vector2f position;
 	int xIndex = 0;
 	int yIndex = 0;
 	int width = 0;
@@ -43,11 +42,11 @@ public:
 
 
 	
-	void setPosition(sf::Vector2f position) { this->position = position; };
-	sf::Vector2f getPosition() { return position; }
+	void setPosition(b2Vec2 position) { this->myBodyDef.position = position; };
+	b2Vec2 getPosition() { return this->myBodyDef.position; };
 
-	int getPositionX() { return position.x; }
-	int getPositionY() { return position.y; }
+	int getPositionX() { return this->myBodyDef.position.x; }
+	int getPositionY() { return this->myBodyDef.position.y; }
 
 	virtual void Update();
 	virtual void doAction();
@@ -55,10 +54,14 @@ public:
 
 	void setDrawBehaviour(DrawBehaviour* newDrawBehaviour);
 	void SetMoveBehaviour(MoveBehaviour* moveBehaviour);
+	void setMyBodydef(b2BodyDef body) { myBodyDef = body; };
+
+	void move();
 
 	void setDrawContainer(DrawContainer* newDrawContainer) {this->drawContainer = newDrawContainer	;}
 	void setMoveContainer(MoveContainer* newMoveContainer) { this->moveContainer = newMoveContainer; }
 
+	b2BodyDef getMyBodydef() { return myBodyDef; };
 
 	DrawContainer* getDrawContainer() { return this->drawContainer; }
 	MoveContainer* getMoveContainer() { return this->moveContainer; }
@@ -96,5 +99,15 @@ public:
 
 
 	bool isColliding(std::vector<Tile*> tiles, sf::Vector2f velocity);
+	void createBoxStatic(b2World& World);
+	void createBoxDynamic(b2World & World);
+
+protected:
+	b2BodyDef myBodyDef;
+	b2PolygonShape Shape;
+	b2Body* Body;
+	b2FixtureDef boxFixtureDef;
+
+
 };
 

@@ -11,7 +11,5 @@ public:
 	GameObject* getGameObject() { return gameObject; };
 protected:
 	GameObject* gameObject;
-	float xPosition = 0;
-	float yPosition = 0;
 };
 

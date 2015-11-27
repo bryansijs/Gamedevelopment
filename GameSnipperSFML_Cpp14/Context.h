@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <SFML\Graphics.hpp>
+#include <Box2D\Box2D.h>
 
 class Unit;
 
@@ -20,5 +21,7 @@ public:
 private:
 	sf::Vector2i* screenDimensions;
 	sf::Clock clock;
+
+	
 };
 

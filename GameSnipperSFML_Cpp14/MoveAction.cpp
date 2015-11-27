@@ -59,8 +59,9 @@ void MoveAction::Move(std::vector<std::string> directions, Player *player, std::
 	velocity.y = roundf(velocity.y * 100) / 100;
 
 	AnimateMovement(player);
-
-	player->setPosition(player->getPosition() + velocity);
+	
+	b2Vec2 tempVec(velocity.x, velocity.y);
+	player->setPosition(player->getPosition() + tempVec);
 
 }
 

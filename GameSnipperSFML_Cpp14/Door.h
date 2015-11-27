@@ -10,7 +10,7 @@ public:
 
 	Door(DrawContainer* container);
 	Door(DrawContainer* container, std::string img);
-	Door(DrawContainer* container, std::string img, sf::Vector2f position, int widht, int height);
+	Door(DrawContainer* container, std::string img, b2Vec2 position, int widht, int height);
 	int getDoorId() { return doorId; };
 	virtual void setProperties(std::map<std::string, std::string>& properties);
 };

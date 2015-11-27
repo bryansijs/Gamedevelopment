@@ -125,18 +125,25 @@ void Level::update()
 
 void Level::draw(sf::RenderWindow* window, sf::View* view)
 {
-	for (size_t i = 0; i < tiles.size(); i++)
-		if (tiles.at(i)->isVisible)
-			window->draw(tiles.at(i)->sprite);
+	for (size_t i = 0; i < groundTiles.size(); i++)
+		if (groundTiles.at(i)->isVisible)
+			window->draw(groundTiles.at(i)->sprite);
+	MoveView(*view, *window);
+}
+
+void Level::drawRoof(sf::RenderWindow* window, sf::View* view) {
+	for (size_t i = 0; i < roofTiles.size(); i++)
+		if (roofTiles.at(i)->isVisible)
+			window->draw(roofTiles.at(i)->sprite);
 	MoveView(*view, *window);
 }
 
 void Level::setLayerVisibility(int layerIndex, bool isVisible)
 {
-	for (int i = 0; i < tiles.size(); i++)
+	for (int i = 0; i < groundTiles.size(); i++)
 	{
-		if (tiles.at(i)->tileLayer == layerIndex)
-			tiles.at(i)->isVisible = isVisible;
+		if (groundTiles.at(i)->tileLayer == layerIndex)
+			groundTiles.at(i)->isVisible = isVisible;
 	}
 }
 
@@ -154,7 +161,7 @@ void Level::Start(GameObject* player, sf::Vector2u* size)
 	if (start == nullptr)
 	{
 		start = new StartTile(gameObjectContainer);
-		start->setPosition(sf::Vector2f(25, 25));
+		start->setPosition(b2Vec2(25, 25));
 	}
 
 	int map_yLocation = start->getPosition().y / size->y;
@@ -162,7 +169,7 @@ void Level::Start(GameObject* player, sf::Vector2u* size)
 	viewPortY = (map_yLocation * size->y);
 	viewPortX = (map_xLocation * size->x);
 
-	player->setPosition(sf::Vector2f(start->getPosition().x, start->getPosition().y));
+	player->setPosition(b2Vec2(start->getPosition().x, start->getPosition().y));
 	music.setLoop(true);
 	music.play();
 }

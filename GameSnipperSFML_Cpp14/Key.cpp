@@ -24,7 +24,7 @@ Key::Key(DrawContainer* container, std::string img) :GameObject{ container, img 
 };
 
 
-Key::Key(DrawContainer* container, std::string img, GameObjectContainer* gameObjectContainer, sf::Vector2f position, int widht, int height) :GameObject{ container,gameObjectContainer, img  } {
+Key::Key(DrawContainer* container, std::string img, GameObjectContainer* gameObjectContainer, b2Vec2 position, int widht, int height) :GameObject{ container,gameObjectContainer, img  } {
 	this->setPosition(position);
 	this->setSize(widht, height);
 };

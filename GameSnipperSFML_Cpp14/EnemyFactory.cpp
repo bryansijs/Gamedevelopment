@@ -34,7 +34,7 @@ GameObject* EnemyFactory::CreateBasic(std::map<std::string, std::string>& proper
 	widht = std::stoi(properties["width"]);
 	height = std::stoi(properties["height"]);
 
-	return new BasicEnemy(container, imgurl, mContainer, gameObjectContainer, sf::Vector2f(x,y), widht,height);
+	return new BasicEnemy(container, imgurl, mContainer, gameObjectContainer, b2Vec2(x,y), widht,height);
 }
 
 GameObject* EnemyFactory::CreateRunner(std::map<std::string, std::string>&properties, DrawContainer* container, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer) {
@@ -45,7 +45,7 @@ GameObject* EnemyFactory::CreateRunner(std::map<std::string, std::string>&proper
 	widht = std::stoi(properties["width"]);
 	height = std::stoi(properties["height"]);
 
-	return new RunnerEnemy(container, imgurl, mContainer, gameObjectContainer, sf::Vector2f(x, y), widht, height);
+	return new RunnerEnemy(container, imgurl, mContainer, gameObjectContainer, b2Vec2(x, y), widht, height);
 }
 
 GameObject* EnemyFactory::CreateTank(std::map<std::string, std::string>& properties, DrawContainer* container, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer) {
@@ -56,5 +56,5 @@ GameObject* EnemyFactory::CreateTank(std::map<std::string, std::string>& propert
 	widht = std::stoi(properties["width"]);
 	height = std::stoi(properties["height"]);
 
-	return new TankEnemy(container, imgurl, mContainer, gameObjectContainer, sf::Vector2f(x, y), widht, height);
+	return new TankEnemy(container, imgurl, mContainer, gameObjectContainer, b2Vec2(x, y), widht, height);
 }

@@ -19,7 +19,9 @@ public:
 	Level(GameObjectContainer* gameObjectContainer);
 
 	std::vector<GameObject*> game_objects;
-	std::vector<Tile*> tiles;
+	//std::vector<Tile*> tiles;
+	std::vector<Tile*> groundTiles;
+	std::vector<Tile*> roofTiles;
 	std::vector<TileSet*> tileSets;
 
 	std::map<int, bool> hazardMap;
@@ -33,6 +35,7 @@ public:
 	void MoveView(sf::View &view, sf::Window& window);
 
 	void draw(sf::RenderWindow* window, sf::View* view);
+	void drawRoof(sf::RenderWindow* window, sf::View* view);
 	void update();
 
 	void Start(GameObject* player, sf::Vector2u* size);
@@ -45,7 +48,7 @@ public:
 
 	void setGameObjects(std::vector<GameObject*>& game_objects) { this->game_objects.swap(game_objects); }
 	void setTileSets(std::vector<TileSet*>& tileSets) { this->tileSets.swap(tileSets); }
-	void setTiles(std::vector<Tile*>& tiles) { this->tiles.swap(tiles);}
+	//void setTiles(std::vector<Tile*>& tiles) { this->tiles.swap(tiles);}
 
 
 	std::vector<GameObject*> getGame_Objects() { return game_objects; }

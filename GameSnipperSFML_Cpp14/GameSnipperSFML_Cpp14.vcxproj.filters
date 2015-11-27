@@ -181,6 +181,12 @@
     <Filter Include="Header Files\Model\Items">
       <UniqueIdentifier>{374d5c0c-2551-4b15-b054-3b4bbdf8ff57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\UnitTest\Tests\Box2d">
+      <UniqueIdentifier>{17d6b5a7-3db0-4976-a2a7-d7f1174edb2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UnitTest\Tests\box2d">
+      <UniqueIdentifier>{6ef797b3-1247-495f-9e6e-6947af921a22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -357,11 +363,9 @@
     <ClInclude Include="UnitTestGameObjectFactory.h">
       <Filter>Header Files\UnitTest\Tests</Filter>
     </ClInclude>
-
     <ClInclude Include="GameObjectContainer.h">
       <Filter>Header Files\Containers</Filter>
-	</ClInclude>
-
+    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -370,6 +374,12 @@
     </ClInclude>
     <ClInclude Include="resource2.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugBox2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="square.h">
+      <Filter>Header Files\UnitTest\Tests\Box2d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -543,6 +553,12 @@
     </ClCompile>
     <ClCompile Include="GameObjectContainer.cpp">
       <Filter>Source Files\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugBox2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="square.cpp">
+      <Filter>Source Files\UnitTest\Tests\box2d</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

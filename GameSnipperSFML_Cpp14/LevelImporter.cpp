@@ -105,14 +105,14 @@ void LevelImporter::PrepareTiles()
 				if (dataIndex == 0)
 					continue;
 
-				addTile(dataIndex, (*it), x, y);
+				this->addTileToContainer(addTile(dataIndex, (*it), x, y));
 			}
 	}
 }
 
 
 
-void LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
+Tile* LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 {
 	int tileSetIndex = 0;
 	int tileStartIndex = 0;
@@ -131,7 +131,7 @@ void LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 	int topIndex = (dataIndex - tileStartIndex) / (tileCount_widht);
 	int leftIndex = (dataIndex - tileStartIndex) - (tileCount_widht * topIndex);
 
-	Tile* insert_tile = new Tile();;
+	Tile* insert_tile = new Tile();
 
 	insert_tile->sprite = sf::Sprite(tileSets[tileSetIndex]->tileImage);
 
@@ -140,8 +140,8 @@ void LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 	insert_tile->sprite.setTextureRect(subRect);
 	insert_tile->sprite.setPosition(float(x*tileSize), float(y*tileSize));
 
-	insert_tile->y_Position = y*tileSize;
-	insert_tile->x_Position = x*tileSize;
+	insert_tile->setPositionY(y*tileSize);
+	insert_tile->setPositionX(x*tileSize);
 	insert_tile->tileLayer = tileSetIndex;
 
 	if (value["visible"].asString() == "true")
@@ -159,8 +159,6 @@ void LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 	{
 		Json::Value props = value["properties"];
 
-
-
 		if (props.isMember("hazardLinkIndex"))
 		{
 			string hazardIndex = value["properties"]["hazardLinkIndex"].asString();
@@ -168,16 +166,19 @@ void LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 
 		}
 
+		if (props.isMember("onTop"))
+		{
+			if (value["properties"]["onTop"].asString() == "true") {
+				insert_tile->topTile = true;
+			}
+		}
 
 		if (props.isMember("isCollidable"))
 		{
 			if (value["properties"]["isCollidable"].asString() == "true")
 			{
 				insert_tile->isCollidable = true;
-				insert_tile->bodyDef = new b2BodyDef();
-
-				insert_tile->bodyDef->type = b2_staticBody;
-				insert_tile->bodyDef->position.Set(insert_tile->x_Position, insert_tile->y_Position);
+				//insert_tile->createStaticBody(*this->world);
 			}
 		}
 
@@ -186,10 +187,7 @@ void LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 			if (value["properties"]["isEnemyCollidable"].asString() == "true")
 			{
 				insert_tile->isEnemyCollidable = true;
-				insert_tile->enemyBodyDef = new b2BodyDef();
-
-				insert_tile->enemyBodyDef->type = b2_staticBody;
-				insert_tile->enemyBodyDef->position.Set(insert_tile->x_Position, insert_tile->y_Position);
+				//insert_tile->createStaticBody(*this->world);
 			}
 		}
 
@@ -246,7 +244,19 @@ void LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 		}
 	}
 
-	tiles.push_back(insert_tile);
+	return insert_tile;
+	
+}
+
+void LevelImporter::addTileToContainer(Tile * tile)
+{
+	if (tile->topTile == true) {
+		roofTiles.push_back(tile);
+	}
+	else {
+		groundTiles.push_back(tile);
+	}
+	tiles.push_back(tile);
 }
 
 
@@ -274,6 +284,7 @@ void LevelImporter::Prepare()
 
 void LevelImporter::Import(std::string JSON)
 {
+
 	inputFileStream.open(JSON, std::ifstream::binary);
 
 	bool parsingSuccessful = jsonReader.parse(inputFileStream, jsonRoot, false);
@@ -287,31 +298,39 @@ void LevelImporter::Clear()
 {
 	game_objects.clear();
 	tileSets.clear();
+	groundTiles.clear();
+	roofTiles.clear();
 	tiles.clear();
 	music.resetBuffer();
 }
 
 Level* LevelImporter::getLevel()
 {
+
+	//TODO  in level moeten de tiles opgedeeld worden in ground en roof. 
 	Level* level = new Level(gameObjectContainer);
 	level->setGameObjects(game_objects);
 	level->setTileSets(tileSets);
-	level->setTiles(tiles);
+	level->groundTiles = this->groundTiles;
+	level->roofTiles = this->roofTiles;
 	level->setMusic(music);
 	level->setHazardMap(hazardMap);
 
 	return level;
 }
 
-LevelImporter::LevelImporter(DrawContainer *drawContainer)
+LevelImporter::LevelImporter(DrawContainer *drawContainer, b2World* world)
 {
 	this->drawContainer = drawContainer;
+	this->world = world;
+
 }
 
-LevelImporter::LevelImporter(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer)
+LevelImporter::LevelImporter(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, b2World* world)
 {
 	this->drawContainer = drawContainer;
 	this->gameObjectContainer = gameObjectContainer;
+	this->world = world;
 }
 
 LevelImporter::LevelImporter()

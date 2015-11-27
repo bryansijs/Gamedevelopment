@@ -20,24 +20,24 @@ void ShotMoveBehaviour::Update()
 	if (direction == "move-up")
 	{
 		float temp = gameObject->getPositionY() - velocity * Time::deltaTime;
-		gameObject->setPosition(sf::Vector2f(gameObject->getPositionX(), temp));
+		gameObject->setPosition(b2Vec2(gameObject->getPositionX(), temp));
 	}
 	if (direction == "move-down")
 	{
 		float temp = gameObject->getPositionY() + velocity * Time::deltaTime;
-		gameObject->setPosition(sf::Vector2f(gameObject->getPositionX(), temp));
+		gameObject->setPosition(b2Vec2(gameObject->getPositionX(), temp));
 	}
 	if (direction == "move-left")
 	{
 
 		float temp = gameObject->getPositionX() - velocity * Time::deltaTime;
-		gameObject->setPosition(sf::Vector2f(temp, gameObject->getPositionY()));
+		gameObject->setPosition(b2Vec2(temp, gameObject->getPositionY()));
 
 }
 	if (direction == "move-right")
 	{
 		float temp = gameObject->getPositionX() + velocity * Time::deltaTime;
-		gameObject->setPosition(sf::Vector2f(temp, gameObject->getPositionY()));
+		gameObject->setPosition(b2Vec2(temp, gameObject->getPositionY()));
 
 	}
 }

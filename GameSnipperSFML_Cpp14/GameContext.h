@@ -15,10 +15,6 @@ class GameObjectContainer;
 
 class GameContext
 {
-private: 
-
-
-
 
 public: 
 	GameContext(Context* context);
@@ -42,6 +38,8 @@ public:
 	sf::Event event;
 	sf::View view;
 
-	
+	b2World* world;
+
+private:
 };
 
