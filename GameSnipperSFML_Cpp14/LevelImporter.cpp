@@ -251,10 +251,13 @@ void LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 
 bool LevelImporter::PrepareMusic(string music)
 {
-	if (sbuffer.loadFromFile("./Resources/music/" + music))
+	if (music != "")
 	{
-		this->music.setBuffer(sbuffer);
-		return true;
+		if (sbuffer.loadFromFile("./Resources/music/" + music))
+		{
+			this->music.setBuffer(sbuffer);
+			return true;
+		}
 	}
 	
 	return false;
