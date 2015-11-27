@@ -18,6 +18,7 @@ private:
 
 	int ofState = 0;
 	int onState = 0;
+	int xOfIndex = -1;
 
 	void setState()
 	{
@@ -27,6 +28,7 @@ private:
 			this->setImageY(onState);
 		else
 			this->setImageY(ofState);
+
 	}
 
 	void setHazardState();
@@ -40,14 +42,15 @@ public:
 	Game_Switch();
 	~Game_Switch();
 
-	Game_Switch(DrawContainer* container);
-	Game_Switch(DrawContainer* container, std::string img);
-	Game_Switch(DrawContainer* container, std::string img, sf::Vector2f position, int widht, int height);
+	Game_Switch(DrawContainer* container, GameObjectContainer *GameObjectContainer, std::string img,  std::map<std::string, std::string>& properties, std::vector<Tile*>& tileList);
 
-	Game_Switch(DrawContainer* container, GameObjectContainer *GameObjectContainer, std::string img, sf::Vector2f position, int widht, int height);
+	Game_Switch(GameObjectContainer *useContainer, std::map<std::string, std::string>& properties, std::vector<Tile*>& tileList);
 
-	Game_Switch(sf::Vector2f position, int widht, int height);
-	Game_Switch(GameObjectContainer *useContainer,sf::Vector2f position, int widht, int height);
+	Game_Switch(GameObjectContainer *gameObjectContainer, sf::Vector2f position, int widht, int height);
+
+
+	Game_Switch(DrawContainer* container, GameObjectContainer *gameObjectContainer, std::string img, sf::Vector2f position, int widht, int height);
+
 	virtual void setProperties(std::map<std::string, std::string>& properties);
 	virtual void doAction(Player* player);
 

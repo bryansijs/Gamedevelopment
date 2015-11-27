@@ -22,9 +22,11 @@ void Game_Switch::setProperties(std::map<std::string, std::string>& properties) 
 	this->isOn = (properties.count("state")) ? std::stoi(properties["state"]) : 0;
 	this->ofState = (properties.count("ofIndex")) ? std::stoi(properties["ofIndex"]) : 0;
 	this->onState = (properties.count("onIndex")) ? std::stoi(properties["onIndex"]) : 2;
-	this->setImageX((properties.count("xIndex")) ? std::stoi(properties["xIndex"]) : 0);
 	this->needKey = (properties.count("needKey")) ? std::stoi(properties["needKey"]) : 0;
+	this->isCollidable = (properties.count("isCollidable")) ? std::stoi(properties["isCollidable"]) : 0;
 
+	this->xOfIndex = (properties.count("ofXIndex")) ? std::stoi(properties["ofXIndex"]) : -1;
+	this->setImageX((properties.count("xIndex")) ? std::stoi(properties["xIndex"]) : 0);
 
 	if (this->isOn)
 		this->setImageY(onState);
@@ -32,41 +34,44 @@ void Game_Switch::setProperties(std::map<std::string, std::string>& properties) 
 		this->setImageY(ofState);
 
 	this->shouldUpdate = true;
+
+	int x, y, widht, height;
+	x = std::stoi(properties["x"]);
+	y = std::stoi(properties["y"]);
+	widht = std::stoi(properties["width"]);
+	height = std::stoi(properties["height"]);
+
+
+	this->setPosition(sf::Vector2f(x, y));
+	this->setSize(widht, height);
 }
 
-
-
-Game_Switch::Game_Switch(DrawContainer* container) :GameObject{ container } {
+Game_Switch::Game_Switch(DrawContainer* container, GameObjectContainer *gameObjectContainer, std::string img, std::map<std::string, std::string>& properties, std::vector<Tile*>& tileList) :GameObject{ container,gameObjectContainer, img } {
+	this->setProperties(properties);
+	this->setTiles(tileList);
 };
 
-
-Game_Switch::Game_Switch(DrawContainer* container, std::string img) :GameObject{ container, img } {
-};
-
-
-Game_Switch::Game_Switch(DrawContainer* container, std::string img, sf::Vector2f position, int widht, int height) :GameObject{ container, "switches.png" } {
-	this->setPosition(position);
-	this->setSize(widht, height);
-};
-
-
-
-Game_Switch::Game_Switch(DrawContainer* container, GameObjectContainer *gameObjectContainer, std::string img, sf::Vector2f position, int widht, int height) :GameObject{ container,gameObjectContainer, img } {
-	this->setPosition(position);
-	this->setSize(widht, height);
-};
-
-
-
-Game_Switch::Game_Switch(sf::Vector2f position, int widht, int height) :GameObject{} {
-	this->setPosition(position);
-	this->setSize(widht, height);
-};
 
 Game_Switch::Game_Switch(GameObjectContainer *gameObjectContainer, sf::Vector2f position, int widht, int height) :GameObject{ gameObjectContainer } {
+
 	this->setPosition(position);
 	this->setSize(widht, height);
+
 };
+
+Game_Switch::Game_Switch(DrawContainer* container, GameObjectContainer *gameObjectContainer, std::string img, sf::Vector2f position, int widht, int height) :GameObject{ container, gameObjectContainer,img } {
+
+	this->setPosition(position);
+	this->setSize(widht, height);
+
+};
+
+Game_Switch::Game_Switch(GameObjectContainer *gameObjectContainer, std::map<std::string, std::string>& properties, std::vector<Tile*>& tileList) :GameObject{ gameObjectContainer } {
+
+	this->setProperties(properties);
+	this->setTiles(tileList);
+};
+
 
 void Game_Switch::doAction(Player* player)
 {
@@ -76,6 +81,7 @@ void Game_Switch::doAction(Player* player)
 	{
 		if (player->getKey() > 0) {
 			player->removeKey();
+			this->setImageX(xOfIndex);
 			this->usedKey = true;
 		}
 		else

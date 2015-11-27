@@ -175,6 +175,8 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.h" />
+    <ClInclude Include="BaseEnemy.h" />
+    <ClInclude Include="BaseItem.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="BasicEnemy.h" />
     <ClInclude Include="Context.h" />
@@ -237,6 +239,8 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="WarpTile.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BaseEnemy.cpp" />
+    <ClCompile Include="BaseItem.cpp" />
     <ClCompile Include="BasicEnemy.cpp" />
     <ClCompile Include="Context.cpp" />
     <ClCompile Include="Door.cpp" />

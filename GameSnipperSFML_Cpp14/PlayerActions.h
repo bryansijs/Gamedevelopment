@@ -29,6 +29,9 @@ public:
 	void Move();
 	void Shoot();
 	void Use();
+
+
+
 private:
 	void ExecuteActions();
 

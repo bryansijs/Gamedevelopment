@@ -7,10 +7,11 @@
 
 class Player;
 class DrawContainer;
+class GameObjectContainer;
 class MoveContainer;
 class DrawBehaviour;
 class MoveBehaviour;
-class GameObjectContainer;
+
 class Tile;
 
 class GameObject
@@ -83,7 +84,7 @@ public:
 	int getImageX() { return xIndex * width; }
 	int getHeight() { return height; }
 	int getWidth() { return width; }
-
+	bool isCollidable = false;
 	void setSize(int width, int height)
 	{
 		this->width = width;

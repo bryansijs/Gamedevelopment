@@ -16,13 +16,14 @@ class Door : public GameObject
 
 	void setOpen() {
 		isOpen = !isOpen;
-
+		isCollidable = isOpen;
 		if (!isOpen)
 			this->setImageY(openState);
 		else if (isOpen)
 			this->setImageY(closedState);
 
 		setDoorState();
+
 	}
 
 	std::vector<Tile*> DoorList;
@@ -35,9 +36,9 @@ public:
 
 	Door(DrawContainer* container);
 	Door(DrawContainer* container, std::string img);
-	Door(DrawContainer* container, std::string img, GameObjectContainer* gameObjectContainer, sf::Vector2f position, int widht, int height);
+	Door(DrawContainer* container, std::string img, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>&  properties, std::vector<Tile*>& tiles);
 
-	Door(GameObjectContainer* gameObjectContainer, sf::Vector2f position, int widht, int height);
+	Door(GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties,std::vector<Tile*>& tiles);
 
 	int getDoorId() { return doorId; };
 

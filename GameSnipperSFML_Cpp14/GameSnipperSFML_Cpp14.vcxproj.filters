@@ -300,9 +300,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
-    <ClInclude Include="application.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
@@ -357,11 +354,9 @@
     <ClInclude Include="UnitTestGameObjectFactory.h">
       <Filter>Header Files\UnitTest\Tests</Filter>
     </ClInclude>
-
     <ClInclude Include="GameObjectContainer.h">
       <Filter>Header Files\Containers</Filter>
-	</ClInclude>
-
+    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -370,6 +365,15 @@
     </ClInclude>
     <ClInclude Include="resource2.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseItem.h">
+      <Filter>Header Files\Model\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEnemy.h">
+      <Filter>Header Files\Model\Units\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -543,6 +547,12 @@
     </ClCompile>
     <ClCompile Include="GameObjectContainer.cpp">
       <Filter>Source Files\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseItem.cpp">
+      <Filter>Source Files\Model\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseEnemy.cpp">
+      <Filter>Source Files\Model\Units\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

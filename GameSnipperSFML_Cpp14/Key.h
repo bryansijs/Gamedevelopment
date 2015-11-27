@@ -1,16 +1,19 @@
 #pragma once
-#include "GameObject.h"
+#include "BaseItem.h"
 #include "Player.h";
 
-class Key : public GameObject
+class Player;
+class DrawContainer;
+class GameObjectContainer;
+
+
+class Key : public BaseItem
 {
 public:
 	Key();
 	~Key();
 
-	Key(DrawContainer* container);
-	Key(DrawContainer* container, std::string img);
-	Key(DrawContainer* container, std::string img,GameObjectContainer* gameObjectContainer, sf::Vector2f position, int widht, int height);
+	Key(DrawContainer* container, std::string img,GameObjectContainer* gameObjectContainer,std::map<std::string, std::string>& properties);
 
 	virtual void setProperties(std::map<std::string, std::string>& properties);
 	virtual void doAction(Player* player);

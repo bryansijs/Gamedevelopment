@@ -9,7 +9,7 @@
 #include "KeyMapping.h"
 #include "GameObject.h"
 #include "Tile.h"
-#include"Key.h"
+#include "Key.h"
 #include "Door.h"
 PlayerActions::PlayerActions()
 {
@@ -18,6 +18,7 @@ PlayerActions::PlayerActions()
 
 PlayerActions::~PlayerActions()
 {
+
 }
 
 void PlayerActions::SetPlayer(Player *player)
@@ -107,8 +108,8 @@ void PlayerActions::Use()
 		return;
 	}
 
-	int b = this->player->getgameObjectContainer()->getObjects().size();
-	std::cout << b <<  std::endl;
+	//int b = this->player->getgameObjectContainer()->getObjects().size();
+	//std::cout << b <<  std::endl;
 	/*std::cout << "My current location x y " << player->getPosition().x << " " << player->getPosition().y << std::endl;*/
 
 	float playery = this->player->getPosition().y;
@@ -125,11 +126,10 @@ void PlayerActions::Use()
 		{
 			if (playerx + 32 > object->getPosition().x && playerx - 48 < object->getPosition().x)
 			{
-
-					object->doAction(player);
+				object->doAction(player);
 			}
 		}
 	}
 
-	useDelay = 0.1;
+	useDelay = 0.15;
 }
