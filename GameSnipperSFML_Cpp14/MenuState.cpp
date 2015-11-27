@@ -162,23 +162,32 @@ void MenuState::Update()
 				{
 					BackToMenu();
 				}
-				// temp stuff -------------------------------------------------------------------------------------------
-				else
-				{
-					menuContext->music->stop();
-
-					//Dit is nodig om een afbeelding te maken van wat er op dit moment word getoont. Deze word dan in de win/lose screen gebruikt als achtergrond omdat het niet met transparantie wil lukken
-					((BitmapSurface*)menuContext->webView->surface())->SaveToPNG(Awesomium::WebString::CreateFromUTF8("./Resources/menuHTML/images/hold.png", strlen("./Resources/menuHTML/images/hold.png")));
-
-					LoseState* loseState = new LoseState(menuContext->context, stateManager);
-					stateManager->AddState(loseState);
-					stateManager->StartNextState();
-
-					/*WinState* winState = new WinState(menuContext->context, stateManager);
-					stateManager->AddState(winState);
-					stateManager->StartNextState();*/
-				}
+				
 			}
+
+			// temp stuff -------------------------------------------------------------------------------------------
+			if (Input::GetKeyDown("Y")) {
+				menuContext->music->stop();
+
+				//Dit is nodig om een afbeelding te maken van wat er op dit moment word getoont. Deze word dan in de win/lose screen gebruikt als achtergrond omdat het niet met transparantie wil lukken
+				((BitmapSurface*)menuContext->webView->surface())->SaveToPNG(Awesomium::WebString::CreateFromUTF8("./Resources/menuHTML/images/hold.png", strlen("./Resources/menuHTML/images/hold.png")));
+
+				WinState* winState = new WinState(menuContext->context, stateManager);
+				stateManager->AddState(winState);
+				stateManager->StartNextState();
+			}
+
+			if (Input::GetKeyDown("U")) {
+				menuContext->music->stop();
+
+				//Dit is nodig om een afbeelding te maken van wat er op dit moment word getoont. Deze word dan in de win/lose screen gebruikt als achtergrond omdat het niet met transparantie wil lukken
+				((BitmapSurface*)menuContext->webView->surface())->SaveToPNG(Awesomium::WebString::CreateFromUTF8("./Resources/menuHTML/images/hold.png", strlen("./Resources/menuHTML/images/hold.png")));
+
+				LoseState* loseState = new LoseState(menuContext->context, stateManager);
+				stateManager->AddState(loseState);
+				stateManager->StartNextState();
+			}
+			//-------------------------------------------------------------------------------------------------------
 
 			if (Input::GetKeyDown("Return")) {
 				std::map <int, void(MenuState::*)()>::iterator it;
