@@ -15,7 +15,7 @@ BaseInput::BaseInput()
 
 BaseInput::~BaseInput()
 {
-	delete &activeKeys;
+	
 }
 
 void BaseInput::CatchInput()
@@ -39,6 +39,14 @@ void BaseInput::CatchInput()
 	}
 }
 
+void BaseInput::RemoveAllActiveKeys()
+{
+	for (int i = 0; i < activeKeys.size(); i++)
+	{
+		activeKeys.push_back(activeKeys[i]);
+	}
+}
+
 void BaseInput::AddActiveKey(string key)
 {
 	if (find(activeKeys.begin(), activeKeys.end(), key) == activeKeys.end())
@@ -49,5 +57,5 @@ void BaseInput::AddActiveKey(string key)
 
 void BaseInput::RemoveActiveKey(string key)
 {
-	activeKeys.erase(remove(activeKeys.begin(), activeKeys.end(), key));
+	activeKeys.erase(activeKeys.begin(), activeKeys.end());
 }

@@ -1,13 +1,10 @@
 #pragma once
 #include "BaseInput.h"
 
-class MenuContext;
+class MenuActions;
 
 class MenuInput : public BaseInput
 {
 public:
-	MenuInput(MenuContext* mContext);
-	void ProcessKeyActions() override;
-private:
-	MenuContext* mContext;
+	void ProcessKeyActions(MenuActions* menuActions);
 };

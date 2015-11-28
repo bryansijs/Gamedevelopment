@@ -187,6 +187,12 @@
     <Filter Include="Source Files\Input">
       <UniqueIdentifier>{a096012f-a593-4531-951a-7ce3e258756b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Model\Menu">
+      <UniqueIdentifier>{9288194e-1c9b-4558-943b-884cb364ad1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Menu">
+      <UniqueIdentifier>{0bb3b5f6-a8de-421f-835c-d55739c78dc3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -387,6 +393,9 @@
     <ClInclude Include="MenuInput.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
+    <ClInclude Include="MenuActions.h">
+      <Filter>Header Files\Model\Menu</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -574,6 +583,9 @@
     </ClCompile>
     <ClCompile Include="MenuInput.cpp">
       <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuActions.cpp">
+      <Filter>Source Files\Model\Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

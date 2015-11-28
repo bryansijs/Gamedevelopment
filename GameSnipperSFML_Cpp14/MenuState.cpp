@@ -4,7 +4,6 @@
 
 #include <Awesomium/WebCore.h>
 #include <Awesomium/BitmapSurface.h>
-#include <Awesomium/STLHelpers.h>
 
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
@@ -12,26 +11,27 @@
 #include "MenuContext.h"
 
 #include "Input.h"
-#include "GameState.h"
 #include "StateManager.h"
+#include <filesystem>
+#include <thread>
 
-using namespace Awesomium;
 
 MenuState::MenuState(Context* context, StateManager* stateManager)
 {
 	menuContext = new MenuContext(context);
 	this->stateManager = stateManager;
+	menuActions = new MenuActions(stateManager, menuContext);
 
 	menuContext->inMenu = true;
 	menuContext->currentLevel = 1;
 
 	// Awesomium init
-	menuContext->web_core = WebCore::Initialize(WebConfig());
+	menuContext->web_core = Awesomium::WebCore::Initialize(Awesomium::WebConfig());
 	menuContext->webView = menuContext->web_core->CreateWebView(960, 640);
 
 	// Load Page
 	menuContext->pathToFile = "file:///Resources/menuHTML/menu.html";
-	ReloadPage();
+	menuActions->ReloadPage();
 
 	//Create Bitmap
 	menuContext->surface = static_cast<Awesomium::BitmapSurface*>(menuContext->webView->surface());
@@ -51,71 +51,9 @@ MenuState::~MenuState()
 	delete menuContext;
 }
 
-void MenuState::callDirectJSFunction(Awesomium::WebView * webView, Awesomium::WebCore * web_core, int currentLevel)
-{
-	JSValue window = webView->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));
-
-	if (window.IsObject())
-	{
-		JSArray args;
-		JSValue val = JSValue(currentLevel);
-		args.Push(val);
-		window.ToObject().Invoke(WSLit("myfunc"), args);
-	}
-
-	Sleep(50);
-	web_core->Update();
-}
-
 void MenuState::Terminate()
 {
 	terminate = true;
-}
-
-void MenuState::ShowIntruction()
-{
-	menuContext->inMenu = false;
-	menuContext->pathToFile = "file:///Resources/menuHTML/instruction.html";
-	ReloadPage();
-}
-
-void MenuState::RunGame()
-{
-	menuContext->music->stop();
-
-	GameState* gameState = new GameState(menuContext->context, stateManager);
-	stateManager->AddState(gameState);
-	stateManager->StartNextState();
-}
-
-void MenuState::ShowAbout()
-{
-	menuContext->inMenu = false;
-	menuContext->pathToFile = "file:///Resources/menuHTML/about.html";
-	ReloadPage();
-}
-
-void MenuState::BackToMenu()
-{
-	menuContext->inMenu = true;
-	menuContext->pathToFile = "file:///Resources/menuHTML/menu.html";
-	ReloadPage();
-	menuContext->currentLevel = 1;
-}
-
-void MenuState::ReloadPage()
-{
-	WebURL url(WSLit(menuContext->pathToFile));
-	menuContext->webView->LoadURL(url);
-	menuContext->webView->SetTransparent(true);
-
-	while (menuContext->webView->IsLoading())
-	{
-		menuContext->web_core->Update();
-	}
-		
-	Sleep(100);
-	menuContext->web_core->Update();
 }
 
 void MenuState::Update()
@@ -125,44 +63,21 @@ void MenuState::Update()
 	while (menuContext->context->window.pollEvent(menuContext->event)) {
 		if (menuContext->event.type == sf::Event::Closed)
 		{
-			menuContext->context->window.close();
-			stateManager->PopState();
+			menuActions->ExitGame();
 			return;
 		}
 
+		if (menuContext->event.type == sf::Event::KeyReleased)
+		{
+			Input::EventOccured(menuContext->event);
+			menuContext->menuInput.CatchInput();
+		}
+	
 		if (menuContext->event.type == sf::Event::KeyPressed)
 		{
 			Input::EventOccured(menuContext->event);
 			menuContext->menuInput.CatchInput();
-			menuContext->menuInput.ProcessKeyActions();
-			
-			if (Input::GetKeyDown("Down")) {
-				if (menuContext->currentLevel < menuItems.size())
-				{
-					menuContext->currentLevel += 1;
-					callDirectJSFunction(menuContext->webView, menuContext->web_core, menuContext->currentLevel);
-				}
-			}
-
-			if (Input::GetKeyDown("Esc")) {
-				if (!menuContext->inMenu)
-				{
-					BackToMenu();
-				}
-			}
-
-			if (Input::GetKeyDown("Return")) {
-				std::map <int, void(MenuState::*)()>::iterator it;
-				for (it = menuItems.begin(); it != menuItems.end(); ++it)
-				{
-					if (it->first == menuContext->currentLevel)
-					{
-						auto function = it->second;
-						(this->*function)();
-						break;
-					}
-				}
-			}
+			menuContext->menuInput.ProcessKeyActions(menuActions);
 		}
 	}
 		

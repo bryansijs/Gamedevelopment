@@ -25,7 +25,7 @@ public:
 
 	StateManager* stateManager;
 
-	MenuInput menuInput = MenuInput(this);
+	MenuInput menuInput;
 
 	Awesomium::WebView* webView;
 	Awesomium::WebCore* web_core;
