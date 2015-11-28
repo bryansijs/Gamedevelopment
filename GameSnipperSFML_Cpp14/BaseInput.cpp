@@ -57,5 +57,5 @@ void BaseInput::AddActiveKey(string key)
 
 void BaseInput::RemoveActiveKey(string key)
 {
-	activeKeys.erase(activeKeys.begin(), activeKeys.end());
+	activeKeys.erase(remove(activeKeys.begin(), activeKeys.end(), key));
 }

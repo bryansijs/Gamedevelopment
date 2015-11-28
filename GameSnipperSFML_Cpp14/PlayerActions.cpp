@@ -27,17 +27,21 @@ void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *m
 
 void PlayerActions::Move(std::vector<std::string>* moveDirections)
 {
+	DoNotingTimerReset();
 	direction = moveDirections->at(0);
 	moveAction.Move(moveDirections, player, tiles);
 }
 
 void PlayerActions::Shoot()
 {
+	DoNotingTimerReset();
 	shootAction.Shoot(drawContainer, moveContainer, player, direction);
 }
 
 void PlayerActions::Use()
 {
+	DoNotingTimerReset();
+
 	if (useDelay > 0)
 	{
 		useDelay -= Time::deltaTime;
@@ -70,5 +74,14 @@ void PlayerActions::Use()
 
 void PlayerActions::DoNothing()
 {
-	moveAction.AnimateMovement(player, 1);
+	if (DoNothingTimer > 0)
+	{
+		moveAction.AnimateMovement(player, 1);
+		DoNothingTimer = DoNothingTimer - Time::deltaTime;
+		return;
+	}
+
+	// todo: add text to text displayer
+	std::cout << "What are you waiting for?\n";
+	DoNotingTimerReset();
 }

@@ -37,4 +37,7 @@ private:
 
 	Player *player;
 	std::vector<Tile*>* tiles;
+
+	void DoNotingTimerReset() { DoNothingTimer = 1000; };
+	int DoNothingTimer = 1000;
 };
