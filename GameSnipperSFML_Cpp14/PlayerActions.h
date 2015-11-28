@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include <map>
 #include "DrawBehaviour.h"
 #include "MoveBehaviour.h"
 #include "MoveAction.h"
@@ -20,9 +19,10 @@ public:
 	float useDelay; 
 	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile*>* tiles);
 	void setTiles(std::vector<Tile*>* t) { tiles = t; };
-	void Move(std::string direction);
+	void Move(std::vector<std::string>* moveDirections);
 	void Shoot();
 	void Use();
+	void DoNothing();
 private:
 	std::string direction = "move-left";
 
@@ -37,8 +37,4 @@ private:
 
 	Player *player;
 	std::vector<Tile*>* tiles;
-
-	bool fired = false;
-
 };
-

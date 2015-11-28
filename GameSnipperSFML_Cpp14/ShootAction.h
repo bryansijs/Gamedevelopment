@@ -14,7 +14,7 @@ public:
 
 	void Shoot(DrawContainer* drawContainer, MoveContainer* moveContainer, Player* player, std::string direction);
 private:
-	float shotRate = 50.0f;
+	float shotRate = 0.5f;
 	float nextShot;
 };
 

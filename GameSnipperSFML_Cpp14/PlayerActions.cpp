@@ -25,17 +25,16 @@ void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *m
 	this->tiles = tiles;
 }
 
-void PlayerActions::Move(std::string direction)
+void PlayerActions::Move(std::vector<std::string>* moveDirections)
 {
-	PlayerActions::direction = direction;
-	moveAction.Move(direction, player, tiles);
+	direction = moveDirections->at(0);
+	moveAction.Move(moveDirections, player, tiles);
 }
 
 void PlayerActions::Shoot()
 {
 	shootAction.Shoot(drawContainer, moveContainer, player, direction);
 }
-
 
 void PlayerActions::Use()
 {
@@ -67,4 +66,9 @@ void PlayerActions::Use()
 	}
 
 	useDelay = 7;
+}
+
+void PlayerActions::DoNothing()
+{
+	moveAction.AnimateMovement(player, 1);
 }

@@ -15,7 +15,7 @@ void PlayerInput::ProcessKeyActions()
 		string key = KeyMapping::GetMap(activeKeys[i]);
 
 		if (key.find("move") != string::npos)
-			gContext->player->GetActions()->Move(key);
+			moveDirections.push_back(key);
 
 		if (key == "shoot")
 			gContext->player->GetActions()->Shoot();
@@ -23,4 +23,15 @@ void PlayerInput::ProcessKeyActions()
 		if (key == "use")
 			gContext->player->GetActions()->Use();
 	}
+
+	if (moveDirections.size() > 0)
+		DoMovement();
+	else
+		gContext->player->GetActions()->DoNothing();
+}
+
+void PlayerInput::DoMovement()
+{
+	gContext->player->GetActions()->Move(&moveDirections);
+	moveDirections.clear();
 }

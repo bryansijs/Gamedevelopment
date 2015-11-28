@@ -10,4 +10,6 @@ public:
 	void ProcessKeyActions() override;
 private:
 	GameContext* gContext;
+	std::vector<std::string> moveDirections;
+	void DoMovement();
 };

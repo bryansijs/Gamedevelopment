@@ -23,6 +23,7 @@ public:
 	GameObjectContainer *useContainer;
 
 	Player* player;
+
 	PlayerInput playerInput = PlayerInput(this);
 	GameInput gameInput = GameInput(this);
 

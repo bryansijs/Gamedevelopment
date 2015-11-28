@@ -15,7 +15,7 @@ GameState::GameState(Context* context, StateManager* stateManager)
 	this->stateManager = stateManager;
 
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->useContainer);
-	gameContext->levelImporter->Import("./Resources/levels/Level_New.json");
+	gameContext->levelImporter->Import("./Resources/levels/OnTopTempGuus.json");
 	gameContext->levelImporter->Prepare();
 
 	gameContext->level = gameContext->levelImporter->getLevel();
@@ -36,7 +36,7 @@ GameState::~GameState()
 
 void GameState::Update()
 {
-	Time::deltaTime = (float)gameContext->deltaClock.restart().asMilliseconds() / 10;
+	Time::deltaTime = (float)gameContext->deltaClock.restart().asSeconds();
 	Time::runningTime += Time::deltaTime;
 
 	gameContext->context->window.clear();
