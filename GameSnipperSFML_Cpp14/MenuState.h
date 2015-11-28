@@ -19,8 +19,8 @@ private:
 	Context* context;
 	MenuContext* menuContext;
 public:
-	void Update();
-	void Terminate();
+	void Update() override;
+	void Terminate() override;
 
 	void BackToMenu();
 
@@ -32,4 +32,6 @@ public:
 
 	MenuState(Context* context, StateManager* stateManager);
 	~MenuState();
+
+	static void callDirectJSFunction(Awesomium::WebView* webView, Awesomium::WebCore* web_core, int currentLevel);
 };

@@ -2,12 +2,11 @@
 
 #include <Awesomium/WebCore.h>
 #include <Awesomium/BitmapSurface.h>
-#include <Awesomium/STLHelpers.h>
 
 #include <SFML/Audio.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Texture.hpp>
-#include <SFML/Graphics/Sprite.hpp>
+#include "MenuInput.h"
 
 class Context;
 class StateManager;
@@ -25,6 +24,8 @@ public:
 	char const* pathToFile;
 
 	StateManager* stateManager;
+
+	MenuInput menuInput = MenuInput(this);
 
 	Awesomium::WebView* webView;
 	Awesomium::WebCore* web_core;

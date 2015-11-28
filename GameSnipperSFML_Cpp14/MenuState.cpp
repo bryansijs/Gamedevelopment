@@ -9,9 +9,6 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
-#include <iostream>
-
-#include "Context.h"
 #include "MenuContext.h"
 
 #include "Input.h"
@@ -54,12 +51,7 @@ MenuState::~MenuState()
 	delete menuContext;
 }
 
-void MenuState::Terminate()
-{
-	terminate = true;
-}
-
-void callDirectJSFunction(WebView* webView, WebCore* web_core, int currentLevel)
+void MenuState::callDirectJSFunction(Awesomium::WebView * webView, Awesomium::WebCore * web_core, int currentLevel)
 {
 	JSValue window = webView->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));
 
@@ -73,6 +65,11 @@ void callDirectJSFunction(WebView* webView, WebCore* web_core, int currentLevel)
 
 	Sleep(50);
 	web_core->Update();
+}
+
+void MenuState::Terminate()
+{
+	terminate = true;
 }
 
 void MenuState::ShowIntruction()
@@ -136,15 +133,9 @@ void MenuState::Update()
 		if (menuContext->event.type == sf::Event::KeyPressed)
 		{
 			Input::EventOccured(menuContext->event);
-
-			if (Input::GetKeyDown("Up")) {
-				if (menuContext->currentLevel > 1)
-				{
-					menuContext->currentLevel -= 1;
-					callDirectJSFunction(menuContext->webView, menuContext->web_core, menuContext->currentLevel);
-				}
-			}
-
+			menuContext->menuInput.CatchInput();
+			menuContext->menuInput.ProcessKeyActions();
+			
 			if (Input::GetKeyDown("Down")) {
 				if (menuContext->currentLevel < menuItems.size())
 				{

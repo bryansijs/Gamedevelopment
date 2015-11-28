@@ -7,7 +7,7 @@ class PlayerInput : public BaseInput
 {
 public:
 	PlayerInput(GameContext* gContext);
-	void ProcessKeyActions();
+	void ProcessKeyActions() override;
 private:
 	GameContext* gContext;
 };

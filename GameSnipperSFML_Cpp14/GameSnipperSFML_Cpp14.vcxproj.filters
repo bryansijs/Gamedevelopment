@@ -384,6 +384,9 @@
     <ClInclude Include="GameInput.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
+    <ClInclude Include="MenuInput.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -567,6 +570,9 @@
       <Filter>Source Files\Input</Filter>
     </ClCompile>
     <ClCompile Include="GameInput.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuInput.cpp">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
   </ItemGroup>

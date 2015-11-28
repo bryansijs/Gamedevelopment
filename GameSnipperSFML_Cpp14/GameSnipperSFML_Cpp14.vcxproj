@@ -201,6 +201,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelImporter.h" />
     <ClInclude Include="MenuContext.h" />
+    <ClInclude Include="MenuInput.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="method_dispatcher.h" />
     <ClInclude Include="MoveAction.h" />
@@ -267,6 +268,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="LevelImporter.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuContext.cpp" />
+    <ClCompile Include="MenuInput.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="MoveAction.cpp" />
     <ClCompile Include="MoveBehaviour.cpp" />
