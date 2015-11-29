@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseState.h"
 #include <Awesomium/WebCore.h>
+#include <map>
 
 class LevelManager;
 class StateManager;
@@ -29,7 +30,7 @@ public:
 	
 	void BackToMenu();
 
-	std::map <int, void(MenuState::*)()> menuItems{
+	std::map<int, void(MenuState::*)()> menuItems{
 		{ 1, &MenuState::RunGame },
 		{ 2, &MenuState::ShowLevels },
 		{ 3, &MenuState::ShowIntruction },

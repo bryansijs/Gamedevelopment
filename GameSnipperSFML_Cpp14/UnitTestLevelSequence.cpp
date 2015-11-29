@@ -4,15 +4,26 @@
 #include "Context.h"
 #include "StateManager.h"
 #include "LevelManager.h"
+#include "UnitTest.h"
 
 
 UnitTestLevelSequence::UnitTestLevelSequence()
 {
-	Context* maincontext = new Context(500,500);
-	StateManager* stateManager = new StateManager();
 	LevelManager* levelManager = new LevelManager();
 
-	MenuState* menuState = new MenuState(maincontext, stateManager, levelManager);
+	std::vector<std::string> levels = levelManager->getAllLevels();
+	bool nextLevelBool = levels.front() == levelManager->getNextLevelName();
+	bool currentLevelBool = levels.front() == levelManager->getCurrentLevel();
+	
+	levelManager->getNextLevelName();
+	levelManager->swapSequence(1, 2);
+
+	bool swapLevelBool = levels.front() == levelManager->getCurrentLevel();
+
+	levelManager->getAllLevels().front() == levelManager->getCurrentLevel();
+	UnitTest::Compare("GetCurrentLevel",currentLevelBool , true);
+	UnitTest::Compare("NextLevel",nextLevelBool, true);
+	UnitTest::Compare("SwapLevel", swapLevelBool, true);
 }
 
 
