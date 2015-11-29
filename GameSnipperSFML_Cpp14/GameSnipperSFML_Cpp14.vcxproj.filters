@@ -375,6 +375,9 @@
     <ClInclude Include="JSConsole.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="UnitTestLevelSequence.h">
+      <Filter>Header Files\UnitTest\Tests</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -550,6 +553,9 @@
     </ClCompile>
     <ClCompile Include="GameObjectContainer.cpp">
       <Filter>Source Files\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitTestLevelSequence.cpp">
+      <Filter>Source Files\UnitTest\Tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

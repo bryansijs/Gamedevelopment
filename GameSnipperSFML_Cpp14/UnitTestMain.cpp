@@ -2,6 +2,7 @@
 #include "UnitTestMain.h"
 #include "TestDemo.h"
 #include "UnitTestGameObjectFactory.h"
+#include "UnitTestLevelSequence.h"
 
 UnitTestMain::UnitTestMain()
 {
@@ -15,4 +16,5 @@ void UnitTestMain::RunTests(bool enabled)
 
 //	TestDemo td1;
 	UnitTestGameObjectFactory td2;
+	UnitTestLevelSequence td3;
 }
