@@ -2,6 +2,7 @@
 #include "MenuContext.h"
 
 #include "Context.h"
+#include "LevelManager.h"
 
 MenuContext::MenuContext(Context* context)
 {

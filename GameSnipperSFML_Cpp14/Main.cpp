@@ -25,11 +25,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	try
 	{
 		StateManager* stateManager = new StateManager();
+		LevelManager* levelManager = new LevelManager();
 
 		UnitTestMain utm;
 
 		Context* context = new Context(960, 640);
-		MenuState* state = new MenuState(context, stateManager);
+		MenuState* state = new MenuState(context, stateManager,levelManager);
 
 		stateManager->AddState(state);
 		stateManager->RunState();

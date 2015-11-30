@@ -193,11 +193,13 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="Input.h" />
     <ClInclude Include="InteractiveFactory.h" />
     <ClInclude Include="ItemFactory.h" />
+    <ClInclude Include="JSConsole.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="KeyMapping.h" />
     <ClInclude Include="KeyMappingImporter.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelImporter.h" />
+    <ClInclude Include="LevelManager.h" />
     <ClInclude Include="MenuContext.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="MoveAction.h" />
@@ -233,6 +235,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="UnitState.h" />
     <ClInclude Include="UnitTest.h" />
     <ClInclude Include="UnitTestGameObjectFactory.h" />
+    <ClInclude Include="UnitTestLevelSequence.h" />
     <ClInclude Include="UnitTestMain.h" />
     <ClInclude Include="UpdateLogic.h" />
     <ClInclude Include="UpdateUI.h" />
@@ -263,6 +266,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="KeyMappingImporter.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelImporter.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuContext.cpp" />
     <ClCompile Include="MenuState.cpp" />
@@ -300,6 +304,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="UnitState.cpp" />
     <ClCompile Include="UnitTest.cpp" />
     <ClCompile Include="UnitTestGameObjectFactory.cpp" />
+    <ClCompile Include="UnitTestLevelSequence.cpp" />
     <ClCompile Include="UnitTestMain.cpp" />
     <ClCompile Include="UpdateLogic.cpp" />
     <ClCompile Include="UpdateUI.cpp" />
