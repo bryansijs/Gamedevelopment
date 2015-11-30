@@ -125,7 +125,11 @@
 				}
 				levelNumber++;
 			}
-			document.getElementById("pagination").innerHTML = "Page " + (currentPage + 1) + " of " + (pageFillIndex +1);
+			var numberOfPages = pageFillIndex+1;
+			if(elementsInPage == 0)
+				numberOfPages = pageFillIndex;
+
+			document.getElementById("pagination").innerHTML = "Page " + (currentPage + 1) + " of " + numberOfPages;
         }
 		
 		function nextPage()
