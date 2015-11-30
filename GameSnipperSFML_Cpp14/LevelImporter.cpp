@@ -285,7 +285,6 @@ bool LevelImporter::Import(std::string JSON)
 	if (inputFileStream.is_open())
 		inputFileStream.close();
 
-
 	inputFileStream.open(JSON, std::ifstream::binary);
 
 	bool parsingSuccessful = jsonReader.parse(inputFileStream, jsonRoot, false);

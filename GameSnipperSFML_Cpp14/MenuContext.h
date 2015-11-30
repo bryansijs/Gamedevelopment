@@ -21,7 +21,10 @@ public:
 	Context* context;
 
 	int currentLevel;
+	int currentLevelIndex;
+	int currentLevelPage;
 	bool inMenu = false;
+	bool inLevels = false;
 	char const* pathToFile;
 
 	StateManager* stateManager;
