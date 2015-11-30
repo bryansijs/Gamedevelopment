@@ -74,6 +74,11 @@ void PlayerActions::ExecuteActions()
 		useAction = true;
 	}
 
+	if (Input::GetKeyDown("Y"))
+	{
+		player->setHealth(0);
+	}
+
 	activeActions.clear();
 	resetAnimation = true;
 }

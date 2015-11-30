@@ -7,6 +7,8 @@
 #include "GameContext.h"
 #include "MoveContainer.h"
 #include "DrawContainer.h"
+#include "WinState.h"
+#include "MenuState.h"
 
 GameState::GameState(Context* context, StateManager* stateManager)
 {
@@ -70,9 +72,18 @@ void GameState::Update()
 	gameContext->moveContainer->Update();
 	gameContext->drawContainer->Draw(&gameContext->context->window);
 
-
 	gameContext->context->window.setView(gameContext->view);
 	gameContext->context->window.display();
+
+	if (gameContext->player->getHealth() <= 0)
+	{
+		sf::Image screenshot = gameContext->context->window.capture();
+		screenshot.saveToFile("./Resources/menuHTML/images/hold.png");
+
+		WinState* winState = new WinState(gameContext->context, stateManager);
+		stateManager->AddState(winState);
+		stateManager->StartNextState();
+	}
 
 	if (terminate)
 	{

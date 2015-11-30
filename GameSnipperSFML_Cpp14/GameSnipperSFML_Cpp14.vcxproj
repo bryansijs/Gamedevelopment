@@ -317,7 +317,9 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
   <ItemGroup>
     <None Include="Resources\menuHTML\about.html" />
     <None Include="Resources\menuHTML\instruction.html" />
+    <None Include="Resources\menuHTML\lose.html" />
     <None Include="Resources\menuHtml\menu.html" />
+    <None Include="Resources\menuHTML\win.html" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\menuHtml\images\bg.png" />
