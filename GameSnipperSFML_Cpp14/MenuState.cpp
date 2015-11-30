@@ -66,21 +66,15 @@ void MenuState::Update()
 			menuActions->ExitGame();
 			return;
 		}
-		/*
-		if (menuContext->event.type == sf::Event::KeyReleased)
+
+		if (menuContext->event.type == sf::Event::KeyPressed || menuContext->event.type == sf::Event::KeyReleased)
 		{
 			Input::EventOccured(menuContext->event);
 			menuActions->CatchInput();
-		}*/
-	
-		if (menuContext->event.type == sf::Event::KeyPressed)
-		{
-			Input::EventOccured(menuContext->event);
-			menuActions->CatchInput();
-			menuActions->ProcessActions();
 		}
 	}
-		
+	menuActions->ProcessActions();
+
 	//Create image from Bitmap
 	menuContext->surface = static_cast<Awesomium::BitmapSurface*>(menuContext->webView->surface());
 	const unsigned char* tempBuffer = menuContext->surface->buffer();

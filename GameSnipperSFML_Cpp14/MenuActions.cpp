@@ -46,7 +46,7 @@ void MenuActions::ExecuteActions()
 		auto function = *it;
 		(this->*function)();
 	}
-	activeKeys.clear();
+	//activeKeys.clear();
 }
 
 
