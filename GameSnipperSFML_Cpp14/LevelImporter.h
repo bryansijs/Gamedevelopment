@@ -31,8 +31,10 @@ public:
 	LevelImporter();
 	~LevelImporter();
 
-	void Import(std::string JSON);
+	bool Import(std::string JSON);
 	void Prepare();
+	bool PrepareMusic(std::string musicName);
+	sf::Sound getMusic() { return music; };
 
 	void Clear();
 
@@ -43,7 +45,6 @@ private:
 	void PrepareGameObjects();
 	void PrepareTileSets();
 	void PrepareTiles();
-	void PrepareMusic(std::string musicName);
 	void addTile(int dataIndex, Json::Value& value, int i, int j);
 	int tileSize;
 	int levelHeight;
