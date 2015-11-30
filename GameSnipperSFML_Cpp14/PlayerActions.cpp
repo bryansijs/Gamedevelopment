@@ -8,9 +8,6 @@
 #include "GameObjectContainer.h"
 #include "KeyMapping.h"
 #include "GameObject.h"
-#include "Tile.h"
-#include "Key.h"
-#include "Door.h"
 PlayerActions::PlayerActions()
 {
 
@@ -72,6 +69,11 @@ void PlayerActions::ExecuteActions()
 		moveAction.AnimateMovement(player, 1);
 	}
 
+	if (Input::GetKeyUp(KeyMapping::GetKey("use")))
+	{
+		useAction = true;
+	}
+
 	activeActions.clear();
 	resetAnimation = true;
 }
@@ -102,34 +104,32 @@ void PlayerActions::Shoot()
 
 void PlayerActions::Use()
 {
-	if (useDelay > 0)
-	{
-		useDelay -= Time::deltaTime;
-		return;
-	}
 
-	//int b = this->player->getgameObjectContainer()->getObjects().size();
-	//std::cout << b <<  std::endl;
-	/*std::cout << "My current location x y " << player->getPosition().x << " " << player->getPosition().y << std::endl;*/
-
-	float playery = this->player->getPosition().y;
-	float playerx = this->player->getPosition().x;
-	for (GameObject* object : this->player->getgameObjectContainer()->getObjects())
+	if (useAction)
 	{
-		//Check zit ik wel bij dit object in de beurt?
-		//zojah dan gaan zijn actie uitvoeren;
-		//anders nope nope
-		//Dit moet worden afgevangen doormiddel van is colliding en de juiste directe!
-		//Als we op dezelfde y zitten met een 32 ~48 verschil;
-		//Als we op dezelfde x zittten met en 32 ~48 verschil; 
-		if (playery + 32 > object->getPosition().y && playery - 48 < object->getPosition().y)
+		//int b = this->player->getgameObjectContainer()->getObjects().size();
+		//std::cout << b <<  std::endl;
+		/*std::cout << "My current location x y " << player->getPosition().x << " " << player->getPosition().y << std::endl;*/
+
+		float playery = this->player->getPosition().y;
+		float playerx = this->player->getPosition().x;
+		for (GameObject* object : this->player->getgameObjectContainer()->getObjects())
 		{
-			if (playerx + 32 > object->getPosition().x && playerx - 48 < object->getPosition().x)
+			//Check zit ik wel bij dit object in de beurt?
+			//zojah dan gaan zijn actie uitvoeren;
+			//anders nope nope
+			//Dit moet worden afgevangen doormiddel van is colliding en de juiste directe!
+			//Als we op dezelfde y zitten met een 32 ~48 verschil;
+			//Als we op dezelfde x zittten met en 32 ~48 verschil; 
+			if (playery + 32 > object->getPosition().y && playery - 48 < object->getPosition().y)
 			{
-				object->doAction(player);
+				if (playerx + 32 > object->getPosition().x && playerx - 48 < object->getPosition().x)
+				{
+					object->doAction(player);
+				}
 			}
 		}
-	}
+		useAction = false;
 
-	useDelay = 0.15;
+	}
 }
