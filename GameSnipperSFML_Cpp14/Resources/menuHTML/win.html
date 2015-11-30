@@ -29,28 +29,6 @@
         width: 960px;
         color: white;
     }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-      }
-    }
-
-    .fade-in {
-      animation: fadeIn 1s ease-in 1 forwards;
-      opacity: 0;
-    }
-
-    .fade-out {
-      animation: fadeOut 2s ease-out 1 forwards;
-      opacity: 1;
-    }
 </style>
 <body>
     <div class="frame">
@@ -58,23 +36,8 @@
 	    	<img src="images/victory.png">
 	    </div>
         <div class="js-fade fade-out" style="position:absolute; width: 310px; height: 50px; top: 400px;left: 325px;">
-            <h1 style="text-align: center; font-family: moonhouse;">Press any key to continue</h1>
+            <h1 style="text-align: center; font-family: moonhouse; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Press any key to continue</h1>
         </div>
     </div>
-    <script>
-        var el = document.querySelector('.js-fade');
-        setInterval(function myfunc() {
-           if (el.classList.contains('fade-in'))
-           {
-             el.classList.remove('fade-in')
-             el.classList.add('fade-out')
-           }
-           else
-           {
-              el.classList.remove('fade-out')
-              el.classList.add('fade-in')
-           }
-        }, 2000); 
-    </script>
 </body>
 </html>

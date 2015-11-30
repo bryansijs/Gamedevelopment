@@ -38,7 +38,7 @@ WinState::WinState(Context* context, StateManager* stateManager)
 	winContext->texture.create(960, 640);
 	winContext->pixels = new sf::Uint8[winContext->context->window.getSize().x * winContext->context->window.getSize().y * 4];
 
-	winContext->sfx.loadFromFile("./Resources/sfx/victorylol.ogg");
+	winContext->sfx.loadFromFile("./Resources/sfx/victory.ogg");
 	winContext->music = new sf::Sound(winContext->sfx);
 	winContext->music->setVolume(50.0f);
 	winContext->music->play();
