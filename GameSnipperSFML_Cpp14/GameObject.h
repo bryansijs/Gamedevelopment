@@ -5,11 +5,13 @@
 #include <SFML\Graphics.hpp>
 #include <iostream>
 
+class Player;
 class DrawContainer;
+class GameObjectContainer;
 class MoveContainer;
 class DrawBehaviour;
 class MoveBehaviour;
-class GameObjectContainer;
+
 class Tile;
 
 class GameObject
@@ -25,13 +27,11 @@ private:
 	DrawBehaviour* drawBehaviour;
 	MoveBehaviour* moveBehaviour;
 
-
 	sf::Vector2f position;
 	int xIndex = 0;
 	int yIndex = 0;
 	int width = 0;
 	int height = 0;
-
 
 public:
 	GameObject(DrawContainer *drawContainer, std::string textureUrl);
@@ -41,8 +41,6 @@ public:
 	GameObject::GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, std::string textureUrl);
 	~GameObject();
 
-
-	
 	void setPosition(sf::Vector2f position) { this->position = position; };
 	sf::Vector2f getPosition() { return position; }
 
@@ -51,6 +49,7 @@ public:
 
 	virtual void Update();
 	virtual void doAction();
+	virtual void doAction(Player* player);
 	virtual void setProperties(std::map<std::string, std::string>& properties);
 
 	void setDrawBehaviour(DrawBehaviour* newDrawBehaviour);
@@ -85,7 +84,7 @@ public:
 	int getImageX() { return xIndex * width; }
 	int getHeight() { return height; }
 	int getWidth() { return width; }
-
+	bool isCollidable = false;
 	void setSize(int width, int height)
 	{
 		this->width = width;

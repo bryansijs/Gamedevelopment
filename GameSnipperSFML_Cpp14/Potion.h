@@ -1,15 +1,25 @@
 #pragma once
-#include "GameObject.h"
-class Potion : public GameObject
+#include "BaseItem.h"
+
+
+class Player;
+class DrawContainer;
+class GameObjectContainer;
+
+class Potion : public BaseItem
 {
+
+private: 
+	std::string potionType;
+	int potionId;
+
 public:
 	Potion();
 	~Potion();
 
-	Potion(DrawContainer* container);
-	Potion(DrawContainer* container, std::string img);
-	Potion(DrawContainer* container, std::string img,GameObjectContainer* gameObjectContainer, sf::Vector2f position, int widht, int height);
+	Potion(DrawContainer* container, std::string img,GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties);
 
 	virtual void setProperties(std::map<std::string, std::string>& properties);
+	virtual void doAction(Player* player);
 };
 

@@ -18,6 +18,7 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->useContainer);
 	gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
 
+
 	gameContext->levelImporter->Prepare();
 
 	gameContext->level = gameContext->levelImporter->getLevel();
