@@ -14,6 +14,8 @@ TankEnemy::TankEnemy(DrawContainer* container, std::string img) :Unit{ container
 TankEnemy::TankEnemy(DrawContainer* container, std::string img, sf::Vector2f position, int widht, int height) :Unit{ container, img } {
 	this->setPosition(position);
 	this->setSize(widht, height);
+
+	this->SetAnimationStates(4);
 };
 
 
@@ -23,6 +25,8 @@ TankEnemy::TankEnemy(DrawContainer* dContainer, std::string img, MoveContainer* 
 
 	this->setPosition(position);
 	this->setSize(widht, height);
+
+	this->SetAnimationStates(4);
 };
 
 TankEnemy::~TankEnemy()

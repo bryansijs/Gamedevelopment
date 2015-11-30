@@ -15,6 +15,8 @@ BasicEnemy::BasicEnemy(DrawContainer* container, std::string img, sf::Vector2f p
 {
 	this->setPosition(position);
 	this->setSize(widht, height);
+
+	this->SetAnimationStates(4);
 }
 
 BasicEnemy::BasicEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer, sf::Vector2f position, int widht, int height) :Unit{ dContainer, img,mContainer, gameObjectContainer }
@@ -23,6 +25,8 @@ BasicEnemy::BasicEnemy(DrawContainer* dContainer, std::string img, MoveContainer
 	
 	this->setPosition(position);
 	this->setSize(widht, height);
+
+	this->SetAnimationStates(4);
 }
 
 BasicEnemy::~BasicEnemy()

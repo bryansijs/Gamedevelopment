@@ -10,8 +10,6 @@ WanderMoveBehaviour::WanderMoveBehaviour(GameObject* gameObject)
 	this->gameObject = gameObject;
 	startPosition = gameObject->getPosition();
 	endPosition = gameObject->getPosition();
-
-	moveAction.SetAnimationStates(4);
 }
 
 WanderMoveBehaviour::~WanderMoveBehaviour()

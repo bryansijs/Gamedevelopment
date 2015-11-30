@@ -13,6 +13,7 @@ GameContext::GameContext(Context* context)
 	drawContainer = new DrawContainer();
 	useContainer = new GameObjectContainer();
 	player = new Player(moveContainer, drawContainer,useContainer);
+	player->SetAnimationStates(3);
 	playerActions.SetPlayer(player);
 
 	keyMappingImporter.Import("./Resources/key-mapping.json");

@@ -91,7 +91,7 @@ void MoveAction::AnimateMovement(GameObject *gameObject)
 		return;
 	}
 
-	if (animateState == animationStates)
+	if (animateState == gameObject->GetAnimationStates())
 		animateState = 0;
 
 	gameObject->setImageX(animateState);
@@ -103,9 +103,4 @@ void MoveAction::AnimateMovement(GameObject* gameObject, int state)
 {
 	animateState = state;
 	AnimateMovement(gameObject);
-}
-
-void MoveAction::SetAnimationStates(int states)
-{
-	animationStates = states;
 }

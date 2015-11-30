@@ -32,7 +32,7 @@ private:
 	int width = 0;
 	int height = 0;
 
-
+	int animationStates;
 public:
 	GameObject(DrawContainer *drawContainer, std::string textureUrl);
 	GameObject(DrawContainer *drawContainer);
@@ -43,7 +43,8 @@ public:
 	GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, MoveContainer *moveContainer, std::string textureUrl);
 	~GameObject();
 
-
+	void SetAnimationStates(int states) { animationStates = states; };
+	int GetAnimationStates() { return animationStates; };
 	
 	void setPosition(sf::Vector2f position) { this->position = position; };
 	sf::Vector2f getPosition() { return position; }

@@ -14,6 +14,8 @@ RunnerEnemy::RunnerEnemy(DrawContainer* container, std::string img) :Unit{ conta
 RunnerEnemy::RunnerEnemy(DrawContainer* container, std::string img, sf::Vector2f position, int widht, int height) :Unit{ container, img } {
 	this->setPosition(position);
 	this->setSize(widht, height);
+
+	this->SetAnimationStates(4);
 };
 
 
@@ -23,6 +25,8 @@ RunnerEnemy::RunnerEnemy(DrawContainer* dContainer, std::string img, MoveContain
 
 	this->setPosition(position);
 	this->setSize(widht, height);
+
+	this->SetAnimationStates(4);
 };
 
 RunnerEnemy::~RunnerEnemy()

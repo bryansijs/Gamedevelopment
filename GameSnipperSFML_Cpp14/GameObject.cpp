@@ -85,12 +85,16 @@ void GameObject::setProperties(std::map<std::string, std::string>& properties)
 
 void GameObject::setDrawBehaviour(DrawBehaviour* newDrawBehaviour)
 {
+	//drawContainer->RemoveBehaviour(this->drawBehaviour);
 	this->drawBehaviour = newDrawBehaviour;
+	//drawContainer->AddBehaviour(this->drawBehaviour);
 }
 
 void GameObject::SetMoveBehaviour(MoveBehaviour* moveBehaviour)
 {
+	//moveContainer->RemoveBehaviour(this->moveBehaviour);
 	this->moveBehaviour = moveBehaviour;
+	//moveContainer->AddBehaviour(this->moveBehaviour);
 }
 
 void GameObject::doAction()
