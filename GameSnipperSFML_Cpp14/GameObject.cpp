@@ -1,11 +1,15 @@
 #include "stdafx.h"
 #include "GameObject.h"
-#include "DrawContainer.h"
-#include "GameObjectContainer.h"
-#include "NormalDrawBehaviour.h"
-#include "MoveBehaviour.h"
-#include "Tile.h"
 
+#include "DrawContainer.h"
+#include "MoveContainer.h"
+#include "GameObjectContainer.h"
+
+#include "NormalDrawBehaviour.h"
+#include "WanderMoveBehaviour.h"
+#include "MoveBehaviour.h"
+
+#include "Tile.h"
 
 GameObject::GameObject(DrawContainer *drawContainer, std::string textureUrl)
 {
@@ -16,9 +20,7 @@ GameObject::GameObject(DrawContainer *drawContainer, std::string textureUrl)
 
 GameObject::GameObject(DrawContainer *drawContainer)
 {
-	
 }
-
 
 GameObject::GameObject(GameObjectContainer *gameObjectContainer)
 {
@@ -26,16 +28,42 @@ GameObject::GameObject(GameObjectContainer *gameObjectContainer)
 	this->gameObjectContainer->AddObject(this);
 }
 
-GameObject::GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer,std::string textureUrl)
+GameObject::GameObject(GameObjectContainer *gameObjectContainer, MoveContainer *moveContainer, std::string textureUrl)
+{
+	this->gameObjectContainer = gameObjectContainer;
+	this->gameObjectContainer->AddObject(this);
+
+	this->moveContainer = moveContainer;
+	this->moveBehaviour = { new WanderMoveBehaviour(this) };
+	this->moveContainer->AddBehaviour(this->moveBehaviour);
+}
+
+GameObject::GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, MoveContainer *moveContainer, std::string textureUrl)
 {
 	this->drawContainer = drawContainer;
+	this->moveContainer = moveContainer;
+
 	this->drawBehaviour = { new NormalDrawBehaviour(this, 10, "./Resources/sprites/" + textureUrl) };
+	this->moveBehaviour = { new WanderMoveBehaviour(this) };
+
 	this->drawContainer->AddBehaviour(this->drawBehaviour);
+	this->moveContainer->AddBehaviour(this->moveBehaviour);
+
 	this->gameObjectContainer = gameObjectContainer;
 	this->gameObjectContainer->AddObject(this);
 }
 
+GameObject::GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer,std::string textureUrl)
+{
+	this->drawContainer = drawContainer;
 
+	this->drawBehaviour = { new NormalDrawBehaviour(this, 10, "./Resources/sprites/" + textureUrl) };
+
+	this->drawContainer->AddBehaviour(this->drawBehaviour);
+
+	this->gameObjectContainer = gameObjectContainer;
+	this->gameObjectContainer->AddObject(this);
+}
 
 GameObject::GameObject()
 {
@@ -64,8 +92,6 @@ void GameObject::SetMoveBehaviour(MoveBehaviour* moveBehaviour)
 {
 	this->moveBehaviour = moveBehaviour;
 }
-
-
 
 void GameObject::doAction()
 {

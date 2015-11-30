@@ -38,7 +38,9 @@ public:
 	GameObject(DrawContainer *drawContainer);
 	GameObject();
 	GameObject(GameObjectContainer *useContainer);
-	GameObject::GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, std::string textureUrl);
+	GameObject(GameObjectContainer *gameObjectContainer, MoveContainer *moveContainer, std::string textureUrl);
+	GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, std::string textureUrl);
+	GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, MoveContainer *moveContainer, std::string textureUrl);
 	~GameObject();
 
 

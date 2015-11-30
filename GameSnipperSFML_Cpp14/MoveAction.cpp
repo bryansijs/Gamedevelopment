@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "MoveAction.h"
 
-#include "Player.h"
+#include "GameObject.h"
 #include "Time.h"
 #include "Tile.h"
 
@@ -16,28 +16,45 @@ MoveAction::~MoveAction()
 {
 }
 
-void MoveAction::Move(std::vector<std::string> directions, Player *player, std::vector<Tile*>* tiles)
+void MoveAction::Move(std::vector<std::string> directions, GameObject *gameObject, std::vector<Tile*>* tiles)
+{
+	this->directions = directions;
+	this->gameObject = gameObject;
+	this->tiles = tiles;
+
+	Move();
+}
+
+void MoveAction::Move(std::vector<std::string> directions, GameObject *gameObject)
+{
+	this->directions = directions;
+	this->gameObject = gameObject;
+
+	Move();
+}
+
+void MoveAction::Move()
 {
 	for (std::vector<std::string>::iterator it = directions.begin(); it != directions.end(); ++it)
 	{
 		if (*it == "move-up")
 		{
-			player->setImageY(3);
+			gameObject->setImageY(3);
 			velocity.y -= speed;
 		}
 		if (*it == "move-down")
 		{
-			player->setImageY(0);
+			gameObject->setImageY(0);
 			velocity.y += speed;
 		}
 		if (*it == "move-left")
 		{
-			player->setImageY(1);
+			gameObject->setImageY(1);
 			velocity.x -= speed;
 		}
 		if (*it == "move-right")
 		{
-			player->setImageY(2);
+			gameObject->setImageY(2);
 			velocity.x += speed;
 		}
 	}
@@ -50,21 +67,23 @@ void MoveAction::Move(std::vector<std::string> directions, Player *player, std::
 		velocity.y *= sin(45 * 3.14159265359 / 180);
 	}
 
-	if (player->isColliding(*tiles, velocity))
+	if (tiles != nullptr)
 	{
-		return;
+		if (gameObject->isColliding(*tiles, velocity))
+		{
+			return;
+		}
 	}
 
 	velocity.x = roundf(velocity.x * 100) / 100;
 	velocity.y = roundf(velocity.y * 100) / 100;
 
-	AnimateMovement(player);
+	AnimateMovement(gameObject);
 
-	player->setPosition(player->getPosition() + velocity);
-
+	gameObject->setPosition(gameObject->getPosition() + velocity);
 }
 
-void MoveAction::AnimateMovement(Player *player)
+void MoveAction::AnimateMovement(GameObject *gameObject)
 {
 	if (animationDelay > 0)
 	{
@@ -75,13 +94,13 @@ void MoveAction::AnimateMovement(Player *player)
 	if (animateState == 3)
 		animateState = 0;
 
-	player->setImageX(animateState);
+	gameObject->setImageX(animateState);
 	animateState++;
 	animationDelay = 0.05;
 }
 
-void MoveAction::AnimateMovement(Player* player, int state)
+void MoveAction::AnimateMovement(GameObject* gameObject, int state)
 {
 	animateState = state;
-	AnimateMovement(player);
+	AnimateMovement(gameObject);
 }

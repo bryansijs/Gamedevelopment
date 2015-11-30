@@ -15,11 +15,6 @@ class GameObjectContainer;
 
 class GameContext
 {
-private: 
-
-
-
-
 public: 
 	GameContext(Context* context);
 	~GameContext();
@@ -41,7 +36,5 @@ public:
 	sf::Clock deltaClock;
 	sf::Event event;
 	sf::View view;
-
-	
 };
 

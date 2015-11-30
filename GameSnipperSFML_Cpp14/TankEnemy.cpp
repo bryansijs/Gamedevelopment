@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "TankEnemy.h"
 
-
+#include "WanderMoveBehaviour.h"
 
 TankEnemy::TankEnemy(DrawContainer* container) :Unit{ container } {
 };
@@ -19,8 +19,7 @@ TankEnemy::TankEnemy(DrawContainer* container, std::string img, sf::Vector2f pos
 
 TankEnemy::TankEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer, sf::Vector2f position, int widht, int height) :Unit{ dContainer, img,mContainer,gameObjectContainer } {
 
-	//TODO Iemand:Basic moveBahavoir for this Enemy;
-	this->SetMoveBehaviour(nullptr);
+	this->SetMoveBehaviour(new WanderMoveBehaviour(this));
 
 	this->setPosition(position);
 	this->setSize(widht, height);

@@ -5,7 +5,7 @@
 class MoveBehaviour
 {
 public:
-	virtual void Update();
+	virtual void Update(sf::Vector2f viewPortPosition);
 	virtual bool checkVisible(int screenX, int screenY);
 
 	GameObject* getGameObject() { return gameObject; };

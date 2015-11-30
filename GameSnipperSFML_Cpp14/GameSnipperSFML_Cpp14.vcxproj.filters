@@ -357,11 +357,9 @@
     <ClInclude Include="UnitTestGameObjectFactory.h">
       <Filter>Header Files\UnitTest\Tests</Filter>
     </ClInclude>
-
     <ClInclude Include="GameObjectContainer.h">
       <Filter>Header Files\Containers</Filter>
-	</ClInclude>
-
+    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -370,6 +368,12 @@
     </ClInclude>
     <ClInclude Include="resource2.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WanderMoveBehaviour.h">
+      <Filter>Header Files\Behaviours\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -543,6 +547,12 @@
     </ClCompile>
     <ClCompile Include="GameObjectContainer.cpp">
       <Filter>Source Files\Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="WanderMoveBehaviour.cpp">
+      <Filter>Source Files\Behaviours\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

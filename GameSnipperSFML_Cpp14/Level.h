@@ -59,6 +59,7 @@ public:
 
 	GameObjectContainer* getGameObjectContainer() { return this->gameObjectContainer; }
 
+	sf::Vector2f GetViewPortPosition();
 private:
 	bool doEvents = true;
 	bool moveDown = true;

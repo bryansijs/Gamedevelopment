@@ -11,7 +11,6 @@ Level::Level(GameObjectContainer* gameObjectContainer)
 	this->gameObjectContainer = gameObjectContainer;
 }
 
-
 Level::~Level()
 {
 }
@@ -140,6 +139,11 @@ void Level::setLayerVisibility(int layerIndex, bool isVisible)
 	}
 }
 
+sf::Vector2f Level::GetViewPortPosition()
+{
+	return sf::Vector2f(r_value, t_value);
+}
+
 void Level::Start(GameObject* player, sf::Vector2u* size)
 {
 	StartTile* start = nullptr;
@@ -161,6 +165,11 @@ void Level::Start(GameObject* player, sf::Vector2u* size)
 	int map_xLocation = start->getPosition().x / size->x;
 	viewPortY = (map_yLocation * size->y);
 	viewPortX = (map_xLocation * size->x);
+
+	t_max = viewPortY;
+	t_value = viewPortY;
+	r_max = viewPortX;
+	r_value = viewPortX;
 
 	player->setPosition(sf::Vector2f(start->getPosition().x, start->getPosition().y));
 	music.setLoop(true);

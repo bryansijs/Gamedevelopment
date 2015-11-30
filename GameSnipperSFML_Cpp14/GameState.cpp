@@ -13,8 +13,8 @@ GameState::GameState(Context* context, StateManager* stateManager)
 	gameContext = new GameContext(context);
 	this->stateManager = stateManager;
 
-	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->useContainer);
-	gameContext->levelImporter->Import("./Resources/levels/OnTopTempGuus.json");
+	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer);
+	gameContext->levelImporter->Import("./Resources/levels/Level_New.json");
 	gameContext->levelImporter->Prepare();
 
 	gameContext->level = gameContext->levelImporter->getLevel();
@@ -66,9 +66,8 @@ void GameState::Update()
 		gameContext->level->updateViewPort(worldPosition);
 	}
 
-	gameContext->moveContainer->Update();
+	gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
 	gameContext->drawContainer->Draw(&gameContext->context->window);
-
 
 	gameContext->context->window.setView(gameContext->view);
 	gameContext->context->window.display();
