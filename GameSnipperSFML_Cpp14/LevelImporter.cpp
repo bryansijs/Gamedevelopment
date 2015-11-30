@@ -3,6 +3,7 @@
 #include "LevelImporter.h"
 #include "DrawContainer.h"
 #include "NormalDrawBehaviour.h"
+#include "Tile.h"
 
 #define JSON_DLL
 
@@ -178,7 +179,7 @@ Tile* LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 			if (value["properties"]["isCollidable"].asString() == "true")
 			{
 				insert_tile->isCollidable = true;
-				//insert_tile->createStaticBody(*this->world);
+				insert_tile->createStaticBody(*this->world);
 			}
 		}
 
@@ -187,7 +188,7 @@ Tile* LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 			if (value["properties"]["isEnemyCollidable"].asString() == "true")
 			{
 				insert_tile->isEnemyCollidable = true;
-				//insert_tile->createStaticBody(*this->world);
+				insert_tile->createStaticBody(*this->world);
 			}
 		}
 

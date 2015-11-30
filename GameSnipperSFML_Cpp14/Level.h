@@ -17,6 +17,8 @@ public:
 	Level();
 	~Level();
 	Level(GameObjectContainer* gameObjectContainer);
+	StartTile* start;
+
 
 	std::vector<GameObject*> game_objects;
 	//std::vector<Tile*> tiles;

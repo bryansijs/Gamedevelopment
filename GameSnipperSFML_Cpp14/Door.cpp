@@ -26,7 +26,7 @@ Door::Door(DrawContainer* container, std::string img) :GameObject{ container, im
 
 
 Door::Door(DrawContainer* container, std::string img, b2Vec2 position, int widht, int height) :GameObject{ container, img } {
-	this->setPosition(position);
+	this->setPosition(position.x, position.y);
 	this->setSize(widht, height);
 };
 

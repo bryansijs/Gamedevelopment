@@ -28,7 +28,7 @@ sf::Sprite PlayerDrawBehaviour::getCurrentImage()
 		this->gameObject->getWidth(),
 		this->gameObject->getHeight()));
 
-	this->unitImage.setPosition(sf::Vector2f(this->gameObject->getPosition().x, this->gameObject->getPosition().y));
+	this->unitImage.setPosition(sf::Vector2f(this->gameObject->getBody()->GetPosition().x, this->gameObject->getBody()->GetPosition().y));
 
 	return this->unitImage;
 }

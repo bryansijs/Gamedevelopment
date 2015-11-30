@@ -30,19 +30,19 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 		
 		if (direction == "move-up")
 		{
-		shot->setPosition(b2Vec2(player->getPositionX() + 12, player->getPositionY()));
+		shot->setPosition(player->getPositionX() + 12, player->getPositionY());
 		}
 		if (direction == "move-down")
 		{
-			shot->setPosition(b2Vec2(player->getPositionX() + 12, player->getPositionY() + 24));
+			shot->setPosition(player->getPositionX() + 12, player->getPositionY() + 24);
 		}
 		if (direction == "move-left")
 		{
-			shot->setPosition(b2Vec2(player->getPositionX(), player->getPositionY() + 12));
+			shot->setPosition(player->getPositionX(), player->getPositionY() + 12);
 		}
 		if (direction == "move-right")
 		{
-			shot->setPosition(b2Vec2(player->getPositionX() + 24, player->getPositionY() + 12));
+			shot->setPosition(player->getPositionX() + 24, player->getPositionY() + 12);
 		}
 		
 		shot->setSize(8, 8);

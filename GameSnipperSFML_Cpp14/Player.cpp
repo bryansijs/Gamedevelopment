@@ -18,7 +18,7 @@ Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, b2Wor
 	
 	this->setSize(32, 32);
 
-	this->createBoxDynamic(*world);
+	//this->createBoxDynamic(*world);
 
 	
 	this->getDrawContainer()->AddBehaviour(getDrawBehaviour());
@@ -35,9 +35,7 @@ Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameO
 
 	this->setSize(32, 32);
 
-	this->createBoxDynamic(*world);
-	
-
+	//this->createBoxDynamic(*world);
 	this->getDrawContainer()->AddBehaviour(getDrawBehaviour());
 
 	this->setUseContainer(useContainer);

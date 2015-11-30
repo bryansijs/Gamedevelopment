@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Level.h"
 #include "Game_Switch.h"
+#include <Box2D\Box2D.h>
 
 Level::Level()
 {
@@ -125,10 +126,16 @@ void Level::update()
 
 void Level::draw(sf::RenderWindow* window, sf::View* view)
 {
-	for (size_t i = 0; i < groundTiles.size(); i++)
-		if (groundTiles.at(i)->isVisible)
+	for (size_t i = 0; i < groundTiles.size(); i++) {
+		if (groundTiles.at(i)->isVisible) {
+			if (groundTiles.at(i)->getBody() != nullptr) {
+				groundTiles.at(i)->sprite.setPosition(groundTiles.at(i)->getBody()->GetPosition().x, groundTiles.at(i)->getBody()->GetPosition().y);
+			}
 			window->draw(groundTiles.at(i)->sprite);
-	MoveView(*view, *window);
+		}
+		MoveView(*view, *window);
+	}
+
 }
 
 void Level::drawRoof(sf::RenderWindow* window, sf::View* view) {
@@ -149,7 +156,7 @@ void Level::setLayerVisibility(int layerIndex, bool isVisible)
 
 void Level::Start(GameObject* player, sf::Vector2u* size)
 {
-	StartTile* start = nullptr;
+	start = nullptr;
 
 	for (size_t i = 0; i < game_objects.size(); i++)
 	{
@@ -161,7 +168,7 @@ void Level::Start(GameObject* player, sf::Vector2u* size)
 	if (start == nullptr)
 	{
 		start = new StartTile(gameObjectContainer);
-		start->setPosition(b2Vec2(25, 25));
+		start->setPosition(25, 25);
 	}
 
 	int map_yLocation = start->getPosition().y / size->y;
@@ -169,7 +176,9 @@ void Level::Start(GameObject* player, sf::Vector2u* size)
 	viewPortY = (map_yLocation * size->y);
 	viewPortX = (map_xLocation * size->x);
 
-	player->setPosition(b2Vec2(start->getPosition().x, start->getPosition().y));
+	player->setPosition(start->getPosition().x, start->getPosition().y);
+	
+	player->getMyBodydef().position = b2Vec2(start->getPosition().x, start->getPosition().y);
 	music.setLoop(true);
 	music.play();
 }

@@ -11,7 +11,7 @@ RunnerEnemy::RunnerEnemy(DrawContainer* container, std::string img) :Unit{ conta
 
 
 RunnerEnemy::RunnerEnemy(DrawContainer* container, std::string img, b2Vec2 position, int widht, int height) :Unit{ container, img } {
-	this->setPosition(position);
+	this->setPosition(position.x, position.y);
 	this->setSize(widht, height);
 };
 
@@ -21,7 +21,7 @@ RunnerEnemy::RunnerEnemy(DrawContainer* dContainer, std::string img, MoveContain
 	//TODO Iemand:Basic moveBahavoir for this Enemy;
 	this->SetMoveBehaviour(nullptr);
 
-	this->setPosition(position);
+	this->setPosition(position.x, position.y);
 	this->setSize(widht, height);
 };
 

@@ -2,7 +2,7 @@
 #include "GameState.h"
 
 #include "StateManager.h"
-
+#include <iostream>
 #include "Context.h"
 #include "GameContext.h"
 #include "MoveContainer.h"
@@ -16,7 +16,7 @@ GameState::GameState(Context* context, StateManager* stateManager)
 	this->stateManager = stateManager;
 
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->useContainer, gameContext->world);
-	gameContext->levelImporter->Import("./Resources/levels/CollideTest.json");
+	gameContext->levelImporter->Import("./Resources/levels/Level_New.json");
 	gameContext->levelImporter->Prepare();
 
 	gameContext->level = gameContext->levelImporter->getLevel();
@@ -25,18 +25,15 @@ GameState::GameState(Context* context, StateManager* stateManager)
 	gameContext->playerActions.SetContainers(gameContext->drawContainer, gameContext->moveContainer, &gameContext->level->groundTiles);
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
 
+	gameContext->player->createBoxDynamic(*gameContext->world);
+
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
 	
 	gameContext->view.reset(rect);
 	gameContext->context->window.setView(gameContext->view);
 
-	s = { new square(context) };
-	s->createBoxDynamic(*gameContext->world);
-	s->setPosition(b2Vec2(gameContext->player->getPositionX() + 1000, gameContext->player->getPositionY() + 1000));
-	
-	s2 = { new square(context) };
-	s2->createBoxStatic(*gameContext->world);
-	s2->setPosition(b2Vec2(gameContext->player->getPositionX() + 1000, gameContext->player->getPositionY() + 1000));
+	//s = { new square(context,gameContext->player->getPositionX() + 400, (gameContext->player->getPositionY())) };
+	//s->createBoxDynamic(*gameContext->world);
 }
 
 GameState::~GameState()
@@ -50,7 +47,7 @@ void GameState::Update()
 
 	gameContext->context->window.clear(sf::Color::White);
 
-	sf::Vector2f playerPosition(gameContext->player->getPosition().x, gameContext->player->getPosition().y);
+	sf::Vector2f playerPosition(gameContext->player->getBody()->GetPosition().x, gameContext->player->getBody()->GetPosition().y);
 	sf::Vector2i worldPosition = gameContext->context->window.mapCoordsToPixel(playerPosition);
 
 
@@ -79,6 +76,8 @@ void GameState::Update()
 	}
 
 	this->gameContext->world->Step(1 / 60.f, 8, 3);
+	//this->gameContext->world->Step(1 / 60.f, 8, 3);
+	//this->gameContext->world->Step(1 / 60.f, 8, 3);
 
 	gameContext->moveContainer->Update();
 	gameContext->drawContainer->Draw(&gameContext->context->window);
@@ -90,21 +89,13 @@ void GameState::Update()
 	///////////////////////////////////// Guus
 
 
-	sf::Sprite Sprite;
-	Sprite.setTexture(s->BoxTexture);
-	Sprite.setOrigin(16.f, 16.f);
-	Sprite.setPosition(s->getBody()->GetPosition().x, s->getBody()->GetPosition().y);
-	Sprite.setRotation(s->getBody()->GetAngle() * 180 / b2_pi);
-
-	gameContext->context->window.draw(Sprite);
-
-	sf::Sprite Sprite2;
-	Sprite2.setTexture(s2->BoxTexture);
-	Sprite2.setOrigin(16.f, 16.f);
-	Sprite2.setPosition(1 * s2->getBody()->GetPosition().x, 1 * s2->getBody()->GetPosition().y);
-	Sprite2.setRotation(s2->getBody()->GetAngle() * 180 / b2_pi);
-
-	gameContext->context->window.draw(Sprite2);
+	//for (b2Body* b = gameContext->world->GetBodyList(); b; b = b->GetNext()) {
+	//	sf::RectangleShape rectangle(sf::Vector2f(32, 32));
+	//	rectangle.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
+	//	rectangle.setOutlineThickness(0);
+	//	rectangle.setFillColor(sf::Color(180, 100, 100, 200));
+	//	gameContext->context->window.draw(rectangle);
+	//}
 
 
 

@@ -13,11 +13,12 @@
 #include <math.h> 
 #include "GameObject.h"
 #include <Box2D/Box2D.h>
-#include "Tile.h"
+
 #include "TileSet.h"
 #include "Level.h"
 #include "GameObjectFactory.h"
 
+class Tile;
 class DrawContainer;
 
 class LevelImporter

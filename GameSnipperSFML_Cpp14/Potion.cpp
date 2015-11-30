@@ -27,7 +27,7 @@ Potion::Potion(DrawContainer* container, std::string img) :GameObject{ container
 
 
 Potion::Potion(DrawContainer* container, std::string img, GameObjectContainer* gameObjectContainer, b2Vec2 position, int widht, int height) :GameObject{ container,gameObjectContainer, img } {
-	this->setPosition(position);
+	this->setPosition(position.x, position.y);
 	this->setSize(widht, height);
 };
 

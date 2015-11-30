@@ -42,7 +42,7 @@ public:
 
 
 	
-	void setPosition(b2Vec2 position) { this->myBodyDef.position = position; };
+	void setPosition(float x, float y) { this->myBodyDef.position.Set(x,y); };
 	b2Vec2 getPosition() { return this->myBodyDef.position; };
 
 	int getPositionX() { return this->myBodyDef.position.x; }
@@ -62,7 +62,7 @@ public:
 	void setMoveContainer(MoveContainer* newMoveContainer) { this->moveContainer = newMoveContainer; }
 
 	b2BodyDef getMyBodydef() { return myBodyDef; };
-
+	b2Body* getBody() { return Body; };
 	DrawContainer* getDrawContainer() { return this->drawContainer; }
 	MoveContainer* getMoveContainer() { return this->moveContainer; }
 	GameObjectContainer* getgameObjectContainer() { return this->gameObjectContainer; }

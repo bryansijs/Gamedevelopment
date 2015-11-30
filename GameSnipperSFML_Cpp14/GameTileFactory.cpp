@@ -30,7 +30,7 @@ GameObject* GameTileFactory::CreateStart(std::map<std::string, std::string>& pro
 	int x, y, widht, height;
 	x = std::stoi(properties["x"]);
 	y = std::stoi(properties["y"]);
-	obj->setPosition(b2Vec2(x, y));
+	obj->setPosition(x, y);
 	return obj;
 }
 
@@ -39,7 +39,7 @@ GameObject* GameTileFactory::CreateEnd(std::map<std::string, std::string>& prope
 	int x, y, widht, height;
 	x = std::stoi(properties["x"]);
 	y = std::stoi(properties["y"]);
-	obj->setPosition(b2Vec2(x, y));
+	obj->setPosition(x, y);
 	return obj;
 }
 
@@ -48,6 +48,6 @@ GameObject* GameTileFactory::CreateWarp(std::map<std::string, std::string>& prop
 	int x, y, widht, height;
 	x = std::stoi(properties["x"]);
 	y = std::stoi(properties["y"]);
-	obj->setPosition(b2Vec2(x, y));
+	obj->setPosition(x, y);
 	return obj;
 }

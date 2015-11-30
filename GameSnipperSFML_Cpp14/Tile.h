@@ -34,6 +34,9 @@ public:
 
 	void setPositionX(float x) { this->myBodyDef.position.x = x; };
 	void setPositionY(float y) { this->myBodyDef.position.y = y; };
+
+	b2Body* getBody() { return Body; };
+	b2BodyDef getBodyDef() { return myBodyDef; };
 protected:
 	b2BodyDef myBodyDef;
 	b2PolygonShape Shape;

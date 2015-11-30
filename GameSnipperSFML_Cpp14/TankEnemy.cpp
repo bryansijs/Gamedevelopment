@@ -12,7 +12,7 @@ TankEnemy::TankEnemy(DrawContainer* container, std::string img) :Unit{ container
 
 
 TankEnemy::TankEnemy(DrawContainer* container, std::string img, b2Vec2 position, int widht, int height) :Unit{ container, img } {
-	this->setPosition(position);
+	this->setPosition(position.x, position.y);
 	this->setSize(widht, height);
 };
 
@@ -22,7 +22,7 @@ TankEnemy::TankEnemy(DrawContainer* dContainer, std::string img, MoveContainer* 
 	//TODO Iemand:Basic moveBahavoir for this Enemy;
 	this->SetMoveBehaviour(nullptr);
 
-	this->setPosition(position);
+	this->setPosition(position.x, position.y);
 	this->setSize(widht, height);
 };
 

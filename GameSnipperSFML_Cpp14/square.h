@@ -7,7 +7,7 @@ class Context;
 class square : public GameObject
 {
 public:
-	square(Context* con);
+	square(Context* con, float x, float y);
 	~square();
 
 	b2Body* getBody() { return this->Body; };

@@ -82,7 +82,7 @@ bool GameObject::isColliding(std::vector<Tile*> tiles, sf::Vector2f velocity)
 	//for (int i = 0; i < tiles.size(); i++) {
 
 	//	if (tiles.at(i)->isCollidable) {
-	//		if (getPosition().x + velocity.x < (tiles.at(i)->x_Position + 28) &&
+	//		if (getPosition() + velocity.x < (tiles.at(i)->x_Position + 28) &&
 	//			(getPosition().x + velocity.x + 28) > tiles.at(i)->x_Position &&
 	//			getPosition().y + velocity.y < (tiles.at(i)->y_Position + 12) &&
 	//			(getPosition().y + velocity.y + 32) > tiles.at(i)->y_Position) {
@@ -94,16 +94,14 @@ bool GameObject::isColliding(std::vector<Tile*> tiles, sf::Vector2f velocity)
 }
 
 void GameObject::createBoxStatic(b2World& World)
-{
-
-	
+{	
 	myBodyDef.type = b2_staticBody;
 
 	Body = World.CreateBody(&myBodyDef);
 
 	Shape.SetAsBox((32.f / 2), (32.f / 2));
 
-	boxFixtureDef.density = 1.f;
+	boxFixtureDef.density = 100.f;
 	boxFixtureDef.friction = 0.0f;
 	boxFixtureDef.shape = &Shape;
 	Body->CreateFixture(&boxFixtureDef);
@@ -116,9 +114,15 @@ void GameObject::createBoxDynamic(b2World & World)
 
 	Body = World.CreateBody(&myBodyDef);
 
-	Shape.SetAsBox((32.f / 2), (32.f / 2));
+	if (this->getHeight() < 1 || this->getWidth() < 1) {
+		Shape.SetAsBox((32.f / 2), (32.f / 2));
+	}
+	else {
+		Shape.SetAsBox(getHeight() / 2, getWidth() / 2);
+	}
 
-	boxFixtureDef.density = 1.f;
+
+	boxFixtureDef.density = 100.f;
 	boxFixtureDef.friction = 0.7f;
 	boxFixtureDef.shape = &Shape;
 	Body->CreateFixture(&boxFixtureDef);

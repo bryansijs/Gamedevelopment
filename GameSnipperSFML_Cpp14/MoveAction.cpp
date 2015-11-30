@@ -60,8 +60,10 @@ void MoveAction::Move(std::vector<std::string> directions, Player *player, std::
 
 	AnimateMovement(player);
 	
-	b2Vec2 tempVec(velocity.x, velocity.y);
-	player->setPosition(player->getPosition() + tempVec);
+	//player->getBody()->SetLinearVelocity(b2Vec2(200, 0));
+	player->getBody()->SetLinearVelocity(b2Vec2(velocity.x * 1000, velocity.y * 1000));
+
+	//player->getBody()->SetLinearVelocity(b2Vec2(player->getPosition().x + tempVec.x, player->getPosition().y + tempVec.y));//setPosition(player->getPosition().x + tempVec.x, player->getPosition().y + tempVec.y);
 
 }
 

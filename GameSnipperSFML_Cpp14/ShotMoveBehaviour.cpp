@@ -19,25 +19,25 @@ void ShotMoveBehaviour::Update()
 	//Daarna zul je deze moeten zetten door middel van een setter!
 	if (direction == "move-up")
 	{
-		float temp = gameObject->getPositionY() - velocity * Time::deltaTime;
-		gameObject->setPosition(b2Vec2(gameObject->getPositionX(), temp));
+		float temp = gameObject->getBody()->GetPosition().y - velocity * Time::deltaTime;
+		gameObject->setPosition(gameObject->getBody()->GetPosition().x, temp);
 	}
 	if (direction == "move-down")
 	{
-		float temp = gameObject->getPositionY() + velocity * Time::deltaTime;
-		gameObject->setPosition(b2Vec2(gameObject->getPositionX(), temp));
+		float temp = gameObject->getBody()->GetPosition().y + velocity * Time::deltaTime;
+		gameObject->setPosition(gameObject->getBody()->GetPosition().x, temp);
 	}
 	if (direction == "move-left")
 	{
 
-		float temp = gameObject->getPositionX() - velocity * Time::deltaTime;
-		gameObject->setPosition(b2Vec2(temp, gameObject->getPositionY()));
+		float temp = gameObject->getBody()->GetPosition().x - velocity * Time::deltaTime;
+		gameObject->setPosition(temp, gameObject->getBody()->GetPosition().y);
 
 }
 	if (direction == "move-right")
 	{
-		float temp = gameObject->getPositionX() + velocity * Time::deltaTime;
-		gameObject->setPosition(b2Vec2(temp, gameObject->getPositionY()));
+		float temp = gameObject->getBody()->GetPosition().x + velocity * Time::deltaTime;
+		gameObject->setPosition(temp, gameObject->getBody()->GetPosition().y);
 
 	}
 }
