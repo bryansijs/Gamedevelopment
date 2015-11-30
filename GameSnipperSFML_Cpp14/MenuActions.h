@@ -1,4 +1,5 @@
 #pragma once
+#include "BaseInput.h"
 
 namespace Awesomium{
 	class WebCore;
@@ -8,7 +9,7 @@ namespace Awesomium{
 class MenuContext;
 class StateManager;
 
-class MenuActions
+class MenuActions : public BaseInput
 {
 public:
 	MenuActions(StateManager* stateManager, MenuContext* menuContext);
@@ -25,7 +26,18 @@ public:
 	void NavigateComfirm();
 
 	void callDirectJSFunction(Awesomium::WebView* webView, Awesomium::WebCore* web_core, int currentLevel);
+
+	void ProcessActions() override;
+	void ExecuteActions() override;
 private:
 	StateManager* stateManager;
 	MenuContext* menuContext;
+
+	std::vector<void(MenuActions::*)()> activeActions;
+	std::map<std::string, void(MenuActions::*)()> actions = {
+		{ "move-up", &MenuActions::NavigateUp },
+		{ "move-down", &MenuActions::NavigateDown },
+		{ "enter", &MenuActions::NavigateComfirm },
+		{ "escape", &MenuActions::BackToMenu }
+	};
 };

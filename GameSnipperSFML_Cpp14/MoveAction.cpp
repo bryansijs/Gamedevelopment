@@ -16,9 +16,9 @@ MoveAction::~MoveAction()
 {
 }
 
-void MoveAction::Move(std::vector<std::string>* directions, Player *player, std::vector<Tile*>* tiles)
+void MoveAction::Move(std::vector<std::string> directions, Player *player, std::vector<Tile*>* tiles)
 {
-	for (std::vector<std::string>::iterator it = directions->begin(); it != directions->end(); ++it)
+	for (std::vector<std::string>::iterator it = directions.begin(); it != directions.end(); ++it)
 	{
 		if (*it == "move-up")
 		{
@@ -44,7 +44,7 @@ void MoveAction::Move(std::vector<std::string>* directions, Player *player, std:
 
 	velocity *= Time::deltaTime;
 
-	if (directions->size() == 2)
+	if (directions.size() == 2)
 	{
 		velocity.x *= cos(45 * 3.14159265359 / 180);
 		velocity.y *= sin(45 * 3.14159265359 / 180);

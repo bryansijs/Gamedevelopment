@@ -6,12 +6,14 @@ class BaseInput
 {
 public:
 	BaseInput();
-	void CatchInput();
 	virtual ~BaseInput();
-	void RemoveAllActiveKeys();
+
+	void CatchInput();
+	virtual void ProcessActions() {};
 protected:
+	virtual void ExecuteActions() {};
+
 	std::vector<std::string> activeKeys;
-	virtual void ProcessKeyActions() {};
 	void AddActiveKey(std::string key);
 	void RemoveActiveKey(std::string key);
 };

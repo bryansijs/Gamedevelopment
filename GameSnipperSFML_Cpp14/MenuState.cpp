@@ -66,18 +66,18 @@ void MenuState::Update()
 			menuActions->ExitGame();
 			return;
 		}
-
+		/*
 		if (menuContext->event.type == sf::Event::KeyReleased)
 		{
 			Input::EventOccured(menuContext->event);
-			menuContext->menuInput.CatchInput();
-		}
+			menuActions->CatchInput();
+		}*/
 	
 		if (menuContext->event.type == sf::Event::KeyPressed)
 		{
 			Input::EventOccured(menuContext->event);
-			menuContext->menuInput.CatchInput();
-			menuContext->menuInput.ProcessKeyActions(menuActions);
+			menuActions->CatchInput();
+			menuActions->ProcessActions();
 		}
 	}
 		

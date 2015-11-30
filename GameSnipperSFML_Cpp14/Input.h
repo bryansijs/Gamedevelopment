@@ -1,7 +1,5 @@
 #pragma once
-
-#include <iostream>
-#include <map>
+#include <string>
 
 using namespace std;
 
@@ -18,8 +16,5 @@ public:
 
 	static bool GetKeyDown(string key);
 	static bool GetKeyUp(string key);
-	// TODO: Move to friend class
 	static void EventOccured(sf::Event occuredEvent);
-private:
-
 };

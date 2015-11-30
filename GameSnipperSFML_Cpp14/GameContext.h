@@ -1,9 +1,8 @@
 #pragma once
 #include "Player.h"
-#include "PlayerInput.h"
 #include "LevelImporter.h"
 #include "Level.h"
-#include "GameInput.h"
+#include "GameActions.h"
 
 class Context;
 class MoveContainer;
@@ -23,9 +22,8 @@ public:
 	GameObjectContainer *useContainer;
 
 	Player* player;
-
-	PlayerInput playerInput = PlayerInput(this);
-	GameInput gameInput = GameInput(this);
+	PlayerActions* playerActions;
+	GameActions* gameActions;
 
 	LevelImporter* levelImporter;
 	Level* level;

@@ -4,10 +4,11 @@
 #include <vector>
 #include "Time.h"
 #include "Player.h"
-#include "DrawBehaviour.h"
 #include "GameObjectContainer.h"
 #include "GameObject.h"
 #include "Tile.h"
+#include "KeyMapping.h"
+
 
 PlayerActions::PlayerActions(Player* player)
 {
@@ -18,6 +19,55 @@ PlayerActions::~PlayerActions()
 {
 }
 
+void PlayerActions::ProcessActions()
+{
+	bool animate = false;
+
+	map<string, void(PlayerActions::*)()>::iterator it;
+
+	for (vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
+
+		string map = KeyMapping::GetMap(activeKeys[i]);
+
+		for (it = actions.begin(); it != actions.end(); ++it)
+		{
+			if (map.find(it->first) != string::npos)
+			{
+				if (find(activeActions.begin(), activeActions.end(), it->second) == activeActions.end())
+				{
+					activeActions.push_back(it->second);
+				}
+			}
+		}
+
+		// stop animation
+		if(it->first.find("move") != string::npos)
+		{
+			animate = true;
+		}
+		else
+		{
+			
+		}
+	}
+	if(!animate)
+	{
+		StandStill();
+	}
+	ExecuteActions();
+}
+
+void PlayerActions::ExecuteActions()
+{
+	vector<void(PlayerActions::*)()>::iterator it;
+	for (it = activeActions.begin(); it != activeActions.end(); ++it)
+	{
+		auto function = *it;
+		(this->*function)();
+	}
+	activeKeys.clear();
+}
+
 void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile*>* tiles)
 {
 	this->drawContainer = drawContainer;
@@ -25,22 +75,35 @@ void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *m
 	this->tiles = tiles;
 }
 
-void PlayerActions::Move(std::vector<std::string>* moveDirections)
+void PlayerActions::Move()
 {
-	DoNotingTimerReset();
-	direction = moveDirections->at(0);
-	moveAction.Move(moveDirections, player, tiles);
+	StandStillTimerReset();
+
+	std::vector<std::string> directions;
+
+	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
+		std::string map = KeyMapping::GetMap(activeKeys[i]);
+
+		if (map.find("move") != std::string::npos)
+		{
+			directions.push_back(map);
+			direction = map;
+		}
+	}
+
+	direction = directions.at(0);
+	moveAction.Move(directions, player, tiles);
 }
 
 void PlayerActions::Shoot()
 {
-	DoNotingTimerReset();
+	StandStillTimerReset();
 	shootAction.Shoot(drawContainer, moveContainer, player, direction);
 }
 
 void PlayerActions::Use()
 {
-	DoNotingTimerReset();
+	StandStillTimerReset();
 
 	if (useDelay > 0)
 	{
@@ -72,16 +135,16 @@ void PlayerActions::Use()
 	useDelay = 7;
 }
 
-void PlayerActions::DoNothing()
+void PlayerActions::StandStill()
 {
-	if (DoNothingTimer > 0)
+	if (StandStillTimer > 0)
 	{
 		moveAction.AnimateMovement(player, 1);
-		DoNothingTimer = DoNothingTimer - Time::deltaTime;
+		StandStillTimer = StandStillTimer - Time::deltaTime;
 		return;
 	}
 
 	// todo: add text to text displayer
-	std::cout << "What are you waiting for?\n";
-	DoNotingTimerReset();
+	cout << "Let's take a walk!\n";
+	StandStillTimerReset();
 }

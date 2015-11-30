@@ -6,7 +6,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Texture.hpp>
-#include "MenuInput.h"
+#include "MenuActions.h"
 
 class Context;
 class StateManager;
@@ -24,8 +24,6 @@ public:
 	char const* pathToFile;
 
 	StateManager* stateManager;
-
-	MenuInput menuInput;
 
 	Awesomium::WebView* webView;
 	Awesomium::WebCore* web_core;

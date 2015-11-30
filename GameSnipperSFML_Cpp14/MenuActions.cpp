@@ -5,6 +5,7 @@
 #include "MenuContext.h"
 #include <Awesomium/STLHelpers.h>
 #include "Context.h"
+#include "KeyMapping.h"
 
 using namespace Awesomium;
 
@@ -13,6 +14,42 @@ MenuActions::MenuActions(StateManager* stateManager, MenuContext* menuContext)
 	MenuActions::stateManager = stateManager;
 	MenuActions::menuContext = menuContext;
 }
+
+void MenuActions::ProcessActions()
+{
+	bool animate = false;
+
+	std::map<std::string, void(MenuActions::*)()>::iterator it;
+
+	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
+		std::string map = KeyMapping::GetMap(activeKeys[i]);
+
+		for (it = actions.begin(); it != actions.end(); ++it)
+		{
+			if (map.find(it->first) != string::npos)
+			{
+				if (find(activeActions.begin(), activeActions.end(), it->second) == activeActions.end())
+				{
+					activeActions.push_back(it->second);
+				}
+			}
+		}
+	}
+	ExecuteActions();
+}
+
+void MenuActions::ExecuteActions()
+{
+	std::vector<void(MenuActions::*)()>::iterator it;
+	for (it = activeActions.begin(); it != activeActions.end(); ++it)
+	{
+		auto function = *it;
+		(this->*function)();
+	}
+	activeKeys.clear();
+}
+
+
 
 void MenuActions::ExitGame()
 {

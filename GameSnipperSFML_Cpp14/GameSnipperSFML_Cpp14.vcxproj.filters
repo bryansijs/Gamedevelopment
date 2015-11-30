@@ -187,11 +187,14 @@
     <Filter Include="Source Files\Input">
       <UniqueIdentifier>{a096012f-a593-4531-951a-7ce3e258756b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Model\Menu">
-      <UniqueIdentifier>{9288194e-1c9b-4558-943b-884cb364ad1b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Model\Menu">
       <UniqueIdentifier>{0bb3b5f6-a8de-421f-835c-d55739c78dc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Actions">
+      <UniqueIdentifier>{f3effd31-0d13-4a74-8192-aa5090a53787}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actions">
+      <UniqueIdentifier>{ff0f8881-6a32-47ab-a6da-4404a6d2c445}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -262,9 +265,6 @@
       <Filter>Header Files\Containers</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Header Files\Model\Units\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerActions.h">
       <Filter>Header Files\Model\Units\Player</Filter>
     </ClInclude>
     <ClInclude Include="TestDemo.h">
@@ -381,17 +381,14 @@
     <ClInclude Include="BaseInput.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerInput.h">
-      <Filter>Header Files\Input</Filter>
+    <ClInclude Include="PlayerActions.h">
+      <Filter>Header Files\Actions</Filter>
     </ClInclude>
-    <ClInclude Include="GameInput.h">
-      <Filter>Header Files\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuInput.h">
-      <Filter>Header Files\Input</Filter>
+    <ClInclude Include="GameActions.h">
+      <Filter>Header Files\Actions</Filter>
     </ClInclude>
     <ClInclude Include="MenuActions.h">
-      <Filter>Header Files\Model\Menu</Filter>
+      <Filter>Header Files\Actions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -462,9 +459,6 @@
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Model\Units\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerActions.cpp">
       <Filter>Source Files\Model\Units\Player</Filter>
     </ClCompile>
     <ClCompile Include="UnitTest.cpp">
@@ -566,17 +560,14 @@
     <ClCompile Include="BaseInput.cpp">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerInput.cpp">
-      <Filter>Source Files\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="GameInput.cpp">
-      <Filter>Source Files\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuInput.cpp">
-      <Filter>Source Files\Input</Filter>
-    </ClCompile>
     <ClCompile Include="MenuActions.cpp">
       <Filter>Source Files\Model\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerActions.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="GameActions.cpp">
+      <Filter>Source Files\Actions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

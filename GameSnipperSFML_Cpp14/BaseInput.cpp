@@ -27,23 +27,15 @@ void BaseInput::CatchInput()
 	{
 		string key = iterator->second;
 
-		if (Input::GetKeyDown(key))
-		{
-			AddActiveKey(key);
-		}
-
 		if (Input::GetKeyUp(key))
 		{
 			RemoveActiveKey(key);
 		}
-	}
-}
 
-void BaseInput::RemoveAllActiveKeys()
-{
-	for (int i = 0; i < activeKeys.size(); i++)
-	{
-		activeKeys.push_back(activeKeys[i]);
+		if (Input::GetKeyDown(key))
+		{
+			AddActiveKey(key);
+		}
 	}
 }
 
@@ -57,5 +49,8 @@ void BaseInput::AddActiveKey(string key)
 
 void BaseInput::RemoveActiveKey(string key)
 {
-	activeKeys.erase(remove(activeKeys.begin(), activeKeys.end(), key));
+	if (find(activeKeys.begin(), activeKeys.end(), key) == activeKeys.end())
+	{
+		activeKeys.erase(remove(activeKeys.begin(), activeKeys.end(), key));
+	}
 }

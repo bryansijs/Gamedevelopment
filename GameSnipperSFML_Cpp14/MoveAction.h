@@ -16,7 +16,7 @@ public:
 	~MoveAction();
 
 
-	void Move(std::vector<std::string>* activeKeys, Player *player, std::vector<Tile*>* tiles);
+	void Move(std::vector<std::string> activeKeys, Player *player, std::vector<Tile*>* tiles);
 	void AnimateMovement(Player *player, int state);
 
 	int animateState = 1;

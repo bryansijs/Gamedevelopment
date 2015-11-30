@@ -3,6 +3,7 @@
 #include "GameObjectContainer.h"
 #include "MoveContainer.h"
 #include "DrawContainer.h"
+#include "GameActions.h"
 
 GameContext::GameContext(Context* context)
 {
@@ -12,6 +13,8 @@ GameContext::GameContext(Context* context)
 	drawContainer = new DrawContainer();
 	useContainer = new GameObjectContainer();
 	player = new Player(moveContainer, drawContainer,useContainer);
+	playerActions = new PlayerActions(player);
+	gameActions = new GameActions();
 }
 
 GameContext::~GameContext()

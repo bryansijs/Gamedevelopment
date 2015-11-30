@@ -1,30 +1,51 @@
 #pragma once
 
 #include <vector>
+#include <map>
+
 #include "DrawBehaviour.h"
 #include "MoveBehaviour.h"
+
 #include "MoveAction.h"
 #include "ShootAction.h"
+#include "BaseInput.h"
 
 class Player;
 class MoveContainer;
 class DrawContainer;
 class Tile;
 
-class PlayerActions
+class PlayerActions : public BaseInput
 {
 public:
-	PlayerActions(Player* activePlayer);
+	PlayerActions(Player *player);
 	~PlayerActions();
-	float useDelay; 
+
+	void ProcessActions() override;
+
+
+	float useDelay = 0;
 	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile*>* tiles);
-	void setTiles(std::vector<Tile*>* t) { tiles = t; };
-	void Move(std::vector<std::string>* moveDirections);
+	void SetTiles(std::vector<Tile*>* t) { tiles = t; };
+
+	void Move();
 	void Shoot();
 	void Use();
-	void DoNothing();
+
+	bool used = false;
 private:
+	void ExecuteActions() override;
+
+	std::map<std::string, void(PlayerActions::*)()> actions = {
+		{ "move", &PlayerActions::Move },
+		{ "shoot", &PlayerActions::Shoot },
+		{ "use", &PlayerActions::Use }
+	};
+
+	std::vector<void(PlayerActions::*)()> activeActions;
+
 	std::string direction = "move-left";
+	std::string currentMap;
 
 	DrawContainer *drawContainer;
 	MoveContainer *moveContainer;
@@ -38,6 +59,10 @@ private:
 	Player *player;
 	std::vector<Tile*>* tiles;
 
-	void DoNotingTimerReset() { DoNothingTimer = 1000; };
-	int DoNothingTimer = 1000;
+	bool fired = false;
+	bool useAction = true;
+
+	void StandStillTimerReset() { StandStillTimer = 1000; };
+	int StandStillTimer = 1000;
+	void StandStill();
 };

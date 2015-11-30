@@ -59,12 +59,12 @@ void GameState::Update()
 			if (gameContext->event.type == sf::Event::KeyPressed || gameContext->event.type == sf::Event::KeyReleased)
 			{
 				Input::EventOccured(gameContext->event);
-				gameContext->gameInput.CatchInput();
-				gameContext->playerInput.CatchInput();
+				gameContext->gameActions->CatchInput();
+				gameContext->playerActions->CatchInput();
 			}
 		}
-		gameContext->gameInput.ProcessKeyActions();
-		gameContext->playerInput.ProcessKeyActions();
+		gameContext->gameActions->ProcessActions();
+		gameContext->playerActions->ProcessActions();
 		gameContext->level->updateViewPort(worldPosition);
 	}
 
