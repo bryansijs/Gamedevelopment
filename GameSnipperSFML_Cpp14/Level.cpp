@@ -155,6 +155,7 @@ void Level::Start(GameObject* player, sf::Vector2u* size)
 			break;
 		}
 	}
+
 	if (start == nullptr)
 	{
 		start = new StartTile(gameObjectContainer);

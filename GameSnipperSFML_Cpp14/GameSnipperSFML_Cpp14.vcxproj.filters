@@ -300,9 +300,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
-    <ClInclude Include="application.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
@@ -323,6 +320,9 @@
     </ClInclude>
     <ClInclude Include="BaseState.h">
       <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="TestLevelImporter.h">
+      <Filter>Header Files\UnitTest\Tests</Filter>
     </ClInclude>
     <ClInclude Include="EnemyFactory.h">
       <Filter>Header Files\Factories</Filter>
@@ -369,11 +369,20 @@
     <ClInclude Include="resource2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WanderMoveBehaviour.h">
-      <Filter>Header Files\Behaviours\Move</Filter>
+    <ClInclude Include="application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseItem.h">
+      <Filter>Header Files\Model\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEnemy.h">
+      <Filter>Header Files\Model\Units\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="Random.h">
       <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="WanderMoveBehaviour.h">
+      <Filter>Header Files\Behaviours\Move</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -512,6 +521,9 @@
     <ClCompile Include="GameContext.cpp">
       <Filter>Source Files\Context</Filter>
     </ClCompile>
+    <ClCompile Include="TestLevelImporter.cpp">
+      <Filter>Source Files\UnitTest\Tests</Filter>
+    </ClCompile>
     <ClCompile Include="GameTileFactory.cpp">
       <Filter>Source Files\Factories</Filter>
     </ClCompile>
@@ -548,11 +560,17 @@
     <ClCompile Include="GameObjectContainer.cpp">
       <Filter>Source Files\Containers</Filter>
     </ClCompile>
-    <ClCompile Include="WanderMoveBehaviour.cpp">
-      <Filter>Source Files\Behaviours\Move</Filter>
+    <ClCompile Include="BaseItem.cpp">
+      <Filter>Source Files\Model\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseEnemy.cpp">
+      <Filter>Source Files\Model\Units\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="Random.cpp">
       <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="WanderMoveBehaviour.cpp">
+      <Filter>Source Files\Behaviours\Move</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

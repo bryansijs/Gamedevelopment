@@ -20,7 +20,7 @@ class PlayerActions
 public:
 	PlayerActions();
 	~PlayerActions();
-	float useDelay; 
+	float useDelay = 0;
 	void SetPlayer(Player *activePlayer);
 	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile*>* tiles);
 	void ProcessActions(std::vector<std::string> &newActiveKeys);
@@ -29,6 +29,9 @@ public:
 	void Move();
 	void Shoot();
 	void Use();
+
+
+	bool used = false;
 private:
 	void ExecuteActions();
 
@@ -59,5 +62,6 @@ private:
 
 	bool fired = false;
 	bool resetAnimation = true;
+	bool useAction = true;
 };
 

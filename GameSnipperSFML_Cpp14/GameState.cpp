@@ -15,6 +15,7 @@ GameState::GameState(Context* context, StateManager* stateManager)
 
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer);
 	gameContext->levelImporter->Import("./Resources/levels/Level_New.json");
+
 	gameContext->levelImporter->Prepare();
 
 	gameContext->level = gameContext->levelImporter->getLevel();
