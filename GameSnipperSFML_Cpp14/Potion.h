@@ -17,7 +17,7 @@ public:
 	Potion();
 	~Potion();
 
-	Potion(DrawContainer* container, std::string img,GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties);
+	Potion(DrawContainer* container, std::string img,GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, b2World* world);
 
 
 	virtual void setProperties(std::map<std::string, std::string>& properties);

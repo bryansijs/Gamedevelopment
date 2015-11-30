@@ -37,9 +37,9 @@ public:
 	Door(DrawContainer* container);
 	Door(DrawContainer* container, std::string img);
 
-	Door(DrawContainer* container, std::string img, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>&  properties, std::vector<Tile*>& tiles);
+	Door(DrawContainer* container, std::string img, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>&  properties, std::vector<Tile*>& tiles, b2World* world);
 
-	Door(GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties,std::vector<Tile*>& tiles);
+	Door(GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties,std::vector<Tile*>& tiles, b2World* world);
 
 	int getDoorId() { return doorId; };
 

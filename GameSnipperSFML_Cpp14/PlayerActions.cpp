@@ -115,6 +115,7 @@ void PlayerActions::Use()
 
 		float playery = this->player->getPosition().y;
 		float playerx = this->player->getPosition().x;
+
 		for (GameObject* object : this->player->getgameObjectContainer()->getObjects())
 		{
 			//Check zit ik wel bij dit object in de beurt?
@@ -123,9 +124,14 @@ void PlayerActions::Use()
 			//Dit moet worden afgevangen doormiddel van is colliding en de juiste directe!
 			//Als we op dezelfde y zitten met een 32 ~48 verschil;
 			//Als we op dezelfde x zittten met en 32 ~48 verschil; 
-			if (playery + 32 > object->getPosition().y && playery - 48 < object->getPosition().y)
+
+
+
+			float y = object->getPosition().y;
+			float x = object->getPosition().x;
+			if (playery + 48 > y && playery - 48 < y)
 			{
-				if (playerx + 32 > object->getPosition().x && playerx - 48 < object->getPosition().x)
+				if (playerx + 48  >x && playerx - 48 <x)
 				{
 					object->doAction(player);
 				}

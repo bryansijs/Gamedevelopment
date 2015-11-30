@@ -46,15 +46,19 @@ Game_Switch::~Game_Switch()
 	this->setSize(widht, height);
 }
 
-Game_Switch::Game_Switch(DrawContainer* container, GameObjectContainer *gameObjectContainer, std::string img, std::map<std::string, std::string>& properties, std::vector<Tile*>& tileList) :GameObject{ container,gameObjectContainer, img } {
+Game_Switch::Game_Switch(DrawContainer* container, GameObjectContainer *gameObjectContainer, std::string img, std::map<std::string, std::string>& properties, std::vector<Tile*>& tileList, b2World* world) :GameObject{ container,gameObjectContainer, img } {
 	this->setProperties(properties);
 	this->setTiles(tileList);
+	this->createBoxStatic(*world);
 };
 
 
-Game_Switch::Game_Switch(GameObjectContainer *gameObjectContainer, std::map<std::string, std::string>& properties, std::vector<Tile*>& tileList) :GameObject{ gameObjectContainer } {
+Game_Switch::Game_Switch(GameObjectContainer *gameObjectContainer, std::map<std::string, std::string>& properties, std::vector<Tile*>& tileList, b2World* world) :GameObject{ gameObjectContainer } {
+	
 	this->setProperties(properties);
+	
 	this->setTiles(tileList);
+	this->createBoxStatic(*world);
 };
 
 void Game_Switch::doAction(Player* player)

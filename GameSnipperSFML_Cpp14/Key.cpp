@@ -30,8 +30,9 @@ void Key::setProperties(std::map<std::string, std::string>& properties) {
 
 }
 
-Key::Key(DrawContainer* container, std::string img, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties) :BaseItem{ container,gameObjectContainer, img  } {
+Key::Key(DrawContainer* container, std::string img, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties,b2World* world) :BaseItem{ container,gameObjectContainer, img  } {
 	this->setProperties(properties);
+	this->createBoxStatic(*world);
 };
 
 

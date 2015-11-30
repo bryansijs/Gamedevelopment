@@ -38,7 +38,7 @@ void LevelImporter::PrepareTileSets()
 void LevelImporter::PrepareGameObjects()
 {
 
-	objectFactory = new GameObjectFactory(drawContainer,moveContainer, gameObjectContainer);
+	objectFactory = new GameObjectFactory(drawContainer,moveContainer, gameObjectContainer,this->world);
 	objectFactory->setTile(tiles);
 	for (Json::Value::iterator it = jsonRoot["layers"].begin(); it != jsonRoot["layers"].end(); ++it)
 	{

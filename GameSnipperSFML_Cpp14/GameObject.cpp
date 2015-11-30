@@ -134,6 +134,7 @@ void GameObject::createBoxStatic(b2World& World)
 
 	Body = World.CreateBody(&myBodyDef);
 
+	//TODO:: Andy says: Ik denk dat hier de widht en height
 	Shape.SetAsBox((32.f / 2), (32.f / 2));
 
 	boxFixtureDef.density = 100.f;

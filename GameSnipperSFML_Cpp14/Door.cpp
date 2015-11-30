@@ -47,17 +47,25 @@ Door::Door(DrawContainer* container) :GameObject{ container } {
 Door::Door(DrawContainer* container, std::string img) :GameObject{ container, img } {
 };
 
-Door::Door(GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, std::vector<Tile*>& tiles) :GameObject{ gameObjectContainer } {
+Door::Door(GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, std::vector<Tile*>& tiles, b2World* world) :GameObject{ gameObjectContainer } {
+
 	this->setProperties(properties);
 	this->setTiles(tiles);
 	this->useImage = false;
+
+	//TODO: Set me for body pls!
+	//this->createBoxStatic(*world);
+
 };
 
 
-Door::Door(DrawContainer* container, std::string img, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, std::vector<Tile*>& tiles) :GameObject{ container,gameObjectContainer,img } {
+Door::Door(DrawContainer* container, std::string img, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, std::vector<Tile*>& tiles, b2World* world) :GameObject{ container,gameObjectContainer,img } {
 	this->useImage = true;
 	this->setProperties(properties);
 	this->setTiles(tiles);
+
+	//TODO: Set me for body pls!
+	//this->createBoxStatic(*world);
 };
 
 void Door::doAction()

@@ -33,8 +33,9 @@ void Potion::setProperties(std::map<std::string, std::string>& properties) {
 
 
 
-Potion::Potion(DrawContainer* container, std::string img, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties) :BaseItem{ container,gameObjectContainer, img } {
+Potion::Potion(DrawContainer* container, std::string img, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, b2World* world) :BaseItem{ container,gameObjectContainer, img } {
 	this->setProperties(properties);
+	this->createBoxStatic(*world);
 };
 
 
