@@ -69,7 +69,7 @@ void PlayerActions::ExecuteActions()
 	{
 		moveAction.AnimateMovement(player, 1);
 		//force van player op 0 zetten.
-		//player->getBody()->SetLinearVelocity(b2Vec2(0,0));
+		player->getBody()->SetLinearVelocity(b2Vec2(0,0));
 	}
 
 	activeActions.clear();
