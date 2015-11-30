@@ -377,6 +377,7 @@
     </ClInclude>
     <ClInclude Include="UnitTestLevelSequence.h">
       <Filter>Header Files\UnitTest\Tests</Filter>
+	</ClInclude>
     <ClInclude Include="application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -567,6 +568,7 @@
     </ClCompile>
     <ClCompile Include="UnitTestLevelSequence.cpp">
       <Filter>Source Files\UnitTest\Tests</Filter>
+	 </ClCompile>
     <ClCompile Include="BaseItem.cpp">
       <Filter>Source Files\Model\Items</Filter>
     </ClCompile>
