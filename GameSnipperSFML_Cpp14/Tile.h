@@ -19,13 +19,16 @@ public:
 	int hazardValue;
 	int hazardIndex;
 	int hazardType;
-
+	int hazardLinkIndex;
 	bool isEnemyCollidable;
 	bool isCollidable;
 	bool isVisible;
 
 	b2BodyDef* bodyDef;
 	b2BodyDef* enemyBodyDef;
+
+	int doorId;
+	int ofDoorId;
 
 };
 

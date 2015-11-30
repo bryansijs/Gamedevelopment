@@ -14,21 +14,31 @@ ShotMoveBehaviour::~ShotMoveBehaviour()
 
 void ShotMoveBehaviour::Update()
 {
+	//TODO wat er word hier per direct iets aangepast?
+	//position van het object word een private die je later kunt opvragenmet een getter
+	//Daarna zul je deze moeten zetten door middel van een setter!
 	if (direction == "move-up")
 	{
-		gameObject->position.y += -velocity * Time::deltaTime;
+		float temp = gameObject->getPositionY() - velocity * Time::deltaTime;
+		gameObject->setPosition(sf::Vector2f(gameObject->getPositionX(), temp));
 	}
 	if (direction == "move-down")
 	{
-		gameObject->position.y += velocity * Time::deltaTime;
+		float temp = gameObject->getPositionY() + velocity * Time::deltaTime;
+		gameObject->setPosition(sf::Vector2f(gameObject->getPositionX(), temp));
 	}
 	if (direction == "move-left")
 	{
-		gameObject->position.x += -velocity * Time::deltaTime;
-	}
+
+		float temp = gameObject->getPositionX() - velocity * Time::deltaTime;
+		gameObject->setPosition(sf::Vector2f(temp, gameObject->getPositionY()));
+
+}
 	if (direction == "move-right")
 	{
-		gameObject->position.x += velocity * Time::deltaTime;
+		float temp = gameObject->getPositionX() + velocity * Time::deltaTime;
+		gameObject->setPosition(sf::Vector2f(temp, gameObject->getPositionY()));
+
 	}
 }
 

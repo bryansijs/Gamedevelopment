@@ -2,7 +2,7 @@
 #include "WarpTile.h"
 
 
-WarpTile::WarpTile()
+WarpTile::WarpTile(GameObjectContainer* gameObjectContainer): GameObject{ gameObjectContainer }
 {
 }
 

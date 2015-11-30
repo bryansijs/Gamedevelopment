@@ -8,15 +8,19 @@
 #include "EnemyFactory.h"
 #include "ItemFactory.h"
 #include "InteractiveFactory.h"
+#include "Tile.h"
+
 class GameObject;
 class DrawContainer;
-
+class GameObjectContainer;
+class Tile;
 class GameObjectFactory
 {
 private:
 
-	DrawContainer *drawContainer;
-	MoveContainer *moveContainer;
+	DrawContainer* drawContainer;
+	MoveContainer* moveContainer;
+	GameObjectContainer* gameObjectContainer;
 	std::map<std::string, GameObject*(GameObjectFactory::*)(std::map<std::string, std::string>&)> possibleObjects = {
 		{ "Enemy", &GameObjectFactory::CreateEnemy },
 		{ "Object", &GameObjectFactory::CreateObject },
@@ -33,22 +37,32 @@ private:
 	EnemyFactory enemyFactory;
 	InteractiveFactory interactiveFactory;
 	ItemFactory itemFactory;
-
+	std::vector<Tile*> tileList;
 
 public:
 	GameObjectFactory(DrawContainer *drawContainer);
 	GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer);
+	GameObjectFactory(DrawContainer *drawContainer, GameObjectContainer* gameObjectContainer);
+	GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer);
 	GameObjectFactory();
 	~GameObjectFactory();
 
 	GameObject* Create(std::map<std::string, std::string>&);
 
+
+	void setTile(std::vector<Tile*>& tileList)
+	{
+		this->tileList = tileList;
+	}
+
 	void setDrawContainer(DrawContainer* drawContainer) { this->drawContainer = drawContainer; };
 	void setMoveContainer(MoveContainer* moveContainer) { this->moveContainer = moveContainer; };
+	void setGameObjectContainer(GameObjectContainer* gameObjectContainer) { this->gameObjectContainer = gameObjectContainer; }
+
 
 	static GameObjectFactory& getInstance()
 	{
-		static GameObjectFactory    instance; 			
+		static GameObjectFactory    instance;
 		return instance;
 	}
 

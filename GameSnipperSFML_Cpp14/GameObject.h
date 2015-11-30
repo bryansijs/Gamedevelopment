@@ -1,47 +1,55 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <SFML\System\Vector2.hpp>
 #include <SFML\Graphics.hpp>
 #include <iostream>
 
+class Player;
 class DrawContainer;
+class GameObjectContainer;
 class MoveContainer;
 class DrawBehaviour;
 class MoveBehaviour;
+
 class Tile;
 
 class GameObject
 {
 
 private:
-	
-
-public:
-	//TODO deze moeten private worden, maar aangezien dit al word gebruikt moeten we dit even naar een merge doen;
 	std::string name;
 	std::string type;
 
+	GameObjectContainer*  gameObjectContainer;
 	DrawContainer* drawContainer;
 	MoveContainer* moveContainer;
 	DrawBehaviour* drawBehaviour;
 	MoveBehaviour* moveBehaviour;
 
+	sf::Vector2f position;
 	int xIndex = 0;
 	int yIndex = 0;
 	int width = 0;
 	int height = 0;
-	//TOT hier
 
+public:
 	GameObject(DrawContainer *drawContainer, std::string textureUrl);
 	GameObject(DrawContainer *drawContainer);
 	GameObject();
+	GameObject(GameObjectContainer *useContainer);
+	GameObject::GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, std::string textureUrl);
 	~GameObject();
 
-
-	sf::Vector2f position;
-
 	void setPosition(sf::Vector2f position) { this->position = position; };
+	sf::Vector2f getPosition() { return position; }
+
+	int getPositionX() { return position.x; }
+	int getPositionY() { return position.y; }
+
 	virtual void Update();
+	virtual void doAction();
+	virtual void doAction(Player* player);
 	virtual void setProperties(std::map<std::string, std::string>& properties);
 
 	void setDrawBehaviour(DrawBehaviour* newDrawBehaviour);
@@ -49,6 +57,17 @@ public:
 
 	void setDrawContainer(DrawContainer* newDrawContainer) {this->drawContainer = newDrawContainer	;}
 	void setMoveContainer(MoveContainer* newMoveContainer) { this->moveContainer = newMoveContainer; }
+
+
+	DrawContainer* getDrawContainer() { return this->drawContainer; }
+	MoveContainer* getMoveContainer() { return this->moveContainer; }
+	GameObjectContainer* getgameObjectContainer() { return this->gameObjectContainer; }
+
+
+	DrawBehaviour* getDrawBehaviour() { return this->drawBehaviour; }
+	MoveBehaviour* getMoveBehaviour() { return this->moveBehaviour; }
+
+	void setUseContainer(GameObjectContainer* gameObjectContainer) { this->gameObjectContainer = gameObjectContainer; }
 	sf::IntRect imageRect =  sf::IntRect(0, 0, 0, 0);
 
 	void setImageX(int x)
@@ -63,7 +82,9 @@ public:
 
 	int getImageY() { return yIndex * height; }
 	int getImageX() { return xIndex * width; }
-
+	int getHeight() { return height; }
+	int getWidth() { return width; }
+	bool isCollidable = false;
 	void setSize(int width, int height)
 	{
 		this->width = width;
@@ -72,6 +93,7 @@ public:
 		imageRect.width = width;
 	}
 
-	bool isColliding(std::vector<Tile> tiles, float newX, float newY);
+
+	bool isColliding(std::vector<Tile*> tiles, sf::Vector2f velocity);
 };
 

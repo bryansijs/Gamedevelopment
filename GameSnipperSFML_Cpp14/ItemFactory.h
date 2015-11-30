@@ -12,14 +12,14 @@ public:
 	ItemFactory();
 	~ItemFactory();
 
-	GameObject* Create(std::map<std::string, std::string> properties, DrawContainer* container);
+	GameObject* Create(std::map<std::string, std::string> properties, DrawContainer* container, GameObjectContainer* gameObjectContainer);
 private:
-	GameObject* CreatePotion(std::map<std::string, std::string>& properties, DrawContainer* container);
-	GameObject* CreateGun(std::map<std::string, std::string>& properties, DrawContainer* container);
-	GameObject* CreateAmmo(std::map<std::string, std::string>& properties, DrawContainer* container);
-	GameObject* CreateKey(std::map<std::string, std::string>& properties, DrawContainer* container);
+	GameObject* CreatePotion(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer);
+	GameObject* CreateGun(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer);
+	GameObject* CreateAmmo(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer);
+	GameObject* CreateKey(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer);
 
-	std::map<std::string, GameObject*(ItemFactory::*)(std::map<std::string, std::string>&, DrawContainer* container)> possibleObjects = {
+	std::map<std::string, GameObject*(ItemFactory::*)(std::map<std::string, std::string>&, DrawContainer* , GameObjectContainer* )> possibleObjects = {
 		{ "Potion", &ItemFactory::CreatePotion },
 		{ "Gun", &ItemFactory::CreateGun },
 		{ "Ammo", &ItemFactory::CreateAmmo },

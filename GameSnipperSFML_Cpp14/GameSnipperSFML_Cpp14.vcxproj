@@ -175,6 +175,8 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.h" />
+    <ClInclude Include="BaseEnemy.h" />
+    <ClInclude Include="BaseItem.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="BasicEnemy.h" />
     <ClInclude Include="Context.h" />
@@ -183,13 +185,11 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="DrawContainer.h" />
     <ClInclude Include="EndTile.h" />
     <ClInclude Include="EnemyFactory.h" />
-    <ClInclude Include="GameLoop.h" />
     <ClInclude Include="GameContext.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectFactory.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameTileFactory.h" />
-    <ClInclude Include="game_state.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="InteractiveFactory.h" />
     <ClInclude Include="ItemFactory.h" />
@@ -202,7 +202,6 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="LoseState.h" />
     <ClInclude Include="MenuContext.h" />
     <ClInclude Include="MenuState.h" />
-    <ClInclude Include="method_dispatcher.h" />
     <ClInclude Include="MoveAction.h" />
     <ClInclude Include="MoveBehaviour.h" />
     <ClInclude Include="MoveBehaviourFactory.h" />
@@ -214,7 +213,9 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="PlayerActions.h" />
     <ClInclude Include="PlayerDrawBehaviour.h" />
     <ClInclude Include="PlayerInput.h" />
-    <ClInclude Include="PlayerMovement.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="resource1.h" />
+    <ClInclude Include="resource2.h" />
     <ClInclude Include="Potion.h" />
     <ClInclude Include="RunnerEnemy.h" />
     <ClInclude Include="StateManager.h" />
@@ -226,6 +227,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="TankEnemy.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestDemo.h" />
+    <ClInclude Include="TestLevelImporter.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileSet.h" />
     <ClInclude Include="Time.h" />
@@ -236,11 +238,14 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="UnitTestMain.h" />
     <ClInclude Include="UpdateLogic.h" />
     <ClInclude Include="UpdateUI.h" />
+    <ClInclude Include="GameObjectContainer.h" />
     <ClInclude Include="WarpTile.h" />
     <ClInclude Include="WinContext.h" />
     <ClInclude Include="WinState.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BaseEnemy.cpp" />
+    <ClCompile Include="BaseItem.cpp" />
     <ClCompile Include="BasicEnemy.cpp" />
     <ClCompile Include="Context.cpp" />
     <ClCompile Include="Door.cpp" />
@@ -248,13 +253,11 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="DrawContainer.cpp" />
     <ClCompile Include="EndTile.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
-    <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="GameContext.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameTileFactory.cpp" />
-    <ClCompile Include="game_state.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="InteractiveFactory.cpp" />
     <ClCompile Include="ItemFactory.cpp" />
@@ -278,7 +281,6 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="PlayerActions.cpp" />
     <ClCompile Include="PlayerDrawBehaviour.cpp" />
     <ClCompile Include="PlayerInput.cpp" />
-    <ClCompile Include="PlayerMovement.cpp" />
     <ClCompile Include="Potion.cpp" />
     <ClCompile Include="RunnerEnemy.cpp" />
     <ClCompile Include="SetupState.cpp" />
@@ -296,6 +298,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="Game_Switch.cpp" />
     <ClCompile Include="TankEnemy.cpp" />
     <ClCompile Include="TestDemo.cpp" />
+    <ClCompile Include="TestLevelImporter.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileSet.cpp" />
     <ClCompile Include="Time.cpp" />
@@ -306,6 +309,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="UnitTestMain.cpp" />
     <ClCompile Include="UpdateLogic.cpp" />
     <ClCompile Include="UpdateUI.cpp" />
+    <ClCompile Include="GameObjectContainer.cpp" />
     <ClCompile Include="WarpTile.cpp" />
     <ClCompile Include="WinContext.cpp" />
     <ClCompile Include="WinState.cpp" />
