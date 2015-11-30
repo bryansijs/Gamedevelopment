@@ -112,7 +112,6 @@ void LevelImporter::PrepareTiles()
 }
 
 
-
 Tile* LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 {
 	int tileSetIndex = 0;
@@ -164,7 +163,6 @@ Tile* LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 		{
 			string hazardIndex = value["properties"]["hazardLinkIndex"].asString();
 			insert_tile->hazardLinkIndex = atoi(hazardIndex.c_str());
-
 		}
 
 		if (props.isMember("onTop"))
@@ -174,6 +172,7 @@ Tile* LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 			}
 		}
 
+
 		if (props.isMember("isCollidable"))
 		{
 			if (value["properties"]["isCollidable"].asString() == "true")
@@ -181,6 +180,18 @@ Tile* LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 				insert_tile->isCollidable = true;
 				insert_tile->createStaticBody(*this->world);
 			}
+		}
+
+		if (props.isMember("doorId"))
+		{
+			string doorId = value["properties"]["doorId"].asString();
+			insert_tile->doorId = atoi(doorId.c_str());
+		}
+
+		if (props.isMember("ofDoorId"))
+		{
+			string ofDoorId = value["properties"]["ofDoorId"].asString();
+			insert_tile->ofDoorId = atoi(ofDoorId.c_str());
 		}
 
 		if (props.isMember("isEnemyCollidable"))
@@ -198,7 +209,6 @@ Tile* LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 				insert_tile->isHazard = true;
 		}
 
-
 		if (props.isMember("hazardIndex"))
 		{
 			string hazardIndex = value["properties"]["hazardIndex"].asString();
@@ -207,8 +217,6 @@ Tile* LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 			if (!hazardMap.count(insert_tile->hazardIndex))
 				hazardMap.insert(std::pair<int, bool>(insert_tile->hazardIndex, false));
 		}
-
-
 
 		if (props.isMember("hazardState"))
 		{
@@ -224,8 +232,6 @@ Tile* LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 				}
 			}
 		}
-
-
 
 		if (props.isMember("hazardValue"))
 		{
@@ -260,11 +266,18 @@ void LevelImporter::addTileToContainer(Tile * tile)
 	tiles.push_back(tile);
 }
 
-
-void LevelImporter::PrepareMusic(string music)
+bool LevelImporter::PrepareMusic(string music)
 {
-	sbuffer.loadFromFile("./Resources/music/" + music);
-	this->music.setBuffer(sbuffer);
+	if (music != "")
+	{
+		if (sbuffer.loadFromFile("./Resources/music/" + music))
+		{
+			this->music.setBuffer(sbuffer);
+			return true;
+		}
+	}
+	
+	return false;
 }
 
 void LevelImporter::Prepare()
@@ -283,8 +296,10 @@ void LevelImporter::Prepare()
 	PrepareGameObjects();
 }
 
-void LevelImporter::Import(std::string JSON)
+bool LevelImporter::Import(std::string JSON)
 {
+	if (inputFileStream.is_open())
+		inputFileStream.close();
 
 	inputFileStream.open(JSON, std::ifstream::binary);
 
@@ -292,7 +307,9 @@ void LevelImporter::Import(std::string JSON)
 	if (!parsingSuccessful)
 	{
 		std::cout << jsonReader.getFormattedErrorMessages() << "\n";
+		return false;
 	}
+	return true;
 }
 
 void LevelImporter::Clear()
@@ -320,23 +337,14 @@ Level* LevelImporter::getLevel()
 	return level;
 }
 
-LevelImporter::LevelImporter(DrawContainer *drawContainer, b2World* world)
-{
-	this->drawContainer = drawContainer;
-	this->world = world;
-
-}
-
-LevelImporter::LevelImporter(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, b2World* world)
+LevelImporter::LevelImporter(DrawContainer *drawContainer, MoveContainer *moveContainer, GameObjectContainer *gameObjectContainer, b2World* world)
 {
 	this->drawContainer = drawContainer;
 	this->gameObjectContainer = gameObjectContainer;
+	this->moveContainer = moveContainer;
 	this->world = world;
 }
 
-LevelImporter::LevelImporter()
-{
-}
 
 LevelImporter::~LevelImporter()
 {

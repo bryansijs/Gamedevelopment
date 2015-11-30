@@ -1,15 +1,10 @@
 #pragma once
-#include "Unit.h"
+#include "BaseEnemy.h"
 
-
-class BasicEnemy : public Unit
+class BasicEnemy : public BaseEnemy
 {
 public:
-	BasicEnemy(DrawContainer* container);
-	BasicEnemy(DrawContainer* container, std::string img);
-	BasicEnemy(DrawContainer* container, std::string img, b2Vec2 position, int widht, int height);
-	BasicEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer,GameObjectContainer* gameObjectContainer, b2Vec2 position, int widht, int height);
-
+	BasicEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer,std::map<std::string, std::string>& properties);
 	~BasicEnemy();
 };
 

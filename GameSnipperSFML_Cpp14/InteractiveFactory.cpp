@@ -15,7 +15,7 @@ InteractiveFactory::~InteractiveFactory()
 
 GameObject* InteractiveFactory::Create(std::map<std::string, std::string> properties, DrawContainer* container, GameObjectContainer* gameObjectContainer, std::vector<Tile*>& tileList) {
 	this->tileList = tileList;
-	std::map<std::string, GameObject*(InteractiveFactory::*)(std::map<std::string, std::string>&, DrawContainer* , GameObjectContainer* )>::iterator  it;
+	std::map<std::string, GameObject*(InteractiveFactory::*)(std::map<std::string, std::string>&, DrawContainer*, GameObjectContainer*)>::iterator  it;
 	for (it = possibleObjects.begin(); it != possibleObjects.end(); it++) {
 		if (it->first == properties["iType"]) {
 			auto function = it->second;
@@ -28,31 +28,20 @@ GameObject* InteractiveFactory::Create(std::map<std::string, std::string> proper
 
 
 GameObject* InteractiveFactory::CreateSwitch(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer) {
-	Game_Switch *obj = nullptr;
-	std::string imgurl =properties["image"];
-	int x, y, widht, height;
-	x = std::stoi(properties["x"]);
-	y = std::stoi(properties["y"]);
-	widht = std::stoi(properties["width"]);
-	height = std::stoi(properties["height"]);
-	if(imgurl != "")
-		obj = new Game_Switch(container, gameObjectContainer, imgurl, b2Vec2(x, y), widht, height);
-	else
-		obj=  new Game_Switch(gameObjectContainer, b2Vec2(x, y), widht, height);
 
-	obj->setProperties(properties);
-	obj->setTiles(tileList);
-	return obj;
+	std::string imgurl = properties["image"];
+	if (imgurl != "")
+		return new Game_Switch(container, gameObjectContainer, imgurl, properties, tileList);
+	else
+		return new Game_Switch(gameObjectContainer, properties, tileList);
 }
 GameObject* InteractiveFactory::CreateDoor(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer) {
 	std::string imgurl = properties["image"];
-	int x, y, widht, height;
-	x = std::stoi(properties["x"]);
-	y = std::stoi(properties["y"]);
-	widht = std::stoi(properties["width"]);
-	height = std::stoi(properties["height"]);
-	return  new Door(container, imgurl, b2Vec2(x, y), widht, height);
 
+	if (imgurl != "")
+		return new Door(container, imgurl, gameObjectContainer, properties, tileList);
+	else
+		return  new Door(gameObjectContainer, properties, tileList);
 }
 GameObject* InteractiveFactory::CreateKeyHole(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer) {
 	return nullptr;

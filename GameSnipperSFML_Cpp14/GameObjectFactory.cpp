@@ -6,29 +6,13 @@ GameObjectFactory::GameObjectFactory()
 {
 }
 
-GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer)
-{
-	this->drawContainer = drawContainer;
-	this->moveContainer = nullptr;
-}
 
-GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer)
-{
-	this->drawContainer = drawContainer;
-	this->moveContainer = moveContainer;
-}
-
-GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer,GameObjectContainer* gameObjectContainer)
+GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer,GameObjectContainer* gameObjectContainer, b2World* world)
 {
 	this->drawContainer = drawContainer;
 	this->moveContainer = moveContainer;
 	this->gameObjectContainer = gameObjectContainer;
-}
-
-GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer, GameObjectContainer* gameObjectContainer)
-{
-	this->drawContainer = drawContainer;
-	this->gameObjectContainer = gameObjectContainer;
+	this->world = world;
 }
 
 GameObjectFactory::~GameObjectFactory()

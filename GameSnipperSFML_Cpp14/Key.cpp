@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "Key.h"
+#include "DrawContainer.h"
+#include "GameObjectContainer.h"
 
 
 Key::Key()
@@ -12,20 +14,31 @@ Key::~Key()
 }
 
 void Key::setProperties(std::map<std::string, std::string>& properties) {
+	this->setItemType(properties["iType"]);
+
+	this->isCollidable = (properties.count("isCollidable")) ? std::stoi(properties["isCollidable"]) : 0;
+
+	int x, y, widht, height;
+	x = std::stoi(properties["x"]);
+	y = std::stoi(properties["y"]);
+	widht = std::stoi(properties["width"]);
+	height = std::stoi(properties["height"]);
+
+	this->setPosition(x, y);
+	this->setSize(widht, height);
+
 
 }
 
-
-Key::Key(DrawContainer* container) :GameObject{ container } {
+Key::Key(DrawContainer* container, std::string img, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties) :BaseItem{ container,gameObjectContainer, img  } {
+	this->setProperties(properties);
 };
 
 
-Key::Key(DrawContainer* container, std::string img) :GameObject{ container, img } {
-};
-
-
-Key::Key(DrawContainer* container, std::string img, GameObjectContainer* gameObjectContainer, b2Vec2 position, int widht, int height) :GameObject{ container,gameObjectContainer, img  } {
-	this->setPosition(position.x, position.y);
-	this->setSize(widht, height);
-};
-
+void Key::doAction(Player* player)
+{
+	player->AddItem(this);
+	getDrawContainer()->RemoveBehaviour(this->getDrawBehaviour());
+	getgameObjectContainer()->RemoveObject(this);
+	this->~Key();
+}

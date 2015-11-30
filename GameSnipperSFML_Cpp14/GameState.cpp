@@ -15,8 +15,9 @@ GameState::GameState(Context* context, StateManager* stateManager)
 	gameContext = new GameContext(context);
 	this->stateManager = stateManager;
 
-	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->useContainer, gameContext->world);
+	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer,gameContext->moveContainer, gameContext->useContainer, gameContext->world);
 	gameContext->levelImporter->Import("./Resources/levels/Level_New.json");
+
 	gameContext->levelImporter->Prepare();
 
 	gameContext->level = gameContext->levelImporter->getLevel();
@@ -32,8 +33,6 @@ GameState::GameState(Context* context, StateManager* stateManager)
 	gameContext->view.reset(rect);
 	gameContext->context->window.setView(gameContext->view);
 
-	//s = { new square(context,gameContext->player->getPositionX() + 400, (gameContext->player->getPositionY())) };
-	//s->createBoxDynamic(*gameContext->world);
 }
 
 GameState::~GameState()
@@ -76,8 +75,6 @@ void GameState::Update()
 	}
 
 	this->gameContext->world->Step(1 / 60.f, 8, 3);
-	//this->gameContext->world->Step(1 / 60.f, 8, 3);
-	//this->gameContext->world->Step(1 / 60.f, 8, 3);
 
 	gameContext->moveContainer->Update();
 	gameContext->drawContainer->Draw(&gameContext->context->window);

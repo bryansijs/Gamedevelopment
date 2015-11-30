@@ -37,12 +37,18 @@ public:
 
 	b2Body* getBody() { return Body; };
 	b2BodyDef getBodyDef() { return myBodyDef; };
+	
+	int doorId;
+	int ofDoorId;
+
 protected:
 	b2BodyDef myBodyDef;
 	b2PolygonShape Shape;
 	b2Body* Body;
 	b2FixtureDef boxFixtureDef;
 
+
+	
 
 };
 

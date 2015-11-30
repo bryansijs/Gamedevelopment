@@ -17,7 +17,7 @@
 UnitTestGameObjectFactory::UnitTestGameObjectFactory()
 {
 	
-	DrawContainer* cont = new DrawContainer();
+	/*DrawContainer* cont = new DrawContainer();
 	MoveContainer* move = new MoveContainer();
 	GameObjectContainer* gameObjectecontainer = new GameObjectContainer();
 	GameObjectFactory factory{ cont,move,gameObjectecontainer };
@@ -111,7 +111,7 @@ UnitTestGameObjectFactory::UnitTestGameObjectFactory()
 	
 	cont->~DrawContainer();
 	move->~MoveContainer();
-	gameObjectecontainer->~GameObjectContainer();
+	gameObjectecontainer->~GameObjectContainer();*/
 }
 
 

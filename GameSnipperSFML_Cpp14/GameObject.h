@@ -6,11 +6,13 @@
 #include <Box2D/Box2D.h>
 #include <iostream>
 
+class Player;
 class DrawContainer;
+class GameObjectContainer;
 class MoveContainer;
 class DrawBehaviour;
 class MoveBehaviour;
-class GameObjectContainer;
+
 class Tile;
 
 class GameObject
@@ -31,7 +33,6 @@ private:
 	int width = 0;
 	int height = 0;
 
-
 public:
 	GameObject(DrawContainer *drawContainer, std::string textureUrl);
 	GameObject(DrawContainer *drawContainer);
@@ -39,7 +40,6 @@ public:
 	GameObject(GameObjectContainer *useContainer);
 	GameObject::GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, std::string textureUrl);
 	~GameObject();
-
 
 	
 	void setPosition(float x, float y) { this->myBodyDef.position.Set(x,y); };
@@ -50,6 +50,7 @@ public:
 
 	virtual void Update();
 	virtual void doAction();
+	virtual void doAction(Player* player);
 	virtual void setProperties(std::map<std::string, std::string>& properties);
 
 	void setDrawBehaviour(DrawBehaviour* newDrawBehaviour);
@@ -88,7 +89,7 @@ public:
 	int getImageX() { return xIndex * width; }
 	int getHeight() { return height; }
 	int getWidth() { return width; }
-
+	bool isCollidable = false;
 	void setSize(int width, int height)
 	{
 		this->width = width;

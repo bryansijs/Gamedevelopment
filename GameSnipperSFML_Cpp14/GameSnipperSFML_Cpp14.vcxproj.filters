@@ -306,9 +306,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
-    <ClInclude Include="application.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
@@ -329,6 +326,9 @@
     </ClInclude>
     <ClInclude Include="BaseState.h">
       <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="TestLevelImporter.h">
+      <Filter>Header Files\UnitTest\Tests</Filter>
     </ClInclude>
     <ClInclude Include="EnemyFactory.h">
       <Filter>Header Files\Factories</Filter>
@@ -380,6 +380,15 @@
     </ClInclude>
     <ClInclude Include="square.h">
       <Filter>Header Files\UnitTest\Tests\Box2d</Filter>
+	</ClInclude>
+    <ClInclude Include="application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseItem.h">
+      <Filter>Header Files\Model\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEnemy.h">
+      <Filter>Header Files\Model\Units\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -518,6 +527,9 @@
     <ClCompile Include="GameContext.cpp">
       <Filter>Source Files\Context</Filter>
     </ClCompile>
+    <ClCompile Include="TestLevelImporter.cpp">
+      <Filter>Source Files\UnitTest\Tests</Filter>
+    </ClCompile>
     <ClCompile Include="GameTileFactory.cpp">
       <Filter>Source Files\Factories</Filter>
     </ClCompile>
@@ -559,6 +571,12 @@
     </ClCompile>
     <ClCompile Include="square.cpp">
       <Filter>Source Files\UnitTest\Tests\box2d</Filter>
+	</ClCompile>
+    <ClCompile Include="BaseItem.cpp">
+      <Filter>Source Files\Model\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseEnemy.cpp">
+      <Filter>Source Files\Model\Units\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
