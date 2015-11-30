@@ -12,7 +12,7 @@
 
 PlayerActions::PlayerActions()
 {
-
+	moveAction.SetAnimationStates(3);
 }
 
 PlayerActions::~PlayerActions()

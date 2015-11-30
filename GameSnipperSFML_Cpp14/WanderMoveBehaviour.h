@@ -1,6 +1,8 @@
 #pragma once
 #include "MoveBehaviour.h"
 
+#include "MoveAction.h"
+
 #include <vector>
 #include <SFML\System\Vector2.hpp>
 
@@ -13,6 +15,8 @@ public:
 	void Update(sf::Vector2f viewPortPosition);
 	bool checkVisible(int screenX, int screenY);
 private:
+	MoveAction moveAction;
+
 	int defaultMoveDistance = 20;
 	int minMoveDistance = 200;
 	int maxMoveDistance = 400;

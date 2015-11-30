@@ -1,18 +1,17 @@
 #include "stdafx.h"
 #include "WanderMoveBehaviour.h"
 
-#include "MoveAction.h"
 #include "Random.h"
 
 #include <cstdlib>
-// iostream verwijderen na gebruik
-#include <iostream>
 
 WanderMoveBehaviour::WanderMoveBehaviour(GameObject* gameObject)
 {
 	this->gameObject = gameObject;
 	startPosition = gameObject->getPosition();
 	endPosition = gameObject->getPosition();
+
+	moveAction.SetAnimationStates(4);
 }
 
 WanderMoveBehaviour::~WanderMoveBehaviour()
@@ -31,7 +30,6 @@ void WanderMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 			direction = directions[Random::Number(0, directions.size() - 1)];
 		}
 
-		MoveAction moveAction;
 		moveAction.Move({ direction }, gameObject);
 	}
 }
