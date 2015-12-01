@@ -23,6 +23,7 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 		nextShot = (float)Time::runningTime + (float)shotRate;
 
 		GameObject* shot = new GameObject(drawContainer, "bullet-red.png");
+		
 		ShotMoveBehaviour* shotBehaviour = new ShotMoveBehaviour(shot);
 
 		shotBehaviour->SetDirection(direction);
@@ -30,19 +31,19 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 		
 		if (direction == "move-up")
 		{
-		shot->setPosition(sf::Vector2f(player->getPositionX() + 12, player->getPositionY()));
+		shot->setPosition(player->getPositionX() + 12, player->getPositionY());
 		}
 		if (direction == "move-down")
 		{
-			shot->setPosition(sf::Vector2f(player->getPositionX() + 12, player->getPositionY() + 24));
+			shot->setPosition(player->getPositionX() + 12, player->getPositionY() + 24);
 		}
 		if (direction == "move-left")
 		{
-			shot->setPosition(sf::Vector2f(player->getPositionX(), player->getPositionY() + 12));
+			shot->setPosition(player->getPositionX(), player->getPositionY() + 12);
 		}
 		if (direction == "move-right")
 		{
-			shot->setPosition(sf::Vector2f(player->getPositionX() + 24, player->getPositionY() + 12));
+			shot->setPosition(player->getPositionX() + 24, player->getPositionY() + 12);
 		}
 		
 		shot->setSize(8, 8);

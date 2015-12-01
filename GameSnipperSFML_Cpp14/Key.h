@@ -13,7 +13,8 @@ public:
 	Key();
 	~Key();
 
-	Key(DrawContainer* container, std::string img,GameObjectContainer* gameObjectContainer,std::map<std::string, std::string>& properties);
+	Key(DrawContainer* container, std::string img,GameObjectContainer* gameObjectContainer,std::map<std::string, std::string>& properties, b2World* world);
+
 
 	virtual void setProperties(std::map<std::string, std::string>& properties);
 	virtual void doAction(Player* player);

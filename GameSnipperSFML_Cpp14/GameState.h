@@ -5,13 +5,15 @@
 class StateManager;
 class Context;
 class GameContext;
-
+class square;
 class GameState: public BaseState
 {
 private:
 	StateManager* stateManager;
+
 	LevelManager* levelManager;
 	Context* maincontext;
+
 	GameContext* gameContext;
 public:
 	void Update();

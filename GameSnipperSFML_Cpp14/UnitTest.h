@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <SFML\System.hpp>
+#include <Box2D\Box2D.h>
 class UnitTest
 {
 public:
@@ -10,7 +11,7 @@ public:
 	static bool Compare(std::string identifier, bool result, bool expected);
 	static bool Compare(std::string identifier, std::string result, char expected[]);
 	static bool Compare(std::string identifier, char result[], char expected[]);
-	static bool Compare(std::string identifier, sf::Vector2f result, sf::Vector2f expected);
+	static bool Compare(std::string identifier, b2Vec2 result, b2Vec2 expected);
 private:
 	static bool PrintTrue(std::string identifier);
 	static bool PrintFalse(std::string identifier);

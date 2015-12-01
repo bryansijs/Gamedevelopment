@@ -14,7 +14,7 @@ Game_Switch::~Game_Switch()
 }
 
 
-void Game_Switch::setProperties(std::map<std::string, std::string>& properties) {
+	void Game_Switch::setProperties(std::map<std::string, std::string>& properties) {
 
 	this->hazardIndex = (properties.count("hazardIndex")) ? std::stoi(properties["hazardIndex"]) : -1;
 	this->doorIndex = (properties.count("doorId")) ? std::stoi(properties["doorId"]) : -1;
@@ -42,36 +42,24 @@ void Game_Switch::setProperties(std::map<std::string, std::string>& properties) 
 	height = std::stoi(properties["height"]);
 
 
-	this->setPosition(sf::Vector2f(x, y));
+	this->setPosition(x, y);
 	this->setSize(widht, height);
 }
 
-Game_Switch::Game_Switch(DrawContainer* container, GameObjectContainer *gameObjectContainer, std::string img, std::map<std::string, std::string>& properties, std::vector<Tile*>& tileList) :GameObject{ container,gameObjectContainer, img } {
+Game_Switch::Game_Switch(DrawContainer* container, GameObjectContainer *gameObjectContainer, std::string img, std::map<std::string, std::string>& properties, std::vector<Tile*>& tileList, b2World* world) :GameObject{ container,gameObjectContainer, img } {
 	this->setProperties(properties);
 	this->setTiles(tileList);
+	this->createBoxStatic(*world);
 };
 
 
-Game_Switch::Game_Switch(GameObjectContainer *gameObjectContainer, sf::Vector2f position, int widht, int height) :GameObject{ gameObjectContainer } {
-
-	this->setPosition(position);
-	this->setSize(widht, height);
-
-};
-
-Game_Switch::Game_Switch(DrawContainer* container, GameObjectContainer *gameObjectContainer, std::string img, sf::Vector2f position, int widht, int height) :GameObject{ container, gameObjectContainer,img } {
-
-	this->setPosition(position);
-	this->setSize(widht, height);
-
-};
-
-Game_Switch::Game_Switch(GameObjectContainer *gameObjectContainer, std::map<std::string, std::string>& properties, std::vector<Tile*>& tileList) :GameObject{ gameObjectContainer } {
-
+Game_Switch::Game_Switch(GameObjectContainer *gameObjectContainer, std::map<std::string, std::string>& properties, std::vector<Tile*>& tileList, b2World* world) :GameObject{ gameObjectContainer } {
+	
 	this->setProperties(properties);
+	
 	this->setTiles(tileList);
+	this->createBoxStatic(*world);
 };
-
 
 void Game_Switch::doAction(Player* player)
 {

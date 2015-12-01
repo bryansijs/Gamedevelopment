@@ -13,13 +13,13 @@ InteractiveFactory::~InteractiveFactory()
 }
 
 
-GameObject* InteractiveFactory::Create(std::map<std::string, std::string> properties, DrawContainer* container, GameObjectContainer* gameObjectContainer, std::vector<Tile*>& tileList) {
+GameObject* InteractiveFactory::Create(std::map<std::string, std::string> properties, DrawContainer* container, GameObjectContainer* gameObjectContainer, b2World* world, std::vector<Tile*>& tileList) {
 	this->tileList = tileList;
-	std::map<std::string, GameObject*(InteractiveFactory::*)(std::map<std::string, std::string>&, DrawContainer*, GameObjectContainer*)>::iterator  it;
+	std::map<std::string, GameObject*(InteractiveFactory::*)(std::map<std::string, std::string>&, DrawContainer*, GameObjectContainer*, b2World* )>::iterator  it;
 	for (it = possibleObjects.begin(); it != possibleObjects.end(); it++) {
 		if (it->first == properties["iType"]) {
 			auto function = it->second;
-			return (this->*function)(properties, container, gameObjectContainer);
+			return (this->*function)(properties, container, gameObjectContainer,world);
 		}
 	}
 
@@ -27,22 +27,22 @@ GameObject* InteractiveFactory::Create(std::map<std::string, std::string> proper
 }
 
 
-GameObject* InteractiveFactory::CreateSwitch(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer) {
+GameObject* InteractiveFactory::CreateSwitch(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer ,b2World* world) {
 
 	std::string imgurl = properties["image"];
 	if (imgurl != "")
-		return new Game_Switch(container, gameObjectContainer, imgurl, properties, tileList);
+		return new Game_Switch(container, gameObjectContainer, imgurl, properties, tileList, world);
 	else
-		return new Game_Switch(gameObjectContainer, properties, tileList);
+		return new Game_Switch(gameObjectContainer, properties, tileList, world);
 }
-GameObject* InteractiveFactory::CreateDoor(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer) {
+GameObject* InteractiveFactory::CreateDoor(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer, b2World* world) {
 	std::string imgurl = properties["image"];
 
 	if (imgurl != "")
-		return new Door(container, imgurl, gameObjectContainer, properties, tileList);
+		return new Door(container, imgurl, gameObjectContainer, properties, tileList, world);
 	else
-		return  new Door(gameObjectContainer, properties, tileList);
+		return new Door(gameObjectContainer, properties, tileList, world);
 }
-GameObject* InteractiveFactory::CreateKeyHole(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer) {
+GameObject* InteractiveFactory::CreateKeyHole(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer, b2World* world) {
 	return nullptr;
 }

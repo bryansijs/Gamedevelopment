@@ -67,6 +67,8 @@ void PlayerActions::ExecuteActions()
 	if (resetAnimation)
 	{
 		moveAction.AnimateMovement(player, 1);
+		//force van player op 0 zetten.
+		player->getBody()->SetLinearVelocity(b2Vec2(0,0));
 	}
 
 	if (Input::GetKeyUp(KeyMapping::GetKey("use")))
@@ -111,8 +113,9 @@ void PlayerActions::Use()
 		//std::cout << b <<  std::endl;
 		/*std::cout << "My current location x y " << player->getPosition().x << " " << player->getPosition().y << std::endl;*/
 
-		float playery = this->player->getPosition().y;
-		float playerx = this->player->getPosition().x;
+		float playery = this->player->getBody()->GetPosition().y;
+		float playerx = this->player->getBody()->GetPosition().x;
+
 		for (GameObject* object : this->player->getgameObjectContainer()->getObjects())
 		{
 			//Check zit ik wel bij dit object in de beurt?
@@ -121,9 +124,14 @@ void PlayerActions::Use()
 			//Dit moet worden afgevangen doormiddel van is colliding en de juiste directe!
 			//Als we op dezelfde y zitten met een 32 ~48 verschil;
 			//Als we op dezelfde x zittten met en 32 ~48 verschil; 
-			if (playery + 32 > object->getPosition().y && playery - 48 < object->getPosition().y)
+
+
+
+			float y = object->getPosition().y;
+			float x = object->getPosition().x;
+			if (playery + 48 > y && playery - 48 < y)
 			{
-				if (playerx + 32 > object->getPosition().x && playerx - 48 < object->getPosition().x)
+				if (playerx + 48  >x && playerx - 48 <x)
 				{
 					object->doAction(player);
 				}

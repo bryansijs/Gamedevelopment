@@ -179,7 +179,9 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="BaseItem.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="BasicEnemy.h" />
+    <ClInclude Include="CollisionListener.h" />
     <ClInclude Include="Context.h" />
+    <ClInclude Include="DebugBox2D.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="DrawBehaviour.h" />
     <ClInclude Include="DrawContainer.h" />
@@ -218,6 +220,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="resource2.h" />
     <ClInclude Include="Potion.h" />
     <ClInclude Include="RunnerEnemy.h" />
+    <ClInclude Include="square.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="ShootAction.h" />
     <ClInclude Include="ShotMoveBehaviour.h" />
@@ -246,7 +249,9 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="BaseEnemy.cpp" />
     <ClCompile Include="BaseItem.cpp" />
     <ClCompile Include="BasicEnemy.cpp" />
+    <ClCompile Include="CollisionListener.cpp" />
     <ClCompile Include="Context.cpp" />
+    <ClCompile Include="DebugBox2D.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="DrawBehaviour.cpp" />
     <ClCompile Include="DrawContainer.cpp" />
@@ -282,6 +287,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="Potion.cpp" />
     <ClCompile Include="RunnerEnemy.cpp" />
     <ClCompile Include="SetupState.cpp" />
+    <ClCompile Include="square.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ShootAction.cpp" />

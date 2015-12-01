@@ -3,6 +3,7 @@
 #include <vector>
 #include <SFML\System\Vector2.hpp>
 #include <SFML\Graphics.hpp>
+#include <Box2D/Box2D.h>
 #include <iostream>
 
 class Player;
@@ -27,7 +28,6 @@ private:
 	DrawBehaviour* drawBehaviour;
 	MoveBehaviour* moveBehaviour;
 
-	sf::Vector2f position;
 	int xIndex = 0;
 	int yIndex = 0;
 	int width = 0;
@@ -41,24 +41,28 @@ public:
 	GameObject::GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, std::string textureUrl);
 	~GameObject();
 
-	void setPosition(sf::Vector2f position) { this->position = position; };
-	sf::Vector2f getPosition() { return position; }
+	
+	void setPosition(float x, float y) { this->myBodyDef.position.Set(x,y); };
+	b2Vec2 getPosition() { return this->myBodyDef.position; };
 
-	int getPositionX() { return position.x; }
-	int getPositionY() { return position.y; }
+	int getPositionX() { return this->myBodyDef.position.x; }
+	int getPositionY() { return this->myBodyDef.position.y; }
 
 	virtual void Update();
-	virtual void doAction();
 	virtual void doAction(Player* player);
 	virtual void setProperties(std::map<std::string, std::string>& properties);
 
 	void setDrawBehaviour(DrawBehaviour* newDrawBehaviour);
 	void SetMoveBehaviour(MoveBehaviour* moveBehaviour);
+	void setMyBodydef(b2BodyDef body) { myBodyDef = body; };
+
+	void move();
 
 	void setDrawContainer(DrawContainer* newDrawContainer) {this->drawContainer = newDrawContainer	;}
 	void setMoveContainer(MoveContainer* newMoveContainer) { this->moveContainer = newMoveContainer; }
 
-
+	b2BodyDef getMyBodydef() { return myBodyDef; };
+	b2Body* getBody() { return Body; };
 	DrawContainer* getDrawContainer() { return this->drawContainer; }
 	MoveContainer* getMoveContainer() { return this->moveContainer; }
 	GameObjectContainer* getgameObjectContainer() { return this->gameObjectContainer; }
@@ -94,6 +98,18 @@ public:
 	}
 
 
-	bool isColliding(std::vector<Tile*> tiles, sf::Vector2f velocity);
+	void createBoxStatic(b2World& World);
+	void createBoxDynamic(b2World & World);
+
+	virtual void startContact(b2Fixture* fixture);
+	virtual void endContact(b2Fixture* fixture);
+
+protected:
+	b2BodyDef myBodyDef;
+	b2PolygonShape Shape;
+	b2Body* Body;
+	b2FixtureDef boxFixtureDef;
+
+
 };
 

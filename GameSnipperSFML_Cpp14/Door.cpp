@@ -34,7 +34,7 @@ void Door::setProperties(std::map<std::string, std::string>& properties) {
 	widht = std::stoi(properties["width"]);
 	height = std::stoi(properties["height"]);
 
-	this->setPosition(sf::Vector2f(x, y));
+	this->setPosition(x, y);
 	this->setSize(widht, height);
 	this->shouldUpdate = true;
 }
@@ -47,16 +47,26 @@ Door::Door(DrawContainer* container) :GameObject{ container } {
 Door::Door(DrawContainer* container, std::string img) :GameObject{ container, img } {
 };
 
-Door::Door(GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, std::vector<Tile*>& tiles) :GameObject{ gameObjectContainer } {
+Door::Door(GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, std::vector<Tile*>& tiles, b2World* world) :GameObject{ gameObjectContainer } {
+
 	this->setProperties(properties);
 	this->setTiles(tiles);
 	this->useImage = false;
+
+	//TODO: Set me for body pls!
+	this->createBoxStatic(*world);
+
 };
 
-Door::Door(DrawContainer* container, std::string img, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, std::vector<Tile*>& tiles) :GameObject{ container,gameObjectContainer,img } {
+
+Door::Door(DrawContainer* container, std::string img, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, std::vector<Tile*>& tiles, b2World* world) :GameObject{ container,gameObjectContainer,img } {
 	this->useImage = true;
+
 	this->setProperties(properties);
 	this->setTiles(tiles);
+
+	//TODO: Set me for body pls!
+	//this->createBoxStatic(*world);
 };
 
 void Door::doAction()
@@ -83,6 +93,21 @@ void Door::doAction(Player* player)
 	shouldUpdate = true;
 	setOpen();
 
+}
+
+void Door::setOpen()
+{
+	isOpen = !isOpen;
+	isCollidable = isOpen;
+	if (!isOpen) {
+		this->setImageY(openState);
+		this->getBody()->SetActive(false);
+	}
+	else if (isOpen) {
+		this->setImageY(closedState);
+		this->getBody()->SetActive(true);
+	}
+	this->setDoorState();
 }
 
 void Door::setDoorState()

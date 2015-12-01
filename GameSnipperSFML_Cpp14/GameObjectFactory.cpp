@@ -6,29 +6,13 @@ GameObjectFactory::GameObjectFactory()
 {
 }
 
-GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer)
-{
-	this->drawContainer = drawContainer;
-	this->moveContainer = nullptr;
-}
 
-GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer)
-{
-	this->drawContainer = drawContainer;
-	this->moveContainer = moveContainer;
-}
-
-GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer,GameObjectContainer* gameObjectContainer)
+GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer,GameObjectContainer* gameObjectContainer, b2World* world)
 {
 	this->drawContainer = drawContainer;
 	this->moveContainer = moveContainer;
 	this->gameObjectContainer = gameObjectContainer;
-}
-
-GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer, GameObjectContainer* gameObjectContainer)
-{
-	this->drawContainer = drawContainer;
-	this->gameObjectContainer = gameObjectContainer;
+	this->world = world;
 }
 
 GameObjectFactory::~GameObjectFactory()
@@ -50,12 +34,12 @@ GameObject* GameObjectFactory::Create(std::map<std::string, std::string>& proper
 
 GameObject* GameObjectFactory::CreateEnemy(std::map<std::string, std::string>& properties)
 {
-	return	this->enemyFactory.Create(properties, drawContainer, moveContainer, gameObjectContainer);
+	return	this->enemyFactory.Create(properties, drawContainer, moveContainer, gameObjectContainer,world);
 }
 
 GameObject* GameObjectFactory::CreateObject(std::map<std::string, std::string>& properties)
 {
-	return this->interactiveFactory.Create(properties, drawContainer, gameObjectContainer, this->tileList);
+	return this->interactiveFactory.Create(properties, drawContainer, gameObjectContainer,world, this->tileList);
 }
 
 GameObject* GameObjectFactory::CreateTile(std::map<std::string, std::string>& properties)
@@ -66,5 +50,5 @@ GameObject* GameObjectFactory::CreateTile(std::map<std::string, std::string>& pr
 
 GameObject* GameObjectFactory::CreateItem(std::map<std::string, std::string>& properties)
 {
-	return this->itemFactory.Create(properties, drawContainer, gameObjectContainer);
+	return this->itemFactory.Create(properties, drawContainer, gameObjectContainer,world);
 }
