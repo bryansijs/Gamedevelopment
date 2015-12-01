@@ -14,17 +14,7 @@ class Door : public GameObject
 	int closedState = 3;
 	int openState = 0; 
 
-	void setOpen() {
-		isOpen = !isOpen;
-		isCollidable = isOpen;
-		if (!isOpen)
-			this->setImageY(openState);
-		else if (isOpen)
-			this->setImageY(closedState);
-
-		setDoorState();
-
-	}
+	void setOpen();
 
 	std::vector<Tile*> DoorList;
 	std::vector<Tile*> ofDoorList;

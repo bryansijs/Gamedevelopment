@@ -54,13 +54,14 @@ Door::Door(GameObjectContainer* gameObjectContainer, std::map<std::string, std::
 	this->useImage = false;
 
 	//TODO: Set me for body pls!
-	//this->createBoxStatic(*world);
+	this->createBoxStatic(*world);
 
 };
 
 
 Door::Door(DrawContainer* container, std::string img, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, std::vector<Tile*>& tiles, b2World* world) :GameObject{ container,gameObjectContainer,img } {
 	this->useImage = true;
+
 	this->setProperties(properties);
 	this->setTiles(tiles);
 
@@ -92,6 +93,21 @@ void Door::doAction(Player* player)
 	shouldUpdate = true;
 	setOpen();
 
+}
+
+void Door::setOpen()
+{
+	isOpen = !isOpen;
+	isCollidable = isOpen;
+	if (!isOpen) {
+		this->setImageY(openState);
+		this->getBody()->SetActive(false);
+	}
+	else if (isOpen) {
+		this->setImageY(closedState);
+		this->getBody()->SetActive(true);
+	}
+	this->setDoorState();
 }
 
 void Door::setDoorState()

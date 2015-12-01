@@ -49,7 +49,6 @@ public:
 	int getPositionY() { return this->myBodyDef.position.y; }
 
 	virtual void Update();
-	virtual void doAction();
 	virtual void doAction(Player* player);
 	virtual void setProperties(std::map<std::string, std::string>& properties);
 
@@ -99,9 +98,11 @@ public:
 	}
 
 
-	bool isColliding(std::vector<Tile*> tiles, sf::Vector2f velocity);
 	void createBoxStatic(b2World& World);
 	void createBoxDynamic(b2World & World);
+
+	virtual void startContact(b2Fixture* fixture);
+	virtual void endContact(b2Fixture* fixture);
 
 protected:
 	b2BodyDef myBodyDef;

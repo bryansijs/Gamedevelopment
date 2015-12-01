@@ -5,12 +5,15 @@
 #include "DrawContainer.h"
 #include "KeyMapping.h"
 #include "DebugBox2D.h"
+#include "CollisionListener.h"
 
 GameContext::GameContext(Context* context)
 {
 	this->context = context;
 	b2Vec2 gravity(0.f, 0.0f);
 	world = { new b2World(gravity) };
+	collisionListener = { new CollisionListener() };
+	world->SetContactListener(collisionListener);
 
 	moveContainer = new MoveContainer();
 	drawContainer = new DrawContainer();

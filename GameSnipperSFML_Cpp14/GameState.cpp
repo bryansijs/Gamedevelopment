@@ -85,7 +85,6 @@ void GameState::Update()
 
 	///////////////////////////////////// Guus
 
-
 	//for (b2Body* b = gameContext->world->GetBodyList(); b; b = b->GetNext()) {
 	//	sf::RectangleShape rectangle(sf::Vector2f(32, 32));
 	//	rectangle.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
@@ -93,8 +92,6 @@ void GameState::Update()
 	//	rectangle.setFillColor(sf::Color(180, 100, 100, 200));
 	//	gameContext->context->window.draw(rectangle);
 	//}
-
-
 
 	///////////////////////////////////// End Guus Box2d Test
 

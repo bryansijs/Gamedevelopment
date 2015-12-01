@@ -380,7 +380,7 @@
     </ClInclude>
     <ClInclude Include="square.h">
       <Filter>Header Files\UnitTest\Tests\Box2d</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -389,6 +389,9 @@
     </ClInclude>
     <ClInclude Include="BaseEnemy.h">
       <Filter>Header Files\Model\Units\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionListener.h">
+      <Filter>Header Files\Controller</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -571,12 +574,15 @@
     </ClCompile>
     <ClCompile Include="square.cpp">
       <Filter>Source Files\UnitTest\Tests\box2d</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="BaseItem.cpp">
       <Filter>Source Files\Model\Items</Filter>
     </ClCompile>
     <ClCompile Include="BaseEnemy.cpp">
       <Filter>Source Files\Model\Units\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionListener.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

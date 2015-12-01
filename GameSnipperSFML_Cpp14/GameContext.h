@@ -12,6 +12,7 @@ class Context;
 class MoveContainer;
 class DrawContainer;
 class GameObjectContainer;
+class CollisionListener;
 
 class GameContext
 {
@@ -39,6 +40,7 @@ public:
 	sf::View view;
 
 	b2World* world;
+	CollisionListener* collisionListener;
 
 private:
 };

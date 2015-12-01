@@ -50,18 +50,13 @@ void MoveAction::Move(std::vector<std::string> directions, Player *player, std::
 		velocity.y *= sin(45 * 3.14159265359 / 180);
 	}
 
-	if (player->isColliding(*tiles, velocity))
-	{
-		return;
-	}
-
 	velocity.x = roundf(velocity.x * 100) / 100;
 	velocity.y = roundf(velocity.y * 100) / 100;
 
 	AnimateMovement(player);
 	
 	//player->getBody()->SetLinearVelocity(b2Vec2(200, 0));
-	player->getBody()->SetLinearVelocity(b2Vec2(velocity.x * 1000, velocity.y * 1000));
+	player->getBody()->SetLinearVelocity(b2Vec2(velocity.x * 10, velocity.y * 10));
 
 	//player->getBody()->SetLinearVelocity(b2Vec2(player->getPosition().x + tempVec.x, player->getPosition().y + tempVec.y));//setPosition(player->getPosition().x + tempVec.x, player->getPosition().y + tempVec.y);
 
