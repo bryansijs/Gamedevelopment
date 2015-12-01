@@ -42,6 +42,11 @@ public:
 	sf::Event event;
 	sf::View view;
 
-	
+
+	sf::Text pauzeText;
+	sf::Font font;
+
+	sf::SoundBuffer sfx;
+	sf::Sound pauseSound;
 };
 

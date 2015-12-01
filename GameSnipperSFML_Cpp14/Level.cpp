@@ -129,6 +129,8 @@ void Level::draw(sf::RenderWindow* window, sf::View* view)
 		if (tiles.at(i)->isVisible)
 			window->draw(tiles.at(i)->sprite);
 	MoveView(*view, *window);
+
+
 }
 
 void Level::setLayerVisibility(int layerIndex, bool isVisible)
@@ -140,8 +142,15 @@ void Level::setLayerVisibility(int layerIndex, bool isVisible)
 	}
 }
 
+
+sf::Vector2f Level::GetViewPortPosition()
+ {
+	return sf::Vector2f(r_value, t_value);
+	}
+
 void Level::Start(GameObject* player, sf::Vector2u* size)
 {
+
 	StartTile* start = nullptr;
 
 	for (size_t i = 0; i < game_objects.size(); i++)
@@ -162,6 +171,12 @@ void Level::Start(GameObject* player, sf::Vector2u* size)
 	int map_xLocation = start->getPosition().x / size->x;
 	viewPortY = (map_yLocation * size->y);
 	viewPortX = (map_xLocation * size->x);
+
+
+	t_max = viewPortY;
+	t_value = viewPortY;
+	r_max = viewPortX;
+	r_value = viewPortX;
 
 	player->setPosition(sf::Vector2f(start->getPosition().x, start->getPosition().y));
 	music.setLoop(true);
