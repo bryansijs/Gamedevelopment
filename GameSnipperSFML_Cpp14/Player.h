@@ -11,9 +11,6 @@ public:
 	Player(MoveContainer* moveContainer, DrawContainer* drawContainer);
 	Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameObjectContainer *useContainer);
 	Player();
-	PlayerActions* GetActions() { return &actions; };
 	~Player() override;
-private:
-	PlayerActions actions = PlayerActions(this);
 };
 

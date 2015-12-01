@@ -18,6 +18,25 @@ BaseInput::~BaseInput()
 	
 }
 
+void BaseInput::CatchSingleInput(sf::Keyboard::Key key)
+{
+	activeKeys.clear();
+
+	multimap<string, string> mapping = KeyMapping::GetMapping();
+	multimap<string, string>::iterator iterator;
+
+	for (iterator = mapping.begin(); iterator != mapping.end(); ++iterator)
+	{
+		string mapkey = iterator->second;
+		auto test = Input::TranslateKey(key);
+		if (mapkey == Input::TranslateKey(key))
+		{
+			AddActiveKey(mapkey);
+			return;
+		}
+	}
+}
+
 void BaseInput::CatchInput()
 {
 	multimap<string, string> mapping = KeyMapping::GetMapping();
@@ -49,8 +68,5 @@ void BaseInput::AddActiveKey(string key)
 
 void BaseInput::RemoveActiveKey(string key)
 {
-	if (find(activeKeys.begin(), activeKeys.end(), key) == activeKeys.end())
-	{
-		activeKeys.erase(remove(activeKeys.begin(), activeKeys.end(), key));
-	}
+	activeKeys.erase(remove(activeKeys.begin(), activeKeys.end(), key));
 }

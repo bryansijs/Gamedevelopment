@@ -187,9 +187,6 @@
     <Filter Include="Source Files\Input">
       <UniqueIdentifier>{a096012f-a593-4531-951a-7ce3e258756b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Model\Menu">
-      <UniqueIdentifier>{0bb3b5f6-a8de-421f-835c-d55739c78dc3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Actions">
       <UniqueIdentifier>{f3effd31-0d13-4a74-8192-aa5090a53787}</UniqueIdentifier>
     </Filter>
@@ -560,13 +557,13 @@
     <ClCompile Include="BaseInput.cpp">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
-    <ClCompile Include="MenuActions.cpp">
-      <Filter>Source Files\Model\Menu</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerActions.cpp">
       <Filter>Source Files\Actions</Filter>
     </ClCompile>
     <ClCompile Include="GameActions.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuActions.cpp">
       <Filter>Source Files\Actions</Filter>
     </ClCompile>
   </ItemGroup>

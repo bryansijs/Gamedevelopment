@@ -17,12 +17,11 @@ MenuActions::MenuActions(StateManager* stateManager, MenuContext* menuContext)
 
 void MenuActions::ProcessActions()
 {
-	bool animate = false;
+	map<string, void(MenuActions::*)()>::iterator it;
 
-	std::map<std::string, void(MenuActions::*)()>::iterator it;
+	for (vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
 
-	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
-		std::string map = KeyMapping::GetMap(activeKeys[i]);
+		string map = KeyMapping::GetMap(activeKeys[i]);
 
 		for (it = actions.begin(); it != actions.end(); ++it)
 		{
@@ -46,7 +45,7 @@ void MenuActions::ExecuteActions()
 		auto function = *it;
 		(this->*function)();
 	}
-	//activeKeys.clear();
+	activeActions.clear();
 }
 
 

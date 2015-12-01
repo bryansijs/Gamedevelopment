@@ -27,8 +27,8 @@ public:
 
 	void callDirectJSFunction(Awesomium::WebView* webView, Awesomium::WebCore* web_core, int currentLevel);
 
-	void ProcessActions() override;
-	void ExecuteActions() override;
+	void ProcessActions();
+	void ExecuteActions();
 private:
 	StateManager* stateManager;
 	MenuContext* menuContext;

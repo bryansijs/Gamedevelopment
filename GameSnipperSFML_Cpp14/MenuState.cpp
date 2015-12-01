@@ -67,13 +67,12 @@ void MenuState::Update()
 			return;
 		}
 
-		if (menuContext->event.type == sf::Event::KeyPressed || menuContext->event.type == sf::Event::KeyReleased)
+		if (menuContext->event.type == sf::Event::KeyPressed)
 		{
-			Input::EventOccured(menuContext->event);
-			menuActions->CatchInput();
+			menuActions->CatchSingleInput(menuContext->event.key.code);
+			menuActions->ProcessActions();
 		}
 	}
-	menuActions->ProcessActions();
 
 	//Create image from Bitmap
 	menuContext->surface = static_cast<Awesomium::BitmapSurface*>(menuContext->webView->surface());

@@ -13,8 +13,8 @@ GameContext::GameContext(Context* context)
 	drawContainer = new DrawContainer();
 	useContainer = new GameObjectContainer();
 	player = new Player(moveContainer, drawContainer,useContainer);
-	playerActions = new PlayerActions(player);
 	gameActions = new GameActions();
+	playerActions.SetPlayer(player);
 }
 
 GameContext::~GameContext()

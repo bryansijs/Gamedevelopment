@@ -1,6 +1,5 @@
 #pragma once
 #include "BaseState.h"
-#include <Awesomium/WebCore.h>
 #include "MenuActions.h"
 
 class StateManager;

@@ -18,10 +18,10 @@ class Tile;
 class PlayerActions : public BaseInput
 {
 public:
-	PlayerActions(Player *player);
+	PlayerActions();
 	~PlayerActions();
-
-	void ProcessActions() override;
+	void SetPlayer(Player *activePlayer);
+	void ProcessActions();
 
 
 	float useDelay = 0;
@@ -33,16 +33,15 @@ public:
 	void Use();
 
 	bool used = false;
+	std::vector<void(PlayerActions::*)()> activeActions;
 private:
-	void ExecuteActions() override;
+	void ExecuteActions();
 
 	std::map<std::string, void(PlayerActions::*)()> actions = {
 		{ "move", &PlayerActions::Move },
 		{ "shoot", &PlayerActions::Shoot },
 		{ "use", &PlayerActions::Use }
 	};
-
-	std::vector<void(PlayerActions::*)()> activeActions;
 
 	std::string direction = "move-left";
 	std::string currentMap;

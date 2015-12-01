@@ -13,6 +13,39 @@ Input::~Input()
 
 sf::Event event;
 
+std::string Input::TranslateKey(sf::Keyboard::Key key)
+{
+	sf::Keyboard::Key incomingKey = key;
+
+	map<sf::Keyboard::Key, string> keys = {
+		{ sf::Keyboard::W, "W" },
+		{ sf::Keyboard::A,"A" },
+		{ sf::Keyboard::S, "S" },
+		{ sf::Keyboard::D, "D" },
+		{ sf::Keyboard::Left, "Left" },
+		{ sf::Keyboard::Right, "Right" },
+		{ sf::Keyboard::Up, "Up" },
+		{ sf::Keyboard::Down, "Down" },
+		{ sf::Keyboard::Space, "Space" },
+		{ sf::Keyboard::E, "E" },
+		{ sf::Keyboard::Num1, "Num1" },
+		{ sf::Keyboard::Num2, "Num2" },
+		{ sf::Keyboard::Num3, "Num3" },
+		{ sf::Keyboard::Num4, "Num4" },
+		{ sf::Keyboard::Num5, "Num5" },
+		{ sf::Keyboard::Escape, "Esc" },
+		{ sf::Keyboard::Return, "Return" }
+	};
+
+	auto it = keys.find(key);
+
+	if (it != keys.end())
+	{
+		return keys.at(key);
+	}
+	return"";
+}
+
 sf::Keyboard::Key GetKey(const string & key)
 {
 	string incomingKey = key;

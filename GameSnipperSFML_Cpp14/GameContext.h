@@ -22,7 +22,7 @@ public:
 	GameObjectContainer *useContainer;
 
 	Player* player;
-	PlayerActions* playerActions;
+	PlayerActions playerActions;
 	GameActions* gameActions;
 
 	LevelImporter* levelImporter;

@@ -10,8 +10,8 @@ public:
 	GameActions();
 	~GameActions() override;
 
-	void ProcessActions() override;
-	void ExecuteActions() override;
+	void ProcessActions();
+	void ExecuteActions();
 private:
 	std::vector<void(GameActions::*)()> activeActions;
 	std::map<std::string, void(GameActions::*)()> actions = {};

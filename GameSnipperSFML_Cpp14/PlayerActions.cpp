@@ -2,52 +2,59 @@
 #include "PlayerActions.h"
 
 #include <vector>
-#include "Time.h"
 #include "Player.h"
+#include "DrawBehaviour.h"
 #include "GameObjectContainer.h"
-#include "GameObject.h"
-#include "Tile.h"
 #include "KeyMapping.h"
+#include "GameObject.h"
+#include "Time.h"
 
-
-PlayerActions::PlayerActions(Player* player)
+PlayerActions::PlayerActions()
 {
-	this->player = player;
+
 }
 
 PlayerActions::~PlayerActions()
 {
+
+}
+
+void PlayerActions::SetPlayer(Player *player)
+{
+	this->player = player;
+}
+
+void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile*>* tiles)
+{
+	this->drawContainer = drawContainer;
+	this->moveContainer = moveContainer;
+	this->tiles = tiles;
 }
 
 void PlayerActions::ProcessActions()
 {
 	bool animate = false;
 
-	map<string, void(PlayerActions::*)()>::iterator it;
+	std::map<std::string, void(PlayerActions::*)()>::iterator it;
 
-	for (vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
-
-		string map = KeyMapping::GetMap(activeKeys[i]);
+	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
+		std::string map = KeyMapping::GetMap(activeKeys[i]);
 
 		for (it = actions.begin(); it != actions.end(); ++it)
 		{
-			if (map.find(it->first) != string::npos)
+			if (map.find(it->first) != std::string::npos)
 			{
-				if (find(activeActions.begin(), activeActions.end(), it->second) == activeActions.end())
+				if (std::find(activeActions.begin(), activeActions.end(), it->second) == activeActions.end())
 				{
 					activeActions.push_back(it->second);
 				}
 			}
-		}
 
-		// stop animation
-		if(it->first.find("move") != string::npos)
-		{
-			animate = true;
-		}
-		else
-		{
-			
+			if (map.find("move") != std::string::npos)
+			{
+				animate = true;
+			}
+
 		}
 	}
 	if(!animate)
@@ -59,20 +66,20 @@ void PlayerActions::ProcessActions()
 
 void PlayerActions::ExecuteActions()
 {
-	vector<void(PlayerActions::*)()>::iterator it;
+	std::vector<void(PlayerActions::*)()>::iterator it;
+
 	for (it = activeActions.begin(); it != activeActions.end(); ++it)
 	{
 		auto function = *it;
 		(this->*function)();
 	}
-	activeKeys.clear();
-}
 
-void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile*>* tiles)
-{
-	this->drawContainer = drawContainer;
-	this->moveContainer = moveContainer;
-	this->tiles = tiles;
+	if (Input::GetKeyUp(KeyMapping::GetKey("use")))
+	{
+		useAction = true;
+	}
+
+	activeActions.clear();
 }
 
 void PlayerActions::Move()
@@ -91,7 +98,6 @@ void PlayerActions::Move()
 		}
 	}
 
-	direction = directions.at(0);
 	moveAction.Move(directions, player, tiles);
 }
 
@@ -101,38 +107,37 @@ void PlayerActions::Shoot()
 	shootAction.Shoot(drawContainer, moveContainer, player, direction);
 }
 
+
 void PlayerActions::Use()
 {
 	StandStillTimerReset();
-
-	if (useDelay > 0)
+	if (useAction)
 	{
-		useDelay -= Time::deltaTime;
-		return;
-	}
-	//std::cout << b <<  std::endl;
-	/*std::cout << "My current location x y " << player->getPosition().x << " " << player->getPosition().y << std::endl;*/
+		//int b = this->player->getgameObjectContainer()->getObjects().size();
+		//std::cout << b <<  std::endl;
+		/*std::cout << "My current location x y " << player->getPosition().x << " " << player->getPosition().y << std::endl;*/
 
-	float playery = this->player->getPosition().y;
-	float playerx = this->player->getPosition().x;
-	for (GameObject* object : this->player->getgameObjectContainer()->getObjects())
-	{
-		//Check zit ik wel bij dit object in de beurt?
-		//zojah dan gaan zijn actie uitvoeren;
-		//anders nope nope
-		//Dit moet worden afgevangen doormiddel van is colliding en de juiste directe!
-		//Als we op dezelfde y zitten met een 32 ~48 verschil;
-		//Als we op dezelfde x zittten met en 32 ~48 verschil; 
-		if (playery + 32 > object->getPosition().y && playery - 48 < object->getPosition().y)
+		float playery = this->player->getPosition().y;
+		float playerx = this->player->getPosition().x;
+		for (GameObject* object : this->player->getgameObjectContainer()->getObjects())
 		{
-			if (playerx + 32 > object->getPosition().x && playerx - 48 < object->getPosition().x)
+			//Check zit ik wel bij dit object in de beurt?
+			//zojah dan gaan zijn actie uitvoeren;
+			//anders nope nope
+			//Dit moet worden afgevangen doormiddel van is colliding en de juiste directe!
+			//Als we op dezelfde y zitten met een 32 ~48 verschil;
+			//Als we op dezelfde x zittten met en 32 ~48 verschil; 
+			if (playery + 32 > object->getPosition().y && playery - 48 < object->getPosition().y)
 			{
-				object->doAction();
+				if (playerx + 32 > object->getPosition().x && playerx - 48 < object->getPosition().x)
+				{
+					//object->doAction(player);
+				}
 			}
 		}
-	}
+		useAction = false;
 
-	useDelay = 7;
+	}
 }
 
 void PlayerActions::StandStill()
