@@ -23,9 +23,8 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 		nextShot = (float)Time::runningTime + (float)shotRate;
 
 		GameObject* shot = new GameObject(drawContainer, "bullet-red.png");
-		ShotMoveBehaviour* shotBehaviour = new ShotMoveBehaviour(shot);
+		ShotMoveBehaviour* shotBehaviour = new ShotMoveBehaviour(shot, direction);
 
-		shotBehaviour->SetDirection(direction);
 		moveContainer->AddBehaviour(shotBehaviour);
 		
 		if (direction == "move-up")
