@@ -24,14 +24,15 @@ void Key::setProperties(std::map<std::string, std::string>& properties) {
 	widht = std::stoi(properties["width"]);
 	height = std::stoi(properties["height"]);
 
-	this->setPosition(sf::Vector2f(x, y));
+	this->setPosition(x, y);
 	this->setSize(widht, height);
 
 
 }
 
-Key::Key(DrawContainer* container, std::string img, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties) :BaseItem{ container,gameObjectContainer, img  } {
+Key::Key(DrawContainer* container, std::string img, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties,b2World* world) :BaseItem{ container,gameObjectContainer, img  } {
 	this->setProperties(properties);
+	this->createBoxStatic(*world);
 };
 
 

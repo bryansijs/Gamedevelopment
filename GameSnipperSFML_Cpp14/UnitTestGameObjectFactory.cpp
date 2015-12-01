@@ -17,7 +17,7 @@
 UnitTestGameObjectFactory::UnitTestGameObjectFactory()
 {
 	
-	DrawContainer* cont = new DrawContainer();
+	/*DrawContainer* cont = new DrawContainer();
 	MoveContainer* move = new MoveContainer();
 	GameObjectContainer* gameObjectecontainer = new GameObjectContainer();
 	GameObjectFactory factory{ cont,move,gameObjectecontainer };
@@ -77,7 +77,7 @@ UnitTestGameObjectFactory::UnitTestGameObjectFactory()
 	UnitTest::Compare("Item is not an enemy: ", dynamic_cast<RunnerEnemy*>(object), false);
 	UnitTest::Compare("both x are 20: ",int(object->getPosition().x),20);
 	UnitTest::Compare("both y are 80: ", int(object->getPosition().y), 80);
-	UnitTest::Compare("Vector equals: " ,object->getPosition(), sf::Vector2f(20,80));
+	UnitTest::Compare("Vector equals: " ,object->getPosition(), b2Vec2(20,80));
 	
 	propertymap.clear();
 
@@ -111,7 +111,7 @@ UnitTestGameObjectFactory::UnitTestGameObjectFactory()
 	
 	cont->~DrawContainer();
 	move->~MoveContainer();
-	gameObjectecontainer->~GameObjectContainer();
+	gameObjectecontainer->~GameObjectContainer();*/
 }
 
 

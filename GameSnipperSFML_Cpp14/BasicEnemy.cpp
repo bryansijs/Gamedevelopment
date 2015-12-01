@@ -3,22 +3,14 @@
 
 #include "WanderMoveBehaviour.h"
 
-BasicEnemy::BasicEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer, sf::Vector2f position, int widht, int height) :BaseEnemy{ dContainer, img,mContainer, gameObjectContainer } {
-
-	//TODO Iemand:Basic moveBahavoir for this Enemy;
-	this->SetMoveBehaviour(new WanderMoveBehaviour(this));
-	this->SetAnimationStates(4);
-};
-
-
-BasicEnemy::BasicEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties
-	) :BaseEnemy{ dContainer, img,mContainer, gameObjectContainer } {
-
-	//TODO Iemand:Basic moveBahavoir for this Enemy;
+BasicEnemy::BasicEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, b2World* world) :BaseEnemy{ dContainer, img,mContainer, gameObjectContainer }
+{
 	this->SetMoveBehaviour(new WanderMoveBehaviour(this));
 	this->isCollidable = true;
+
 	this->setProperties(properties);
 	this->SetAnimationStates(4);
+	this->createBoxDynamic(*world);
 };
 
 BasicEnemy::~BasicEnemy()

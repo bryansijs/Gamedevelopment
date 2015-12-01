@@ -24,8 +24,8 @@ private:
 	int moveDistance;
 	std::string direction;
 
-	sf::Vector2f startPosition;
-	sf::Vector2f endPosition;
+	b2Vec2 startPosition;
+	b2Vec2 endPosition;
 
 	std::vector<std::string> directions = {
 		{ "move-up" },

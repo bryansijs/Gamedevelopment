@@ -17,23 +17,23 @@ void ShotMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 {
 	if (direction == "move-up")
 	{
-		float temp = gameObject->getPositionY() - velocity * Time::deltaTime;
-		gameObject->setPosition(sf::Vector2f(gameObject->getPositionX(), temp));
+		float temp = gameObject->getPosition().y - velocity * Time::deltaTime;
+		gameObject->setPosition(gameObject->getPosition().x, temp);
 	}
 	if (direction == "move-down")
 	{
-		float temp = gameObject->getPositionY() + velocity * Time::deltaTime;
-		gameObject->setPosition(sf::Vector2f(gameObject->getPositionX(), temp));
+		float temp = gameObject->getPosition().y + velocity * Time::deltaTime;
+		gameObject->setPosition(gameObject->getPosition().x, temp);
 	}
 	if (direction == "move-left")
 	{
-		float temp = gameObject->getPositionX() - velocity * Time::deltaTime;
-		gameObject->setPosition(sf::Vector2f(temp, gameObject->getPositionY()));
+		float temp = gameObject->getPosition().x - velocity * Time::deltaTime;
+		gameObject->setPosition(temp, gameObject->getPosition().y);
 	}
 	if (direction == "move-right")
 	{
-		float temp = gameObject->getPositionX() + velocity * Time::deltaTime;
-		gameObject->setPosition(sf::Vector2f(temp, gameObject->getPositionY()));
+		float temp = gameObject->getPosition().x + velocity * Time::deltaTime;
+		gameObject->setPosition(temp, gameObject->getPosition().y);
 	}
 }
 

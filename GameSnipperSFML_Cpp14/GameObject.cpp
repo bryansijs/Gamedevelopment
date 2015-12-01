@@ -78,6 +78,10 @@ void GameObject::Update()
 
 }
 
+void GameObject::doAction(Player * player)
+{
+}
+
 void GameObject::setProperties(std::map<std::string, std::string>& properties)
 {
 
@@ -97,45 +101,52 @@ void GameObject::SetMoveBehaviour(MoveBehaviour* moveBehaviour)
 	//moveContainer->AddBehaviour(this->moveBehaviour);
 }
 
-void GameObject::doAction()
-{
+void GameObject::createBoxStatic(b2World& World)
+{	
+	myBodyDef.type = b2_staticBody;
 
-}
+	Body = World.CreateBody(&myBodyDef);
 
-void GameObject::doAction(Player* player)
-{
-
-}
-
-bool GameObject::isColliding(std::vector<Tile*> tiles, sf::Vector2f velocity)
-{
-
-	std::vector<GameObject*>::iterator it;
-	std::vector<GameObject*> temp = gameObjectContainer->getObjects();
-
-	for (it = temp.begin(); it != temp.end(); it++) {
-		if ((*it) != this && (*it)->isCollidable)
-		{
-			if (position.x + velocity.x < ((*it)->position.x + (*it)->getHeight()) &&
-				(position.x + velocity.x + this->height) >(*it)->position.x )
-				if (position.y + velocity.y < ((*it)->position.y + (*it)->getWidth()) &&
-					(position.y + velocity.y + this->width) >(*it)->position.y) {
-						return true;
-			}
-		}
+	if (this->getHeight() < 1 || this->getWidth() < 1) {
+		Shape.SetAsBox((32.f / 2), (32.f / 2));
+	}
+	else {
+		Shape.SetAsBox(getHeight() / 2, getWidth() / 2);
 	}
 
-	for (int i = 0; i < tiles.size(); i++) {
+	boxFixtureDef.density = 100.f;
+	boxFixtureDef.friction = 0.0f;
+	boxFixtureDef.shape = &Shape;
+	Body->CreateFixture(&boxFixtureDef);
+	Body->SetUserData(this);
+}
 
-		if (tiles.at(i)->isCollidable) {
-			if (position.x + velocity.x < (tiles.at(i)->x_Position + 32) &&
-				(position.x + velocity.x + 32) > tiles.at(i)->x_Position &&
-				position.y + velocity.y < (tiles.at(i)->y_Position + 32) &&
-				(position.y + velocity.y + 32) > tiles.at(i)->y_Position) {
-				return true;
-			}
-		}
+void GameObject::createBoxDynamic(b2World & World)
+{
+	myBodyDef.type = b2_dynamicBody;
+	Body = World.CreateBody(&myBodyDef);
+
+	if (this->getHeight() < 1 || this->getWidth() < 1)
+	{
+		Shape.SetAsBox((30.f / 2), (30.f / 2));
+	}
+	else
+	{
+		Shape.SetAsBox((getHeight() - 2) / 2, (getWidth() - 2) / 2);
 	}
 
-	return false;
+	boxFixtureDef.density = 100.f;
+	boxFixtureDef.friction = 0.7f;
+	boxFixtureDef.shape = &Shape;
+	Body->CreateFixture(&boxFixtureDef);
+	Body->SetUserData(this);
+}
+
+void GameObject::startContact(b2Fixture* fixture)
+{
+	// het gecollide object is terug te vinden in fixture fixture->GetBody()->GetUserData();
+}
+
+void GameObject::endContact(b2Fixture* fixture)
+{
 }

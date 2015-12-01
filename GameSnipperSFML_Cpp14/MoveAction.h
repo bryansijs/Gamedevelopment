@@ -28,7 +28,7 @@ private:
 	std::vector<Tile*>* tiles;
 
 	sf::Vector2f velocity;
-	float speed = 150.0f;
+	float speed = 10000.0f;
 
 	float animationDelay;
 	void AnimateMovement(GameObject *gameObject);
