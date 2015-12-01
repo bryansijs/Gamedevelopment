@@ -72,6 +72,7 @@ void MenuActions::ShowAbout()
 
 void MenuActions::BackToMenu()
 {
+	menuContext->inLevels = false;
 	if (!menuContext->inMenu)
 	{
 		menuContext->inMenu = true;
