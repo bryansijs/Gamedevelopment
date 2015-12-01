@@ -19,7 +19,6 @@ GameObject::GameObject(DrawContainer *drawContainer)
 
 }
 
-
 GameObject::GameObject(GameObjectContainer *gameObjectContainer)
 {
 	this->gameObjectContainer = gameObjectContainer;
@@ -102,10 +101,10 @@ void GameObject::createBoxDynamic(b2World & World)
 	Body = World.CreateBody(&myBodyDef);
 
 	if (this->getHeight() < 1 || this->getWidth() < 1) {
-		Shape.SetAsBox((32.f / 2), (32.f / 2));
+		Shape.SetAsBox((30.f / 2), (30.f / 2));
 	}
 	else {
-		Shape.SetAsBox(getHeight() / 2, getWidth() / 2);
+		Shape.SetAsBox((getHeight() - 2) / 2, (getWidth() - 2) / 2);
 	}
 
 

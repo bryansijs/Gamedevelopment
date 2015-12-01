@@ -363,6 +363,9 @@
     <ClInclude Include="UnitTestGameObjectFactory.h">
       <Filter>Header Files\UnitTest\Tests</Filter>
     </ClInclude>
+    <ClInclude Include="LevelManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
     <ClInclude Include="GameObjectContainer.h">
       <Filter>Header Files\Containers</Filter>
     </ClInclude>
@@ -375,12 +378,21 @@
     <ClInclude Include="resource2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+
     <ClInclude Include="DebugBox2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="square.h">
       <Filter>Header Files\UnitTest\Tests\Box2d</Filter>
     </ClInclude>
+
+    <ClInclude Include="JSConsole.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitTestLevelSequence.h">
+      <Filter>Header Files\UnitTest\Tests</Filter>
+	</ClInclude>
+
     <ClInclude Include="application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -566,6 +578,9 @@
     <ClCompile Include="UnitTestGameObjectFactory.cpp">
       <Filter>Source Files\UnitTest\Tests</Filter>
     </ClCompile>
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
     <ClCompile Include="GameObjectContainer.cpp">
       <Filter>Source Files\Containers</Filter>
     </ClCompile>
@@ -575,6 +590,9 @@
     <ClCompile Include="square.cpp">
       <Filter>Source Files\UnitTest\Tests\box2d</Filter>
     </ClCompile>
+    <ClCompile Include="UnitTestLevelSequence.cpp">
+      <Filter>Source Files\UnitTest\Tests</Filter>
+	 </ClCompile>
     <ClCompile Include="BaseItem.cpp">
       <Filter>Source Files\Model\Items</Filter>
     </ClCompile>

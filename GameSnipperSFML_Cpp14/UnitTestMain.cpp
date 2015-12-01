@@ -3,6 +3,7 @@
 #include "TestDemo.h"
 #include "TestLevelImporter.h"
 #include "UnitTestGameObjectFactory.h"
+#include "UnitTestLevelSequence.h"
 
 UnitTestMain::UnitTestMain()
 {
@@ -16,4 +17,5 @@ void UnitTestMain::RunTests(bool enabled)
 
 	TestLevelImporter tli;
 	UnitTestGameObjectFactory td2;
+	UnitTestLevelSequence td3;
 }

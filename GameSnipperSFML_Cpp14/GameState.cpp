@@ -10,13 +10,16 @@
 #include "square.h"
 
 
-GameState::GameState(Context* context, StateManager* stateManager)
+GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager)
 {
+	maincontext = context;
 	gameContext = new GameContext(context);
 	this->stateManager = stateManager;
+	this->levelManager = levelmanager;
 
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer,gameContext->moveContainer, gameContext->useContainer, gameContext->world);
-	gameContext->levelImporter->Import("./Resources/levels/Level_New.json");
+	gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
+
 
 	gameContext->levelImporter->Prepare();
 
@@ -37,6 +40,8 @@ GameState::GameState(Context* context, StateManager* stateManager)
 
 GameState::~GameState()
 {
+	delete(gameContext);
+	delete(levelManager);
 }
 
 void GameState::Update()
@@ -67,6 +72,10 @@ void GameState::Update()
 			{
 				Input::EventOccured(gameContext->event);
 				gameContext->playerInput.CatchInput();
+
+				if (Input::GetKeyDown("K")) {
+					StartNextLevel();
+				}
 			}
 		}
 
@@ -106,4 +115,30 @@ void GameState::Update()
 void GameState::Terminate()
 {
 	terminate = true;
+}
+
+void GameState::StartNextLevel()
+{
+	delete(gameContext);
+
+	gameContext = new GameContext(maincontext);
+
+	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer, gameContext->world);
+	//gameContext->levelImporter->Clear();
+	gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
+
+	gameContext->levelImporter->Prepare();
+
+	gameContext->level = gameContext->levelImporter->getLevel();
+	gameContext->levelImporter->Clear();
+
+	gameContext->playerActions.SetContainers(gameContext->drawContainer, gameContext->moveContainer, &gameContext->level->groundTiles);
+	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
+
+	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
+	
+	gameContext->view.reset(rect);
+	gameContext->context->window.setView(gameContext->view);
+
+	Update();
 }
