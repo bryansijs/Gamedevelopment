@@ -8,6 +8,8 @@
 #include "MoveContainer.h"
 #include "DrawContainer.h"
 
+#include "KeyMapping.h"
+
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager)
 {
 	maincontext = context;
@@ -66,21 +68,53 @@ void GameState::Update()
 				Input::EventOccured(gameContext->event);
 				gameContext->playerInput.CatchInput();
 
+
+
+				if (Input::GetKeyUp(KeyMapping::GetKey("pause"))) {
+					std::cout << isPause << std::endl;
+					isPause = !isPause;
+
+					gameContext->level->pauseMusic(isPause);
+
+					if (isPause)
+					{
+						float x = gameContext->level->GetViewPortPosition().x + gameContext->context->window.getSize().x / 4;
+						float y = gameContext->level->GetViewPortPosition().y + gameContext->context->window.getSize().y / 4;
+						gameContext->pauzeText.setPosition(x, y);
+						gameContext->pauseSound.play();
+					}
+
+				}
+
+
+
 				if (Input::GetKeyDown("K")) {
 					StartNextLevel();
 				}
 			}
 		}
 
-		gameContext->playerActions.ProcessActions(gameContext->playerInput.GetActiveKeys());
-		gameContext->level->updateViewPort(worldPosition);
+		if (!isPause) {
+			gameContext->playerActions.ProcessActions(gameContext->playerInput.GetActiveKeys());
+			gameContext->level->updateViewPort(worldPosition);
+		}
 	}
 
-	gameContext->moveContainer->Update();
+
+	if (!isPause) {
+		gameContext->moveContainer->Update();
+	}
 	gameContext->drawContainer->Draw(&gameContext->context->window);
 
 
 	gameContext->context->window.setView(gameContext->view);
+
+	if (isPause)
+	{
+		gameContext->context->window.draw(gameContext->pauzeText);
+	}
+
+
 	gameContext->context->window.display();
 
 	if (terminate)

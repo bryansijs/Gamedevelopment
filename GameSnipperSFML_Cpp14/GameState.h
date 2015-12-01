@@ -13,11 +13,14 @@ private:
 	LevelManager* levelManager;
 	Context* maincontext;
 	GameContext* gameContext;
+
+
 public:
+	bool isPause = false;
 	void Update();
 	void Terminate();
 	void StartNextLevel();
-
+	
 	GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager);
 	~GameState();
 };

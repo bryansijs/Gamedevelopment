@@ -51,14 +51,20 @@ public:
 	std::vector<GameObject*> getGame_Objects() { return game_objects; }
 	GameObject* getObject(int i) { return game_objects.at(i); }
 
-
+	void pauseMusic(bool pause)
+	{
+		if (pause)
+			this->music.pause();
+		else
+			this->music.play();
+	}
 	void setGameObjectContainer(GameObjectContainer* container)
 	{
 		this->gameObjectContainer = container;
 	}
 
 	GameObjectContainer* getGameObjectContainer() { return this->gameObjectContainer; }
-
+	sf::Vector2f GetViewPortPosition();
 private:
 	bool doEvents = true;
 	bool moveDown = true;
