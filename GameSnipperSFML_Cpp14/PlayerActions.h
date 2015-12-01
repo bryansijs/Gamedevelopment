@@ -20,9 +20,9 @@ class PlayerActions : public BaseInput
 public:
 	PlayerActions();
 	~PlayerActions();
+
 	void SetPlayer(Player *activePlayer);
 	void ProcessActions();
-
 
 	float useDelay = 0;
 	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile*>* tiles);

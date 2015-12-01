@@ -9,10 +9,11 @@
 
 using namespace Awesomium;
 
-MenuActions::MenuActions(StateManager* stateManager, MenuContext* menuContext)
+MenuActions::MenuActions(StateManager* stateManager, MenuContext* menuContext, LevelManager* levelManager)
 {
 	MenuActions::stateManager = stateManager;
 	MenuActions::menuContext = menuContext;
+	MenuActions::levelManager = levelManager;
 }
 
 void MenuActions::ProcessActions()
@@ -48,8 +49,6 @@ void MenuActions::ExecuteActions()
 	activeActions.clear();
 }
 
-
-
 void MenuActions::ExitGame()
 {
 	menuContext->context->window.close();
@@ -59,7 +58,7 @@ void MenuActions::ExitGame()
 void MenuActions::RunGame()
 {
 	menuContext->music->stop();
-	GameState* gameState = new GameState(menuContext->context, stateManager);
+	GameState* gameState = new GameState(menuContext->context, stateManager, levelManager);
 	stateManager->AddState(gameState);
 	stateManager->StartNextState();
 }
@@ -80,6 +79,67 @@ void MenuActions::BackToMenu()
 		ReloadPage();
 		menuContext->currentLevel = 1;
 	}
+}
+
+void MenuActions::ShowLevels()
+{
+	menuContext->currentLevelPage = 1;
+	menuContext->currentLevelIndex = 1;
+	menuContext->inLevels = true;
+	menuContext->inMenu = false;
+	menuContext->pathToFile = "file:///Resources/menuHTML/levels.html";
+	ReloadPage();
+	std::vector<std::string> levelCollection = this->levelManager->getAllLevels();
+	for (std::vector<std::string>::iterator it = levelCollection.begin(); it != levelCollection.end(); ++it) {
+		addLevelToMenu(menuContext->webView, menuContext->web_core, (*it).c_str());
+	}
+}
+
+void MenuActions::addLevelToMenu(WebView* webView, WebCore* web_core, const char* naam)
+{
+	JSValue window = webView->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));
+
+	if (window.IsObject())
+	{
+		JSArray args;
+		WebString string = WebString::CreateFromUTF8(naam, strlen(naam) + 1);
+		JSValue val = JSValue(string);
+		bool test = val.IsString();
+		args.Push(val);
+		window.ToObject().Invoke(WSLit("insertRow"), args);
+	}
+
+	Sleep(50);
+	web_core->Update();
+}
+
+void MenuActions::CallLevelEditMenuFunction(WebView* webView, WebCore* web_core, std::string action)
+{
+	JSValue window = webView->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));
+
+	if (window.IsObject())
+	{
+		JSArray args;
+		if (action == "switchToUp" || action == "switchToDown") {
+			int level = menuContext->currentLevelIndex - ((menuContext->currentLevelPage - 1) * 8);
+			JSValue val = JSValue(level);
+			args.Push(val);
+		}
+		if (action == "switchToUp" && menuContext->currentLevelIndex == ((menuContext->currentLevelPage - 1) * 8) + 1) {
+			//bijvoorbeeld nummer 9 naar 8 
+			window.ToObject().Invoke(WSLit("switchToUpAndPage"), args);
+		}
+		else if (action == "switchToDown" && menuContext->currentLevelIndex == menuContext->currentLevelPage * 8) {
+			//bijvoorbeeld nummer 8 naar 9 
+			window.ToObject().Invoke(WSLit("switchToUpAndPageDown"), args);
+		}
+		else
+			window.ToObject().Invoke(WSLit(action.c_str()), args);
+	}
+
+	Sleep(50);
+	web_core->Update();
+
 }
 
 void MenuActions::ReloadPage()
@@ -106,37 +166,107 @@ void MenuActions::ShowIntruction()
 
 void MenuActions::NavigateUp()
 {
-	if (menuContext->currentLevel > 1)
+	if (menuContext->inLevels)
 	{
-		menuContext->currentLevel--;
+		int minLevel = ((menuContext->currentLevelPage - 1) * 8) + 1;
+		if (menuContext->currentLevelIndex > minLevel)
+		{
+			menuContext->currentLevelIndex--;
+			CallLevelEditMenuFunction(menuContext->webView, menuContext->web_core, std::string("selectionUp"));
+		}
+	}
+	else if (menuContext->currentLevel > 1 && menuContext->inMenu)
+	{
+		menuContext->currentLevel -= 1;
 		callDirectJSFunction(menuContext->webView, menuContext->web_core, menuContext->currentLevel);
 	}
 }
 
 void MenuActions::NavigateDown()
 {
-	if (menuContext->currentLevel < 4)
+	if (menuContext->inLevels)
 	{
-		menuContext->currentLevel++;
+		int maxLevel = 0;
+		if (menuContext->currentLevelPage * 8 < this->levelManager->getAllLevels().size())
+			maxLevel = menuContext->currentLevelPage * 8;
+		else
+			maxLevel = this->levelManager->getAllLevels().size();
+
+		if (menuContext->currentLevelIndex < maxLevel)
+		{
+			menuContext->currentLevelIndex++;
+			CallLevelEditMenuFunction(menuContext->webView, menuContext->web_core, std::string("selectionDown"));
+		}
+	}
+	else if (menuContext->currentLevel < menuItems.size() && menuContext->inMenu)
+	{
+		menuContext->currentLevel += 1;
 		callDirectJSFunction(menuContext->webView, menuContext->web_core, menuContext->currentLevel);
+	}
+}
+
+void MenuActions::NavigateLeft()
+{
+	if (menuContext->inLevels) {
+		CallLevelEditMenuFunction(menuContext->webView, menuContext->web_core, std::string("prevPage"));
+		menuContext->currentLevelPage--;
+		menuContext->currentLevelIndex = (menuContext->currentLevelPage - 1) * 8 + 1;
+	}
+}
+
+void MenuActions::NavigateRight()
+{
+	if (menuContext->inLevels) {
+		CallLevelEditMenuFunction(menuContext->webView, menuContext->web_core, std::string("nextPage"));
+		menuContext->currentLevelIndex = (menuContext->currentLevelPage * 8) + 1;
+		menuContext->currentLevelPage++;
 	}
 }
 
 void MenuActions::NavigateComfirm()
 {
-	switch(menuContext->currentLevel)
+	if (menuContext->inMenu)
 	{
-		case 1:
-			RunGame();
-			return;
-		case 2:
-			ShowIntruction();
-			return;
-		case 3:
-			ShowAbout();
-			return;
-		case 4:
-			ExitGame();
+		std::map <int, void(MenuActions::*)()>::iterator it;
+		for (it = menuItems.begin(); it != menuItems.end(); ++it)
+		{
+			if (it->first == menuContext->currentLevel)
+			{
+				auto function = it->second;
+				(this->*function)();
+				break;
+			}
+		}
+	}
+}
+
+void MenuActions::SwitchToUp()
+{
+	if (menuContext->inLevels && menuContext->currentLevelIndex > 1) {
+		CallLevelEditMenuFunction(menuContext->webView, menuContext->web_core, std::string("switchToUp"));
+		this->levelManager->swapSequence(menuContext->currentLevelIndex, menuContext->currentLevelIndex - 1);
+		if (menuContext->currentLevelIndex == ((menuContext->currentLevelPage - 1) * 8) + 1) {
+			menuContext->currentLevelPage--;
+			menuContext->currentLevelIndex = menuContext->currentLevelPage * 8;
+		}
+		else
+			menuContext->currentLevelIndex--;
+	}
+}
+
+void MenuActions::SwitchToDown()
+{
+	int maxLevel = this->levelManager->getAllLevels().size();
+	if (menuContext->inLevels && menuContext->currentLevelIndex < maxLevel) {
+		CallLevelEditMenuFunction(menuContext->webView, menuContext->web_core, std::string("switchToDown"));
+		this->levelManager->swapSequence(menuContext->currentLevelIndex, menuContext->currentLevelIndex + 1);
+		if (menuContext->currentLevelIndex == menuContext->currentLevelPage * 8)
+		{
+			menuContext->currentLevelPage++;
+			menuContext->currentLevelIndex = ((menuContext->currentLevelPage - 1) * 8) + 1;
+		}
+		else
+			menuContext->currentLevelIndex++;
 	}
 }
 

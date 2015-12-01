@@ -19,5 +19,12 @@ void GameObjectContainer::AddObject(GameObject* object)
 
 void GameObjectContainer::RemoveObject(GameObject* object)
 {
-//	useAbleObjects.erase(object);
+	std::vector<GameObject*>::iterator it;
+	for (it = useAbleObjects.begin(); it != useAbleObjects.end(); it++)
+	{
+		if ((*it) == object)
+			break;
+	}
+	useAbleObjects.erase(it);
+
 }

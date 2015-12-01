@@ -10,23 +10,24 @@
 
 #include "MenuContext.h"
 
-#include "Input.h"
 #include "StateManager.h"
 #include <filesystem>
 #include <thread>
 
+using namespace Awesomium;
 
-MenuState::MenuState(Context* context, StateManager* stateManager)
+MenuState::MenuState(Context* context, StateManager* stateManager, LevelManager* levelManager)
 {
 	menuContext = new MenuContext(context);
 	this->stateManager = stateManager;
-	menuActions = new MenuActions(stateManager, menuContext);
+	this->levelManager = levelManager;
+	menuActions = new MenuActions(stateManager, menuContext, levelManager);
 
 	menuContext->inMenu = true;
 	menuContext->currentLevel = 1;
 
 	// Awesomium init
-	menuContext->web_core = Awesomium::WebCore::Initialize(Awesomium::WebConfig());
+	menuContext->web_core = WebCore::Initialize(WebConfig());
 	menuContext->webView = menuContext->web_core->CreateWebView(960, 640);
 
 	// Load Page

@@ -79,6 +79,11 @@ void PlayerActions::ExecuteActions()
 		useAction = true;
 	}
 
+	if (Input::GetKeyUp(KeyMapping::GetKey("use")))
+	{
+		useAction = true;
+	}
+
 	activeActions.clear();
 }
 
@@ -111,6 +116,7 @@ void PlayerActions::Shoot()
 void PlayerActions::Use()
 {
 	StandStillTimerReset();
+
 	if (useAction)
 	{
 		//int b = this->player->getgameObjectContainer()->getObjects().size();
@@ -131,12 +137,11 @@ void PlayerActions::Use()
 			{
 				if (playerx + 32 > object->getPosition().x && playerx - 48 < object->getPosition().x)
 				{
-					//object->doAction(player);
+					object->doAction(player);
 				}
 			}
 		}
 		useAction = false;
-
 	}
 }
 

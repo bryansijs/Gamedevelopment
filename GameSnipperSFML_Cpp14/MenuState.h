@@ -2,6 +2,7 @@
 #include "BaseState.h"
 #include "MenuActions.h"
 
+class LevelManager;
 class StateManager;
 class Context;
 class MenuContext;
@@ -9,13 +10,15 @@ class MenuContext;
 class MenuState : public BaseState
 {
 public:
+	MenuState(Context* context, StateManager* stateManager, LevelManager* levelmanager);
+	~MenuState();
+
 	void Update() override;
 	void Terminate() override;
-
-	MenuState(Context* context, StateManager* stateManager);
-	~MenuState();
 private:
+	LevelManager* levelManager;
 	StateManager* stateManager;
 	MenuContext* menuContext;
 	MenuActions* menuActions;
+	Context* context;
 };

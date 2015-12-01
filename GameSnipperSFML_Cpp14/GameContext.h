@@ -3,6 +3,7 @@
 #include "LevelImporter.h"
 #include "Level.h"
 #include "GameActions.h"
+#include "PlayerActions.h"
 
 class Context;
 class MoveContainer;

@@ -174,8 +174,9 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="application.h" />
     <ClInclude Include="BaseInput.h" />
+    <ClInclude Include="BaseEnemy.h" />
+    <ClInclude Include="BaseItem.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="BasicEnemy.h" />
     <ClInclude Include="Context.h" />
@@ -193,12 +194,14 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="Input.h" />
     <ClInclude Include="InteractiveFactory.h" />
     <ClInclude Include="ItemFactory.h" />
+    <ClInclude Include="JSConsole.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="KeyMapping.h" />
     <ClInclude Include="KeyMappingImporter.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelImporter.h" />
     <ClInclude Include="MenuActions.h" />
+    <ClInclude Include="LevelManager.h" />
     <ClInclude Include="MenuContext.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="MoveAction.h" />
@@ -225,6 +228,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="TankEnemy.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestDemo.h" />
+    <ClInclude Include="TestLevelImporter.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileSet.h" />
     <ClInclude Include="Time.h" />
@@ -232,6 +236,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="UnitState.h" />
     <ClInclude Include="UnitTest.h" />
     <ClInclude Include="UnitTestGameObjectFactory.h" />
+    <ClInclude Include="UnitTestLevelSequence.h" />
     <ClInclude Include="UnitTestMain.h" />
     <ClInclude Include="UpdateLogic.h" />
     <ClInclude Include="UpdateUI.h" />
@@ -240,6 +245,8 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseInput.cpp" />
+    <ClCompile Include="BaseEnemy.cpp" />
+    <ClCompile Include="BaseItem.cpp" />
     <ClCompile Include="BasicEnemy.cpp" />
     <ClCompile Include="Context.cpp" />
     <ClCompile Include="Door.cpp" />
@@ -262,6 +269,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="KeyMappingImporter.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelImporter.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuActions.cpp" />
     <ClCompile Include="MenuContext.cpp" />
@@ -291,6 +299,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="Game_Switch.cpp" />
     <ClCompile Include="TankEnemy.cpp" />
     <ClCompile Include="TestDemo.cpp" />
+    <ClCompile Include="TestLevelImporter.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileSet.cpp" />
     <ClCompile Include="Time.cpp" />
@@ -298,6 +307,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="UnitState.cpp" />
     <ClCompile Include="UnitTest.cpp" />
     <ClCompile Include="UnitTestGameObjectFactory.cpp" />
+    <ClCompile Include="UnitTestLevelSequence.cpp" />
     <ClCompile Include="UnitTestMain.cpp" />
     <ClCompile Include="UpdateLogic.cpp" />
     <ClCompile Include="UpdateUI.cpp" />

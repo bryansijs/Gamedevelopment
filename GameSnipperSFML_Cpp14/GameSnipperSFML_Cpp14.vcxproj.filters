@@ -181,17 +181,11 @@
     <Filter Include="Header Files\Model\Items">
       <UniqueIdentifier>{374d5c0c-2551-4b15-b054-3b4bbdf8ff57}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Input">
-      <UniqueIdentifier>{eb71a3c5-f9ad-4ae4-a2a0-2cc4c719fd70}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Input">
-      <UniqueIdentifier>{a096012f-a593-4531-951a-7ce3e258756b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Actions">
-      <UniqueIdentifier>{f3effd31-0d13-4a74-8192-aa5090a53787}</UniqueIdentifier>
+      <UniqueIdentifier>{b8df937f-8adb-4e46-b3b3-6d4e5acfa0f1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Actions">
-      <UniqueIdentifier>{ff0f8881-6a32-47ab-a6da-4404a6d2c445}</UniqueIdentifier>
+      <UniqueIdentifier>{c83547d1-0bf2-4987-b725-4abb4574c21f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -306,9 +300,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
-    <ClInclude Include="application.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
@@ -329,6 +320,9 @@
     </ClInclude>
     <ClInclude Include="BaseState.h">
       <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="TestLevelImporter.h">
+      <Filter>Header Files\UnitTest\Tests</Filter>
     </ClInclude>
     <ClInclude Include="EnemyFactory.h">
       <Filter>Header Files\Factories</Filter>
@@ -363,6 +357,9 @@
     <ClInclude Include="UnitTestGameObjectFactory.h">
       <Filter>Header Files\UnitTest\Tests</Filter>
     </ClInclude>
+    <ClInclude Include="LevelManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
     <ClInclude Include="GameObjectContainer.h">
       <Filter>Header Files\Containers</Filter>
     </ClInclude>
@@ -375,16 +372,28 @@
     <ClInclude Include="resource2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BaseInput.h">
-      <Filter>Header Files\Input</Filter>
+    <ClInclude Include="JSConsole.h">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerActions.h">
+    <ClInclude Include="UnitTestLevelSequence.h">
+      <Filter>Header Files\UnitTest\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseItem.h">
+      <Filter>Header Files\Model\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEnemy.h">
+      <Filter>Header Files\Model\Units\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseInput.h">
       <Filter>Header Files\Actions</Filter>
     </ClInclude>
     <ClInclude Include="GameActions.h">
       <Filter>Header Files\Actions</Filter>
     </ClInclude>
     <ClInclude Include="MenuActions.h">
+      <Filter>Header Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerActions.h">
       <Filter>Header Files\Actions</Filter>
     </ClInclude>
   </ItemGroup>
@@ -518,6 +527,9 @@
     <ClCompile Include="GameContext.cpp">
       <Filter>Source Files\Context</Filter>
     </ClCompile>
+    <ClCompile Include="TestLevelImporter.cpp">
+      <Filter>Source Files\UnitTest\Tests</Filter>
+    </ClCompile>
     <ClCompile Include="GameTileFactory.cpp">
       <Filter>Source Files\Factories</Filter>
     </ClCompile>
@@ -551,19 +563,31 @@
     <ClCompile Include="UnitTestGameObjectFactory.cpp">
       <Filter>Source Files\UnitTest\Tests</Filter>
     </ClCompile>
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
     <ClCompile Include="GameObjectContainer.cpp">
       <Filter>Source Files\Containers</Filter>
     </ClCompile>
-    <ClCompile Include="BaseInput.cpp">
-      <Filter>Source Files\Input</Filter>
+    <ClCompile Include="UnitTestLevelSequence.cpp">
+      <Filter>Source Files\UnitTest\Tests</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerActions.cpp">
+    <ClCompile Include="BaseItem.cpp">
+      <Filter>Source Files\Model\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseEnemy.cpp">
+      <Filter>Source Files\Model\Units\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseInput.cpp">
       <Filter>Source Files\Actions</Filter>
     </ClCompile>
     <ClCompile Include="GameActions.cpp">
       <Filter>Source Files\Actions</Filter>
     </ClCompile>
     <ClCompile Include="MenuActions.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerActions.cpp">
       <Filter>Source Files\Actions</Filter>
     </ClCompile>
   </ItemGroup>

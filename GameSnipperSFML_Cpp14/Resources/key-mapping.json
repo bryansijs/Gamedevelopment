@@ -31,6 +31,14 @@
     {
       "map": "enter",
       "key": "Return"
+    },
+     {
+      "map": "K",
+      "key": "K"
+    },
+    {
+      "map": "L",
+      "key": "L"
     }
   ]
 }
