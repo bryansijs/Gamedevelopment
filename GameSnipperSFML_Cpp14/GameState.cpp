@@ -11,13 +11,16 @@
 #include "LoseState.h"
 #include "MenuState.h"
 
-GameState::GameState(Context* context, StateManager* stateManager)
+GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager)
 {
+	maincontext = context;
 	gameContext = new GameContext(context);
 	this->stateManager = stateManager;
+	this->levelManager = levelmanager;
 
-	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer,gameContext->moveContainer, gameContext->useContainer);
-	gameContext->levelImporter->Import("./Resources/levels/Level_New.json");
+	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->useContainer);
+	gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
+
 
 	gameContext->levelImporter->Prepare();
 
@@ -35,6 +38,8 @@ GameState::GameState(Context* context, StateManager* stateManager)
 
 GameState::~GameState()
 {
+	delete(gameContext);
+	delete(levelManager);
 }
 
 void GameState::Update()
@@ -63,6 +68,10 @@ void GameState::Update()
 			{
 				Input::EventOccured(gameContext->event);
 				gameContext->playerInput.CatchInput();
+
+				if (Input::GetKeyDown("K")) {
+					StartNextLevel();
+				}
 			}
 		}
 
@@ -81,7 +90,7 @@ void GameState::Update()
 		sf::Image screenshot = gameContext->context->window.capture();
 		screenshot.saveToFile("./Resources/menuHTML/images/hold.png");
 
-		LoseState* loseState = new LoseState(gameContext->context, stateManager);
+		LoseState* loseState = new LoseState(gameContext->context, stateManager, levelManager);
 		stateManager->AddState(loseState);
 		stateManager->StartNextState();
 	}
@@ -97,4 +106,30 @@ void GameState::Update()
 void GameState::Terminate()
 {
 	terminate = true;
+}
+
+void GameState::StartNextLevel()
+{
+	delete(gameContext);
+
+	gameContext = new GameContext(maincontext);
+
+	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->useContainer);
+	gameContext->levelImporter->Clear();
+	gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
+
+	gameContext->levelImporter->Prepare();
+
+	gameContext->level = gameContext->levelImporter->getLevel();
+	gameContext->levelImporter->Clear();
+
+	gameContext->playerActions.SetContainers(gameContext->drawContainer, gameContext->moveContainer, &gameContext->level->tiles);
+	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
+
+	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
+	
+	gameContext->view.reset(rect);
+	gameContext->context->window.setView(gameContext->view);
+
+	Update();
 }

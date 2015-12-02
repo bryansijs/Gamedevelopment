@@ -17,10 +17,11 @@
 
 using namespace Awesomium;
 
-LoseState::LoseState(Context* context, StateManager* stateManager)
+LoseState::LoseState(Context* context, StateManager* stateManager, LevelManager* levelManager)
 {
 	loseContext = new LoseContext(context);
 	this->stateManager = stateManager;
+	this->levelManager = levelManager;
 
 	sf::View view = loseContext->context->window.getView();
 	view.setCenter(480, 320);
@@ -95,7 +96,7 @@ void LoseState::Update()
 void LoseState::ToMenu()
 {
 	loseContext->music->stop();
-	MenuState* menuState = new MenuState(loseContext->context, stateManager);
+	MenuState* menuState = new MenuState(loseContext->context, stateManager, levelManager);
 
 	stateManager->AddState(menuState);
 	stateManager->StartNextState();

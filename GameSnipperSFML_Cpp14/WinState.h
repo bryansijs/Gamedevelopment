@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseState.h"
 #include <Awesomium/WebCore.h>
+#include "LevelManager.h"
 
 class StateManager;
 class Context;
@@ -15,8 +16,9 @@ private:
 
 	Context* context;
 	WinContext* winContext;
+	LevelManager* levelManager;
 public:
-	WinState(Context* context, StateManager* stateManager);
+	WinState(Context* context, StateManager* stateManager, LevelManager* levelManager);
 	~WinState();
 
 	void Update();
