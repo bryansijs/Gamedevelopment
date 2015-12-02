@@ -28,6 +28,8 @@ std::string Input::TranslateKey(sf::Keyboard::Key key)
 		{ sf::Keyboard::Down, "Down" },
 		{ sf::Keyboard::Space, "Space" },
 		{ sf::Keyboard::E, "E" },
+		{ sf::Keyboard::K, "K" },
+		{ sf::Keyboard::L, "L" },
 		{ sf::Keyboard::Num1, "Num1" },
 		{ sf::Keyboard::Num2, "Num2" },
 		{ sf::Keyboard::Num3, "Num3" },

@@ -33,11 +33,11 @@
       "key": "Return"
     },
      {
-      "map": "K",
+      "map": "switch-up",
       "key": "K"
     },
     {
-      "map": "L",
+      "map": "switch-down",
       "key": "L"
     }
   ]

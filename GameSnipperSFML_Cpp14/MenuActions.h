@@ -57,8 +57,8 @@ private:
 		{ "move-down", &MenuActions::NavigateDown },
 		{ "move-left", &MenuActions::NavigateLeft },
 		{ "move-right", &MenuActions::NavigateRight },
-		{ "K", &MenuActions::SwitchToUp },
-		{ "L", &MenuActions::SwitchToDown },
+		{ "switch-up", &MenuActions::SwitchToUp },
+		{ "switch-down", &MenuActions::SwitchToDown },
 		{ "enter", &MenuActions::NavigateComfirm },
 		{ "escape", &MenuActions::BackToMenu }
 	};
