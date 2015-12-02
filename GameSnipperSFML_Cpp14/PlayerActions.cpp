@@ -155,6 +155,6 @@ void PlayerActions::StandStill()
 	}
 
 	// todo: add text to text displayer
-	cout << "Let's take a walk!\n";
+	// cout << "Let's take a walk!\n";
 	StandStillTimerReset();
 }
