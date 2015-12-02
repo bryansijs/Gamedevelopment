@@ -22,6 +22,10 @@ LoseState::LoseState(Context* context, StateManager* stateManager)
 	loseContext = new LoseContext(context);
 	this->stateManager = stateManager;
 
+	sf::View view = loseContext->context->window.getView();
+	view.setCenter(480, 320);
+	loseContext->context->window.setView(view);
+
 	// Awesomium init
 	loseContext->web_core = context->web_core;
 	loseContext->webView = loseContext->web_core->CreateWebView(960, 640);

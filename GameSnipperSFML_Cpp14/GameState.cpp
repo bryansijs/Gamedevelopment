@@ -8,6 +8,7 @@
 #include "MoveContainer.h"
 #include "DrawContainer.h"
 #include "WinState.h"
+#include "LoseState.h"
 #include "MenuState.h"
 
 GameState::GameState(Context* context, StateManager* stateManager)
@@ -80,10 +81,12 @@ void GameState::Update()
 		sf::Image screenshot = gameContext->context->window.capture();
 		screenshot.saveToFile("./Resources/menuHTML/images/hold.png");
 
-		WinState* winState = new WinState(gameContext->context, stateManager);
-		stateManager->AddState(winState);
+		LoseState* loseState = new LoseState(gameContext->context, stateManager);
+		stateManager->AddState(loseState);
 		stateManager->StartNextState();
 	}
+
+
 
 	if (terminate)
 	{
