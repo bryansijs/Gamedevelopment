@@ -24,6 +24,10 @@ WinState::WinState(Context* context, StateManager* stateManager)
 	winContext = new WinContext(context);
 	this->stateManager = stateManager;
 
+	sf::View view = winContext->context->window.getView();
+	view.setCenter(480, 320);
+	winContext->context->window.setView(view);
+
 	// Awesomium init
 	winContext->web_core = context->web_core;
 	winContext->webView = winContext->web_core->CreateWebView(960, 640);
