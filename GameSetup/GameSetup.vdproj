@@ -2807,7 +2807,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:EchoGame"
         "ProductCode" = "8:{017EED8F-F8E4-4D68-BC81-38B890F517EF}"
-        "PackageCode" = "8:{69FFD671-B52B-4633-A9DC-2CE17FBB7EDD}"
+        "PackageCode" = "8:{A227158A-00BB-4210-B8E8-C93E50E1E244}"
         "UpgradeCode" = "8:{2E1206C4-131C-4850-B067-94E83CC1C2BD}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -2927,6 +2927,34 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_818FBE139BB44EE48C8ABC64ACF6F8AA"
+            {
+            "Name" = "8:Echo Game.exe"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_532DD5DA55CC4D52BBFCB48AF100275F"
+            "Folder" = "8:_F8E16883A9754AC6BDDD5FAE3E8532FB"
+            "WorkingFolder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C188C2B2E2C64F278A9E025C250B6EEB"
+            {
+            "Name" = "8:Echo Game.exe"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_532DD5DA55CC4D52BBFCB48AF100275F"
+            "Folder" = "8:_C56A0D9BBBBE4C3F9D8E07F3F5214AB2"
+            "WorkingFolder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {
