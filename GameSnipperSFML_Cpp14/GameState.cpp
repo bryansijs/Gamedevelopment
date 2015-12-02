@@ -95,6 +95,16 @@ void GameState::Update()
 		stateManager->StartNextState();
 	}
 
+	if (gameContext->player->getHealth() == 50)
+	{
+		sf::Image screenshot = gameContext->context->window.capture();
+		screenshot.saveToFile("./Resources/menuHTML/images/hold.png");
+
+		WinState* winState = new WinState(gameContext->context, stateManager, levelManager);
+		stateManager->AddState(winState);
+		stateManager->StartNextState();
+	}
+
 
 
 	if (terminate)

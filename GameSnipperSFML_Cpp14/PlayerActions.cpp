@@ -76,7 +76,7 @@ void PlayerActions::ExecuteActions()
 
 	if (Input::GetKeyDown("Y"))
 	{
-		
+		player->setHealth(50);
 	}
 
 	if (Input::GetKeyDown("U"))
