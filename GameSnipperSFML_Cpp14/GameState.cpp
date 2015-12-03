@@ -55,8 +55,6 @@ void GameState::Update()
 	sf::Vector2f playerPosition(gameContext->player->getBody()->GetPosition().x, gameContext->player->getBody()->GetPosition().y);
 	sf::Vector2i worldPosition = gameContext->context->window.mapCoordsToPixel(playerPosition);
 
-
-
 	gameContext->level->draw(&gameContext->context->window, &gameContext->view);
 	gameContext->level->update();
 
@@ -82,6 +80,10 @@ void GameState::Update()
 
 		gameContext->playerActions.ProcessActions(gameContext->playerInput.GetActiveKeys());
 		gameContext->level->updateViewPort(worldPosition);
+	}
+	else
+	{
+		gameContext->player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	}
 
 	this->gameContext->world->Step(1 / 60.f, 8, 3);

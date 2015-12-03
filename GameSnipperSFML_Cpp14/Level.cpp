@@ -50,7 +50,7 @@ void  Level::updateViewPort(sf::Vector2i &worldPos)
 
 void Level::MoveView(sf::View& view, sf::Window& window)
 {
-	float time = 600.0f * Time::deltaTime;
+	float time = 0.3f * Time::deltaTime;
 	if (moveDown)
 	{
 		if (t_value < t_max)
