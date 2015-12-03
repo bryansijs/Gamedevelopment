@@ -63,7 +63,7 @@ void MoveAction::Move()
 
 	AnimateMovement(gameObject);
 	
-	gameObject->getBody()->SetLinearVelocity(b2Vec2(velocity.x * 2, velocity.y * 2));
+	gameObject->getBody()->SetLinearVelocity(b2Vec2(velocity.x, velocity.y));
 }
 
 void MoveAction::AnimateMovement(GameObject *gameObject)
