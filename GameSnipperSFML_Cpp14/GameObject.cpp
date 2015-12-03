@@ -102,7 +102,7 @@ void GameObject::SetMoveBehaviour(MoveBehaviour* moveBehaviour)
 }
 
 void GameObject::createBoxStatic(b2World& World)
-{	
+{
 	myBodyDef.type = b2_staticBody;
 
 	Body = World.CreateBody(&myBodyDef);
@@ -111,7 +111,12 @@ void GameObject::createBoxStatic(b2World& World)
 		Shape.SetAsBox((32.f / 2), (32.f / 2));
 	}
 	else {
-		Shape.SetAsBox(getHeight() / 2, getWidth() / 2);
+		b2Vec2 vertices[4];
+		vertices[0].Set(-16, -16);
+		vertices[1].Set(-16, this->getHeight() + -16);
+		vertices[2].Set(this->getWidth() + -16, this->getHeight() + -16);
+		vertices[3].Set(this->getWidth() + -16, -16);
+		this->Shape.Set(vertices, 4);
 	}
 
 	boxFixtureDef.density = 100.f;
@@ -123,17 +128,23 @@ void GameObject::createBoxStatic(b2World& World)
 
 void GameObject::createBoxDynamic(b2World & World)
 {
+
 	myBodyDef.type = b2_dynamicBody;
+
 	Body = World.CreateBody(&myBodyDef);
 
-	if (this->getHeight() < 1 || this->getWidth() < 1)
-	{
+	if (this->getHeight() < 1 || this->getWidth() < 1) {
 		Shape.SetAsBox((30.f / 2), (30.f / 2));
 	}
-	else
-	{
-		Shape.SetAsBox((getHeight() - 2) / 2, (getWidth() - 2) / 2);
+	else {
+		b2Vec2 vertices[4];
+		vertices[0].Set(-16, -16);
+		vertices[1].Set(-16, this->getHeight() + -16);
+		vertices[2].Set(this->getWidth() + -16, this->getHeight() + -16);
+		vertices[3].Set(this->getWidth() + -16, -16);
+		this->Shape.Set(vertices, 4);
 	}
+
 
 	boxFixtureDef.density = 100.f;
 	boxFixtureDef.friction = 0.7f;

@@ -86,7 +86,7 @@ void GameState::Update()
 		gameContext->player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	}
 
-	this->gameContext->world->Step(1 / 60.f, 8, 3);
+	this->gameContext->world->Step(1, 8, 3);
 
 	gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
 	gameContext->drawContainer->Draw(&gameContext->context->window);
