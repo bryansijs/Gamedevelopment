@@ -387,9 +387,6 @@
     <ClInclude Include="BaseEnemy.h">
       <Filter>Header Files\Model\Units\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionListener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DebugBox2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -401,6 +398,9 @@
     </ClInclude>
     <ClInclude Include="Random.h">
       <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionListener.h">
+      <Filter>Header Files\Controller</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -590,9 +590,6 @@
     <ClCompile Include="BaseEnemy.cpp">
       <Filter>Source Files\Model\Units\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionListener.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DebugBox2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -604,6 +601,9 @@
     </ClCompile>
     <ClCompile Include="Random.cpp">
       <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionListener.cpp">
+      <Filter>Source Files\Controller</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

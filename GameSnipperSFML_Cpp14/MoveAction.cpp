@@ -79,7 +79,7 @@ void MoveAction::AnimateMovement(GameObject *gameObject)
 
 	gameObject->setImageX(animateState);
 	animateState++;
-	animationDelay = 0.05;
+	animationDelay = 0.08;
 }
 
 void MoveAction::AnimateMovement(GameObject* gameObject, int state)

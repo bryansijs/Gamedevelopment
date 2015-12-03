@@ -187,7 +187,6 @@ void Level::Start(GameObject* player, sf::Vector2u* size)
 	r_value = viewPortX;
 
 	player->setPosition(start->getPosition().x, start->getPosition().y);
-	player->getMyBodydef().position = b2Vec2(start->getPosition().x, start->getPosition().y);
 
 	music.setLoop(true);
 	music.play();
