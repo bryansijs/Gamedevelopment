@@ -10,7 +10,7 @@ bool UnitTest::Compare(std::string identifier, int result, int expected)
 	return PrintFalse(identifier);
 }
 
-bool UnitTest::Compare(std::string identifier, sf::Vector2f result, sf::Vector2f expected)
+bool UnitTest::Compare(std::string identifier, b2Vec2 result, b2Vec2 expected)
 {
 	if (result.x == expected.x && result.y == expected.y)
 		return PrintTrue(identifier);

@@ -3,48 +3,38 @@
 
 #include "Time.h"
 
-ShotMoveBehaviour::ShotMoveBehaviour(GameObject* gameObject)
+ShotMoveBehaviour::ShotMoveBehaviour(GameObject* gameObject, std::string shotDirection)
 {
 	this->gameObject = gameObject;
+	direction = shotDirection;
 }
 
 ShotMoveBehaviour::~ShotMoveBehaviour()
 {
 }
 
-void ShotMoveBehaviour::Update()
+void ShotMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 {
-	//TODO wat er word hier per direct iets aangepast?
-	//position van het object word een private die je later kunt opvragenmet een getter
-	//Daarna zul je deze moeten zetten door middel van een setter!
 	if (direction == "move-up")
 	{
-		float temp = gameObject->getPositionY() - velocity * Time::deltaTime;
-		gameObject->setPosition(sf::Vector2f(gameObject->getPositionX(), temp));
+		float temp = gameObject->getPosition().y - velocity * Time::deltaTime;
+		gameObject->setPosition(gameObject->getPosition().x, temp);
 	}
 	if (direction == "move-down")
 	{
-		float temp = gameObject->getPositionY() + velocity * Time::deltaTime;
-		gameObject->setPosition(sf::Vector2f(gameObject->getPositionX(), temp));
+		float temp = gameObject->getPosition().y + velocity * Time::deltaTime;
+		gameObject->setPosition(gameObject->getPosition().x, temp);
 	}
 	if (direction == "move-left")
 	{
-
-		float temp = gameObject->getPositionX() - velocity * Time::deltaTime;
-		gameObject->setPosition(sf::Vector2f(temp, gameObject->getPositionY()));
-
-}
+		float temp = gameObject->getPosition().x - velocity * Time::deltaTime;
+		gameObject->setPosition(temp, gameObject->getPosition().y);
+	}
 	if (direction == "move-right")
 	{
-		float temp = gameObject->getPositionX() + velocity * Time::deltaTime;
-		gameObject->setPosition(sf::Vector2f(temp, gameObject->getPositionY()));
-
+		float temp = gameObject->getPosition().x + velocity * Time::deltaTime;
+		gameObject->setPosition(temp, gameObject->getPosition().y);
 	}
-}
-
-void ShotMoveBehaviour::SetDirection(std::string shotDirection)
-{
-	direction = shotDirection;
 }
 
 bool ShotMoveBehaviour::checkVisible(int screenX, int screenY)

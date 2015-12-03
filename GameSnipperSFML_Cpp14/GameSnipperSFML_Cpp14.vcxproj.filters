@@ -142,17 +142,11 @@
     <Filter Include="Source Files\UnitTest\Tests">
       <UniqueIdentifier>{0b3d2887-6c2a-4caa-b52f-0ca58b7eeafb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Model\Units\Player\Action">
-      <UniqueIdentifier>{4781ab13-eb86-4298-8071-7fb2180d5e35}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Behaviours\Move">
       <UniqueIdentifier>{993ac1fc-50ef-4984-9960-bb8b20dc4fa5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Behaviours\Draw">
       <UniqueIdentifier>{a3847174-d46c-4a07-87dd-ff4bf682db55}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Model\Units\Player\Action">
-      <UniqueIdentifier>{5398b0e7-83c0-42a3-b93d-ec9c1d339179}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Behaviours\Move">
       <UniqueIdentifier>{1a00c204-68e0-4916-9138-803a72359a03}</UniqueIdentifier>
@@ -180,6 +174,12 @@
     </Filter>
     <Filter Include="Header Files\Model\Items">
       <UniqueIdentifier>{374d5c0c-2551-4b15-b054-3b4bbdf8ff57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Units\Actions">
+      <UniqueIdentifier>{5398b0e7-83c0-42a3-b93d-ec9c1d339179}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Units\Actions">
+      <UniqueIdentifier>{4781ab13-eb86-4298-8071-7fb2180d5e35}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -271,10 +271,10 @@
       <Filter>Header Files\Containers</Filter>
     </ClInclude>
     <ClInclude Include="MoveAction.h">
-      <Filter>Header Files\Model\Units\Player\Action</Filter>
+      <Filter>Header Files\Model\Units\Actions</Filter>
     </ClInclude>
     <ClInclude Include="ShootAction.h">
-      <Filter>Header Files\Model\Units\Player\Action</Filter>
+      <Filter>Header Files\Model\Units\Actions</Filter>
     </ClInclude>
     <ClInclude Include="PlayerDrawBehaviour.h">
       <Filter>Header Files\Behaviours\Draw</Filter>
@@ -377,7 +377,7 @@
     </ClInclude>
     <ClInclude Include="UnitTestLevelSequence.h">
       <Filter>Header Files\UnitTest\Tests</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -387,11 +387,20 @@
     <ClInclude Include="BaseEnemy.h">
       <Filter>Header Files\Model\Units\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="Random.h">
-      <Filter>Header Files\Utils</Filter>
+    <ClInclude Include="DebugBox2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="square.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WanderMoveBehaviour.h">
       <Filter>Header Files\Behaviours\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionListener.h">
+      <Filter>Header Files\Controller</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -480,10 +489,10 @@
       <Filter>Source Files\UnitTest\Tests</Filter>
     </ClCompile>
     <ClCompile Include="MoveAction.cpp">
-      <Filter>Source Files\Model\Units\Player\Action</Filter>
+      <Filter>Source Files\Model\Units\Actions</Filter>
     </ClCompile>
     <ClCompile Include="ShootAction.cpp">
-      <Filter>Source Files\Model\Units\Player\Action</Filter>
+      <Filter>Source Files\Model\Units\Actions</Filter>
     </ClCompile>
     <ClCompile Include="PlayerDrawBehaviour.cpp">
       <Filter>Source Files\Behaviours\Draw</Filter>
@@ -574,18 +583,27 @@
     </ClCompile>
     <ClCompile Include="UnitTestLevelSequence.cpp">
       <Filter>Source Files\UnitTest\Tests</Filter>
-	 </ClCompile>
+    </ClCompile>
     <ClCompile Include="BaseItem.cpp">
       <Filter>Source Files\Model\Items</Filter>
     </ClCompile>
     <ClCompile Include="BaseEnemy.cpp">
       <Filter>Source Files\Model\Units\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="Random.cpp">
-      <Filter>Source Files\Utils</Filter>
+    <ClCompile Include="DebugBox2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="square.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WanderMoveBehaviour.cpp">
       <Filter>Source Files\Behaviours\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionListener.cpp">
+      <Filter>Source Files\Controller</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -38,12 +38,11 @@ private:
 	InteractiveFactory interactiveFactory;
 	ItemFactory itemFactory;
 	std::vector<Tile*> tileList;
+	b2World* world;
 
 public:
-	GameObjectFactory(DrawContainer *drawContainer);
-	GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer);
-	GameObjectFactory(DrawContainer *drawContainer, GameObjectContainer* gameObjectContainer);
-	GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer);
+
+	GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer, b2World* world);
 	GameObjectFactory();
 	~GameObjectFactory();
 

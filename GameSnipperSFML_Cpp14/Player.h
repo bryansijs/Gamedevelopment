@@ -34,8 +34,8 @@ private:
 
 
 public:
-	Player(MoveContainer* moveContainer, DrawContainer* drawContainer);
-	Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameObjectContainer *useContainer);
+	Player(MoveContainer* moveContainer, DrawContainer* drawContainer, b2World* world);
+	Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameObjectContainer *useContainer, b2World* world);
 	Player();
 	~Player();
 

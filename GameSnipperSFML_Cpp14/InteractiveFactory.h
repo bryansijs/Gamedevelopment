@@ -12,15 +12,15 @@ class InteractiveFactory
 public:
 	InteractiveFactory();
 	~InteractiveFactory();
-	GameObject* Create(std::map<std::string, std::string> properties, DrawContainer* , GameObjectContainer* , std::vector<Tile*>& );
+	GameObject* Create(std::map<std::string, std::string> properties, DrawContainer* , GameObjectContainer*, b2World* world, std::vector<Tile*>& );
 
 
 private:
 	std::vector<Tile*> tileList;
-	GameObject* CreateSwitch(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer);
-	GameObject* CreateDoor(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer);
-	GameObject* CreateKeyHole(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer);
-	std::map<std::string, GameObject*(InteractiveFactory::*)(std::map<std::string, std::string>&, DrawContainer* container, GameObjectContainer* gameObjectContainer)> possibleObjects = {
+	GameObject* CreateSwitch(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer, b2World* world);
+	GameObject* CreateDoor(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer, b2World* world);
+	GameObject* CreateKeyHole(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer, b2World* world);
+	std::map<std::string, GameObject*(InteractiveFactory::*)(std::map<std::string, std::string>&, DrawContainer* , GameObjectContainer* , b2World* )> possibleObjects = {
 		{ "Switch", &InteractiveFactory::CreateSwitch },
 		{ "Door", &InteractiveFactory::CreateDoor },
 		{ "KeyHole", &InteractiveFactory::CreateKeyHole }, };

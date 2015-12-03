@@ -16,15 +16,6 @@ MoveAction::~MoveAction()
 {
 }
 
-void MoveAction::Move(std::vector<std::string> directions, GameObject *gameObject, std::vector<Tile*>* tiles)
-{
-	this->directions = directions;
-	this->gameObject = gameObject;
-	this->tiles = tiles;
-
-	Move();
-}
-
 void MoveAction::Move(std::vector<std::string> directions, GameObject *gameObject)
 {
 	this->directions = directions;
@@ -67,20 +58,12 @@ void MoveAction::Move()
 		velocity.y *= sin(45 * 3.14159265359 / 180);
 	}
 
-	if (tiles != nullptr)
-	{
-		if (gameObject->isColliding(*tiles, velocity))
-		{
-			return;
-		}
-	}
-
 	velocity.x = roundf(velocity.x * 100) / 100;
 	velocity.y = roundf(velocity.y * 100) / 100;
 
 	AnimateMovement(gameObject);
-
-	gameObject->setPosition(gameObject->getPosition() + velocity);
+	
+	gameObject->getBody()->SetLinearVelocity(b2Vec2(velocity.x, velocity.y));
 }
 
 void MoveAction::AnimateMovement(GameObject *gameObject)
@@ -96,7 +79,7 @@ void MoveAction::AnimateMovement(GameObject *gameObject)
 
 	gameObject->setImageX(animateState);
 	animateState++;
-	animationDelay = 0.05;
+	animationDelay = 0.08;
 }
 
 void MoveAction::AnimateMovement(GameObject* gameObject, int state)

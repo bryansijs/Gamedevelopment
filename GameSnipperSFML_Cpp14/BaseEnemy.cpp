@@ -16,7 +16,6 @@ BaseEnemy::BaseEnemy(DrawContainer* dContainer, std::string img, MoveContainer* 
 
 }
 
-
 void BaseEnemy::setProperties(std::map<std::string, std::string>& properties)
 {
 	int x, y, widht, height;
@@ -25,12 +24,6 @@ void BaseEnemy::setProperties(std::map<std::string, std::string>& properties)
 	widht = std::stoi(properties["width"]);
 	height = std::stoi(properties["height"]);
 
-
-	this->setPosition(sf::Vector2f(x,y));
+	this->setPosition(x,y);
 	this->setSize(widht, height);
 }
-
-/*
-
-
-*/
