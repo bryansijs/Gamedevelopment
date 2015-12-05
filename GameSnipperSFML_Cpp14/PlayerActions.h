@@ -21,9 +21,9 @@ public:
 	PlayerActions(Player *player);
 	~PlayerActions();
 	float useDelay = 0;
-	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer);
+	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, GameObjectContainer *gameObjectContainer);
+	void SetWorld(b2World* world);
 	void ProcessActions(std::vector<std::string> &newActiveKeys);
-	void SetTiles(std::vector<Tile*>* t) { tiles = t; };
 
 	void Move();
 	void Shoot();
@@ -49,6 +49,7 @@ private:
 
 	DrawContainer *drawContainer;
 	MoveContainer *moveContainer;
+	GameObjectContainer * gameObjectContainer;
 
 	DrawBehaviour drawBehaviour;
 	MoveBehaviour moveBehaviour;
@@ -57,7 +58,7 @@ private:
 	ShootAction shootAction;
 
 	Player *player;
-	std::vector<Tile*>* tiles;
+	b2World* world;
 
 	bool fired = false;
 	bool resetMove = true;

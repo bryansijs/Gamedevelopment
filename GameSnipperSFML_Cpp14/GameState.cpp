@@ -20,15 +20,13 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer,gameContext->moveContainer, gameContext->useContainer, gameContext->world);
 	gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
 
-	//gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer);
-	//gameContext->levelImporter->Import("./Resources/levels/Level_New.json");
-
 	gameContext->levelImporter->Prepare();
 
 	gameContext->level = gameContext->levelImporter->getLevel();
 	gameContext->levelImporter->Clear();
 
-	gameContext->playerActions->SetContainers(gameContext->drawContainer, gameContext->moveContainer);
+	gameContext->playerActions->SetContainers(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer);
+	gameContext->playerActions->SetWorld(gameContext->world);
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
 
 	gameContext->player->createBoxDynamic(*gameContext->world);
@@ -121,7 +119,8 @@ void GameState::StartNextLevel()
 	gameContext->level = gameContext->levelImporter->getLevel();
 	gameContext->levelImporter->Clear();
 
-	gameContext->playerActions->SetContainers(gameContext->drawContainer, gameContext->moveContainer);
+	gameContext->playerActions->SetContainers(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer);
+	gameContext->playerActions->SetWorld(gameContext->world);
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
 
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);

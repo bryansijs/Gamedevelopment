@@ -7,6 +7,7 @@
 #include "GameObject.h"
 #include "DrawContainer.h"
 #include "MoveContainer.h"
+#include "GameObjectContainer.h"
 #include "ShotMoveBehaviour.h"
 #include "Player.h"
 
@@ -20,34 +21,33 @@ ShootAction::~ShootAction()
 {
 }
  
-void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContainer, Player* player, std::string direction)
+void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer, b2World* world, Player* player, std::string direction)
 {
 	if (Time::runningTime > nextShot)
 	{
 		nextShot = (float)Time::runningTime + (float)shotRate;
 
-		GameObject* shot = new GameObject(drawContainer, "bullet-red.png");
-
-		ShotMoveBehaviour* shotBehaviour = new ShotMoveBehaviour(shot, direction);
-		moveContainer->AddBehaviour(shotBehaviour);
+		GameObjectFactory gameObjectFactory{ drawContainer, moveContainer, gameObjectContainer, world };
+		std::map<std::string, std::string> properties = { { "type", "Projectile" },{ "pType", "Bullet" },{ "direction", direction },{ "texture", "bullet-red.png" } };
+		GameObject* bullet = gameObjectFactory.Create(properties);
 		
 		if (direction == "move-up")
 		{
-			shot->setPosition(player->getBody()->GetPosition().x + 12, player->getBody()->GetPosition().y);
+			bullet->setPosition(player->getBody()->GetPosition().x + 12, player->getBody()->GetPosition().y);
 		}
 		if (direction == "move-down")
 		{
-			shot->setPosition(player->getBody()->GetPosition().x + 12, player->getBody()->GetPosition().y + 24);
+			bullet->setPosition(player->getBody()->GetPosition().x + 12, player->getBody()->GetPosition().y + 24);
 		}
 		if (direction == "move-left")
 		{
-			shot->setPosition(player->getBody()->GetPosition().x, player->getBody()->GetPosition().y + 12);
+			bullet->setPosition(player->getBody()->GetPosition().x, player->getBody()->GetPosition().y + 12);
 		}
 		if (direction == "move-right")
 		{
-			shot->setPosition(player->getBody()->GetPosition().x + 24, player->getBody()->GetPosition().y + 12);
+			bullet->setPosition(player->getBody()->GetPosition().x + 24, player->getBody()->GetPosition().y + 12);
 		}
 		
-		shot->setSize(8, 8);
+		bullet->setSize(8, 8);
 	}
 }

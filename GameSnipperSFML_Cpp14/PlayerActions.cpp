@@ -20,10 +20,16 @@ PlayerActions::~PlayerActions()
 
 }
 
-void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer)
+void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, GameObjectContainer *gameObjectContainer)
 {
 	this->drawContainer = drawContainer;
 	this->moveContainer = moveContainer;
+	this->gameObjectContainer = gameObjectContainer;
+}
+
+void PlayerActions::SetWorld(b2World * world)
+{
+	this->world = world;
 }
 
 void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys)
@@ -94,7 +100,7 @@ void PlayerActions::Move()
 
 void PlayerActions::Shoot()
 {
-	shootAction.Shoot(drawContainer, moveContainer, player, direction);
+	shootAction.Shoot(drawContainer, moveContainer, gameObjectContainer, world, player, direction);
 }
 
 
