@@ -30,7 +30,7 @@ public:
 
 	Player* player;
 	PlayerInput playerInput;
-	PlayerActions playerActions;
+	PlayerActions* playerActions;
 	KeyMappingImporter keyMappingImporter;
 
 	LevelImporter* levelImporter;

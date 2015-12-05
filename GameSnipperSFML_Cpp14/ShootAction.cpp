@@ -33,7 +33,7 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 		
 		if (direction == "move-up")
 		{
-		shot->setPosition(player->getBody()->GetPosition().x + 12, player->getBody()->GetPosition().y);
+			shot->setPosition(player->getBody()->GetPosition().x + 12, player->getBody()->GetPosition().y);
 		}
 		if (direction == "move-down")
 		{

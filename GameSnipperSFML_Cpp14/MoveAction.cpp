@@ -4,24 +4,32 @@
 #include "GameObject.h"
 #include "Time.h"
 #include "Tile.h"
+#include "Animation.h"
 
 #include <math.h>
 #include <iostream>
 
-MoveAction::MoveAction()
+MoveAction::MoveAction(GameObject *gameObject, float delay)
 {
+	this->gameObject = gameObject;
+	animation = new Animation(gameObject, delay, 1);
 }
 
 MoveAction::~MoveAction()
 {
 }
 
-void MoveAction::Move(std::vector<std::string> directions, GameObject *gameObject)
+void MoveAction::Move(std::vector<std::string> directions)
 {
 	this->directions = directions;
-	this->gameObject = gameObject;
 
 	Move();
+}
+
+void MoveAction::Reset()
+{
+	animation->Reset();
+	gameObject->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 }
 
 void MoveAction::Move()
@@ -61,29 +69,7 @@ void MoveAction::Move()
 	velocity.x = roundf(velocity.x * 100) / 100;
 	velocity.y = roundf(velocity.y * 100) / 100;
 
-	AnimateMovement(gameObject);
+	animation->Animate();
 	
 	gameObject->getBody()->SetLinearVelocity(b2Vec2(velocity.x, velocity.y));
-}
-
-void MoveAction::AnimateMovement(GameObject *gameObject)
-{
-	if (animationDelay > 0)
-	{
-		animationDelay = animationDelay - Time::deltaTime;
-		return;
-	}
-
-	if (animateState == gameObject->GetAnimationStates())
-		animateState = 0;
-
-	gameObject->setImageX(animateState);
-	animateState++;
-	animationDelay = 0.08;
-}
-
-void MoveAction::AnimateMovement(GameObject* gameObject, int state)
-{
-	animateState = state;
-	AnimateMovement(gameObject);
 }

@@ -18,10 +18,9 @@ class Tile;
 class PlayerActions
 {
 public:
-	PlayerActions();
+	PlayerActions(Player *player);
 	~PlayerActions();
 	float useDelay = 0;
-	void SetPlayer(Player *activePlayer);
 	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer);
 	void ProcessActions(std::vector<std::string> &newActiveKeys);
 	void SetTiles(std::vector<Tile*>* t) { tiles = t; };
@@ -54,14 +53,14 @@ private:
 	DrawBehaviour drawBehaviour;
 	MoveBehaviour moveBehaviour;
 
-	MoveAction moveAction;
+	MoveAction* moveAction;
 	ShootAction shootAction;
 
 	Player *player;
 	std::vector<Tile*>* tiles;
 
 	bool fired = false;
-	bool resetAnimation = true;
+	bool resetMove = true;
 	bool useAction = true;
 };
 

@@ -28,7 +28,7 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	gameContext->level = gameContext->levelImporter->getLevel();
 	gameContext->levelImporter->Clear();
 
-	gameContext->playerActions.SetContainers(gameContext->drawContainer, gameContext->moveContainer);
+	gameContext->playerActions->SetContainers(gameContext->drawContainer, gameContext->moveContainer);
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
 
 	gameContext->player->createBoxDynamic(*gameContext->world);
@@ -78,7 +78,7 @@ void GameState::Update()
 			}
 		}
 
-		gameContext->playerActions.ProcessActions(gameContext->playerInput.GetActiveKeys());
+		gameContext->playerActions->ProcessActions(gameContext->playerInput.GetActiveKeys());
 		gameContext->level->updateViewPort(worldPosition);
 	}
 	else
@@ -121,7 +121,7 @@ void GameState::StartNextLevel()
 	gameContext->level = gameContext->levelImporter->getLevel();
 	gameContext->levelImporter->Clear();
 
-	gameContext->playerActions.SetContainers(gameContext->drawContainer, gameContext->moveContainer);
+	gameContext->playerActions->SetContainers(gameContext->drawContainer, gameContext->moveContainer);
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
 
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
