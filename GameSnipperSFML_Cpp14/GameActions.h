@@ -17,10 +17,8 @@ public:
 private:
 	GameState* gamestate;
 	void NextLevel();
-	void Test();
 	std::vector<void(GameActions::*)()> activeActions;
 	std::map<std::string, void(GameActions::*)()> actions = {
-		{ "switch-up", &GameActions::NextLevel },
-		{ "switch-down", &GameActions::Test }
+		{ "switch-up", &GameActions::NextLevel }
 	};
 };

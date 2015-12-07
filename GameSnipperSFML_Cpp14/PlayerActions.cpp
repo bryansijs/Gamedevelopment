@@ -54,7 +54,6 @@ void PlayerActions::ProcessActions()
 			{
 				animate = true;
 			}
-
 		}
 	}
 	if(!animate)
@@ -66,17 +65,12 @@ void PlayerActions::ProcessActions()
 
 void PlayerActions::ExecuteActions()
 {
-	std::vector<void(PlayerActions::*)()>::iterator it;
+	vector<void(PlayerActions::*)()>::iterator it;
 
 	for (it = activeActions.begin(); it != activeActions.end(); ++it)
 	{
 		auto function = *it;
 		(this->*function)();
-	}
-
-	if (Input::GetKeyUp(KeyMapping::GetKey("use")))
-	{
-		useAction = true;
 	}
 
 	if (Input::GetKeyUp(KeyMapping::GetKey("use")))

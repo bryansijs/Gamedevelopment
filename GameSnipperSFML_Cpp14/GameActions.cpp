@@ -43,15 +43,10 @@ void GameActions::ExecuteActions()
 		auto function = *it;
 		(this->*function)();
 	}
-	activeKeys.clear();
+	activeActions.clear();
 }
 
 void GameActions::NextLevel()
 {
 	gamestate->StartNextLevel();
-}
-
-void GameActions::Test()
-{
-	cout << "demo\n";
 }
