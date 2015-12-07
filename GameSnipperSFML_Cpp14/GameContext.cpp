@@ -3,7 +3,6 @@
 #include "GameObjectContainer.h"
 #include "MoveContainer.h"
 #include "DrawContainer.h"
-#include "GameActions.h"
 
 GameContext::GameContext(Context* context)
 {
@@ -13,7 +12,6 @@ GameContext::GameContext(Context* context)
 	drawContainer = new DrawContainer();
 	useContainer = new GameObjectContainer();
 	player = new Player(moveContainer, drawContainer,useContainer);
-	gameActions = new GameActions();
 	playerActions.SetPlayer(player);
 }
 

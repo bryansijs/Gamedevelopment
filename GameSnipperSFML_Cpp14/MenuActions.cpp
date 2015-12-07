@@ -105,7 +105,6 @@ void MenuActions::addLevelToMenu(WebView* webView, WebCore* web_core, const char
 		JSArray args;
 		WebString string = WebString::CreateFromUTF8(naam, strlen(naam) + 1);
 		JSValue val = JSValue(string);
-		bool test = val.IsString();
 		args.Push(val);
 		window.ToObject().Invoke(WSLit("insertRow"), args);
 	}
@@ -187,7 +186,7 @@ void MenuActions::NavigateDown()
 {
 	if (menuContext->inLevels)
 	{
-		int maxLevel = 0;
+		int maxLevel;
 		if (menuContext->currentLevelPage * 8 < this->levelManager->getAllLevels().size())
 			maxLevel = menuContext->currentLevelPage * 8;
 		else

@@ -13,6 +13,7 @@
 #include "StateManager.h"
 #include <filesystem>
 #include <thread>
+#include "Input.h"
 
 using namespace Awesomium;
 
@@ -70,7 +71,8 @@ void MenuState::Update()
 
 		if (menuContext->event.type == sf::Event::KeyPressed)
 		{
-			menuActions->CatchSingleInput(menuContext->event.key.code);
+			Input::EventOccured(menuContext->event);
+			menuActions->CatchSingleInput();
 			menuActions->ProcessActions();
 		}
 	}

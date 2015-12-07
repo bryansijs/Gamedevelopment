@@ -2,10 +2,13 @@
 #include "GameActions.h"
 #include <vector>
 #include "KeyMapping.h"
+#include "GameState.h"
 
-GameActions::GameActions()
+GameActions::GameActions(GameState* gamestate)
 {
+	GameActions::gamestate = gamestate;
 }
+
 
 GameActions::~GameActions()
 {
@@ -41,4 +44,14 @@ void GameActions::ExecuteActions()
 		(this->*function)();
 	}
 	activeKeys.clear();
+}
+
+void GameActions::NextLevel()
+{
+	gamestate->StartNextLevel();
+}
+
+void GameActions::Test()
+{
+	cout << "demo\n";
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <SFML/Window/Keyboard.hpp>
+#include <map>
 
 using namespace std;
 
@@ -12,11 +13,14 @@ class Input
 {
 	friend class Main;
 public:
-	Input();
-	~Input();
-
-	static std::string TranslateKey(sf::Keyboard::Key key);
+	static string GetKey(sf::Keyboard::Key key);
+	static sf::Keyboard::Key GetKey(const string & key);
 	static bool GetKeyDown(string key);
 	static bool GetKeyUp(string key);
 	static void EventOccured(sf::Event occuredEvent);
+	static string GetLastPressed();
+	static void ClearLastPressed();
+private:
+	static map<string, sf::Keyboard::Key> keys;
+	static string LastPressed;
 };

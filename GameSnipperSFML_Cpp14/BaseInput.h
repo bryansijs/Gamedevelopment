@@ -8,7 +8,7 @@ public:
 	BaseInput();
 	virtual ~BaseInput();
 
-	void CatchSingleInput(sf::Keyboard::Key key);
+	void CatchSingleInput();
 	void CatchInput();
 protected:
 	std::vector<std::string> activeKeys;

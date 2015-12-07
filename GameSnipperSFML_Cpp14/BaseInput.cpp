@@ -18,7 +18,7 @@ BaseInput::~BaseInput()
 	
 }
 
-void BaseInput::CatchSingleInput(sf::Keyboard::Key key)
+void BaseInput::CatchSingleInput()
 {
 	activeKeys.clear();
 
@@ -28,10 +28,10 @@ void BaseInput::CatchSingleInput(sf::Keyboard::Key key)
 	for (iterator = mapping.begin(); iterator != mapping.end(); ++iterator)
 	{
 		string mapkey = iterator->second;
-		auto test = Input::TranslateKey(key);
-		if (mapkey == Input::TranslateKey(key))
+		if (mapkey == Input::GetLastPressed())
 		{
 			AddActiveKey(mapkey);
+			Input::ClearLastPressed();
 			return;
 		}
 	}

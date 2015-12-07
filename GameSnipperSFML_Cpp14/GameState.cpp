@@ -16,6 +16,7 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	this->stateManager = stateManager;
 	this->levelManager = levelmanager;
 
+	gameContext->gameActions = new GameActions(this);
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->useContainer);
 	gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
 
@@ -65,16 +66,17 @@ void GameState::Update()
 			if (gameContext->event.type == sf::Event::KeyPressed || gameContext->event.type == sf::Event::KeyReleased)
 			{
 				Input::EventOccured(gameContext->event);
-				//gameContext->gameActions->CatchInput();
 				gameContext->playerActions.CatchInput();
+			}
 
-				if (Input::GetKeyDown("K")) {
-					StartNextLevel();
-				}
+			if (gameContext->event.type == sf::Event::KeyPressed)
+			{
+				gameContext->gameActions->CatchSingleInput();
+				gameContext->gameActions->ProcessActions();
 			}
 		}
-		//gameContext->gameActions->ProcessActions();
 		gameContext->playerActions.ProcessActions();
+
 		gameContext->level->updateViewPort(worldPosition);
 	}
 
