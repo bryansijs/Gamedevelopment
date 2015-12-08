@@ -26,17 +26,17 @@ PauseMenu::PauseMenu(float width, float height)
 	menu[0].setFont(font);
 	menu[0].setCharacterSize(16);
 	menu[0].setColor(sf::Color::Red);
-	menu[0].setString("Resume");
+	menu[0].setString("Resume Game");
 	
 	menu[1].setFont(font);	
 	menu[1].setCharacterSize(16);
 	menu[1].setColor(sf::Color::White);
-	menu[1].setString("Menu");
+	menu[1].setString("To Menu");
 	
 	menu[2].setFont(font);
 	menu[2].setCharacterSize(16);
 	menu[2].setColor(sf::Color::White);
-	menu[2].setString("Close");
+	menu[2].setString("Exit Game");
 
 	title.setFont(font);
 	title.setCharacterSize(32);
@@ -129,11 +129,12 @@ void PauseMenu::setPositions(float levelx, float levely, float width, float heig
 	y += 50;
 	title.setPosition(sf::Vector2f(x,y));
 	y += 48;
+	x -= 30;
 	menu[0].setPosition(sf::Vector2f(x, y));
 	menu[1].setPosition(sf::Vector2f(x, y+18));
 	menu[2].setPosition(sf::Vector2f(x, y+36));
 
-	pointerSprite.setPosition(sf::Vector2f(x + 90, y));
+	pointerSprite.setPosition(sf::Vector2f(x + 150, y));
 }
 
 
