@@ -179,7 +179,9 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="BaseItem.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="BasicEnemy.h" />
+    <ClInclude Include="CollisionListener.h" />
     <ClInclude Include="Context.h" />
+    <ClInclude Include="DebugBox2D.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="DrawBehaviour.h" />
     <ClInclude Include="DrawContainer.h" />
@@ -215,11 +217,13 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="PlayerActions.h" />
     <ClInclude Include="PlayerDrawBehaviour.h" />
     <ClInclude Include="PlayerInput.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="resource1.h" />
     <ClInclude Include="resource2.h" />
     <ClInclude Include="Potion.h" />
     <ClInclude Include="RunnerEnemy.h" />
+    <ClInclude Include="square.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="ShootAction.h" />
     <ClInclude Include="ShotMoveBehaviour.h" />
@@ -242,6 +246,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="UpdateLogic.h" />
     <ClInclude Include="UpdateUI.h" />
     <ClInclude Include="GameObjectContainer.h" />
+    <ClInclude Include="WanderMoveBehaviour.h" />
     <ClInclude Include="WarpTile.h" />
     <ClInclude Include="WinContext.h" />
     <ClInclude Include="WinState.h" />
@@ -250,7 +255,9 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="BaseEnemy.cpp" />
     <ClCompile Include="BaseItem.cpp" />
     <ClCompile Include="BasicEnemy.cpp" />
+    <ClCompile Include="CollisionListener.cpp" />
     <ClCompile Include="Context.cpp" />
+    <ClCompile Include="DebugBox2D.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="DrawBehaviour.cpp" />
     <ClCompile Include="DrawContainer.cpp" />
@@ -286,8 +293,10 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="PlayerDrawBehaviour.cpp" />
     <ClCompile Include="PlayerInput.cpp" />
     <ClCompile Include="Potion.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="RunnerEnemy.cpp" />
     <ClCompile Include="SetupState.cpp" />
+    <ClCompile Include="square.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ShootAction.cpp" />
@@ -315,6 +324,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="UpdateLogic.cpp" />
     <ClCompile Include="UpdateUI.cpp" />
     <ClCompile Include="GameObjectContainer.cpp" />
+    <ClCompile Include="WanderMoveBehaviour.cpp" />
     <ClCompile Include="WarpTile.cpp" />
     <ClCompile Include="WinContext.cpp" />
     <ClCompile Include="WinState.cpp" />

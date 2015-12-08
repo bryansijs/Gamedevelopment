@@ -42,15 +42,11 @@ public:
 	Game_Switch();
 	~Game_Switch();
 
-	Game_Switch(DrawContainer* container, GameObjectContainer *GameObjectContainer, std::string img,  std::map<std::string, std::string>& properties, std::vector<Tile*>& tileList);
+	Game_Switch(DrawContainer* container, GameObjectContainer *GameObjectContainer, std::string img,  std::map<std::string, std::string>& properties, std::vector<Tile*>& tileList, b2World* world);
 
-	Game_Switch(GameObjectContainer *useContainer, std::map<std::string, std::string>& properties, std::vector<Tile*>& tileList);
+	Game_Switch(GameObjectContainer *useContainer, std::map<std::string, std::string>& properties, std::vector<Tile*>& tileList, b2World* world);
 
-	Game_Switch(GameObjectContainer *gameObjectContainer, sf::Vector2f position, int widht, int height);
-
-
-	Game_Switch(DrawContainer* container, GameObjectContainer *gameObjectContainer, std::string img, sf::Vector2f position, int widht, int height);
-
+	
 	virtual void setProperties(std::map<std::string, std::string>& properties);
 	virtual void doAction(Player* player);
 
