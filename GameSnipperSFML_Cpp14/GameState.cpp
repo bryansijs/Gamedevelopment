@@ -7,6 +7,8 @@
 #include "GameContext.h"
 #include "MoveContainer.h"
 #include "DrawContainer.h"
+#include "WinState.h"
+#include "LoseState.h"
 #include "MenuState.h"
 #include "square.h"
 
@@ -30,6 +32,7 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	gameContext->playerActions->SetContainers(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer);
 	gameContext->playerActions->SetWorld(gameContext->world);
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
+	gameContext->level->End(context, stateManager, levelManager);
 
 	gameContext->player->createBoxDynamic(*gameContext->world);
 
@@ -165,6 +168,16 @@ void GameState::Update()
 	}
 
 	gameContext->context->window.display();
+
+	if (gameContext->player->getHealth() <= 0)
+	{
+		sf::Image screenshot = gameContext->context->window.capture();
+		screenshot.saveToFile("./Resources/menuHTML/images/hold.png");
+
+		LoseState* loseState = new LoseState(gameContext->context, stateManager, levelManager);
+		stateManager->AddState(loseState);
+		stateManager->StartNextState();
+	}
 
 	if (terminate)
 	{

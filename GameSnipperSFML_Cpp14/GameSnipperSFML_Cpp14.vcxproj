@@ -202,6 +202,8 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="KeyMappingImporter.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelImporter.h" />
+    <ClInclude Include="LoseContext.h" />
+    <ClInclude Include="LoseState.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="MenuContext.h" />
     <ClInclude Include="MenuState.h" />
@@ -250,6 +252,8 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="GameObjectContainer.h" />
     <ClInclude Include="WanderMoveBehaviour.h" />
     <ClInclude Include="WarpTile.h" />
+    <ClInclude Include="WinContext.h" />
+    <ClInclude Include="WinState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
@@ -278,6 +282,8 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="KeyMappingImporter.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelImporter.cpp" />
+    <ClCompile Include="LoseContext.cpp" />
+    <ClCompile Include="LoseState.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuContext.cpp" />
@@ -328,11 +334,15 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="GameObjectContainer.cpp" />
     <ClCompile Include="WanderMoveBehaviour.cpp" />
     <ClCompile Include="WarpTile.cpp" />
+    <ClCompile Include="WinContext.cpp" />
+    <ClCompile Include="WinState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\menuHTML\about.html" />
     <None Include="Resources\menuHTML\instruction.html" />
+    <None Include="Resources\menuHTML\lose.html" />
     <None Include="Resources\menuHtml\menu.html" />
+    <None Include="Resources\menuHTML\win.html" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\menuHtml\images\bg.png" />

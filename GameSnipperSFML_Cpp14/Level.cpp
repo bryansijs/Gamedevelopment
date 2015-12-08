@@ -192,3 +192,21 @@ void Level::Start(GameObject* player, sf::Vector2u* size)
 	music.setLoop(true);
 	music.play();
 }
+
+void Level::End(Context* context, StateManager* stateManager, LevelManager* levelManager)
+{
+	end = nullptr;
+
+	for (size_t i = 0; i < game_objects.size(); i++)
+	{
+		if (dynamic_cast<EndTile*> (getObject(i))) {
+			end = dynamic_cast<EndTile*> (getObject(i));
+			break;
+		}
+	}
+
+	if (end != nullptr)
+	{
+		end->setContext(context, stateManager, levelManager);
+	}
+}

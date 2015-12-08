@@ -25,6 +25,7 @@ Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, b2Wor
 
 	
 	this->getDrawContainer()->AddBehaviour(getDrawBehaviour());
+	this->setHealth(100);
 }
 
 
@@ -42,6 +43,7 @@ Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameO
 	this->getDrawContainer()->AddBehaviour(getDrawBehaviour());
 
 	this->setUseContainer(useContainer);
+	this->setHealth(100);
 }
 
 
@@ -50,6 +52,7 @@ Player::Player()
 {
 	this->SetMoveBehaviour ( new NormalMoveBehaviour(this) );
 	this->setDrawBehaviour(new PlayerDrawBehaviour(this, 10, "Player.png"));
+	this->setHealth(100);
 }
 
 Player::~Player()

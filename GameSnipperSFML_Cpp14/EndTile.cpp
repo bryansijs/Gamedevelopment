@@ -2,6 +2,7 @@
 #include "EndTile.h"
 #include <iostream>
 #include "Player.h"
+#include "WinState.h"
 
 EndTile::EndTile(GameObjectContainer * gameObjectContainer, std::map<std::string, std::string>& properties, b2World * world)
 {
@@ -27,6 +28,12 @@ void EndTile::setProperties(std::map<std::string, std::string>& properties)
 
 void EndTile::doAction()
 {
+	sf::Image screenshot = context->window.capture();
+	screenshot.saveToFile("./Resources/menuHTML/images/hold.png");
+
+	WinState* winState = new WinState(context, stateManager, levelManager);
+	stateManager->AddState(winState);
+	stateManager->StartNextState();
 }
 
 void EndTile::startContact(b2Fixture * fixture)
@@ -41,4 +48,11 @@ void EndTile::startContact(b2Fixture * fixture)
 void EndTile::endContact(b2Fixture * fixture)
 {
 	
+}
+
+void EndTile::setContext(Context* context, StateManager* stateManager, LevelManager* levelManager)
+{
+	this->context = context;
+	this->stateManager = stateManager;
+	this->levelManager = levelManager;
 }

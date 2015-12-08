@@ -35,7 +35,6 @@ MenuState::MenuState(Context* context, StateManager* stateManager, LevelManager*
 	menuContext->currentLevel = 1;
 
 	// Awesomium init
-
 	menuContext->web_core = context->web_core;
 	menuContext->webView = menuContext->web_core->CreateWebView(960, 640);
 

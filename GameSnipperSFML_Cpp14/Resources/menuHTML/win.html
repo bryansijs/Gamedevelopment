@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    @font-face {
+        font-family: moonhouse;
+        src: local("moonhouse"),
+        local("moonhouse"),
+        url(font/moonhouse.ttf);
+        font-weight: normal;
+    }
+
+    html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .frame{
+        font-family: moonhouse;
+        font-size: 20;
+        background-image: url('images/hold.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 640px;
+        width: 960px;
+        color: white;
+    }
+</style>
+<body>
+    <div class="frame">
+	    <div align="middle">
+	    	<img src="images/victory.png">
+	    </div>
+        <div class="js-fade fade-out" style="position:absolute; width: 310px; height: 50px; top: 400px;left: 325px;">
+            <h1 style="text-align: center; font-family: moonhouse; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Press any key to continue</h1>
+        </div>
+    </div>
+</body>
+</html>

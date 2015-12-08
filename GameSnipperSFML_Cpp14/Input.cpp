@@ -36,7 +36,9 @@ sf::Keyboard::Key GetKey(const string & key)
 		{ "Num4", sf::Keyboard::Num4 },
 		{ "Num5", sf::Keyboard::Num5 },
 		{ "Esc", sf::Keyboard::Escape },
-		{ "Return", sf::Keyboard::Return }
+		{ "Return", sf::Keyboard::Return },
+		{ "Y", sf::Keyboard::Y },
+		{ "U", sf::Keyboard::U }
 	};
 
 	auto it = keys.find(key);
