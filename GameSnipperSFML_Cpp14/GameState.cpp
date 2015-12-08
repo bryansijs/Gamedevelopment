@@ -1,12 +1,13 @@
 #include "stdafx.h"
 #include "GameState.h"
-
 #include "StateManager.h"
-
+#include "KeyMapping.h"
 #include "Context.h"
 #include "GameContext.h"
 #include "MoveContainer.h"
 #include "DrawContainer.h"
+#include "MenuState.h"
+
 
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager)
 {
@@ -28,7 +29,7 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
 
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
-	
+
 	gameContext->view.reset(rect);
 	gameContext->context->window.setView(gameContext->view);
 }
@@ -69,18 +70,45 @@ void GameState::Update()
 				if (Input::GetKeyDown("K")) {
 					StartNextLevel();
 				}
+
+
+				if (isPause)
+					this->MenuEnd(gameContext->pauze->KeyHandler());
+
+				if (Input::GetKeyUp(KeyMapping::GetKey("pause"))) {
+					isPause = !isPause;
+					gameContext->pauseSound.play();
+					gameContext->level->pauseMusic(!isPause);
+					if (isPause)
+						gameContext->setMenuPosition();
+				}
+
+
 			}
 		}
-
-		gameContext->playerActions.ProcessActions(gameContext->playerInput.GetActiveKeys());
-		gameContext->level->updateViewPort(worldPosition);
+		if (!isPause)
+		{
+			gameContext->playerActions.ProcessActions(gameContext->playerInput.GetActiveKeys());
+			gameContext->level->updateViewPort(worldPosition);
+		}
 	}
 
-	gameContext->moveContainer->Update();
+	if (!isPause)
+	{
+		gameContext->moveContainer->Update();
+	}
 	gameContext->drawContainer->Draw(&gameContext->context->window);
 
+	if (isPause)
+	{
+		gameContext->pauze->draw(gameContext->context->window);
+	}
 
-	gameContext->context->window.setView(gameContext->view);
+
+	if (!terminate) {
+		gameContext->context->window.setView(gameContext->view);
+	}
+
 	gameContext->context->window.display();
 
 	if (terminate)
@@ -113,9 +141,32 @@ void GameState::StartNextLevel()
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
 
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
-	
+
 	gameContext->view.reset(rect);
 	gameContext->context->window.setView(gameContext->view);
 
 	Update();
+}
+
+void GameState::MenuEnd(int option)
+{
+	switch (option)	{
+		case 0: {
+			isPause = false;
+			gameContext->pauseSound.play();
+			gameContext->level->pauseMusic(!isPause); }
+			break;
+		case 1: {
+			terminate = true;
+			MenuState* menu = new MenuState{ gameContext->context, stateManager, levelManager };
+			stateManager->AddState(menu);
+			stateManager->StartNextState();
+			break; }
+		case 2: {
+			exit(0); }
+			break;
+		default:
+			break;
+	}
+
 }

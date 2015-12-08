@@ -8,6 +8,8 @@
 #include "LevelImporter.h"
 #include "Level.h"
 
+#include "PauseMenu.h"
+
 class Context;
 class MoveContainer;
 class DrawContainer;
@@ -42,6 +44,13 @@ public:
 	sf::Event event;
 	sf::View view;
 
+
+
+	sf::SoundBuffer sfx;
+	sf::Sound pauseSound;
+
 	
+	void setMenuPosition();
+	PauseMenu* pauze = new PauseMenu{ 321,395 };
 };
 

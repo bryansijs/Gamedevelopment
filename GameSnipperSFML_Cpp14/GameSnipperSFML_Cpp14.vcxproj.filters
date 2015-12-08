@@ -377,7 +377,7 @@
     </ClInclude>
     <ClInclude Include="UnitTestLevelSequence.h">
       <Filter>Header Files\UnitTest\Tests</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -386,6 +386,9 @@
     </ClInclude>
     <ClInclude Include="BaseEnemy.h">
       <Filter>Header Files\Model\Units\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseMenu.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -568,12 +571,15 @@
     </ClCompile>
     <ClCompile Include="UnitTestLevelSequence.cpp">
       <Filter>Source Files\UnitTest\Tests</Filter>
-	 </ClCompile>
+    </ClCompile>
     <ClCompile Include="BaseItem.cpp">
       <Filter>Source Files\Model\Items</Filter>
     </ClCompile>
     <ClCompile Include="BaseEnemy.cpp">
       <Filter>Source Files\Model\Units\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseMenu.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

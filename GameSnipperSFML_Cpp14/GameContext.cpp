@@ -1,14 +1,16 @@
 #include "stdafx.h"
 #include "GameContext.h"
+#include "Context.h"
 #include "GameObjectContainer.h"
 #include "MoveContainer.h"
 #include "DrawContainer.h"
 #include "KeyMapping.h"
+#include "PauseMenu.h"
 
 GameContext::GameContext(Context* context)
 {
 	this->context = context;
-
+	
 	moveContainer = new MoveContainer();
 	drawContainer = new DrawContainer();
 	useContainer = new GameObjectContainer();
@@ -17,6 +19,14 @@ GameContext::GameContext(Context* context)
 
 	keyMappingImporter.Import("./Resources/key-mapping.json");
 	KeyMapping::ReloadMapping(keyMappingImporter.GetMapping());
+
+	sfx.loadFromFile("./Resources/sfx/confirm.ogg");
+	pauseSound.setBuffer(sfx);
+}
+
+void GameContext::setMenuPosition()
+{
+	pauze->setPositions(level->GetViewPortPosition().x, level->GetViewPortPosition().y, context->window.getSize().x, context->window.getSize().y);
 }
 
 GameContext::~GameContext()
@@ -25,3 +35,4 @@ GameContext::~GameContext()
 	delete levelImporter;
 	delete level;
 }
+

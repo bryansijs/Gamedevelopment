@@ -9,6 +9,7 @@ Context::Context(int screenWidth, int screenHeight)
 	window.create(sf::VideoMode(screenDimensions->x, screenDimensions->y), "ECHO GAME!!!!");
 	window.setKeyRepeatEnabled(false);
 	window.setMouseCursorVisible(false);
+	this->web_core = Awesomium::WebCore::Initialize(Awesomium::WebConfig());
 }
 
 Context::~Context()
