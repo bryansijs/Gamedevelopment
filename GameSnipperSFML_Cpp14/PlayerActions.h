@@ -18,13 +18,12 @@ class Tile;
 class PlayerActions
 {
 public:
-	PlayerActions();
+	PlayerActions(Player *player);
 	~PlayerActions();
 	float useDelay = 0;
-	void SetPlayer(Player *activePlayer);
-	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer);
+	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, GameObjectContainer *gameObjectContainer);
+	void SetWorld(b2World* world);
 	void ProcessActions(std::vector<std::string> &newActiveKeys);
-	void SetTiles(std::vector<Tile*>* t) { tiles = t; };
 
 	void Move();
 	void Shoot();
@@ -45,23 +44,24 @@ private:
 
 	std::vector<std::string> activeKeys;
 
-	std::string direction = "move-left";
+	std::string direction = "move-down";
 	std::string currentMap;
 
 	DrawContainer *drawContainer;
 	MoveContainer *moveContainer;
+	GameObjectContainer * gameObjectContainer;
 
 	DrawBehaviour drawBehaviour;
 	MoveBehaviour moveBehaviour;
 
-	MoveAction moveAction;
+	MoveAction* moveAction;
 	ShootAction shootAction;
 
 	Player *player;
-	std::vector<Tile*>* tiles;
+	b2World* world;
 
 	bool fired = false;
-	bool resetAnimation = true;
+	bool resetMove = true;
 	bool useAction = true;
 };
 

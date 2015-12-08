@@ -8,6 +8,7 @@
 WanderMoveBehaviour::WanderMoveBehaviour(GameObject* gameObject)
 {
 	this->gameObject = gameObject;
+	moveAction = new MoveAction{ gameObject, 0.10f };
 	startPosition = gameObject->getPosition();
 	endPosition = gameObject->getPosition();
 }
@@ -28,7 +29,7 @@ void WanderMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 			direction = directions[Random::Number(0, directions.size() - 1)];
 		}
 
-		//moveAction.Move({ direction }, gameObject);
+		//moveAction->Move({ direction });
 	}
 }
 

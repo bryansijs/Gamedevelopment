@@ -11,6 +11,9 @@
 #include "LevelImporter.h"
 #include "Level.h"
 
+#include "PauseMenu.h"
+
+class Context;
 class MoveContainer;
 class DrawContainer;
 class GameObjectContainer;
@@ -30,7 +33,7 @@ public:
 
 	Player* player;
 	PlayerInput playerInput;
-	PlayerActions playerActions;
+	PlayerActions* playerActions;
 	KeyMappingImporter keyMappingImporter;
 
 	LevelImporter* levelImporter;
@@ -39,7 +42,12 @@ public:
 	sf::Clock deltaClock;
 	sf::Event event;
 	sf::View view;
+
+	void setMenuPosition();
+	PauseMenu* pauze = new PauseMenu{ 321,395 };
+
 	b2World* world;
 	CollisionListener* collisionListener;
+
 };
 

@@ -8,8 +8,11 @@
 #include "GameObjectContainer.h"
 #include "KeyMapping.h"
 #include "GameObject.h"
-PlayerActions::PlayerActions()
+
+PlayerActions::PlayerActions(Player *player)
 {
+	this->player = player;
+	moveAction = new MoveAction{ player, 0.10f };
 }
 
 PlayerActions::~PlayerActions()
@@ -17,15 +20,16 @@ PlayerActions::~PlayerActions()
 
 }
 
-void PlayerActions::SetPlayer(Player *player)
-{
-	this->player = player;
-}
-
-void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer)
+void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, GameObjectContainer *gameObjectContainer)
 {
 	this->drawContainer = drawContainer;
 	this->moveContainer = moveContainer;
+	this->gameObjectContainer = gameObjectContainer;
+}
+
+void PlayerActions::SetWorld(b2World * world)
+{
+	this->world = world;
 }
 
 void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys)
@@ -62,11 +66,9 @@ void PlayerActions::ExecuteActions()
 		(this->*function)();
 	}
 
-	if (resetAnimation)
+	if (resetMove)
 	{
-		moveAction.AnimateMovement(player, 1);
-		//force van player op 0 zetten.
-		player->getBody()->SetLinearVelocity(b2Vec2(0,0));
+		moveAction->Reset();
 	}
 
 	if (Input::GetKeyUp(KeyMapping::GetKey("use")))
@@ -80,12 +82,12 @@ void PlayerActions::ExecuteActions()
 	}
 
 	activeActions.clear();
-	resetAnimation = true;
+	resetMove = true;
 }
 
 void PlayerActions::Move()
 {
-	resetAnimation = false;
+	resetMove = false;
 	std::vector<std::string> directions;
 
 	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
@@ -98,18 +100,17 @@ void PlayerActions::Move()
 		}
 	}
 
-	moveAction.Move(directions, player);
+	moveAction->Move(directions);
 }
 
 void PlayerActions::Shoot()
 {
-	shootAction.Shoot(drawContainer, moveContainer, player, direction);
+	shootAction.Shoot(drawContainer, moveContainer, gameObjectContainer, world, player, direction);
 }
 
 
 void PlayerActions::Use()
 {
-
 	if (useAction)
 	{
 		//int b = this->player->getgameObjectContainer()->getObjects().size();
@@ -128,8 +129,6 @@ void PlayerActions::Use()
 			//Als we op dezelfde y zitten met een 32 ~48 verschil;
 			//Als we op dezelfde x zittten met en 32 ~48 verschil; 
 
-
-
 			float y = object->getPosition().y;
 			float x = object->getPosition().x;
 			if (playery + 48 > y && playery - 48 < y)
@@ -140,7 +139,7 @@ void PlayerActions::Use()
 				}
 			}
 		}
-		useAction = false;
 
+		useAction = false;
 	}
 }

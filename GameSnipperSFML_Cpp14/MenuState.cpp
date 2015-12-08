@@ -27,6 +27,10 @@ MenuState::MenuState(Context* context, StateManager* stateManager, LevelManager*
 	this->stateManager = stateManager;
 	this->levelManager = levelManager;
 
+	sf::View view = context->window.getView();
+	view.setCenter(480, 320);
+	context->window.setView(view);
+
 	menuContext->inMenu = true;
 	menuContext->currentLevel = 1;
 

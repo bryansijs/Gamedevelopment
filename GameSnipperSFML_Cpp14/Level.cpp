@@ -188,6 +188,7 @@ void Level::Start(GameObject* player, sf::Vector2u* size)
 
 	player->setPosition(start->getPosition().x, start->getPosition().y);
 
+
 	music.setLoop(true);
 	music.play();
 }

@@ -13,6 +13,15 @@
 #include "Tile.h"
 #include "EndTile.h"
 
+void GameObject::Destroy()
+{
+	this->moveContainer->RemoveBehaviour(moveBehaviour);
+	this->drawContainer->RemoveBehaviour(drawBehaviour);
+	this->gameObjectContainer->RemoveObject(this);
+
+	isFlaggedForDelete = true;
+}
+
 GameObject::GameObject(DrawContainer *drawContainer, std::string textureUrl)
 {
 	this->drawContainer = drawContainer;
@@ -55,12 +64,11 @@ GameObject::GameObject(DrawContainer *drawContainer, GameObjectContainer *gameOb
 	this->gameObjectContainer->AddObject(this);
 }
 
-GameObject::GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer,std::string textureUrl)
+GameObject::GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, std::string textureUrl)
 {
 	this->drawContainer = drawContainer;
 
 	this->drawBehaviour = { new NormalDrawBehaviour(this, 10, "./Resources/sprites/" + textureUrl) };
-
 	this->drawContainer->AddBehaviour(this->drawBehaviour);
 
 	this->gameObjectContainer = gameObjectContainer;

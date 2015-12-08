@@ -2,11 +2,14 @@
 #include "GameObjectFactory.h"
 #include "GameObject.h"
 
+#include "DrawContainer.h"
+#include "GameObjectContainer.h"
+
 GameObjectFactory::GameObjectFactory()
 {
 }
 
-GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer,GameObjectContainer* gameObjectContainer, b2World* world)
+GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer, b2World* world)
 {
 	this->drawContainer = drawContainer;
 	this->moveContainer = moveContainer;
@@ -49,4 +52,9 @@ GameObject* GameObjectFactory::CreateTile(std::map<std::string, std::string>& pr
 GameObject* GameObjectFactory::CreateItem(std::map<std::string, std::string>& properties)
 {
 	return this->itemFactory.Create(properties, drawContainer, gameObjectContainer,world);
+}
+
+GameObject * GameObjectFactory::CreateProjectile(std::map<std::string, std::string>& properties)
+{
+	return this->projectileFactory.Create(properties, drawContainer, moveContainer, gameObjectContainer, world);
 }

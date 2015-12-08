@@ -2,6 +2,7 @@
 #include "BaseState.h"
 #include "LevelManager.h"
 
+
 class StateManager;
 class Context;
 class GameContext;
@@ -15,7 +16,12 @@ private:
 	Context* maincontext;
 
 	GameContext* gameContext;
+
+	void DestroyGameObjects();
+	void DebugBodies();
+	void MenuEnd(int option);
 public:
+	bool isPause = false;
 	void Update();
 	void Terminate();
 	void StartNextLevel();
@@ -23,4 +29,3 @@ public:
 	GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager);
 	~GameState();
 };
-

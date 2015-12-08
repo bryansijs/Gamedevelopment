@@ -3,6 +3,8 @@
 
 #include <SFML\System\Vector2.hpp>
 
+class MoveAction;
+
 class NormalMoveBehaviour : public MoveBehaviour
 {
 public:
@@ -11,5 +13,7 @@ public:
 
 	void Update(sf::Vector2f viewPortPosition);
 	bool checkVisible(int screenX, int screenY);
+private:
+	MoveAction* moveAction;
 };
 

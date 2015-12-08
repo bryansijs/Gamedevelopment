@@ -174,6 +174,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="application.h" />
     <ClInclude Include="BaseEnemy.h" />
     <ClInclude Include="BaseItem.h" />
@@ -213,16 +214,19 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="NormalDrawBehaviour.h" />
     <ClInclude Include="NormalMoveBehaviour.h" />
     <ClInclude Include="NormalState.h" />
+    <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerActions.h" />
     <ClInclude Include="PlayerDrawBehaviour.h" />
     <ClInclude Include="PlayerInput.h" />
+    <ClInclude Include="ProjectileFactory.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="resource1.h" />
     <ClInclude Include="resource2.h" />
     <ClInclude Include="Potion.h" />
     <ClInclude Include="RunnerEnemy.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="square.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="ShootAction.h" />
@@ -252,6 +256,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="WinState.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BaseEnemy.cpp" />
     <ClCompile Include="BaseItem.cpp" />
     <ClCompile Include="BasicEnemy.cpp" />
@@ -289,13 +294,16 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="MoveContainer.cpp" />
     <ClCompile Include="NormalDrawBehaviour.cpp" />
     <ClCompile Include="NormalMoveBehaviour.cpp" />
+    <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="PlayerActions.cpp" />
     <ClCompile Include="PlayerDrawBehaviour.cpp" />
     <ClCompile Include="PlayerInput.cpp" />
     <ClCompile Include="Potion.cpp" />
+    <ClCompile Include="ProjectileFactory.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="RunnerEnemy.cpp" />
     <ClCompile Include="SetupState.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="square.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="Player.cpp" />
