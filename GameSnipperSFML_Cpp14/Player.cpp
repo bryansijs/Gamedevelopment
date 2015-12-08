@@ -8,6 +8,9 @@
 #include "NormalMoveBehaviour.h"
 #include "PlayerDrawBehaviour.h"
 
+#include "EndTile.h"
+#include <Box2D\Box2D.h>
+
 Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, b2World* world)
 {
 	this->setMoveContainer(moveContainer);
@@ -61,6 +64,15 @@ void Player::AddItem(BaseItem* item) {
 			return (this->*function)(item);
 		}
 	}
+}
+
+void Player::startContact(b2Fixture* fixture)
+{
+
+}
+
+void Player::endContact(b2Fixture * fixture)
+{
 }
 
 void Player::AddAmmo(BaseItem* item) {

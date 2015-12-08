@@ -8,8 +8,10 @@
 #include "NormalDrawBehaviour.h"
 #include "WanderMoveBehaviour.h"
 #include "MoveBehaviour.h"
+#include <Box2D\Box2D.h>
 
 #include "Tile.h"
+#include "EndTile.h"
 
 GameObject::GameObject(DrawContainer *drawContainer, std::string textureUrl)
 {
@@ -153,9 +155,37 @@ void GameObject::createBoxDynamic(b2World & World)
 	Body->SetUserData(this);
 }
 
+void GameObject::createBoxSenor(b2World & World)
+{
+	
+	myBodyDef.type = b2_staticBody;
+
+	Body = World.CreateBody(&myBodyDef);
+
+	if (this->getHeight() < 1 || this->getWidth() < 1) {
+		Shape.SetAsBox((32.f / 2), (32.f / 2));
+	}
+	else {
+		b2Vec2 vertices[4];
+		vertices[0].Set(-16, -16);
+		vertices[1].Set(-16, this->getHeight() + -16);
+		vertices[2].Set(this->getWidth() + -16, this->getHeight() + -16);
+		vertices[3].Set(this->getWidth() + -16, -16);
+		this->Shape.Set(vertices, 4);
+	}
+
+	boxFixtureDef.density = 100.f;
+	boxFixtureDef.friction = 0.0f;
+	boxFixtureDef.shape = &Shape;
+	boxFixtureDef.isSensor = true;
+	Body->CreateFixture(&boxFixtureDef);
+	Body->SetUserData(this);
+}
+
 void GameObject::startContact(b2Fixture* fixture)
 {
 	// het gecollide object is terug te vinden in fixture fixture->GetBody()->GetUserData();
+
 }
 
 void GameObject::endContact(b2Fixture* fixture)

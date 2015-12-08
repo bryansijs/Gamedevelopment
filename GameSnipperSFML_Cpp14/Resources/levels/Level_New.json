@@ -404,6 +404,21 @@
                  "width":24,
                  "x":179,
                  "y":1566
+                }, 
+                {
+                 "height":34,
+                 "id":31,
+                 "name":"endTile",
+                 "properties":
+                    {
+                     "sType":"End"
+                    },
+                 "rotation":0,
+                 "type":"GameTile",
+                 "visible":true,
+                 "width":71,
+                 "x":93,
+                 "y":0
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -510,7 +525,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":31,
+ "nextobjectid":33,
  "orientation":"orthogonal",
  "properties":
     {

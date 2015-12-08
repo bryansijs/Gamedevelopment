@@ -50,6 +50,9 @@ public:
 
 	void AddItem(BaseItem* item);
 
+	virtual void startContact(b2Fixture* fixture);
+	virtual void endContact(b2Fixture* fixture);
+
 
 };
 

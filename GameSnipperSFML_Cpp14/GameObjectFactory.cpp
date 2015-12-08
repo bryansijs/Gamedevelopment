@@ -43,7 +43,7 @@ GameObject* GameObjectFactory::CreateObject(std::map<std::string, std::string>& 
 
 GameObject* GameObjectFactory::CreateTile(std::map<std::string, std::string>& properties)
 {
-	return  this->gametTileFactory.Create(properties, gameObjectContainer);
+	return  this->gametTileFactory.Create(properties, gameObjectContainer, world);
 }
 
 GameObject* GameObjectFactory::CreateItem(std::map<std::string, std::string>& properties)
