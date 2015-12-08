@@ -9,6 +9,8 @@
 #include "DrawContainer.h"
 #include "square.h"
 
+#include <iterator>
+
 
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager)
 {
@@ -41,6 +43,41 @@ GameState::~GameState()
 {
 	delete(gameContext);
 	delete(levelManager);
+}
+
+void GameState::DestroyGameObjects()
+{
+	std::vector<b2Body*> gameObjectScheduledForRemoval;
+
+	for (b2Body* body = gameContext->world->GetBodyList(); body; body = body->GetNext()) {
+		if (body->GetUserData() != nullptr)
+		{
+			GameObject* data = (GameObject*)body->GetUserData();
+
+			if (data->isFlaggedForDelete)
+			{
+				gameObjectScheduledForRemoval.push_back(body);
+			}
+		}
+	}
+
+	for (int i = 0; i < gameObjectScheduledForRemoval.size(); i++)
+	{
+		gameContext->world->DestroyBody(gameObjectScheduledForRemoval[i]);
+	}
+
+	gameObjectScheduledForRemoval.clear();
+}
+
+void GameState::DebugBodies()
+{
+	for (b2Body* b = gameContext->world->GetBodyList(); b; b = b->GetNext()) {
+		sf::RectangleShape rectangle(sf::Vector2f(32, 32));
+		rectangle.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
+		rectangle.setOutlineThickness(0);
+		rectangle.setFillColor(sf::Color(180, 100, 100, 200));
+		gameContext->context->window.draw(rectangle);
+	}
 }
 
 void GameState::Update()
@@ -85,6 +122,9 @@ void GameState::Update()
 	}
 
 	this->gameContext->world->Step(1, 8, 3);
+
+	DestroyGameObjects();
+	//DebugBodies();
 
 	gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
 	gameContext->drawContainer->Draw(&gameContext->context->window);

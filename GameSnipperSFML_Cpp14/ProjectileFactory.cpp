@@ -31,6 +31,5 @@ GameObject* ProjectileFactory::Create(std::map<std::string, std::string>& proper
 
 GameObject * ProjectileFactory::CreateBullet(std::map<std::string, std::string>& properties, DrawContainer* drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer, b2World* world)
 {
-
 	return new Bullet(gameObjectContainer, properties, world, moveContainer, drawContainer, properties["texture"]);
 }

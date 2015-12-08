@@ -15,6 +15,9 @@ private:
 	Context* maincontext;
 
 	GameContext* gameContext;
+
+	void DestroyGameObjects();
+	void DebugBodies();
 public:
 	void Update();
 	void Terminate();
