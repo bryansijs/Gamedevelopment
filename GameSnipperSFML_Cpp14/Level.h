@@ -26,7 +26,6 @@ public:
 
 
 	std::vector<GameObject*> game_objects;
-	//std::vector<Tile*> tiles;
 	std::vector<Tile*> groundTiles;
 	std::vector<Tile*> roofTiles;
 	std::vector<TileSet*> tileSets;
@@ -52,7 +51,9 @@ public:
 	int getViewPortX() { return viewPortX; }
 	int getViewPortY() { return viewPortY; }
 	void setMusic(sf::Sound music) { this->music = music; }
-	
+	sf::Sound getMusic() { return music; }
+	void pauseMusic(bool play) { if (!play)music.pause(); else music.play(); }
+
 
 	void setGameObjects(std::vector<GameObject*>& game_objects) { this->game_objects.swap(game_objects); }
 	void setTileSets(std::vector<TileSet*>& tileSets) { this->tileSets.swap(tileSets); }

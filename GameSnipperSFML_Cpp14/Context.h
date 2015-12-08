@@ -1,9 +1,9 @@
 #pragma once
-
 #include <vector>
 #include <SFML\Graphics.hpp>
 #include <Awesomium/WebCore.h>
 #include <Box2D\Box2D.h>
+
 
 class Unit;
 
@@ -17,7 +17,7 @@ public:
 
 	std::vector<Unit*> allUnits;
 	std::vector<Unit*> getUnits() { return allUnits; };
-
+	Awesomium::WebCore* web_core;
 	Unit* getUnitAt(int i) { return allUnits.at(i); };
 
 	Awesomium::WebCore* web_core;
