@@ -91,7 +91,11 @@ void GameState::Update()
 	sf::Vector2i worldPosition = gameContext->context->window.mapCoordsToPixel(playerPosition);
 
 	gameContext->level->draw(&gameContext->context->window, &gameContext->view);
-	gameContext->level->update();
+
+	if (!isPause)
+	{
+		gameContext->level->update();
+	}
 
 	if (gameContext->level->getDoEvents()) {
 		while (gameContext->context->window.pollEvent(gameContext->event)) {
@@ -138,25 +142,23 @@ void GameState::Update()
 		gameContext->player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	}
 
+	//DebugBodies();
 
+	if (!isPause)
+	{
+		this->gameContext->world->Step(1, 8, 3);
 
+		DestroyGameObjects();
+		gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
+	}
+
+	gameContext->drawContainer->Draw(&gameContext->context->window);
+	gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
 
 	if (isPause)
 	{
 		gameContext->pauze->draw(gameContext->context->window);
 	}
-
-	this->gameContext->world->Step(1, 8, 3);
-
-	DestroyGameObjects();
-	//DebugBodies();
-
-	if (!isPause)
-	{
-		gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
-	}
-	gameContext->drawContainer->Draw(&gameContext->context->window);
-	gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
 
 	if (!terminate) {
 		gameContext->context->window.setView(gameContext->view);
