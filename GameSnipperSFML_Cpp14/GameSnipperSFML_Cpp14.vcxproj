@@ -180,6 +180,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="BasicEnemy.h" />
     <ClInclude Include="CollisionListener.h" />
+    <ClInclude Include="ConsoleColor.h" />
     <ClInclude Include="Context.h" />
     <ClInclude Include="DebugBox2D.h" />
     <ClInclude Include="Door.h" />

@@ -25,6 +25,8 @@ Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameO
 	this->getDrawContainer()->AddBehaviour(getDrawBehaviour());
 
 	this->setUseContainer(useContainer);
+
+	this->SetAnimationStates(3);
 }
 
 
