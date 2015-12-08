@@ -22,8 +22,7 @@ PauseMenu::PauseMenu(float width, float height)
 
 	sfxPause.loadFromFile("./Resources/sfx/confirm.ogg");
 	pauseSound.setBuffer(sfxPause);
-
-
+	
 	menu[0].setFont(font);
 	menu[0].setCharacterSize(16);
 	menu[0].setColor(sf::Color::Red);

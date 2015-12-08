@@ -181,6 +181,12 @@
     <Filter Include="Header Files\Model\Items">
       <UniqueIdentifier>{374d5c0c-2551-4b15-b054-3b4bbdf8ff57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Menu">
+      <UniqueIdentifier>{6113e3e9-7e36-4501-9dbe-34daa83ca707}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Pause">
+      <UniqueIdentifier>{0ea53a5d-ec2b-46ae-90de-78c2b2c15704}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -388,7 +394,7 @@
       <Filter>Header Files\Model\Units\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="PauseMenu.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Pause</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -579,7 +585,7 @@
       <Filter>Source Files\Model\Units\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="PauseMenu.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
