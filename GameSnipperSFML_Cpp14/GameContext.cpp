@@ -1,9 +1,13 @@
 #include "stdafx.h"
 #include "GameContext.h"
+#include "Context.h"
 #include "GameObjectContainer.h"
 #include "MoveContainer.h"
 #include "DrawContainer.h"
 #include "KeyMapping.h"
+
+#include "PauseMenu.h"
+
 #include "DebugBox2D.h"
 #include "CollisionListener.h"
 
@@ -27,11 +31,20 @@ GameContext::GameContext(Context* context)
 
 	keyMappingImporter.Import("./Resources/key-mapping.json");
 	KeyMapping::ReloadMapping(keyMappingImporter.GetMapping());
+
+
+}
+
+void GameContext::setMenuPosition()
+{
+	pauze->setPositions(level->GetViewPortPosition().x, level->GetViewPortPosition().y, context->window.getSize().x, context->window.getSize().y);
 }
 
 GameContext::~GameContext()
 {
+	delete pauze;
 	delete player;
 	delete levelImporter;
 	delete level;
 }
+
