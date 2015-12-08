@@ -2,12 +2,13 @@
 #include "PlayerActions.h"
 
 #include <vector>
-#include "Time.h"
 #include "Player.h"
 #include "DrawBehaviour.h"
 #include "GameObjectContainer.h"
 #include "KeyMapping.h"
 #include "GameObject.h"
+#include "Time.h"
+
 PlayerActions::PlayerActions()
 {
 }
@@ -28,9 +29,9 @@ void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *m
 	this->moveContainer = moveContainer;
 }
 
-void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys)
+void PlayerActions::ProcessActions()
 {
-	activeKeys = newActiveKeys;
+	bool animate = false;
 
 	std::map<std::string, void(PlayerActions::*)()>::iterator it;
 
@@ -46,27 +47,28 @@ void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys)
 					activeActions.push_back(it->second);
 				}
 			}
+
+			if (map.find("move") != std::string::npos)
+			{
+				animate = true;
+			}
 		}
 	}
-
+	if(!animate)
+	{
+		StandStill();
+	}
 	ExecuteActions();
 }
 
 void PlayerActions::ExecuteActions()
 {
-	std::vector<void(PlayerActions::*)()>::iterator it;
+	vector<void(PlayerActions::*)()>::iterator it;
 
 	for (it = activeActions.begin(); it != activeActions.end(); ++it)
 	{
 		auto function = *it;
 		(this->*function)();
-	}
-
-	if (resetAnimation)
-	{
-		moveAction.AnimateMovement(player, 1);
-		//force van player op 0 zetten.
-		player->getBody()->SetLinearVelocity(b2Vec2(0,0));
 	}
 
 	if (Input::GetKeyUp(KeyMapping::GetKey("use")))
@@ -75,12 +77,12 @@ void PlayerActions::ExecuteActions()
 	}
 
 	activeActions.clear();
-	resetAnimation = true;
 }
 
 void PlayerActions::Move()
 {
-	resetAnimation = false;
+	StandStillTimerReset();
+
 	std::vector<std::string> directions;
 
 	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
@@ -98,12 +100,14 @@ void PlayerActions::Move()
 
 void PlayerActions::Shoot()
 {
+	StandStillTimerReset();
 	shootAction.Shoot(drawContainer, moveContainer, player, direction);
 }
 
 
 void PlayerActions::Use()
 {
+	StandStillTimerReset();
 
 	if (useAction)
 	{
@@ -136,6 +140,19 @@ void PlayerActions::Use()
 			}
 		}
 		useAction = false;
-
 	}
+}
+
+void PlayerActions::StandStill()
+{
+	player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
+
+	if (StandStillTimer > 0)
+	{
+		moveAction.AnimateMovement(player, 1);
+		StandStillTimer = StandStillTimer - Time::deltaTime;
+		return;
+	}
+
+	StandStillTimerReset();
 }

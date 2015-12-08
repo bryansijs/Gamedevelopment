@@ -7,13 +7,23 @@
 #include "GameContext.h"
 #include "MoveContainer.h"
 #include "DrawContainer.h"
+
 #include "square.h"
 
+#include "input.h"
+#include "GameActions.h"
+#include "PlayerActions.h"
 
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager)
 {
 	maincontext = context;
+	
+	gameActions = new GameActions(this);
+
 	gameContext = new GameContext(context);
+
+	playerActions.SetPlayer(gameContext->player);
+
 	this->stateManager = stateManager;
 	this->levelManager = levelmanager;
 
@@ -28,7 +38,7 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	gameContext->level = gameContext->levelImporter->getLevel();
 	gameContext->levelImporter->Clear();
 
-	gameContext->playerActions.SetContainers(gameContext->drawContainer, gameContext->moveContainer);
+	playerActions.SetContainers(gameContext->drawContainer, gameContext->moveContainer);
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
 
 	gameContext->player->createBoxDynamic(*gameContext->world);
@@ -47,7 +57,7 @@ GameState::~GameState()
 
 void GameState::Update()
 {
-	Time::deltaTime = (float)gameContext->deltaClock.restart().asSeconds();
+	Time::deltaTime = static_cast<float>(gameContext->deltaClock.restart().asSeconds());
 	Time::runningTime += Time::deltaTime;
 
 	gameContext->context->window.clear(sf::Color::White);
@@ -70,15 +80,16 @@ void GameState::Update()
 			if (gameContext->event.type == sf::Event::KeyPressed || gameContext->event.type == sf::Event::KeyReleased)
 			{
 				Input::EventOccured(gameContext->event);
-				gameContext->playerInput.CatchInput();
+				playerActions.CatchInput();
+			}
 
-				if (Input::GetKeyDown("K")) {
-					StartNextLevel();
-				}
+			if (gameContext->event.type == sf::Event::KeyPressed)
+			{
+				gameActions->CatchSingleInput();
+				gameActions->ProcessActions();
 			}
 		}
-
-		gameContext->playerActions.ProcessActions(gameContext->playerInput.GetActiveKeys());
+		playerActions.ProcessActions();
 		gameContext->level->updateViewPort(worldPosition);
 	}
 	else
@@ -121,11 +132,11 @@ void GameState::StartNextLevel()
 	gameContext->level = gameContext->levelImporter->getLevel();
 	gameContext->levelImporter->Clear();
 
-	gameContext->playerActions.SetContainers(gameContext->drawContainer, gameContext->moveContainer);
+	playerActions.SetContainers(gameContext->drawContainer, gameContext->moveContainer);
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
 
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
-	
+
 	gameContext->view.reset(rect);
 	gameContext->context->window.setView(gameContext->view);
 

@@ -1,10 +1,7 @@
 #pragma once
 #include <map>
-#include <string>
-#include  <memory>
 #include "Unit.h"
 #include "BaseItem.h"
-
 
 class MoveContainer;
 class DrawContainer;
@@ -18,7 +15,6 @@ private:
 	std::vector<BaseItem*> ammo;
 	std::vector<BaseItem*> guns;
 
-
 	void AddKey(BaseItem* item) { keyAmount++; }
 	void AddAmmo(BaseItem* item);
 	void AddGun(BaseItem* item);
@@ -30,11 +26,7 @@ private:
 		{ "Gun", &Player::AddGun },
 		{ "Key", &Player::AddKey },
 	};
-
-
-
 public:
-	Player(MoveContainer* moveContainer, DrawContainer* drawContainer, b2World* world);
 	Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameObjectContainer *useContainer, b2World* world);
 	Player();
 	~Player();
@@ -52,7 +44,5 @@ public:
 
 	virtual void startContact(b2Fixture* fixture);
 	virtual void endContact(b2Fixture* fixture);
-
-
 };
 

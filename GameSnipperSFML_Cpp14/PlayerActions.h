@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include <iostream>
 #include <map>
 
 #include "DrawBehaviour.h"
@@ -9,29 +8,32 @@
 
 #include "MoveAction.h"
 #include "ShootAction.h"
+#include "BaseInput.h"
 
 class Player;
 class MoveContainer;
 class DrawContainer;
 class Tile;
 
-class PlayerActions
+class PlayerActions : public BaseInput
 {
 public:
 	PlayerActions();
 	~PlayerActions();
-	float useDelay = 0;
+
 	void SetPlayer(Player *activePlayer);
+	void ProcessActions();
+
+	float useDelay = 0;
 	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer);
-	void ProcessActions(std::vector<std::string> &newActiveKeys);
 	void SetTiles(std::vector<Tile*>* t) { tiles = t; };
 
 	void Move();
 	void Shoot();
 	void Use();
 
-
 	bool used = false;
+	std::vector<void(PlayerActions::*)()> activeActions;
 private:
 	void ExecuteActions();
 
@@ -40,10 +42,6 @@ private:
 		{ "shoot", &PlayerActions::Shoot },
 		{ "use", &PlayerActions::Use }
 	};
-
-	std::vector<void(PlayerActions::*)()> activeActions;
-
-	std::vector<std::string> activeKeys;
 
 	std::string direction = "move-left";
 	std::string currentMap;
@@ -61,7 +59,9 @@ private:
 	std::vector<Tile*>* tiles;
 
 	bool fired = false;
-	bool resetAnimation = true;
 	bool useAction = true;
-};
 
+	void StandStillTimerReset() { StandStillTimer = 1000; };
+	int StandStillTimer = 1000;
+	void StandStill();
+};

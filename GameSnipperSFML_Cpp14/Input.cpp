@@ -1,46 +1,47 @@
 #include "stdafx.h"
 #include "Input.h"
-
 #include <SFML/Graphics.hpp>
 
-Input::Input()
-{
-}
-
-Input::~Input()
-{
-}
-
 sf::Event event;
+string Input::LastPressed;
 
-sf::Keyboard::Key GetKey(const string & key)
+map<string, sf::Keyboard::Key> Input::keys = {
+	{ "W", sf::Keyboard::W },
+	{ "A", sf::Keyboard::A },
+	{ "S", sf::Keyboard::S },
+	{ "D", sf::Keyboard::D },
+	{ "Left", sf::Keyboard::Left },
+	{ "Right", sf::Keyboard::Right },
+	{ "Up", sf::Keyboard::Up },
+	{ "Down", sf::Keyboard::Down },
+	{ "Space", sf::Keyboard::Space },
+	{ "E", sf::Keyboard::E },
+	{ "K", sf::Keyboard::K },
+	{ "L", sf::Keyboard::L },
+	{ "Num1", sf::Keyboard::Num1 },
+	{ "Num2", sf::Keyboard::Num2 },
+	{ "Num3", sf::Keyboard::Num3 },
+	{ "Num4", sf::Keyboard::Num4 },
+	{ "Num5", sf::Keyboard::Num5 },
+	{ "Esc", sf::Keyboard::Escape },
+	{ "Return", sf::Keyboard::Return }
+};
+
+string Input::GetKey(sf::Keyboard::Key key)
 {
-	string incomingKey = key;
+	for (auto iterator = keys.begin(); iterator != keys.end(); ++iterator)
+	{
+		if(iterator->second == key)
+		{
+			return iterator->first.c_str();
+		}
+	}
+	return "";
+}
 
-	map<string, sf::Keyboard::Key> keys = {
-		{ "W", sf::Keyboard::W },
-		{ "A", sf::Keyboard::A },
-		{ "S", sf::Keyboard::S },
-		{ "D", sf::Keyboard::D },
-		{ "Left", sf::Keyboard::Left },
-		{ "Right", sf::Keyboard::Right },
-		{ "Up", sf::Keyboard::Up },
-		{ "Down", sf::Keyboard::Down },
-		{ "Space", sf::Keyboard::Space },
-		{ "E", sf::Keyboard::E },
-		{ "K", sf::Keyboard::K },
-		{ "L", sf::Keyboard::L },
-		{ "Num1", sf::Keyboard::Num1 },
-		{ "Num2", sf::Keyboard::Num2 },
-		{ "Num3", sf::Keyboard::Num3 },
-		{ "Num4", sf::Keyboard::Num4 },
-		{ "Num5", sf::Keyboard::Num5 },
-		{ "Esc", sf::Keyboard::Escape },
-		{ "Return", sf::Keyboard::Return }
-	};
-
+sf::Keyboard::Key Input::GetKey(const string & key)
+{
 	auto it = keys.find(key);
-
 	if (it != keys.end())
 	{
 		return keys.at(key);
@@ -49,7 +50,6 @@ sf::Keyboard::Key GetKey(const string & key)
 
 bool Input::GetKeyDown(string key)
 {
-	sf::Keyboard::Key pressedKey = GetKey(key);
 	return event.type == sf::Event::KeyPressed && event.key.code == GetKey(key);
 }
 
@@ -61,4 +61,17 @@ bool Input::GetKeyUp(string key)
 void Input::EventOccured(sf::Event occuredEvent)
 {
 	event = occuredEvent;
+	if(event.type == sf::Event::KeyPressed)
+		LastPressed = GetKey(event.key.code);
+}
+
+string Input::GetLastPressed()
+{
+	return LastPressed;
+}
+
+
+void Input::ClearLastPressed()
+{
+	LastPressed = "";
 }

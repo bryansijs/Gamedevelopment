@@ -61,8 +61,9 @@ void MoveAction::Move()
 	velocity.x = roundf(velocity.x * 100) / 100;
 	velocity.y = roundf(velocity.y * 100) / 100;
 
-	AnimateMovement(gameObject);
-	
+	if(velocity.x != 0 || velocity.y != 0)
+		AnimateMovement(gameObject);
+
 	gameObject->getBody()->SetLinearVelocity(b2Vec2(velocity.x, velocity.y));
 }
 

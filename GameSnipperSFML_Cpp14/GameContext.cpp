@@ -3,6 +3,7 @@
 #include "GameObjectContainer.h"
 #include "MoveContainer.h"
 #include "DrawContainer.h"
+
 #include "KeyMapping.h"
 #include "DebugBox2D.h"
 #include "CollisionListener.h"
@@ -20,13 +21,7 @@ GameContext::GameContext(Context* context)
 	moveContainer = new MoveContainer();
 	drawContainer = new DrawContainer();
 	useContainer = new GameObjectContainer();
-
-	player = new Player(moveContainer, drawContainer,useContainer, world);
-	player->SetAnimationStates(3);
-	playerActions.SetPlayer(player);
-
-	keyMappingImporter.Import("./Resources/key-mapping.json");
-	KeyMapping::ReloadMapping(keyMappingImporter.GetMapping());
+	player = new Player(moveContainer, drawContainer, useContainer, world);
 }
 
 GameContext::~GameContext()

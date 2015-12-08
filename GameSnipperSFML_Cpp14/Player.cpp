@@ -11,23 +11,6 @@
 #include "EndTile.h"
 #include <Box2D\Box2D.h>
 
-Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, b2World* world)
-{
-	this->setMoveContainer(moveContainer);
-	this->setDrawContainer(drawContainer);
-
-	this->SetMoveBehaviour( new NormalMoveBehaviour(this) );
-	this->setDrawBehaviour( new PlayerDrawBehaviour(this, 10, "Player.png"));
-	
-	this->setSize(32, 32);
-
-	//this->createBoxDynamic(*world);
-
-	
-	this->getDrawContainer()->AddBehaviour(getDrawBehaviour());
-}
-
-
 Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameObjectContainer* useContainer, b2World* world)
 {
 	this->setMoveContainer(moveContainer);
@@ -54,6 +37,7 @@ Player::Player()
 
 Player::~Player()
 {
+	
 }
 
 void Player::AddItem(BaseItem* item) {
