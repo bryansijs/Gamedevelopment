@@ -61,7 +61,8 @@ private:
 	bool fired = false;
 	bool useAction = true;
 
-	void StandStillTimerReset() { StandStillTimer = 1000; };
-	int StandStillTimer = 1000;
+	int notificationSwitch = 0;
+	void StandStillTimerReset() { if (1500 > StandStillTimer) { StandStillTimer = 1500; } };
+	int StandStillTimer = 2000;
 	void StandStill();
 };

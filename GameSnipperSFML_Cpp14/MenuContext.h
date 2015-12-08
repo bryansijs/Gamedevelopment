@@ -29,7 +29,6 @@ public:
 	StateManager* stateManager;
 
 	Awesomium::WebView* webView;
-	Awesomium::WebCore* web_core;
 	Awesomium::BitmapSurface* surface;
 
 	sf::Event event;

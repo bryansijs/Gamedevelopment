@@ -8,6 +8,7 @@
 #include "KeyMapping.h"
 #include "GameObject.h"
 #include "Time.h"
+#include "StorylineManager.h"
 
 PlayerActions::PlayerActions()
 {
@@ -146,6 +147,22 @@ void PlayerActions::StandStill()
 		moveAction.AnimateMovement(player, 1);
 		StandStillTimer = StandStillTimer - Time::deltaTime;
 		return;
+	}
+
+	switch (notificationSwitch)
+	{
+	case 0:
+		StorylineManager::Add("What are you waiting for?");
+		notificationSwitch++;
+		break;
+	case 1:
+		StorylineManager::Add("I'm still waiting!");
+		notificationSwitch++;
+		break;
+	case 2:
+		StorylineManager::Add("I'm bored...");
+		notificationSwitch = 0;
+		break;
 	}
 
 	StandStillTimerReset();

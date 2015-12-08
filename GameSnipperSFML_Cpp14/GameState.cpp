@@ -10,14 +10,16 @@
 #include "input.h"
 #include "GameActions.h"
 #include "PlayerActions.h"
+#include "AwesomiumHelper.h"
+#include "StorylineManager.h"
 
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager)
 {
 	maincontext = context;
 	
 	gameActions = new GameActions(this);
-
 	gameContext = new GameContext(context);
+	storyline = new AwesomiumHelper{ context->web_core, "file:///Resources/html-game/StoryLine.html", 1000, 50 };
 
 	playerActions.SetPlayer(gameContext->player);
 
@@ -37,9 +39,12 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
 
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
-	
+
 	gameContext->view.reset(rect);
 	gameContext->context->window.setView(gameContext->view);
+
+	StorylineManager::Add("Let's find a way out!");
+	StorylineManager::Add("Use your arrow keys to walk");
 }
 
 GameState::~GameState()
@@ -86,9 +91,18 @@ void GameState::Update()
 		gameContext->level->updateViewPort(worldPosition);
 	}
 
+	if (StorylineManager::Updated())
+	{
+		storyline->JavaScriptCall("TextUpdate", StorylineManager::GetText());
+	}
+	sf::Sprite storylineSprite = storyline->GetSprite();
+	storylineSprite.setPosition(0, 880);
+
 	gameContext->moveContainer->Update();
 	gameContext->drawContainer->Draw(&gameContext->context->window);
 
+	gameContext->context->window.setView(storyview);
+	gameContext->context->window.draw(storylineSprite);
 
 	gameContext->context->window.setView(gameContext->view);
 	gameContext->context->window.display();

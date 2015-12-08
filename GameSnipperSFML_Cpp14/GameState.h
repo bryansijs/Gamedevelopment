@@ -7,6 +7,7 @@ class StateManager;
 class Context;
 class GameContext;
 class GameActions;
+class AwesomiumHelper;
 
 class GameState: public BaseState
 {
@@ -25,5 +26,8 @@ private:
 
 	PlayerActions playerActions;
 	GameActions* gameActions;
+
+	sf::View storyview;
+	AwesomiumHelper* storyline;
 };
 

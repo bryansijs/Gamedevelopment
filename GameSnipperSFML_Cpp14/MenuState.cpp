@@ -28,8 +28,8 @@ MenuState::MenuState(Context* context, StateManager* stateManager, LevelManager*
 	menuContext->currentLevel = 1;
 
 	// Awesomium init
-	menuContext->web_core = WebCore::Initialize(WebConfig());
-	menuContext->webView = menuContext->web_core->CreateWebView(960, 640);
+	context->web_core = WebCore::Initialize(WebConfig());
+	menuContext->webView = context->web_core->CreateWebView(960, 640);
 
 	// Load Page
 	menuContext->pathToFile = "file:///Resources/menuHTML/menu.html";
