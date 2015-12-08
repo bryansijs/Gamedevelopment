@@ -44,7 +44,7 @@ private:
 
 	std::vector<std::string> activeKeys;
 
-	std::string direction = "move-left";
+	std::string direction = "move-down";
 	std::string currentMap;
 
 	DrawContainer *drawContainer;
