@@ -3,11 +3,15 @@
 
 #include "MoveContainer.h"
 #include "DrawContainer.h"
+#include <Box2D/Box2D.h>
 
 #include "NormalMoveBehaviour.h"
 #include "PlayerDrawBehaviour.h"
 
-Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer)
+#include "EndTile.h"
+#include <Box2D\Box2D.h>
+
+Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, b2World* world)
 {
 	this->setMoveContainer(moveContainer);
 	this->setDrawContainer(drawContainer);
@@ -17,11 +21,14 @@ Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer)
 	
 	this->setSize(32, 32);
 
+	//this->createBoxDynamic(*world);
+
+	
 	this->getDrawContainer()->AddBehaviour(getDrawBehaviour());
 }
 
 
-Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameObjectContainer* useContainer)
+Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameObjectContainer* useContainer, b2World* world)
 {
 	this->setMoveContainer(moveContainer);
 	this->setDrawContainer(drawContainer);
@@ -31,6 +38,7 @@ Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameO
 
 	this->setSize(32, 32);
 
+	//this->createBoxDynamic(*world);
 	this->getDrawContainer()->AddBehaviour(getDrawBehaviour());
 
 	this->setUseContainer(useContainer);
@@ -56,6 +64,15 @@ void Player::AddItem(BaseItem* item) {
 			return (this->*function)(item);
 		}
 	}
+}
+
+void Player::startContact(b2Fixture* fixture)
+{
+
+}
+
+void Player::endContact(b2Fixture * fixture)
+{
 }
 
 void Player::AddAmmo(BaseItem* item) {

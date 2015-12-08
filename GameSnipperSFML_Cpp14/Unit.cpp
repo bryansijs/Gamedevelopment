@@ -22,7 +22,7 @@ Unit::Unit(DrawContainer* dContainer, std::string img, MoveContainer* mContainer
 	//this->SetMoveBehaviour()
 }
 
-Unit::Unit(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* goContainer) : GameObject{ dContainer,goContainer, img }
+Unit::Unit(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* goContainer) : GameObject{ dContainer,goContainer, mContainer, img }
 {
 	//Wat voor behavoir heeft deze dan als basic?
 	//this->SetMoveBehaviour()

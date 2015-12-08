@@ -1,8 +1,10 @@
 #pragma once
-
 #include <vector>
 #include <SFML\Graphics.hpp>
 #include <Awesomium/WebCore.h>
+#include <Box2D\Box2D.h>
+
+
 class Unit;
 
 class Context
@@ -20,5 +22,7 @@ public:
 private:
 	sf::Vector2i* screenDimensions;
 	sf::Clock clock;
+
+	
 };
 

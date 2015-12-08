@@ -1,8 +1,11 @@
 #pragma once
 
+#include "Context.h"
+
 #include "Player.h"
 #include "PlayerInput.h"
 #include "PlayerActions.h"
+
 #include "KeyMappingImporter.h"
 
 #include "LevelImporter.h"
@@ -14,14 +17,10 @@ class Context;
 class MoveContainer;
 class DrawContainer;
 class GameObjectContainer;
+class CollisionListener;
 
 class GameContext
 {
-private: 
-
-
-
-
 public: 
 	GameContext(Context* context);
 	~GameContext();
@@ -44,10 +43,11 @@ public:
 	sf::Event event;
 	sf::View view;
 
-
-
-	
 	void setMenuPosition();
 	PauseMenu* pauze = new PauseMenu{ 321,395 };
+
+	b2World* world;
+	CollisionListener* collisionListener;
+
 };
 

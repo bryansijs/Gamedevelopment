@@ -5,16 +5,28 @@
 #include "MoveContainer.h"
 #include "DrawContainer.h"
 #include "KeyMapping.h"
+
 #include "PauseMenu.h"
+
+#include "DebugBox2D.h"
+#include "CollisionListener.h"
 
 GameContext::GameContext(Context* context)
 {
 	this->context = context;
-	
+
+	b2Vec2 gravity(0.f, 0.0f);
+	collisionListener = { new CollisionListener() };
+
+	world = { new b2World(gravity) };
+	world->SetContactListener(collisionListener);
+
 	moveContainer = new MoveContainer();
 	drawContainer = new DrawContainer();
 	useContainer = new GameObjectContainer();
-	player = new Player(moveContainer, drawContainer,useContainer);
+
+	player = new Player(moveContainer, drawContainer,useContainer, world);
+	player->SetAnimationStates(3);
 	playerActions.SetPlayer(player);
 
 	keyMappingImporter.Import("./Resources/key-mapping.json");
