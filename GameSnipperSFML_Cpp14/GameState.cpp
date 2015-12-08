@@ -111,10 +111,6 @@ void GameState::Update()
 	}
 
 
-	if (!terminate) {
-		gameContext->context->window.setView(gameContext->view);
-	}
-
 	this->gameContext->world->Step(1, 8, 3);
 
 	if (!isPause)
@@ -124,7 +120,11 @@ void GameState::Update()
 	}
 	gameContext->drawContainer->Draw(&gameContext->context->window);
 	gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
-	gameContext->context->window.setView(gameContext->view);
+
+	if (!terminate) {
+		gameContext->context->window.setView(gameContext->view);
+	}
+
 
 	gameContext->context->window.display();
 
