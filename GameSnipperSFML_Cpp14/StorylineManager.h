@@ -1,5 +1,6 @@
 #pragma once
 #include <queue>
+#include <SFML/Audio/SoundBuffer.hpp>
 
 class StorylineManager
 {
@@ -12,4 +13,9 @@ private:
 	static std::queue<std::string> messages;
 	static float timer;
 	static void TimerReset() { timer = 500; };
+
+	static sf::Sound* music;
+	static sf::SoundBuffer sfx;
+	static void PlaySound();
+
 };

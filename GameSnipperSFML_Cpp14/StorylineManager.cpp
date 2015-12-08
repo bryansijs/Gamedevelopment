@@ -1,9 +1,12 @@
 #include "stdafx.h"
 #include "StorylineManager.h"
+#include <SFML/Audio/Sound.hpp>
 
 std::string StorylineManager::current;
 std::queue<std::string> StorylineManager::messages;
-float StorylineManager::timer = 0;
+float StorylineManager::timer = 100;
+sf::Sound* StorylineManager::music;
+sf::SoundBuffer StorylineManager::sfx;
 
 void StorylineManager::Add(std::string message)
 {
@@ -26,6 +29,7 @@ bool StorylineManager::Updated()
 		current = messages.front();
 		messages.pop();
 		TimerReset();
+		PlaySound();
 		return true;
 	}
 
@@ -36,4 +40,13 @@ bool StorylineManager::Updated()
 std::string StorylineManager::GetText()
 {
 	return current;
+}
+
+void StorylineManager::PlaySound()
+{
+	sfx.loadFromFile("./Resources/music/notification.ogg");
+	music = new sf::Sound(sfx);
+	music->setVolume(100.0f);
+	music->setLoop(false);
+	music->play();
 }
