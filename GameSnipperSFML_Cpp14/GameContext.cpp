@@ -27,7 +27,7 @@ GameContext::GameContext(Context* context)
 
 	player = new Player(moveContainer, drawContainer,useContainer, world);
 	player->SetAnimationStates(3);
-	playerActions.SetPlayer(player);
+	playerActions = new PlayerActions{ player };
 
 	keyMappingImporter.Import("./Resources/key-mapping.json");
 	KeyMapping::ReloadMapping(keyMappingImporter.GetMapping());

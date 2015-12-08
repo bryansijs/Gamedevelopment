@@ -29,7 +29,9 @@ void DrawContainer::RemoveBehaviour(DrawBehaviour *behaviour)
 	for (it = behaviours.begin(); it != behaviours.end(); it++)
 	{
 		if ((*it) == behaviour)
+		{
+			behaviours.erase(it);
 			break;
+		}
 	}
-	behaviours.erase(it);
 }

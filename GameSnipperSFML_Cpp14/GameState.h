@@ -16,6 +16,9 @@ private:
 	Context* maincontext;
 
 	GameContext* gameContext;
+
+	void DestroyGameObjects();
+	void DebugBodies();
 	void MenuEnd(int option);
 public:
 	bool isPause = false;
@@ -25,5 +28,4 @@ public:
 
 	GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager);
 	~GameState();
-
 };

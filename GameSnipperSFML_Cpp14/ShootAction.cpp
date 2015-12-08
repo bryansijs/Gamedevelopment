@@ -1,12 +1,14 @@
 #include "stdafx.h"
 #include "ShootAction.h"
 
+#include <iostream>
 #include <map>
 
 #include "Time.h"
 #include "GameObject.h"
 #include "DrawContainer.h"
 #include "MoveContainer.h"
+#include "GameObjectContainer.h"
 #include "ShotMoveBehaviour.h"
 #include "Player.h"
 
@@ -20,34 +22,45 @@ ShootAction::~ShootAction()
 {
 }
  
-void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContainer, Player* player, std::string direction)
+void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer, b2World* world, Player* player, std::string direction)
 {
 	if (Time::runningTime > nextShot)
 	{
 		nextShot = (float)Time::runningTime + (float)shotRate;
 
-		GameObject* shot = new GameObject(drawContainer, "bullet-red.png");
+		float x = 0;
+		float y = 0;
 
-		ShotMoveBehaviour* shotBehaviour = new ShotMoveBehaviour(shot, direction);
-		moveContainer->AddBehaviour(shotBehaviour);
-		
 		if (direction == "move-up")
 		{
-		shot->setPosition(player->getBody()->GetPosition().x + 12, player->getBody()->GetPosition().y);
+			x = player->getBody()->GetPosition().x + 12;
+			y = player->getBody()->GetPosition().y + 2;
 		}
 		if (direction == "move-down")
 		{
-			shot->setPosition(player->getBody()->GetPosition().x + 12, player->getBody()->GetPosition().y + 24);
+			x = player->getBody()->GetPosition().x + 12;
+			y = player->getBody()->GetPosition().y + 26;
 		}
 		if (direction == "move-left")
 		{
-			shot->setPosition(player->getBody()->GetPosition().x, player->getBody()->GetPosition().y + 12);
+			x = player->getBody()->GetPosition().x + 2;
+			y = player->getBody()->GetPosition().y + 12;
 		}
 		if (direction == "move-right")
 		{
-			shot->setPosition(player->getBody()->GetPosition().x + 24, player->getBody()->GetPosition().y + 12);
+			x = player->getBody()->GetPosition().x + 26;
+			y = player->getBody()->GetPosition().y + 12;
 		}
-		
-		shot->setSize(8, 8);
+
+		GameObjectFactory gameObjectFactory{ drawContainer, moveContainer, gameObjectContainer, world };
+		std::map<std::string, std::string> properties = {
+			{ "type", "Projectile" },
+			{ "pType", "Bullet" },
+			{ "direction", direction },
+			{ "texture", "bullet-red.png" },
+			{ "x", std::to_string(x) },
+			{ "y", std::to_string(y) }
+		};
+		GameObject* bullet = gameObjectFactory.Create(properties);
 	}
 }

@@ -187,6 +187,12 @@
     <Filter Include="Header Files\Model\Units\Actions">
       <UniqueIdentifier>{4781ab13-eb86-4298-8071-7fb2180d5e35}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Model\Projectiles">
+      <UniqueIdentifier>{81c3788d-5f63-4dcd-93b3-891cacb8b4af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Projectiles">
+      <UniqueIdentifier>{66be4227-dff5-4785-80e4-a2d1361e6fde}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -411,6 +417,15 @@
     <ClInclude Include="CollisionListener.h">
       <Filter>Header Files\Controller</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files\Model\Projectiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -616,6 +631,15 @@
     </ClCompile>
     <ClCompile Include="CollisionListener.cpp">
       <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files\Model\Projectiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

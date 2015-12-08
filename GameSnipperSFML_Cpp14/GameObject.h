@@ -108,12 +108,13 @@ public:
 	virtual void startContact(b2Fixture* fixture);
 	virtual void endContact(b2Fixture* fixture);
 
+	bool isFlaggedForDelete = false;
 protected:
 	b2BodyDef myBodyDef;
 	b2PolygonShape Shape;
 	b2Body* Body;
 	b2FixtureDef boxFixtureDef;
 
-
+	void Destroy();
 };
 

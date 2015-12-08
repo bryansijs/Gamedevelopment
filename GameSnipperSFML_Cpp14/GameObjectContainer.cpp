@@ -23,8 +23,9 @@ void GameObjectContainer::RemoveObject(GameObject* object)
 	for (it = useAbleObjects.begin(); it != useAbleObjects.end(); it++)
 	{
 		if ((*it) == object)
+		{
+			useAbleObjects.erase(it);
 			break;
+		}
 	}
-	useAbleObjects.erase(it);
-
 }

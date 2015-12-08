@@ -10,6 +10,8 @@
 #include "MenuState.h"
 #include "square.h"
 
+#include <iterator>
+
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager)
 {
 	maincontext = context;
@@ -20,15 +22,13 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer,gameContext->moveContainer, gameContext->useContainer, gameContext->world);
 	gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
 
-	//gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer);
-	//gameContext->levelImporter->Import("./Resources/levels/Level_New.json");
-
 	gameContext->levelImporter->Prepare();
 
 	gameContext->level = gameContext->levelImporter->getLevel();
 	gameContext->levelImporter->Clear();
 
-	gameContext->playerActions.SetContainers(gameContext->drawContainer, gameContext->moveContainer);
+	gameContext->playerActions->SetContainers(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer);
+	gameContext->playerActions->SetWorld(gameContext->world);
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
 
 	gameContext->player->createBoxDynamic(*gameContext->world);
@@ -45,6 +45,41 @@ GameState::~GameState()
 	delete(levelManager);
 }
 
+void GameState::DestroyGameObjects()
+{
+	std::vector<b2Body*> gameObjectScheduledForRemoval;
+
+	for (b2Body* body = gameContext->world->GetBodyList(); body; body = body->GetNext()) {
+		if (body->GetUserData() != nullptr)
+		{
+			GameObject* data = (GameObject*)body->GetUserData();
+
+			if (data->isFlaggedForDelete)
+			{
+				gameObjectScheduledForRemoval.push_back(body);
+			}
+		}
+	}
+
+	for (int i = 0; i < gameObjectScheduledForRemoval.size(); i++)
+	{
+		gameContext->world->DestroyBody(gameObjectScheduledForRemoval[i]);
+	}
+
+	gameObjectScheduledForRemoval.clear();
+}
+
+void GameState::DebugBodies()
+{
+	for (b2Body* b = gameContext->world->GetBodyList(); b; b = b->GetNext()) {
+		sf::RectangleShape rectangle(sf::Vector2f(32, 32));
+		rectangle.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
+		rectangle.setOutlineThickness(0);
+		rectangle.setFillColor(sf::Color(180, 100, 100, 200));
+		gameContext->context->window.draw(rectangle);
+	}
+}
+
 void GameState::Update()
 {
 	Time::deltaTime = (float)gameContext->deltaClock.restart().asSeconds();
@@ -56,7 +91,11 @@ void GameState::Update()
 	sf::Vector2i worldPosition = gameContext->context->window.mapCoordsToPixel(playerPosition);
 
 	gameContext->level->draw(&gameContext->context->window, &gameContext->view);
-	gameContext->level->update();
+
+	if (!isPause)
+	{
+		gameContext->level->update();
+	}
 
 	if (gameContext->level->getDoEvents()) {
 		while (gameContext->context->window.pollEvent(gameContext->event)) {
@@ -91,9 +130,10 @@ void GameState::Update()
 
 			}
 		}
+
 		if (!isPause)
 		{
-			gameContext->playerActions.ProcessActions(gameContext->playerInput.GetActiveKeys());
+			gameContext->playerActions->ProcessActions(gameContext->playerInput.GetActiveKeys());
 			gameContext->level->updateViewPort(worldPosition);
 		}
 	}
@@ -102,29 +142,27 @@ void GameState::Update()
 		gameContext->player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	}
 
+	//DebugBodies();
 
+	if (!isPause)
+	{
+		this->gameContext->world->Step(1, 8, 3);
 
+		DestroyGameObjects();
+		gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
+	}
+
+	gameContext->drawContainer->Draw(&gameContext->context->window);
+	gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
 
 	if (isPause)
 	{
 		gameContext->pauze->draw(gameContext->context->window);
 	}
 
-
-	this->gameContext->world->Step(1, 8, 3);
-
-	if (!isPause)
-	{
-		gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
-
-	}
-	gameContext->drawContainer->Draw(&gameContext->context->window);
-	gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
-
 	if (!terminate) {
 		gameContext->context->window.setView(gameContext->view);
 	}
-
 
 	gameContext->context->window.display();
 
@@ -153,7 +191,8 @@ void GameState::StartNextLevel()
 	gameContext->level = gameContext->levelImporter->getLevel();
 	gameContext->levelImporter->Clear();
 
-	gameContext->playerActions.SetContainers(gameContext->drawContainer, gameContext->moveContainer);
+	gameContext->playerActions->SetContainers(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer);
+	gameContext->playerActions->SetWorld(gameContext->world);
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
 
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
