@@ -19,8 +19,6 @@ public:
 	std::vector<Unit*> getUnits() { return allUnits; };
 	Awesomium::WebCore* web_core;
 	Unit* getUnitAt(int i) { return allUnits.at(i); };
-
-	Awesomium::WebCore* web_core;
 private:
 	sf::Vector2i* screenDimensions;
 	sf::Clock clock;
