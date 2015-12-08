@@ -58,7 +58,8 @@ void MoveAction::Move(std::vector<std::string> directions, Player *player, std::
 	velocity.x = roundf(velocity.x * 100) / 100;
 	velocity.y = roundf(velocity.y * 100) / 100;
 
-	AnimateMovement(player);
+	if(velocity.x != 0 || velocity.y != 0)
+		AnimateMovement(player);
 
 	player->setPosition(player->getPosition() + velocity);
 
