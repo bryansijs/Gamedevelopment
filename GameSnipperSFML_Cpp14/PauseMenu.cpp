@@ -20,18 +20,20 @@ PauseMenu::PauseMenu(float width, float height)
 	sfxSound.loadFromFile("./Resources/sfx/cat.ogg");
 	sfx.setBuffer(sfxSound);
 
+	sfxPause.loadFromFile("./Resources/sfx/confirm.ogg");
+	pauseSound.setBuffer(sfxPause);
+
+
 	menu[0].setFont(font);
 	menu[0].setCharacterSize(16);
 	menu[0].setColor(sf::Color::Red);
 	menu[0].setString("Resume");
-
-
+	
 	menu[1].setFont(font);	
 	menu[1].setCharacterSize(16);
 	menu[1].setColor(sf::Color::White);
 	menu[1].setString("Menu");
 	
-
 	menu[2].setFont(font);
 	menu[2].setCharacterSize(16);
 	menu[2].setColor(sf::Color::White);

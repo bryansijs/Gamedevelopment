@@ -77,7 +77,7 @@ void GameState::Update()
 
 				if (Input::GetKeyUp(KeyMapping::GetKey("pause"))) {
 					isPause = !isPause;
-					gameContext->pauseSound.play();
+					gameContext->pauze->playEffect();
 					gameContext->level->pauseMusic(!isPause);
 					if (isPause)
 						gameContext->setMenuPosition();
@@ -153,7 +153,7 @@ void GameState::MenuEnd(int option)
 	switch (option)	{
 		case 0: {
 			isPause = false;
-			gameContext->pauseSound.play();
+			gameContext->pauze->playEffect();
 			gameContext->level->pauseMusic(!isPause); }
 			break;
 		case 1: {

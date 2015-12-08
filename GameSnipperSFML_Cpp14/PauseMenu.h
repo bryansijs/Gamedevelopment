@@ -15,9 +15,9 @@ public:
 	int GetPressedItem() { return selectedItemIndex; }
 	int KeyHandler();
 	void setPositions(float levelx, float  levely, float  width, float  height);
+	void playEffect() { pauseSound.play(); }
 private:
 	int selectedItemIndex;
-	int KeyValue();
 
 	sf::Font font;
 	sf::Text menu[MAX_NUMBER_OF_ITEMS];
@@ -35,5 +35,10 @@ private:
 
 	sf::SoundBuffer sfxSound;
 	sf::Sound sfx;
+
+
+	sf::SoundBuffer sfxPause;
+	sf::Sound pauseSound;
+
 };
 

@@ -20,8 +20,7 @@ GameContext::GameContext(Context* context)
 	keyMappingImporter.Import("./Resources/key-mapping.json");
 	KeyMapping::ReloadMapping(keyMappingImporter.GetMapping());
 
-	sfx.loadFromFile("./Resources/sfx/confirm.ogg");
-	pauseSound.setBuffer(sfx);
+
 }
 
 void GameContext::setMenuPosition()
@@ -31,6 +30,7 @@ void GameContext::setMenuPosition()
 
 GameContext::~GameContext()
 {
+	delete pauze;
 	delete player;
 	delete levelImporter;
 	delete level;

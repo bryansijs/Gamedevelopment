@@ -46,9 +46,6 @@ public:
 
 
 
-	sf::SoundBuffer sfx;
-	sf::Sound pauseSound;
-
 	
 	void setMenuPosition();
 	PauseMenu* pauze = new PauseMenu{ 321,395 };
