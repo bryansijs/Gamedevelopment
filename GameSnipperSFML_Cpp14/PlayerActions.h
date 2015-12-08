@@ -22,7 +22,7 @@ public:
 	~PlayerActions();
 	float useDelay = 0;
 	void SetPlayer(Player *activePlayer);
-	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile*>* tiles);
+	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer);
 	void ProcessActions(std::vector<std::string> &newActiveKeys);
 	void SetTiles(std::vector<Tile*>* t) { tiles = t; };
 

@@ -1,25 +1,23 @@
 #pragma once
 
+#include "Context.h"
+
 #include "Player.h"
 #include "PlayerInput.h"
 #include "PlayerActions.h"
+
 #include "KeyMappingImporter.h"
 
 #include "LevelImporter.h"
 #include "Level.h"
 
-class Context;
 class MoveContainer;
 class DrawContainer;
 class GameObjectContainer;
+class CollisionListener;
 
 class GameContext
 {
-private: 
-
-
-
-
 public: 
 	GameContext(Context* context);
 	~GameContext();
@@ -41,7 +39,7 @@ public:
 	sf::Clock deltaClock;
 	sf::Event event;
 	sf::View view;
-
-	
+	b2World* world;
+	CollisionListener* collisionListener;
 };
 
