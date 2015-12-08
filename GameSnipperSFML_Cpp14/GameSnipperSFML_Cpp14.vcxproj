@@ -214,10 +214,10 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="NormalDrawBehaviour.h" />
     <ClInclude Include="NormalMoveBehaviour.h" />
     <ClInclude Include="NormalState.h" />
+    <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerActions.h" />
     <ClInclude Include="PlayerDrawBehaviour.h" />
-    <ClInclude Include="PlayerInput.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="resource1.h" />
@@ -289,6 +289,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="MoveContainer.cpp" />
     <ClCompile Include="NormalDrawBehaviour.cpp" />
     <ClCompile Include="NormalMoveBehaviour.cpp" />
+    <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="PlayerActions.cpp" />
     <ClCompile Include="PlayerDrawBehaviour.cpp" />
     <ClCompile Include="Potion.cpp" />

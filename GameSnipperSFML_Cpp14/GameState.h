@@ -3,6 +3,7 @@
 #include "LevelManager.h"
 #include "PlayerActions.h"
 
+
 class StateManager;
 class Context;
 class GameContext;
@@ -19,6 +20,8 @@ public:
 	void Update() override;
 	void Terminate() override;
 	void StartNextLevel();
+
+	bool isPause = false;
 private:
 	StateManager* stateManager;
 
@@ -29,5 +32,6 @@ private:
 
 	PlayerActions playerActions;
 	GameActions* gameActions;
-};
 
+	void MenuEnd(int option);
+};

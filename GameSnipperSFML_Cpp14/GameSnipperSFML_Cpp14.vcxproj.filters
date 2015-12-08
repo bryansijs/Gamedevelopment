@@ -175,11 +175,23 @@
     <Filter Include="Header Files\Model\Items">
       <UniqueIdentifier>{374d5c0c-2551-4b15-b054-3b4bbdf8ff57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Menu">
+      <UniqueIdentifier>{6113e3e9-7e36-4501-9dbe-34daa83ca707}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Pause">
+      <UniqueIdentifier>{0ea53a5d-ec2b-46ae-90de-78c2b2c15704}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\Model\Units\Actions">
       <UniqueIdentifier>{5398b0e7-83c0-42a3-b93d-ec9c1d339179}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Model\Units\Actions">
       <UniqueIdentifier>{4781ab13-eb86-4298-8071-7fb2180d5e35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Actions">
+      <UniqueIdentifier>{d33bdf51-ecdd-4036-8b07-ec2877de5c9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actions">
+      <UniqueIdentifier>{a2729a85-933b-4076-b281-9cdcd8f80a06}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -250,12 +262,6 @@
       <Filter>Header Files\Containers</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Header Files\Model\Units\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerInput.h">
-      <Filter>Header Files\Model\Units\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerActions.h">
       <Filter>Header Files\Model\Units\Player</Filter>
     </ClInclude>
     <ClInclude Include="TestDemo.h">
@@ -384,6 +390,9 @@
     <ClInclude Include="BaseEnemy.h">
       <Filter>Header Files\Model\Units\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="PauseMenu.h">
+      <Filter>Header Files\Pause</Filter>
+    </ClInclude>
     <ClInclude Include="DebugBox2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -399,17 +408,20 @@
     <ClInclude Include="CollisionListener.h">
       <Filter>Header Files\Controller</Filter>
     </ClInclude>
-    <ClInclude Include="BaseInput.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameActions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuActions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ConsoleColor.h">
       <Filter>Header Files\UnitTest</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseInput.h">
+      <Filter>Header Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuActions.h">
+      <Filter>Header Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="GameActions.h">
+      <Filter>Header Files\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerActions.h">
+      <Filter>Header Files\Actions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -480,9 +492,6 @@
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Model\Units\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerActions.cpp">
       <Filter>Source Files\Model\Units\Player</Filter>
     </ClCompile>
     <ClCompile Include="UnitTest.cpp">
@@ -596,6 +605,9 @@
     <ClCompile Include="BaseEnemy.cpp">
       <Filter>Source Files\Model\Units\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="PauseMenu.cpp">
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
     <ClCompile Include="DebugBox2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -612,13 +624,16 @@
       <Filter>Source Files\Controller</Filter>
     </ClCompile>
     <ClCompile Include="BaseInput.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Actions</Filter>
     </ClCompile>
     <ClCompile Include="GameActions.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Actions</Filter>
     </ClCompile>
     <ClCompile Include="MenuActions.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerActions.cpp">
+      <Filter>Source Files\Actions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

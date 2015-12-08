@@ -1,18 +1,15 @@
 #include "stdafx.h"
 #include "GameState.h"
-
 #include "StateManager.h"
-#include <iostream>
+#include "KeyMapping.h"
 #include "Context.h"
 #include "GameContext.h"
 #include "MoveContainer.h"
 #include "DrawContainer.h"
-
-#include "square.h"
-
 #include "input.h"
 #include "GameActions.h"
 #include "PlayerActions.h"
+#include "MenuState.h"
 
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager)
 {
@@ -44,7 +41,7 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	gameContext->player->createBoxDynamic(*gameContext->world);
 
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
-	
+
 	gameContext->view.reset(rect);
 	gameContext->context->window.setView(gameContext->view);
 }
@@ -88,22 +85,55 @@ void GameState::Update()
 				gameActions->CatchSingleInput();
 				gameActions->ProcessActions();
 			}
+
+			if (Input::GetKeyDown("K")) {
+				StartNextLevel();
+			}
+
+
+			if (isPause)
+				this->MenuEnd(gameContext->pauze->KeyHandler());
+
+			if (Input::GetKeyUp(KeyMapping::GetKey("escape"))) {
+				isPause = !isPause;
+				gameContext->pauze->playEffect();
+				gameContext->level->pauseMusic(!isPause);
+				if (isPause)
+					gameContext->setMenuPosition();
+			}
+
 		}
-		playerActions.ProcessActions();
-		gameContext->level->updateViewPort(worldPosition);
+		if (!isPause)
+		{
+			playerActions.ProcessActions();
+			gameContext->level->updateViewPort(worldPosition);
+		}
+
 	}
 	else
 	{
 		gameContext->player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	}
+	
+	if (isPause)
+	{
+		gameContext->pauze->draw(gameContext->context->window);
+	}
 
 	this->gameContext->world->Step(1, 8, 3);
 
-	gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
-	gameContext->drawContainer->Draw(&gameContext->context->window);
+	if (!isPause)
+	{
+		gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
 
+	}
+	gameContext->drawContainer->Draw(&gameContext->context->window);
 	gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
-	gameContext->context->window.setView(gameContext->view);
+
+	if (!terminate) {
+		gameContext->context->window.setView(gameContext->view);
+	}
+
 
 	gameContext->context->window.display();
 
@@ -141,4 +171,27 @@ void GameState::StartNextLevel()
 	gameContext->context->window.setView(gameContext->view);
 
 	Update();
+}
+
+void GameState::MenuEnd(int option)
+{
+	switch (option)	{
+		case 0: {
+			isPause = false;
+			gameContext->pauze->playEffect();
+			gameContext->level->pauseMusic(!isPause); }
+			break;
+		case 1: {
+			terminate = true;
+			MenuState* menu = new MenuState{ gameContext->context, stateManager, levelManager };
+			stateManager->AddState(menu);
+			stateManager->StartNextState();
+			break; }
+		case 2: {
+			exit(0); }
+			break;
+		default:
+			break;
+	}
+
 }
