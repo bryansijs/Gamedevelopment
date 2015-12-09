@@ -15,7 +15,6 @@ private:
 	std::vector<BaseItem*> ammo;
 	std::vector<BaseItem*> guns;
 
-
 	void AddKey(BaseItem* item) { keyAmount++; }
 	void AddAmmo(BaseItem* item);
 	void AddGun(BaseItem* item);
@@ -27,15 +26,10 @@ private:
 		{ "Gun", &Player::AddGun },
 		{ "Key", &Player::AddKey },
 	};
-
-
-
 public:
-	Player(MoveContainer* moveContainer, DrawContainer* drawContainer);
-	Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameObjectContainer *useContainer);
+	Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameObjectContainer *useContainer, b2World* world);
 	Player();
-	~Player() override;
-
+	~Player();
 
 	void removeKey(){keyAmount--;}
 
@@ -47,5 +41,8 @@ public:
 	}
 
 	void AddItem(BaseItem* item);
+
+	virtual void startContact(b2Fixture* fixture);
+	virtual void endContact(b2Fixture* fixture);
 };
 

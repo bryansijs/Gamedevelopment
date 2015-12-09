@@ -1,27 +1,13 @@
 #include "stdafx.h"
 #include "Player.h"
-
 #include "MoveContainer.h"
 #include "DrawContainer.h"
-
+#include <Box2D/Box2D.h>
 #include "NormalMoveBehaviour.h"
 #include "PlayerDrawBehaviour.h"
+#include "EndTile.h"
 
-Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer)
-{
-	this->setMoveContainer(moveContainer);
-	this->setDrawContainer(drawContainer);
-
-	this->SetMoveBehaviour( new NormalMoveBehaviour(this) );
-	this->setDrawBehaviour( new PlayerDrawBehaviour(this, 10, "Player.png"));
-	
-	this->setSize(32, 32);
-
-	this->getDrawContainer()->AddBehaviour(getDrawBehaviour());
-}
-
-
-Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameObjectContainer* useContainer)
+Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameObjectContainer* useContainer, b2World* world)
 {
 	this->setMoveContainer(moveContainer);
 	this->setDrawContainer(drawContainer);
@@ -31,17 +17,20 @@ Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameO
 
 	this->setSize(32, 32);
 
+	//this->createBoxDynamic(*world);
 	this->getDrawContainer()->AddBehaviour(getDrawBehaviour());
-
 	this->setUseContainer(useContainer);
-}
 
+	this->SetAnimationStates(3);
+	this->setHealth(100);
+}
 
 
 Player::Player()
 {
 	this->SetMoveBehaviour ( new NormalMoveBehaviour(this) );
 	this->setDrawBehaviour(new PlayerDrawBehaviour(this, 10, "Player.png"));
+	this->setHealth(100);
 }
 
 Player::~Player()
@@ -57,6 +46,15 @@ void Player::AddItem(BaseItem* item) {
 			return (this->*function)(item);
 		}
 	}
+}
+
+void Player::startContact(b2Fixture* fixture)
+{
+
+}
+
+void Player::endContact(b2Fixture * fixture)
+{
 }
 
 void Player::AddAmmo(BaseItem* item) {

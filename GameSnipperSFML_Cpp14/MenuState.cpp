@@ -24,11 +24,14 @@ MenuState::MenuState(Context* context, StateManager* stateManager, LevelManager*
 	this->levelManager = levelManager;
 	menuActions = new MenuActions(stateManager, menuContext, levelManager);
 
+	sf::View view = context->window.getView();
+	view.setCenter(480, 320);
+	context->window.setView(view);
+
 	menuContext->inMenu = true;
 	menuContext->currentLevel = 1;
 
 	// Awesomium init
-	context->web_core = WebCore::Initialize(WebConfig());
 	menuContext->webView = context->web_core->CreateWebView(960, 640);
 
 	// Load Page

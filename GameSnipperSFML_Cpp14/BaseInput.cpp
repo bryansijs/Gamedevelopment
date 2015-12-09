@@ -68,5 +68,13 @@ void BaseInput::AddActiveKey(string key)
 
 void BaseInput::RemoveActiveKey(string key)
 {
-	activeKeys.erase(remove(activeKeys.begin(), activeKeys.end(), key));
+	std::vector<std::string>::iterator it;
+	for (it = activeKeys.begin(); it != activeKeys.end(); it++)
+	{
+		if ((*it) == key)
+		{
+			activeKeys.erase(it);
+			break;
+		}
+	}
 }

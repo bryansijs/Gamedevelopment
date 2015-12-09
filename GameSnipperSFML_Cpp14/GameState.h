@@ -6,6 +6,8 @@
 class StateManager;
 class Context;
 class GameContext;
+
+class square;
 class GameActions;
 class AwesomiumHelper;
 
@@ -18,16 +20,23 @@ public:
 	void Update() override;
 	void Terminate() override;
 	void StartNextLevel();
+
+	bool isPause = false;
 private:
 	StateManager* stateManager;
+
 	LevelManager* levelManager;
 	Context* maincontext;
+
 	GameContext* gameContext;
 
-	PlayerActions playerActions;
+	PlayerActions* playerActions;
 	GameActions* gameActions;
 
 	sf::View storyview;
 	AwesomiumHelper* storyline;
-};
 
+	void DestroyGameObjects();
+	void DebugBodies();
+	void MenuEnd(int option);
+};

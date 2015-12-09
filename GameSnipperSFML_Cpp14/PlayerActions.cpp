@@ -7,12 +7,15 @@
 #include "GameObjectContainer.h"
 #include "KeyMapping.h"
 #include "GameObject.h"
+
 #include "Time.h"
 #include "StorylineManager.h"
 
-PlayerActions::PlayerActions()
-{
 
+PlayerActions::PlayerActions(Player *player)
+{
+	this->player = player;
+	moveAction = new MoveAction{ player, 0.10f };
 }
 
 PlayerActions::~PlayerActions()
@@ -20,22 +23,20 @@ PlayerActions::~PlayerActions()
 
 }
 
-void PlayerActions::SetPlayer(Player *player)
-{
-	this->player = player;
-}
-
-void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile*>* tiles)
+void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, GameObjectContainer *gameObjectContainer)
 {
 	this->drawContainer = drawContainer;
 	this->moveContainer = moveContainer;
-	this->tiles = tiles;
+	this->gameObjectContainer = gameObjectContainer;
+}
+
+void PlayerActions::SetWorld(b2World * world)
+{
+	this->world = world;
 }
 
 void PlayerActions::ProcessActions()
 {
-	bool animate = false;
-
 	std::map<std::string, void(PlayerActions::*)()>::iterator it;
 
 	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
@@ -50,17 +51,9 @@ void PlayerActions::ProcessActions()
 					activeActions.push_back(it->second);
 				}
 			}
-
-			if (map.find("move") != std::string::npos)
-			{
-				animate = true;
-			}
 		}
 	}
-	if(!animate)
-	{
-		StandStill();
-	}
+
 	ExecuteActions();
 }
 
@@ -74,18 +67,32 @@ void PlayerActions::ExecuteActions()
 		(this->*function)();
 	}
 
+
+	if (resetMove)
+	{
+		moveAction->Reset();
+	}
+	
 	if (Input::GetKeyUp(KeyMapping::GetKey("use")))
 	{
 		useAction = true;
 	}
 
+	if (Input::GetKeyDown("U"))
+	{
+		player->setHealth(0);
+	}
+
 	activeActions.clear();
+
+	resetMove = true;
 }
 
 void PlayerActions::Move()
 {
 	StandStillTimerReset();
 
+	resetMove = false;
 	std::vector<std::string> directions;
 
 	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
@@ -98,13 +105,13 @@ void PlayerActions::Move()
 		}
 	}
 
-	moveAction.Move(directions, player, tiles);
+	moveAction->Move(directions);
 }
 
 void PlayerActions::Shoot()
 {
 	StandStillTimerReset();
-	shootAction.Shoot(drawContainer, moveContainer, player, direction);
+	shootAction.Shoot(drawContainer, moveContainer, gameObjectContainer, world, player, direction);
 }
 
 
@@ -118,8 +125,9 @@ void PlayerActions::Use()
 		//std::cout << b <<  std::endl;
 		/*std::cout << "My current location x y " << player->getPosition().x << " " << player->getPosition().y << std::endl;*/
 
-		float playery = this->player->getPosition().y;
-		float playerx = this->player->getPosition().x;
+		float playery = this->player->getBody()->GetPosition().y;
+		float playerx = this->player->getBody()->GetPosition().x;
+
 		for (GameObject* object : this->player->getgameObjectContainer()->getObjects())
 		{
 			//Check zit ik wel bij dit object in de beurt?
@@ -128,9 +136,12 @@ void PlayerActions::Use()
 			//Dit moet worden afgevangen doormiddel van is colliding en de juiste directe!
 			//Als we op dezelfde y zitten met een 32 ~48 verschil;
 			//Als we op dezelfde x zittten met en 32 ~48 verschil; 
-			if (playery + 32 > object->getPosition().y && playery - 48 < object->getPosition().y)
+
+			float y = object->getPosition().y;
+			float x = object->getPosition().x;
+			if (playery + 48 > y && playery - 48 < y)
 			{
-				if (playerx + 32 > object->getPosition().x && playerx - 48 < object->getPosition().x)
+				if (playerx + 48  >x && playerx - 48 <x)
 				{
 					object->doAction(player);
 				}
@@ -142,9 +153,10 @@ void PlayerActions::Use()
 
 void PlayerActions::StandStill()
 {
+	player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
+
 	if (StandStillTimer > 0)
-	{
-		moveAction.AnimateMovement(player, 1);
+	{		
 		StandStillTimer = StandStillTimer - Time::deltaTime;
 		return;
 	}

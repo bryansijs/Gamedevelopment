@@ -1,43 +1,58 @@
 #include "stdafx.h"
 #include "MoveAction.h"
 
-#include "Player.h"
+#include "GameObject.h"
 #include "Time.h"
-#include "Tile.h"
+#include "Animation.h"
 
 #include <math.h>
 #include <iostream>
 
-MoveAction::MoveAction()
+MoveAction::MoveAction(GameObject *gameObject, float delay)
 {
+	this->gameObject = gameObject;
+	animation = new Animation(gameObject, delay, 1);
 }
 
 MoveAction::~MoveAction()
 {
 }
 
-void MoveAction::Move(std::vector<std::string> directions, Player *player, std::vector<Tile*>* tiles)
+void MoveAction::Move(std::vector<std::string> directions)
+{
+	this->directions = directions;
+
+	Move();
+}
+
+void MoveAction::Reset()
+{
+	animation->Reset();
+	gameObject->getBody()->SetLinearVelocity(b2Vec2(0, 0));
+}
+
+void MoveAction::Move()
 {
 	for (std::vector<std::string>::iterator it = directions.begin(); it != directions.end(); ++it)
 	{
 		if (*it == "move-up")
 		{
-			player->setImageY(3);
+			gameObject->setImageY(3);
 			velocity.y -= speed;
 		}
 		if (*it == "move-down")
 		{
-			player->setImageY(0);
+			gameObject->setImageY(0);
 			velocity.y += speed;
 		}
 		if (*it == "move-left")
 		{
-			player->setImageY(1);
+			gameObject->setImageY(1);
 			velocity.x -= speed;
 		}
 		if (*it == "move-right")
 		{
-			player->setImageY(2);
+			gameObject->setImageY(2);
 			velocity.x += speed;
 		}
 	}
@@ -50,39 +65,11 @@ void MoveAction::Move(std::vector<std::string> directions, Player *player, std::
 		velocity.y *= sin(45 * 3.14159265359 / 180);
 	}
 
-	if (player->isColliding(*tiles, velocity))
-	{
-		return;
-	}
-
 	velocity.x = roundf(velocity.x * 100) / 100;
 	velocity.y = roundf(velocity.y * 100) / 100;
 
 	if(velocity.x != 0 || velocity.y != 0)
-		AnimateMovement(player);
+		animation->Animate();
 
-	player->setPosition(player->getPosition() + velocity);
-
-}
-
-void MoveAction::AnimateMovement(Player *player)
-{
-	if (animationDelay > 0)
-	{
-		animationDelay = animationDelay - Time::deltaTime;
-		return;
-	}
-
-	if (animateState == 3)
-		animateState = 0;
-
-	player->setImageX(animateState);
-	animateState++;
-	animationDelay = 0.05;
-}
-
-void MoveAction::AnimateMovement(Player* player, int state)
-{
-	animateState = state;
-	AnimateMovement(player);
+	gameObject->getBody()->SetLinearVelocity(b2Vec2(velocity.x, velocity.y));
 }

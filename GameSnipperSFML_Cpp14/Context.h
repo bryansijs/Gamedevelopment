@@ -1,5 +1,4 @@
 #pragma once
-
 #include <vector>
 #include <SFML\Graphics.hpp>
 #include <Awesomium/WebCore.h>
@@ -16,12 +15,12 @@ public:
 
 	std::vector<Unit*> allUnits;
 	std::vector<Unit*> getUnits() { return allUnits; };
-
-	Unit* getUnitAt(int i) { return allUnits.at(i); };
-
 	Awesomium::WebCore* web_core;
+	Unit* getUnitAt(int i) { return allUnits.at(i); };
 private:
 	sf::Vector2i* screenDimensions;
 	sf::Clock clock;
+
+	
 };
 

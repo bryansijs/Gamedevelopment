@@ -18,15 +18,14 @@ class Tile;
 class PlayerActions : public BaseInput
 {
 public:
-	PlayerActions();
+	PlayerActions(Player *player);
 	~PlayerActions();
 
-	void SetPlayer(Player *activePlayer);
 	void ProcessActions();
 
 	float useDelay = 0;
-	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, std::vector<Tile*>* tiles);
-	void SetTiles(std::vector<Tile*>* t) { tiles = t; };
+	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, GameObjectContainer *gameObjectContainer);
+	void SetWorld(b2World* world);
 
 	void Move();
 	void Shoot();
@@ -43,23 +42,25 @@ private:
 		{ "use", &PlayerActions::Use }
 	};
 
-	std::string direction = "move-left";
+	std::string direction = "move-down";
 	std::string currentMap;
 
 	DrawContainer *drawContainer;
 	MoveContainer *moveContainer;
+	GameObjectContainer * gameObjectContainer;
 
 	DrawBehaviour drawBehaviour;
 	MoveBehaviour moveBehaviour;
 
-	MoveAction moveAction;
+	MoveAction* moveAction;
 	ShootAction shootAction;
 
 	Player *player;
-	std::vector<Tile*>* tiles;
+	b2World* world;
 
 	bool fired = false;
 	bool useAction = true;
+	bool resetMove = true;
 
 	int notificationSwitch = 0;
 	void StandStillTimerReset() { if (1500 > StandStillTimer) { StandStillTimer = 1500; } };

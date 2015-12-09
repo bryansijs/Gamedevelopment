@@ -6,25 +6,25 @@
 
 #include <SFML\System\Vector2.hpp>
 
-class Player;
+class GameObject;
 class Tile;
+class Animation;
 
 class MoveAction
 {
 public:
-	MoveAction();
+	MoveAction(GameObject *gameObject, float delay);
 	~MoveAction();
 
-
-	void Move(std::vector<std::string> activeKeys, Player *player, std::vector<Tile*>* tiles);
-	void AnimateMovement(Player *player, int state);
-
-	int animateState = 1;
+	void Move(std::vector<std::string> directions);
+	void Reset();
 private:
-	Player *player;
-	sf::Vector2f velocity;
-	float speed = 150.0f;
+	void Move();
 
-	float animationDelay;
-	void AnimateMovement(Player *player);
+	GameObject *gameObject;
+	std::vector<std::string> directions;
+	sf::Vector2f velocity;
+	float speed = 68.0f;
+
+	Animation* animation;
 };

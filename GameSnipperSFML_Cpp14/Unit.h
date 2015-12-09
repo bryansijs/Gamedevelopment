@@ -11,6 +11,8 @@ class UnitState;
 
 class Unit : public GameObject
 {
+private:
+	int health;
 public:
 	UnitState* currentState;
 	Unit::Unit(DrawContainer* dContainer, std::string img);
@@ -20,5 +22,7 @@ public:
 	Unit::Unit();
 	Unit::Unit(DrawContainer* container);
 	void setCurrentState(UnitState* state);
+	void setHealth(int health) { this->health = health; }
+	int getHealth() { return health; }
 };
 
