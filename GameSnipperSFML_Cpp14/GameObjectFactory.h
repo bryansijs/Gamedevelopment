@@ -8,6 +8,7 @@
 #include "EnemyFactory.h"
 #include "ItemFactory.h"
 #include "InteractiveFactory.h"
+#include "ProjectileFactory.h"
 #include "Tile.h"
 
 class GameObject;
@@ -26,17 +27,20 @@ private:
 		{ "Object", &GameObjectFactory::CreateObject },
 		{ "GameTile", &GameObjectFactory::CreateTile },
 		{ "Item", &GameObjectFactory::CreateItem },
+		{ "Projectile", &GameObjectFactory::CreateProjectile },
 	};
 
 	GameObject* CreateEnemy(std::map<std::string, std::string>& properties);
 	GameObject* CreateObject(std::map<std::string, std::string>&properties);
 	GameObject* CreateTile(std::map<std::string, std::string>& properties);
 	GameObject* CreateItem(std::map<std::string, std::string>& properties);
+	GameObject* CreateProjectile(std::map<std::string, std::string>& properties);
 
 	GameTileFactory gametTileFactory;
 	EnemyFactory enemyFactory;
 	InteractiveFactory interactiveFactory;
 	ItemFactory itemFactory;
+	ProjectileFactory projectileFactory;
 	std::vector<Tile*> tileList;
 	b2World* world;
 

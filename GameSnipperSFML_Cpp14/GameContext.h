@@ -1,13 +1,9 @@
 #pragma once
 
 #include "Context.h"
-
-#include "Player.h"
-
 #include "Player.h"
 #include "LevelImporter.h"
 #include "Level.h"
-
 #include "PauseMenu.h"
 
 class Context;
@@ -29,7 +25,6 @@ public:
 	GameObjectContainer *useContainer;
 
 	Player* player;
-
 	LevelImporter* levelImporter;
 	Level* level;
 

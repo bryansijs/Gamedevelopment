@@ -58,12 +58,6 @@
     <Filter Include="Header Files\States">
       <UniqueIdentifier>{21ccf40d-ef38-484e-91fe-b37e5905f657}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Units">
-      <UniqueIdentifier>{c4634945-a2dc-41cc-b520-c617ca639c54}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Units\Items">
-      <UniqueIdentifier>{f2640498-25be-4db8-b116-a7d158b1959e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Behaviours">
       <UniqueIdentifier>{34398989-877c-4b8a-8434-235379828296}</UniqueIdentifier>
     </Filter>
@@ -187,11 +181,11 @@
     <Filter Include="Header Files\Model\Units\Actions">
       <UniqueIdentifier>{4781ab13-eb86-4298-8071-7fb2180d5e35}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Actions">
-      <UniqueIdentifier>{d33bdf51-ecdd-4036-8b07-ec2877de5c9c}</UniqueIdentifier>
+    <Filter Include="Source Files\Model\Projectiles">
+      <UniqueIdentifier>{81c3788d-5f63-4dcd-93b3-891cacb8b4af}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Actions">
-      <UniqueIdentifier>{a2729a85-933b-4076-b281-9cdcd8f80a06}</UniqueIdentifier>
+    <Filter Include="Header Files\Model\Projectiles">
+      <UniqueIdentifier>{66be4227-dff5-4785-80e4-a2d1361e6fde}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -262,6 +256,12 @@
       <Filter>Header Files\Containers</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>Header Files\Model\Units\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerInput.h">
+      <Filter>Header Files\Model\Units\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerActions.h">
       <Filter>Header Files\Model\Units\Player</Filter>
     </ClInclude>
     <ClInclude Include="TestDemo.h">
@@ -384,6 +384,9 @@
     <ClInclude Include="UnitTestLevelSequence.h">
       <Filter>Header Files\UnitTest\Tests</Filter>
     </ClInclude>
+    <ClInclude Include="application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="BaseItem.h">
       <Filter>Header Files\Model\Items</Filter>
     </ClInclude>
@@ -408,20 +411,38 @@
     <ClInclude Include="CollisionListener.h">
       <Filter>Header Files\Controller</Filter>
     </ClInclude>
-    <ClInclude Include="ConsoleColor.h">
-      <Filter>Header Files\UnitTest</Filter>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files\Model\Projectiles</Filter>
     </ClInclude>
     <ClInclude Include="BaseInput.h">
-      <Filter>Header Files\Actions</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MenuActions.h">
-      <Filter>Header Files\Actions</Filter>
+    <ClInclude Include="ConsoleColor.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameActions.h">
-      <Filter>Header Files\Actions</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerActions.h">
-      <Filter>Header Files\Actions</Filter>
+    <ClInclude Include="MenuActions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LoseContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LoseState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WinContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WinState.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -492,6 +513,9 @@
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Model\Units\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerActions.cpp">
       <Filter>Source Files\Model\Units\Player</Filter>
     </ClCompile>
     <ClCompile Include="UnitTest.cpp">
@@ -623,17 +647,35 @@
     <ClCompile Include="CollisionListener.cpp">
       <Filter>Source Files\Controller</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files\Model\Projectiles</Filter>
+    </ClCompile>
     <ClCompile Include="BaseInput.cpp">
-      <Filter>Source Files\Actions</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameActions.cpp">
-      <Filter>Source Files\Actions</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LoseContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LoseState.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MenuActions.cpp">
-      <Filter>Source Files\Actions</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerActions.cpp">
-      <Filter>Source Files\Actions</Filter>
+    <ClCompile Include="WinContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WinState.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -650,6 +692,8 @@
       <Filter>Resource Files\Html</Filter>
     </None>
     <None Include="Resources\key-mapping.json" />
+    <None Include="Resources\menuHTML\lose.html" />
+    <None Include="Resources\menuHTML\win.html" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameSnipperSFML_Cpp14.rc">

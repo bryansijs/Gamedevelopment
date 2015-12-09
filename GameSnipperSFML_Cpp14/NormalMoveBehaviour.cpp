@@ -20,8 +20,8 @@ void NormalMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 {
 	if (checkVisible(viewPortPosition.x, viewPortPosition.y))
 	{
-		MoveAction moveAction;
-		moveAction.Move({ "move-left" }, gameObject);
+		moveAction = new MoveAction{ gameObject, 0.10f };
+		moveAction->Move({ "move-left" });
 	}
 }
 

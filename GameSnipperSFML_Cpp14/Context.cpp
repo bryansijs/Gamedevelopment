@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Context.h"
+#include <Awesomium/WebCore.h>
 
 #include "KeyMapping.h"
 

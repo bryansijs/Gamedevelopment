@@ -25,12 +25,5 @@ void MoveContainer::AddBehaviour(MoveBehaviour* behaviour)
 
 void MoveContainer::RemoveBehaviour(MoveBehaviour* behaviour)
 {
-	std::vector<MoveBehaviour*>::iterator it;
-	for (it = behaviours.begin(); it != behaviours.end(); it++)
-	{
-		if ((*it) == behaviour)
-			break;
-	}
-
-	behaviours.erase(it);
+	behaviours.erase(std::remove(behaviours.begin(), behaviours.end(), behaviour), behaviours.end());
 }

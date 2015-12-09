@@ -3,7 +3,6 @@
 #include "LevelManager.h"
 #include "PlayerActions.h"
 
-
 class StateManager;
 class Context;
 class GameContext;
@@ -30,8 +29,10 @@ private:
 
 	GameContext* gameContext;
 
-	PlayerActions playerActions;
+	PlayerActions* playerActions;
 	GameActions* gameActions;
 
+	void DestroyGameObjects();
+	void DebugBodies();
 	void MenuEnd(int option);
 };

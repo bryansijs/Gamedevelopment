@@ -7,10 +7,14 @@
 #include "GameObjectContainer.h"
 #include "KeyMapping.h"
 #include "GameObject.h"
+
 #include "Time.h"
 
-PlayerActions::PlayerActions()
+
+PlayerActions::PlayerActions(Player *player)
 {
+	this->player = player;
+	moveAction = new MoveAction{ player, 0.10f };
 }
 
 PlayerActions::~PlayerActions()
@@ -18,15 +22,16 @@ PlayerActions::~PlayerActions()
 
 }
 
-void PlayerActions::SetPlayer(Player *player)
-{
-	this->player = player;
-}
-
-void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer)
+void PlayerActions::SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, GameObjectContainer *gameObjectContainer)
 {
 	this->drawContainer = drawContainer;
 	this->moveContainer = moveContainer;
+	this->gameObjectContainer = gameObjectContainer;
+}
+
+void PlayerActions::SetWorld(b2World * world)
+{
+	this->world = world;
 }
 
 void PlayerActions::ProcessActions()
@@ -71,17 +76,32 @@ void PlayerActions::ExecuteActions()
 		(this->*function)();
 	}
 
+
+	if (resetMove)
+	{
+		moveAction->Reset();
+	}
+
 	if (Input::GetKeyUp(KeyMapping::GetKey("use")))
 	{
 		useAction = true;
 	}
 
+	if (Input::GetKeyDown("U"))
+	{
+		player->setHealth(0);
+	}
+
 	activeActions.clear();
+
+	resetMove = true;
 }
 
 void PlayerActions::Move()
 {
+
 	StandStillTimerReset();
+	resetMove = false;
 
 	std::vector<std::string> directions;
 
@@ -95,13 +115,13 @@ void PlayerActions::Move()
 		}
 	}
 
-	moveAction.Move(directions, player);
+	moveAction->Move(directions);
 }
 
 void PlayerActions::Shoot()
 {
 	StandStillTimerReset();
-	shootAction.Shoot(drawContainer, moveContainer, player, direction);
+	shootAction.Shoot(drawContainer, moveContainer, gameObjectContainer, world, player, direction);
 }
 
 
@@ -127,8 +147,6 @@ void PlayerActions::Use()
 			//Als we op dezelfde y zitten met een 32 ~48 verschil;
 			//Als we op dezelfde x zittten met en 32 ~48 verschil; 
 
-
-
 			float y = object->getPosition().y;
 			float x = object->getPosition().x;
 			if (playery + 48 > y && playery - 48 < y)
@@ -149,7 +167,9 @@ void PlayerActions::StandStill()
 
 	if (StandStillTimer > 0)
 	{
-		moveAction.AnimateMovement(player, 1);
+		useAction = false;
+		
+		// moveAction.AnimateMovement(player, 1);
 		StandStillTimer = StandStillTimer - Time::deltaTime;
 		return;
 	}
