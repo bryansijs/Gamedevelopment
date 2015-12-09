@@ -36,8 +36,6 @@ void PlayerActions::SetWorld(b2World * world)
 
 void PlayerActions::ProcessActions()
 {
-	bool animate = false;
-
 	std::map<std::string, void(PlayerActions::*)()>::iterator it;
 
 	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
@@ -52,17 +50,9 @@ void PlayerActions::ProcessActions()
 					activeActions.push_back(it->second);
 				}
 			}
-
-			if (map.find("move") != std::string::npos)
-			{
-				animate = true;
-			}
 		}
 	}
-	if(!animate)
-	{
-		StandStill();
-	}
+
 	ExecuteActions();
 }
 
@@ -81,7 +71,7 @@ void PlayerActions::ExecuteActions()
 	{
 		moveAction->Reset();
 	}
-
+	
 	if (Input::GetKeyUp(KeyMapping::GetKey("use")))
 	{
 		useAction = true;
@@ -99,10 +89,9 @@ void PlayerActions::ExecuteActions()
 
 void PlayerActions::Move()
 {
-
 	StandStillTimerReset();
-	resetMove = false;
 
+	resetMove = false;
 	std::vector<std::string> directions;
 
 	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
@@ -166,9 +155,7 @@ void PlayerActions::StandStill()
 	player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 
 	if (StandStillTimer > 0)
-	{
-		useAction = false;
-		
+	{		
 		// moveAction.AnimateMovement(player, 1);
 		StandStillTimer = StandStillTimer - Time::deltaTime;
 		return;

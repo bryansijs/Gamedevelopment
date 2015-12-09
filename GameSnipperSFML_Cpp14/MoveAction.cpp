@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "MoveAction.h"
+
 #include "GameObject.h"
 #include "Time.h"
 #include "Animation.h"
+
 #include <math.h>
 #include <iostream>
 
@@ -68,6 +70,6 @@ void MoveAction::Move()
 
 	if(velocity.x != 0 || velocity.y != 0)
 		animation->Animate();
-	
+
 	gameObject->getBody()->SetLinearVelocity(b2Vec2(velocity.x, velocity.y));
 }

@@ -222,7 +222,6 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerActions.h" />
     <ClInclude Include="PlayerDrawBehaviour.h" />
-    <ClInclude Include="PlayerInput.h" />
     <ClInclude Include="ProjectileFactory.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="resource.h" />
