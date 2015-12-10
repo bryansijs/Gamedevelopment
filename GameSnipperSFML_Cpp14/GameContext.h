@@ -19,6 +19,7 @@ class MoveContainer;
 class DrawContainer;
 class GameObjectContainer;
 class CollisionListener;
+class PauzeMenu;
 
 class GameContext
 {
@@ -51,11 +52,5 @@ public:
 
 	b2World* world;
 	CollisionListener* collisionListener;
-
-
-
-	
-
-
 };
 

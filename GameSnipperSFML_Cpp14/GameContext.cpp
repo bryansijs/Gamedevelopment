@@ -6,7 +6,6 @@
 #include "DrawContainer.h"
 #include "KeyMapping.h"
 
-#include "PauseMenu.h"
 #include "DebugBox2D.h"
 #include "CollisionListener.h"
 

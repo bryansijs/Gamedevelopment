@@ -16,7 +16,6 @@ float Time::delay;
 float Time::fps;
 int Time::GetFPs()
 {
-
 	if (delay < 0) {
 		fps = round(1.0 / deltaTime);
 		delay = 0.5f;
