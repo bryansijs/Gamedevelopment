@@ -14,6 +14,7 @@
 
 #include <iterator>
 
+
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager)
 {
 	maincontext = context;
@@ -37,6 +38,10 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	gameContext->player->createBoxDynamic(*gameContext->world);
 
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
+
+
+	
+
 
 	gameContext->view.reset(rect);
 	gameContext->context->window.setView(gameContext->view);
@@ -130,6 +135,9 @@ void GameState::Update()
 						gameContext->setMenuPosition();
 				}
 
+				if (Input::GetKeyUp(KeyMapping::GetKey("fps"))) {
+					showFPS = !showFPS;
+				}
 
 			}
 		}
@@ -163,11 +171,21 @@ void GameState::Update()
 		gameContext->pauze->draw(gameContext->context->window);
 	}
 
+
+	if (showFPS) {
+		gameContext->fpsShow->setFPS(gameContext->level->GetViewPortPosition().x, gameContext->level->GetViewPortPosition().y, gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
+		gameContext->fpsShow->draw(gameContext->context->window);
+	}
+
 	if (!terminate) {
 		gameContext->context->window.setView(gameContext->view);
 	}
 
+
+
 	gameContext->context->window.display();
+
+
 
 	if (gameContext->player->getHealth() <= 0)
 	{
@@ -178,6 +196,8 @@ void GameState::Update()
 		stateManager->AddState(loseState);
 		stateManager->StartNextState();
 	}
+
+
 
 	if (terminate)
 	{
@@ -238,3 +258,5 @@ void GameState::MenuEnd(int option)
 	}
 
 }
+
+
