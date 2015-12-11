@@ -48,6 +48,7 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 
 	gameContext->view.reset(rect);
 	gameContext->context->window.setView(gameContext->view);
+	DebugBodies();
 
 	StorylineManager::Add("Let's find a way out!");
 	StorylineManager::Add("Use your arrow keys to walk");

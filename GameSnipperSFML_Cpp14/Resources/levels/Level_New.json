@@ -524,8 +524,36 @@
          "width":30,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":62,
+         "name":"StoryTiles",
+         "objects":[
+                {
+                 "height":57,
+                 "id":33,
+                 "name":"Story1",
+                 "properties":
+                    {
+                     "Story":"This is a test story",
+                     "sType":"StoryTile"
+                    },
+                 "rotation":0,
+                 "type":"GameTile",
+                 "visible":true,
+                 "width":33,
+                 "x":127,
+                 "y":1827
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":30,
+         "x":0,
+         "y":0
         }],
- "nextobjectid":33,
+ "nextobjectid":34,
  "orientation":"orthogonal",
  "properties":
     {

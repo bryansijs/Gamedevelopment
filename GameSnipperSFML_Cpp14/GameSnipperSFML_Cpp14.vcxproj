@@ -238,6 +238,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="StartTile.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Game_Switch.h" />
+    <ClInclude Include="StoryTile.h" />
     <ClInclude Include="TankEnemy.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestDemo.h" />
@@ -325,6 +326,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Game_Switch.cpp" />
+    <ClCompile Include="StoryTile.cpp" />
     <ClCompile Include="TankEnemy.cpp" />
     <ClCompile Include="TestDemo.cpp" />
     <ClCompile Include="TestLevelImporter.cpp" />

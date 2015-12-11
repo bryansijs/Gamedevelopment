@@ -447,6 +447,9 @@
     <ClInclude Include="StorylineManager.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="StoryTile.h">
+      <Filter>Header Files\Model\GameTiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -685,6 +688,9 @@
     </ClCompile>
     <ClCompile Include="StorylineManager.cpp">
       <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="StoryTile.cpp">
+      <Filter>Source Files\Model\GameTiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
