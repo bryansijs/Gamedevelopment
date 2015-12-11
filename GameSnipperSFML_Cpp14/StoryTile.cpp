@@ -25,16 +25,15 @@ void StoryTile::setProperties(std::map<std::string, std::string>& properties)
 	this->setPosition(x, y);
 	this->setSize(widht, height);
 
-	for (size_t i = 0; i < properties.size(); i++)
+	for (size_t i = 1; i <= std::stoi(properties["Lines"]); i++)
 	{
 		std::string temp = "Line";
-		temp += std::to_string(i + 1);
+		temp += std::to_string(i);
 
 		if (properties.find(temp) != properties.end())
 		{
 			storys.push_back(properties[temp]);
 		}
-		
 	}
 }
 

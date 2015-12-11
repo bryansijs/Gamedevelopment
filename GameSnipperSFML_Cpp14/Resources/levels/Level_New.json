@@ -538,6 +538,7 @@
                     {
                      "Line1":"This is a test story",
                      "Line2":"test line ",
+                     "Lines":"2",
                      "sType":"StoryTile"
                     },
                  "rotation":0,
@@ -546,6 +547,23 @@
                  "width":33,
                  "x":127,
                  "y":1827
+                }, 
+                {
+                 "height":31,
+                 "id":34,
+                 "name":"Story2",
+                 "properties":
+                    {
+                     "Line1":"story 2 test line",
+                     "Lines":"1",
+                     "sType":"StoryTile"
+                    },
+                 "rotation":0,
+                 "type":"GameTile",
+                 "visible":true,
+                 "width":127,
+                 "x":416,
+                 "y":1761
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -554,7 +572,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":34,
+ "nextobjectid":35,
  "orientation":"orthogonal",
  "properties":
     {
