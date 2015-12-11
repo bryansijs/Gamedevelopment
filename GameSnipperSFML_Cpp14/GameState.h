@@ -2,6 +2,7 @@
 #include "BaseState.h"
 #include "LevelManager.h"
 #include "PlayerActions.h"
+#include "StorylineManager.h"
 
 class StateManager;
 class Context;
@@ -35,6 +36,7 @@ private:
 
 	sf::View storyview;
 	AwesomiumHelper* storyline;
+	StorylineManager* storylineManager;
 
 	void DestroyGameObjects();
 	void DebugBodies();

@@ -536,7 +536,8 @@
                  "name":"Story1",
                  "properties":
                     {
-                     "Story":"This is a test story",
+                     "Line1":"This is a test story",
+                     "Line2":"test line ",
                      "sType":"StoryTile"
                     },
                  "rotation":0,

@@ -3,8 +3,10 @@
 #include "Player.h"
 
 
-StoryTile::StoryTile(GameObjectContainer* gameObjectContainer) : GameObject{ gameObjectContainer }
+StoryTile::StoryTile(GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, b2World * world)
 {
+	this->setProperties(properties);
+	this->createBoxSenor(*world);
 }
 
 
@@ -22,14 +24,31 @@ void StoryTile::setProperties(std::map<std::string, std::string>& properties)
 
 	this->setPosition(x, y);
 	this->setSize(widht, height);
+
+	for (size_t i = 0; i < properties.size(); i++)
+	{
+		std::string temp = "Line";
+		temp += std::to_string(i + 1);
+
+		if (properties.find(temp) != properties.end())
+		{
+			storys.push_back(properties[temp]);
+		}
+		
+	}
 }
 
 void StoryTile::doAction()
 {
-	std::cout << "test";
+	if (!told)
+	{
+		for (size_t i = 0; i < storys.size(); i++)
+		{
+			storylineManager->Add(storys[i]);
+		}
 
-
-	told = true;
+		told = true;
+	}
 }
 
 void StoryTile::startContact(b2Fixture * fixture)
@@ -43,4 +62,9 @@ void StoryTile::startContact(b2Fixture * fixture)
 void StoryTile::endContact(b2Fixture * fixture)
 {
 
+}
+
+void StoryTile::setStorylineManager(StorylineManager* storylineManager)
+{
+	this->storylineManager = storylineManager;
 }

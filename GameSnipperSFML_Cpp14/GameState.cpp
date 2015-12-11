@@ -22,6 +22,7 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	gameActions = new GameActions(this);
 	gameContext = new GameContext(context);
 	storyline = new AwesomiumHelper{ context->web_core, "file:///Resources/html-game/StoryLine.html", 1000, 50 };
+	storylineManager = new StorylineManager();
 
 	playerActions = new PlayerActions(gameContext->player);
 
@@ -41,6 +42,7 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
 	gameContext->level->End(context, stateManager, levelManager);
+	gameContext->level->Story(storylineManager);
 
 	gameContext->player->createBoxDynamic(*gameContext->world);
 
@@ -50,8 +52,8 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	gameContext->context->window.setView(gameContext->view);
 	DebugBodies();
 
-	StorylineManager::Add("Let's find a way out!");
-	StorylineManager::Add("Use your arrow keys to walk");
+	storylineManager->Add("Let's find a way out!");
+	storylineManager->Add("Use your arrow keys to walk");
 }
 
 GameState::~GameState()

@@ -210,3 +210,21 @@ void Level::End(Context* context, StateManager* stateManager, LevelManager* leve
 		end->setContext(context, stateManager, levelManager);
 	}
 }
+
+void Level::Story(StorylineManager* storylineManager)
+{
+	story = nullptr;
+
+	for (size_t i = 0; i < game_objects.size(); i++)
+	{
+		if (dynamic_cast<StoryTile*> (getObject(i))) {
+			story = dynamic_cast<StoryTile*> (getObject(i));
+			break;
+		}
+	}
+
+	if (story != nullptr)
+	{
+		story->setStorylineManager(storylineManager);
+	}
+}
