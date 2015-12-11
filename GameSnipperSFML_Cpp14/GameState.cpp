@@ -115,13 +115,13 @@ void GameState::Update()
 				return;
 			}
 
-			if (gameContext->event.type == sf::Event::KeyPressed || gameContext->event.type == sf::Event::KeyReleased)
+			if ((gameContext->event.type == sf::Event::KeyPressed && !isPause) || gameContext->event.type == sf::Event::KeyReleased)
 			{
 				Input::EventOccured(gameContext->event);
 				playerActions->CatchInput();
 			}
 
-			if (gameContext->event.type == sf::Event::KeyPressed)
+			if (gameContext->event.type == sf::Event::KeyPressed && !isPause)
 			{
 				gameActions->CatchSingleInput();
 				gameActions->ProcessActions();
@@ -155,16 +155,8 @@ void GameState::Update()
 	{
 		gameContext->player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	}
-	
-	if (isPause)
-	{
-		gameContext->pauze->draw(gameContext->context->window);
-	}
-
-	this->gameContext->world->Step(1, 8, 3);
 
 	//DebugBodies();
-
 
 	if (!isPause)
 	{
@@ -172,13 +164,12 @@ void GameState::Update()
 
 		DestroyGameObjects();
 		gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
+		gameContext->drawContainer->Draw(&gameContext->context->window);
+		gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
 	}
-
-	gameContext->drawContainer->Draw(&gameContext->context->window);
-	gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
-
-	if (isPause)
+	else
 	{
+		gameContext->pauze->draw(gameContext->context->window);
 		gameContext->pauze->draw(gameContext->context->window);
 	}
 
