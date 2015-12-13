@@ -188,6 +188,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="DrawContainer.h" />
     <ClInclude Include="EndTile.h" />
     <ClInclude Include="EnemyFactory.h" />
+    <ClInclude Include="FPSShow.h" />
     <ClInclude Include="GameContext.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectFactory.h" />
@@ -268,6 +269,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="DrawContainer.cpp" />
     <ClCompile Include="EndTile.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
+    <ClCompile Include="FPSShow.cpp" />
     <ClCompile Include="GameContext.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />

@@ -1,12 +1,11 @@
 #pragma once
 #include "BaseState.h"
 #include "LevelManager.h"
-
-
 class StateManager;
 class Context;
 class GameContext;
 class square;
+
 class GameState: public BaseState
 {
 private:
@@ -16,12 +15,16 @@ private:
 	Context* maincontext;
 
 	GameContext* gameContext;
+	void DrawFPS();
+
+
 
 	void DestroyGameObjects();
 	void DebugBodies();
 	void MenuEnd(int option);
 public:
 	bool isPause = false;
+	bool showFPS = false;
 	void Update();
 	void Terminate();
 	void StartNextLevel();
