@@ -126,27 +126,29 @@ void GameState::Update()
 				playerActions->CatchInput();
 			}
 
-			if (gameContext->event.type == sf::Event::KeyPressed)
+			if (gameContext->event.type == sf::Event::KeyPressed && !isPause)
 			{
 				gameActions->CatchSingleInput();
 				gameActions->ProcessActions();
 			}
 
-			if (Input::GetKeyDown("K")) {
-				StartNextLevel();
-			}
+			if (gameContext->event.type == sf::Event::KeyPressed)
+			{
+				if (Input::GetKeyDown("K")) {
+					StartNextLevel();
+				}
 
-			if (isPause)
-				this->MenuEnd(gameContext->pauze->KeyHandler());
-
-			if (Input::GetKeyUp(KeyMapping::GetKey("escape"))) {
-				isPause = !isPause;
-				gameContext->pauze->playEffect();
-				gameContext->level->pauseMusic(!isPause);
 				if (isPause)
-					gameContext->setMenuPosition();
-			}
+					this->MenuEnd(gameContext->pauze->KeyHandler());
 
+				if (Input::GetKeyDown(KeyMapping::GetKey("escape"))) {
+					isPause = !isPause;
+					gameContext->pauze->playEffect();
+					gameContext->level->pauseMusic(!isPause);
+					if (isPause)
+						gameContext->setMenuPosition();
+				}
+			}
 		}
 
 		if (!isPause)
@@ -160,22 +162,8 @@ void GameState::Update()
 	{
 		gameContext->player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	}
-	
-	if (isPause)
-	{
-		gameContext->pauze->draw(gameContext->context->window);
-	}
-
-	this->gameContext->world->Step(1, 8, 3);
 
 	//DebugBodies();
-
-	if (StorylineManager::Updated())
-	{
-		storyline->JavaScriptCall("TextUpdate", StorylineManager::GetText());
-	}
-	sf::Sprite storylineSprite = storyline->GetSprite();
-	storylineSprite.setPosition(0, 880);
 
 	if (!isPause)
 	{
@@ -183,16 +171,22 @@ void GameState::Update()
 
 		DestroyGameObjects();
 		gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
+		gameContext->drawContainer->Draw(&gameContext->context->window);
+		gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
+
+		if (StorylineManager::Updated())
+		{
+			storyline->JavaScriptCall("TextUpdate", StorylineManager::GetText());
+		}
 	}
-
-	gameContext->drawContainer->Draw(&gameContext->context->window);
-	gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
-
-	if (isPause)
+	else
 	{
+		gameContext->pauze->draw(gameContext->context->window);
 		gameContext->pauze->draw(gameContext->context->window);
 	}
 
+	sf::Sprite storylineSprite = storyline->GetSprite();
+	storylineSprite.setPosition(0, 880);
 	gameContext->context->window.setView(storyview);
 	gameContext->context->window.draw(storylineSprite);
 

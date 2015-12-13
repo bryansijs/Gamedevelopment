@@ -92,16 +92,16 @@ void PauseMenu::MoveDown()
 
 int PauseMenu::KeyHandler()
 {
-	if (Input::GetKeyUp("Up"))
+	if (Input::GetKeyDown("Up"))
 	{
 		MoveUp();
 	
 	}
-	if (Input::GetKeyUp("Down"))
+	if (Input::GetKeyDown("Down"))
 	{
 		MoveDown();
 	}
-	if (Input::GetKeyUp("Return"))
+	if (Input::GetKeyDown("Return"))
 	{
 		return GetPressedItem();
 	}

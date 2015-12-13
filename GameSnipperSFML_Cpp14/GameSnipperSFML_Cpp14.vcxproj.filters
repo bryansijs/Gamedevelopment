@@ -58,6 +58,12 @@
     <Filter Include="Header Files\States">
       <UniqueIdentifier>{21ccf40d-ef38-484e-91fe-b37e5905f657}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Units">
+      <UniqueIdentifier>{c4634945-a2dc-41cc-b520-c617ca639c54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Units\Items">
+      <UniqueIdentifier>{f2640498-25be-4db8-b116-a7d158b1959e}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\Behaviours">
       <UniqueIdentifier>{34398989-877c-4b8a-8434-235379828296}</UniqueIdentifier>
     </Filter>
@@ -187,6 +193,15 @@
     <Filter Include="Header Files\Model\Projectiles">
       <UniqueIdentifier>{66be4227-dff5-4785-80e4-a2d1361e6fde}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Actions">
+      <UniqueIdentifier>{eb63f6a0-599f-4f93-9c24-5d0fd517f0d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actions">
+      <UniqueIdentifier>{6520bd63-69d2-4cb6-89de-f6edfceb1ab3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Fonts">
+      <UniqueIdentifier>{8e0a3160-507f-4e06-928c-a48635fe7699}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -256,9 +271,6 @@
       <Filter>Header Files\Containers</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Header Files\Model\Units\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerActions.h">
       <Filter>Header Files\Model\Units\Player</Filter>
     </ClInclude>
     <ClInclude Include="TestDemo.h">
@@ -418,34 +430,31 @@
       <Filter>Header Files\Model\Projectiles</Filter>
     </ClInclude>
     <ClInclude Include="BaseInput.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsoleColor.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Actions</Filter>
     </ClInclude>
     <ClInclude Include="GameActions.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Actions</Filter>
     </ClInclude>
     <ClInclude Include="MenuActions.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Actions</Filter>
     </ClInclude>
-    <ClInclude Include="LoseContext.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="PlayerActions.h">
+      <Filter>Header Files\Actions</Filter>
     </ClInclude>
     <ClInclude Include="LoseState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WinContext.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\States</Filter>
     </ClInclude>
     <ClInclude Include="WinState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\States</Filter>
     </ClInclude>
-    <ClInclude Include="AwesomiumHelper.h">
+    <ClInclude Include="ConsoleColor.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="StorylineManager.h">
-      <Filter>Header Files\Managers</Filter>
+    <ClInclude Include="LoseContext.h">
+      <Filter>Header Files\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="WinContext.h">
+      <Filter>Header Files\Context</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -516,9 +525,6 @@
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Model\Units\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerActions.cpp">
       <Filter>Source Files\Model\Units\Player</Filter>
     </ClCompile>
     <ClCompile Include="UnitTest.cpp">
@@ -660,31 +666,28 @@
       <Filter>Source Files\Model\Projectiles</Filter>
     </ClCompile>
     <ClCompile Include="BaseInput.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Actions</Filter>
     </ClCompile>
     <ClCompile Include="GameActions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LoseContext.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LoseState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Actions</Filter>
     </ClCompile>
     <ClCompile Include="MenuActions.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Actions</Filter>
     </ClCompile>
-    <ClCompile Include="WinContext.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="PlayerActions.cpp">
+      <Filter>Source Files\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="LoseState.cpp">
+      <Filter>Source Files\States</Filter>
     </ClCompile>
     <ClCompile Include="WinState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\States</Filter>
     </ClCompile>
-    <ClCompile Include="AwesomiumHelper.cpp">
-      <Filter>Source Files\Utils</Filter>
+    <ClCompile Include="LoseContext.cpp">
+      <Filter>Source Files\Context</Filter>
     </ClCompile>
-    <ClCompile Include="StorylineManager.cpp">
-      <Filter>Source Files\Managers</Filter>
+    <ClCompile Include="WinContext.cpp">
+      <Filter>Source Files\Context</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -703,12 +706,12 @@
     <None Include="Resources\key-mapping.json">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="Resources\html-game\StoryLine.html">
+    <None Include="Resources\menuHTML\win.html">
       <Filter>Resource Files\Html</Filter>
     </None>
-    <None Include="Resources\key-mapping.json" />
-    <None Include="Resources\menuHTML\lose.html" />
-    <None Include="Resources\menuHTML\win.html" />
+    <None Include="Resources\menuHTML\lose.html">
+      <Filter>Resource Files\Html</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameSnipperSFML_Cpp14.rc">
@@ -730,6 +733,8 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Font Include="Resources\menuHtml\font\moonhouse.ttf" />
+    <Font Include="Resources\menuHtml\font\moonhouse.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
   </ItemGroup>
 </Project>
