@@ -115,7 +115,7 @@ void GameState::Update()
 				return;
 			}
 
-			if ((gameContext->event.type == sf::Event::KeyPressed && !isPause) || gameContext->event.type == sf::Event::KeyReleased)
+			if (gameContext->event.type == sf::Event::KeyPressed || gameContext->event.type == sf::Event::KeyReleased)
 			{
 				Input::EventOccured(gameContext->event);
 				playerActions->CatchInput();
@@ -127,21 +127,23 @@ void GameState::Update()
 				gameActions->ProcessActions();
 			}
 
-			if (Input::GetKeyDown("K")) {
-				StartNextLevel();
-			}
+			if (gameContext->event.type == sf::Event::KeyPressed)
+			{
+				if (Input::GetKeyDown("K")) {
+					StartNextLevel();
+				}
 
-			if (isPause)
-				this->MenuEnd(gameContext->pauze->KeyHandler());
-
-			if (Input::GetKeyUp(KeyMapping::GetKey("escape"))) {
-				isPause = !isPause;
-				gameContext->pauze->playEffect();
-				gameContext->level->pauseMusic(!isPause);
 				if (isPause)
-					gameContext->setMenuPosition();
-			}
+					this->MenuEnd(gameContext->pauze->KeyHandler());
 
+				if (Input::GetKeyDown(KeyMapping::GetKey("escape"))) {
+					isPause = !isPause;
+					gameContext->pauze->playEffect();
+					gameContext->level->pauseMusic(!isPause);
+					if (isPause)
+						gameContext->setMenuPosition();
+				}
+			}
 		}
 
 		if (!isPause)
