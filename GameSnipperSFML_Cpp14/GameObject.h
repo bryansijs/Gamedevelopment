@@ -87,6 +87,8 @@ public:
 		this->yIndex = y;
 	}
 
+	int getIndexY() { return yIndex; }
+	int getIndexX() { return xIndex; }
 	int getImageY() { return yIndex * height; }
 	int getImageX() { return xIndex * width; }
 	int getHeight() { return height; }
@@ -109,11 +111,14 @@ public:
 	virtual void endContact(b2Fixture* fixture);
 
 	bool isFlaggedForDelete = false;
+
+	b2World* theWorld() { return this->world; }
 protected:
 	b2BodyDef myBodyDef;
 	b2PolygonShape Shape;
 	b2Body* Body;
 	b2FixtureDef boxFixtureDef;
+	b2World* world;
 
 	void Destroy();
 };

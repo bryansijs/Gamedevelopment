@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "NormalDrawBehaviour.h"
-
+#include "BaseEnemy.h"
 #include <iostream>
 
 NormalDrawBehaviour::NormalDrawBehaviour(GameObject* gameObject, int refreshRate, std::string textureUrl)
@@ -20,6 +20,10 @@ NormalDrawBehaviour::~NormalDrawBehaviour()
 void NormalDrawBehaviour::Draw(sf::RenderWindow *window)
 {
 	window->draw(getCurrentImage());
+	if (dynamic_cast<BaseEnemy*>(this->gameObject))
+	{
+		window->draw(dynamic_cast<BaseEnemy*>(this->gameObject)->convex);
+	}
 }
 
 sf::Sprite NormalDrawBehaviour::getCurrentImage()

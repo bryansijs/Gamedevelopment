@@ -18,8 +18,9 @@ public:
 
 	void Move(std::vector<std::string> directions);
 	void Reset();
-private:
 	void Move();
+private:
+
 
 	GameObject *gameObject;
 	std::vector<std::string> directions;
