@@ -46,6 +46,8 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
 
+//	storyview = context->window.getView();
+	storyview.setSize(960, 640);
 	gameContext->view.reset(rect);
 	gameContext->context->window.setView(gameContext->view);
 
@@ -186,7 +188,7 @@ void GameState::Update()
 	}
 
 	sf::Sprite storylineSprite = storyline->GetSprite();
-	storylineSprite.setPosition(0, 880);
+	storylineSprite.setPosition(0, 640);
 	gameContext->context->window.setView(storyview);
 	gameContext->context->window.draw(storylineSprite);
 

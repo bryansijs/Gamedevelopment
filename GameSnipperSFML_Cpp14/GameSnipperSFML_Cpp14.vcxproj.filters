@@ -456,6 +456,12 @@
     <ClInclude Include="WinContext.h">
       <Filter>Header Files\Context</Filter>
     </ClInclude>
+    <ClInclude Include="AwesomiumHelper.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="StorylineManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -689,6 +695,12 @@
     <ClCompile Include="WinContext.cpp">
       <Filter>Source Files\Context</Filter>
     </ClCompile>
+    <ClCompile Include="AwesomiumHelper.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="StorylineManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\levels\Level_New.json">
@@ -712,6 +724,7 @@
     <None Include="Resources\menuHTML\lose.html">
       <Filter>Resource Files\Html</Filter>
     </None>
+    <None Include="Resources\html-game\StoryLine.html" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameSnipperSFML_Cpp14.rc">
