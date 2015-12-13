@@ -52,9 +52,5 @@ GameObject* GameTileFactory::CreateWarp(std::map<std::string, std::string>& prop
 
 GameObject* GameTileFactory::CreateStory(std::map<std::string, std::string>& properties, GameObjectContainer* gameObjectContainer, b2World* world) {
 	GameObject* obj = new StoryTile(gameObjectContainer, properties, world);
-	int x, y, widht, height;
-	x = std::stoi(properties["x"]);
-	y = std::stoi(properties["y"]);
-	obj->setPosition(x, y);
 	return obj;
 }
