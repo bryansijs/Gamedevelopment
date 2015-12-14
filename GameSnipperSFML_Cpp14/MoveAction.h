@@ -24,7 +24,7 @@ private:
 	GameObject *gameObject;
 	std::vector<std::string> directions;
 	sf::Vector2f velocity;
-	float speed = 200.0f;
+	float speed = 280.0f;
 
 	Animation* animation;
 };

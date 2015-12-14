@@ -166,12 +166,13 @@ void GameState::Update()
 
 		DestroyGameObjects();
 		gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
-		gameContext->drawContainer->Draw(&gameContext->context->window);
-		gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
 	}
-	else
+	
+	gameContext->drawContainer->Draw(&gameContext->context->window);
+	gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
+	
+	if(isPause)
 	{
-		gameContext->pauze->draw(gameContext->context->window);
 		gameContext->pauze->draw(gameContext->context->window);
 	}
 
