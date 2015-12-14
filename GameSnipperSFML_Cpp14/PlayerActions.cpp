@@ -2,12 +2,14 @@
 #include "PlayerActions.h"
 
 #include <vector>
-#include "Time.h"
 #include "Player.h"
 #include "DrawBehaviour.h"
 #include "GameObjectContainer.h"
 #include "KeyMapping.h"
 #include "GameObject.h"
+
+#include "Time.h"
+
 
 PlayerActions::PlayerActions(Player *player)
 {
@@ -32,10 +34,8 @@ void PlayerActions::SetWorld(b2World * world)
 	this->world = world;
 }
 
-void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys)
+void PlayerActions::ProcessActions()
 {
-	activeKeys = newActiveKeys;
-
 	std::map<std::string, void(PlayerActions::*)()>::iterator it;
 
 	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
@@ -58,7 +58,7 @@ void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys)
 
 void PlayerActions::ExecuteActions()
 {
-	std::vector<void(PlayerActions::*)()>::iterator it;
+	vector<void(PlayerActions::*)()>::iterator it;
 
 	for (it = activeActions.begin(); it != activeActions.end(); ++it)
 	{
@@ -66,11 +66,12 @@ void PlayerActions::ExecuteActions()
 		(this->*function)();
 	}
 
+
 	if (resetMove)
 	{
 		moveAction->Reset();
 	}
-
+	
 	if (Input::GetKeyUp(KeyMapping::GetKey("use")))
 	{
 		useAction = true;
@@ -82,11 +83,14 @@ void PlayerActions::ExecuteActions()
 	}
 
 	activeActions.clear();
+
 	resetMove = true;
 }
 
 void PlayerActions::Move()
 {
+	StandStillTimerReset();
+
 	resetMove = false;
 	std::vector<std::string> directions;
 
@@ -105,12 +109,15 @@ void PlayerActions::Move()
 
 void PlayerActions::Shoot()
 {
+	StandStillTimerReset();
 	shootAction.Shoot(drawContainer, moveContainer, gameObjectContainer, world, player, direction);
 }
 
 
 void PlayerActions::Use()
 {
+	StandStillTimerReset();
+
 	if (useAction)
 	{
 		//int b = this->player->getgameObjectContainer()->getObjects().size();
@@ -139,7 +146,20 @@ void PlayerActions::Use()
 				}
 			}
 		}
-
 		useAction = false;
 	}
+}
+
+void PlayerActions::StandStill()
+{
+	player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
+
+	if (StandStillTimer > 0)
+	{		
+		// moveAction.AnimateMovement(player, 1);
+		StandStillTimer = StandStillTimer - Time::deltaTime;
+		return;
+	}
+
+	StandStillTimerReset();
 }
