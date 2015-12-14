@@ -1,0 +1,45 @@
+@font-face {
+    font-family: moonhouse;
+    src: local("moonhouse"), local("moonhouse"), url(../font/moonhouse.ttf);
+    font-weight: normal;
+}
+
+body, html {
+    padding: 0;
+    margin: 0;
+
+    overflow: hidden;
+}
+
+#container {
+    padding: 40px 0;
+    width: 960px;
+    height: 560px;
+
+    background: url(../images/bg.png);
+
+    font-family: moonhouse;
+}
+
+#advertisement {
+    margin: 0 auto;
+    width: 728px;
+    height: 90px;
+
+    text-align: center;
+    line-height: 90px;
+
+    background: #fff;
+}
+
+#loading-info {
+    margin: 20px auto 0 auto;
+    width: 728px;
+
+    text-align: center;
+}
+
+    #loading-info .loading-text {
+        font-size: 24px;
+        color: #fff;
+    }

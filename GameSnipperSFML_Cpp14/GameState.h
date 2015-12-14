@@ -20,6 +20,15 @@ private:
 	void DestroyGameObjects();
 	void DebugBodies();
 	void MenuEnd(int option);
+
+	void Loading();
+	void DoneLoading();
+
+	void ReloadUI(char const* path);
+	void DrawUI();
+	void CreateTexture();
+
+	void GetAd();
 public:
 	bool isPause = false;
 	void Update();

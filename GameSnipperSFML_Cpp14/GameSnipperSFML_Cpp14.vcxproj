@@ -338,6 +338,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="WinState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="loading.html" />
     <None Include="Resources\menuHTML\about.html" />
     <None Include="Resources\menuHTML\instruction.html" />
     <None Include="Resources\menuHTML\lose.html" />
