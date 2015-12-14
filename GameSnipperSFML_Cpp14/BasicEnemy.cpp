@@ -12,7 +12,7 @@ BasicEnemy::BasicEnemy(DrawContainer* dContainer, std::string img, MoveContainer
 	this->SetAnimationStates(4);
 	this->createBoxDynamic(*world);
 
-	this->setImageY(0);
+	//this->setImageY(2);
 };
 
 BasicEnemy::~BasicEnemy()

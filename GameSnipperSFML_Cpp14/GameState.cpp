@@ -13,14 +13,25 @@
 #include "square.h"
 
 #include <iterator>
-
-
+#include "DebugBox2D.h"
+#include <Box2D\Box2D.h>
+#include <Box2D\Common\b2Draw.h>
+DebugBox2D fooDrawInstance;
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager)
 {
 	maincontext = context;
 	gameContext = new GameContext(context);
 	this->stateManager = stateManager;
 	this->levelManager = levelmanager;
+
+
+
+
+
+	//in constructor, usually
+
+	this->gameContext->world->SetDebugDraw(&fooDrawInstance);
+	fooDrawInstance.SetFlags(b2Draw::e_shapeBit);
 
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer, gameContext->world);
 	gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
@@ -79,13 +90,32 @@ void GameState::DestroyGameObjects()
 
 void GameState::DebugBodies()
 {
+
+
+
 	for (b2Body* b = gameContext->world->GetBodyList(); b; b = b->GetNext()) {
-		sf::RectangleShape rectangle(sf::Vector2f(32, 32));
-		rectangle.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
-		rectangle.setOutlineThickness(0);
-		rectangle.setFillColor(sf::Color(180, 100, 100, 200));
-		gameContext->context->window.draw(rectangle);
+
+		b2Shape::Type t = b->GetFixtureList()->GetType();
+		if (t == b2Shape::e_polygon)
+		{
+			b2PolygonShape* s = (b2PolygonShape*)b->GetFixtureList()->GetShape();
+			sf::ConvexShape convex;
+			int vertextCount = s->GetVertexCount();
+			convex.setPointCount(vertextCount);
+			convex.setFillColor(sf::Color(255, 255, 0, 128));
+
+			convex.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
+
+			for (int i = 0; i < vertextCount; i++)
+				convex.setPoint(i, sf::Vector2f(s->GetVertex(i).x, s->GetVertex(i).y));
+
+
+			gameContext->context->window.draw(convex);
+		}
 	}
+
+
+
 }
 
 void GameState::Update()
@@ -155,7 +185,7 @@ void GameState::Update()
 		gameContext->player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	}
 
-	//DebugBodies();
+	DebugBodies();
 
 
 
@@ -263,5 +293,6 @@ void GameState::MenuEnd(int option)
 	}
 
 }
+
 
 

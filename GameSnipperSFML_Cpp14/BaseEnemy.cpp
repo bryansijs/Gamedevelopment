@@ -4,6 +4,7 @@
 #include "KeyMapping.h"
 #include "Player.h"
 #include <Box2D\Dynamics\b2Body.h>
+#include <Box2D\Collision\b2Collision.h>
 BaseEnemy::BaseEnemy()
 {
 }
@@ -17,6 +18,7 @@ BaseEnemy::~BaseEnemy()
 BaseEnemy::BaseEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer) :Unit{ dContainer, img,mContainer, gameObjectContainer } {
 
 }
+
 
 void BaseEnemy::setProperties(std::map<std::string, std::string>& properties)
 {
@@ -32,66 +34,56 @@ void BaseEnemy::setProperties(std::map<std::string, std::string>& properties)
 	this->setPosition(x, y);
 	this->setSize(widht, height);
 
+	this->setImageY((properties.count("yIndex")) ? std::stoi(properties["yIndex"]) : 0);
+
 	//Laten we een Line  of sight maken. 
-	convex.setPointCount(3);
-	convex.setFillColor(sf::Color(255, 129, 0, 128));
+	this->los = new b2BodyDef();
+	this->convex = new sf::ConvexShape{};
+	this->convex->setPointCount(3);
+	this->convex->setFillColor(sf::Color(255, 129, 0, 128));
 
 
 
-
-	myFixtureDef.shape = &chain;
-	myFixtureDef.isSensor = true;
 
 }
 
 void BaseEnemy::Update()
 {
-	if (player == nullptr) {
+	if (this->player == nullptr) {
+
 		for (b2Body * b = world->GetBodyList(); b != NULL; b = b->GetNext()) {
-
 			GameObject* wrapper = reinterpret_cast<GameObject*>(b->GetUserData());
-
 			if (dynamic_cast<Player*>(wrapper))
 			{
-
-				player = dynamic_cast<Player*>(wrapper);
+				this->player = dynamic_cast<Player*>(wrapper);
 				break;
 			}
 		}
 	}
-
-
+	
 	int b = this->getIndexY();
-	b2Vec2 vec = this->getBody()->GetPosition();
+	los->position = this->getBody()->GetPosition();
 	switch (b)
 	{
 	case 0: {
-		vec.x = vec.x + this->getWidth() / 2;
-		vec.y = vec.y + 15;
-		vecB.y = vecA.y = vec.y + seeLenght;
-		vecA.x = vec.x - seeAngle;
-		vecB.x = vec.x + seeAngle;
+		vertices[0].Set(16, 16);
+		vertices[1].Set(seeAngle, seeLenght);
+		vertices[2].Set(-seeAngle, seeLenght);
 	}	break;
 	case 1: {
-		vec.x = vec.x + this->getWidth() / 2;
-		vec.y = vec.y + 15;
-		vecB.x = vecA.x = vec.x - seeLenght;
-		vecB.y = vec.y - seeAngle;
-		vecA.y = vec.y + seeAngle;
+		vertices[0].Set(16, 16);
+		vertices[1].Set(-seeLenght, seeAngle);
+		vertices[2].Set(-seeLenght, -seeAngle);
 	}	break;
 	case 2: {
-		vec.x = vec.x + this->getWidth() / 2;
-		vec.y = vec.y + 15;
-		vecB.x = vecA.x = vec.x + seeLenght;
-		vecA.y = vec.y - seeAngle;
-		vecB.y = vec.y + seeAngle;
+		vertices[0].Set(16, 16);
+		vertices[1].Set(seeLenght, seeAngle);
+		vertices[2].Set(seeLenght,-seeAngle);
 	}	break;
 	case 3: {
-		vec.x = vec.x + this->getWidth() / 2;
-		vec.y = vec.y + 15;
-		vecB.y = vecA.y = vec.y - seeLenght;
-		vecA.x = vec.x + seeAngle;
-		vecB.x = vec.x - seeAngle;
+		vertices[0].Set(16, 16);
+		vertices[1].Set(-seeAngle, -seeLenght);
+		vertices[2].Set(seeAngle, -seeLenght);
 	}	break;
 
 
@@ -99,26 +91,36 @@ void BaseEnemy::Update()
 		break;
 	}
 
-	vertices[0] = vec;
-	vertices[1] = vecA;
-	vertices[2] = vecB;
-	chain.Set(this->vertices, 3);
-	
-	convex.setFillColor(sf::Color(255, 129, 0, 128));
-	float playerx = player->getBody()->GetPosition().x + 16;
-	float playery = player->getBody()->GetPosition().y + 16;
-	
-	
-	
-	if (playerx >= vecA.x && playerx <= vecB.x)
+	this->chain.Set(this->vertices, 3);
+	if (this->create)
 	{
-		if (playery >= vec.y)
-			convex.setFillColor(sf::Color(255, 0, 0, 128));
+		this->los->type = b2_dynamicBody;
+		this->m_body = this->world->CreateBody(los);
+		this->myFixtureDef.shape = &chain;
+		this->myFixtureDef.density = 100.f;
+		this->myFixtureDef.friction = 0.0f;
+		this->myFixtureDef.isSensor = true;
+
+		this->m_body->CreateFixture(&myFixtureDef);
+		this->create = false;
 	}
+
+	this->m_body->SetTransform(los->position, 0);
 	
+	this->convex->setFillColor(sf::Color(255, 129, 0, 128));
+	this->convex->setPosition(sf::Vector2f(m_body->GetPosition().x, m_body->GetPosition().y));
 
+	this->convex->setPoint(0, sf::Vector2f(chain.GetVertex(0).x, chain.GetVertex(0).y));
+	this->convex->setPoint(1, sf::Vector2f(chain.GetVertex(1).x, chain.GetVertex(1).y));
+	this->convex->setPoint(2, sf::Vector2f(chain.GetVertex(2).x, chain.GetVertex(2).y));
 
-	convex.setPoint(0, sf::Vector2f(vec.x, vec.y));
-	convex.setPoint(1, sf::Vector2f(vecA.x, vecA.y) );
-	convex.setPoint(2, sf::Vector2f(vecB.x, vecB.y));
+	for (b2ContactEdge* ce = m_body->GetContactList(); ce; ce = ce->next)
+	{
+		b2Contact* c = ce->contact;
+		if (this->player == static_cast<Player*>(ce->other->GetUserData()))
+		{
+			if (c->IsTouching())
+				this->convex->setFillColor(sf::Color(000, 129, 0, 128));
+		}
+	}
 }

@@ -22,7 +22,7 @@ void NormalDrawBehaviour::Draw(sf::RenderWindow *window)
 	window->draw(getCurrentImage());
 	if (dynamic_cast<BaseEnemy*>(this->gameObject))
 	{
-		window->draw(dynamic_cast<BaseEnemy*>(this->gameObject)->convex);
+		window->draw(dynamic_cast<BaseEnemy*>(this->gameObject)->getConvex());
 	}
 }
 
