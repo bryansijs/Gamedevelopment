@@ -17,11 +17,12 @@ private:
 	b2BodyDef* los;
 public:
 	BaseEnemy();
+	void CreateLineOfSight();
 	~BaseEnemy();
 	BaseEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* goContainer);
 	virtual void setProperties(std::map<std::string, std::string>& properties);
-
-
+	void CreateVectors();
+	void AddPlayer();
 	int seeAngle;
 	int seeLenght;
 

@@ -17,6 +17,7 @@ BaseEnemy::~BaseEnemy()
 
 BaseEnemy::BaseEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer) :Unit{ dContainer, img,mContainer, gameObjectContainer } {
 
+
 }
 
 
@@ -35,35 +36,32 @@ void BaseEnemy::setProperties(std::map<std::string, std::string>& properties)
 	this->setSize(widht, height);
 
 	this->setImageY((properties.count("yIndex")) ? std::stoi(properties["yIndex"]) : 0);
+}
+
+void BaseEnemy::CreateLineOfSight()
+{
+	CreateVectors();
 
 	//Laten we een Line  of sight maken. 
 	this->los = new b2BodyDef();
 	this->convex = new sf::ConvexShape{};
 	this->convex->setPointCount(3);
-	this->convex->setFillColor(sf::Color(255, 129, 0, 128));
 
-
+	los->position = this->getBody()->GetPosition();
+	this->los->type = b2_dynamicBody;
+	this->m_body = this->world->CreateBody(los);
+	this->myFixtureDef.shape = &chain;
+	this->myFixtureDef.density = 100.f;
+	this->myFixtureDef.friction = 0.0f;
+	this->myFixtureDef.isSensor = true;
+	this->m_body->CreateFixture(&myFixtureDef);
 
 
 }
 
-void BaseEnemy::Update()
+void BaseEnemy::CreateVectors()
 {
-	if (this->player == nullptr) {
-
-		for (b2Body * b = world->GetBodyList(); b != NULL; b = b->GetNext()) {
-			GameObject* wrapper = reinterpret_cast<GameObject*>(b->GetUserData());
-			if (dynamic_cast<Player*>(wrapper))
-			{
-				this->player = dynamic_cast<Player*>(wrapper);
-				break;
-			}
-		}
-	}
-	
-	int b = this->getIndexY();
-	los->position = this->getBody()->GetPosition();
-	switch (b)
+	switch (getIndexY())
 	{
 	case 0: {
 		vertices[0].Set(16, 16);
@@ -78,7 +76,7 @@ void BaseEnemy::Update()
 	case 2: {
 		vertices[0].Set(16, 16);
 		vertices[1].Set(seeLenght, seeAngle);
-		vertices[2].Set(seeLenght,-seeAngle);
+		vertices[2].Set(seeLenght, -seeAngle);
 	}	break;
 	case 3: {
 		vertices[0].Set(16, 16);
@@ -92,21 +90,34 @@ void BaseEnemy::Update()
 	}
 
 	this->chain.Set(this->vertices, 3);
-	if (this->create)
-	{
-		this->los->type = b2_dynamicBody;
-		this->m_body = this->world->CreateBody(los);
-		this->myFixtureDef.shape = &chain;
-		this->myFixtureDef.density = 100.f;
-		this->myFixtureDef.friction = 0.0f;
-		this->myFixtureDef.isSensor = true;
 
-		this->m_body->CreateFixture(&myFixtureDef);
-		this->create = false;
+}
+
+void BaseEnemy::AddPlayer()
+{
+	if (this->player == nullptr) {
+
+		for (b2Body * b = world->GetBodyList(); b != NULL; b = b->GetNext()) {
+			GameObject* wrapper = reinterpret_cast<GameObject*>(b->GetUserData());
+			if (dynamic_cast<Player*>(wrapper))
+			{
+				this->player = dynamic_cast<Player*>(wrapper);
+				break;
+			}
+		}
 	}
+}
 
+void BaseEnemy::Update()
+{
+	if (this->player == nullptr) 
+		AddPlayer();
+
+	CreateVectors();
+
+	this->los->position = this->getBody()->GetPosition();
 	this->m_body->SetTransform(los->position, 0);
-	
+
 	this->convex->setFillColor(sf::Color(255, 129, 0, 128));
 	this->convex->setPosition(sf::Vector2f(m_body->GetPosition().x, m_body->GetPosition().y));
 
@@ -120,7 +131,7 @@ void BaseEnemy::Update()
 		if (this->player == static_cast<Player*>(ce->other->GetUserData()))
 		{
 			if (c->IsTouching())
-				this->convex->setFillColor(sf::Color(000, 129, 0, 128));
+				this->convex->setFillColor(sf::Color(250, 0, 0, 128));
 		}
 	}
 }
