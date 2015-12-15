@@ -22,7 +22,7 @@ public:
 	void Update() override;
 	void Terminate() override;
 	void StartNextLevel();
-
+	bool showFPS = false;
 	bool isPause = false;
 private:
 	StateManager* stateManager;
@@ -31,7 +31,6 @@ private:
 	Context* maincontext;
 
 	GameContext* gameContext;
-	void DrawFPS();
 
 	PlayerActions* playerActions;
 	GameActions* gameActions;
@@ -40,13 +39,5 @@ private:
 	void DebugBodies();
 	void MenuEnd(int option);
 
-public:
-	bool isPause = false;
-	bool showFPS = false;
-	void Update();
-	void Terminate();
-	void StartNextLevel();
 
-	GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager);
-	~GameState();
 };

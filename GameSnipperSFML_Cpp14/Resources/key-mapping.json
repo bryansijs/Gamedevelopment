@@ -40,7 +40,7 @@
       "map": "escape",
       "key": "Esc"
     },
-		{
+    {
       "map": "fps",
       "key": "/"
     }

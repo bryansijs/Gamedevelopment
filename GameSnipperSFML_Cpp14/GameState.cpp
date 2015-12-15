@@ -152,7 +152,7 @@ void GameState::Update()
 				}
 
 
-				if (Input::GetKeyUp(KeyMapping::GetKey("fps"))) {
+				if (Input::GetKeyDown(KeyMapping::GetKey("fps"))) {
 					showFPS = !showFPS;
 				}
 			}
