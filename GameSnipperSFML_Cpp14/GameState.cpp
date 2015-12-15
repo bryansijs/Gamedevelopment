@@ -32,7 +32,7 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
 
 	gameContext->player->createBoxDynamic(*gameContext->world);
-
+	
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
 	
 	gameContext->view.reset(rect);
@@ -94,7 +94,34 @@ void GameState::Update()
 	gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
 	gameContext->context->window.setView(gameContext->view);
 
-	gameContext->context->window.display();
+	for (b2Body* b = gameContext->world->GetBodyList(); b; b = b->GetNext()) {
+
+		b2Shape::Type t = b->GetFixtureList()->GetType();
+		if (t == b2Shape::e_polygon)
+		{
+			b2PolygonShape* s = (b2PolygonShape*)b->GetFixtureList()->GetShape();
+			sf::ConvexShape convex;
+			int vertextCount = s->GetVertexCount();
+			convex.setPointCount(vertextCount);
+			convex.setFillColor(sf::Color(255, 255, 0, 128));
+
+			convex.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
+
+			for (int i = 0; i < vertextCount; i++)
+				convex.setPoint(i, sf::Vector2f(s->GetVertex(i).x, s->GetVertex(i).y));
+
+
+			gameContext->context->window.draw(convex);
+		}
+	}
+
+		sf::RectangleShape rectangle(sf::Vector2f(32, 32));
+		rectangle.setPosition(sf::Vector2f(gameContext->player->getBody()->GetPosition().x, gameContext->player->getBody()->GetPosition().y));
+		rectangle.setOutlineThickness(0);
+		rectangle.setFillColor(sf::Color(230, 100, 50, 200));
+		gameContext->context->window.draw(rectangle);
+
+		gameContext->context->window.display();
 
 	if (terminate)
 	{
