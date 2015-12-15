@@ -2,16 +2,15 @@
 #include "GameState.h"
 #include "StateManager.h"
 #include "KeyMapping.h"
-#include <iostream>
 #include "Context.h"
 #include "GameContext.h"
 #include "MoveContainer.h"
 #include "DrawContainer.h"
-#include "WinState.h"
+#include "input.h"
+#include "GameActions.h"
+#include "PlayerActions.h"
 #include "LoseState.h"
 #include "MenuState.h"
-#include "square.h"
-
 #include <iterator>
 #include "DebugBox2D.h"
 #include <Box2D\Box2D.h>
@@ -20,7 +19,13 @@ DebugBox2D fooDrawInstance;
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager)
 {
 	maincontext = context;
+	
+	gameActions = new GameActions(this);
+
 	gameContext = new GameContext(context);
+
+	playerActions = new PlayerActions(gameContext->player);
+
 	this->stateManager = stateManager;
 	this->levelManager = levelmanager;
 
@@ -41,8 +46,9 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	gameContext->level = gameContext->levelImporter->getLevel();
 	gameContext->levelImporter->Clear();
 
-	gameContext->playerActions->SetContainers(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer);
-	gameContext->playerActions->SetWorld(gameContext->world);
+	playerActions->SetContainers(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer);
+	playerActions->SetWorld(gameContext->world);
+
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
 	gameContext->level->End(context, stateManager, levelManager);
 
@@ -71,7 +77,7 @@ void GameState::DestroyGameObjects()
 	for (b2Body* body = gameContext->world->GetBodyList(); body; body = body->GetNext()) {
 		if (body->GetUserData() != nullptr)
 		{
-			GameObject* data = (GameObject*)body->GetUserData();
+			GameObject* data = static_cast<GameObject*>(body->GetUserData());
 
 			if (data->isFlaggedForDelete)
 			{
@@ -120,7 +126,7 @@ void GameState::DebugBodies()
 
 void GameState::Update()
 {
-	Time::deltaTime = (float)gameContext->deltaClock.restart().asSeconds();
+	Time::deltaTime = static_cast<float>(gameContext->deltaClock.restart().asSeconds());
 	Time::runningTime += Time::deltaTime;
 
 	gameContext->context->window.clear(sf::Color::White);
@@ -149,17 +155,25 @@ void GameState::Update()
 			if (gameContext->event.type == sf::Event::KeyPressed || gameContext->event.type == sf::Event::KeyReleased)
 			{
 				Input::EventOccured(gameContext->event);
-				gameContext->playerInput.CatchInput();
+				playerActions->CatchInput();
+			}
 
+			if (gameContext->event.type == sf::Event::KeyPressed && !isPause)
+			{
+				gameActions->CatchSingleInput();
+				gameActions->ProcessActions();
+			}
+
+			if (gameContext->event.type == sf::Event::KeyPressed)
+			{
 				if (Input::GetKeyDown("K")) {
 					StartNextLevel();
 				}
 
-
 				if (isPause)
 					this->MenuEnd(gameContext->pauze->KeyHandler());
 
-				if (Input::GetKeyUp(KeyMapping::GetKey("pause"))) {
+				if (Input::GetKeyDown(KeyMapping::GetKey("escape"))) {
 					isPause = !isPause;
 					gameContext->pauze->playEffect();
 					gameContext->level->pauseMusic(!isPause);
@@ -167,18 +181,19 @@ void GameState::Update()
 						gameContext->setMenuPosition();
 				}
 
-				if (Input::GetKeyUp(KeyMapping::GetKey("fps"))) {
+
+				if (Input::GetKeyDown(KeyMapping::GetKey("fps"))) {
 					showFPS = !showFPS;
 				}
-
 			}
 		}
 
 		if (!isPause)
 		{
-			gameContext->playerActions->ProcessActions(gameContext->playerInput.GetActiveKeys());
+			playerActions->ProcessActions();
 			gameContext->level->updateViewPort(worldPosition);
 		}
+
 	}
 	else
 	{
@@ -196,15 +211,19 @@ void GameState::Update()
 		DestroyGameObjects();
 		gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
 	}
-
+	
 	gameContext->drawContainer->Draw(&gameContext->context->window);
 	gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
+
 
 	if (showFPS ) {
 		//gameContext->fpsShow->setFPS(gameContext->level->GetViewPortPosition().x, gameContext->level->GetViewPortPosition().y, gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
 		gameContext->fpsShow->draw(gameContext->context->window);
 	}
-	if (isPause)
+
+	
+	if(isPause)
+
 	{
 		gameContext->pauze->draw(gameContext->context->window);
 	}
@@ -259,8 +278,9 @@ void GameState::StartNextLevel()
 	gameContext->level = gameContext->levelImporter->getLevel();
 	gameContext->levelImporter->Clear();
 
-	gameContext->playerActions->SetContainers(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer);
-	gameContext->playerActions->SetWorld(gameContext->world);
+	playerActions->SetContainers(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer);
+	playerActions->SetWorld(gameContext->world);
+
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
 
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);

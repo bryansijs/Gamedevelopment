@@ -5,8 +5,8 @@
 #include "MoveContainer.h"
 #include "DrawContainer.h"
 #include "KeyMapping.h"
-
 #include "DebugBox2D.h"
+#include "PauseMenu.h"
 #include "CollisionListener.h"
 
 GameContext::GameContext(Context* context)
@@ -23,13 +23,7 @@ GameContext::GameContext(Context* context)
 	drawContainer = new DrawContainer();
 	useContainer = new GameObjectContainer();
 
-	player = new Player(moveContainer, drawContainer,useContainer, world);
-	player->SetAnimationStates(3);
-	playerActions = new PlayerActions{ player };
-
-	keyMappingImporter.Import("./Resources/key-mapping.json");
-	KeyMapping::ReloadMapping(keyMappingImporter.GetMapping());
-
+	player = new Player(moveContainer, drawContainer, useContainer, world);
 }
 
 void GameContext::setMenuPosition()
