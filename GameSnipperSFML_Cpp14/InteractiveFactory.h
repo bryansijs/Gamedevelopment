@@ -13,8 +13,6 @@ public:
 	InteractiveFactory();
 	~InteractiveFactory();
 	GameObject* Create(std::map<std::string, std::string> properties, DrawContainer* , GameObjectContainer*, b2World* world, std::vector<Tile*>& );
-
-
 private:
 	std::vector<Tile*> tileList;
 	GameObject* CreateSwitch(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer, b2World* world);
@@ -23,7 +21,6 @@ private:
 	std::map<std::string, GameObject*(InteractiveFactory::*)(std::map<std::string, std::string>&, DrawContainer* , GameObjectContainer* , b2World* )> possibleObjects = {
 		{ "Switch", &InteractiveFactory::CreateSwitch },
 		{ "Door", &InteractiveFactory::CreateDoor },
-		{ "KeyHole", &InteractiveFactory::CreateKeyHole }, };
-
+		{ "KeyHole", &InteractiveFactory::CreateKeyHole },
+	};
 };
-

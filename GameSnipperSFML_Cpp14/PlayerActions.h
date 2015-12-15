@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include <iostream>
 #include <map>
 
 #include "DrawBehaviour.h"
@@ -9,29 +8,31 @@
 
 #include "MoveAction.h"
 #include "ShootAction.h"
+#include "BaseInput.h"
 
 class Player;
 class MoveContainer;
 class DrawContainer;
 class Tile;
 
-class PlayerActions
+class PlayerActions : public BaseInput
 {
 public:
-	PlayerActions();
+	PlayerActions(Player *player);
 	~PlayerActions();
+
+	void ProcessActions();
+
 	float useDelay = 0;
-	void SetPlayer(Player *activePlayer);
-	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer);
-	void ProcessActions(std::vector<std::string> &newActiveKeys);
-	void SetTiles(std::vector<Tile*>* t) { tiles = t; };
+	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, GameObjectContainer *gameObjectContainer);
+	void SetWorld(b2World* world);
 
 	void Move();
 	void Shoot();
 	void Use();
 
-
 	bool used = false;
+	std::vector<void(PlayerActions::*)()> activeActions;
 private:
 	void ExecuteActions();
 
@@ -41,27 +42,27 @@ private:
 		{ "use", &PlayerActions::Use }
 	};
 
-	std::vector<void(PlayerActions::*)()> activeActions;
-
-	std::vector<std::string> activeKeys;
-
-	std::string direction = "move-left";
+	std::string direction = "move-down";
 	std::string currentMap;
 
 	DrawContainer *drawContainer;
 	MoveContainer *moveContainer;
+	GameObjectContainer * gameObjectContainer;
 
 	DrawBehaviour drawBehaviour;
 	MoveBehaviour moveBehaviour;
 
-	MoveAction moveAction;
+	MoveAction* moveAction;
 	ShootAction shootAction;
 
 	Player *player;
-	std::vector<Tile*>* tiles;
+	b2World* world;
 
 	bool fired = false;
-	bool resetAnimation = true;
 	bool useAction = true;
-};
+	bool resetMove = true;
 
+	void StandStillTimerReset() { StandStillTimer = 1000; };
+	int StandStillTimer = 1000;
+	void StandStill();
+};

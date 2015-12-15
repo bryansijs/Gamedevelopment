@@ -8,28 +8,23 @@
 
 class GameObject;
 class Tile;
+class Animation;
 
 class MoveAction
 {
 public:
-	MoveAction();
+	MoveAction(GameObject *gameObject, float delay);
 	~MoveAction();
 
-	void Move(std::vector<std::string> directions, GameObject *gameObject, std::vector<Tile*>* tiles);
-	void Move(std::vector<std::string> directions, GameObject *gameObject);
-	void AnimateMovement(GameObject *gameObject, int state);
-
-	int animateState = 1;
+	void Move(std::vector<std::string> directions);
+	void Reset();
 private:
 	void Move();
 
 	GameObject *gameObject;
 	std::vector<std::string> directions;
-	std::vector<Tile*>* tiles;
-
 	sf::Vector2f velocity;
-	float speed = 200.0f;
+	float speed = 280.0f;
 
-	float animationDelay;
-	void AnimateMovement(GameObject *gameObject);
+	Animation* animation;
 };

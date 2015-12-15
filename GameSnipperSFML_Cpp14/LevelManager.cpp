@@ -24,13 +24,14 @@ void LevelManager::LoadAllLevels()
 	/* Open directory stream */
 	dir = opendir("./Resources/levels/");
 	if (dir != NULL) {
-
+		std::string name = std::string("");
 		/* Print all files and directories within the directory */
 		int i = 0;
 		while ((ent = readdir(dir)) != NULL) {
 			switch (ent->d_type) {
 			case DT_REG:
-				allLevels[i] = std::string(ent->d_name);
+				name = std::string(ent->d_name);
+				allLevels[i] = name.substr(0,std::string(ent->d_name).size()-5);
 				i++;
 				break;
 			default:
@@ -65,17 +66,20 @@ std::vector<std::string> LevelManager::getAllLevels()
 	return levels;
 }
 
-const char* LevelManager::getCurrentLevel()
+std::string LevelManager::getCurrentLevel()
 {
-	return allLevels[currentLevelNumber].c_str();
+	std::string result;
+	result.append(allLevels[currentLevelNumber]);
+	result.append(".json");
+	return result;
 }
 
-const char* LevelManager::getNextLevelName()
+std::string LevelManager::getNextLevelName()
 {
 	if(!allLevels.empty())
 	{
 		currentLevelNumber += 1;
-		return allLevels[currentLevelNumber].c_str();
+		return getCurrentLevel();
 	}
 	return nullptr;
 }

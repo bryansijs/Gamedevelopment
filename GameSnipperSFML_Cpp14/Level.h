@@ -7,7 +7,11 @@
 #include "GameObject.h"
 #include "TileSet.h"
 #include "StartTile.h"
+#include "EndTile.h"
 #include "Time.h"
+#include "Context.h"
+#include "StateManager.h"
+#include "LevelManager.h"
 
 class Level
 {
@@ -18,10 +22,10 @@ public:
 	~Level();
 	Level(GameObjectContainer* gameObjectContainer);
 	StartTile* start;
+	EndTile* end;
 
 
 	std::vector<GameObject*> game_objects;
-	//std::vector<Tile*> tiles;
 	std::vector<Tile*> groundTiles;
 	std::vector<Tile*> roofTiles;
 	std::vector<TileSet*> tileSets;
@@ -41,12 +45,15 @@ public:
 	void update();
 
 	void Start(GameObject* player, sf::Vector2u* size);
+	void End(Context* context, StateManager* stateManager, LevelManager* levelManager);
 	void setLayerVisibility(int layerIndex, bool isVisible);
 	bool getDoEvents() { return doEvents; }
 	int getViewPortX() { return viewPortX; }
 	int getViewPortY() { return viewPortY; }
 	void setMusic(sf::Sound music) { this->music = music; }
-	
+	sf::Sound getMusic() { return music; }
+	void pauseMusic(bool play) { if (!play)music.pause(); else music.play(); }
+
 
 	void setGameObjects(std::vector<GameObject*>& game_objects) { this->game_objects.swap(game_objects); }
 	void setTileSets(std::vector<TileSet*>& tileSets) { this->tileSets.swap(tileSets); }

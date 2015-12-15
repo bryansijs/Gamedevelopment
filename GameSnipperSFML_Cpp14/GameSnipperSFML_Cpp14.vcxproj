@@ -174,12 +174,15 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseInput.h" />
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="application.h" />
     <ClInclude Include="BaseEnemy.h" />
     <ClInclude Include="BaseItem.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="BasicEnemy.h" />
     <ClInclude Include="CollisionListener.h" />
+    <ClInclude Include="ConsoleColor.h" />
     <ClInclude Include="Context.h" />
     <ClInclude Include="DebugBox2D.h" />
     <ClInclude Include="Door.h" />
@@ -187,6 +190,8 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="DrawContainer.h" />
     <ClInclude Include="EndTile.h" />
     <ClInclude Include="EnemyFactory.h" />
+    <ClInclude Include="FPSShow.h" />
+    <ClInclude Include="GameActions.h" />
     <ClInclude Include="GameContext.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectFactory.h" />
@@ -201,6 +206,9 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="KeyMappingImporter.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelImporter.h" />
+    <ClInclude Include="MenuActions.h" />
+    <ClInclude Include="LoseContext.h" />
+    <ClInclude Include="LoseState.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="MenuContext.h" />
     <ClInclude Include="MenuState.h" />
@@ -211,16 +219,18 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="NormalDrawBehaviour.h" />
     <ClInclude Include="NormalMoveBehaviour.h" />
     <ClInclude Include="NormalState.h" />
+    <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerActions.h" />
     <ClInclude Include="PlayerDrawBehaviour.h" />
-    <ClInclude Include="PlayerInput.h" />
+    <ClInclude Include="ProjectileFactory.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="resource1.h" />
     <ClInclude Include="resource2.h" />
     <ClInclude Include="Potion.h" />
     <ClInclude Include="RunnerEnemy.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="square.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="ShootAction.h" />
@@ -246,8 +256,12 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="GameObjectContainer.h" />
     <ClInclude Include="WanderMoveBehaviour.h" />
     <ClInclude Include="WarpTile.h" />
+    <ClInclude Include="WinContext.h" />
+    <ClInclude Include="WinState.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BaseInput.cpp" />
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BaseEnemy.cpp" />
     <ClCompile Include="BaseItem.cpp" />
     <ClCompile Include="BasicEnemy.cpp" />
@@ -259,6 +273,8 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="DrawContainer.cpp" />
     <ClCompile Include="EndTile.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
+    <ClCompile Include="FPSShow.cpp" />
+    <ClCompile Include="GameActions.cpp" />
     <ClCompile Include="GameContext.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
@@ -273,8 +289,11 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="KeyMappingImporter.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelImporter.cpp" />
+    <ClCompile Include="LoseContext.cpp" />
+    <ClCompile Include="LoseState.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MenuActions.cpp" />
     <ClCompile Include="MenuContext.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="MoveAction.cpp" />
@@ -283,13 +302,15 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="MoveContainer.cpp" />
     <ClCompile Include="NormalDrawBehaviour.cpp" />
     <ClCompile Include="NormalMoveBehaviour.cpp" />
+    <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="PlayerActions.cpp" />
     <ClCompile Include="PlayerDrawBehaviour.cpp" />
-    <ClCompile Include="PlayerInput.cpp" />
     <ClCompile Include="Potion.cpp" />
+    <ClCompile Include="ProjectileFactory.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="RunnerEnemy.cpp" />
     <ClCompile Include="SetupState.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="square.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -320,11 +341,16 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="GameObjectContainer.cpp" />
     <ClCompile Include="WanderMoveBehaviour.cpp" />
     <ClCompile Include="WarpTile.cpp" />
+    <ClCompile Include="WinContext.cpp" />
+    <ClCompile Include="WinState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\key-mapping.json" />
     <None Include="Resources\menuHTML\about.html" />
     <None Include="Resources\menuHTML\instruction.html" />
+    <None Include="Resources\menuHTML\lose.html" />
     <None Include="Resources\menuHtml\menu.html" />
+    <None Include="Resources\menuHTML\win.html" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\menuHtml\images\bg.png" />

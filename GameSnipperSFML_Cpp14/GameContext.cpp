@@ -1,10 +1,12 @@
 #include "stdafx.h"
 #include "GameContext.h"
+#include "Context.h"
 #include "GameObjectContainer.h"
 #include "MoveContainer.h"
 #include "DrawContainer.h"
 #include "KeyMapping.h"
 #include "DebugBox2D.h"
+#include "PauseMenu.h"
 #include "CollisionListener.h"
 
 GameContext::GameContext(Context* context)
@@ -21,17 +23,21 @@ GameContext::GameContext(Context* context)
 	drawContainer = new DrawContainer();
 	useContainer = new GameObjectContainer();
 
-	player = new Player(moveContainer, drawContainer,useContainer, world);
-	player->SetAnimationStates(3);
-	playerActions.SetPlayer(player);
-
-	keyMappingImporter.Import("./Resources/key-mapping.json");
-	KeyMapping::ReloadMapping(keyMappingImporter.GetMapping());
+	player = new Player(moveContainer, drawContainer, useContainer, world);
 }
+
+void GameContext::setMenuPosition()
+{
+	pauze->setPositions(level->GetViewPortPosition().x, level->GetViewPortPosition().y, context->window.getSize().x, context->window.getSize().y);
+}
+
+
 
 GameContext::~GameContext()
 {
+	delete pauze;
 	delete player;
 	delete levelImporter;
 	delete level;
 }
+
