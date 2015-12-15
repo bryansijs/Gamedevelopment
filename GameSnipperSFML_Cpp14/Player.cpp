@@ -1,33 +1,11 @@
 #include "stdafx.h"
 #include "Player.h"
-
 #include "MoveContainer.h"
 #include "DrawContainer.h"
 #include <Box2D/Box2D.h>
-
 #include "NormalMoveBehaviour.h"
 #include "PlayerDrawBehaviour.h"
-
 #include "EndTile.h"
-#include <Box2D\Box2D.h>
-
-Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, b2World* world)
-{
-	this->setMoveContainer(moveContainer);
-	this->setDrawContainer(drawContainer);
-
-	this->SetMoveBehaviour( new NormalMoveBehaviour(this) );
-	this->setDrawBehaviour( new PlayerDrawBehaviour(this, 10, "Player.png"));
-	
-	this->setSize(32, 32);
-
-	//this->createBoxDynamic(*world);
-
-	
-	this->getDrawContainer()->AddBehaviour(getDrawBehaviour());
-	this->setHealth(100);
-}
-
 
 Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameObjectContainer* useContainer, b2World* world)
 {
@@ -41,11 +19,11 @@ Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameO
 
 	//this->createBoxDynamic(*world);
 	this->getDrawContainer()->AddBehaviour(getDrawBehaviour());
-
 	this->setUseContainer(useContainer);
+
+	this->SetAnimationStates(3);
 	this->setHealth(100);
 }
-
 
 
 Player::Player()
@@ -57,6 +35,7 @@ Player::Player()
 
 Player::~Player()
 {
+	
 }
 
 void Player::AddItem(BaseItem* item) {

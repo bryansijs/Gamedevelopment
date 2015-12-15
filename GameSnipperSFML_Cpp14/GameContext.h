@@ -1,17 +1,11 @@
 #pragma once
-
+#include "SFML/Graphics.hpp"
 #include "Context.h"
-
 #include "Player.h"
-#include "PlayerInput.h"
-#include "PlayerActions.h"
-
-#include "KeyMappingImporter.h"
-
 #include "LevelImporter.h"
 #include "Level.h"
-
 #include "PauseMenu.h"
+#include "FPSShow.h"
 
 #include <Awesomium/WebCore.h>
 #include <Awesomium/BitmapSurface.h>
@@ -22,6 +16,7 @@ class MoveContainer;
 class DrawContainer;
 class GameObjectContainer;
 class CollisionListener;
+class PauzeMenu;
 
 class GameContext
 {
@@ -36,10 +31,6 @@ public:
 	GameObjectContainer *useContainer;
 
 	Player* player;
-	PlayerInput playerInput;
-	PlayerActions* playerActions;
-	KeyMappingImporter keyMappingImporter;
-
 	LevelImporter* levelImporter;
 	Level* level;
 
@@ -49,6 +40,8 @@ public:
 
 	void setMenuPosition();
 	PauseMenu* pauze = new PauseMenu{ 321,395 };
+
+	FPSShow* fpsShow = new FPSShow{};
 
 	b2World* world;
 	CollisionListener* collisionListener;

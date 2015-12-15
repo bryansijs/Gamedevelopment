@@ -31,6 +31,14 @@ body, html {
 
     background: #fff;
 }
+    
+    #advertisement .advertisement-text {
+        width: 100%;
+    }
+
+        #advertisement .advertisement-text img {
+            width: 100%;
+        }
 
 #loading-info {
     margin: 20px auto 0 auto;
@@ -43,3 +51,12 @@ body, html {
         font-size: 24px;
         color: #fff;
     }
+
+#game-tips {
+    margin: 400px auto 0 auto;
+    width: 728px;
+
+    font-size: 20px;
+    text-align: center;
+    color: #fff;
+}
