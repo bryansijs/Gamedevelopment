@@ -10,5 +10,6 @@ public:
 	ScoreManager() { ReadScores(); };
 	~ScoreManager();
 	void AddScore(int score, std::string naam);
-	std::map<int, std::string> GetScores();
+	std::map<std::string,int> GetScores();
+	void Save();
 };

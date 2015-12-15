@@ -443,7 +443,7 @@
     </ClInclude>
     <ClInclude Include="FPSShow.h">
       <Filter>Header Files</Filter>
-	 </ClInclude>
+    </ClInclude>
     <ClInclude Include="BaseInput.h">
       <Filter>Header Files\Actions</Filter>
     </ClInclude>
@@ -470,6 +470,9 @@
     </ClInclude>
     <ClInclude Include="WinContext.h">
       <Filter>Header Files\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreManager.h">
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -694,7 +697,7 @@
     </ClCompile>
     <ClCompile Include="FPSShow.cpp">
       <Filter>Source Files</Filter>
-	     </ClCompile>
+    </ClCompile>
     <ClCompile Include="BaseInput.cpp">
       <Filter>Source Files\Actions</Filter>
     </ClCompile>
@@ -718,6 +721,9 @@
     </ClCompile>
     <ClCompile Include="WinContext.cpp">
       <Filter>Source Files\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreManager.cpp">
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -744,7 +750,6 @@
     <None Include="Resources\menuHTML\lose.html">
       <Filter>Resource Files\Html</Filter>
     </None>
-
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameSnipperSFML_Cpp14.rc">
