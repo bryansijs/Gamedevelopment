@@ -18,6 +18,7 @@ private:
 public:
 	void Update();
 	void Terminate();
+	void enableDebug();
 	void StartNextLevel();
 
 	GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager);
