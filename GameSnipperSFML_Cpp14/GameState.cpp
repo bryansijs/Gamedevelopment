@@ -206,7 +206,6 @@ void GameState::Update()
 	}
 
 
-
 	//this->enableDebug();
 
 	gameContext->context->window.display();
