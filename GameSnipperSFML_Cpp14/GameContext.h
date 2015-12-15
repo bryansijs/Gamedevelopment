@@ -7,6 +7,10 @@
 #include "PauseMenu.h"
 #include "FPSShow.h"
 
+#include <Awesomium/WebCore.h>
+#include <Awesomium/BitmapSurface.h>
+#include <Awesomium/STLHelpers.h>
+
 class Context;
 class MoveContainer;
 class DrawContainer;
@@ -41,5 +45,14 @@ public:
 
 	b2World* world;
 	CollisionListener* collisionListener;
+
+	Awesomium::WebView* webView;
+	Awesomium::WebCore* web_core;
+	Awesomium::BitmapSurface* surface;
+
+	sf::Texture texture;
+	sf::Uint8* pixels;
+
+	bool loading;
 };
 
