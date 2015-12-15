@@ -24,9 +24,25 @@
       "map": "use",
       "key": "E"
     },
+    {
+      "map": "enter",
+      "key": "Return"
+    },
+     {
+      "map": "switch-up",
+      "key": "K"
+    },
+    {
+      "map": "switch-down",
+      "key": "L"
+    },
 	{
-      "map": "pause",
+      "map": "escape",
       "key": "Esc"
+    },
+    {
+      "map": "fps",
+      "key": "/"
     }
   ]
 }
