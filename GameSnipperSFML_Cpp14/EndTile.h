@@ -1,5 +1,9 @@
 #pragma once
 #include "GameObject.h"
+#include "Context.h"
+#include "StateManager.h"
+#include "LevelManager.h"
+
 class EndTile : public GameObject
 {
 public:
@@ -11,6 +15,11 @@ public:
 	
 	virtual void startContact(b2Fixture* fixture);
 	virtual void endContact(b2Fixture* fixture);
+	void setContext(Context* context, StateManager* stateManager, LevelManager* levelManager);
 
+private:
+	Context* context;
+	StateManager* stateManager;
+	LevelManager* levelManager;
 };
 

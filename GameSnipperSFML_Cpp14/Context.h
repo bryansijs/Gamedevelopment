@@ -1,8 +1,7 @@
 #pragma once
-
 #include <vector>
 #include <SFML\Graphics.hpp>
-#include <Box2D\Box2D.h>
+#include <Awesomium/WebCore.h>
 
 class Unit;
 
@@ -16,7 +15,7 @@ public:
 
 	std::vector<Unit*> allUnits;
 	std::vector<Unit*> getUnits() { return allUnits; };
-
+	Awesomium::WebCore* web_core;
 	Unit* getUnitAt(int i) { return allUnits.at(i); };
 private:
 	sf::Vector2i* screenDimensions;

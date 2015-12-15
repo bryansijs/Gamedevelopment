@@ -524,8 +524,55 @@
          "width":30,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":62,
+         "name":"StoryTiles",
+         "objects":[
+                {
+                 "height":57,
+                 "id":33,
+                 "name":"Story1",
+                 "properties":
+                    {
+                     "Line1":"This is a test story",
+                     "Line2":"test line ",
+                     "Lines":"2",
+                     "sType":"StoryTile"
+                    },
+                 "rotation":0,
+                 "type":"GameTile",
+                 "visible":true,
+                 "width":33,
+                 "x":127,
+                 "y":1827
+                }, 
+                {
+                 "height":31,
+                 "id":34,
+                 "name":"Story2",
+                 "properties":
+                    {
+                     "Line1":"story 2 test line",
+                     "Lines":"1",
+                     "sType":"StoryTile"
+                    },
+                 "rotation":0,
+                 "type":"GameTile",
+                 "visible":true,
+                 "width":127,
+                 "x":416,
+                 "y":1761
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":30,
+         "x":0,
+         "y":0
         }],
- "nextobjectid":33,
+ "nextobjectid":35,
  "orientation":"orthogonal",
  "properties":
     {

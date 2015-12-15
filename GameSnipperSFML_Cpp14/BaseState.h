@@ -2,6 +2,8 @@
 class BaseState
 {
 public:
+	virtual ~BaseState() {};
+
 	bool terminate = false;
 
 	virtual void Update() {};

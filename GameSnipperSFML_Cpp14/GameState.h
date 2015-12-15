@@ -1,13 +1,28 @@
 #pragma once
 #include "BaseState.h"
 #include "LevelManager.h"
+#include "PlayerActions.h"
+#include "StorylineManager.h"
 
 class StateManager;
 class Context;
 class GameContext;
+
 class square;
+class GameActions;
+class AwesomiumHelper;
+
 class GameState: public BaseState
 {
+public:
+	GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager);
+	~GameState();
+
+	void Update() override;
+	void Terminate() override;
+	void StartNextLevel();
+
+	bool isPause = false;
 private:
 	StateManager* stateManager;
 
@@ -15,12 +30,15 @@ private:
 	Context* maincontext;
 
 	GameContext* gameContext;
-public:
-	void Update();
-	void Terminate();
-	void StartNextLevel();
 
-	GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager);
-	~GameState();
+	PlayerActions* playerActions;
+	GameActions* gameActions;
+
+	sf::View storyview;
+	AwesomiumHelper* storyline;
+	StorylineManager* storylineManager;
+
+	void DestroyGameObjects();
+	void DebugBodies();
+	void MenuEnd(int option);
 };
-

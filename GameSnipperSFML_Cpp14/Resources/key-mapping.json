@@ -23,6 +23,22 @@
     {
       "map": "use",
       "key": "E"
+    },
+    {
+      "map": "enter",
+      "key": "Return"
+    },
+     {
+      "map": "switch-up",
+      "key": "K"
+    },
+    {
+      "map": "switch-down",
+      "key": "L"
+    },
+	{
+      "map": "escape",
+      "key": "Esc"
     }
   ]
 }
