@@ -5,8 +5,8 @@
 #include "MoveContainer.h"
 #include "DrawContainer.h"
 #include "KeyMapping.h"
-
 #include "DebugBox2D.h"
+#include "PauseMenu.h"
 #include "CollisionListener.h"
 
 GameContext::GameContext(Context* context)
@@ -29,7 +29,6 @@ GameContext::GameContext(Context* context)
 
 	keyMappingImporter.Import("./Resources/key-mapping.json");
 	KeyMapping::ReloadMapping(keyMappingImporter.GetMapping());
-
 }
 
 void GameContext::setMenuPosition()

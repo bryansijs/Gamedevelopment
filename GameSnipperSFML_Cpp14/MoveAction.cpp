@@ -3,7 +3,6 @@
 
 #include "GameObject.h"
 #include "Time.h"
-#include "Tile.h"
 #include "Animation.h"
 
 #include <math.h>
@@ -69,7 +68,8 @@ void MoveAction::Move()
 	velocity.x = roundf(velocity.x * 100) / 100;
 	velocity.y = roundf(velocity.y * 100) / 100;
 
-	animation->Animate();
-	
+	if(velocity.x != 0 || velocity.y != 0)
+		animation->Animate();
+
 	gameObject->getBody()->SetLinearVelocity(b2Vec2(velocity.x, velocity.y));
 }

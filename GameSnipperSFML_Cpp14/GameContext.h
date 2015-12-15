@@ -1,16 +1,9 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "Context.h"
-
 #include "Player.h"
-#include "PlayerInput.h"
-#include "PlayerActions.h"
-
-#include "KeyMappingImporter.h"
-
 #include "LevelImporter.h"
 #include "Level.h"
-
 #include "PauseMenu.h"
 #include "FPSShow.h"
 
@@ -34,10 +27,6 @@ public:
 	GameObjectContainer *useContainer;
 
 	Player* player;
-	PlayerInput playerInput;
-	PlayerActions* playerActions;
-	KeyMappingImporter keyMappingImporter;
-
 	LevelImporter* levelImporter;
 	Level* level;
 
