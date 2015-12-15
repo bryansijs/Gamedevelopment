@@ -8,7 +8,10 @@ class Context;
 class GameContext;
 
 class square;
+
+
 class GameActions;
+
 
 class GameState: public BaseState
 {
@@ -19,7 +22,7 @@ public:
 	void Update() override;
 	void Terminate() override;
 	void StartNextLevel();
-
+	bool showFPS = false;
 	bool isPause = false;
 private:
 	StateManager* stateManager;
@@ -35,4 +38,6 @@ private:
 	void DestroyGameObjects();
 	void DebugBodies();
 	void MenuEnd(int option);
+
+
 };
