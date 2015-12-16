@@ -1,16 +1,22 @@
 #pragma once
-
+#include "SFML/Graphics.hpp"
 #include "Context.h"
 #include "Player.h"
 #include "LevelImporter.h"
 #include "Level.h"
 #include "PauseMenu.h"
+#include "FPSShow.h"
+
+#include <Awesomium/WebCore.h>
+#include <Awesomium/BitmapSurface.h>
+#include <Awesomium/STLHelpers.h>
 
 class Context;
 class MoveContainer;
 class DrawContainer;
 class GameObjectContainer;
 class CollisionListener;
+class PauzeMenu;
 
 class GameContext
 {
@@ -35,8 +41,18 @@ public:
 	void setMenuPosition();
 	PauseMenu* pauze = new PauseMenu{ 321,395 };
 
+	FPSShow* fpsShow = new FPSShow{};
+
 	b2World* world;
 	CollisionListener* collisionListener;
 
+	Awesomium::WebView* webView;
+	Awesomium::WebCore* web_core;
+	Awesomium::BitmapSurface* surface;
+
+	sf::Texture texture;
+	sf::Uint8* pixels;
+
+	bool loading;
 };
 

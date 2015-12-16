@@ -191,6 +191,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="DrawContainer.h" />
     <ClInclude Include="EndTile.h" />
     <ClInclude Include="EnemyFactory.h" />
+    <ClInclude Include="FPSShow.h" />
     <ClInclude Include="GameActions.h" />
     <ClInclude Include="GameContext.h" />
     <ClInclude Include="GameObject.h" />
@@ -275,6 +276,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="DrawContainer.cpp" />
     <ClCompile Include="EndTile.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
+    <ClCompile Include="FPSShow.cpp" />
     <ClCompile Include="GameActions.cpp" />
     <ClCompile Include="GameContext.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -348,6 +350,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\html-game\StoryLine.html" />
+    <None Include="loading.html" />
     <None Include="Resources\key-mapping.json" />
     <None Include="Resources\menuHTML\about.html" />
     <None Include="Resources\menuHTML\instruction.html" />
