@@ -9,27 +9,29 @@ private:
 
 	Player* player;
 	b2Vec2 vertices[3];
-	sf::ConvexShape* convex;
-	bool create = true;
-	b2PolygonShape  chain;
-	b2FixtureDef myFixtureDef;
-	b2Body* m_body;
-	b2BodyDef* los;
+	b2Vec2 convexVert[3];
+	sf::ConvexShape* lineOfSightConvex;
+
+	b2PolygonShape  lineOfSightShape;
+	b2FixtureDef* lineOfSightFixtureDef;
+	b2Body* lineOfSightBody;
+	b2BodyDef* lineOfSightBodyDef;
+
+	int seeWidth;
+	int seeLength;
+
+	void CreateVisibleLine();
+	void CreateVectors();
 public:
 	BaseEnemy();
-	void CreateLineOfSight();
 	~BaseEnemy();
 	BaseEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* goContainer);
-	virtual void setProperties(std::map<std::string, std::string>& properties);
-	void CreateVectors();
-	void AddPlayer();
-	int seeAngle;
-	int seeLenght;
 
+	virtual void setProperties(std::map<std::string, std::string>& properties);
+	void CreateLineOfSight();
 	void Update();
 
-
-	sf::ConvexShape& getConvex() { return *convex; }
+	sf::ConvexShape& getLineOfSightConvex() { return *lineOfSightConvex; }
 };
 
 

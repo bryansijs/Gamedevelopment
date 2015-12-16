@@ -22,7 +22,7 @@ void NormalDrawBehaviour::Draw(sf::RenderWindow *window, sf::Vector2f viewPortPo
 	window->draw(getCurrentImage());
 	if (dynamic_cast<BaseEnemy*>(this->gameObject) && this->isVisible(viewPortPosition.x, viewPortPosition.y))
 	{
-		window->draw(dynamic_cast<BaseEnemy*>(this->gameObject)->getConvex());
+		window->draw(dynamic_cast<BaseEnemy*>(this->gameObject)->getLineOfSightConvex());
 	}
 }
 
