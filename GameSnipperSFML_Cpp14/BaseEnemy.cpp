@@ -5,6 +5,9 @@
 #include "Player.h"
 #include <Box2D\Dynamics\b2Body.h>
 #include <Box2D\Collision\b2Collision.h>
+
+
+#include "MoveBehaviour.h"
 BaseEnemy::BaseEnemy()
 {
 }
@@ -16,7 +19,7 @@ BaseEnemy::~BaseEnemy()
 
 
 BaseEnemy::BaseEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer) :Unit{ dContainer, img,mContainer, gameObjectContainer } {
-
+	this->setSpeed(40.0f);
 
 }
 
@@ -40,8 +43,7 @@ void BaseEnemy::setProperties(std::map<std::string, std::string>& properties)
 
 void BaseEnemy::CreateLineOfSight()
 {
-	CreateVectors();
-
+	this->myFixtureDef = new b2FixtureDef();
 	//Laten we een Line  of sight maken. 
 	this->los = new b2BodyDef();
 	this->convex = new sf::ConvexShape{};
@@ -50,35 +52,42 @@ void BaseEnemy::CreateLineOfSight()
 	los->position = this->getBody()->GetPosition();
 	this->los->type = b2_dynamicBody;
 	this->m_body = this->world->CreateBody(los);
-	this->myFixtureDef.shape = &chain;
-	this->myFixtureDef.density = 100.f;
-	this->myFixtureDef.friction = 0.0f;
-	this->myFixtureDef.isSensor = true;
-	this->m_body->CreateFixture(&myFixtureDef);
+	CreateVectors();
 
 
+	myFixtureDef->shape = &chain;
+	myFixtureDef->density = 100;
+	myFixtureDef->friction = 0.3f;
+	myFixtureDef->isSensor = true;
+	myFixture  = m_body->CreateFixture(myFixtureDef);
 }
 
 void BaseEnemy::CreateVectors()
 {
-	switch (getIndexY())
+	int b = this->getIndexY();
+
+	switch (b)
 	{
 	case 0: {
+
 		vertices[0].Set(16, 16);
 		vertices[1].Set(seeAngle, seeLenght);
 		vertices[2].Set(-seeAngle, seeLenght);
 	}	break;
 	case 1: {
+
 		vertices[0].Set(16, 16);
 		vertices[1].Set(-seeLenght, seeAngle);
 		vertices[2].Set(-seeLenght, -seeAngle);
 	}	break;
 	case 2: {
+
 		vertices[0].Set(16, 16);
 		vertices[1].Set(seeLenght, seeAngle);
 		vertices[2].Set(seeLenght, -seeAngle);
 	}	break;
 	case 3: {
+
 		vertices[0].Set(16, 16);
 		vertices[1].Set(-seeAngle, -seeLenght);
 		vertices[2].Set(seeAngle, -seeLenght);
@@ -89,7 +98,24 @@ void BaseEnemy::CreateVectors()
 		break;
 	}
 
+
+
 	this->chain.Set(this->vertices, 3);
+
+	//
+	if (m_body->GetFixtureList() != nullptr) {
+
+
+		m_body->DestroyFixture(myFixture);
+
+		myFixtureDef->shape = &chain;
+		myFixtureDef->density = 100;
+		myFixtureDef->friction = 0.3f;
+		myFixtureDef->isSensor = true;
+		myFixture =	m_body->CreateFixture(myFixtureDef);
+	}
+
+
 
 }
 
@@ -110,28 +136,43 @@ void BaseEnemy::AddPlayer()
 
 void BaseEnemy::Update()
 {
-	if (this->player == nullptr) 
+	if (this->player == nullptr)
 		AddPlayer();
 
-	CreateVectors();
 
 	this->los->position = this->getBody()->GetPosition();
 	this->m_body->SetTransform(los->position, 0);
 
+	CreateVectors();
+
 	this->convex->setFillColor(sf::Color(255, 129, 0, 128));
 	this->convex->setPosition(sf::Vector2f(m_body->GetPosition().x, m_body->GetPosition().y));
 
-	this->convex->setPoint(0, sf::Vector2f(chain.GetVertex(0).x, chain.GetVertex(0).y));
-	this->convex->setPoint(1, sf::Vector2f(chain.GetVertex(1).x, chain.GetVertex(1).y));
-	this->convex->setPoint(2, sf::Vector2f(chain.GetVertex(2).x, chain.GetVertex(2).y));
+	b2PolygonShape* s = (b2PolygonShape*)m_body->GetFixtureList()->GetShape();
+	int vertextCount = s->GetVertexCount();
+	this->convex->setPointCount(vertextCount);
+
+	for (int i = 0; i < vertextCount; i++)
+		this->convex->setPoint(i, sf::Vector2f(s->GetVertex(i).x, s->GetVertex(i).y));
+
+
 
 	for (b2ContactEdge* ce = m_body->GetContactList(); ce; ce = ce->next)
 	{
+		std::cout << "stuff" << std::endl;
 		b2Contact* c = ce->contact;
-		if (this->player == static_cast<Player*>(ce->other->GetUserData()))
+
+		GameObject* obj = static_cast<GameObject*>(ce->other->GetUserData());
+		if (dynamic_cast<Player*>(obj))
 		{
 			if (c->IsTouching())
-				this->convex->setFillColor(sf::Color(250, 0, 0, 128));
+				std::cout << "Tough of red" << std::endl;
+			//this->convex->setFillColor(sf::Color(250, 0, 0, 128));
 		}
+
 	}
+
+
 }
+
+

@@ -12,9 +12,10 @@ private:
 	sf::ConvexShape* convex;
 	bool create = true;
 	b2PolygonShape  chain;
-	b2FixtureDef myFixtureDef;
+	b2FixtureDef* myFixtureDef;
 	b2Body* m_body;
 	b2BodyDef* los;
+	b2Fixture* myFixture;
 public:
 	BaseEnemy();
 	void CreateLineOfSight();
@@ -28,6 +29,9 @@ public:
 
 	void Update();
 
+	
+
+	int prevY = -1;
 
 	sf::ConvexShape& getConvex() { return *convex; }
 };

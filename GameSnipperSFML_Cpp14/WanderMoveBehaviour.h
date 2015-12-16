@@ -14,18 +14,22 @@ public:
 
 	void Update(sf::Vector2f viewPortPosition);
 	bool checkVisible(int screenX, int screenY);
+
+	
+
 private:
 	MoveAction* moveAction;
-
+	void setDirection();
 	int defaultMoveDistance = 20;
 	int minMoveDistance = 200;
 	int maxMoveDistance = 400;
 
 	int moveDistance;
-	std::string direction;
-
+	
 	b2Vec2 startPosition;
 	b2Vec2 endPosition;
+
+	std::string direction;
 
 	std::vector<std::string> directions = {
 		{ "move-up" },

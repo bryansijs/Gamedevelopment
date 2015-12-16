@@ -32,7 +32,7 @@ private:
 	int yIndex = 0;
 	int width = 0;
 	int height = 0;
-
+	float speed = 0.0f;
 	int animationStates;
 public:
 	GameObject(DrawContainer *drawContainer, std::string textureUrl);
@@ -113,6 +113,10 @@ public:
 	bool isFlaggedForDelete = false;
 
 	b2World* theWorld() { return this->world; }
+
+
+	void setSpeed(float speed) { this->speed = speed; }
+	float getspeed() { return speed; }
 protected:
 	b2BodyDef myBodyDef;
 	b2PolygonShape Shape;

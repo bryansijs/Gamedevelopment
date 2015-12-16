@@ -26,4 +26,6 @@ void Tile::createStaticBody(b2World& world)
 	boxFixtureDef.friction = 0.0f;
 	boxFixtureDef.shape = &Shape;
 	Body->CreateFixture(&boxFixtureDef);
+
+	Body->SetUserData(this);
 }

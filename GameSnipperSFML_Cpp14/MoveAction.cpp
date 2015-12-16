@@ -38,22 +38,22 @@ void MoveAction::Move()
 		if (*it == "move-up")
 		{
 			gameObject->setImageY(3);
-			velocity.y -= speed;
+			velocity.y -= gameObject->getspeed();
 		}
 		if (*it == "move-down")
 		{
 			gameObject->setImageY(0);
-			velocity.y += speed;
+			velocity.y += gameObject->getspeed();
 		}
 		if (*it == "move-left")
 		{
 			gameObject->setImageY(1);
-			velocity.x -= speed;
+			velocity.x -= gameObject->getspeed();
 		}
 		if (*it == "move-right")
 		{
 			gameObject->setImageY(2);
-			velocity.x += speed;
+			velocity.x += gameObject->getspeed();
 		}
 	}
 

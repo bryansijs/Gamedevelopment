@@ -9,6 +9,7 @@
 NormalMoveBehaviour::NormalMoveBehaviour(GameObject* gameObject)
 {
 	this->gameObject = gameObject;
+
 }
 
 NormalMoveBehaviour::~NormalMoveBehaviour()
