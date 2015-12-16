@@ -3,6 +3,7 @@
 #include "LevelManager.h"
 #include "PlayerActions.h"
 
+class ScoreManager;
 class StateManager;
 class Context;
 class GameContext;
@@ -16,7 +17,7 @@ class GameActions;
 class GameState: public BaseState
 {
 public:
-	GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager);
+	GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager, ScoreManager* scoreManager);
 	~GameState();
 
 	void Update() override;
@@ -26,7 +27,7 @@ public:
 	bool isPause = false;
 private:
 	StateManager* stateManager;
-
+	ScoreManager* scoreManager;
 	LevelManager* levelManager;
 	Context* maincontext;
 

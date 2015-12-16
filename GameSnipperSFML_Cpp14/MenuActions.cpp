@@ -6,14 +6,16 @@
 #include <Awesomium/STLHelpers.h>
 #include "Context.h"
 #include "KeyMapping.h"
+#include "ScoreManager.h"
 
 using namespace Awesomium;
 
-MenuActions::MenuActions(StateManager* stateManager, MenuContext* menuContext, LevelManager* levelManager)
+MenuActions::MenuActions(StateManager* stateManager, MenuContext* menuContext, LevelManager* levelManager,ScoreManager* scoreManager)
 {
 	MenuActions::stateManager = stateManager;
 	MenuActions::menuContext = menuContext;
 	MenuActions::levelManager = levelManager;
+	MenuActions::scoreManager = scoreManager;
 }
 
 void MenuActions::ProcessActions()
@@ -58,7 +60,7 @@ void MenuActions::ExitGame()
 void MenuActions::RunGame()
 {
 	menuContext->music->stop();
-	GameState* gameState = new GameState(menuContext->context, stateManager, levelManager);
+	GameState* gameState = new GameState(menuContext->context, stateManager, levelManager, scoreManager);
 	stateManager->AddState(gameState);
 	stateManager->StartNextState();
 }
@@ -164,6 +166,17 @@ void MenuActions::ShowIntruction()
 	ReloadPage();
 }
 
+void MenuActions::ShowHighscore()
+{
+	menuContext->inMenu = false;
+	menuContext->pathToFile = "file:///Resources/menuHTML/score.html";
+	ReloadPage();
+	
+	for (auto it = scoreManager->GetScores().begin(); it != scoreManager->GetScores().end(); ++it) {
+		addHighScoreToMenu(menuContext->webView, menuContext->web_core, it->first.c_str(),it->second);
+	}
+}
+
 void MenuActions::NavigateUp()
 {
 	if (menuContext->inLevels)
@@ -178,6 +191,7 @@ void MenuActions::NavigateUp()
 	else if (menuContext->currentLevel > 1 && menuContext->inMenu)
 	{
 		menuContext->currentLevel -= 1;
+		std::cout << menuContext->currentLevel;
 		callDirectJSFunction(menuContext->webView, menuContext->web_core, menuContext->currentLevel);
 	}
 }
@@ -268,6 +282,24 @@ void MenuActions::SwitchToDown()
 		else
 			menuContext->currentLevelIndex++;
 	}
+}
+
+void MenuActions::addHighScoreToMenu(Awesomium::WebView* webView, Awesomium::WebCore* web_core, const char* naam, int score)
+{
+	JSValue window = webView->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));
+
+	if (window.IsObject())
+	{
+		JSArray args;
+		JSValue key = JSValue(naam);
+		JSValue val = JSValue(score);
+		args.Push(key);
+		args.Push(val);
+		window.ToObject().Invoke(WSLit("addScore"), args);
+	}
+
+	Sleep(50);
+	web_core->Update();
 }
 
 void MenuActions::callDirectJSFunction(WebView* webView, WebCore* web_core, int currentLevel)

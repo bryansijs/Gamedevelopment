@@ -23,7 +23,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		UnitTestMain utm;
 
 		Context* context = new Context(960, 640);
-		MenuState* state = new MenuState(context, stateManager,levelManager);
+		MenuState* state = new MenuState(context, stateManager,levelManager,scoreManager);
 
 		stateManager->AddState(state);
 		stateManager->RunState();

@@ -193,7 +193,7 @@ void Level::Start(GameObject* player, sf::Vector2u* size)
 	music.play();
 }
 
-void Level::End(Context* context, StateManager* stateManager, LevelManager* levelManager)
+void Level::End(Context* context, StateManager* stateManager, LevelManager* levelManager, ScoreManager* scoreManager)
 {
 	end = nullptr;
 
@@ -207,6 +207,6 @@ void Level::End(Context* context, StateManager* stateManager, LevelManager* leve
 
 	if (end != nullptr)
 	{
-		end->setContext(context, stateManager, levelManager);
+		end->setContext(context, stateManager, levelManager, scoreManager);
 	}
 }
