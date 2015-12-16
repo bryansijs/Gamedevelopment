@@ -21,7 +21,7 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	
 	gameActions = new GameActions(this);
 	gameContext = new GameContext(context);
-	storyline = new AwesomiumHelper{ context->web_core, "file:///Resources/html-game/StoryLine.html", 1000, 50 };
+	storyline = new AwesomiumHelper{ context->web_core, "file:///Resources/html-game/StoryLine.html", 960, 40 };
 
 	playerActions = new PlayerActions(gameContext->player);
 
@@ -46,10 +46,11 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
 
-//	storyview = context->window.getView();
-	storyview.setSize(960, 640);
 	gameContext->view.reset(rect);
 	gameContext->context->window.setView(gameContext->view);
+
+	storyview.setSize(960, 640);
+	storyview.setCenter(480, 320);
 
 	StorylineManager::Add("Let's find a way out!");
 	StorylineManager::Add("Use your arrow keys to walk");
@@ -188,7 +189,7 @@ void GameState::Update()
 	}
 
 	sf::Sprite storylineSprite = storyline->GetSprite();
-	storylineSprite.setPosition(0, 640);
+	storylineSprite.setPosition(0, 540);
 	gameContext->context->window.setView(storyview);
 	gameContext->context->window.draw(storylineSprite);
 

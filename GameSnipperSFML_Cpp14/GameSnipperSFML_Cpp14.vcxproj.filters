@@ -724,7 +724,9 @@
     <None Include="Resources\menuHTML\lose.html">
       <Filter>Resource Files\Html</Filter>
     </None>
-    <None Include="Resources\html-game\StoryLine.html" />
+    <None Include="Resources\html-game\StoryLine.html">
+      <Filter>Resource Files\Html</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameSnipperSFML_Cpp14.rc">
