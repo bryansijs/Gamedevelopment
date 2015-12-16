@@ -6,7 +6,8 @@
 void ScoreManager::ReadScores()
 {
 	scores.clear();
-	std::ifstream highScorefile("Recourses/save/highscore.txt");
+	std::ifstream highScorefile;
+	highScorefile.open("./Resources/save/highscore.txt");
 	if (highScorefile.is_open())
 	{
 		std::string key;

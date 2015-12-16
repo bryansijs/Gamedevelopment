@@ -172,8 +172,10 @@ void MenuActions::ShowHighscore()
 	menuContext->pathToFile = "file:///Resources/menuHTML/score.html";
 	ReloadPage();
 	
-	typedef std::map<std::string, int>::iterator it_type;
-	for (it_type it = scoreManager->GetScores().begin(); it != scoreManager->GetScores().end(); ++it) {
+	if(scoreManager->GetScores().size() < 1) return;
+	
+	std::map<std::string, int>::iterator it;
+	for (it = scoreManager->GetScores().begin(); it != scoreManager->GetScores().end(); ++it) {
 		addHighScoreToMenu(menuContext->webView, menuContext->web_core, it->first.c_str(),it->second);
 	}
 }
