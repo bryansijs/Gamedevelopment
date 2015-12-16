@@ -16,9 +16,6 @@
 #include "JSConsole.h"
 
 #include <iterator>
-#include "DebugBox2D.h"
-#include <Box2D\Box2D.h>
-#include <Box2D\Common\b2Draw.h>
 
 #include <Awesomium/WebCore.h>
 #include <Awesomium/BitmapSurface.h>
@@ -44,9 +41,6 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	this->stateManager = stateManager;
 	this->levelManager = levelmanager;
 	//in constructor, usually
-
-	this->gameContext->world->SetDebugDraw(&fooDrawInstance);
-	fooDrawInstance.SetFlags(b2Draw::e_shapeBit);
 
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer, gameContext->world);
 	gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
