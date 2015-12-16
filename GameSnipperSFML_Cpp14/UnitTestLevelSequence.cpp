@@ -12,7 +12,7 @@ UnitTestLevelSequence::UnitTestLevelSequence()
 	LevelManager* levelManager = new LevelManager();
 
 	std::vector<std::string> levels = levelManager->getAllLevels();
-	bool nextLevelBool = levels.front() == levelManager->getNextLevelName();
+	bool nextLevelBool = levels.front().append(".json") == levelManager->getNextLevelName();
 	bool currentLevelBool = levels.front() == levelManager->getCurrentLevel();
 	
 	levelManager->getNextLevelName();

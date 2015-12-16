@@ -63,7 +63,7 @@ private:
 	bool resetMove = true;
 
 	int notificationSwitch = 0;
-	void StandStillTimerReset() { if (1500 > StandStillTimer) { StandStillTimer = 1500; } };
-	int StandStillTimer = 2000;
+	void StandStillTimerReset() { if (750 > StandStillTimer) { StandStillTimer = 750; } };
+	int StandStillTimer = 1500;
 	void StandStill();
 };

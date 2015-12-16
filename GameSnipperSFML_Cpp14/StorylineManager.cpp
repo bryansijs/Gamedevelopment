@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "StorylineManager.h"
 #include <SFML/Audio/Sound.hpp>
+#include "Time.h"
 
 std::string StorylineManager::current;
 std::queue<std::string> StorylineManager::messages;
-float StorylineManager::timer = 100;
+float StorylineManager::timer = 5;
 sf::Sound* StorylineManager::music;
 sf::SoundBuffer StorylineManager::sfx;
 
@@ -17,7 +18,7 @@ bool StorylineManager::Updated()
 {
 	if (timer > 0)
 	{
-		timer--;
+		timer -= Time::deltaTime;
 		return false;
 	}
 
