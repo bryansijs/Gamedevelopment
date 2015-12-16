@@ -17,10 +17,10 @@ NormalDrawBehaviour::~NormalDrawBehaviour()
 {
 }
 
-void NormalDrawBehaviour::Draw(sf::RenderWindow *window)
+void NormalDrawBehaviour::Draw(sf::RenderWindow *window, sf::Vector2f viewPortPosition)
 {
 	window->draw(getCurrentImage());
-	if (dynamic_cast<BaseEnemy*>(this->gameObject))
+	if (dynamic_cast<BaseEnemy*>(this->gameObject) && this->isVisible(viewPortPosition.x, viewPortPosition.y))
 	{
 		window->draw(dynamic_cast<BaseEnemy*>(this->gameObject)->getConvex());
 	}
@@ -38,3 +38,7 @@ sf::Sprite NormalDrawBehaviour::getCurrentImage()
 
 	return this->unitImage;
 }
+
+
+
+

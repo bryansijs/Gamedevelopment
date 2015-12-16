@@ -194,7 +194,7 @@ void GameState::Update()
 		gameContext->player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	}
 
-	DebugBodies();
+//DebugBodies();
 
 
 
@@ -206,12 +206,11 @@ void GameState::Update()
 		gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
 	}
 	
-	gameContext->drawContainer->Draw(&gameContext->context->window);
+	gameContext->drawContainer->Draw(&gameContext->context->window, gameContext->level->GetViewPortPosition());
 	gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
 
 
 	if (showFPS ) {
-		//gameContext->fpsShow->setFPS(gameContext->level->GetViewPortPosition().x, gameContext->level->GetViewPortPosition().y, gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
 		gameContext->fpsShow->draw(gameContext->context->window);
 	}
 
