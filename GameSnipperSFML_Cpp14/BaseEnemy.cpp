@@ -65,15 +65,11 @@ void BaseEnemy::CreateLineOfSight()
 
 void BaseEnemy::CreateVectors()
 {
-	int b = this->getIndexY();
-
-
 	float desiredAngle;
-	switch (b)
+	switch (this->getIndexY())
 	{
 	case 0: {
 		desiredAngle = atan2f(0, 0);
-		this->lineOfSightBody->SetTransform(this->getBody()->GetPosition(), desiredAngle);
 		convexVert[0].Set(16, 16);
 		convexVert[1].Set(seeWidth, seeLength);
 		convexVert[2].Set(-seeWidth, seeLength);
