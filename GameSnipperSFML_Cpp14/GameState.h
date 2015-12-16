@@ -21,6 +21,7 @@ public:
 
 	void Update() override;
 	void Terminate() override;
+	void enableDebug();
 	void StartNextLevel();
 	bool showFPS = false;
 	bool isPause = false;

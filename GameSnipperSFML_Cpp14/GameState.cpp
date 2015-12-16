@@ -218,6 +218,7 @@ void GameState::Update()
 	}
 
 
+	//this->enableDebug();
 
 	gameContext->context->window.display();
 
@@ -244,6 +245,30 @@ void GameState::Update()
 void GameState::Terminate()
 {
 	terminate = true;
+}
+
+void GameState::enableDebug()
+{
+	for (b2Body* b = gameContext->world->GetBodyList(); b; b = b->GetNext()) {
+
+		b2Shape::Type t = b->GetFixtureList()->GetType();
+		if (t == b2Shape::e_polygon)
+		{
+			b2PolygonShape* s = (b2PolygonShape*)b->GetFixtureList()->GetShape();
+			sf::ConvexShape convex;
+			int vertextCount = s->GetVertexCount();
+			convex.setPointCount(vertextCount);
+			convex.setFillColor(sf::Color(255, 255, 0, 128));
+
+			convex.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
+
+			for (int i = 0; i < vertextCount; i++)
+				convex.setPoint(i, sf::Vector2f(s->GetVertex(i).x, s->GetVertex(i).y));
+
+
+			gameContext->context->window.draw(convex);
+		}
+	}
 }
 
 void GameState::StartNextLevel()

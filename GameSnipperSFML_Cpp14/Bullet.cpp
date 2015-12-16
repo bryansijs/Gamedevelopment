@@ -21,7 +21,7 @@ Bullet::Bullet(GameObjectContainer * gameObjectContainer, std::map<std::string, 
 
 	int x = std::stoi(properties["x"]);
 	int y = std::stoi(properties["y"]);
-	this->setPosition(x, y);
+	this->setPosition(x -16, y -16);
 	this->setSize(8, 8);
 	this->createBoxDynamic(*world);
 	this->getBody()->SetBullet(true);
