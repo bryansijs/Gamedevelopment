@@ -1,4 +1,5 @@
 #include "stdafx.h"
+
 #include "GameState.h"
 #include "StateManager.h"
 #include "KeyMapping.h"
@@ -11,11 +12,19 @@
 #include "PlayerActions.h"
 #include "LoseState.h"
 #include "MenuState.h"
+#include "square.h"
+#include "JSConsole.h"
+
 #include <iterator>
 #include "DebugBox2D.h"
 #include <Box2D\Box2D.h>
 #include <Box2D\Common\b2Draw.h>
-DebugBox2D fooDrawInstance;
+
+#include <Awesomium/WebCore.h>
+#include <Awesomium/BitmapSurface.h>
+#include <Awesomium/STLHelpers.h>
+#include <Awesomium/WebString.h>
+
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager)
 {
 	maincontext = context;
@@ -24,15 +33,16 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 
 	gameContext = new GameContext(context);
 
+	// Awesomium init
+	gameContext->web_core = context->web_core;
+	gameContext->webView = gameContext->web_core->CreateWebView(960, 640);
+
+	Loading();
+
 	playerActions = new PlayerActions(gameContext->player);
 
 	this->stateManager = stateManager;
 	this->levelManager = levelmanager;
-
-
-
-
-
 	//in constructor, usually
 
 	this->gameContext->world->SetDebugDraw(&fooDrawInstance);
@@ -56,9 +66,7 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
 
-
-
-
+	DoneLoading();
 
 	gameContext->view.reset(rect);
 	gameContext->context->window.setView(gameContext->view);
@@ -96,9 +104,6 @@ void GameState::DestroyGameObjects()
 
 void GameState::DebugBodies()
 {
-
-
-
 	for (b2Body* b = gameContext->world->GetBodyList(); b; b = b->GetNext()) {
 
 		b2Shape::Type t = b->GetFixtureList()->GetType();
@@ -114,14 +119,9 @@ void GameState::DebugBodies()
 
 			for (int i = 0; i < vertextCount; i++)
 				convex.setPoint(i, sf::Vector2f(s->GetVertex(i).x, s->GetVertex(i).y));
-
-
 			gameContext->context->window.draw(convex);
 		}
 	}
-
-
-
 }
 
 void GameState::Update()
@@ -314,5 +314,75 @@ void GameState::MenuEnd(int option)
 
 }
 
+void GameState::Loading()
+{
+	gameContext->loading = true;
 
+	GetAd();
 
+	ReloadUI("file:///Resources/menuHTML/loading.html");
+	CreateTexture();
+	DrawUI();
+}
+
+void GameState::DoneLoading()
+{
+	ReloadUI("file:///Resources/menuHTML/doneLoading.html");
+	CreateTexture();
+	DrawUI();
+
+	while (gameContext->loading)
+	{
+		while (gameContext->context->window.pollEvent(gameContext->event)) {
+			if (gameContext->event.type == sf::Event::KeyPressed)
+			{
+				gameContext->loading = false;
+			}
+		}
+	}
+}
+
+void GameState::ReloadUI(char const* path)
+{
+	Awesomium::WebURL url(Awesomium::WSLit(path));
+	gameContext->webView->LoadURL(url);
+	gameContext->webView->SetTransparent(true);
+
+	while (gameContext->webView->IsLoading())
+	{
+		gameContext->web_core->Update();
+	}
+
+	Sleep(100);
+	gameContext->web_core->Update();
+}
+
+void GameState::DrawUI()
+{
+	sf::Sprite ui(gameContext->texture);
+	gameContext->texture.update(gameContext->pixels);
+	gameContext->context->window.draw(ui);
+	gameContext->context->window.display();
+}
+
+void GameState::CreateTexture()
+{
+	gameContext->surface = static_cast<Awesomium::BitmapSurface*>(gameContext->webView->surface());
+
+	gameContext->texture.create(960, 640);
+	gameContext->pixels = new sf::Uint8[gameContext->context->window.getSize().x * gameContext->context->window.getSize().y * 4];
+
+	const unsigned char* tempBuffer = gameContext->surface->buffer();
+
+	for (register int i = 0; i < 960 * 640 * 4; i += 4) {
+		gameContext->pixels[i] = tempBuffer[i + 2];
+		gameContext->pixels[i + 1] = tempBuffer[i + 1];
+		gameContext->pixels[i + 2] = tempBuffer[i];
+		gameContext->pixels[i + 3] = tempBuffer[i + 3];
+	}
+}
+
+void GameState::GetAd()
+{
+	
+}

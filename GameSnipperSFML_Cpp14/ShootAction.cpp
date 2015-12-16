@@ -34,21 +34,21 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 		if (direction == "move-up")
 		{
 			x = player->getBody()->GetPosition().x + 12;
-			y = player->getBody()->GetPosition().y + 2;
+			y = player->getBody()->GetPosition().y + 5;
 		}
 		if (direction == "move-down")
 		{
 			x = player->getBody()->GetPosition().x + 12;
-			y = player->getBody()->GetPosition().y + 26;
+			y = player->getBody()->GetPosition().y + 29;
 		}
 		if (direction == "move-left")
 		{
-			x = player->getBody()->GetPosition().x + 2;
+			x = player->getBody()->GetPosition().x + 5;
 			y = player->getBody()->GetPosition().y + 12;
 		}
 		if (direction == "move-right")
 		{
-			x = player->getBody()->GetPosition().x + 26;
+			x = player->getBody()->GetPosition().x + 29;
 			y = player->getBody()->GetPosition().y + 12;
 		}
 
