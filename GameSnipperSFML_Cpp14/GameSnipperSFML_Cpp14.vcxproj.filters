@@ -450,6 +450,9 @@
     <ClInclude Include="StoryTile.h">
       <Filter>Header Files\Model\GameTiles</Filter>
     </ClInclude>
+    <ClInclude Include="DiscoverTile.h">
+      <Filter>Header Files\Model\GameTiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -692,6 +695,9 @@
     <ClCompile Include="StoryTile.cpp">
       <Filter>Source Files\Model\GameTiles</Filter>
     </ClCompile>
+    <ClCompile Include="DiscoverTile.cpp">
+      <Filter>Source Files\Model\GameTiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\levels\Level_New.json">
@@ -715,6 +721,7 @@
     <None Include="Resources\key-mapping.json" />
     <None Include="Resources\menuHTML\lose.html" />
     <None Include="Resources\menuHTML\win.html" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameSnipperSFML_Cpp14.rc">

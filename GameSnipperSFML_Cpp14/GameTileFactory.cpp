@@ -54,3 +54,8 @@ GameObject* GameTileFactory::CreateStory(std::map<std::string, std::string>& pro
 	GameObject* obj = new StoryTile(gameObjectContainer, properties, world);
 	return obj;
 }
+
+GameObject * GameTileFactory::CreateDiscovery(std::map<std::string, std::string>& properties, GameObjectContainer * gameObjectContainer, b2World * world)
+{
+	return nullptr;
+}

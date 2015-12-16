@@ -75,6 +75,8 @@ public:
 
 	GameObjectContainer* getGameObjectContainer() { return this->gameObjectContainer; }
 
+	void addDiscoverdLayer(int number) { DiscoverdLayers.push_back(number); };
+
 	sf::Vector2f GetViewPortPosition();
 private:
 	bool doEvents = true;
@@ -89,6 +91,8 @@ private:
 
 	int viewPortX = 0;
 	int viewPortY = 0;
+
+	std::vector<int> DiscoverdLayers;
 
 	GameObjectContainer* gameObjectContainer;
 

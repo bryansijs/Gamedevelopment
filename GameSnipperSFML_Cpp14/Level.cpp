@@ -10,6 +10,7 @@ Level::Level()
 Level::Level(GameObjectContainer* gameObjectContainer)
 {
 	this->gameObjectContainer = gameObjectContainer;
+	this->DiscoverdLayers.push_back(0);
 }
 
 Level::~Level()
