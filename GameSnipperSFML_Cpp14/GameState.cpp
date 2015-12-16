@@ -196,7 +196,7 @@ void GameState::Update()
 		gameContext->player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	}
 
-DebugBodies();
+//DebugBodies();
 
 
 

@@ -32,8 +32,8 @@ void BaseEnemy::setProperties(std::map<std::string, std::string>& properties)
 	widht = std::stoi(properties["width"]);
 	height = std::stoi(properties["height"]);
 
-	this->seeLenght = (properties.count("seeLenght")) ? std::stoi(properties["seeLenght"]) : 250;
-	this->seeAngle = (properties.count("seeAngle")) ? std::stoi(properties["seeAngle"]) : 100;
+	this->seeLength = (properties.count("seeLength")) ? std::stoi(properties["seeLength"]) : 250;
+	this->seeWidth = (properties.count("seeWidth")) ? std::stoi(properties["seeWidth"]) : 100;
 
 	this->setPosition(x, y);
 	this->setSize(widht, height);
@@ -43,136 +43,97 @@ void BaseEnemy::setProperties(std::map<std::string, std::string>& properties)
 
 void BaseEnemy::CreateLineOfSight()
 {
-	this->myFixtureDef = new b2FixtureDef();
-	//Laten we een Line  of sight maken. 
-	this->los = new b2BodyDef();
-	this->convex = new sf::ConvexShape{};
-	this->convex->setPointCount(3);
+	this->lineOfSightFixtureDef = new b2FixtureDef();
+	this->lineOfSightBodyDef = new b2BodyDef();
+	this->lineOfSightConvex = new sf::ConvexShape{};
+	this->lineOfSightConvex->setPointCount(3);
 
-	los->position = this->getBody()->GetPosition();
-	this->los->type = b2_dynamicBody;
-	this->m_body = this->world->CreateBody(los);
+	lineOfSightBodyDef->position = this->getBody()->GetPosition();
+	this->lineOfSightBodyDef->type = b2_dynamicBody;
+	this->lineOfSightBody = this->world->CreateBody(lineOfSightBodyDef);
+
+	vertices[0].Set(16, 16);
+	vertices[1].Set(seeWidth, seeLength);
+	vertices[2].Set(-seeWidth, seeLength);
 	CreateVectors();
 
-
-	myFixtureDef->shape = &chain;
-	myFixtureDef->density = 100;
-	myFixtureDef->friction = 0.3f;
-	myFixtureDef->isSensor = true;
-	myFixture  = m_body->CreateFixture(myFixtureDef);
+	lineOfSightFixtureDef->shape = &lineOfSightShape;
+	lineOfSightFixtureDef->density = 100;
+	lineOfSightFixtureDef->friction = 0.3f;
+	lineOfSightFixtureDef->isSensor = true;
+	lineOfSightBody->CreateFixture(lineOfSightFixtureDef);
 }
 
 void BaseEnemy::CreateVectors()
 {
 	int b = this->getIndexY();
 
+
+	float desiredAngle;
 	switch (b)
 	{
 	case 0: {
-
-		vertices[0].Set(16, 16);
-		vertices[1].Set(seeAngle, seeLenght);
-		vertices[2].Set(-seeAngle, seeLenght);
+		desiredAngle = atan2f(0,0);
+		this->lineOfSightBody->SetTransform(this->getBody()->GetPosition(), desiredAngle);
+		convexVert[0].Set(16, 16);
+		convexVert[1].Set(seeWidth, seeLength);
+		convexVert[2].Set(-seeWidth, seeLength);
 	}	break;
 	case 1: {
-
-		vertices[0].Set(16, 16);
-		vertices[1].Set(-seeLenght, seeAngle);
-		vertices[2].Set(-seeLenght, -seeAngle);
+		desiredAngle = atan2f(seeLength * 2, 0);
+		convexVert[0].Set(16, 16);
+		convexVert[1].Set(-seeLength, seeWidth);
+		convexVert[2].Set(-seeLength, -seeWidth);
 	}	break;
 	case 2: {
-
-		vertices[0].Set(16, 16);
-		vertices[1].Set(seeLenght, seeAngle);
-		vertices[2].Set(seeLenght, -seeAngle);
+		desiredAngle = atan2f(-seeLength * 2, 0);
+		convexVert[0].Set(16, 16);
+		convexVert[1].Set(seeLength, seeWidth);
+		convexVert[2].Set(seeLength, -seeWidth);
 	}	break;
 	case 3: {
-
-		vertices[0].Set(16, 16);
-		vertices[1].Set(-seeAngle, -seeLenght);
-		vertices[2].Set(seeAngle, -seeLenght);
+		desiredAngle = atan2f(0, -seeLength *2);
+	
+		convexVert[0].Set(16, 16);
+		convexVert[1].Set(-seeWidth, -seeLength);
+		convexVert[2].Set(seeWidth, -seeLength);
 	}	break;
 
 
 	default:
 		break;
 	}
-
-
-
-	this->chain.Set(this->vertices, 3);
-
-	//
-	if (m_body->GetFixtureList() != nullptr) {
-
-
-		m_body->DestroyFixture(myFixture);
-
-		myFixtureDef->shape = &chain;
-		myFixtureDef->density = 100;
-		myFixtureDef->friction = 0.3f;
-		myFixtureDef->isSensor = true;
-		myFixture =	m_body->CreateFixture(myFixtureDef);
-	}
-
-
-
+	
+	this->lineOfSightBody->SetTransform(this->getBody()->GetPosition(), desiredAngle);
+	this->lineOfSightShape.Set(this->vertices, 3);
 }
 
-void BaseEnemy::AddPlayer()
-{
-	if (this->player == nullptr) {
 
-		for (b2Body * b = world->GetBodyList(); b != NULL; b = b->GetNext()) {
-			GameObject* wrapper = reinterpret_cast<GameObject*>(b->GetUserData());
-			if (dynamic_cast<Player*>(wrapper))
-			{
-				this->player = dynamic_cast<Player*>(wrapper);
-				break;
-			}
-		}
-	}
+void BaseEnemy::CreateVisibleLine()
+{
+	this->lineOfSightConvex->setFillColor(sf::Color(255, 129, 0, 128));
+	this->lineOfSightConvex->setPosition(sf::Vector2f(lineOfSightBody->GetPosition().x, lineOfSightBody->GetPosition().y));
+
+	for (int i = 0; i < 3; i++)
+		this->lineOfSightConvex->setPoint(i, sf::Vector2f(convexVert[i].x, convexVert[i].y));
 }
 
 void BaseEnemy::Update()
 {
-	if (this->player == nullptr)
-		AddPlayer();
-
-
-	this->los->position = this->getBody()->GetPosition();
-	this->m_body->SetTransform(los->position, 0);
-
-	CreateVectors();
-
-	this->convex->setFillColor(sf::Color(255, 129, 0, 128));
-	this->convex->setPosition(sf::Vector2f(m_body->GetPosition().x, m_body->GetPosition().y));
-
-	b2PolygonShape* s = (b2PolygonShape*)m_body->GetFixtureList()->GetShape();
-	int vertextCount = s->GetVertexCount();
-	this->convex->setPointCount(vertextCount);
-
-	for (int i = 0; i < vertextCount; i++)
-		this->convex->setPoint(i, sf::Vector2f(s->GetVertex(i).x, s->GetVertex(i).y));
-
-
-
-	for (b2ContactEdge* ce = m_body->GetContactList(); ce; ce = ce->next)
+	this->CreateVectors();
+	this->CreateVisibleLine();
+	
+	for (b2ContactEdge* ce = lineOfSightBody->GetContactList(); ce; ce = ce->next)
 	{
-		std::cout << "stuff" << std::endl;
 		b2Contact* c = ce->contact;
-
 		GameObject* obj = static_cast<GameObject*>(ce->other->GetUserData());
 		if (dynamic_cast<Player*>(obj))
 		{
 			if (c->IsTouching())
-				std::cout << "Tough of red" << std::endl;
-			//this->convex->setFillColor(sf::Color(250, 0, 0, 128));
+				this->lineOfSightConvex->setFillColor(sf::Color(250, 0, 0, 128));
 		}
 
 	}
-
-
 }
 
 
