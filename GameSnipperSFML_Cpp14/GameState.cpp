@@ -158,9 +158,12 @@ void GameState::Update()
 					gameContext->gameSpeedMultiplier++;
 				}
 
-				if (Input::GetKeyDown("Substract"))
+				if (Input::GetKeyDown("Subtract"))
 				{
-					gameContext->gameSpeedMultiplier--;
+					if (gameContext->gameSpeedMultiplier > 1)
+					{
+						gameContext->gameSpeedMultiplier--;
+					}
 				}
 
 				if (Input::GetKeyDown("K")) {
