@@ -96,6 +96,46 @@ void MenuActions::ShowLevels()
 	}
 }
 
+void MenuActions::ShowControls()
+{
+	menuContext->inMenu = false;
+	menuContext->pathToFile = "file:///Resources/menuHTML/controls.html";
+	ReloadPage();
+
+	std::multimap<std::string, std::string> mapping = KeyMapping::GetMapping();
+
+	multimap<std::string, std::string>::iterator it;
+	for (it = mapping.begin(); it != mapping.end(); ++it)
+	{
+		std::vector<std::string>::iterator vit;
+		for (vit = editableMappings.begin(); vit != editableMappings.end(); ++vit)
+		{
+			if (it->first == *vit)
+			{
+				std::string map = it->first + "," + it->second;
+				addMapToMenu(menuContext->webView, menuContext->context->web_core, map.c_str());
+			}
+		}
+	}
+}
+
+void MenuActions::addMapToMenu(WebView* webView, WebCore* web_core, const char* map)
+{
+	JSValue window = webView->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));
+
+	if (window.IsObject())
+	{
+		JSArray args;
+		WebString string = WebString::CreateFromUTF8(map, strlen(map) + 1);
+		JSValue val = JSValue(string);
+		args.Push(val);
+		window.ToObject().Invoke(WSLit("addMap"), args);
+	}
+
+	Sleep(50);
+	web_core->Update();
+}
+
 void MenuActions::addLevelToMenu(WebView* webView, WebCore* web_core, const char* naam)
 {
 	JSValue window = webView->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));

@@ -22,6 +22,7 @@ public:
 	void ShowIntruction();
 	void BackToMenu();
 	void ShowLevels();
+	void ShowControls();
 
 	void NavigateUp();
 	void NavigateDown();
@@ -33,6 +34,7 @@ public:
 	void SwitchToDown();
 
 	void addLevelToMenu(Awesomium::WebView* webView, Awesomium::WebCore* web_core, const char* naam);
+	void addMapToMenu(Awesomium::WebView* webView, Awesomium::WebCore* web_core, const char* map);
 	void callDirectJSFunction(Awesomium::WebView* webView, Awesomium::WebCore* web_core, int currentLevel);
 	void CallLevelEditMenuFunction(Awesomium::WebView* webView, Awesomium::WebCore* web_core, std::string action);
 
@@ -48,7 +50,8 @@ private:
 		{ 2, &MenuActions::ShowLevels },
 		{ 3, &MenuActions::ShowIntruction },
 		{ 4, &MenuActions::ShowAbout },
-		{ 5, &MenuActions::ExitGame }
+		{ 5, &MenuActions::ShowControls },
+		{ 6, &MenuActions::ExitGame },
 	};
 
 	std::vector<void(MenuActions::*)()> activeActions;
@@ -61,5 +64,14 @@ private:
 		{ "switch-down", &MenuActions::SwitchToDown },
 		{ "enter", &MenuActions::NavigateComfirm },
 		{ "escape", &MenuActions::BackToMenu }
+	};
+
+	std::vector<std::string> editableMappings = {
+		{ "move-up" },
+		{ "move-down" },
+		{ "move-left" },
+		{ "move-right" },
+		{ "use" },
+		{ "shoot" }
 	};
 };
