@@ -7,7 +7,7 @@ public:
 	NormalDrawBehaviour(GameObject* gameObject, int refreshRate, std::string textureURL);
 	~NormalDrawBehaviour();
 
-	void Draw(sf::RenderWindow *window) override;
+	void Draw(sf::RenderWindow *window, sf::Vector2f viewPortPosition) override;
 	sf::Sprite getCurrentImage();
 };
 

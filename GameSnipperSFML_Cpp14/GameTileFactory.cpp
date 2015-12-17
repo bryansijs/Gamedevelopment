@@ -3,6 +3,7 @@
 #include "StartTile.h"
 #include "EndTile.h"
 #include "WarpTile.h"
+#include "StoryTile.h"
 #include <Box2D\Box2D.h>
 
 GameTileFactory::GameTileFactory()
@@ -46,5 +47,10 @@ GameObject* GameTileFactory::CreateWarp(std::map<std::string, std::string>& prop
 	x = std::stoi(properties["x"]);
 	y = std::stoi(properties["y"]);
 	obj->setPosition(x, y);
+	return obj;
+}
+
+GameObject* GameTileFactory::CreateStory(std::map<std::string, std::string>& properties, GameObjectContainer* gameObjectContainer, b2World* world) {
+	GameObject* obj = new StoryTile(gameObjectContainer, properties, world);
 	return obj;
 }

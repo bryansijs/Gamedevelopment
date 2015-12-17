@@ -2,12 +2,15 @@
 #include "PlayerActions.h"
 
 #include <vector>
-#include "Time.h"
 #include "Player.h"
 #include "DrawBehaviour.h"
 #include "GameObjectContainer.h"
 #include "KeyMapping.h"
 #include "GameObject.h"
+
+#include "Time.h"
+#include "StorylineManager.h"
+
 
 PlayerActions::PlayerActions(Player *player)
 {
@@ -32,9 +35,9 @@ void PlayerActions::SetWorld(b2World * world)
 	this->world = world;
 }
 
-void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys)
+void PlayerActions::ProcessActions()
 {
-	activeKeys = newActiveKeys;
+	bool standStill = true;
 
 	std::map<std::string, void(PlayerActions::*)()>::iterator it;
 
@@ -50,15 +53,23 @@ void PlayerActions::ProcessActions(std::vector<std::string> &newActiveKeys)
 					activeActions.push_back(it->second);
 				}
 			}
+
+			if (map.find("move") != std::string::npos)
+			{
+				standStill = false;
+			}
 		}
 	}
+
+	if (standStill)
+		StandStill();
 
 	ExecuteActions();
 }
 
 void PlayerActions::ExecuteActions()
 {
-	std::vector<void(PlayerActions::*)()>::iterator it;
+	vector<void(PlayerActions::*)()>::iterator it;
 
 	for (it = activeActions.begin(); it != activeActions.end(); ++it)
 	{
@@ -66,11 +77,12 @@ void PlayerActions::ExecuteActions()
 		(this->*function)();
 	}
 
+
 	if (resetMove)
 	{
 		moveAction->Reset();
 	}
-
+	
 	if (Input::GetKeyUp(KeyMapping::GetKey("use")))
 	{
 		useAction = true;
@@ -82,11 +94,14 @@ void PlayerActions::ExecuteActions()
 	}
 
 	activeActions.clear();
+
 	resetMove = true;
 }
 
 void PlayerActions::Move()
 {
+	StandStillTimerReset();
+
 	resetMove = false;
 	std::vector<std::string> directions;
 
@@ -105,12 +120,15 @@ void PlayerActions::Move()
 
 void PlayerActions::Shoot()
 {
+	StandStillTimerReset();
 	shootAction.Shoot(drawContainer, moveContainer, gameObjectContainer, world, player, direction);
 }
 
 
 void PlayerActions::Use()
 {
+	StandStillTimerReset();
+
 	if (useAction)
 	{
 		//int b = this->player->getgameObjectContainer()->getObjects().size();
@@ -139,7 +157,35 @@ void PlayerActions::Use()
 				}
 			}
 		}
-
 		useAction = false;
 	}
+}
+
+void PlayerActions::StandStill()
+{
+	player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
+
+	if (StandStillTimer > 0)
+	{		
+		StandStillTimer -= Time::deltaTime;
+		return;
+	}
+
+	switch (notificationSwitch)
+	{
+	case 0:
+		StorylineManager::Add("What are you waiting for?");
+		notificationSwitch++;
+		break;
+	case 1:
+		StorylineManager::Add("I'm still waiting!");
+		notificationSwitch++;
+		break;
+	case 2:
+		StorylineManager::Add("I'm bored...");
+		notificationSwitch = 0;
+		break;
+	}
+
+	StandStillTimerReset();
 }

@@ -22,11 +22,13 @@ private:
 	GameObject* CreateStart(std::map<std::string, std::string>& properties, GameObjectContainer* gameObjectContainer, b2World* world);
 	GameObject* CreateWarp(std::map<std::string, std::string>& properties, GameObjectContainer* gameObjectContainer, b2World* world);
 	GameObject* CreateEnd(std::map<std::string, std::string>& properties, GameObjectContainer* gameObjectContainer, b2World* world);
+	GameObject* CreateStory(std::map<std::string, std::string>& properties, GameObjectContainer* gameObjectContainer, b2World* world);
 
 	std::map<std::string, GameObject*(GameTileFactory::*)(std::map<std::string, std::string>&,  GameObjectContainer*, b2World*)> possibleTiles = {
 		{ "StartTile", &GameTileFactory::CreateStart },
 		{ "Warp", &GameTileFactory::CreateWarp },
 		{ "End", &GameTileFactory::CreateEnd },
+		{ "StoryTile", &GameTileFactory::CreateStory },
 	};
 };
 

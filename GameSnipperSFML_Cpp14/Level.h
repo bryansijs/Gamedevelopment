@@ -8,10 +8,12 @@
 #include "TileSet.h"
 #include "StartTile.h"
 #include "EndTile.h"
+#include "StoryTile.h"
 #include "Time.h"
 #include "Context.h"
 #include "StateManager.h"
 #include "LevelManager.h"
+#include "StorylineManager.h"
 
 class Level
 {
@@ -23,6 +25,7 @@ public:
 	Level(GameObjectContainer* gameObjectContainer);
 	StartTile* start;
 	EndTile* end;
+	StoryTile* story;
 
 
 	std::vector<GameObject*> game_objects;
@@ -46,6 +49,7 @@ public:
 
 	void Start(GameObject* player, sf::Vector2u* size);
 	void End(Context* context, StateManager* stateManager, LevelManager* levelManager);
+	void Story(StorylineManager* storylineManager);
 	void setLayerVisibility(int layerIndex, bool isVisible);
 	bool getDoEvents() { return doEvents; }
 	int getViewPortX() { return viewPortX; }

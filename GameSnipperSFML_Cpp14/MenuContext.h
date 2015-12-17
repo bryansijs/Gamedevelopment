@@ -2,12 +2,11 @@
 
 #include <Awesomium/WebCore.h>
 #include <Awesomium/BitmapSurface.h>
-#include <Awesomium/STLHelpers.h>
 
 #include <SFML/Audio.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Texture.hpp>
-#include <SFML/Graphics/Sprite.hpp>
+#include "MenuActions.h"
 
 class Context;
 class StateManager;
@@ -30,7 +29,6 @@ public:
 	StateManager* stateManager;
 
 	Awesomium::WebView* webView;
-	Awesomium::WebCore* web_core;
 	Awesomium::BitmapSurface* surface;
 
 	sf::Event event;
