@@ -172,9 +172,8 @@ void GameState::Update()
 	if (gameContext->player->getHealth() <= 0)
 	{
 		sf::Image screenshot = gameContext->context->window.capture();
-		screenshot.saveToFile("./Resources/menuHTML/images/hold.png");
 
-		LoseState* loseState = new LoseState(gameContext->context, stateManager, levelManager);
+		LoseState* loseState = new LoseState(gameContext->context, stateManager, levelManager, screenshot);
 		stateManager->AddState(loseState);
 		stateManager->StartNextState();
 	}

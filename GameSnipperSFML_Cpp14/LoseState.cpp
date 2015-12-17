@@ -17,11 +17,12 @@
 
 using namespace Awesomium;
 
-LoseState::LoseState(Context* context, StateManager* stateManager, LevelManager* levelManager)
+LoseState::LoseState(Context* context, StateManager* stateManager, LevelManager* levelManager, sf::Image screenshot)
 {
 	loseContext = new LoseContext(context);
 	this->stateManager = stateManager;
 	this->levelManager = levelManager;
+	this->screenshot = screenshot;
 
 	sf::View view = loseContext->context->window.getView();
 	view.setCenter(480, 320);
@@ -87,8 +88,10 @@ void LoseState::Update()
 	}
 
 	sf::Sprite ui(loseContext->texture);
-	loseContext->texture.update(loseContext->pixels);
+	loseContext->texture.update(screenshot);
+	loseContext->context->window.draw(ui);
 
+	loseContext->texture.update(loseContext->pixels);
 	loseContext->context->window.draw(ui);
 	loseContext->context->window.display();
 }

@@ -29,9 +29,8 @@ void EndTile::setProperties(std::map<std::string, std::string>& properties)
 void EndTile::doAction()
 {
 	sf::Image screenshot = context->window.capture();
-	screenshot.saveToFile("./Resources/menuHTML/images/hold.png");
 
-	WinState* winState = new WinState(context, stateManager, levelManager);
+	WinState* winState = new WinState(context, stateManager, levelManager, screenshot);
 	stateManager->AddState(winState);
 	stateManager->StartNextState();
 }

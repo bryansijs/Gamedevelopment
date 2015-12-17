@@ -17,8 +17,9 @@ private:
 	Context* context;
 	LoseContext* loseContext;
 	LevelManager* levelManager;
+	sf::Image screenshot;
 public:
-	LoseState(Context* context, StateManager* stateManager, LevelManager* levelManager);
+	LoseState(Context* context, StateManager* stateManager, LevelManager* levelManager, sf::Image screenshot);
 	~LoseState();
 
 	void Update();

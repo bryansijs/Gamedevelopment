@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_077A0E4E3ACB4CF88E5C43A0CD205E22"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_0B086DD2A8DE4E039A4915257F1E4C8F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -28,18 +34,6 @@
         "Entry"
         {
         "MsmKey" = "8:_120F3EC4D7E0462DA8C182219705AECF"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_189F2E3465564C6391451668F20F902E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_19AF8E26600B4067836E22D8EEBAB405"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -75,6 +69,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_26A3FB2D02144A8E9DD32C748656A93B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_2722B39F32144093AB1C92F4A71F5648"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -82,18 +82,6 @@
         "Entry"
         {
         "MsmKey" = "8:_28727D0574FB4047B5225BFAFB7D82A5"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_29DC962CCC3E4407AF8BFA3687543EAF"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2D1EA22BA4D64DDE975FC7882443E5E2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -111,13 +99,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_343C658B63C24F2E9AEC409C28C66AC2"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_3A35CA949FBB43DAA768BA6539F8AB98"
+        "MsmKey" = "8:_3395D345CB504A10873FE0EE873B6609"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -130,18 +112,6 @@
         "Entry"
         {
         "MsmKey" = "8:_3E12EA93064C40CCA0C0131656242FD0"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_406635E1C1D745D58DA6F8A694A83B68"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_419973F0C44D43B2B51B02E2058D9043"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -177,12 +147,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_4D3856A9DEB247DC9E224C837227439C"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_500158DF7B9E45D0BB7DD016ADDD8FA8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -190,6 +154,12 @@
         "Entry"
         {
         "MsmKey" = "8:_516E9C390BED4948A8BCE99B42D3F7F7"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_55B9963F321F4AF7839DADA2464F26AE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -207,7 +177,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_5A58228FFF8D4AC79FD8AFA64D1CF0BE"
+        "MsmKey" = "8:_5A5A74FAEC364346B72D11FB12AD20FB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5C15A0174E2B4F349D979DFAF0A12D8C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -219,13 +195,25 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_6017FA4FE18344D6A130006AB7DEC994"
+        "MsmKey" = "8:_6584F3A493244E82A29F588912EE08D3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_686C39CFA5E54E0A8445D1E2E8433744"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_68C855763E20449C9303ACD5E5E04A25"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_68CFE87DEE9C430EBE35ABEA988404B3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -243,19 +231,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_6AF149835A9846CE96AE767E8B64CAB7"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_6B7410B0FB084A53B98AF82E015B02DE"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6D0924214DBB4E29AACC332911B0D753"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -303,13 +279,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_7F6ED882B64348D4ADBDB51E66A70716"
+        "MsmKey" = "8:_7F4FADED6CCC45FE8A13894E163AED75"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_831D14EFAC254C2388FCE741181057B8"
+        "MsmKey" = "8:_7F6ED882B64348D4ADBDB51E66A70716"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -327,13 +303,19 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_894B53C011DA4DD78DAE0F808284CE00"
+        "MsmKey" = "8:_86D1C58DFABB4FF284C3CD4576C3740F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_8AF7EA6EDDF449E8BC0B815D1A3B4E2A"
+        "MsmKey" = "8:_87C19794828D4E70AEBB324006CFA134"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_894B53C011DA4DD78DAE0F808284CE00"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -345,31 +327,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_8BA16CDF064C49A094D6F48B5992275C"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8DEDB732D4744BEE84698295172D6412"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_8F63E3A950D34E7FB1A7B743B387725A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_916F281DB64545298D39CB77A262FC7A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_91F0332630744153A28ED112EB181EB5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -387,13 +345,25 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_974619C5A57648F7B6D903E788B8811B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_98DCBF9EEC6E4A1784E44EAD3F622E83"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_9E18EAD0517640E5AB2739F464731581"
+        "MsmKey" = "8:_9FCE5E279AF2455CBB0A10FBEE89F7F2"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A2048AA4D81B4268A219C40F9993B277"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -411,13 +381,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A386DDD4CD9049F29332AC2EB3EF4C52"
+        "MsmKey" = "8:_A9841F00B12D4B14ABD24E8B80E918D9"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A9841F00B12D4B14ABD24E8B80E918D9"
+        "MsmKey" = "8:_AA645323C55D46788F51B0AFB23FBB8F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -441,7 +411,25 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_AE34004399C04B099C1BA6288C076FE8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_AEB01ED5FC93472689385DBCF89F46F9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B205FF56C26D4E6FACBEE19791A5884D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B363A7358684413AB43C509F3B294047"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -489,13 +477,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_BC9A2069B40D4E19A30F00BF62AEE623"
+        "MsmKey" = "8:_BE0D7AF2C4D54F28A531EA5371A3C541"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_BE0D7AF2C4D54F28A531EA5371A3C541"
+        "MsmKey" = "8:_BF2FDD4B7CE046C1A0B6350F74F7EEC1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -513,37 +501,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_C4B51EA3991F47A48AA5565996B40C1D"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_C68EF9B40D604469928635BEA5C1200E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_C863FE6278C94F1587A3EAA38E10CA48"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C977694923464989AC016072E7864168"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_CFF6C2BC37454154A65E7E7CE51C552F"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_D14A51DBAB71485FBC4B9DAAFC028C7B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -561,12 +525,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_DB4350A9271041AD998CA252E55F2998"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_DB85A460CFBF4B2E81FF29B9FF1A09FA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -574,6 +532,12 @@
         "Entry"
         {
         "MsmKey" = "8:_DCA4BE5CEE024AA2AE0FBC7487912F06"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DDBA14F9523B45C4BB8C1D193E5038AC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -591,19 +555,31 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_DFB011A10F1840F7AA5F5EDD4B88DE43"
+        "MsmKey" = "8:_DFB001F7D84A445784023F6717CE40BD"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E07253E26AC945D385235AEA2072FDF8"
+        "MsmKey" = "8:_E17845846C07418BA5D0CBE97FD63A74"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_E517FE7CC6A54E469995C05BE60FF292"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E57B985658324347A0BC234E3C366FCF"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E90CE46842864F968E04DFA7EA6C17B0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -621,7 +597,19 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_ED8977FE28C44AE694F484280E416D3B"
+        "MsmKey" = "8:_F3D3CC95D6E547CF95FFEBC79BF47360"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F4C217EFA3534B448F07F9A820CF668B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F59DDFD1098B43D6B5D3551BB5118AAE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -646,6 +634,12 @@
         "Entry"
         {
         "MsmKey" = "8:_F8BCCCE48C594082BFA7627D96D000DE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FA48D88BC98F4202A6371EC8827DB56E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -714,15 +708,20 @@
             {
             "Enabled" = "11:TRUE"
             "PromptEnabled" = "11:TRUE"
-            "PrerequisitesLocation" = "2:1"
+            "PrerequisitesLocation" = "2:2"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6"
                     {
-                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
-                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    "Name" = "8:Microsoft .NET Framework 4.6 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Visual.C++.14.0.x86"
+                    {
+                    "Name" = "8:Visual C++ \"14\" Runtime Libraries (x86)"
+                    "ProductCode" = "8:Microsoft.Visual.C++.14.0.x86"
                     }
                 }
             }
@@ -747,6 +746,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_077A0E4E3ACB4CF88E5C43A0CD205E22"
+            {
+            "SourcePath" = "8:..\\Release\\avformat-53.dll"
+            "TargetName" = "8:avformat-53.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0B086DD2A8DE4E039A4915257F1E4C8F"
             {
             "SourcePath" = "8:..\\Debug\\Resources\\tiles\\Sci-Fi-Tiles_A4.png"
@@ -793,46 +812,6 @@
             "TargetName" = "8:ship.png"
             "Tag" = "8:"
             "Folder" = "8:_C24889D4750A4DDBA6A843CE302C37FD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_189F2E3465564C6391451668F20F902E"
-            {
-            "SourcePath" = "8:..\\Debug\\sfml-window-2.dll"
-            "TargetName" = "8:sfml-window-2.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_19AF8E26600B4067836E22D8EEBAB405"
-            {
-            "SourcePath" = "8:..\\Debug\\sfml-system-2.dll"
-            "TargetName" = "8:sfml-system-2.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -947,6 +926,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_26A3FB2D02144A8E9DD32C748656A93B"
+            {
+            "SourcePath" = "8:..\\Release\\GameSnipperSFML_Cpp14.pdb"
+            "TargetName" = "8:GameSnipperSFML_Cpp14.pdb"
+            "Tag" = "8:"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2722B39F32144093AB1C92F4A71F5648"
             {
             "SourcePath" = "8:..\\Debug\\Resources\\tiles\\scifiexample01.png"
@@ -973,46 +972,6 @@
             "TargetName" = "8:Z18-TileD.png"
             "Tag" = "8:"
             "Folder" = "8:_61C53A18D1E748E39039CF29A6EDB765"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_29DC962CCC3E4407AF8BFA3687543EAF"
-            {
-            "SourcePath" = "8:..\\Debug\\debug.log"
-            "TargetName" = "8:debug.log"
-            "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2D1EA22BA4D64DDE975FC7882443E5E2"
-            {
-            "SourcePath" = "8:..\\Debug\\awesomium.log"
-            "TargetName" = "8:awesomium.log"
-            "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1067,30 +1026,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_343C658B63C24F2E9AEC409C28C66AC2"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3395D345CB504A10873FE0EE873B6609"
             {
-            "SourcePath" = "8:..\\Debug\\GameSnipperSFML_Cpp14.pdb"
-            "TargetName" = "8:GameSnipperSFML_Cpp14.pdb"
-            "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3A35CA949FBB43DAA768BA6539F8AB98"
-            {
-            "SourcePath" = "8:..\\Debug\\Box2D.pdb"
-            "TargetName" = "8:Box2D.pdb"
+            "SourcePath" = "8:..\\Release\\awesomium_symbols.pdb"
+            "TargetName" = "8:awesomium_symbols.pdb"
             "Tag" = "8:"
             "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
@@ -1133,46 +1072,6 @@
             "TargetName" = "8:zGuus.json"
             "Tag" = "8:"
             "Folder" = "8:_8C1BEF8EC8A74939A79D08A8E9B12D79"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_406635E1C1D745D58DA6F8A694A83B68"
-            {
-            "SourcePath" = "8:..\\Debug\\avformat-53.dll"
-            "TargetName" = "8:avformat-53.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_419973F0C44D43B2B51B02E2058D9043"
-            {
-            "SourcePath" = "8:..\\Debug\\awesomium_symbols.pdb"
-            "TargetName" = "8:awesomium_symbols.pdb"
-            "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1287,26 +1186,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4D3856A9DEB247DC9E224C837227439C"
-            {
-            "SourcePath" = "8:..\\Debug\\sfml-network-2.dll"
-            "TargetName" = "8:sfml-network-2.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_500158DF7B9E45D0BB7DD016ADDD8FA8"
             {
             "SourcePath" = "8:..\\GameSnipperSFML_Cpp14\\Resources\\sprites\\paddle2.png"
@@ -1333,6 +1212,26 @@
             "TargetName" = "8:Z18-TileA3.png"
             "Tag" = "8:"
             "Folder" = "8:_61C53A18D1E748E39039CF29A6EDB765"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_55B9963F321F4AF7839DADA2464F26AE"
+            {
+            "SourcePath" = "8:..\\Release\\openal32.dll"
+            "TargetName" = "8:openal32.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1387,9 +1286,29 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5A58228FFF8D4AC79FD8AFA64D1CF0BE"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5A5A74FAEC364346B72D11FB12AD20FB"
             {
-            "SourcePath" = "8:..\\Debug\\sfml-audio-2.dll"
+            "SourcePath" = "8:..\\Release\\sfml-graphics-d-2.dll"
+            "TargetName" = "8:sfml-graphics-d-2.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5C15A0174E2B4F349D979DFAF0A12D8C"
+            {
+            "SourcePath" = "8:..\\Release\\sfml-audio-2.dll"
             "TargetName" = "8:sfml-audio-2.dll"
             "Tag" = "8:"
             "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
@@ -1427,10 +1346,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6017FA4FE18344D6A130006AB7DEC994"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6584F3A493244E82A29F588912EE08D3"
             {
-            "SourcePath" = "8:..\\Debug\\awesomium_process.exe"
-            "TargetName" = "8:awesomium_process.exe"
+            "SourcePath" = "8:..\\Release\\avutil-51.dll"
+            "TargetName" = "8:avutil-51.dll"
             "Tag" = "8:"
             "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
@@ -1453,6 +1372,46 @@
             "TargetName" = "8:Sci-Fi-Tiles_B.png"
             "Tag" = "8:"
             "Folder" = "8:_61C53A18D1E748E39039CF29A6EDB765"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_68C855763E20449C9303ACD5E5E04A25"
+            {
+            "SourcePath" = "8:..\\Release\\awesomium.dll"
+            "TargetName" = "8:awesomium.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_68CFE87DEE9C430EBE35ABEA988404B3"
+            {
+            "SourcePath" = "8:..\\Release\\awesomium_process.exe"
+            "TargetName" = "8:awesomium_process.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1507,52 +1466,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6AF149835A9846CE96AE767E8B64CAB7"
-            {
-            "SourcePath" = "8:..\\Debug\\awesomium.dll"
-            "TargetName" = "8:awesomium.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6B7410B0FB084A53B98AF82E015B02DE"
             {
             "SourcePath" = "8:..\\GameSnipperSFML_Cpp14\\Resources\\sprites\\bullet-red.png"
             "TargetName" = "8:bullet-red.png"
             "Tag" = "8:"
             "Folder" = "8:_C24889D4750A4DDBA6A843CE302C37FD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6D0924214DBB4E29AACC332911B0D753"
-            {
-            "SourcePath" = "8:..\\Debug\\GameSnipperSFML_Cpp14.ilk"
-            "TargetName" = "8:GameSnipperSFML_Cpp14.ilk"
-            "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1707,12 +1626,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7F6ED882B64348D4ADBDB51E66A70716"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7F4FADED6CCC45FE8A13894E163AED75"
             {
-            "SourcePath" = "8:..\\Debug\\Resources\\tiles\\Sci-Fi-Tiles_A1.png"
-            "TargetName" = "8:Sci-Fi-Tiles_A1.png"
+            "SourcePath" = "8:..\\Release\\sfml-window-d-2.dll"
+            "TargetName" = "8:sfml-window-d-2.dll"
             "Tag" = "8:"
-            "Folder" = "8:_61C53A18D1E748E39039CF29A6EDB765"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1727,12 +1646,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_831D14EFAC254C2388FCE741181057B8"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7F6ED882B64348D4ADBDB51E66A70716"
             {
-            "SourcePath" = "8:..\\Debug\\libGLESv2.dll"
-            "TargetName" = "8:libGLESv2.dll"
+            "SourcePath" = "8:..\\Debug\\Resources\\tiles\\Sci-Fi-Tiles_A1.png"
+            "TargetName" = "8:Sci-Fi-Tiles_A1.png"
             "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
+            "Folder" = "8:_61C53A18D1E748E39039CF29A6EDB765"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1787,12 +1706,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_894B53C011DA4DD78DAE0F808284CE00"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_86D1C58DFABB4FF284C3CD4576C3740F"
             {
-            "SourcePath" = "8:..\\GameSnipperSFML_Cpp14\\Resources\\sprites\\Player.png"
-            "TargetName" = "8:Player.png"
+            "SourcePath" = "8:..\\Release\\GameSnipperSFML_Cpp14.ipdb"
+            "TargetName" = "8:GameSnipperSFML_Cpp14.ipdb"
             "Tag" = "8:"
-            "Folder" = "8:_C24889D4750A4DDBA6A843CE302C37FD"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1807,12 +1726,32 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8AF7EA6EDDF449E8BC0B815D1A3B4E2A"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_87C19794828D4E70AEBB324006CFA134"
             {
-            "SourcePath" = "8:..\\Debug\\sfml-network-d-2.dll"
-            "TargetName" = "8:sfml-network-d-2.dll"
+            "SourcePath" = "8:..\\Release\\GameSnipperSFML_Cpp14.iobj"
+            "TargetName" = "8:GameSnipperSFML_Cpp14.iobj"
             "Tag" = "8:"
             "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_894B53C011DA4DD78DAE0F808284CE00"
+            {
+            "SourcePath" = "8:..\\GameSnipperSFML_Cpp14\\Resources\\sprites\\Player.png"
+            "TargetName" = "8:Player.png"
+            "Tag" = "8:"
+            "Folder" = "8:_C24889D4750A4DDBA6A843CE302C37FD"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1847,92 +1786,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8BA16CDF064C49A094D6F48B5992275C"
-            {
-            "SourcePath" = "8:..\\Debug\\sfml-audio-d-2.dll"
-            "TargetName" = "8:sfml-audio-d-2.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8DEDB732D4744BEE84698295172D6412"
-            {
-            "SourcePath" = "8:..\\GameSnipperSFML_Cpp14\\openal32.dll"
-            "TargetName" = "8:openal32.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8F63E3A950D34E7FB1A7B743B387725A"
             {
             "SourcePath" = "8:..\\GameSnipperSFML_Cpp14\\Resources\\menuHTML\\levels.html"
             "TargetName" = "8:levels.html"
             "Tag" = "8:"
             "Folder" = "8:_EA95DFE30D8A4B8FA6A7C39B3AB07B78"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_916F281DB64545298D39CB77A262FC7A"
-            {
-            "SourcePath" = "8:..\\Debug\\sfml-window-d-2.dll"
-            "TargetName" = "8:sfml-window-d-2.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_91F0332630744153A28ED112EB181EB5"
-            {
-            "SourcePath" = "8:..\\Debug\\xinput9_1_0.dll"
-            "TargetName" = "8:xinput9_1_0.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -1987,6 +1846,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_974619C5A57648F7B6D903E788B8811B"
+            {
+            "SourcePath" = "8:..\\Release\\sfml-graphics-2.dll"
+            "TargetName" = "8:sfml-graphics-2.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_98DCBF9EEC6E4A1784E44EAD3F622E83"
             {
             "SourcePath" = "8:..\\Debug\\Resources\\music\\title.ogg"
@@ -2007,10 +1886,30 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9E18EAD0517640E5AB2739F464731581"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9FCE5E279AF2455CBB0A10FBEE89F7F2"
             {
-            "SourcePath" = "8:..\\Debug\\avcodec-53.dll"
-            "TargetName" = "8:avcodec-53.dll"
+            "SourcePath" = "8:..\\Release\\libGLESv2.dll"
+            "TargetName" = "8:libGLESv2.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A2048AA4D81B4268A219C40F9993B277"
+            {
+            "SourcePath" = "8:..\\Release\\sfml-window-2.dll"
+            "TargetName" = "8:sfml-window-2.dll"
             "Tag" = "8:"
             "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
@@ -2067,12 +1966,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A386DDD4CD9049F29332AC2EB3EF4C52"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A9841F00B12D4B14ABD24E8B80E918D9"
             {
-            "SourcePath" = "8:..\\Debug\\awesomium_process.pdb"
-            "TargetName" = "8:awesomium_process.pdb"
+            "SourcePath" = "8:..\\Debug\\Resources\\tiles\\Sci-Fi-Tiles_A5.png"
+            "TargetName" = "8:Sci-Fi-Tiles_A5.png"
             "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
+            "Folder" = "8:_61C53A18D1E748E39039CF29A6EDB765"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2087,12 +1986,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A9841F00B12D4B14ABD24E8B80E918D9"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AA645323C55D46788F51B0AFB23FBB8F"
             {
-            "SourcePath" = "8:..\\Debug\\Resources\\tiles\\Sci-Fi-Tiles_A5.png"
-            "TargetName" = "8:Sci-Fi-Tiles_A5.png"
+            "SourcePath" = "8:..\\Release\\GameSnipperSFML_Cpp14.exe"
+            "TargetName" = "8:GameSnipperSFML_Cpp14.exe"
             "Tag" = "8:"
-            "Folder" = "8:_61C53A18D1E748E39039CF29A6EDB765"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2167,12 +2066,72 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AE34004399C04B099C1BA6288C076FE8"
+            {
+            "SourcePath" = "8:..\\Release\\sfml-network-d-2.dll"
+            "TargetName" = "8:sfml-network-d-2.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AEB01ED5FC93472689385DBCF89F46F9"
             {
             "SourcePath" = "8:..\\GameSnipperSFML_Cpp14\\Resources\\sprites\\floor.png"
             "TargetName" = "8:floor.png"
             "Tag" = "8:"
             "Folder" = "8:_C24889D4750A4DDBA6A843CE302C37FD"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B205FF56C26D4E6FACBEE19791A5884D"
+            {
+            "SourcePath" = "8:..\\Release\\inspector.pak"
+            "TargetName" = "8:inspector.pak"
+            "Tag" = "8:"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B363A7358684413AB43C509F3B294047"
+            {
+            "SourcePath" = "8:..\\Release\\sfml-audio-d-2.dll"
+            "TargetName" = "8:sfml-audio-d-2.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2327,12 +2286,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BC9A2069B40D4E19A30F00BF62AEE623"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BE0D7AF2C4D54F28A531EA5371A3C541"
             {
-            "SourcePath" = "8:..\\Debug\\sfml-system-d-2.dll"
-            "TargetName" = "8:sfml-system-d-2.dll"
+            "SourcePath" = "8:..\\GameSnipperSFML_Cpp14\\Resources\\key-mapping.json"
+            "TargetName" = "8:key-mapping.json"
             "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
+            "Folder" = "8:_52FD5B6EC5204150A103D6ABDDC76CE7"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2347,12 +2306,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BE0D7AF2C4D54F28A531EA5371A3C541"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BF2FDD4B7CE046C1A0B6350F74F7EEC1"
             {
-            "SourcePath" = "8:..\\GameSnipperSFML_Cpp14\\Resources\\key-mapping.json"
-            "TargetName" = "8:key-mapping.json"
+            "SourcePath" = "8:..\\Release\\xinput9_1_0.dll"
+            "TargetName" = "8:xinput9_1_0.dll"
             "Tag" = "8:"
-            "Folder" = "8:_52FD5B6EC5204150A103D6ABDDC76CE7"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2407,26 +2366,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C4B51EA3991F47A48AA5565996B40C1D"
-            {
-            "SourcePath" = "8:..\\Debug\\icudt.dll"
-            "TargetName" = "8:icudt.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C68EF9B40D604469928635BEA5C1200E"
             {
             "SourcePath" = "8:..\\Debug\\Resources\\menuHTML\\images\\bg.png"
@@ -2447,72 +2386,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C863FE6278C94F1587A3EAA38E10CA48"
-            {
-            "SourcePath" = "8:..\\Debug\\sfml-graphics-d-2.dll"
-            "TargetName" = "8:sfml-graphics-d-2.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C977694923464989AC016072E7864168"
-            {
-            "SourcePath" = "8:..\\Debug\\avutil-51.dll"
-            "TargetName" = "8:avutil-51.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CFF6C2BC37454154A65E7E7CE51C552F"
             {
             "SourcePath" = "8:..\\Debug\\Resources\\menuHTML\\images\\cat.png"
             "TargetName" = "8:cat.png"
             "Tag" = "8:"
             "Folder" = "8:_4F4DFB19F89042A9A86CFCB6B1B06D32"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D14A51DBAB71485FBC4B9DAAFC028C7B"
-            {
-            "SourcePath" = "8:..\\Debug\\GameSnipperSFML_Cpp14.exe"
-            "TargetName" = "8:GameSnipperSFML_Cpp14.exe"
-            "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2567,26 +2446,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DB4350A9271041AD998CA252E55F2998"
-            {
-            "SourcePath" = "8:..\\Debug\\inspector.pak"
-            "TargetName" = "8:inspector.pak"
-            "Tag" = "8:"
-            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DB85A460CFBF4B2E81FF29B9FF1A09FA"
             {
             "SourcePath" = "8:..\\Debug\\Resources\\music\\level1.ogg"
@@ -2613,6 +2472,26 @@
             "TargetName" = "8:1240753373019659800.png"
             "Tag" = "8:"
             "Folder" = "8:_61C53A18D1E748E39039CF29A6EDB765"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DDBA14F9523B45C4BB8C1D193E5038AC"
+            {
+            "SourcePath" = "8:..\\Release\\awesomium.log"
+            "TargetName" = "8:awesomium.log"
+            "Tag" = "8:"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2667,10 +2546,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DFB011A10F1840F7AA5F5EDD4B88DE43"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DFB001F7D84A445784023F6717CE40BD"
             {
-            "SourcePath" = "8:..\\Debug\\libEGL.dll"
-            "TargetName" = "8:libEGL.dll"
+            "SourcePath" = "8:..\\Release\\icudt.dll"
+            "TargetName" = "8:icudt.dll"
             "Tag" = "8:"
             "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
@@ -2687,10 +2566,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E07253E26AC945D385235AEA2072FDF8"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E17845846C07418BA5D0CBE97FD63A74"
             {
-            "SourcePath" = "8:..\\Debug\\awesomium_pak_utility.exe"
-            "TargetName" = "8:awesomium_pak_utility.exe"
+            "SourcePath" = "8:..\\Release\\sfml-system-2.dll"
+            "TargetName" = "8:sfml-system-2.dll"
             "Tag" = "8:"
             "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
@@ -2713,6 +2592,46 @@
             "TargetName" = "8:defeat.ogg"
             "Tag" = "8:"
             "Folder" = "8:_8923D7283B3947FFB8549E8B73CC3DD3"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E57B985658324347A0BC234E3C366FCF"
+            {
+            "SourcePath" = "8:..\\Release\\avcodec-53.dll"
+            "TargetName" = "8:avcodec-53.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E90CE46842864F968E04DFA7EA6C17B0"
+            {
+            "SourcePath" = "8:..\\Release\\libEGL.dll"
+            "TargetName" = "8:libEGL.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -2767,10 +2686,50 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ED8977FE28C44AE694F484280E416D3B"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F3D3CC95D6E547CF95FFEBC79BF47360"
             {
-            "SourcePath" = "8:..\\Debug\\sfml-graphics-2.dll"
-            "TargetName" = "8:sfml-graphics-2.dll"
+            "SourcePath" = "8:..\\Release\\awesomium_pak_utility.exe"
+            "TargetName" = "8:awesomium_pak_utility.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F4C217EFA3534B448F07F9A820CF668B"
+            {
+            "SourcePath" = "8:..\\Release\\sfml-network-2.dll"
+            "TargetName" = "8:sfml-network-2.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F59DDFD1098B43D6B5D3551BB5118AAE"
+            {
+            "SourcePath" = "8:..\\Release\\sfml-system-d-2.dll"
+            "TargetName" = "8:sfml-system-d-2.dll"
             "Tag" = "8:"
             "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
@@ -2853,6 +2812,26 @@
             "TargetName" = "8:Defeat.png"
             "Tag" = "8:"
             "Folder" = "8:_4F4DFB19F89042A9A86CFCB6B1B06D32"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FA48D88BC98F4202A6371EC8827DB56E"
+            {
+            "SourcePath" = "8:..\\Release\\awesomium_process.pdb"
+            "TargetName" = "8:awesomium_process.pdb"
+            "Tag" = "8:"
+            "Folder" = "8:_1A913B5A37B44DDE876A705429DAB88C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -3076,7 +3055,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:EchoGame"
         "ProductCode" = "8:{017EED8F-F8E4-4D68-BC81-38B890F517EF}"
-        "PackageCode" = "8:{23B07DB8-D2AA-47B4-BD64-1E9D96EAC0BE}"
+        "PackageCode" = "8:{B39E402F-9766-4347-8A8A-874FB1D0B4FB}"
         "UpgradeCode" = "8:{2E1206C4-131C-4850-B067-94E83CC1C2BD}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
