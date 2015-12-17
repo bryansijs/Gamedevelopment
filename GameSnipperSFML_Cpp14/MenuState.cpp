@@ -25,6 +25,7 @@ MenuState::MenuState(Context* context, StateManager* stateManager, LevelManager*
 	menuActions = new MenuActions(stateManager, menuContext, levelManager);
 
 	sf::View view = context->window.getView();
+	view.setSize(960, 640);
 	view.setCenter(480, 320);
 	context->window.setView(view);
 
@@ -32,8 +33,7 @@ MenuState::MenuState(Context* context, StateManager* stateManager, LevelManager*
 	menuContext->currentLevel = 1;
 
 	// Awesomium init
-	menuContext->web_core = context->web_core;
-	menuContext->webView = menuContext->web_core->CreateWebView(960, 640);
+	menuContext->webView = context->web_core->CreateWebView(960, 640);
 
 	// Load Page
 	menuContext->pathToFile = "file:///Resources/menuHTML/menu.html";
@@ -65,7 +65,6 @@ void MenuState::Terminate()
 void MenuState::Update()
 {
 	menuContext->context->window.clear();
-
 	while (menuContext->context->window.pollEvent(menuContext->event)) {
 		if (menuContext->event.type == sf::Event::Closed)
 		{

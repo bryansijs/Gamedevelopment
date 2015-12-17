@@ -429,21 +429,9 @@
     <ClInclude Include="Bullet.h">
       <Filter>Header Files\Model\Projectiles</Filter>
     </ClInclude>
-    <ClInclude Include="LoseContext.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LoseState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WinContext.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WinState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="FPSShow.h">
       <Filter>Header Files</Filter>
-	 </ClInclude>
+    </ClInclude>
     <ClInclude Include="BaseInput.h">
       <Filter>Header Files\Actions</Filter>
     </ClInclude>
@@ -467,6 +455,24 @@
     </ClInclude>
     <ClInclude Include="LoseContext.h">
       <Filter>Header Files\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="WinContext.h">
+      <Filter>Header Files\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="AwesomiumHelper.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="StorylineManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="LoseState.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="LoseContext.h">
+      <Filter>Header Files\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="WinState.h">
+      <Filter>Header Files\States</Filter>
     </ClInclude>
     <ClInclude Include="WinContext.h">
       <Filter>Header Files\Context</Filter>
@@ -680,21 +686,9 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Source Files\Model\Projectiles</Filter>
     </ClCompile>
-    <ClCompile Include="LoseContext.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LoseState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WinContext.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WinState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FPSShow.cpp">
       <Filter>Source Files</Filter>
-	     </ClCompile>
+    </ClCompile>
     <ClCompile Include="BaseInput.cpp">
       <Filter>Source Files\Actions</Filter>
     </ClCompile>
@@ -719,6 +713,24 @@
     <ClCompile Include="WinContext.cpp">
       <Filter>Source Files\Context</Filter>
     </ClCompile>
+    <ClCompile Include="AwesomiumHelper.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="StorylineManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="LoseContext.cpp">
+      <Filter>Source Files\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="WinContext.cpp">
+      <Filter>Source Files\Context</Filter>
+    </ClCompile>
+    <ClCompile Include="WinState.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="LoseState.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\levels\Level_New.json">
@@ -733,8 +745,6 @@
     <None Include="Resources\menuHtml\menu.html">
       <Filter>Resource Files\Html</Filter>
     </None>
-    <None Include="Resources\menuHTML\lose.html" />
-    <None Include="Resources\menuHTML\win.html" />
     <None Include="Resources\key-mapping.json">
       <Filter>Resource Files</Filter>
     </None>
@@ -744,7 +754,18 @@
     <None Include="Resources\menuHTML\lose.html">
       <Filter>Resource Files\Html</Filter>
     </None>
-
+    <None Include="Resources\html-game\StoryLine.html">
+      <Filter>Resource Files\Html</Filter>
+    </None>
+    <None Include="Resources\menuHTML\lose.html">
+      <Filter>Resource Files\Html</Filter>
+    </None>
+    <None Include="loading.html">
+      <Filter>Resource Files\Html</Filter>
+    </None>
+    <None Include="Resources\menuHTML\win.html">
+      <Filter>Resource Files\Html</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameSnipperSFML_Cpp14.rc">
