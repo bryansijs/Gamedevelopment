@@ -34,13 +34,21 @@ public:
 	void SwitchToDown();
 
 	void addLevelToMenu(Awesomium::WebView* webView, Awesomium::WebCore* web_core, const char* naam);
-	void addMapToMenu(Awesomium::WebView* webView, Awesomium::WebCore* web_core, const char* map);
 	void callDirectJSFunction(Awesomium::WebView* webView, Awesomium::WebCore* web_core, int currentLevel);
 	void CallLevelEditMenuFunction(Awesomium::WebView* webView, Awesomium::WebCore* web_core, std::string action);
+
+	void CallDirectJSFunction(std::string function, std::string params);
+	void CallDirectJSFunction(std::string function, int param);
 
 	void ProcessActions();
 	void ExecuteActions();
 private:
+	bool confirmed = false;
+	bool editingKey = false;
+	std::string currentMap;
+
+	void EditKey();
+
 	StateManager* stateManager;
 	MenuContext* menuContext;
 	LevelManager* levelManager;
@@ -66,12 +74,12 @@ private:
 		{ "escape", &MenuActions::BackToMenu }
 	};
 
-	std::vector<std::string> editableMappings = {
-		{ "move-up" },
-		{ "move-down" },
-		{ "move-left" },
-		{ "move-right" },
-		{ "use" },
-		{ "shoot" }
+	std::map<int, std::string> editableMappings = {
+		{ 1, "move-up" },
+		{ 2, "move-down" },
+		{ 3, "move-left" },
+		{ 4, "move-right" },
+		{ 5, "use" },
+		{ 6, "shoot" }
 	};
 };

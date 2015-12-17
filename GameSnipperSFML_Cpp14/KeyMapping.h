@@ -19,6 +19,7 @@ public:
 
 	static string GetMap(string key);
 	static string GetKey(string map);
+	static void ChangeKey(string map, string key);
 	static multimap<string, string> GetMapping();
 private:
 	static multimap<string, string> mapping;

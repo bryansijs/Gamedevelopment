@@ -61,6 +61,20 @@ string KeyMapping::GetKey(string map)
 	}
 }
 
+void KeyMapping::ChangeKey(string map, string key)
+{
+	multimap<string, string>::iterator it;
+
+	for (it = mapping.begin(); it != mapping.end(); ++it)
+	{
+		if (it->first == map)
+		{
+			it->second = key;
+			return;
+		}
+	}
+}
+
 multimap<string, string> KeyMapping::GetMapping()
 {
 	return mapping;

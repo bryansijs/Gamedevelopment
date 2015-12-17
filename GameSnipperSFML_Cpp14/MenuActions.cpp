@@ -47,6 +47,24 @@ void MenuActions::ExecuteActions()
 		(this->*function)();
 	}
 	activeActions.clear();
+
+	if (editingKey)
+	{
+		EditKey();
+	}
+}
+
+void MenuActions::EditKey()
+{
+	if (activeKeys.size() > 0 && !Input::GetKeyDown("Return"))
+	{
+		KeyMapping::ChangeKey(currentMap, activeKeys.back());
+		std::string map = currentMap + "," + activeKeys.back();
+		CallDirectJSFunction("changeMap", map.c_str());
+		//CallDirectJSFunction("showPopup", "hide");
+
+		//editingKey = false;
+	}
 }
 
 void MenuActions::ExitGame()
@@ -73,6 +91,7 @@ void MenuActions::ShowAbout()
 void MenuActions::BackToMenu()
 {
 	menuContext->inLevels = false;
+	menuContext->inControls = false;
 	if (!menuContext->inMenu)
 	{
 		menuContext->inMenu = true;
@@ -98,7 +117,9 @@ void MenuActions::ShowLevels()
 
 void MenuActions::ShowControls()
 {
+	menuContext->currentLevel = 1;
 	menuContext->inMenu = false;
+	menuContext->inControls = true;
 	menuContext->pathToFile = "file:///Resources/menuHTML/controls.html";
 	ReloadPage();
 
@@ -107,33 +128,16 @@ void MenuActions::ShowControls()
 	multimap<std::string, std::string>::iterator it;
 	for (it = mapping.begin(); it != mapping.end(); ++it)
 	{
-		std::vector<std::string>::iterator vit;
+		std::map<int, std::string>::iterator vit;
 		for (vit = editableMappings.begin(); vit != editableMappings.end(); ++vit)
 		{
-			if (it->first == *vit)
+			if (it->first == vit->second)
 			{
 				std::string map = it->first + "," + it->second;
-				addMapToMenu(menuContext->webView, menuContext->context->web_core, map.c_str());
+				CallDirectJSFunction("addMap", map.c_str());
 			}
 		}
 	}
-}
-
-void MenuActions::addMapToMenu(WebView* webView, WebCore* web_core, const char* map)
-{
-	JSValue window = webView->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));
-
-	if (window.IsObject())
-	{
-		JSArray args;
-		WebString string = WebString::CreateFromUTF8(map, strlen(map) + 1);
-		JSValue val = JSValue(string);
-		args.Push(val);
-		window.ToObject().Invoke(WSLit("addMap"), args);
-	}
-
-	Sleep(50);
-	web_core->Update();
 }
 
 void MenuActions::addLevelToMenu(WebView* webView, WebCore* web_core, const char* naam)
@@ -215,6 +219,11 @@ void MenuActions::NavigateUp()
 			CallLevelEditMenuFunction(menuContext->webView, menuContext->context->web_core, std::string("selectionUp"));
 		}
 	}
+	else if (menuContext->currentLevel > 1 && menuContext->inControls && !editingKey)
+	{
+		menuContext->currentLevel -= 1;
+		CallDirectJSFunction("setSelected", menuContext->currentLevel);
+	}
 	else if (menuContext->currentLevel > 1 && menuContext->inMenu)
 	{
 		menuContext->currentLevel -= 1;
@@ -237,6 +246,11 @@ void MenuActions::NavigateDown()
 			menuContext->currentLevelIndex++;
 			CallLevelEditMenuFunction(menuContext->webView, menuContext->context->web_core, std::string("selectionDown"));
 		}
+	}
+	else if (menuContext->currentLevel < editableMappings.size() && menuContext->inControls && !editingKey)
+	{
+		menuContext->currentLevel += 1;
+		CallDirectJSFunction("setSelected", menuContext->currentLevel);
 	}
 	else if (menuContext->currentLevel < menuItems.size() && menuContext->inMenu)
 	{
@@ -265,6 +279,21 @@ void MenuActions::NavigateRight()
 
 void MenuActions::NavigateComfirm()
 {
+	if (menuContext->inControls && confirmed)
+	{
+		std::map<int, std::string>::iterator it;
+		for (it = editableMappings.begin(); it != editableMappings.end(); ++it)
+		{
+			if (it->first == menuContext->currentLevel)
+			{
+				currentMap = it->second;
+			}
+		}
+
+		CallDirectJSFunction("showPopup", "block");
+		editingKey = true;
+	}
+
 	if (menuContext->inMenu)
 	{
 		std::map <int, void(MenuActions::*)()>::iterator it;
@@ -277,6 +306,8 @@ void MenuActions::NavigateComfirm()
 				break;
 			}
 		}
+
+		confirmed = true;
 	}
 }
 
@@ -324,4 +355,37 @@ void MenuActions::callDirectJSFunction(WebView* webView, WebCore* web_core, int 
 
 	Sleep(50);
 	web_core->Update();
+}
+
+void MenuActions::CallDirectJSFunction(std::string function, std::string params)
+{
+	JSValue window = menuContext->webView->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));
+
+	if (window.IsObject())
+	{
+		JSArray args;
+		WebString string = WebString::CreateFromUTF8(params.c_str(), strlen(params.c_str()) + 1);
+		JSValue val = JSValue(string);
+		args.Push(val);
+		window.ToObject().Invoke(WSLit(function.c_str()), args);
+	}
+
+	Sleep(50);
+	menuContext->context->web_core->Update();
+}
+
+void MenuActions::CallDirectJSFunction(std::string function, int param)
+{
+	JSValue window = menuContext->webView->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));
+
+	if (window.IsObject())
+	{
+		JSArray args;
+		JSValue val = JSValue(param);
+		args.Push(val);
+		window.ToObject().Invoke(WSLit(function.c_str()), args);
+	}
+
+	Sleep(50);
+	menuContext->context->web_core->Update();
 }

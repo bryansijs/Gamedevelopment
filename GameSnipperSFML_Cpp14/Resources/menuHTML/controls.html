@@ -18,6 +18,7 @@
     }
 
     .frame {
+        position: relative;
         font-family: moonhouse;
         background-image: url('images/bg.png');
         height: 640px;
@@ -51,9 +52,21 @@
 
     }
 
-        #controlsTable tr td {
-            width: 50%;
-        }
+    #pop-up {
+        display: none;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -100px;
+        margin-top: -25px;
+        width:200px;
+        height:50px;
+
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid #000;
+
+        text-align: center;
+    }
 </style>
 <body>
     <div class="frame">
@@ -62,12 +75,44 @@
             <h3 style="text-align: center; font-family: moonhouse;">Controls</h3>
             <table id="controlsTable"></table>
         </div>
+
+        <div id="pop-up">
+            <p>Press a key...</p>
+        </div>
     </div>
     <script>
         function addMap(map)
         {
             var mapping = map.split(',');
-            document.getElementById("controlsTable").insertAdjacentHTML("beforeEnd", "<tr><td>" + mapping[0] + "</td><td>" + mapping[1] + "</td></tr>");
+            var element = document.getElementById("controlsTable");
+            element.insertAdjacentHTML("beforeEnd", "<tr id='" + mapping[0] + "'><td class='map' width='120'>" + mapping[0] + "</td><td class='key' width='62'>" + mapping[1] + "</td></tr>");
+
+            if (element.getElementsByTagName("tr").length == 1)
+            {
+                document.getElementById(mapping[0]).className = "selected";
+            }
+        }
+
+        function changeMap(map)
+        {
+            var mapping = map.split(',');
+            var element = document.getElementById(mapping[0]);
+            element.innerHTML("<td class='map' width='120'>" + mapping[0] + "</td><td class='key' width='62'>" + mapping[1] + "</td>");
+            
+        }
+
+        function setSelected(map)
+        {
+            //delete current selected
+            document.getElementsByClassName("selected")[0].className = "";
+
+            //make new item selected
+            document.getElementsByTagName("tr")[parseInt(map - 1)].className = "selected";
+        }
+
+        function popup(param)
+        {
+            document.getElementById("pop-up").style.display = param;
         }
     </script>
 </body>
