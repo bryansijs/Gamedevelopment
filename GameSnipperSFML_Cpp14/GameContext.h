@@ -54,5 +54,6 @@ public:
 	sf::Uint8* pixels;
 
 	bool loading;
+	int gameSpeedMultiplier = 1;
 };
 

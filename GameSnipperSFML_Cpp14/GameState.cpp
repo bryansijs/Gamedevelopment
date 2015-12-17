@@ -113,6 +113,7 @@ void GameState::DebugBodies()
 void GameState::Update()
 {
 	Time::deltaTime = static_cast<float>(gameContext->deltaClock.restart().asSeconds());
+	Time::deltaTime *= gameContext->gameSpeedMultiplier;
 	Time::runningTime += Time::deltaTime;
 
 	gameContext->context->window.clear(sf::Color::White);
@@ -152,6 +153,16 @@ void GameState::Update()
 
 			if (gameContext->event.type == sf::Event::KeyPressed)
 			{
+				if (Input::GetKeyDown("Add"))
+				{
+					gameContext->gameSpeedMultiplier++;
+				}
+
+				if (Input::GetKeyDown("Substract"))
+				{
+					gameContext->gameSpeedMultiplier--;
+				}
+
 				if (Input::GetKeyDown("K")) {
 					StartNextLevel();
 				}
@@ -166,7 +177,6 @@ void GameState::Update()
 					if (isPause)
 						gameContext->setMenuPosition();
 				}
-
 
 				if (Input::GetKeyDown(KeyMapping::GetKey("fps"))) {
 					showFPS = !showFPS;
