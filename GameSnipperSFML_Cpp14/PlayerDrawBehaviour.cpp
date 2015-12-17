@@ -15,7 +15,7 @@ PlayerDrawBehaviour::~PlayerDrawBehaviour()
 {
 }
 
-void PlayerDrawBehaviour::Draw(sf::RenderWindow *window)
+void PlayerDrawBehaviour::Draw(sf::RenderWindow *window, sf::Vector2f viewPortPosition)
 {
 	window->draw(getCurrentImage());
 }

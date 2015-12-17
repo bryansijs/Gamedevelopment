@@ -161,6 +161,7 @@ void GameObject::createBoxDynamic(b2World & World)
 	boxFixtureDef.shape = &Shape;
 	Body->CreateFixture(&boxFixtureDef);
 	Body->SetUserData(this);
+	this->world = &World;
 }
 
 void GameObject::createBoxSenor(b2World & World)

@@ -37,6 +37,7 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 
 	this->stateManager = stateManager;
 	this->levelManager = levelmanager;
+	//in constructor, usually
 
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer, gameContext->world);
 	gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
@@ -102,11 +103,22 @@ void GameState::DestroyGameObjects()
 void GameState::DebugBodies()
 {
 	for (b2Body* b = gameContext->world->GetBodyList(); b; b = b->GetNext()) {
-		sf::RectangleShape rectangle(sf::Vector2f(32, 32));
-		rectangle.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
-		rectangle.setOutlineThickness(0);
-		rectangle.setFillColor(sf::Color(180, 100, 100, 200));
-		gameContext->context->window.draw(rectangle);
+
+		b2Shape::Type t = b->GetFixtureList()->GetType();
+		if (t == b2Shape::e_polygon)
+		{
+			b2PolygonShape* s = (b2PolygonShape*)b->GetFixtureList()->GetShape();
+			sf::ConvexShape convex;
+			int vertextCount = s->GetVertexCount();
+			convex.setPointCount(vertextCount);
+			convex.setFillColor(sf::Color(255, 255, 0, 128));
+
+			convex.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
+
+			for (int i = 0; i < vertextCount; i++)
+				convex.setPoint(i, sf::Vector2f(s->GetVertex(i).x, s->GetVertex(i).y));
+			gameContext->context->window.draw(convex);
+		}
 	}
 }
 
@@ -186,7 +198,7 @@ void GameState::Update()
 		gameContext->player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	}
 
-	//DebugBodies();
+//DebugBodies();
 
 
 
@@ -204,12 +216,11 @@ void GameState::Update()
 
 	}
 	
-	gameContext->drawContainer->Draw(&gameContext->context->window);
+	gameContext->drawContainer->Draw(&gameContext->context->window, gameContext->level->GetViewPortPosition());
 	gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
 
 
 	if (showFPS ) {
-		//gameContext->fpsShow->setFPS(gameContext->level->GetViewPortPosition().x, gameContext->level->GetViewPortPosition().y, gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
 		gameContext->fpsShow->draw(gameContext->context->window);
 	}
 

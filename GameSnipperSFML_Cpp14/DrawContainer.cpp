@@ -10,11 +10,11 @@ DrawContainer::~DrawContainer()
 {
 }
 
-void DrawContainer::Draw(sf::RenderWindow *window)
+void DrawContainer::Draw(sf::RenderWindow *window, sf::Vector2f viewPortPosition)
 {
 	for each(DrawBehaviour *behaviour in behaviours)
 	{
-		behaviour->Draw(window);
+		behaviour->Draw(window,viewPortPosition);
 	}
 }
 
