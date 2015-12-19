@@ -116,10 +116,8 @@ void Level::update()
 
 	for (size_t i = 0; i < getGame_Objects().size(); i++)
 	{
-		if (dynamic_cast<Game_Switch*>(getObject(i)))
-		{
-			dynamic_cast<Game_Switch*>(getObject(i))->Update();
-		}
+		if(getObject(i) != nullptr)
+		getObject(i)->Update();
 	}
 }
 
@@ -208,5 +206,23 @@ void Level::End(Context* context, StateManager* stateManager, LevelManager* leve
 	if (end != nullptr)
 	{
 		end->setContext(context, stateManager, levelManager, scoreManager);
+	}
+}
+
+void Level::Story(StorylineManager* storylineManager)
+{
+	story = nullptr;
+
+	for (size_t i = 0; i < game_objects.size(); i++)
+	{
+		if (dynamic_cast<StoryTile*> (getObject(i))) {
+			story = dynamic_cast<StoryTile*> (getObject(i));
+			break;
+		}
+	}
+
+	if (story != nullptr)
+	{
+		story->setStorylineManager(storylineManager);
 	}
 }

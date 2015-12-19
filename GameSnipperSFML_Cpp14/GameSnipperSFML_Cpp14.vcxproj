@@ -174,6 +174,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AwesomiumHelper.h" />
     <ClInclude Include="BaseInput.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="application.h" />
@@ -239,10 +240,12 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="StartTile.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Game_Switch.h" />
+    <ClInclude Include="StoryTile.h" />
     <ClInclude Include="TankEnemy.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestDemo.h" />
     <ClInclude Include="TestLevelImporter.h" />
+    <ClInclude Include="StorylineManager.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileSet.h" />
     <ClInclude Include="Time.h" />
@@ -261,6 +264,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="WinState.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AwesomiumHelper.cpp" />
     <ClCompile Include="BaseInput.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BaseEnemy.cpp" />
@@ -326,9 +330,11 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Game_Switch.cpp" />
+    <ClCompile Include="StoryTile.cpp" />
     <ClCompile Include="TankEnemy.cpp" />
     <ClCompile Include="TestDemo.cpp" />
     <ClCompile Include="TestLevelImporter.cpp" />
+    <ClCompile Include="StorylineManager.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileSet.cpp" />
     <ClCompile Include="Time.cpp" />
@@ -347,6 +353,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="WinState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\html-game\StoryLine.html" />
     <None Include="loading.html" />
     <None Include="Resources\key-mapping.json" />
     <None Include="Resources\menuHTML\about.html" />

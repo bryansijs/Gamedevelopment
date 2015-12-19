@@ -12,6 +12,7 @@ RunnerEnemy::RunnerEnemy(DrawContainer* dContainer, std::string img, MoveContain
 
 	this->setProperties(properties);
 	this->createBoxDynamic(*world);
+	this->CreateLineOfSight();
 };
 
 RunnerEnemy::~RunnerEnemy()

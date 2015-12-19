@@ -34,7 +34,7 @@ Bullet::~Bullet()
 void Bullet::startContact(b2Fixture * fixture)
 {
 	GameObject* pal = static_cast<Player*>(fixture->GetBody()->GetUserData());
-	if (!dynamic_cast<Player*> (pal)) {
+	if (!dynamic_cast<Player*> (pal) && !fixture->IsSensor()) {
 		Destroy();
 	}
 }

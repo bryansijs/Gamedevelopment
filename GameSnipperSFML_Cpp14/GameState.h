@@ -2,6 +2,7 @@
 #include "BaseState.h"
 #include "LevelManager.h"
 #include "PlayerActions.h"
+#include "StorylineManager.h"
 
 class ScoreManager;
 class StateManager;
@@ -12,6 +13,7 @@ class square;
 
 
 class GameActions;
+class AwesomiumHelper;
 
 
 class GameState: public BaseState
@@ -35,6 +37,10 @@ private:
 
 	PlayerActions* playerActions;
 	GameActions* gameActions;
+
+	sf::View storyview;
+	AwesomiumHelper* storyline;
+	StorylineManager* storylineManager;
 
 	void DestroyGameObjects();
 	void DebugBodies();

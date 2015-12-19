@@ -1,0 +1,149 @@
+﻿Merge remote-tracking branch 'refs/remotes/origin/inputchange+develop' into feature/StoryLine
+
+# Conflicts:
+#	GameSnipperSFML_Cpp14/Context.h
+#	GameSnipperSFML_Cpp14/GameSnipperSFML_Cpp14.vcxproj.filters
+#	GameSnipperSFML_Cpp14/GameState.cpp
+#	GameSnipperSFML_Cpp14/GameState.h
+#	GameSnipperSFML_Cpp14/MenuState.cpp
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch feature/StoryLine
+# Your branch is up-to-date with 'origin/feature/StoryLine'.
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes not staged for commit:
+#	modified:   GameSetup/GameSetup.vdproj
+#	modified:   GameSnipperSFML_Cpp14/BaseEnemy.cpp
+#	modified:   GameSnipperSFML_Cpp14/BaseInput.cpp
+#	modified:   GameSnipperSFML_Cpp14/BasicEnemy.cpp
+#	modified:   GameSnipperSFML_Cpp14/BasicEnemy.h
+#	modified:   GameSnipperSFML_Cpp14/Context.cpp
+#	modified:   GameSnipperSFML_Cpp14/Context.h
+#	modified:   GameSnipperSFML_Cpp14/Door.cpp
+#	modified:   GameSnipperSFML_Cpp14/Door.h
+#	modified:   GameSnipperSFML_Cpp14/DrawContainer.cpp
+#	modified:   GameSnipperSFML_Cpp14/EndTile.cpp
+#	modified:   GameSnipperSFML_Cpp14/EndTile.h
+#	modified:   GameSnipperSFML_Cpp14/EnemyFactory.cpp
+#	modified:   GameSnipperSFML_Cpp14/EnemyFactory.h
+#	modified:   GameSnipperSFML_Cpp14/GameContext.cpp
+#	modified:   GameSnipperSFML_Cpp14/GameContext.h
+#	modified:   GameSnipperSFML_Cpp14/GameObject.cpp
+#	modified:   GameSnipperSFML_Cpp14/GameObject.h
+#	modified:   GameSnipperSFML_Cpp14/GameObjectContainer.cpp
+#	modified:   GameSnipperSFML_Cpp14/GameObjectFactory.cpp
+#	modified:   GameSnipperSFML_Cpp14/GameObjectFactory.h
+#	modified:   GameSnipperSFML_Cpp14/GameSnipperSFML_Cpp14.vcxproj
+#	modified:   GameSnipperSFML_Cpp14/GameSnipperSFML_Cpp14.vcxproj.filters
+#	modified:   GameSnipperSFML_Cpp14/GameState.cpp
+#	modified:   GameSnipperSFML_Cpp14/GameState.h
+#	modified:   GameSnipperSFML_Cpp14/GameTileFactory.cpp
+#	modified:   GameSnipperSFML_Cpp14/GameTileFactory.h
+#	modified:   GameSnipperSFML_Cpp14/Game_Switch.cpp
+#	modified:   GameSnipperSFML_Cpp14/Game_Switch.h
+#	modified:   GameSnipperSFML_Cpp14/Input.cpp
+#	modified:   GameSnipperSFML_Cpp14/InteractiveFactory.cpp
+#	modified:   GameSnipperSFML_Cpp14/InteractiveFactory.h
+#	modified:   GameSnipperSFML_Cpp14/ItemFactory.cpp
+#	modified:   GameSnipperSFML_Cpp14/ItemFactory.h
+#	modified:   GameSnipperSFML_Cpp14/Key.cpp
+#	modified:   GameSnipperSFML_Cpp14/Key.h
+#	modified:   GameSnipperSFML_Cpp14/Level.cpp
+#	modified:   GameSnipperSFML_Cpp14/Level.h
+#	modified:   GameSnipperSFML_Cpp14/LevelImporter.cpp
+#	modified:   GameSnipperSFML_Cpp14/LevelImporter.h
+#	modified:   GameSnipperSFML_Cpp14/MenuState.cpp
+#	modified:   GameSnipperSFML_Cpp14/MoveAction.cpp
+#	modified:   GameSnipperSFML_Cpp14/MoveAction.h
+#	modified:   GameSnipperSFML_Cpp14/MoveBehaviour.cpp
+#	modified:   GameSnipperSFML_Cpp14/MoveBehaviour.h
+#	modified:   GameSnipperSFML_Cpp14/MoveBehaviourFactory.cpp
+#	modified:   GameSnipperSFML_Cpp14/MoveContainer.cpp
+#	modified:   GameSnipperSFML_Cpp14/MoveContainer.h
+#	modified:   GameSnipperSFML_Cpp14/NormalDrawBehaviour.cpp
+#	modified:   GameSnipperSFML_Cpp14/NormalMoveBehaviour.cpp
+#	modified:   GameSnipperSFML_Cpp14/NormalMoveBehaviour.h
+#	modified:   GameSnipperSFML_Cpp14/Player.cpp
+#	modified:   GameSnipperSFML_Cpp14/Player.h
+#	modified:   GameSnipperSFML_Cpp14/PlayerActions.cpp
+#	modified:   GameSnipperSFML_Cpp14/PlayerActions.h
+#	modified:   GameSnipperSFML_Cpp14/PlayerDrawBehaviour.cpp
+#	modified:   GameSnipperSFML_Cpp14/Potion.cpp
+#	modified:   GameSnipperSFML_Cpp14/Potion.h
+#	modified:   GameSnipperSFML_Cpp14/Resources/key-mapping.json
+#	deleted:    GameSnipperSFML_Cpp14/Resources/levels/Guus.json
+#	modified:   GameSnipperSFML_Cpp14/Resources/levels/Level_New.json
+#	deleted:    GameSnipperSFML_Cpp14/Resources/levels/UnitTestLevel.json
+#	modified:   GameSnipperSFML_Cpp14/Resources/sprites/enemy3.png
+#	modified:   GameSnipperSFML_Cpp14/RunnerEnemy.cpp
+#	modified:   GameSnipperSFML_Cpp14/RunnerEnemy.h
+#	modified:   GameSnipperSFML_Cpp14/ShootAction.cpp
+#	modified:   GameSnipperSFML_Cpp14/ShootAction.h
+#	modified:   GameSnipperSFML_Cpp14/ShotMoveBehaviour.cpp
+#	modified:   GameSnipperSFML_Cpp14/ShotMoveBehaviour.h
+#	modified:   GameSnipperSFML_Cpp14/StorylineManager.h
+#	modified:   GameSnipperSFML_Cpp14/TankEnemy.cpp
+#	modified:   GameSnipperSFML_Cpp14/TankEnemy.h
+#	modified:   GameSnipperSFML_Cpp14/TestLevelImporter.cpp
+#	modified:   GameSnipperSFML_Cpp14/Tile.cpp
+#	modified:   GameSnipperSFML_Cpp14/Tile.h
+#	modified:   GameSnipperSFML_Cpp14/Unit.cpp
+#	modified:   GameSnipperSFML_Cpp14/Unit.h
+#	modified:   GameSnipperSFML_Cpp14/UnitTest.cpp
+#	modified:   GameSnipperSFML_Cpp14/UnitTest.h
+#	modified:   GameSnipperSFML_Cpp14/UnitTestGameObjectFactory.cpp
+#	modified:   ipch/GAMESNIPPERSFML_CPP14-e39d0cb5/GAMESNIPPERSFML_CPP14-72c1e9a0.ipch
+#
+# Untracked files:
+#	GameSnipperSFML_Cpp14/Animation.cpp
+#	GameSnipperSFML_Cpp14/Animation.h
+#	GameSnipperSFML_Cpp14/Bullet.cpp
+#	GameSnipperSFML_Cpp14/Bullet.h
+#	GameSnipperSFML_Cpp14/CollisionListener.cpp
+#	GameSnipperSFML_Cpp14/CollisionListener.h
+#	GameSnipperSFML_Cpp14/DebugBox2D.cpp
+#	GameSnipperSFML_Cpp14/DebugBox2D.h
+#	GameSnipperSFML_Cpp14/LoseContext.cpp
+#	GameSnipperSFML_Cpp14/LoseContext.h
+#	GameSnipperSFML_Cpp14/LoseState.cpp
+#	GameSnipperSFML_Cpp14/LoseState.h
+#	GameSnipperSFML_Cpp14/PauseMenu.cpp
+#	GameSnipperSFML_Cpp14/PauseMenu.h
+#	GameSnipperSFML_Cpp14/ProjectileFactory.cpp
+#	GameSnipperSFML_Cpp14/ProjectileFactory.h
+#	GameSnipperSFML_Cpp14/Random.cpp
+#	GameSnipperSFML_Cpp14/Random.h
+#	GameSnipperSFML_Cpp14/Resources/levels/zGuus.json
+#	GameSnipperSFML_Cpp14/Resources/menu/
+#	GameSnipperSFML_Cpp14/Resources/menuHTML/images/Defeat.png
+#	GameSnipperSFML_Cpp14/Resources/menuHTML/images/hold.png
+#	GameSnipperSFML_Cpp14/Resources/menuHTML/images/victory.png
+#	GameSnipperSFML_Cpp14/Resources/menuHTML/lose.html
+#	GameSnipperSFML_Cpp14/Resources/menuHTML/win.html
+#	GameSnipperSFML_Cpp14/Resources/moonhouse.ttf
+#	GameSnipperSFML_Cpp14/Resources/sfx/Cat.ogg
+#	GameSnipperSFML_Cpp14/Resources/sfx/Confirm.ogg
+#	GameSnipperSFML_Cpp14/Resources/sfx/defeat.ogg
+#	GameSnipperSFML_Cpp14/Resources/sfx/victory.ogg
+#	GameSnipperSFML_Cpp14/Resources/sprites/enemy-wrong.png
+#	GameSnipperSFML_Cpp14/Resources/test/
+#	GameSnipperSFML_Cpp14/WanderMoveBehaviour.cpp
+#	GameSnipperSFML_Cpp14/WanderMoveBehaviour.h
+#	GameSnipperSFML_Cpp14/WinContext.cpp
+#	GameSnipperSFML_Cpp14/WinContext.h
+#	GameSnipperSFML_Cpp14/WinState.cpp
+#	GameSnipperSFML_Cpp14/WinState.h
+#	GameSnipperSFML_Cpp14/box.png
+#	GameSnipperSFML_Cpp14/square.cpp
+#	GameSnipperSFML_Cpp14/square.h
+#
+

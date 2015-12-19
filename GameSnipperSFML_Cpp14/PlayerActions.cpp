@@ -9,6 +9,7 @@
 #include "GameObject.h"
 
 #include "Time.h"
+#include "StorylineManager.h"
 
 
 PlayerActions::PlayerActions(Player *player)
@@ -36,6 +37,8 @@ void PlayerActions::SetWorld(b2World * world)
 
 void PlayerActions::ProcessActions()
 {
+	bool standStill = true;
+
 	std::map<std::string, void(PlayerActions::*)()>::iterator it;
 
 	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
@@ -50,8 +53,16 @@ void PlayerActions::ProcessActions()
 					activeActions.push_back(it->second);
 				}
 			}
+
+			if (map.find("move") != std::string::npos)
+			{
+				standStill = false;
+			}
 		}
 	}
+
+	if (standStill)
+		StandStill();
 
 	ExecuteActions();
 }
@@ -156,9 +167,24 @@ void PlayerActions::StandStill()
 
 	if (StandStillTimer > 0)
 	{		
-		// moveAction.AnimateMovement(player, 1);
-		StandStillTimer = StandStillTimer - Time::deltaTime;
+		StandStillTimer -= Time::deltaTime;
 		return;
+	}
+
+	switch (notificationSwitch)
+	{
+	case 0:
+		StorylineManager::Add("What are you waiting for?");
+		notificationSwitch++;
+		break;
+	case 1:
+		StorylineManager::Add("I'm still waiting!");
+		notificationSwitch++;
+		break;
+	case 2:
+		StorylineManager::Add("I'm bored...");
+		notificationSwitch = 0;
+		break;
 	}
 
 	StandStillTimerReset();

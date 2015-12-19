@@ -1,5 +1,4 @@
 #include "stdafx.h"
-
 #include "GameState.h"
 #include "StateManager.h"
 #include "KeyMapping.h"
@@ -10,25 +9,23 @@
 #include "input.h"
 #include "GameActions.h"
 #include "PlayerActions.h"
+#include "AwesomiumHelper.h"
+#include "StorylineManager.h"
 #include "LoseState.h"
 #include "MenuState.h"
-#include "square.h"
-#include "JSConsole.h"
-
 #include <iterator>
-
 #include <Awesomium/WebCore.h>
 #include <Awesomium/BitmapSurface.h>
 #include <Awesomium/STLHelpers.h>
-#include <Awesomium/WebString.h>
 
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager, ScoreManager* scoreManager)
 {
 	maincontext = context;
 	
 	gameActions = new GameActions(this);
-
 	gameContext = new GameContext(context);
+	storyline = new AwesomiumHelper{ context->web_core, "file:///Resources/html-game/StoryLine.html", 1000, 50 };
+	storylineManager = new StorylineManager();
 
 	// Awesomium init
 	gameContext->web_core = context->web_core;
@@ -41,6 +38,8 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	this->stateManager = stateManager;
 	this->levelManager = levelmanager;
 	this->scoreManager = scoreManager;
+	//in constructor, usually
+
 
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer, gameContext->world);
 	gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
@@ -54,7 +53,10 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	playerActions->SetWorld(gameContext->world);
 
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
+
 	gameContext->level->End(context, stateManager, levelManager, scoreManager);
+	gameContext->level->Story(storylineManager);
+
 
 	gameContext->player->createBoxDynamic(*gameContext->world);
 
@@ -64,6 +66,12 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 
 	gameContext->view.reset(rect);
 	gameContext->context->window.setView(gameContext->view);
+
+	storyview.setSize(960, 640);
+	storyview.setCenter(480, 320);
+
+	StorylineManager::Add("Let's find a way out!");
+	StorylineManager::Add("Use your arrow keys to walk");
 }
 
 GameState::~GameState()
@@ -99,11 +107,22 @@ void GameState::DestroyGameObjects()
 void GameState::DebugBodies()
 {
 	for (b2Body* b = gameContext->world->GetBodyList(); b; b = b->GetNext()) {
-		sf::RectangleShape rectangle(sf::Vector2f(32, 32));
-		rectangle.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
-		rectangle.setOutlineThickness(0);
-		rectangle.setFillColor(sf::Color(180, 100, 100, 200));
-		gameContext->context->window.draw(rectangle);
+
+		b2Shape::Type t = b->GetFixtureList()->GetType();
+		if (t == b2Shape::e_polygon)
+		{
+			b2PolygonShape* s = (b2PolygonShape*)b->GetFixtureList()->GetShape();
+			sf::ConvexShape convex;
+			int vertextCount = s->GetVertexCount();
+			convex.setPointCount(vertextCount);
+			convex.setFillColor(sf::Color(255, 255, 0, 128));
+
+			convex.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
+
+			for (int i = 0; i < vertextCount; i++)
+				convex.setPoint(i, sf::Vector2f(s->GetVertex(i).x, s->GetVertex(i).y));
+			gameContext->context->window.draw(convex);
+		}
 	}
 }
 
@@ -183,7 +202,7 @@ void GameState::Update()
 		gameContext->player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	}
 
-	//DebugBodies();
+//DebugBodies();
 
 
 
@@ -193,14 +212,19 @@ void GameState::Update()
 
 		DestroyGameObjects();
 		gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
+
+		if (StorylineManager::Updated())
+		{
+			storyline->JavaScriptCall("TextUpdate", StorylineManager::GetText());
+		}
+
 	}
 	
-	gameContext->drawContainer->Draw(&gameContext->context->window);
+	gameContext->drawContainer->Draw(&gameContext->context->window, gameContext->level->GetViewPortPosition());
 	gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
 
 
 	if (showFPS ) {
-		//gameContext->fpsShow->setFPS(gameContext->level->GetViewPortPosition().x, gameContext->level->GetViewPortPosition().y, gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
 		gameContext->fpsShow->draw(gameContext->context->window);
 	}
 
@@ -211,18 +235,17 @@ void GameState::Update()
 		gameContext->pauze->draw(gameContext->context->window);
 	}
 
-
+	sf::Sprite storylineSprite = storyline->GetSprite();
+	storylineSprite.setPosition(0, 540);
+	gameContext->context->window.setView(storyview);
+	gameContext->context->window.draw(storylineSprite);
 
 
 	if (!terminate) {
 		gameContext->context->window.setView(gameContext->view);
 	}
-
-
-
+	
 	gameContext->context->window.display();
-
-
 
 	if (gameContext->player->getHealth() <= 0)
 	{
@@ -233,8 +256,6 @@ void GameState::Update()
 		stateManager->AddState(loseState);
 		stateManager->StartNextState();
 	}
-
-
 
 	if (terminate)
 	{
