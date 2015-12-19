@@ -52,7 +52,8 @@
 
     }
 
-    #pop-up {
+
+    #popup {
         display: none;
         position: absolute;
         left: 50%;
@@ -71,12 +72,13 @@
 <body>
     <div class="frame">
         <img src="images/border.png" style="z-index: 99" />
+
         <div class="canvas">
             <h3 style="text-align: center; font-family: moonhouse;">Controls</h3>
             <table id="controlsTable"></table>
         </div>
 
-        <div id="pop-up">
+        <div id="popup">
             <p>Press a key...</p>
         </div>
     </div>
@@ -98,7 +100,11 @@
             var mapping = map.split(',');
             var element = document.getElementById(mapping[0]);
             element.innerHTML("<td class='map' width='120'>" + mapping[0] + "</td><td class='key' width='62'>" + mapping[1] + "</td>");
-            
+        }
+
+        function popup(param)
+        {
+            document.getElementById("popup").style.display = param;
         }
 
         function setSelected(map)
@@ -108,11 +114,6 @@
 
             //make new item selected
             document.getElementsByTagName("tr")[parseInt(map - 1)].className = "selected";
-        }
-
-        function popup(param)
-        {
-            document.getElementById("pop-up").style.display = param;
         }
     </script>
 </body>

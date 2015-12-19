@@ -58,12 +58,15 @@ void MenuActions::EditKey()
 {
 	if (activeKeys.size() > 0 && !Input::GetKeyDown("Return"))
 	{
-		KeyMapping::ChangeKey(currentMap, activeKeys.back());
-		std::string map = currentMap + "," + activeKeys.back();
-		CallDirectJSFunction("changeMap", map.c_str());
-		//CallDirectJSFunction("showPopup", "hide");
+		if (std::find(activeKeys.begin(), activeKeys.end(), "Return") == activeKeys.end())
+		{
+			//CallDirectJSFunction("popup", "none");
+			KeyMapping::ChangeKey(currentMap, activeKeys.back());
+			std::string map = currentMap + "," + activeKeys.back();
+			CallDirectJSFunction("changeMap", map.c_str());
 
-		//editingKey = false;
+			editingKey = false;
+		}
 	}
 }
 
@@ -290,7 +293,7 @@ void MenuActions::NavigateComfirm()
 			}
 		}
 
-		CallDirectJSFunction("showPopup", "block");
+		CallDirectJSFunction("popup", "block");
 		editingKey = true;
 	}
 
