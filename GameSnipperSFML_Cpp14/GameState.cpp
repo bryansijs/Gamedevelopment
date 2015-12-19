@@ -153,12 +153,12 @@ void GameState::Update()
 
 			if (gameContext->event.type == sf::Event::KeyPressed)
 			{
-				if (Input::GetKeyDown("Add"))
+				if (Input::GetKeyDown("RBracket"))
 				{
 					gameContext->gameSpeedMultiplier++;
 				}
 
-				if (Input::GetKeyDown("Subtract"))
+				if (Input::GetKeyDown("LBracket"))
 				{
 					if (gameContext->gameSpeedMultiplier > 1)
 					{
