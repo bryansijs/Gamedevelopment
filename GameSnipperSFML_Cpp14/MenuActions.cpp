@@ -175,7 +175,8 @@ void MenuActions::ShowHighscore()
 	if(scoreManager->GetScores().size() < 1) return;
 	
 	std::map<std::string, int>::iterator it;
-	for (it = scoreManager->GetScores().begin(); it != scoreManager->GetScores().end(); ++it) {
+	std::map<std::string, int> map = scoreManager->GetScores();
+	for (it = map.begin(); it != map.end(); ++it) {
 		addHighScoreToMenu(menuContext->webView, menuContext->web_core, it->first.c_str(),it->second);
 	}
 }
@@ -294,7 +295,8 @@ void MenuActions::addHighScoreToMenu(Awesomium::WebView* webView, Awesomium::Web
 	if (window.IsObject())
 	{
 		JSArray args;
-		JSValue key = JSValue(naam);
+		WebString string = WebString::CreateFromUTF8(naam, strlen(naam) + 1);
+		JSValue key = JSValue(string);
 		JSValue val = JSValue(score);
 		args.Push(key);
 		args.Push(val);
