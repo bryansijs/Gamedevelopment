@@ -51,5 +51,6 @@ public:
 	Awesomium::BitmapSurface* surface;
 
 	bool loading;
+	int gameSpeedMultiplier = 1;
 };
 
