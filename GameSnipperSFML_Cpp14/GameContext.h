@@ -50,9 +50,6 @@ public:
 	Awesomium::WebCore* web_core;
 	Awesomium::BitmapSurface* surface;
 
-	sf::Texture texture;
-	sf::Uint8* pixels;
-
 	bool loading;
 };
 
