@@ -252,6 +252,7 @@ xcopy /y /d  "$(ProjectDir)*.exe" $(TargetDir)</Command>
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileSet.h" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="tinydir.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitState.h" />
     <ClInclude Include="UnitTest.h" />
