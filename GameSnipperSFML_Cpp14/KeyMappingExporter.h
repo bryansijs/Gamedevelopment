@@ -9,8 +9,7 @@ public:
 	KeyMappingExporter();
 	~KeyMappingExporter();
 
-	static void SaveToFile(std::string location);
-	static void SaveToFile(std::string location, std::string filename);
+	static void SaveToFile(std::string data);
 	static std::string MappingToString(std::multimap<std::string, std::string> mapping);
 };
 

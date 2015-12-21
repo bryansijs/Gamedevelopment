@@ -480,6 +480,9 @@
     <ClInclude Include="StoryTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="KeyMappingExporter.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -736,6 +739,9 @@
     </ClCompile>
     <ClCompile Include="StoryTile.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyMappingExporter.cpp">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

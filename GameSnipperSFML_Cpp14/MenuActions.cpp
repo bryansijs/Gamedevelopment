@@ -7,6 +7,7 @@
 #include "Context.h"
 #include "KeyMapping.h"
 #include "KeyMappingImporter.h"
+#include "KeyMappingExporter.h"
 #include <codecvt>
 
 using namespace Awesomium;
@@ -69,8 +70,8 @@ void MenuActions::EditKey()
 			if (key != "Return")
 			{
 				KeyMapping::ChangeKey(currentMap, key);
-				std::string json = KeyMapping::MappingToJson();
-				//KeyMappingImporter::Import(KeyMapping::GetMapping());
+				std::string mappingString = KeyMappingExporter::MappingToString(KeyMapping::GetMapping());
+				KeyMappingExporter::SaveToFile(mappingString);
 				editingKey = false;
 				ShowControls();
 			}
