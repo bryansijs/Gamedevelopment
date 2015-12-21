@@ -36,13 +36,13 @@
       "map": "switch-down",
       "key": "L"
     },
-	{
+    {
       "map": "escape",
-      "key": "Esc"
+      "key": "Escape"
     },
     {
       "map": "fps",
-      "key": "/"
+      "key": "Slash"
     }
   ]
 }

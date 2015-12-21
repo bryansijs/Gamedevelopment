@@ -4,8 +4,7 @@
 
 #include <map>
 #include <iostream>
-
-using namespace std;
+#include <json\json.h>
 
 class KeyMapping
 {
@@ -13,14 +12,14 @@ public:
 	KeyMapping();
 	~KeyMapping();
 
-	static void AddKeyMap(string map, string key);
-	static void RemoveKeyMap(string map, string key);
-	static void ReloadMapping(multimap<string, string> mapping);
+	static void AddKeyMap(std::string map, std::string key);
+	static void RemoveKeyMap(std::string map, std::string key);
+	static void ReloadMapping(multimap<std::string, std::string> mapping);
 
-	static string GetMap(string key);
-	static string GetKey(string map);
-	static void ChangeKey(string map, string key);
-	static multimap<string, string> GetMapping();
+	static std::string GetMap(std::string key);
+	static std::string GetKey(std::string map);
+	static void ChangeKey(std::string map, std::string key);
+	static multimap<std::string, std::string> GetMapping();
 private:
-	static multimap<string, string> mapping;
+	static multimap<std::string, std::string> mapping;
 };

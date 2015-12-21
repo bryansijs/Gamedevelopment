@@ -6,6 +6,8 @@
 #include <Awesomium/STLHelpers.h>
 #include "Context.h"
 #include "KeyMapping.h"
+#include "KeyMappingImporter.h"
+#include <codecvt>
 
 using namespace Awesomium;
 
@@ -56,18 +58,36 @@ void MenuActions::ExecuteActions()
 
 void MenuActions::EditKey()
 {
-	if (activeKeys.size() > 0 && !Input::GetKeyDown("Return"))
+	if (menuContext->event.type == sf::Event::KeyPressed)
+	{
+		Input::EventOccured(menuContext->event);
+
+		if (menuContext->event.text.unicode < 128)
+		{
+			std::string key = Input::GetKey(menuContext->event.key.code);
+
+			if (key != "Return")
+			{
+				KeyMapping::ChangeKey(currentMap, key);
+				std::string json = KeyMapping::MappingToJson();
+				//KeyMappingImporter::Import(KeyMapping::GetMapping());
+				editingKey = false;
+				ShowControls();
+			}
+		}
+	}
+
+	/*if (activeKeys.size() > 0 && !Input::GetKeyDown("Return"))
 	{
 		if (std::find(activeKeys.begin(), activeKeys.end(), "Return") == activeKeys.end())
 		{
-			//CallDirectJSFunction("popup", "none");
 			KeyMapping::ChangeKey(currentMap, activeKeys.back());
 			std::string map = currentMap + "," + activeKeys.back();
-			CallDirectJSFunction("changeMap", map.c_str());
+			ShowControls();
 
 			editingKey = false;
 		}
-	}
+	}*/
 }
 
 void MenuActions::ExitGame()
@@ -127,12 +147,12 @@ void MenuActions::ShowControls()
 	ReloadPage();
 
 	std::multimap<std::string, std::string> mapping = KeyMapping::GetMapping();
-
-	multimap<std::string, std::string>::iterator it;
-	for (it = mapping.begin(); it != mapping.end(); ++it)
+	
+	std::map<int, std::string>::iterator vit;
+	for (vit = editableMappings.begin(); vit != editableMappings.end(); ++vit)
 	{
-		std::map<int, std::string>::iterator vit;
-		for (vit = editableMappings.begin(); vit != editableMappings.end(); ++vit)
+		multimap<std::string, std::string>::iterator it;
+		for (it = mapping.begin(); it != mapping.end(); ++it)
 		{
 			if (it->first == vit->second)
 			{
@@ -293,7 +313,7 @@ void MenuActions::NavigateComfirm()
 			}
 		}
 
-		CallDirectJSFunction("popup", "block");
+		CallDirectJSFunction("popup", "visible");
 		editingKey = true;
 	}
 

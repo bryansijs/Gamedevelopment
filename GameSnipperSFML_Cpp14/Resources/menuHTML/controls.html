@@ -1,120 +1,118 @@
 ﻿<!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<style>
-    @font-face {
-        font-family: moonhouse;
-        src: local("moonhouse"), local("moonhouse"), url(font/moonhouse.ttf);
-        font-weight: normal;
-    }
-
-    html, body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-    }
-
-    .frame {
-        position: relative;
-        font-family: moonhouse;
-        background-image: url('images/bg.png');
-        height: 640px;
-        width: 960px;
-        color: white;
-    }
-
-    .selected {
-        color: #992424;
-    }
-
-    .selector {
-        display: none;
-    }
-
-    .selected .selector {
-        display: block !important;
-    }
-
-    .canvas {
-        overflow: hidden;
-        position: absolute;
-        width: 192px;
-        height: 302px;
-        top: 168px;
-        left: 384px;
-        background-color: #161616;
-    }
-
-    #controlsTable {
-
-    }
-
-
-    #popup {
-        display: none;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        margin-left: -100px;
-        margin-top: -25px;
-        width:200px;
-        height:50px;
-
-        background: rgba(0, 0, 0, 0.5);
-        border: 1px solid #000;
-
-        text-align: center;
-    }
-</style>
-<body>
-    <div class="frame">
-        <img src="images/border.png" style="z-index: 99" />
-
-        <div class="canvas">
-            <h3 style="text-align: center; font-family: moonhouse;">Controls</h3>
-            <table id="controlsTable"></table>
-        </div>
-
-        <div id="popup">
-            <p>Press a key...</p>
-        </div>
-    </div>
-    <script>
-        function addMap(map)
-        {
-            var mapping = map.split(',');
-            var element = document.getElementById("controlsTable");
-            element.insertAdjacentHTML("beforeEnd", "<tr id='" + mapping[0] + "'><td class='map' width='120'>" + mapping[0] + "</td><td class='key' width='62'>" + mapping[1] + "</td></tr>");
-
-            if (element.getElementsByTagName("tr").length == 1)
-            {
-                document.getElementById(mapping[0]).className = "selected";
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+        <style>
+            @font-face {
+                font-family: moonhouse;
+                src: local("moonhouse"), local("moonhouse"), url(font/moonhouse.ttf);
+                font-weight: normal;
             }
-        }
 
-        function changeMap(map)
-        {
-            var mapping = map.split(',');
-            var element = document.getElementById(mapping[0]);
-            element.innerHTML("<td class='map' width='120'>" + mapping[0] + "</td><td class='key' width='62'>" + mapping[1] + "</td>");
-        }
+            html, body {
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
 
-        function popup(param)
-        {
-            document.getElementById("popup").style.display = param;
-        }
+            .frame {
+                position: relative;
+                font-family: moonhouse;
+                background-image: url('images/bg.png');
+                height: 640px;
+                width: 960px;
+                color: white;
+            }
 
-        function setSelected(map)
-        {
-            //delete current selected
-            document.getElementsByClassName("selected")[0].className = "";
+            .selected {
+                color: #992424;
+            }
 
-            //make new item selected
-            document.getElementsByTagName("tr")[parseInt(map - 1)].className = "selected";
-        }
-    </script>
-</body>
+            .selector {
+                display: none;
+            }
+
+            .selected .selector {
+                display: block !important;
+            }
+
+            .canvas {
+                overflow: hidden;
+                position: absolute;
+                width: 192px;
+                height: 302px;
+                top: 168px;
+                left: 384px;
+                background-color: #161616;
+            }
+
+            #pop-up {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-left: -100px;
+                margin-top: -25px;
+                width: 200px;
+                height: 50px;
+                background: rgba(0, 0, 0, 0.5);
+                border: 1px solid #000;
+                text-align: center;
+            }
+
+                #pop-up.visible {
+                    display: block;
+                }
+                #pop-up.hidden {
+                    display: none;
+                }
+        </style>
+
+        <div class="frame">
+            <img src="images/border.png" style="z-index: 99" />
+
+            <div class="canvas">
+                <h3 style="text-align: center; font-family: moonhouse;">Controls</h3>
+                <table id="controlsTable"></table>
+            </div>
+
+            <div id="pop-up" class="hidden">
+                <p>Press a key...</p>
+            </div>
+        </div>
+        <script>
+            function addMap(map)
+            {
+                var mapping = map.split(',');
+                var element = document.getElementById("controlsTable");
+                element.insertAdjacentHTML("beforeEnd", "<tr id='" + mapping[0] + "'><td class='map' width='120'>" + mapping[0] + "</td><td class='key' width='62'>" + mapping[1] + "</td></tr>");
+
+                if (element.getElementsByTagName("tr").length == 1)
+                {
+                    document.getElementById(mapping[0]).className = "selected";
+                }
+            }
+
+            function changeMap(map)
+            {
+                var mapping = map.split(',');
+                var element = document.getElementById(mapping[0]);
+                element.innerHTML("<td class='map' width='120'>" + mapping[0] + "</td><td class='key' width='62'>" + mapping[1] + "</td>");
+            }
+
+            function popup(param)
+            {
+                document.getElementById("pop-up").removeAttribute("class");
+                document.getElementById("pop-up").className = param;
+            }
+
+            function setSelected(map)
+            {
+                document.getElementsByClassName("selected")[0].className = "";
+                document.getElementsByTagName("tr")[parseInt(map - 1)].className = "selected";
+            }
+        </script>
+    </body>
 </html>
