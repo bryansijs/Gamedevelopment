@@ -10,4 +10,6 @@ public:
 
 	void startContact(b2Fixture* fixture);
 	void endContact(b2Fixture* fixture);
+private:
+	int damage = 20;
 };
