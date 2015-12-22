@@ -11,6 +11,8 @@ BasicEnemy::BasicEnemy(DrawContainer* dContainer, std::string img, MoveContainer
 	this->setProperties(properties);
 	this->SetAnimationStates(4);
 	this->createBoxDynamic(*world);
+	this->CreateLineOfSight();
+	//this->setImageY(2);
 };
 
 BasicEnemy::~BasicEnemy()

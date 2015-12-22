@@ -25,6 +25,7 @@ MenuState::MenuState(Context* context, StateManager* stateManager, LevelManager*
 	menuActions = new MenuActions(stateManager, menuContext, levelManager);
 
 	sf::View view = context->window.getView();
+	view.setSize(960, 640);
 	view.setCenter(480, 320);
 	context->window.setView(view);
 
@@ -64,7 +65,6 @@ void MenuState::Terminate()
 void MenuState::Update()
 {
 	menuContext->context->window.clear();
-
 	while (menuContext->context->window.pollEvent(menuContext->event)) {
 		if (menuContext->event.type == sf::Event::Closed)
 		{

@@ -17,10 +17,12 @@
 UnitTestGameObjectFactory::UnitTestGameObjectFactory()
 {
 	
-	/*DrawContainer* cont = new DrawContainer();
+	DrawContainer* cont = new DrawContainer();
 	MoveContainer* move = new MoveContainer();
 	GameObjectContainer* gameObjectecontainer = new GameObjectContainer();
-	GameObjectFactory factory{ cont,move,gameObjectecontainer };
+	b2Vec2 gravity(0.f, 0.0f);
+	b2World* world = { new b2World(gravity) };
+	GameObjectFactory factory{ cont,move,gameObjectecontainer,world, nullptr };
 
 	std::map<std::string, std::string> propertymap;
 	propertymap.insert(std::pair<std::string, std::string>("image", "player.png"));
@@ -111,7 +113,7 @@ UnitTestGameObjectFactory::UnitTestGameObjectFactory()
 	
 	cont->~DrawContainer();
 	move->~MoveContainer();
-	gameObjectecontainer->~GameObjectContainer();*/
+	gameObjectecontainer->~GameObjectContainer();
 }
 
 

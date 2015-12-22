@@ -9,10 +9,10 @@
 class DrawBehaviour
 {
 public:
-	virtual void Draw(sf::RenderWindow *window);
+	virtual void Draw(sf::RenderWindow *window, sf::Vector2f viewPortPosition);
 	virtual sf::Sprite getCurrentImage();
 	GameObject* getGameObject();
-
+	bool isVisible(int screenx, int screeny);
 protected:
 	int refreshRate;
 	GameObject* gameObject;

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "NormalDrawBehaviour.h"
-
+#include "BaseEnemy.h"
 #include <iostream>
 
 NormalDrawBehaviour::NormalDrawBehaviour(GameObject* gameObject, int refreshRate, std::string textureUrl)
@@ -17,9 +17,13 @@ NormalDrawBehaviour::~NormalDrawBehaviour()
 {
 }
 
-void NormalDrawBehaviour::Draw(sf::RenderWindow *window)
+void NormalDrawBehaviour::Draw(sf::RenderWindow *window, sf::Vector2f viewPortPosition)
 {
 	window->draw(getCurrentImage());
+	if (dynamic_cast<BaseEnemy*>(this->gameObject) && this->isVisible(viewPortPosition.x, viewPortPosition.y))
+	{
+		window->draw(dynamic_cast<BaseEnemy*>(this->gameObject)->getLineOfSightConvex());
+	}
 }
 
 sf::Sprite NormalDrawBehaviour::getCurrentImage()
@@ -34,3 +38,7 @@ sf::Sprite NormalDrawBehaviour::getCurrentImage()
 
 	return this->unitImage;
 }
+
+
+
+

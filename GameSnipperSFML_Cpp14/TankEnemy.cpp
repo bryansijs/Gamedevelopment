@@ -10,6 +10,7 @@ TankEnemy::TankEnemy(DrawContainer* dContainer, std::string img, MoveContainer* 
 
 	this->setProperties(properties);
 	this->createBoxDynamic(*world);
+	this->CreateLineOfSight();
 };
 
 TankEnemy::~TankEnemy()
