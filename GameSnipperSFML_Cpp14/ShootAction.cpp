@@ -52,7 +52,7 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 			y = player->getBody()->GetPosition().y + 12;
 		}
 
-		GameObjectFactory gameObjectFactory{ drawContainer, moveContainer, gameObjectContainer, world };
+		GameObjectFactory gameObjectFactory{ drawContainer, moveContainer, gameObjectContainer, world, nullptr };
 		std::map<std::string, std::string> properties = {
 			{ "type", "Projectile" },
 			{ "pType", "Bullet" },

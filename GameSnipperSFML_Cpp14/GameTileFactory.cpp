@@ -4,8 +4,9 @@
 #include "EndTile.h"
 #include "WarpTile.h"
 #include "StoryTile.h"
+#include "DiscoverTile.h"
 #include <Box2D\Box2D.h>
-
+#include "Level.h"
 GameTileFactory::GameTileFactory()
 {
 }
@@ -15,15 +16,15 @@ GameTileFactory::~GameTileFactory()
 {
 }
 
-GameObject* GameTileFactory::Create(std::map<std::string, std::string>& properties, GameObjectContainer* gameObjectContainer, b2World* world) {
+GameObject* GameTileFactory::Create(std::map<std::string, std::string>& properties, GameObjectContainer* gameObjectContainer, b2World* world, Level* level) {
 	std::map<std::string, GameObject*(GameTileFactory::*)(std::map<std::string, std::string>&, GameObjectContainer*, b2World* )>::iterator  it;
+	this->level = level;
 	for (it = possibleTiles.begin(); it != possibleTiles.end(); it++) {
 		if (it->first == properties["sType"]) {
 			auto function = it->second;
 			return (this->*function)(properties, gameObjectContainer, world);
 		}
 	}
-
 	return nullptr;
 }
 
@@ -57,5 +58,6 @@ GameObject* GameTileFactory::CreateStory(std::map<std::string, std::string>& pro
 
 GameObject * GameTileFactory::CreateDiscovery(std::map<std::string, std::string>& properties, GameObjectContainer * gameObjectContainer, b2World * world)
 {
-	return nullptr;
+	GameObject* obj = new DiscoverTile(gameObjectContainer, properties, world, level);
+	return obj;
 }

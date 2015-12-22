@@ -34,6 +34,7 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 
 	gameContext->levelImporter->Prepare();
 
+	gameContext->levelImporter->updateLevel();
 	gameContext->level = gameContext->levelImporter->getLevel();
 	gameContext->levelImporter->Clear();
 
@@ -263,6 +264,7 @@ void GameState::StartNextLevel()
 
 	gameContext->levelImporter->Prepare();
 
+	gameContext->levelImporter->updateLevel();
 	gameContext->level = gameContext->levelImporter->getLevel();
 	gameContext->levelImporter->Clear();
 

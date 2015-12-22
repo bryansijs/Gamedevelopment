@@ -5,7 +5,7 @@
 class DiscoverTile : public GameObject
 {
 public:
-	DiscoverTile(GameObjectContainer * gameObjectContainer, std::map<std::string, std::string>& properties, b2World * world);
+	DiscoverTile(GameObjectContainer * gameObjectContainer, std::map<std::string, std::string>& properties, b2World * world, Level* level);
 	~DiscoverTile();
 
 	virtual void setProperties(std::map<std::string, std::string>& properties);
@@ -16,5 +16,6 @@ public:
 
 private:
 	Level* level;
+	int DiscoverId;
 };
 

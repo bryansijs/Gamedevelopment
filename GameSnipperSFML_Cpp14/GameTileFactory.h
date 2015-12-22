@@ -10,14 +10,14 @@ class StartTile;
 class WarpTile;
 class EndTile;
 class b2World;
-
+class Level;
 class GameTileFactory
 {
 public:
 	GameTileFactory();
 	~GameTileFactory();
 
-	GameObject* Create(std::map<std::string, std::string>& properties, GameObjectContainer* gameObjectContainer, b2World* world);
+	GameObject* Create(std::map<std::string, std::string>& properties, GameObjectContainer* gameObjectContainer, b2World* world, Level* level);
 private:
 	GameObject* CreateStart(std::map<std::string, std::string>& properties, GameObjectContainer* gameObjectContainer, b2World* world);
 	GameObject* CreateWarp(std::map<std::string, std::string>& properties, GameObjectContainer* gameObjectContainer, b2World* world);
@@ -32,5 +32,7 @@ private:
 		{ "StoryTile", &GameTileFactory::CreateStory },
 		{ "DiscoverTile", &GameTileFactory::CreateDiscovery },
 	};
+
+	Level* level;
 };
 

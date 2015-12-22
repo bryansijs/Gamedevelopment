@@ -18,6 +18,7 @@
          "opacity":1,
          "properties":
             {
+             "LayerId":"5",
              "music":"level1.ogg"
             },
          "type":"tilelayer",
@@ -571,7 +572,7 @@
                  "name":"LayerDiscovery",
                  "properties":
                     {
-                     "Layer":"1",
+                     "Layer":"5",
                      "sType":"DiscoverTile"
                     },
                  "rotation":0,

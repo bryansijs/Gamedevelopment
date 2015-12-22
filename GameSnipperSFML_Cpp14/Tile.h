@@ -24,6 +24,7 @@ public:
 	bool isCollidable;
 	bool isVisible;
 	bool topTile = false;
+	int LayerId;
 
 	//b2BodyDef* bodyDef;
 	//b2BodyDef* enemyBodyDef;
