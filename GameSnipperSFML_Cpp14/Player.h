@@ -46,6 +46,7 @@ public:
 
 	void EnableGodMode();
 	void DisableGodMode();
+	bool GetGodMode();
 
 	virtual void startContact(b2Fixture* fixture);
 	virtual void endContact(b2Fixture* fixture);

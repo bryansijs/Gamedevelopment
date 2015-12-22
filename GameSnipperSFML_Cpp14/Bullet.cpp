@@ -35,6 +35,14 @@ void Bullet::startContact(b2Fixture * fixture)
 {
 	GameObject* pal = static_cast<Player*>(fixture->GetBody()->GetUserData());
 
+	if (dynamic_cast<Player*> (pal))
+	{
+		if (dynamic_cast<Player*> (pal)->GetGodMode())
+		{
+			return;
+		}
+	}
+
 	if (dynamic_cast<Unit*> (pal))
 	{
 		Unit* enemy = dynamic_cast<Unit*> (pal);

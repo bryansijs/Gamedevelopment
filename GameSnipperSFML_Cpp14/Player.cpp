@@ -58,6 +58,11 @@ void Player::DisableGodMode()
 	this->godMode = false;
 }
 
+bool Player::GetGodMode()
+{
+	return this->godMode;
+}
+
 void Player::startContact(b2Fixture* fixture)
 {
 
