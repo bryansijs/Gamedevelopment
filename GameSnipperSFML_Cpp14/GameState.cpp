@@ -216,13 +216,12 @@ void GameState::Update()
 		gameContext->player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	}
 
-//DebugBodies();
-
+	//DebugBodies();
 
 
 	if (!isPause)
 	{
-		this->gameContext->world->Step(1, 8, 3);
+		this->gameContext->world->Step(Time::deltaTime, 6, 6);
 
 		DestroyGameObjects();
 		gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
@@ -260,38 +259,35 @@ void GameState::Update()
 	}
 //<<<<<<< HEAD
 //
-//	for (b2Body* b = gameContext->world->GetBodyList(); b; b = b->GetNext()) {
-//
-//		b2Shape::Type t = b->GetFixtureList()->GetType();
-//		if (t == b2Shape::e_polygon)
-//		{
-//			b2PolygonShape* s = (b2PolygonShape*)b->GetFixtureList()->GetShape();
-//			sf::ConvexShape convex;
-//			int vertextCount = s->GetVertexCount();
-//			convex.setPointCount(vertextCount);
-//			convex.setFillColor(sf::Color(255, 255, 0, 128));
-//
-//			convex.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
-//
-//			for (int i = 0; i < vertextCount; i++)
-//				convex.setPoint(i, sf::Vector2f(s->GetVertex(i).x, s->GetVertex(i).y));
-//
-//
-//			gameContext->context->window.draw(convex);
-//		}
-//	}
+	//for (b2Body* b = gameContext->world->GetBodyList(); b; b = b->GetNext()) {
+
+	//	b2Shape::Type t = b->GetFixtureList()->GetType();
+	//	if (t == b2Shape::e_polygon)
+	//	{
+	//		b2PolygonShape* s = (b2PolygonShape*)b->GetFixtureList()->GetShape();
+	//		sf::ConvexShape convex;
+	//		int vertextCount = s->GetVertexCount();
+	//		convex.setPointCount(vertextCount);
+	//		convex.setFillColor(sf::Color(255, 255, 100, 128));
+
+	//		convex.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
+
+	//		for (int i = 0; i < vertextCount; i++)
+	//			convex.setPoint(i, sf::Vector2f(s->GetVertex(i).x, s->GetVertex(i).y));
+
+
+	//		gameContext->context->window.draw(convex);
+	//	}
+	//}
 //
 //		sf::RectangleShape rectangle(sf::Vector2f(32, 32));
 //		rectangle.setPosition(sf::Vector2f(gameContext->player->getBody()->GetPosition().x, gameContext->player->getBody()->GetPosition().y));
 //		rectangle.setOutlineThickness(0);
 //		rectangle.setFillColor(sf::Color(230, 100, 50, 200));
 //		gameContext->context->window.draw(rectangle);
-//
-//		gameContext->context->window.display();
-//=======
 	
 	gameContext->context->window.display();
-//>>>>>>> c0ac0f71076f89f7406fd636a6b50b518beefc97
+
 
 	if (gameContext->player->getHealth() <= 0)
 	{
