@@ -13,7 +13,6 @@ Tile::~Tile()
 
 void Tile::createStaticBody(b2World& world)
 {
-	
 	//check of locatie niet 0 is. 
 	myBodyDef.position = b2Vec2(this->getPositionX(), this->getPositionY());
 	myBodyDef.type = b2_staticBody;
@@ -27,7 +26,7 @@ void Tile::createStaticBody(b2World& world)
 	vertices[3].Set(32, 0);
 	this->Shape.Set(vertices, 4);
 
-	boxFixtureDef.density = 100.f;
+	boxFixtureDef.density = 10.f;
 	boxFixtureDef.friction = 0.0f;
 	boxFixtureDef.shape = &Shape;
 	Body->CreateFixture(&boxFixtureDef);

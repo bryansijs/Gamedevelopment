@@ -135,8 +135,8 @@ void PlayerActions::Use()
 		//std::cout << b <<  std::endl;
 		/*std::cout << "My current location x y " << player->getPosition().x << " " << player->getPosition().y << std::endl;*/
 
-		float playery = this->player->getBody()->GetPosition().y;
-		float playerx = this->player->getBody()->GetPosition().x;
+		float playery = this->player->getBody()->GetPosition().y -16;
+		float playerx = this->player->getBody()->GetPosition().x -16;
 
 		for (GameObject* object : this->player->getgameObjectContainer()->getObjects())
 		{

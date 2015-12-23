@@ -13,5 +13,5 @@ public:
 	bool checkVisible(int screenX, int screenY);
 private:
 	std::string direction;
-	int velocity = 50000.0f;
+	int velocity = 500.0f;
 };

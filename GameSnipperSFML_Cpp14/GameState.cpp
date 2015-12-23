@@ -59,7 +59,8 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	gameContext->level->End(context, stateManager, levelManager);
 	gameContext->level->Story(storylineManager);
 
-	gameContext->player->createBoxDynamic(*gameContext->world);
+	//gameContext->player->setPosition(gameContext->player->getPositionX() -16, gameContext->player->getPositionY() - 16);
+	gameContext->player->createBoxDynamicForPlayers(*gameContext->world);
 	
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
 
@@ -216,12 +217,12 @@ void GameState::Update()
 		gameContext->player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	}
 
-	//DebugBodies();
+	DebugBodies();
 
 
 	if (!isPause)
 	{
-		float speed = 0.01;
+		float speed = 1;
 		float count = 0;
 		float point = speed / Time::deltaTime;
 		while (point > count) {
