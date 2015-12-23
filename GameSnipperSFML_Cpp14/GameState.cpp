@@ -221,8 +221,13 @@ void GameState::Update()
 
 	if (!isPause)
 	{
-		this->gameContext->world->Step(Time::deltaTime, 6, 6);
-
+		float speed = 0.01;
+		float count = 0;
+		float point = speed / Time::deltaTime;
+		while (point > count) {
+			this->gameContext->world->Step(Time::deltaTime, 6, 6);
+			count++;
+		}
 		DestroyGameObjects();
 		gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
 
