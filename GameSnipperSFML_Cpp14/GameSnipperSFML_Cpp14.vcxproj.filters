@@ -202,6 +202,12 @@
     <Filter Include="Resource Files\Fonts">
       <UniqueIdentifier>{8e0a3160-507f-4e06-928c-a48635fe7699}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Model\Guns">
+      <UniqueIdentifier>{8b4310c2-058a-4eb6-80d7-e9dee5614529}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Guns">
+      <UniqueIdentifier>{2792518e-5b04-40bc-a1c6-b385dbcae222}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -483,6 +489,18 @@
     <ClInclude Include="tinydir.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Rifle.h">
+      <Filter>Header Files\Model\Guns</Filter>
+    </ClInclude>
+    <ClInclude Include="Pistol.h">
+      <Filter>Header Files\Model\Guns</Filter>
+    </ClInclude>
+    <ClInclude Include="Gun.h">
+      <Filter>Header Files\Model\Guns</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -623,9 +641,6 @@
     <ClCompile Include="InteractiveFactory.cpp">
       <Filter>Source Files\Factories</Filter>
     </ClCompile>
-    <ClCompile Include="ItemFactory.cpp">
-      <Filter>Source Files\Factories</Filter>
-    </ClCompile>
     <ClCompile Include="GameObjectFactory.cpp">
       <Filter>Source Files\Factories</Filter>
     </ClCompile>
@@ -739,6 +754,21 @@
     </ClCompile>
     <ClCompile Include="StoryTile.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Gun.cpp">
+      <Filter>Source Files\Model\Guns</Filter>
+    </ClCompile>
+    <ClCompile Include="Rifle.cpp">
+      <Filter>Source Files\Model\Guns</Filter>
+    </ClCompile>
+    <ClCompile Include="Pistol.cpp">
+      <Filter>Source Files\Model\Guns</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

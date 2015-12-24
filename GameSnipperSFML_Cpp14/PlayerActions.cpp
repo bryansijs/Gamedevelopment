@@ -161,6 +161,25 @@ void PlayerActions::Use()
 	}
 }
 
+void PlayerActions::Equip()
+{
+	std::string slot;
+
+	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
+		std::string map = KeyMapping::GetMap(activeKeys[i]);
+
+		if (map.find("equip") != std::string::npos)
+		{
+			slot = map;
+		}
+	}
+
+	if (!slot.empty())
+	{
+		player->EquipGun(slot.back() - '0');
+	}
+}
+
 void PlayerActions::StandStill()
 {
 	player->getBody()->SetLinearVelocity(b2Vec2(0, 0));

@@ -16,7 +16,6 @@ public:
 
 	void Shoot(DrawContainer* drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer, b2World* world, Player* player, std::string direction);
 private:
-	float shotRate = 0.5f;
 	float nextShot;
 };
 

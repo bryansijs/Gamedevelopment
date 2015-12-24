@@ -44,7 +44,8 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	//in constructor, usually
 
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer, gameContext->world);
-	gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
+	//gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
+	gameContext->levelImporter->Import(std::string("./Resources/levels/Level_New.json"));
 
 	gameContext->levelImporter->Prepare();
 

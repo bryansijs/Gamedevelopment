@@ -30,6 +30,7 @@ public:
 	void Move();
 	void Shoot();
 	void Use();
+	void Equip();
 
 	bool used = false;
 	std::vector<void(PlayerActions::*)()> activeActions;
@@ -39,7 +40,8 @@ private:
 	std::map<std::string, void(PlayerActions::*)()> actions = {
 		{ "move", &PlayerActions::Move },
 		{ "shoot", &PlayerActions::Shoot },
-		{ "use", &PlayerActions::Use }
+		{ "use", &PlayerActions::Use },
+		{ "equip", &PlayerActions::Equip }
 	};
 
 	std::string direction = "move-down";

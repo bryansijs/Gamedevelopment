@@ -27,6 +27,7 @@ private:
 		{ "Key", &Player::AddKey },
 	};
 
+	BaseItem* equipedGun;
 	bool godMode = false;
 public:
 	Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameObjectContainer *useContainer, b2World* world);
@@ -34,7 +35,6 @@ public:
 	~Player();
 
 	void removeKey(){keyAmount--;}
-
 	int getKey() { return keyAmount; }
 
 	std::map<BaseItem*, int> getPotions()
@@ -47,6 +47,9 @@ public:
 	void EnableGodMode();
 	void DisableGodMode();
 	bool GetGodMode();
+
+	void EquipGun(int slot);
+	BaseItem* GetEquipedGun();
 
 	virtual void startContact(b2Fixture* fixture);
 	virtual void endContact(b2Fixture* fixture);

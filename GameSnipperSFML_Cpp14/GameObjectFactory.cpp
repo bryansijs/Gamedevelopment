@@ -51,10 +51,15 @@ GameObject* GameObjectFactory::CreateTile(std::map<std::string, std::string>& pr
 
 GameObject* GameObjectFactory::CreateItem(std::map<std::string, std::string>& properties)
 {
-	return this->itemFactory.Create(properties, drawContainer, gameObjectContainer,world);
+	return this->itemFactory.Create(properties, drawContainer, moveContainer, gameObjectContainer,world);
 }
 
 GameObject * GameObjectFactory::CreateProjectile(std::map<std::string, std::string>& properties)
 {
 	return this->projectileFactory.Create(properties, drawContainer, moveContainer, gameObjectContainer, world);
+}
+
+GameObject * GameObjectFactory::CreateWeapon(std::map<std::string, std::string>& properties)
+{
+	return this->weaponFactory.Create(properties, gameObjectContainer);
 }

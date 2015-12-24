@@ -10,7 +10,7 @@
 #include "NormalDrawBehaviour.h"
 #include "ShotMoveBehaviour.h"
 
-Bullet::Bullet(GameObjectContainer * gameObjectContainer, std::map<std::string, std::string>& properties, b2World * world, MoveContainer * moveContainer, DrawContainer * drawContainer, std::string texture) : GameObject{ drawContainer, gameObjectContainer, texture }
+Bullet::Bullet(GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, b2World* world, MoveContainer* moveContainer, DrawContainer* drawContainer, std::string texture) : GameObject{ drawContainer, gameObjectContainer, texture }
 {
 	this->setProperties(properties);
 
@@ -31,15 +31,20 @@ Bullet::~Bullet()
 {
 }
 
-void Bullet::startContact(b2Fixture * fixture)
+void Bullet::startContact(b2Fixture* fixture)
 {
 	GameObject* pal = static_cast<Player*>(fixture->GetBody()->GetUserData());
 
-	if (dynamic_cast<Player*> (pal))
+	if (Player* player = dynamic_cast<Player*> (pal))
 	{
-		if (dynamic_cast<Player*> (pal)->GetGodMode())
+		if (player->GetGodMode())
 		{
 			return;
+		}
+
+		if (player->getHealth() <= 0)
+		{
+			// Lose state
 		}
 	}
 

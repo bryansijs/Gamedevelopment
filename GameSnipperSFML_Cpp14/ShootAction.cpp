@@ -11,6 +11,7 @@
 #include "GameObjectContainer.h"
 #include "ShotMoveBehaviour.h"
 #include "Player.h"
+#include "Gun.h"
 
 #include "GameObjectFactory.h"
 
@@ -26,7 +27,9 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 {
 	if (Time::runningTime > nextShot)
 	{
-		nextShot = (float)Time::runningTime + (float)shotRate;
+		Gun* gun = (Gun*)player->GetEquipedGun();
+
+		nextShot = (float)Time::runningTime + gun->GetFireRate();
 
 		float x = 0;
 		float y = 0;
@@ -52,15 +55,17 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 			y = player->getBody()->GetPosition().y + player->getHeight() / 2;
 		}
 
+		std::string projectileType = gun->GetProjectileType();
+
 		GameObjectFactory gameObjectFactory{ drawContainer, moveContainer, gameObjectContainer, world };
 		std::map<std::string, std::string> properties = {
 			{ "type", "Projectile" },
-			{ "pType", "Bullet" },
+			{ "pType", projectileType },
 			{ "direction", direction },
 			{ "texture", "bullet-red.png" },
 			{ "x", std::to_string(x) },
 			{ "y", std::to_string(y) }
 		};
-		GameObject* bullet = gameObjectFactory.Create(properties);
+		gameObjectFactory.Create(properties);
 	}
 }
