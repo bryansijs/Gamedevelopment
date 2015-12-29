@@ -92,7 +92,7 @@ void MenuActions::ShowLevels()
 	ReloadPage();
 	std::vector<std::string> levelCollection = this->levelManager->getAllLevels();
 	for (std::vector<std::string>::iterator it = levelCollection.begin(); it != levelCollection.end(); ++it) {
-		addLevelToMenu(menuContext->webView, menuContext->web_core, (*it).c_str());
+		addLevelToMenu(menuContext->webView, menuContext->context->web_core, (*it).c_str());
 	}
 }
 
@@ -150,11 +150,11 @@ void MenuActions::ReloadPage()
 
 	while (menuContext->webView->IsLoading())
 	{
-		menuContext->web_core->Update();
+		menuContext->context->web_core->Update();
 	}
 
 	Sleep(100);
-	menuContext->web_core->Update();
+	menuContext->context->web_core->Update();
 }
 
 void MenuActions::ShowIntruction()
@@ -172,13 +172,13 @@ void MenuActions::NavigateUp()
 		if (menuContext->currentLevelIndex > minLevel)
 		{
 			menuContext->currentLevelIndex--;
-			CallLevelEditMenuFunction(menuContext->webView, menuContext->web_core, std::string("selectionUp"));
+			CallLevelEditMenuFunction(menuContext->webView, menuContext->context->web_core, std::string("selectionUp"));
 		}
 	}
 	else if (menuContext->currentLevel > 1 && menuContext->inMenu)
 	{
 		menuContext->currentLevel -= 1;
-		callDirectJSFunction(menuContext->webView, menuContext->web_core, menuContext->currentLevel);
+		callDirectJSFunction(menuContext->webView, menuContext->context->web_core, menuContext->currentLevel);
 	}
 }
 
@@ -195,20 +195,20 @@ void MenuActions::NavigateDown()
 		if (menuContext->currentLevelIndex < maxLevel)
 		{
 			menuContext->currentLevelIndex++;
-			CallLevelEditMenuFunction(menuContext->webView, menuContext->web_core, std::string("selectionDown"));
+			CallLevelEditMenuFunction(menuContext->webView, menuContext->context->web_core, std::string("selectionDown"));
 		}
 	}
 	else if (menuContext->currentLevel < menuItems.size() && menuContext->inMenu)
 	{
 		menuContext->currentLevel += 1;
-		callDirectJSFunction(menuContext->webView, menuContext->web_core, menuContext->currentLevel);
+		callDirectJSFunction(menuContext->webView, menuContext->context->web_core, menuContext->currentLevel);
 	}
 }
 
 void MenuActions::NavigateLeft()
 {
 	if (menuContext->inLevels) {
-		CallLevelEditMenuFunction(menuContext->webView, menuContext->web_core, std::string("prevPage"));
+		CallLevelEditMenuFunction(menuContext->webView, menuContext->context->web_core, std::string("prevPage"));
 		menuContext->currentLevelPage--;
 		menuContext->currentLevelIndex = (menuContext->currentLevelPage - 1) * 8 + 1;
 	}
@@ -217,7 +217,7 @@ void MenuActions::NavigateLeft()
 void MenuActions::NavigateRight()
 {
 	if (menuContext->inLevels) {
-		CallLevelEditMenuFunction(menuContext->webView, menuContext->web_core, std::string("nextPage"));
+		CallLevelEditMenuFunction(menuContext->webView, menuContext->context->web_core, std::string("nextPage"));
 		menuContext->currentLevelIndex = (menuContext->currentLevelPage * 8) + 1;
 		menuContext->currentLevelPage++;
 	}
@@ -243,7 +243,7 @@ void MenuActions::NavigateComfirm()
 void MenuActions::SwitchToUp()
 {
 	if (menuContext->inLevels && menuContext->currentLevelIndex > 1) {
-		CallLevelEditMenuFunction(menuContext->webView, menuContext->web_core, std::string("switchToUp"));
+		CallLevelEditMenuFunction(menuContext->webView, menuContext->context->web_core, std::string("switchToUp"));
 		this->levelManager->swapSequence(menuContext->currentLevelIndex, menuContext->currentLevelIndex - 1);
 		if (menuContext->currentLevelIndex == ((menuContext->currentLevelPage - 1) * 8) + 1) {
 			menuContext->currentLevelPage--;
@@ -258,7 +258,7 @@ void MenuActions::SwitchToDown()
 {
 	int maxLevel = this->levelManager->getAllLevels().size();
 	if (menuContext->inLevels && menuContext->currentLevelIndex < maxLevel) {
-		CallLevelEditMenuFunction(menuContext->webView, menuContext->web_core, std::string("switchToDown"));
+		CallLevelEditMenuFunction(menuContext->webView, menuContext->context->web_core, std::string("switchToDown"));
 		this->levelManager->swapSequence(menuContext->currentLevelIndex, menuContext->currentLevelIndex + 1);
 		if (menuContext->currentLevelIndex == menuContext->currentLevelPage * 8)
 		{

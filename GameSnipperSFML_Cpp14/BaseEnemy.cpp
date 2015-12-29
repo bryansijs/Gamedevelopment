@@ -19,8 +19,8 @@ BaseEnemy::~BaseEnemy()
 
 
 BaseEnemy::BaseEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer) :Unit{ dContainer, img,mContainer, gameObjectContainer } {
-	this->setSpeed(40.0f);
 
+	this->setSpeed(40.0f);
 }
 
 
@@ -66,15 +66,11 @@ void BaseEnemy::CreateLineOfSight()
 
 void BaseEnemy::CreateVectors()
 {
-	int b = this->getIndexY();
-
-
 	float desiredAngle;
-	switch (b)
+	switch (this->getIndexY())
 	{
 	case 0: {
-		desiredAngle = atan2f(0,0);
-		this->lineOfSightBody->SetTransform(this->getBody()->GetPosition(), desiredAngle);
+		desiredAngle = atan2f(0, 0);
 		convexVert[0].Set(16, 16);
 		convexVert[1].Set(seeWidth, seeLength);
 		convexVert[2].Set(-seeWidth, seeLength);
@@ -92,8 +88,8 @@ void BaseEnemy::CreateVectors()
 		convexVert[2].Set(seeLength, -seeWidth);
 	}	break;
 	case 3: {
+
 		desiredAngle = atan2f(0, -seeLength *2);
-	
 		convexVert[0].Set(16, 16);
 		convexVert[1].Set(-seeWidth, -seeLength);
 		convexVert[2].Set(seeWidth, -seeLength);
@@ -103,7 +99,7 @@ void BaseEnemy::CreateVectors()
 	default:
 		break;
 	}
-	
+
 	this->lineOfSightBody->SetTransform(this->getBody()->GetPosition(), desiredAngle);
 	this->lineOfSightShape.Set(this->vertices, 3);
 }
@@ -122,7 +118,8 @@ void BaseEnemy::Update()
 {
 	this->CreateVectors();
 	this->CreateVisibleLine();
-	
+
+
 	for (b2ContactEdge* ce = lineOfSightBody->GetContactList(); ce; ce = ce->next)
 	{
 		b2Contact* c = ce->contact;
