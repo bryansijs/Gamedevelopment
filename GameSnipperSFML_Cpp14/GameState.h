@@ -39,7 +39,9 @@ private:
 	GameActions* gameActions;
 
 	sf::View storyview;
+	sf::View loadingView;
 	AwesomiumHelper* storyline;
+	AwesomiumHelper* loadingScreen;
 	StorylineManager* storylineManager;
 
 	void DestroyGameObjects();
@@ -49,9 +51,9 @@ private:
 	void Loading();
 	void DoneLoading();
 
-	void ReloadUI(char const* path);
-	void DrawUI();
-	void CreateTexture();
+	void DrawLoadingScreen();
 
-	void GetAd();
+	std::string GetAd();
+	std::string GetTip();
+	std::vector<std::string> GetFilesInDirectory(const char* directory);
 };

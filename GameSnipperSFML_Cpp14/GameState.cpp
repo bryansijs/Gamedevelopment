@@ -17,6 +17,10 @@
 #include <Awesomium/WebCore.h>
 #include <Awesomium/BitmapSurface.h>
 #include <Awesomium/STLHelpers.h>
+#include "tinydir.h"
+#include "Random.h"
+#include <vector>
+#include <string>
 
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager, ScoreManager* scoreManager)
 {
@@ -129,6 +133,7 @@ void GameState::DebugBodies()
 void GameState::Update()
 {
 	Time::deltaTime = static_cast<float>(gameContext->deltaClock.restart().asSeconds());
+	Time::deltaTime *= gameContext->gameSpeedMultiplier;
 	Time::runningTime += Time::deltaTime;
 
 	gameContext->context->window.clear(sf::Color::White);
@@ -168,6 +173,19 @@ void GameState::Update()
 
 			if (gameContext->event.type == sf::Event::KeyPressed)
 			{
+				if (Input::GetKeyDown("RBracket"))
+				{
+					gameContext->gameSpeedMultiplier++;
+				}
+
+				if (Input::GetKeyDown("LBracket"))
+				{
+					if (gameContext->gameSpeedMultiplier > 1)
+					{
+						gameContext->gameSpeedMultiplier--;
+					}
+				}
+
 				if (Input::GetKeyDown("K")) {
 					StartNextLevel();
 				}
@@ -182,7 +200,6 @@ void GameState::Update()
 					if (isPause)
 						gameContext->setMenuPosition();
 				}
-
 
 				if (Input::GetKeyDown(KeyMapping::GetKey("fps"))) {
 					showFPS = !showFPS;
@@ -321,23 +338,32 @@ void GameState::MenuEnd(int option)
 void GameState::Loading()
 {
 	gameContext->loading = true;
+	
+	loadingScreen = new AwesomiumHelper{ maincontext->web_core, "file:///Resources/menuHTML/loading.html", 960, 640 };
+	loadingScreen->JavaScriptCall("loadAd", GetAd());
+	loadingScreen->JavaScriptCall("loadTip", GetTip());
 
-	GetAd();
-
-	ReloadUI("file:///Resources/menuHTML/loading.html");
-	CreateTexture();
-	DrawUI();
+	DrawLoadingScreen();
 }
 
 void GameState::DoneLoading()
 {
-	ReloadUI("file:///Resources/menuHTML/doneLoading.html");
-	CreateTexture();
-	DrawUI();
+	loadingScreen = new AwesomiumHelper{ maincontext->web_core, "file:///Resources/menuHTML/doneLoading.html", 960, 640 };
+	loadingScreen->JavaScriptCall("loadAd", GetAd());
+	loadingScreen->JavaScriptCall("loadTip", GetTip());
+
+	DrawLoadingScreen();
 
 	while (gameContext->loading)
 	{
 		while (gameContext->context->window.pollEvent(gameContext->event)) {
+			if (gameContext->event.type == sf::Event::Closed)
+			{
+				gameContext->context->window.close();
+				stateManager->PopState();
+				return;
+			}
+
 			if (gameContext->event.type == sf::Event::KeyPressed)
 			{
 				gameContext->loading = false;
@@ -346,47 +372,72 @@ void GameState::DoneLoading()
 	}
 }
 
-void GameState::ReloadUI(char const* path)
+void GameState::DrawLoadingScreen()
 {
-	Awesomium::WebURL url(Awesomium::WSLit(path));
-	gameContext->webView->LoadURL(url);
-	gameContext->webView->SetTransparent(true);
-
-	while (gameContext->webView->IsLoading())
-	{
-		gameContext->web_core->Update();
-	}
-
-	Sleep(100);
-	gameContext->web_core->Update();
-}
-
-void GameState::DrawUI()
-{
-	sf::Sprite ui(gameContext->texture);
-	gameContext->texture.update(gameContext->pixels);
-	gameContext->context->window.draw(ui);
+	sf::Sprite loadingSprite = loadingScreen->GetSprite();
+	loadingSprite.setPosition(0, 0);
+	loadingView.setSize(960, 640);
+	loadingView.setCenter(480, 320);
+	gameContext->context->window.setView(loadingView);
+	gameContext->context->window.draw(loadingSprite);
 	gameContext->context->window.display();
 }
 
-void GameState::CreateTexture()
+std::string GameState::GetAd()
 {
-	gameContext->surface = static_cast<Awesomium::BitmapSurface*>(gameContext->webView->surface());
+	std::vector<std::string> ads = GetFilesInDirectory("./Resources/ads/");
 
-	gameContext->texture.create(960, 640);
-	gameContext->pixels = new sf::Uint8[gameContext->context->window.getSize().x * gameContext->context->window.getSize().y * 4];
-
-	const unsigned char* tempBuffer = gameContext->surface->buffer();
-
-	for (register int i = 0; i < 960 * 640 * 4; i += 4) {
-		gameContext->pixels[i] = tempBuffer[i + 2];
-		gameContext->pixels[i + 1] = tempBuffer[i + 1];
-		gameContext->pixels[i + 2] = tempBuffer[i];
-		gameContext->pixels[i + 3] = tempBuffer[i + 3];
+	if (ads.size() > 0)
+	{
+		return ads[Random::Number(0, (ads.size() - 1))];
 	}
+	
+	return "";
 }
 
-void GameState::GetAd()
+std::string GameState::GetTip()
 {
+	std::vector<std::string> tips;
 	
+	std::ifstream tipsFile;
+	tipsFile.open("./Resources/tips.txt");
+	if (tipsFile.is_open())
+	{
+		string line;
+		while (getline(tipsFile, line)) {
+			tips.push_back(line);
+		}
+	}
+
+	if (tips.size() > 0)
+	{
+		return tips[Random::Number(0, (tips.size() - 1))];
+	}
+	
+	return "";
+}
+
+std::vector<std::string> GameState::GetFilesInDirectory(const char* directory)
+{
+	std::vector<std::string> files;
+
+	tinydir_dir dir;
+	tinydir_open(&dir, directory);
+
+	while (dir.has_next)
+	{
+		tinydir_file file;
+		tinydir_readfile(&dir, &file);
+
+		if (!file.is_dir)
+		{
+			files.push_back(file.name);
+		}
+
+		tinydir_next(&dir);
+	}
+
+	tinydir_close(&dir);
+	
+	return files;
 }
