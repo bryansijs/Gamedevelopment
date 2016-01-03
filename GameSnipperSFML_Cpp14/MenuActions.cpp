@@ -174,6 +174,7 @@ void MenuActions::ShowHighscore()
 	
 	if(scoreManager->GetScores().size() < 1) return;
 	
+	scoreManager->Reload();
 	std::map<std::string, int>::iterator it;
 	std::map<std::string, int> map = scoreManager->GetScores();
 	for (it = map.begin(); it != map.end(); ++it) {

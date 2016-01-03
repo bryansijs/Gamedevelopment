@@ -1,1 +1,2 @@
 bryan 5
+thomas 10

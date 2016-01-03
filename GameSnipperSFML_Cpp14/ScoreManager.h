@@ -9,6 +9,7 @@ class ScoreManager
 public:
 	ScoreManager() { ReadScores(); };
 	~ScoreManager();
+	void Reload() { ReadScores(); };
 	void AddScore(int score, std::string naam);
 	std::map<std::string,int> GetScores();
 	void Save();
