@@ -2,15 +2,32 @@
 #include "WanderMoveBehaviour.h"
 #include "Tile.h"
 #include "Random.h"
-
+#include "Time.h"
+#include "BaseEnemy.h"
 #include <cstdlib>
 
 WanderMoveBehaviour::WanderMoveBehaviour(GameObject* gameObject)
 {
 	this->gameObject = gameObject;
 	moveAction = new MoveAction{ gameObject, 0.10f };
-	startPosition = gameObject->getPosition();
-	endPosition = gameObject->getPosition();
+
+	moveDistance = 0;
+
+	std::vector<std::string> dir= 
+	{
+		{ "move-up" },
+		{ "move-down" },
+		{ "move-left" },
+		{ "move-right" },
+		{ "move-upright" },
+		{ "move-downright" },
+		{ "move-upleft" },
+		{ "move-downleft" },
+		{ "move-not" }
+	};
+
+	this->swapDirections(dir);
+	dir.clear();
 }
 
 WanderMoveBehaviour::~WanderMoveBehaviour()
@@ -21,12 +38,13 @@ void WanderMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 {
 	if (checkVisible(viewPortPosition.x, viewPortPosition.y))
 	{
-		if (startPosition == endPosition || std::abs(gameObject->getPosition().x - startPosition.x) > moveDistance || std::abs(gameObject->getPosition().y - startPosition.y) > moveDistance)
+
+		if (currentMoveDistance >= moveDistance)
 		{
-			startPosition = gameObject->getPosition();
 
 			moveDistance = Random::Number(minMoveDistance, maxMoveDistance) + defaultMoveDistance;
-			this->direction = directions[Random::Number(0, directions.size() - 1)];
+			currentMoveDistance = 0;
+			this->setDirection();
 		}
 
 		for (b2ContactEdge* ce = this->gameObject->getBody()->GetContactList(); ce; ce = ce->next)
@@ -34,15 +52,32 @@ void WanderMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 			b2Contact* c = ce->contact;
 
 			GameObject* obj = static_cast<GameObject*>(ce->other->GetUserData());
+			if (dynamic_cast<BaseEnemy*>(obj))
+			{
+				this->MoveAway(dynamic_cast<BaseEnemy*>(obj));
+				moveDistance = Random::Number(minMoveDistance, maxMoveDistance) + defaultMoveDistance;
+				currentMoveDistance = 0;
+			}
+
 			if (dynamic_cast<Tile*>(obj))
 			{
-				if (c->IsTouching())
+				if (c->IsTouching()) {
+
+					moveDistance = Random::Number(minMoveDistance, maxMoveDistance) + defaultMoveDistance;
+					currentMoveDistance = 0;
 					this->setDirection();
+				}
 			}
 		}
 
-		moveAction->Move({ this->direction });
+
+		moveAction->Move( this->getDirection());
+		currentMoveDistance += 300.0f* Time::deltaTime; 
+		if (mDircection == "move-not")currentMoveDistance += 360.0f* Time::deltaTime;
+		reverseTime += 300.0f * Time::deltaTime;
 	}
+
+	
 }
 
 bool WanderMoveBehaviour::checkVisible(int screenX, int screenY)
@@ -51,33 +86,85 @@ bool WanderMoveBehaviour::checkVisible(int screenX, int screenY)
 }
 
 
+void WanderMoveBehaviour::MoveAway(BaseEnemy* obj)
+{
+	if (this->getDirection() == obj->getMoveBehaviour()->getDirection())
+	{
+		this->setDirection();
+	}
+	else
+		this->reverseDirection();
+
+
+}
+
+
+void WanderMoveBehaviour::finalizeDirection()
+{
+	this->clearDirection();
+	if (mDircection == "move-upleft")
+	{
+		this->addDirection("move-up");
+		this->addDirection("move-left");
+		return;
+	}
+	if (mDircection == "move-upright")
+	{
+		this->addDirection("move-up");
+		this->addDirection("move-right");
+		return;
+	}
+	if (mDircection == "move-downleft")
+	{
+		this->addDirection("move-down");
+		this->addDirection("move-left");
+		return;
+	}
+	if (mDircection == "move-downright")
+	{
+		this->addDirection("move-down");
+		this->addDirection("move-right");
+		return;
+	}
+
+	this->addDirection(mDircection);
+}
+
+void WanderMoveBehaviour::reverseDirection()
+{
+
+	if (reverseTime < reversecoolDown)return;
+
+	reverseTime = 0;
+
+	if (mDircection.find("up") != std::string::npos) 
+		Replace(mDircection, "up", "down");
+	else 
+		Replace(mDircection, "down", "up");
+
+	if (mDircection.find("left") != std::string::npos)
+		Replace(mDircection, "left", "right");
+	else
+		Replace(mDircection, "right", "left");
+	
+
+	finalizeDirection();
+
+}
 
 void WanderMoveBehaviour::setDirection()
 {
+	
+	std::string oldDirection = mDircection;
+	mDircection  =  getDirection(Random::Number(0,getDirectionSize() - 1));
 
-	if (direction == "move-up") {
-		direction = "move-down";
-		this->gameObject->setPosition(this->gameObject->getBody()->GetPosition().x, this->gameObject->getBody()->GetPosition().y + 5);
-		this->gameObject->getBody()->SetTransform(b2Vec2(this->gameObject->getBody()->GetPosition().x, this->gameObject->getBody()->GetPosition().y + 5), 0);
+	while (mDircection == oldDirection) {
+		mDircection = getDirection(Random::Number(0, getDirectionSize() - 1));
+	}
 
-	}
-	else if (direction == "move-down")
-	{
+	finalizeDirection();
 
-		direction = "move-up";
-		this->gameObject->setPosition(this->gameObject->getBody()->GetPosition().x, this->gameObject->getBody()->GetPosition().y - 5);
-		this->gameObject->getBody()->SetTransform(b2Vec2(this->gameObject->getBody()->GetPosition().x, this->gameObject->getBody()->GetPosition().y - 5), 0);
-	}
-	if (direction == "move-left")
-	{
-		direction = "move-right";
-		this->gameObject->setPosition(this->gameObject->getBody()->GetPosition().x - 5, this->gameObject->getBody()->GetPosition().y);
-		this->gameObject->getBody()->SetTransform(b2Vec2(this->gameObject->getBody()->GetPosition().x - 5, this->gameObject->getBody()->GetPosition().y), 0);
-	}
-	else if (direction == "move-right")
-	{
-		direction = "move-left";
-		this->gameObject->setPosition(this->gameObject->getBody()->GetPosition().x + 5, this->gameObject->getBody()->GetPosition().y);
-		this->gameObject->getBody()->SetTransform(b2Vec2(this->gameObject->getBody()->GetPosition().x + 5, this->gameObject->getBody()->GetPosition().y), 0);
-	}
+	
+
 }
+
