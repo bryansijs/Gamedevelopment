@@ -5,7 +5,6 @@
 #include "Time.h"
 #include "BaseEnemy.h"
 #include <cstdlib>
-
 WanderMoveBehaviour::WanderMoveBehaviour(GameObject* gameObject)
 {
 	this->gameObject = gameObject;
@@ -13,7 +12,7 @@ WanderMoveBehaviour::WanderMoveBehaviour(GameObject* gameObject)
 
 	moveDistance = 0;
 
-	std::vector<std::string> dir= 
+	std::vector<std::string> dir =
 	{
 		{ "move-up" },
 		{ "move-down" },
@@ -41,43 +40,45 @@ void WanderMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 
 		if (currentMoveDistance >= moveDistance)
 		{
-
-			moveDistance = Random::Number(minMoveDistance, maxMoveDistance) + defaultMoveDistance;
-			currentMoveDistance = 0;
 			this->setDirection();
 		}
 
-		for (b2ContactEdge* ce = this->gameObject->getBody()->GetContactList(); ce; ce = ce->next)
-		{
+		for (b2ContactEdge* ce = this->gameObject->getBody()->GetContactList(); ce; ce = ce->next){
 			b2Contact* c = ce->contact;
-
 			GameObject* obj = static_cast<GameObject*>(ce->other->GetUserData());
+			
+
+			b2Fixture* fixtureA = ce->contact->GetFixtureA();
+			b2Fixture* fixtureB = ce->contact->GetFixtureB();
+
+			if (fixtureA->IsSensor()|| fixtureB->IsSensor())continue;
+
+
 			if (dynamic_cast<BaseEnemy*>(obj))
 			{
 				this->MoveAway(dynamic_cast<BaseEnemy*>(obj));
-				moveDistance = Random::Number(minMoveDistance, maxMoveDistance) + defaultMoveDistance;
-				currentMoveDistance = 0;
 			}
-
 			if (dynamic_cast<Tile*>(obj))
-			{
-				if (c->IsTouching()) {
-
-					moveDistance = Random::Number(minMoveDistance, maxMoveDistance) + defaultMoveDistance;
-					currentMoveDistance = 0;
-					this->setDirection();
+				{
+					if (c->IsTouching()) {
+						this->setDirection();
+					}
 				}
-			}
+				
 		}
 
 
-		moveAction->Move( this->getDirection());
-		currentMoveDistance += 300.0f* Time::deltaTime; 
-		if (mDircection == "move-not")currentMoveDistance += 360.0f* Time::deltaTime;
+		moveAction->Move(this->getDirection());
+		currentMoveDistance += 100.0f* Time::deltaTime;
+
+		if (mDircection == "move-not")
+			currentMoveDistance += 360.0f* Time::deltaTime;
+
 		reverseTime += 300.0f * Time::deltaTime;
+
 	}
 
-	
+
 }
 
 bool WanderMoveBehaviour::checkVisible(int screenX, int screenY)
@@ -128,6 +129,9 @@ void WanderMoveBehaviour::finalizeDirection()
 	}
 
 	this->addDirection(mDircection);
+
+	moveDistance = Random::Number(minMoveDistance, maxMoveDistance) + defaultMoveDistance;
+	currentMoveDistance = 0;
 }
 
 void WanderMoveBehaviour::reverseDirection()
@@ -137,16 +141,16 @@ void WanderMoveBehaviour::reverseDirection()
 
 	reverseTime = 0;
 
-	if (mDircection.find("up") != std::string::npos) 
+	if (mDircection.find("up") != std::string::npos)
 		Replace(mDircection, "up", "down");
-	else 
+	else
 		Replace(mDircection, "down", "up");
 
 	if (mDircection.find("left") != std::string::npos)
 		Replace(mDircection, "left", "right");
 	else
 		Replace(mDircection, "right", "left");
-	
+
 
 	finalizeDirection();
 
@@ -154,9 +158,9 @@ void WanderMoveBehaviour::reverseDirection()
 
 void WanderMoveBehaviour::setDirection()
 {
-	
+
 	std::string oldDirection = mDircection;
-	mDircection  =  getDirection(Random::Number(0,getDirectionSize() - 1));
+	mDircection = getDirection(Random::Number(0, getDirectionSize() - 1));
 
 	while (mDircection == oldDirection) {
 		mDircection = getDirection(Random::Number(0, getDirectionSize() - 1));
@@ -164,7 +168,7 @@ void WanderMoveBehaviour::setDirection()
 
 	finalizeDirection();
 
-	
+
 
 }
 

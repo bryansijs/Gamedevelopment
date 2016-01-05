@@ -5,8 +5,8 @@
 #include "Player.h"
 #include <Box2D\Dynamics\b2Body.h>
 #include <Box2D\Collision\b2Collision.h>
-
-
+#include "FilterEnum.h"
+#include "Tile.h"
 #include "MoveBehaviour.h"
 BaseEnemy::BaseEnemy()
 {
@@ -22,6 +22,8 @@ BaseEnemy::BaseEnemy(DrawContainer* dContainer, std::string img, MoveContainer* 
 
 	this->setSpeed(40.0f);
 }
+
+
 
 
 void BaseEnemy::setProperties(std::map<std::string, std::string>& properties)
@@ -44,13 +46,8 @@ void BaseEnemy::setProperties(std::map<std::string, std::string>& properties)
 void BaseEnemy::CreateLineOfSight()
 {
 	this->lineOfSightFixtureDef = new b2FixtureDef();
-	this->lineOfSightBodyDef = new b2BodyDef();
 	this->lineOfSightConvex = new sf::ConvexShape{};
 	this->lineOfSightConvex->setPointCount(3);
-
-	lineOfSightBodyDef->position = this->getBody()->GetPosition();
-	this->lineOfSightBodyDef->type = b2_dynamicBody;
-	this->lineOfSightBody = this->world->CreateBody(lineOfSightBodyDef);
 
 	vertices[0].Set(16, 16);
 	vertices[1].Set(seeWidth, seeLength);
@@ -61,7 +58,8 @@ void BaseEnemy::CreateLineOfSight()
 	lineOfSightFixtureDef->density = 100;
 	lineOfSightFixtureDef->friction = 0.3f;
 	lineOfSightFixtureDef->isSensor = true;
-	lineOfSightBody->CreateFixture(lineOfSightFixtureDef);
+
+	this->getBody()->CreateFixture(lineOfSightFixtureDef);
 }
 
 void BaseEnemy::CreateVectors()
@@ -100,7 +98,7 @@ void BaseEnemy::CreateVectors()
 		break;
 	}
 
-	this->lineOfSightBody->SetTransform(this->getBody()->GetPosition(), desiredAngle);
+	this->getBody()->SetTransform(this->getBody()->GetPosition(), desiredAngle);
 	this->lineOfSightShape.Set(this->vertices, 3);
 }
 
@@ -108,7 +106,7 @@ void BaseEnemy::CreateVectors()
 void BaseEnemy::CreateVisibleLine()
 {
 	this->lineOfSightConvex->setFillColor(sf::Color(255, 129, 0, 128));
-	this->lineOfSightConvex->setPosition(sf::Vector2f(lineOfSightBody->GetPosition().x, lineOfSightBody->GetPosition().y));
+	this->lineOfSightConvex->setPosition(sf::Vector2f(this->getBody()->GetPosition().x, this->getBody()->GetPosition().y));
 
 	for (int i = 0; i < 3; i++)
 		this->lineOfSightConvex->setPoint(i, sf::Vector2f(convexVert[i].x, convexVert[i].y));
@@ -119,18 +117,32 @@ void BaseEnemy::Update()
 	this->CreateVectors();
 	this->CreateVisibleLine();
 
-
-	for (b2ContactEdge* ce = lineOfSightBody->GetContactList(); ce; ce = ce->next)
+	
+	for (b2ContactEdge* ce = this->getBody()->GetContactList(); ce; ce = ce->next)
 	{
-		b2Contact* c = ce->contact;
-		GameObject* obj = static_cast<GameObject*>(ce->other->GetUserData());
-		if (dynamic_cast<Player*>(obj))
-		{
-			if (c->IsTouching())
-				this->lineOfSightConvex->setFillColor(sf::Color(250, 0, 0, 128));
-		}
 
+		b2Contact* c = ce->contact;
+		b2Fixture* fixtureA = c->GetFixtureA();
+		b2Fixture* fixtureB = c->GetFixtureB();
+		if (fixtureA->IsSensor() || fixtureB->IsSensor()) {
+			GameObject* obj = static_cast<GameObject*>(ce->other->GetUserData());
+			if (dynamic_cast<Player*>(obj))
+			{
+				if (c->IsTouching())
+					this->lineOfSightConvex->setFillColor(sf::Color(250, 0, 0, 128));
+			}
+		}
 	}
 }
 
 
+
+void BaseEnemy::startContact(b2Fixture * fixture)
+{
+
+}
+
+void BaseEnemy::endContact(b2Fixture * fixture)
+{
+
+}

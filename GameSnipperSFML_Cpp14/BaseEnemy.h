@@ -14,14 +14,14 @@ private:
 
 	b2PolygonShape  lineOfSightShape;
 	b2FixtureDef* lineOfSightFixtureDef;
-	b2Body* lineOfSightBody;
-	b2BodyDef* lineOfSightBodyDef;
 
 	int seeWidth;
 	int seeLength;
 
 	void CreateVisibleLine();
 	void CreateVectors();
+	void startContact(b2Fixture * fixture);
+	void endContact(b2Fixture * fixture);
 public:
 	BaseEnemy();
 	~BaseEnemy();

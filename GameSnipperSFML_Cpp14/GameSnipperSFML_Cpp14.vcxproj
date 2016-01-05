@@ -191,6 +191,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="DrawContainer.h" />
     <ClInclude Include="EndTile.h" />
     <ClInclude Include="EnemyFactory.h" />
+    <ClInclude Include="FilterEnum.h" />
     <ClInclude Include="FPSShow.h" />
     <ClInclude Include="GameActions.h" />
     <ClInclude Include="GameContext.h" />
