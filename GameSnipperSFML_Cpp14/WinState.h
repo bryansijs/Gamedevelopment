@@ -2,6 +2,7 @@
 #include "BaseState.h"
 #include <Awesomium/WebCore.h>
 #include "LevelManager.h"
+#include "ScoreManager.h"
 
 class StateManager;
 class Context;
@@ -17,8 +18,9 @@ private:
 	Context* context;
 	WinContext* winContext;
 	LevelManager* levelManager;
+	ScoreManager* scoreManager;
 public:
-	WinState(Context* context, StateManager* stateManager, LevelManager* levelManager);
+	WinState(Context* context, StateManager* stateManager, LevelManager* levelManager, ScoreManager* scoreManager);
 	~WinState();
 
 	void Update();
