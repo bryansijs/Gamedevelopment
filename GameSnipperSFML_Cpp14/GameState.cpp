@@ -26,8 +26,8 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 {
 	maincontext = context;
 	
-	gameActions = new GameActions(this);
 	gameContext = new GameContext(context);
+	gameActions = new GameActions(this, gameContext);
 	storyline = new AwesomiumHelper{ context->web_core, "file:///Resources/html-game/StoryLine.html", 1000, 50 };
 	storylineManager = new StorylineManager();
 
