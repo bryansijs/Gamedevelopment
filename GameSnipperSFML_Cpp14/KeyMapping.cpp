@@ -35,6 +35,21 @@ void KeyMapping::ReloadMapping(multimap<std::string, std::string> newMapping)
 	mapping = newMapping;
 }
 
+bool KeyMapping::KeyInUse(std::string key)
+{
+	multimap<std::string, std::string>::iterator it;
+
+	for (it = mapping.begin(); it != mapping.end(); ++it)
+	{
+		if (it->second == key)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 std::string KeyMapping::GetMap(std::string key)
 {
 	multimap<std::string, std::string>::iterator it;

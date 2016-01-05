@@ -16,6 +16,7 @@ public:
 	static void RemoveKeyMap(std::string map, std::string key);
 	static void ReloadMapping(multimap<std::string, std::string> mapping);
 
+	static bool KeyInUse(std::string key);
 	static std::string GetMap(std::string key);
 	static std::string GetKey(std::string map);
 	static void ChangeKey(std::string map, std::string key);

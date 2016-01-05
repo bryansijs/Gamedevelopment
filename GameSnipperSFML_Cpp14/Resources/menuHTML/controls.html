@@ -56,18 +56,31 @@
                 margin-left: -100px;
                 margin-top: -25px;
                 width: 200px;
-                height: 50px;
-                background: rgba(0, 0, 0, 0.5);
+                background: rgba(0, 0, 0, 0.85);
                 border: 1px solid #000;
                 text-align: center;
             }
 
-                #pop-up.visible {
+                #pop-up.visible,
+                #invalid-key.visible {
                     display: block;
                 }
-                #pop-up.hidden {
+                #pop-up.hidden,
+                #invalid-key.hidden {
                     display: none;
                 }
+
+            #invalid-key {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-left: -100px;
+                margin-top: 30px;
+                width: 200px;
+                background: rgba(0, 0, 0, 0.85);
+                border: 1px solid #000;
+                text-align: center;
+            }
         </style>
 
         <div class="frame">
@@ -75,11 +88,16 @@
 
             <div class="canvas">
                 <h3 style="text-align: center; font-family: moonhouse;">Controls</h3>
+                <p>Choose an action and press "enter" to change the key.</p>
                 <table id="controlsTable"></table>
             </div>
 
             <div id="pop-up" class="hidden">
                 <p>Press a key...</p>
+            </div>
+
+            <div id="invalid-key" class="hidden">
+                <p>The key you pressed is already in use, try another one.</p>
             </div>
         </div>
         <script>
@@ -112,6 +130,12 @@
             {
                 document.getElementsByClassName("selected")[0].className = "";
                 document.getElementsByTagName("tr")[parseInt(map - 1)].className = "selected";
+            }
+
+            function invalidKey(param)
+            {
+                document.getElementById("invalid-key").removeAttribute("class");
+                document.getElementById("invalid-key").className = param;
             }
         </script>
     </body>

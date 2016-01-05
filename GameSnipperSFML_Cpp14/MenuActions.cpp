@@ -69,26 +69,44 @@ void MenuActions::EditKey()
 
 			if (key != "Return")
 			{
-				KeyMapping::ChangeKey(currentMap, key);
-				std::string mappingString = KeyMappingExporter::MappingToString(KeyMapping::GetMapping());
-				KeyMappingExporter::SaveToFile(mappingString);
-				editingKey = false;
-				ShowControls();
+				if (key == "Escape")
+				{
+					editingKey = false;
+					ShowControls();
+					return;
+				}
+
+				bool edit = true;
+				std::vector<std::string>::iterator it;
+
+				for (it = uneditableKeys.begin(); it != uneditableKeys.end(); ++it)
+				{
+					if ((*it) == key)
+					{
+						edit = false;
+					}
+				}
+
+				if (KeyMapping::KeyInUse(key) && KeyMapping::GetMap(key) != currentMap)
+				{
+					edit = false;
+				}
+
+				if (edit == true)
+				{
+					KeyMapping::ChangeKey(currentMap, key);
+					std::string mappingString = KeyMappingExporter::MappingToString(KeyMapping::GetMapping());
+					KeyMappingExporter::SaveToFile(mappingString);
+					editingKey = false;
+					ShowControls();
+				}
+				else
+				{
+					CallDirectJSFunction("invalidKey", "visible");
+				}
 			}
 		}
 	}
-
-	/*if (activeKeys.size() > 0 && !Input::GetKeyDown("Return"))
-	{
-		if (std::find(activeKeys.begin(), activeKeys.end(), "Return") == activeKeys.end())
-		{
-			KeyMapping::ChangeKey(currentMap, activeKeys.back());
-			std::string map = currentMap + "," + activeKeys.back();
-			ShowControls();
-
-			editingKey = false;
-		}
-	}*/
 }
 
 void MenuActions::ExitGame()
