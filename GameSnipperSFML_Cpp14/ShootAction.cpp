@@ -33,23 +33,23 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 
 		if (direction == "move-up")
 		{
-			x = player->getBody()->GetPosition().x + 12;
-			y = player->getBody()->GetPosition().y + 5;
+			x = player->getBody()->GetPosition().x + player->getWidth() / 2;
+			y = player->getBody()->GetPosition().y - 10;
 		}
 		if (direction == "move-down")
 		{
-			x = player->getBody()->GetPosition().x + 12;
-			y = player->getBody()->GetPosition().y + 29;
+			x = player->getBody()->GetPosition().x + player->getWidth() / 2;
+			y = player->getBody()->GetPosition().y + player->getHeight() + 10;
 		}
 		if (direction == "move-left")
 		{
-			x = player->getBody()->GetPosition().x + 5;
-			y = player->getBody()->GetPosition().y + 12;
+			x = player->getBody()->GetPosition().x - 10;
+			y = player->getBody()->GetPosition().y + player->getHeight() / 2;
 		}
 		if (direction == "move-right")
 		{
-			x = player->getBody()->GetPosition().x + 29;
-			y = player->getBody()->GetPosition().y + 12;
+			x = player->getBody()->GetPosition().x + player->getWidth() + 10;
+			y = player->getBody()->GetPosition().y + player->getHeight() / 2;
 		}
 
 		GameObjectFactory gameObjectFactory{ drawContainer, moveContainer, gameObjectContainer, world };
