@@ -20,7 +20,7 @@ BaseEnemy::~BaseEnemy()
 
 BaseEnemy::BaseEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer) :Unit{ dContainer, img,mContainer, gameObjectContainer } {
 
-	this->setSpeed(40.0f);
+
 }
 
 
@@ -41,6 +41,12 @@ void BaseEnemy::setProperties(std::map<std::string, std::string>& properties)
 	this->setSize(widht, height);
 
 	this->setImageY((properties.count("yIndex")) ? std::stoi(properties["yIndex"]) : 0);
+	this->setSpeed((properties.count("speed")) ? std::stoi(properties["speed"]) : 40);
+
+	this->setMinWanderDistance((properties.count("minWander")) ? std::stoi(properties["minWander"]) : 10);
+	this->setMaxWanderDistance((properties.count("maxWander")) ? std::stoi(properties["maxWander"]) : 100);
+	this->setDefaultWanderDistance((properties.count("defaultWander")) ? std::stoi(properties["defaultWander"]) : 20);
+
 }
 
 void BaseEnemy::CreateLineOfSight()

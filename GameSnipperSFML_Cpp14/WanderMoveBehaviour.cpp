@@ -27,6 +27,12 @@ WanderMoveBehaviour::WanderMoveBehaviour(GameObject* gameObject)
 
 	this->swapDirections(dir);
 	dir.clear();
+
+	if (dynamic_cast<BaseEnemy*>(gameObject)){
+		this->maxMoveDistance = dynamic_cast<BaseEnemy*>(gameObject)->getMaxWanderDistance();
+		this->minMoveDistance = dynamic_cast<BaseEnemy*>(gameObject)->getMinWanderDistance();
+		this->defaultMoveDistance = dynamic_cast<BaseEnemy*>(gameObject)->getDefaultWanderDistance();
+	}
 }
 
 WanderMoveBehaviour::~WanderMoveBehaviour()
@@ -74,7 +80,7 @@ void WanderMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 		if (mDircection == "move-not")
 			currentMoveDistance += 360.0f* Time::deltaTime;
 
-		reverseTime += 300.0f * Time::deltaTime;
+		reverseTime += 100.0f * Time::deltaTime;
 
 	}
 
