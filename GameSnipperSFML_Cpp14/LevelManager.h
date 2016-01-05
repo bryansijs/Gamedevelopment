@@ -11,6 +11,7 @@ class LevelManager
 public:
 	void swapSequence(int first, int second);
 	std::vector<std::string> getAllLevels();
+	int getCurrentLevelIndex() { return currentLevelNumber; };
 	std::string getCurrentLevel();
 	std::string getNextLevelName();
 	LevelManager();

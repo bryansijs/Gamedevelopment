@@ -73,7 +73,6 @@ void AwesomiumHelper::JavaScriptCall(std::string functionName, std::string param
 
 	Sleep(50);
 	webcore->Update();
-
 }
 
 void AwesomiumHelper::JavaScriptCall(std::string functionName, int parameter)

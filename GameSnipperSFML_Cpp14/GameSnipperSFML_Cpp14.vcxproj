@@ -198,6 +198,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="GameObjectFactory.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameTileFactory.h" />
+    <ClInclude Include="HUD.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="InteractiveFactory.h" />
     <ClInclude Include="ItemFactory.h" />
@@ -284,6 +285,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="GameObjectFactory.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameTileFactory.cpp" />
+    <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="InteractiveFactory.cpp" />
     <ClCompile Include="ItemFactory.cpp" />

@@ -3,6 +3,7 @@
 #include "LevelManager.h"
 #include "PlayerActions.h"
 #include "StorylineManager.h"
+#include "HUD.h"
 
 class StateManager;
 class Context;
@@ -36,6 +37,8 @@ private:
 
 	PlayerActions* playerActions;
 	GameActions* gameActions;
+
+	HUD* hud;
 
 	sf::View storyview;
 	AwesomiumHelper* storyline;

@@ -17,6 +17,7 @@
 #include <Awesomium/WebCore.h>
 #include <Awesomium/BitmapSurface.h>
 #include <Awesomium/STLHelpers.h>
+#include "HUD.h"
 
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager)
 {
@@ -24,7 +25,9 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	
 	gameActions = new GameActions(this);
 	gameContext = new GameContext(context);
-	storyline = new AwesomiumHelper{ context->web_core, "file:///Resources/html-game/StoryLine.html", 1000, 50 };
+
+	hud = new HUD{ gameContext, levelmanager };
+	storyline = new AwesomiumHelper{ context->web_core, "file:///Resources/html-game/StoryLine.html", 960, 36 };
 	storylineManager = new StorylineManager();
 
 	// Awesomium init
@@ -214,6 +217,7 @@ void GameState::Update()
 			storyline->JavaScriptCall("TextUpdate", StorylineManager::GetText());
 		}
 
+		hud->Update();
 	}
 	
 	gameContext->drawContainer->Draw(&gameContext->context->window, gameContext->level->GetViewPortPosition());
