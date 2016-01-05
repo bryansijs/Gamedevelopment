@@ -76,23 +76,7 @@ void MenuActions::EditKey()
 					return;
 				}
 
-				bool edit = true;
-				std::vector<std::string>::iterator it;
-
-				for (it = uneditableKeys.begin(); it != uneditableKeys.end(); ++it)
-				{
-					if ((*it) == key)
-					{
-						edit = false;
-					}
-				}
-
-				if (KeyMapping::KeyInUse(key) && KeyMapping::GetMap(key) != currentMap)
-				{
-					edit = false;
-				}
-
-				if (edit == true)
+				if (!KeyMapping::KeyInUse(key) || KeyMapping::GetMap(key) == currentMap)
 				{
 					KeyMapping::ChangeKey(currentMap, key);
 					std::string mappingString = KeyMappingExporter::MappingToString(KeyMapping::GetMapping());
