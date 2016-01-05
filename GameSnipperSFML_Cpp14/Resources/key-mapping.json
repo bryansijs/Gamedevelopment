@@ -43,6 +43,10 @@
     {
       "map": "fps",
       "key": "/"
+    },
+    {
+      "map": "godmode",
+      "key": "G"
     }
   ]
 }

@@ -25,9 +25,9 @@
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager)
 {
 	maincontext = context;
-
-	gameActions = new GameActions(this);
+	
 	gameContext = new GameContext(context);
+	gameActions = new GameActions(this, gameContext);
 	storyline = new AwesomiumHelper{ context->web_core, "file:///Resources/html-game/StoryLine.html", 1000, 50 };
 	storylineManager = new StorylineManager();
 
@@ -89,8 +89,6 @@ void GameState::DestroyGameObjects()
 		{
 			GameObject* data = static_cast<GameObject*>(body->GetUserData());
 
-
-
 			if (data->isFlaggedForDelete)
 			{
 				gameObjectScheduledForRemoval.push_back(body);
@@ -110,29 +108,21 @@ void GameState::DebugBodies()
 {
 	for (b2Body* b = gameContext->world->GetBodyList(); b; b = b->GetNext()) {
 
-		for (b2Fixture* fix = b->GetFixtureList(); fix; fix = fix->GetNext())
+		b2Shape::Type t = b->GetFixtureList()->GetType();
+		if (t == b2Shape::e_polygon)
 		{
+			b2PolygonShape* s = (b2PolygonShape*)b->GetFixtureList()->GetShape();
+			sf::ConvexShape convex;
+			int vertextCount = s->GetVertexCount();
+			convex.setPointCount(vertextCount);
+			convex.setFillColor(sf::Color(255, 255, 0, 128));
 
-			b2Shape::Type t = fix->GetType();
-			if (t == b2Shape::e_polygon)
-			{
-				b2PolygonShape* s = (b2PolygonShape*)fix->GetShape();
-				sf::ConvexShape convex;
-				int vertextCount = s->GetVertexCount();
+			convex.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
 
-				if (vertextCount == 3) continue;
-
-				convex.setPointCount(vertextCount);
-				convex.setFillColor(sf::Color(255, 255, 0, 128));
-
-				convex.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
-
-				for (int i = 0; i < vertextCount; i++)
-					convex.setPoint(i, sf::Vector2f(s->GetVertex(i).x, s->GetVertex(i).y));
-				gameContext->context->window.draw(convex);
-			}
+			for (int i = 0; i < vertextCount; i++)
+				convex.setPoint(i, sf::Vector2f(s->GetVertex(i).x, s->GetVertex(i).y));
+			gameContext->context->window.draw(convex);
 		}
-
 	}
 }
 
@@ -225,7 +215,7 @@ void GameState::Update()
 		gameContext->player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	}
 
-	//DebugBodies();
+//DebugBodies();
 
 
 
@@ -242,17 +232,17 @@ void GameState::Update()
 		}
 
 	}
-
+	
 	gameContext->drawContainer->Draw(&gameContext->context->window, gameContext->level->GetViewPortPosition());
 	gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
 
 
-	if (showFPS) {
+	if (showFPS ) {
 		gameContext->fpsShow->draw(gameContext->context->window);
 	}
 
-
-	if (isPause)
+	
+	if(isPause)
 
 	{
 		gameContext->pauze->draw(gameContext->context->window);
@@ -267,7 +257,7 @@ void GameState::Update()
 	if (!terminate) {
 		gameContext->context->window.setView(gameContext->view);
 	}
-
+	
 	gameContext->context->window.display();
 
 	if (gameContext->player->getHealth() <= 0)
@@ -344,7 +334,7 @@ void GameState::MenuEnd(int option)
 void GameState::Loading()
 {
 	gameContext->loading = true;
-
+	
 	loadingScreen = new AwesomiumHelper{ maincontext->web_core, "file:///Resources/menuHTML/loading.html", 960, 640 };
 	loadingScreen->JavaScriptCall("loadAd", GetAd());
 	loadingScreen->JavaScriptCall("loadTip", GetTip());
@@ -397,14 +387,14 @@ std::string GameState::GetAd()
 	{
 		return ads[Random::Number(0, (ads.size() - 1))];
 	}
-
+	
 	return "";
 }
 
 std::string GameState::GetTip()
 {
 	std::vector<std::string> tips;
-
+	
 	std::ifstream tipsFile;
 	tipsFile.open("./Resources/tips.txt");
 	if (tipsFile.is_open())
@@ -419,7 +409,7 @@ std::string GameState::GetTip()
 	{
 		return tips[Random::Number(0, (tips.size() - 1))];
 	}
-
+	
 	return "";
 }
 
@@ -444,6 +434,6 @@ std::vector<std::string> GameState::GetFilesInDirectory(const char* directory)
 	}
 
 	tinydir_close(&dir);
-
+	
 	return files;
 }
