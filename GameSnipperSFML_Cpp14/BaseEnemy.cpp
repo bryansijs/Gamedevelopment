@@ -26,8 +26,12 @@ BaseEnemy::BaseEnemy(DrawContainer* dContainer, std::string img, MoveContainer* 
 	this->setDrawBehaviour({ new EnemyDrawBehaviour(this, 10, "./Resources/sprites/" + img) });
 	this->getDrawContainer()->AddBehaviour(this->getDrawBehaviour());
 
-//	this->hpBar = new sf::RectangleShape(sf::Vector2f(100, 20));
-//	this->hpBar->setFillColor(sf::Color(100, 100, 100, 128));
+	this->mhpBar = new sf::RectangleShape(sf::Vector2f(60, 14));
+	this->mhpBar->setFillColor(sf::Color(100, 100, 100, 128));
+
+	this->hpBar = new sf::RectangleShape(sf::Vector2f(56, 10));
+	this->hpBar->setFillColor(sf::Color(255, 0, 0, 128));
+
 }
 
 
@@ -53,6 +57,9 @@ void BaseEnemy::setProperties(std::map<std::string, std::string>& properties)
 	this->setMinWanderDistance((properties.count("minWander")) ? std::stoi(properties["minWander"]) : 10);
 	this->setMaxWanderDistance((properties.count("maxWander")) ? std::stoi(properties["maxWander"]) : 100);
 	this->setDefaultWanderDistance((properties.count("defaultWander")) ? std::stoi(properties["defaultWander"]) : 20);
+
+	this->setMaxHealth((properties.count("maxHealth")) ? std::stoi(properties["maxHealth"]) : 100);
+	this->setHealth((properties.count("maxHealth")) ? std::stoi(properties["maxHealth"]) : 100);
 
 }
 
@@ -118,9 +125,19 @@ void BaseEnemy::CreateVectors()
 
 void BaseEnemy::CreateVisibleLine()
 {
+	
 	this->lineOfSightConvex->setFillColor(sf::Color(255, 129, 0, 128));
 	this->lineOfSightConvex->setPosition(sf::Vector2f(this->getBody()->GetPosition().x, this->getBody()->GetPosition().y));
-	this->hpBar->setPosition(sf::Vector2f(this->getBody()->GetPosition().x + this->getHeight()/2, this->getBody()->GetPosition().y) );
+	this->mhpBar->setPosition(sf::Vector2f(this->getBody()->GetPosition().x -16, this->getBody()->GetPosition().y - 30 ));
+	this->hpBar->setPosition(sf::Vector2f(this->getBody()->GetPosition().x - 14, this->getBody()->GetPosition().y - 28));
+
+	//56 is de groote dus dit is gelijk aan maxhp;
+
+	float b =56.0f / (float)this->getMaxHealth();
+	float c = (float)this->getHealth() * b;
+
+	this->hpBar->setSize(sf::Vector2f(c, 10));
+
 
 	for (int i = 0; i < 3; i++)
 		this->lineOfSightConvex->setPoint(i, sf::Vector2f(convexVert[i].x, convexVert[i].y));

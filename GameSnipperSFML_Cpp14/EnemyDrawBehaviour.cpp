@@ -23,7 +23,8 @@ void EnemyDrawBehaviour::Draw(sf::RenderWindow *window, sf::Vector2f viewPortPos
 {
 	window->draw(getCurrentImage());
 	window->draw(dynamic_cast<BaseEnemy*>(this->gameObject)->getLineOfSightConvex());
-//	window->draw(dynamic_cast<BaseEnemy*>(this->gameObject)->getHpBar());
+	window->draw(dynamic_cast<BaseEnemy*>(this->gameObject)->getMaxHpBar());
+	window->draw(dynamic_cast<BaseEnemy*>(this->gameObject)->getHpBar());
 }
 
 sf::Sprite EnemyDrawBehaviour::getCurrentImage()

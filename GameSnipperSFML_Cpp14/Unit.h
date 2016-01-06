@@ -13,6 +13,7 @@ class Unit : public GameObject
 {
 private:
 	int health = 100;
+	int maxHealth = 100;
 public:
 	UnitState* currentState;
 	Unit::Unit(DrawContainer* dContainer, std::string img);
@@ -27,6 +28,8 @@ public:
 	void setHealth(int health) { this->health = health; }
 	int getHealth() { return health; }
 
+	void setMaxHealth(int maxHealth) { this->maxHealth = maxHealth; }
+	int getMaxHealth() { return maxHealth; }
 	void Damage(int amount);
 };
 
