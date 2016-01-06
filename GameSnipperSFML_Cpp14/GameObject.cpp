@@ -7,16 +7,23 @@
 
 #include "NormalDrawBehaviour.h"
 #include "WanderMoveBehaviour.h"
+
+#include "NormalMoveBehaviour.h"
+
 #include "MoveBehaviour.h"
 #include <Box2D\Box2D.h>
 
 #include "Tile.h"
 #include "EndTile.h"
 
+
 void GameObject::Destroy()
 {
-	this->moveContainer->RemoveBehaviour(moveBehaviour);
+
 	this->drawContainer->RemoveBehaviour(drawBehaviour);
+
+	this->moveContainer->RemoveBehaviour(moveBehaviour);
+
 	this->gameObjectContainer->RemoveObject(this);
 
 	isFlaggedForDelete = true;

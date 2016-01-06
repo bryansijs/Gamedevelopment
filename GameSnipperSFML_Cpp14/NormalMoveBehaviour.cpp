@@ -8,7 +8,8 @@
 
 NormalMoveBehaviour::NormalMoveBehaviour(GameObject* gameObject)
 {
-	this->gameObject = gameObject;
+	this->setGameObject(gameObject);
+
 }
 
 NormalMoveBehaviour::~NormalMoveBehaviour()
@@ -20,14 +21,14 @@ void NormalMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 {
 	if (checkVisible(viewPortPosition.x, viewPortPosition.y))
 	{
-		moveAction = new MoveAction{ gameObject, 0.10f };
+		moveAction = new MoveAction{ this->getGameObject(), 0.10f };
 		moveAction->Move({ "move-left" });
 	}
 }
 
 bool NormalMoveBehaviour::checkVisible(int screenX, int screenY)
 {
-	if (gameObject->getPosition().x > screenX && gameObject->getPosition().x < screenX + 960 && gameObject->getPosition().y > screenY && gameObject->getPosition().y < screenY + 640)
+	if (this->getGameObject()->getPosition().x > screenX && this->getGameObject()->getPosition().x < screenX + 960 && this->getGameObject()->getPosition().y > screenY && this->getGameObject()->getPosition().y < screenY + 640)
 	{
 		return true;
 	}

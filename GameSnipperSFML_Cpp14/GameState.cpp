@@ -21,6 +21,7 @@
 #include "Random.h"
 #include <vector>
 #include <string>
+#include "GameObjectContainer.h"
 
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager, ScoreManager* scoreManager)
 {
@@ -112,26 +113,35 @@ void GameState::DebugBodies()
 {
 	for (b2Body* b = gameContext->world->GetBodyList(); b; b = b->GetNext()) {
 
-		b2Shape::Type t = b->GetFixtureList()->GetType();
-		if (t == b2Shape::e_polygon)
-		{
-			b2PolygonShape* s = (b2PolygonShape*)b->GetFixtureList()->GetShape();
-			sf::ConvexShape convex;
-			int vertextCount = s->GetVertexCount();
-			convex.setPointCount(vertextCount);
-			convex.setFillColor(sf::Color(255, 255, 0, 128));
+	
 
-			convex.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
+		for (b2Fixture* fix = b->GetFixtureList(); fix; fix = fix->GetNext()) {
 
-			for (int i = 0; i < vertextCount; i++)
-				convex.setPoint(i, sf::Vector2f(s->GetVertex(i).x, s->GetVertex(i).y));
-			gameContext->context->window.draw(convex);
+			b2Shape::Type t = fix->GetType();
+			if (t == b2Shape::e_polygon)
+			{
+				b2PolygonShape* s = (b2PolygonShape*)fix->GetShape();
+				sf::ConvexShape convex;
+				int vertextCount = s->GetVertexCount();
+
+				if (vertextCount == 3) continue;
+
+				convex.setPointCount(vertextCount);
+				convex.setFillColor(sf::Color(255, 255, 0, 128));
+
+				convex.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
+
+				for (int i = 0; i < vertextCount; i++)
+					convex.setPoint(i, sf::Vector2f(s->GetVertex(i).x, s->GetVertex(i).y));
+				gameContext->context->window.draw(convex);
+			}
 		}
 	}
 }
 
 void GameState::Update()
 {
+	DestroyGameObjects();
 	Time::deltaTime = static_cast<float>(gameContext->deltaClock.restart().asSeconds());
 	Time::deltaTime *= gameContext->gameSpeedMultiplier;
 	Time::runningTime += Time::deltaTime;
@@ -147,7 +157,10 @@ void GameState::Update()
 
 	if (!isPause)
 	{
-		gameContext->level->update();
+		DestroyGameObjects();
+	//	gameContext->level->update();
+
+	
 	}
 
 	if (gameContext->level->getDoEvents()) {
@@ -219,7 +232,7 @@ void GameState::Update()
 		gameContext->player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	}
 
-//DebugBodies();
+	DebugBodies();
 
 
 
@@ -227,16 +240,14 @@ void GameState::Update()
 	{
 		this->gameContext->world->Step(1, 8, 3);
 
-		DestroyGameObjects();
 		gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
-
+		gameContext->useContainer->Update();
 		if (StorylineManager::Updated())
 		{
 			storyline->JavaScriptCall("TextUpdate", StorylineManager::GetText());
 		}
 
 	}
-	
 	gameContext->drawContainer->Draw(&gameContext->context->window, gameContext->level->GetViewPortPosition());
 	gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
 
@@ -263,7 +274,7 @@ void GameState::Update()
 	}
 	
 	gameContext->context->window.display();
-
+	DestroyGameObjects();
 	if (gameContext->player->getHealth() <= 0)
 	{
 		sf::Image screenshot = gameContext->context->window.capture();

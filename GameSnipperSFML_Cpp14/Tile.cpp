@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Tile.h"
-
+#include "FilterEnum.h"
 
 Tile::Tile()
 {
@@ -25,5 +25,9 @@ void Tile::createStaticBody(b2World& world)
 	boxFixtureDef.density = 100.f;
 	boxFixtureDef.friction = 0.0f;
 	boxFixtureDef.shape = &Shape;
+	boxFixtureDef.filter.categoryBits = TILE;
+	
 	Body->CreateFixture(&boxFixtureDef);
+
+	Body->SetUserData(this);
 }

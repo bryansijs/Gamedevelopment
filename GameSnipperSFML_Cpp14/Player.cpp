@@ -9,6 +9,7 @@
 
 Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameObjectContainer* useContainer, b2World* world)
 {
+	this->setSpeed(250.0f);
 	this->setMoveContainer(moveContainer);
 	this->setDrawContainer(drawContainer);
 
@@ -23,6 +24,7 @@ Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameO
 
 	this->SetAnimationStates(3);
 	this->setHealth(100);
+
 }
 
 
