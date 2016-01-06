@@ -21,6 +21,7 @@
 #include "Random.h"
 #include <vector>
 #include <string>
+#include "GameObjectContainer.h"
 
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager, ScoreManager* scoreManager)
 {
@@ -132,6 +133,7 @@ void GameState::DebugBodies()
 
 void GameState::Update()
 {
+	DestroyGameObjects();
 	Time::deltaTime = static_cast<float>(gameContext->deltaClock.restart().asSeconds());
 	Time::deltaTime *= gameContext->gameSpeedMultiplier;
 	Time::runningTime += Time::deltaTime;
@@ -147,7 +149,10 @@ void GameState::Update()
 
 	if (!isPause)
 	{
-		gameContext->level->update();
+		DestroyGameObjects();
+	//	gameContext->level->update();
+
+	
 	}
 
 	if (gameContext->level->getDoEvents()) {
@@ -229,14 +234,14 @@ void GameState::Update()
 
 		DestroyGameObjects();
 		gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
-
+		gameContext->useContainer->Update();
 		if (StorylineManager::Updated())
 		{
 			storyline->JavaScriptCall("TextUpdate", StorylineManager::GetText());
 		}
 
 	}
-	
+	DestroyGameObjects();
 	gameContext->drawContainer->Draw(&gameContext->context->window, gameContext->level->GetViewPortPosition());
 	gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
 
@@ -263,7 +268,7 @@ void GameState::Update()
 	}
 	
 	gameContext->context->window.display();
-
+	DestroyGameObjects();
 	if (gameContext->player->getHealth() <= 0)
 	{
 		sf::Image screenshot = gameContext->context->window.capture();

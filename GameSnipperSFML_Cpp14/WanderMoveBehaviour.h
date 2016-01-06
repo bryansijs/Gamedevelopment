@@ -6,6 +6,8 @@
 #include <vector>
 #include <SFML\System\Vector2.hpp>
 
+class BaseEnemy;
+
 class WanderMoveBehaviour : public MoveBehaviour
 {
 public:
@@ -14,24 +16,22 @@ public:
 
 	void Update(sf::Vector2f viewPortPosition);
 	bool checkVisible(int screenX, int screenY);
-private:
-	MoveAction* moveAction;
 
+private:
+	void MoveAway(BaseEnemy* obj);
+	MoveAction* moveAction;
+	void setDirection();
 	int defaultMoveDistance = 20;
-	int minMoveDistance = 200;
-	int maxMoveDistance = 400;
+	int reverseTime = 20;
+	int reversecoolDown = 10;
+	int minMoveDistance = 10;
+	int maxMoveDistance = 100;
 
 	int moveDistance;
-	std::string direction;
+	int currentMoveDistance = 0;
+	std::string mDircection;
 
-	b2Vec2 startPosition;
-	b2Vec2 endPosition;
-
-	std::vector<std::string> directions = {
-		{ "move-up" },
-		{ "move-down" },
-		{ "move-left" },
-		{ "move-right" }
-	};
+	void reverseDirection();
+	void finalizeDirection();
 };
 

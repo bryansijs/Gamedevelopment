@@ -52,7 +52,7 @@ void Unit::Damage(int amount)
 
 	if (health <= 0)
 	{
-		this->Destroy();
+ 		this->Destroy();
 		return;
 	}
 

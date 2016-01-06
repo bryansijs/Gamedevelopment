@@ -486,6 +486,12 @@
     <ClInclude Include="tinydir.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FilterEnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyDrawBehaviour.h">
+      <Filter>Header Files\Behaviours\Draw</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -745,6 +751,9 @@
     </ClCompile>
     <ClCompile Include="StoryTile.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyDrawBehaviour.cpp">
+      <Filter>Source Files\Behaviours\Draw</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
