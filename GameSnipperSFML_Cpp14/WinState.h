@@ -14,11 +14,16 @@ private:
 	void ReloadPage();
 
 	StateManager* stateManager;
-
+	bool load = true;
 	Context* context;
 	WinContext* winContext;
 	LevelManager* levelManager;
 	ScoreManager* scoreManager;
+	void SetHighscore();
+	void addNameCharacter(const char* character);
+	void setScore(int score);
+	void addScore(std::string name, int score);
+
 public:
 	WinState(Context* context, StateManager* stateManager, LevelManager* levelManager, ScoreManager* scoreManager);
 	~WinState();

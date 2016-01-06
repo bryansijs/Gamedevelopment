@@ -16,8 +16,13 @@
 #include "WinState.h"
 #include "MenuState.h"
 #include "StateManager.h"
+#include "KeyMapping.h"
+#include <fstream>
 
 using namespace Awesomium;
+
+
+
 
 WinState::WinState(Context* context, StateManager* stateManager, LevelManager* levelManager, ScoreManager* scoreManager)
 {
@@ -55,7 +60,7 @@ void WinState::ReloadPage()
 	WebURL url(WSLit(winContext->pathToFile));
 	winContext->webView->LoadURL(url);
 	winContext->webView->SetTransparent(true);
-
+	setScore(50);
 	while (winContext->webView->IsLoading())
 	{
 		winContext->web_core->Update();
@@ -70,12 +75,39 @@ void WinState::Update()
 	winContext->context->window.clear();
 
 	while (winContext->context->window.pollEvent(winContext->event)) {
-		if (winContext->event.type == sf::Event::KeyPressed)
+		if (Input::GetKeyDown(KeyMapping::GetKey("escape"))) {
+			ToMenu();
+		}
+
+		if (winContext->event.type == sf::Event::TextEntered)
+		{
+			if (winContext->event.text.unicode < 128) {
+				addNameCharacter(new char(static_cast<char>(winContext->event.text.unicode)));
+				winContext->scoreName.append(new char(static_cast<char>(winContext->event.text.unicode)));
+				winContext->amountNameChars++;
+			}
+			if(winContext->amountNameChars > 2)
+			{
+				//TODO: Safe 
+				ToMenu();
+			}
+		}
+		
+		/*if (winContext->event.type == sf::Event::KeyPressed)
 		{
 			Input::EventOccured(winContext->event);
 
-			ToMenu();
-		}
+			if (Input::GetKeyDown("Return")) {
+				if(!winContext->saved)
+				{
+					SetHighscore();
+				}
+			}
+			else
+			{
+				ToMenu();
+			}
+		}*/
 	}
 
 	//Create image from Bitmap
@@ -108,4 +140,55 @@ void WinState::ToMenu()
 WinState::~WinState()
 {
 	delete winContext;
+}
+
+
+void WinState::SetHighscore()
+{
+	std::cout << "excape";
+}
+
+void WinState::addNameCharacter(const char* character)
+{
+	JSValue window = winContext->webView->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));
+
+	if (window.IsObject())
+	{
+		JSArray args;
+		WebString string = WebString::CreateFromUTF8(character, 1);
+		JSValue val = JSValue(string);
+		args.Push(val);
+		window.ToObject().Invoke(WSLit("insertChar"), args);
+	}
+
+	Sleep(50);
+	winContext->web_core->Update();
+}
+
+void WinState::setScore(int score)
+{
+	JSValue window = winContext->webView->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));
+
+	if (window.IsObject())
+	{
+		JSArray args;
+		JSValue val = JSValue(score);
+		args.Push(val);
+		window.ToObject().Invoke(WSLit("insertScore"), args);
+	}
+
+	Sleep(50);
+	winContext->web_core->Update();
+}
+void WinState::addScore(std::string name, int score)
+{
+	std::ofstream highScorefile("./Resources/save/highscore.txt");
+	if (highScorefile.is_open())
+	{
+		//highScorefile.clear();
+		highScorefile << name << " " << score;
+		highScorefile.close();
+	}
+	else
+		std::cerr << "could not open highScore file";
 }
