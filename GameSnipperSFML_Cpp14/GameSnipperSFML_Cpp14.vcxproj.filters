@@ -747,7 +747,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EnemyDrawBehaviour.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Behaviours\Draw</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

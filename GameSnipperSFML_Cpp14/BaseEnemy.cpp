@@ -120,7 +120,7 @@ void BaseEnemy::CreateVisibleLine()
 {
 	this->lineOfSightConvex->setFillColor(sf::Color(255, 129, 0, 128));
 	this->lineOfSightConvex->setPosition(sf::Vector2f(this->getBody()->GetPosition().x, this->getBody()->GetPosition().y));
-	this->hpBar->setPosition(sf::Vector2f(this->getBody()->GetPosition().x + this->getHeight()/2, this->getBody()->GetPosition().y) );
+//	this->hpBar->setPosition(sf::Vector2f(this->getBody()->GetPosition().x + this->getHeight()/2, this->getBody()->GetPosition().y) );
 
 	for (int i = 0; i < 3; i++)
 		this->lineOfSightConvex->setPoint(i, sf::Vector2f(convexVert[i].x, convexVert[i].y));
