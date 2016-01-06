@@ -236,6 +236,7 @@ xcopy /y /d  "$(ProjectDir)*.exe" $(TargetDir)</Command>
     <ClInclude Include="Potion.h" />
     <ClInclude Include="RunnerEnemy.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="square.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="ShootAction.h" />
@@ -319,6 +320,7 @@ xcopy /y /d  "$(ProjectDir)*.exe" $(TargetDir)</Command>
     <ClCompile Include="ProjectileFactory.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="RunnerEnemy.cpp" />
+    <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="SetupState.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="square.cpp" />

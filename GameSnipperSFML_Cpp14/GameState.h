@@ -4,6 +4,7 @@
 #include "PlayerActions.h"
 #include "StorylineManager.h"
 
+class ScoreManager;
 class StateManager;
 class Context;
 class GameContext;
@@ -18,7 +19,7 @@ class AwesomiumHelper;
 class GameState: public BaseState
 {
 public:
-	GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager);
+	GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager, ScoreManager* scoreManager);
 	~GameState();
 
 	void Update() override;
@@ -28,7 +29,7 @@ public:
 	bool isPause = false;
 private:
 	StateManager* stateManager;
-
+	ScoreManager* scoreManager;
 	LevelManager* levelManager;
 	Context* maincontext;
 

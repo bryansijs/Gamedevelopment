@@ -17,10 +17,11 @@
 
 using namespace Awesomium;
 
-MenuState::MenuState(Context* context, StateManager* stateManager, LevelManager* levelManager)
+MenuState::MenuState(Context* context, StateManager* stateManager, LevelManager* levelManager, ScoreManager* scoreManager)
 {
 	this->stateManager = stateManager;
 	this->levelManager = levelManager;
+	this->scoreManager = scoreManager;
 
 	sf::View view = context->window.getView();
 	view.setSize(960, 640);
@@ -34,7 +35,7 @@ MenuState::MenuState(Context* context, StateManager* stateManager, LevelManager*
 	// Awesomium init
 	menuContext->webView = context->web_core->CreateWebView(960, 640);
 
-	menuActions = new MenuActions(stateManager, menuContext, levelManager);
+	menuActions = new MenuActions(stateManager, menuContext, levelManager, scoreManager);
 
 	// Load Page
 	menuContext->pathToFile = "file:///Resources/menuHTML/menu.html";
