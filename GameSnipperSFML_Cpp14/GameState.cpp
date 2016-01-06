@@ -57,6 +57,7 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 
 	playerActions->SetContainers(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer);
 	playerActions->SetWorld(gameContext->world);
+	playerActions->SetContext(gameContext);
 
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
 
@@ -138,6 +139,15 @@ void GameState::Update()
 	Time::deltaTime *= gameContext->gameSpeedMultiplier;
 	Time::runningTime += Time::deltaTime;
 
+	std::cout << "Health: " << gameContext->player->getHealth();
+
+	if (gameContext->player->getHealth() <= 0)
+	{
+		LoseState* loseState = new LoseState{ gameContext->context, stateManager, levelManager, scoreManager };
+		stateManager->AddState(loseState);
+		stateManager->PopState();
+	}
+
 	gameContext->context->window.clear(sf::Color::White);
 
 	sf::Vector2f playerPosition(gameContext->player->getBody()->GetPosition().x, gameContext->player->getBody()->GetPosition().y);
@@ -175,16 +185,29 @@ void GameState::Update()
 
 			if (gameContext->event.type == sf::Event::KeyPressed)
 			{
-				if (Input::GetKeyDown("RBracket"))
+				if (Input::GetKeyDown(KeyMapping::GetKey("gamespeed-up")))
 				{
 					gameContext->gameSpeedMultiplier++;
 				}
 
-				if (Input::GetKeyDown("LBracket"))
+				if (Input::GetKeyDown(KeyMapping::GetKey("gamespeed-down")))
 				{
 					if (gameContext->gameSpeedMultiplier > 1)
 					{
 						gameContext->gameSpeedMultiplier--;
+					}
+				}
+
+				if (Input::GetKeyDown(KeyMapping::GetKey("damage-up")))
+				{
+					gameContext->damageMultiplier++;
+				}
+
+				if (Input::GetKeyDown(KeyMapping::GetKey("damage-down")))
+				{
+					if (gameContext->damageMultiplier > 1)
+					{
+						gameContext->damageMultiplier--;
 					}
 				}
 

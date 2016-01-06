@@ -52,5 +52,6 @@ public:
 
 	bool loading;
 	int gameSpeedMultiplier = 1;
+	int damageMultiplier = 1;
 };
 

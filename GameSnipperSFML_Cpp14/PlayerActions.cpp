@@ -35,6 +35,11 @@ void PlayerActions::SetWorld(b2World * world)
 	this->world = world;
 }
 
+void PlayerActions::SetContext(GameContext* context)
+{
+	this->context = context;
+}
+
 void PlayerActions::ProcessActions()
 {
 	bool standStill = true;
@@ -121,7 +126,7 @@ void PlayerActions::Move()
 void PlayerActions::Shoot()
 {
 	StandStillTimerReset();
-	shootAction.Shoot(drawContainer, moveContainer, gameObjectContainer, world, player, direction);
+	shootAction.Shoot(drawContainer, moveContainer, gameObjectContainer, world, player, direction, context);
 }
 
 

@@ -9,6 +9,7 @@
 #include "MoveAction.h"
 #include "ShootAction.h"
 #include "BaseInput.h"
+#include "GameContext.h"
 
 class Player;
 class MoveContainer;
@@ -26,6 +27,8 @@ public:
 	float useDelay = 0;
 	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, GameObjectContainer *gameObjectContainer);
 	void SetWorld(b2World* world);
+
+	void SetContext(GameContext* context);
 
 	void Move();
 	void Shoot();
@@ -59,6 +62,7 @@ private:
 
 	Player *player;
 	b2World* world;
+	GameContext* context;
 
 	bool fired = false;
 	bool useAction = true;

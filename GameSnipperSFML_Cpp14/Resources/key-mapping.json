@@ -67,6 +67,22 @@
     {
       "map": "equip-5",
       "key": "Num5"
+    },
+    {
+      "map": "damage-up",
+      "key": "Period"
+    },
+    {
+      "map": "damage-down",
+      "key": "Comma"
+    },
+    {
+      "map": "gamespeed-up",
+      "key": "RBracket"
+    },
+    {
+      "map": "gamespeed-down",
+      "key": "LBracket"
     }
   ]
 }

@@ -13,6 +13,7 @@
 #include "Player.h"
 #include "Gun.h"
 #include "Bullet.h"
+#include "GameContext.h"
 
 #include "GameObjectFactory.h"
 
@@ -24,7 +25,7 @@ ShootAction::~ShootAction()
 {
 }
  
-void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer, b2World* world, Player* player, std::string direction)
+void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer, b2World* world, Player* player, std::string direction, GameContext* gameContext)
 {
 	if (Time::runningTime > nextShot)
 	{
@@ -69,5 +70,6 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 		};
 		Bullet* bullet = (Bullet*)projectileFactory.Create(properties, drawContainer, moveContainer, gameObjectContainer, world);
 		bullet->SetOwner(player);
+		bullet->SetContext(gameContext);
 	}
 }

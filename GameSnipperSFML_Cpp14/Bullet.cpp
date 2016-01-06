@@ -36,6 +36,11 @@ void Bullet::SetOwner(GameObject* owner)
 	this->owner = owner;
 }
 
+void Bullet::SetContext(GameContext* context)
+{
+	this->context = context;
+}
+
 void Bullet::startContact(b2Fixture* fixture)
 {
 	GameObject* pal = static_cast<Player*>(fixture->GetBody()->GetUserData());
@@ -51,17 +56,12 @@ void Bullet::startContact(b2Fixture* fixture)
 		{
 			return;
 		}
-
-		if (player->getHealth() <= 0)
-		{
-			// Lose state
-		}
 	}
 
 	if (dynamic_cast<Unit*> (pal))
 	{
 		Unit* enemy = dynamic_cast<Unit*> (pal);
-		enemy->Damage(this->damage);
+		enemy->Damage(this->damage * context->damageMultiplier);
 	}
 
 	Destroy();
