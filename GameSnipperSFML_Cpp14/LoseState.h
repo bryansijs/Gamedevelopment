@@ -3,6 +3,7 @@
 #include <Awesomium/WebCore.h>
 #include "LevelManager.h"
 
+class ScoreManager;
 class StateManager;
 class Context;
 class LoseContext;
@@ -13,12 +14,13 @@ private:
 	void ReloadPage();
 
 	StateManager* stateManager;
+	ScoreManager* scoreManager;
 
 	Context* context;
 	LoseContext* loseContext;
 	LevelManager* levelManager;
 public:
-	LoseState(Context* context, StateManager* stateManager, LevelManager* levelManager);
+	LoseState(Context* context, StateManager* stateManager, LevelManager* levelManager, ScoreManager* scoreManager);
 	~LoseState();
 
 	void Update();

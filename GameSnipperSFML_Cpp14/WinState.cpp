@@ -19,11 +19,12 @@
 
 using namespace Awesomium;
 
-WinState::WinState(Context* context, StateManager* stateManager, LevelManager* levelManager)
+WinState::WinState(Context* context, StateManager* stateManager, LevelManager* levelManager, ScoreManager* scoreManager)
 {
 	winContext = new WinContext(context);
 	this->stateManager = stateManager;
 	this->levelManager = levelManager;
+	this->scoreManager = scoreManager;
 
 	sf::View view = winContext->context->window.getView();
 	view.setCenter(480, 320);
@@ -98,7 +99,7 @@ void WinState::Update()
 void WinState::ToMenu()
 {
 	winContext->music->stop();
-	MenuState* menuState = new MenuState(winContext->context, stateManager, levelManager);
+	MenuState* menuState = new MenuState(winContext->context, stateManager, levelManager,scoreManager);
 
 	stateManager->AddState(menuState);
 	stateManager->StartNextState();

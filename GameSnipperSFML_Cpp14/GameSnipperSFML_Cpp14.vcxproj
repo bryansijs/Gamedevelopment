@@ -237,6 +237,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="Rifle.h" />
     <ClInclude Include="RunnerEnemy.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="square.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="ShootAction.h" />
@@ -324,6 +325,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Rifle.cpp" />
     <ClCompile Include="RunnerEnemy.cpp" />
+    <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="SetupState.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="square.cpp" />
