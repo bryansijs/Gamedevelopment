@@ -33,15 +33,16 @@ private:
 	int width = 0;
 	int height = 0;
 
+	int visibleId;
 	int animationStates;
 public:
 	GameObject(DrawContainer *drawContainer, std::string textureUrl);
-	GameObject(DrawContainer *drawContainer);
 	GameObject();
 	GameObject(GameObjectContainer *useContainer);
 	GameObject(GameObjectContainer *gameObjectContainer, MoveContainer *moveContainer, std::string textureUrl);
 	GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, std::string textureUrl);
 	GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, MoveContainer *moveContainer, std::string textureUrl);
+	GameObject(DrawContainer *drawContainer);
 	~GameObject();
 
 	void SetAnimationStates(int states) { animationStates = states; };
@@ -63,13 +64,14 @@ public:
 
 	void setDrawContainer(DrawContainer* newDrawContainer) {this->drawContainer = newDrawContainer	;}
 	void setMoveContainer(MoveContainer* newMoveContainer) { this->moveContainer = newMoveContainer; }
+	void setVisibleId(int id) { this->visibleId = id; }
 
 	b2BodyDef getMyBodydef() { return myBodyDef; };
 	b2Body* getBody() { return Body; };
 	DrawContainer* getDrawContainer() { return this->drawContainer; }
 	MoveContainer* getMoveContainer() { return this->moveContainer; }
 	GameObjectContainer* getgameObjectContainer() { return this->gameObjectContainer; }
-
+	int getVisibleId() { return this->visibleId; }
 
 	DrawBehaviour* getDrawBehaviour() { return this->drawBehaviour; }
 	MoveBehaviour* getMoveBehaviour() { return this->moveBehaviour; }

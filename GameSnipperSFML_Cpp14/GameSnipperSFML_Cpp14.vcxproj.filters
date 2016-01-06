@@ -486,6 +486,9 @@
     <ClInclude Include="DiscoverTile.h">
       <Filter>Header Files\Model\GameTiles</Filter>
     </ClInclude>
+    <ClInclude Include="Discovery.h">
+      <Filter>Header Files\Model\Objecten</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -746,6 +749,9 @@
     <ClCompile Include="DiscoverTile.cpp">
       <Filter>Source Files\Model\GameTiles</Filter>
     </ClCompile>
+    <ClCompile Include="Discovery.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\levels\Level_New.json">
@@ -776,7 +782,6 @@
     <None Include="Resources\menuHTML\lose.html" />
     <None Include="Resources\menuHTML\win.html" />
     <None Include="ClassDiagram.cd" />
-
     <None Include="Resources\menuHTML\lose.html">
       <Filter>Resource Files\Html</Filter>
     </None>
