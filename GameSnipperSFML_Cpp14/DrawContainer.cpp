@@ -31,7 +31,7 @@ void DrawContainer::AddBehaviour(DrawBehaviour *behaviour)
 
 void DrawContainer::RemoveBehaviour(DrawBehaviour *behaviour)
 {
-	std::vector<DrawBehaviour*>::iterator it;
+	std::vector<DrawBehaviour*>::iterator it; 
 	for (it = behaviours.begin(); it != behaviours.end(); it++)
 	{
 		if ((*it) == behaviour)
