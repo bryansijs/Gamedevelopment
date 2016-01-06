@@ -26,7 +26,7 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	gameActions = new GameActions(this);
 	gameContext = new GameContext(context);
 
-	hud = new HUD{ gameContext, levelmanager };
+	hud = new HUD{ gameContext };
 	storyline = new AwesomiumHelper{ context->web_core, "file:///Resources/html-game/StoryLine.html", 960, 36 };
 	storylineManager = new StorylineManager();
 
@@ -234,12 +234,16 @@ void GameState::Update()
 	{
 		gameContext->pauze->draw(gameContext->context->window);
 	}
-
+	
+	// draw storyline
 	sf::Sprite storylineSprite = storyline->GetSprite();
 	storylineSprite.setPosition(0, 540);
 	gameContext->context->window.setView(storyview);
 	gameContext->context->window.draw(storylineSprite);
 
+	// draw hud
+	gameContext->context->window.setView(hud->view);
+	gameContext->context->window.draw(hud->awesomium->GetSprite());
 
 	if (!terminate) {
 		gameContext->context->window.setView(gameContext->view);

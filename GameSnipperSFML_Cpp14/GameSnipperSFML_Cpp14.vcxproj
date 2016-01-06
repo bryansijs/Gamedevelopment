@@ -353,6 +353,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="WinState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\html-game\HUD.html" />
     <None Include="Resources\html-game\StoryLine.html" />
     <None Include="loading.html" />
     <None Include="Resources\key-mapping.json" />
@@ -363,12 +364,18 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <None Include="Resources\menuHTML\win.html" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resources\html-game\images\healthbar.png" />
+    <Image Include="Resources\html-game\images\healthbar_bg.png" />
+    <Image Include="Resources\html-game\images\item2.png" />
+    <Image Include="Resources\html-game\images\item3.png" />
+    <Image Include="Resources\html-game\images\key.png" />
     <Image Include="Resources\menuHtml\images\bg.png" />
     <Image Include="Resources\menuHtml\images\border.png" />
     <Image Include="Resources\menuHtml\images\cat.png" />
     <Image Include="Resources\menuHtml\images\menuBorder.png" />
   </ItemGroup>
   <ItemGroup>
+    <Font Include="Resources\html-game\font\robotechgp.ttf" />
     <Font Include="Resources\menuHtml\font\moonhouse.ttf" />
     <None Include="Resources\levels\Level_New.json" />
   </ItemGroup>

@@ -202,6 +202,9 @@
     <Filter Include="Resource Files\Fonts">
       <UniqueIdentifier>{8e0a3160-507f-4e06-928c-a48635fe7699}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Images">
+      <UniqueIdentifier>{8cc66b41-e4c9-4037-a3ea-d67a3f616e69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -778,6 +781,9 @@
     <None Include="Resources\menuHTML\win.html">
       <Filter>Resource Files\Html</Filter>
     </None>
+    <None Include="Resources\html-game\HUD.html">
+      <Filter>Resource Files\Html</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameSnipperSFML_Cpp14.rc">
@@ -786,20 +792,38 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\menuHtml\images\bg.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Images</Filter>
     </Image>
     <Image Include="Resources\menuHtml\images\border.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Images</Filter>
     </Image>
     <Image Include="Resources\menuHtml\images\cat.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Resources\html-game\images\healthbar.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Resources\html-game\images\healthbar_bg.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Resources\html-game\images\item2.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Resources\html-game\images\item3.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Resources\html-game\images\key.png">
+      <Filter>Resource Files\Images</Filter>
     </Image>
     <Image Include="Resources\menuHtml\images\menuBorder.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Images</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\menuHtml\font\moonhouse.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
+    <Font Include="Resources\html-game\font\robotechgp.ttf">
       <Filter>Resource Files\Fonts</Filter>
     </Font>
   </ItemGroup>
