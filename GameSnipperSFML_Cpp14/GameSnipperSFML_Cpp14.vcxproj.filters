@@ -459,6 +459,9 @@
     <ClInclude Include="WinContext.h">
       <Filter>Header Files\Context</Filter>
     </ClInclude>
+    <ClInclude Include="ScoreManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
     <ClInclude Include="AwesomiumHelper.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
@@ -476,6 +479,12 @@
     </ClInclude>
     <ClInclude Include="WinContext.h">
       <Filter>Header Files\Context</Filter>
+    </ClInclude>
+    <ClInclude Include="StoryTile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tinydir.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -713,6 +722,9 @@
     <ClCompile Include="WinContext.cpp">
       <Filter>Source Files\Context</Filter>
     </ClCompile>
+    <ClCompile Include="ScoreManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
     <ClCompile Include="AwesomiumHelper.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
@@ -730,6 +742,9 @@
     </ClCompile>
     <ClCompile Include="LoseState.cpp">
       <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="StoryTile.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

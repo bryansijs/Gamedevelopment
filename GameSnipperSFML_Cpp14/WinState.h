@@ -4,6 +4,7 @@
 #include "LevelManager.h"
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include "ScoreManager.h"
 
 class StateManager;
 class Context;
@@ -20,8 +21,10 @@ private:
 	WinContext* winContext;
 	LevelManager* levelManager;
 	sf::Image screenshot;
+	ScoreManager* scoreManager;
+	bool load = true;
 public:
-	WinState(Context* context, StateManager* stateManager, LevelManager* levelManager, sf::Image screenshot);
+	WinState(Context* context, StateManager* stateManager, LevelManager* levelManager, sf::Image screenshot, ScoreManager* scoreManager);
 	~WinState();
 
 	void Update();

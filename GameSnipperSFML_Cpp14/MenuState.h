@@ -10,7 +10,7 @@ class MenuContext;
 class MenuState : public BaseState
 {
 public:
-	MenuState(Context* context, StateManager* stateManager, LevelManager* levelmanager);
+	MenuState(Context* context, StateManager* stateManager, LevelManager* levelmanager, ScoreManager* scoreManager);
 	~MenuState();
 
 	void Update() override;
@@ -18,6 +18,7 @@ public:
 private:
 	LevelManager* levelManager;
 	StateManager* stateManager;
+	ScoreManager* scoreManager;
 	MenuContext* menuContext;
 	MenuActions* menuActions;
 	Context* context;

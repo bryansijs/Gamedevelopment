@@ -4,6 +4,7 @@
 #include "PlayerActions.h"
 #include "StorylineManager.h"
 
+class ScoreManager;
 class StateManager;
 class Context;
 class GameContext;
@@ -18,7 +19,7 @@ class AwesomiumHelper;
 class GameState: public BaseState
 {
 public:
-	GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager);
+	GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager, ScoreManager* scoreManager);
 	~GameState();
 
 	void Update() override;
@@ -28,7 +29,7 @@ public:
 	bool isPause = false;
 private:
 	StateManager* stateManager;
-
+	ScoreManager* scoreManager;
 	LevelManager* levelManager;
 	Context* maincontext;
 
@@ -38,7 +39,9 @@ private:
 	GameActions* gameActions;
 
 	sf::View storyview;
+	sf::View loadingView;
 	AwesomiumHelper* storyline;
+	AwesomiumHelper* loadingScreen;
 	StorylineManager* storylineManager;
 
 	void DestroyGameObjects();
@@ -48,9 +51,9 @@ private:
 	void Loading();
 	void DoneLoading();
 
-	void ReloadUI(char const* path);
-	void DrawUI();
-	void CreateTexture();
+	void DrawLoadingScreen();
 
-	void GetAd();
+	std::string GetAd();
+	std::string GetTip();
+	std::vector<std::string> GetFilesInDirectory(const char* directory);
 };

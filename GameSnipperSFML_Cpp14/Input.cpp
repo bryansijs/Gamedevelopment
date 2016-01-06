@@ -27,7 +27,12 @@ map<string, sf::Keyboard::Key> Input::keys = {
 	{ "Return", sf::Keyboard::Return },
 	{ "Y", sf::Keyboard::Y },
 	{ "U", sf::Keyboard::U },
-	{ "/", sf::Keyboard::Slash }
+	{ "/", sf::Keyboard::Slash },
+	{ "Add", sf::Keyboard::Add },
+	{ "Subtract", sf::Keyboard::Subtract },
+	{ "LBracket", sf::Keyboard::LBracket },
+	{ "RBracket", sf::Keyboard::RBracket },
+	{ "G", sf::Keyboard::G },
 };
 
 string Input::GetKey(sf::Keyboard::Key key)

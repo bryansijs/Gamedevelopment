@@ -48,8 +48,10 @@ public:
 	void update();
 
 	void Start(GameObject* player, sf::Vector2u* size);
-	void End(Context* context, StateManager* stateManager, LevelManager* levelManager);
+
+	void End(Context* context, StateManager* stateManager, LevelManager* levelManager, ScoreManager* scoreManager);
 	void Story(StorylineManager* storylineManager);
+
 	void setLayerVisibility(int layerIndex, bool isVisible);
 	bool getDoEvents() { return doEvents; }
 	int getViewPortX() { return viewPortX; }

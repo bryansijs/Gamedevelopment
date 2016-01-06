@@ -30,7 +30,7 @@ void EndTile::doAction()
 {
 	sf::Image screenshot = context->window.capture();
 
-	WinState* winState = new WinState(context, stateManager, levelManager, screenshot);
+	WinState* winState = new WinState(context, stateManager, levelManager, screenshot, scoreManager);
 	stateManager->AddState(winState);
 	stateManager->StartNextState();
 }
@@ -49,9 +49,10 @@ void EndTile::endContact(b2Fixture * fixture)
 	
 }
 
-void EndTile::setContext(Context* context, StateManager* stateManager, LevelManager* levelManager)
+void EndTile::setContext(Context* context, StateManager* stateManager, LevelManager* levelManager, ScoreManager* scoreManager)
 {
 	this->context = context;
 	this->stateManager = stateManager;
 	this->levelManager = levelManager;
+	this->scoreManager = scoreManager;
 }

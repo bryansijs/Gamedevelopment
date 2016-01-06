@@ -19,12 +19,14 @@
 
 using namespace Awesomium;
 
-WinState::WinState(Context* context, StateManager* stateManager, LevelManager* levelManager, sf::Image screenshot)
+
+WinState::WinState(Context* context, StateManager* stateManager, LevelManager* levelManager, sf::Image screenshot, ScoreManager* scoreManager)
 {
 	winContext = new WinContext(context);
 	this->stateManager = stateManager;
 	this->levelManager = levelManager;
 	this->screenshot = screenshot;
+	this->scoreManager = scoreManager;
 
 	sf::View view = winContext->context->window.getView();
 	view.setCenter(480, 320);
@@ -44,6 +46,7 @@ WinState::WinState(Context* context, StateManager* stateManager, LevelManager* l
 	winContext->sfx.loadFromFile("./Resources/sfx/victory.ogg");
 	winContext->music = new sf::Sound(winContext->sfx);
 	winContext->music->setVolume(50.0f);
+	winContext->music->setLoop(true);
 	winContext->music->play();
 
 	// Load Page
@@ -102,11 +105,15 @@ void WinState::Update()
 
 void WinState::ToMenu()
 {
-	winContext->music->stop();
-	MenuState* menuState = new MenuState(winContext->context, stateManager, levelManager);
+	if (load)
+	{
+		winContext->music->stop();
+		MenuState* menuState = new MenuState(winContext->context, stateManager, levelManager, scoreManager);
 
-	stateManager->AddState(menuState);
-	stateManager->StartNextState();
+		stateManager->AddState(menuState);
+		stateManager->StartNextState();
+		load = false;
+	}
 }
 
 WinState::~WinState()
