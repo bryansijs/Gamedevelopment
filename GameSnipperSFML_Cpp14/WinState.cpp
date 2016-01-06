@@ -82,32 +82,19 @@ void WinState::Update()
 		if (winContext->event.type == sf::Event::TextEntered)
 		{
 			if (winContext->event.text.unicode < 128) {
-				addNameCharacter(new char(static_cast<char>(winContext->event.text.unicode)));
-				winContext->scoreName.append(new char(static_cast<char>(winContext->event.text.unicode)));
+				char i = static_cast<char>(winContext->event.text.unicode);
+				addNameCharacter(new char(i));
+				winContext->scoreName += i;
 				winContext->amountNameChars++;
 			}
 			if(winContext->amountNameChars > 2)
 			{
-				//TODO: Safe 
+				//TODO: Safe
+				scoreManager->AddScore(500,winContext->scoreName);
+				scoreManager->Save();
 				ToMenu();
 			}
 		}
-		
-		/*if (winContext->event.type == sf::Event::KeyPressed)
-		{
-			Input::EventOccured(winContext->event);
-
-			if (Input::GetKeyDown("Return")) {
-				if(!winContext->saved)
-				{
-					SetHighscore();
-				}
-			}
-			else
-			{
-				ToMenu();
-			}
-		}*/
 	}
 
 	//Create image from Bitmap
@@ -179,16 +166,4 @@ void WinState::setScore(int score)
 
 	Sleep(50);
 	winContext->web_core->Update();
-}
-void WinState::addScore(std::string name, int score)
-{
-	std::ofstream highScorefile("./Resources/save/highscore.txt");
-	if (highScorefile.is_open())
-	{
-		//highScorefile.clear();
-		highScorefile << name << " " << score;
-		highScorefile.close();
-	}
-	else
-		std::cerr << "could not open highScore file";
 }

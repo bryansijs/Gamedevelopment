@@ -22,7 +22,6 @@ private:
 	void SetHighscore();
 	void addNameCharacter(const char* character);
 	void setScore(int score);
-	void addScore(std::string name, int score);
 
 public:
 	WinState(Context* context, StateManager* stateManager, LevelManager* levelManager, ScoreManager* scoreManager);
