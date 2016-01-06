@@ -17,8 +17,6 @@ public:
 	void Update(sf::Vector2f viewPortPosition);
 	bool checkVisible(int screenX, int screenY);
 
-	
-
 private:
 	void MoveAway(BaseEnemy* obj);
 	MoveAction* moveAction;

@@ -17,23 +17,6 @@
          "name":"Objectlaag 1",
          "objects":[
                 {
-                 "height":64,
-                 "id":2,
-                 "name":"Enemy",
-                 "properties":
-                    {
-                     "eType":"Basic",
-                     "image":"enemy1.png",
-                     "isCollidable":"1"
-                    },
-                 "rotation":0,
-                 "type":"Enemy",
-                 "visible":true,
-                 "width":64,
-                 "x":425,
-                 "y":138
-                }, 
-                {
                  "height":28,
                  "id":6,
                  "name":"startTile",
@@ -63,44 +46,62 @@
                  "type":"Enemy",
                  "visible":true,
                  "width":64,
-                 "x":131,
-                 "y":354
+                 "x":279,
+                 "y":133
                 }, 
                 {
                  "height":64,
-                 "id":12,
+                 "id":15,
                  "name":"Enemy",
                  "properties":
                     {
                      "eType":"Basic",
                      "image":"enemy1.png",
                      "isCollidable":"1",
-                     "yIndex":"2"
+                     "yIndex":"3"
                     },
                  "rotation":0,
                  "type":"Enemy",
                  "visible":true,
                  "width":64,
-                 "x":127,
-                 "y":141
+                 "x":98,
+                 "y":237
                 }, 
                 {
                  "height":64,
-                 "id":13,
+                 "id":16,
                  "name":"Enemy",
                  "properties":
                     {
                      "eType":"Basic",
                      "image":"enemy1.png",
                      "isCollidable":"1",
-                     "yIndex":"1"
+                     "yIndex":"3"
                     },
                  "rotation":0,
                  "type":"Enemy",
                  "visible":true,
                  "width":64,
-                 "x":432,
-                 "y":359
+                 "x":434,
+                 "y":245
+                }, 
+                {
+                 "height":64,
+                 "id":17,
+                 "name":"Enemy",
+                 "properties":
+                    {
+                     "eType":"Basic",
+                     "image":"enemy1.png",
+                     "isCollidable":"1",
+                     "yIndex":"3"
+                    },
+                 "rotation":0,
+                 "type":"Enemy",
+                 "visible":true,
+                 "width":64,
+                 "x":269,
+                 "y":364
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -124,7 +125,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":15,
+ "nextobjectid":18,
  "orientation":"orthogonal",
  "properties":
     {

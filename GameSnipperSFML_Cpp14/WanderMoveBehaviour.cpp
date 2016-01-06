@@ -7,7 +7,7 @@
 #include <cstdlib>
 WanderMoveBehaviour::WanderMoveBehaviour(GameObject* gameObject)
 {
-	this->gameObject = gameObject;
+	this->setGameObject(gameObject);
 	moveAction = new MoveAction{ gameObject, 0.10f };
 
 	moveDistance = 0;
@@ -41,6 +41,7 @@ WanderMoveBehaviour::~WanderMoveBehaviour()
 
 void WanderMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 {
+ 	if (this->getGameObject()->isFlaggedForDelete)return;
 	if (checkVisible(viewPortPosition.x, viewPortPosition.y))
 	{
 
@@ -48,8 +49,9 @@ void WanderMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 		{
 			this->setDirection();
 		}
+	
 
-		for (b2ContactEdge* ce = this->gameObject->getBody()->GetContactList(); ce; ce = ce->next){
+		for (b2ContactEdge* ce = this->getGameObject()->getBody()->GetContactList(); ce; ce = ce->next){
 			b2Contact* c = ce->contact;
 			GameObject* obj = static_cast<GameObject*>(ce->other->GetUserData());
 			
@@ -71,7 +73,7 @@ void WanderMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 					}
 				}
 				
-		}
+	}
 
 
 		moveAction->Move(this->getDirection());
@@ -89,7 +91,7 @@ void WanderMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 
 bool WanderMoveBehaviour::checkVisible(int screenX, int screenY)
 {
-	return (gameObject->getPosition().x > screenX && gameObject->getPosition().x < screenX + 960 && gameObject->getPosition().y > screenY && gameObject->getPosition().y < screenY + 640);
+	return (this->getGameObject()->getPosition().x > screenX && this->getGameObject()->getPosition().x < screenX + 960 && this->getGameObject()->getPosition().y > screenY && this->getGameObject()->getPosition().y < screenY + 640);
 }
 
 

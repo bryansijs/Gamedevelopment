@@ -8,6 +8,8 @@
 #include "FilterEnum.h"
 #include "Tile.h"
 #include "MoveBehaviour.h"
+#include "EnemyDrawBehaviour.h"
+#include "DrawContainer.h"
 BaseEnemy::BaseEnemy()
 {
 }
@@ -20,7 +22,13 @@ BaseEnemy::~BaseEnemy()
 
 BaseEnemy::BaseEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer) :Unit{ dContainer, img,mContainer, gameObjectContainer } {
 
+	this->getDrawContainer()->RemoveBehaviour(this->getDrawBehaviour());
+	this->setDrawBehaviour({ new EnemyDrawBehaviour(this, 10, "./Resources/sprites/" + img) });
+	this->getDrawContainer()->AddBehaviour(this->getDrawBehaviour());
 
+
+	this->hpBar = new sf::RectangleShape(sf::Vector2f(100, 20));
+	this->hpBar->setFillColor(sf::Color(100, 100, 100, 128));
 }
 
 
@@ -113,6 +121,7 @@ void BaseEnemy::CreateVisibleLine()
 {
 	this->lineOfSightConvex->setFillColor(sf::Color(255, 129, 0, 128));
 	this->lineOfSightConvex->setPosition(sf::Vector2f(this->getBody()->GetPosition().x, this->getBody()->GetPosition().y));
+	this->hpBar->setPosition(sf::Vector2f(this->getBody()->GetPosition().x + this->getHeight()/2, this->getBody()->GetPosition().y) );
 
 	for (int i = 0; i < 3; i++)
 		this->lineOfSightConvex->setPoint(i, sf::Vector2f(convexVert[i].x, convexVert[i].y));

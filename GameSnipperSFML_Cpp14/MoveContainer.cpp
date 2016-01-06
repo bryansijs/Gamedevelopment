@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "MoveContainer.h"
 #include "MoveBehaviour.h"
-
+#include "WanderMoveBehaviour.h"
 MoveContainer::MoveContainer()
 {
 }
@@ -25,5 +25,21 @@ void MoveContainer::AddBehaviour(MoveBehaviour* behaviour)
 
 void MoveContainer::RemoveBehaviour(MoveBehaviour* behaviour)
 {
-	behaviours.erase(std::remove(behaviours.begin(), behaviours.end(), behaviour), behaviours.end());
+	std::vector<MoveBehaviour*>::iterator it;
+	for (it = behaviours.begin(); it != behaviours.end(); it++)
+	{
+
+		if (behaviour == dynamic_cast< WanderMoveBehaviour* >(*it))
+		{
+			behaviours.erase(it);
+			break;
+		}
+
+
+		if ((*it) == behaviour)
+		{
+			behaviours.erase(it);
+			break;
+		}
+	}
 }

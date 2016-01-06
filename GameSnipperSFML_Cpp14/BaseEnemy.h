@@ -1,17 +1,13 @@
 #pragma once
 #include "Unit.h"
 
-
-
 class BaseEnemy : public Unit
 {
 private:
-
-	Player* player;
 	b2Vec2 vertices[3];
 	b2Vec2 convexVert[3];
 	sf::ConvexShape* lineOfSightConvex;
-
+	sf::RectangleShape* hpBar;
 	b2PolygonShape  lineOfSightShape;
 	b2FixtureDef* lineOfSightFixtureDef;
 
@@ -43,6 +39,7 @@ public:
 	int getDefaultWanderDistance() { return defaultWanderDistance; }
 
 	sf::ConvexShape& getLineOfSightConvex() { return *lineOfSightConvex; }
+	sf::RectangleShape& getHpBar() { return *hpBar; }
 };
 
 

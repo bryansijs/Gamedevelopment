@@ -35,6 +35,8 @@ void Bullet::startContact(b2Fixture * fixture)
 {
 	GameObject* pal = static_cast<Player*>(fixture->GetBody()->GetUserData());
 
+	if (fixture->IsSensor())return;
+
 	if (dynamic_cast<Player*> (pal))
 	{
 		if (dynamic_cast<Player*> (pal)->GetGodMode())
