@@ -139,8 +139,6 @@ void GameState::Update()
 	Time::deltaTime *= gameContext->gameSpeedMultiplier;
 	Time::runningTime += Time::deltaTime;
 
-	std::cout << "Health: " << gameContext->player->getHealth();
-
 	if (gameContext->player->getHealth() <= 0)
 	{
 		LoseState* loseState = new LoseState{ gameContext->context, stateManager, levelManager, scoreManager };
