@@ -22,12 +22,12 @@
 #include <vector>
 #include <string>
 
-GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager)
+GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager, ScoreManager* scoreManager)
 {
 	maincontext = context;
 	
-	gameActions = new GameActions(this);
 	gameContext = new GameContext(context);
+	gameActions = new GameActions(this, gameContext);
 	storyline = new AwesomiumHelper{ context->web_core, "file:///Resources/html-game/StoryLine.html", 1000, 50 };
 	storylineManager = new StorylineManager();
 
@@ -41,7 +41,9 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 
 	this->stateManager = stateManager;
 	this->levelManager = levelmanager;
+	this->scoreManager = scoreManager;
 	//in constructor, usually
+
 
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer, gameContext->world);
 	gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
@@ -56,12 +58,13 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	playerActions->SetWorld(gameContext->world);
 
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
-	gameContext->level->End(context, stateManager, levelManager);
+
+	gameContext->level->End(context, stateManager, levelManager, scoreManager);
 	gameContext->level->Story(storylineManager);
 
-	//gameContext->player->setPosition(gameContext->player->getPositionX() -16, gameContext->player->getPositionY() - 16);
 	gameContext->player->createBoxDynamicForPlayers(*gameContext->world);
-	
+
+
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
 
 	DoneLoading();
@@ -300,7 +303,7 @@ void GameState::Update()
 		sf::Image screenshot = gameContext->context->window.capture();
 		screenshot.saveToFile("./Resources/menuHTML/images/hold.png");
 
-		LoseState* loseState = new LoseState(gameContext->context, stateManager, levelManager);
+		LoseState* loseState = new LoseState(gameContext->context, stateManager, levelManager, scoreManager);
 		stateManager->AddState(loseState);
 		stateManager->StartNextState();
 	}
@@ -354,7 +357,7 @@ void GameState::MenuEnd(int option)
 			break;
 	case 1: {
 		terminate = true;
-		MenuState* menu = new MenuState{ gameContext->context, stateManager, levelManager };
+		MenuState* menu = new MenuState{ gameContext->context, stateManager, levelManager, scoreManager};
 		stateManager->AddState(menu);
 		stateManager->StartNextState();
 		break; }

@@ -48,6 +48,21 @@ void Player::AddItem(BaseItem* item) {
 	}
 }
 
+void Player::EnableGodMode()
+{
+	this->godMode = true;
+}
+
+void Player::DisableGodMode()
+{
+	this->godMode = false;
+}
+
+bool Player::GetGodMode()
+{
+	return this->godMode;
+}
+
 void Player::startContact(b2Fixture* fixture)
 {
 
@@ -75,7 +90,6 @@ void Player::AddPotion(BaseItem* item) {
 			return;
 		}
 	}
-
 
 	potions.insert(std::pair<BaseItem*, int>(item, 1));
 }

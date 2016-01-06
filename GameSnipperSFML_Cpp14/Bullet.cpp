@@ -34,9 +34,22 @@ Bullet::~Bullet()
 void Bullet::startContact(b2Fixture * fixture)
 {
 	GameObject* pal = static_cast<Player*>(fixture->GetBody()->GetUserData());
-	if (!dynamic_cast<Player*> (pal) && !fixture->IsSensor()) {
-		Destroy();
+
+	if (dynamic_cast<Player*> (pal))
+	{
+		if (dynamic_cast<Player*> (pal)->GetGodMode())
+		{
+			return;
+		}
 	}
+
+	if (dynamic_cast<Unit*> (pal))
+	{
+		Unit* enemy = dynamic_cast<Unit*> (pal);
+		enemy->Damage(this->damage);
+	}
+
+	Destroy();
 }
 
 void Bullet::endContact(b2Fixture * fixture)

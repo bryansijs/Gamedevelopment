@@ -26,6 +26,8 @@ private:
 		{ "Gun", &Player::AddGun },
 		{ "Key", &Player::AddKey },
 	};
+
+	bool godMode = false;
 public:
 	Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameObjectContainer *useContainer, b2World* world);
 	Player();
@@ -41,6 +43,10 @@ public:
 	}
 
 	void AddItem(BaseItem* item);
+
+	void EnableGodMode();
+	void DisableGodMode();
+	bool GetGodMode();
 
 	virtual void startContact(b2Fixture* fixture);
 	virtual void endContact(b2Fixture* fixture);
