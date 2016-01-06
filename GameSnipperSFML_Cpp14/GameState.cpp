@@ -21,6 +21,7 @@
 #include "Random.h"
 #include <vector>
 #include <string>
+#include "WinState.h"
 
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager, ScoreManager* scoreManager)
 {
@@ -189,6 +190,9 @@ void GameState::Update()
 				if (Input::GetKeyDown("K")) {
 					StartNextLevel();
 				}
+				if (Input::GetKeyDown("Y")) {
+					StartWinState();
+				}
 
 				if (isPause)
 					this->MenuEnd(gameContext->pauze->KeyHandler());
@@ -310,6 +314,16 @@ void GameState::StartNextLevel()
 	gameContext->context->window.setView(gameContext->view);
 
 	Update();
+}
+
+void GameState::StartWinState()
+{
+	sf::Image screenshot = gameContext->context->window.capture();
+	screenshot.saveToFile("./Resources/menuHTML/images/hold.png");
+
+	WinState* winState = new WinState(gameContext->context, stateManager, levelManager, scoreManager);
+	stateManager->AddState(winState);
+	stateManager->StartNextState();
 }
 
 void GameState::MenuEnd(int option)
