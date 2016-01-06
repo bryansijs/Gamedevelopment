@@ -25,26 +25,23 @@ Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameO
 	this->SetAnimationStates(3);
 	this->setHealth(100);
 
-	GameObjectFactory gameObjectFactory{ drawContainer, moveContainer, useContainer, world };
+	WeaponFactory weaponFactory;
 	std::map<std::string, std::string> properties = {
-		{ "type", "Weapon" },
 		{ "wType", "Pistol" },
 		{ "pType", "Bullet" }
 	};
 
-	this->AddGun((BaseItem*)gameObjectFactory.Create(properties));
+	this->AddGun((BaseItem*)weaponFactory.Create(properties, useContainer));
 
 	// Equip a second gun
 	std::map<std::string, std::string> rifleProperties = {
-		{ "type", "Weapon" },
 		{ "wType", "Rifle" },
 		{ "pType", "Bullet" }
 	};
 
-	this->AddGun((BaseItem*)gameObjectFactory.Create(rifleProperties));
-	this->EquipGun(2);
+	this->AddGun((BaseItem*)weaponFactory.Create(rifleProperties, useContainer));
+	this->EquipGun(1);
 }
-
 
 Player::Player()
 {

@@ -18,6 +18,7 @@
          "opacity":1,
          "properties":
             {
+             "LayerId":"5",
              "music":"level1.ogg"
             },
          "type":"tilelayer",
@@ -564,6 +565,22 @@
                  "width":127,
                  "x":416,
                  "y":1761
+                }, 
+                {
+                 "height":58,
+                 "id":35,
+                 "name":"LayerDiscovery",
+                 "properties":
+                    {
+                     "Layer":"5",
+                     "sType":"DiscoverTile"
+                    },
+                 "rotation":0,
+                 "type":"GameTile",
+                 "visible":true,
+                 "width":34,
+                 "x":237,
+                 "y":1831
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -572,7 +589,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":35,
+ "nextobjectid":37,
  "orientation":"orthogonal",
  "properties":
     {

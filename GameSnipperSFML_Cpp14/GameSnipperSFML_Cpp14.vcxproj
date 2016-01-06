@@ -186,6 +186,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="ConsoleColor.h" />
     <ClInclude Include="Context.h" />
     <ClInclude Include="DebugBox2D.h" />
+    <ClInclude Include="DiscoverTile.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="DrawBehaviour.h" />
     <ClInclude Include="DrawContainer.h" />
@@ -277,6 +278,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="CollisionListener.cpp" />
     <ClCompile Include="Context.cpp" />
     <ClCompile Include="DebugBox2D.cpp" />
+    <ClCompile Include="DiscoverTile.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="DrawBehaviour.cpp" />
     <ClCompile Include="DrawContainer.cpp" />
@@ -360,6 +362,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="WinState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="Resources\html-game\StoryLine.html" />
     <None Include="loading.html" />
     <None Include="Resources\key-mapping.json" />

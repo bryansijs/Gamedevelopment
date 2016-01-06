@@ -49,6 +49,7 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 
 	gameContext->levelImporter->Prepare();
 
+	gameContext->levelImporter->updateLevel();
 	gameContext->level = gameContext->levelImporter->getLevel();
 	gameContext->levelImporter->Clear();
 
@@ -59,8 +60,9 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	gameContext->level->End(context, stateManager, levelManager);
 	gameContext->level->Story(storylineManager);
 
-	gameContext->player->createBoxDynamic(*gameContext->world);
-
+	//gameContext->player->setPosition(gameContext->player->getPositionX() -16, gameContext->player->getPositionY() - 16);
+	gameContext->player->createBoxDynamicForPlayers(*gameContext->world);
+	
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
 
 	DoneLoading();
@@ -216,14 +218,18 @@ void GameState::Update()
 		gameContext->player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	}
 
-//DebugBodies();
-
+	//DebugBodies();
 
 
 	if (!isPause)
 	{
-		this->gameContext->world->Step(1, 8, 3);
-
+		float speed = 1;
+		float count = 0;
+		float point = speed / Time::deltaTime;
+		while (point > count) {
+			this->gameContext->world->Step(Time::deltaTime, 6, 6);
+			count++;
+		}
 		DestroyGameObjects();
 		gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
 
@@ -258,8 +264,37 @@ void GameState::Update()
 	if (!terminate) {
 		gameContext->context->window.setView(gameContext->view);
 	}
+//<<<<<<< HEAD
+//
+	//for (b2Body* b = gameContext->world->GetBodyList(); b; b = b->GetNext()) {
+
+	//	b2Shape::Type t = b->GetFixtureList()->GetType();
+	//	if (t == b2Shape::e_polygon)
+	//	{
+	//		b2PolygonShape* s = (b2PolygonShape*)b->GetFixtureList()->GetShape();
+	//		sf::ConvexShape convex;
+	//		int vertextCount = s->GetVertexCount();
+	//		convex.setPointCount(vertextCount);
+	//		convex.setFillColor(sf::Color(255, 255, 100, 128));
+
+	//		convex.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
+
+	//		for (int i = 0; i < vertextCount; i++)
+	//			convex.setPoint(i, sf::Vector2f(s->GetVertex(i).x, s->GetVertex(i).y));
+
+
+	//		gameContext->context->window.draw(convex);
+	//	}
+	//}
+//
+//		sf::RectangleShape rectangle(sf::Vector2f(32, 32));
+//		rectangle.setPosition(sf::Vector2f(gameContext->player->getBody()->GetPosition().x, gameContext->player->getBody()->GetPosition().y));
+//		rectangle.setOutlineThickness(0);
+//		rectangle.setFillColor(sf::Color(230, 100, 50, 200));
+//		gameContext->context->window.draw(rectangle);
 	
 	gameContext->context->window.display();
+
 
 	if (gameContext->player->getHealth() <= 0)
 	{
@@ -293,6 +328,7 @@ void GameState::StartNextLevel()
 
 	gameContext->levelImporter->Prepare();
 
+	gameContext->levelImporter->updateLevel();
 	gameContext->level = gameContext->levelImporter->getLevel();
 	gameContext->levelImporter->Clear();
 

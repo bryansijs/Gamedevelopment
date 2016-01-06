@@ -16,5 +16,5 @@ public:
 	void SetDirection(std::string direction);
 private:
 	std::string direction;
-	int velocity = 50000.0f;
+	int velocity = 500.0f;
 };

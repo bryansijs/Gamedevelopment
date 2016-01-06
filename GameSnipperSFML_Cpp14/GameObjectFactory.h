@@ -16,6 +16,7 @@ class GameObject;
 class DrawContainer;
 class GameObjectContainer;
 class Tile;
+class Level;
 class GameObjectFactory
 {
 private:
@@ -48,10 +49,11 @@ private:
 
 	std::vector<Tile*> tileList;
 	b2World* world;
+	Level* level;
 
 public:
 
-	GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer, b2World* world);
+	GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer, b2World* world, Level* level);
 	GameObjectFactory();
 	~GameObjectFactory();
 

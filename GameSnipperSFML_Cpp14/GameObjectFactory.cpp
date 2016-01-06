@@ -4,17 +4,18 @@
 
 #include "DrawContainer.h"
 #include "GameObjectContainer.h"
-
+#include "Level.h"
 GameObjectFactory::GameObjectFactory()
 {
 }
 
-GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer, b2World* world)
+GameObjectFactory::GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer, b2World* world, Level* level)
 {
 	this->drawContainer = drawContainer;
 	this->moveContainer = moveContainer;
 	this->gameObjectContainer = gameObjectContainer;
 	this->world = world;
+	this->level = level;
 }
 
 GameObjectFactory::~GameObjectFactory()
@@ -46,7 +47,7 @@ GameObject* GameObjectFactory::CreateObject(std::map<std::string, std::string>& 
 
 GameObject* GameObjectFactory::CreateTile(std::map<std::string, std::string>& properties)
 {
-	return  this->gametTileFactory.Create(properties, gameObjectContainer, world);
+	return  this->gametTileFactory.Create(properties, gameObjectContainer, world, level);
 }
 
 GameObject* GameObjectFactory::CreateItem(std::map<std::string, std::string>& properties)

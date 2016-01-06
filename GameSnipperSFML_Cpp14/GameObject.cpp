@@ -114,18 +114,22 @@ void GameObject::SetMoveBehaviour(MoveBehaviour* moveBehaviour)
 void GameObject::createBoxStatic(b2World& World)
 {
 	myBodyDef.type = b2_staticBody;
-
 	Body = World.CreateBody(&myBodyDef);
+
+	b2MassData* ma{ new b2MassData() };
+	ma->center.Normalize();
+	ma->mass = 200000000;
+	Body->SetMassData(ma);
 
 	if (this->getHeight() < 1 || this->getWidth() < 1) {
 		Shape.SetAsBox((32.f / 2), (32.f / 2));
 	}
 	else {
 		b2Vec2 vertices[4];
-		vertices[0].Set(-16, -16);
-		vertices[1].Set(-16, this->getHeight() + -16);
-		vertices[2].Set(this->getWidth() + -16, this->getHeight() + -16);
-		vertices[3].Set(this->getWidth() + -16, -16);
+		vertices[0].Set(0, 0);
+		vertices[1].Set(0, this->getHeight());
+		vertices[2].Set(this->getWidth(), this->getHeight());
+		vertices[3].Set(this->getWidth(),0);
 		this->Shape.Set(vertices, 4);
 	}
 
@@ -139,6 +143,33 @@ void GameObject::createBoxStatic(b2World& World)
 void GameObject::createBoxDynamic(b2World & World)
 {
 
+	myBodyDef.type = b2_dynamicBody;
+
+	Body = World.CreateBody(&myBodyDef);
+
+	if (this->getHeight() < 1 || this->getWidth() < 1) {
+		Shape.SetAsBox((30.f / 2), (30.f / 2));
+	}
+	else {
+		b2Vec2 vertices[4];
+		vertices[0].Set(0,0);
+		vertices[1].Set(0, this->getHeight());
+		vertices[2].Set(this->getWidth(), this->getHeight());
+		vertices[3].Set(this->getWidth(), 0);
+		this->Shape.Set(vertices, 4);
+	}
+
+
+	boxFixtureDef.density = 100.f;
+	boxFixtureDef.friction = 0.7f;
+	boxFixtureDef.shape = &Shape;
+	Body->CreateFixture(&boxFixtureDef);
+	Body->SetUserData(this);
+	this->world = &World;
+}
+
+void GameObject::createBoxDynamicForPlayers(b2World & World)
+{
 	myBodyDef.type = b2_dynamicBody;
 
 	Body = World.CreateBody(&myBodyDef);
@@ -170,16 +201,16 @@ void GameObject::createBoxSenor(b2World & World)
 	myBodyDef.type = b2_staticBody;
 
 	Body = World.CreateBody(&myBodyDef);
-
+	
 	if (this->getHeight() < 1 || this->getWidth() < 1) {
 		Shape.SetAsBox((32.f / 2), (32.f / 2));
 	}
 	else {
 		b2Vec2 vertices[4];
-		vertices[0].Set(-16, -16);
-		vertices[1].Set(-16, this->getHeight() + -16);
-		vertices[2].Set(this->getWidth() + -16, this->getHeight() + -16);
-		vertices[3].Set(this->getWidth() + -16, -16);
+		vertices[0].Set(0, 0);
+		vertices[1].Set(0, this->getHeight());
+		vertices[2].Set(this->getWidth(), this->getHeight());
+		vertices[3].Set(this->getWidth(), 0);
 		this->Shape.Set(vertices, 4);
 	}
 

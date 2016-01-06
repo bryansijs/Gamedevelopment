@@ -31,9 +31,19 @@ Bullet::~Bullet()
 {
 }
 
+void Bullet::SetOwner(GameObject* owner)
+{
+	this->owner = owner;
+}
+
 void Bullet::startContact(b2Fixture* fixture)
 {
 	GameObject* pal = static_cast<Player*>(fixture->GetBody()->GetUserData());
+
+	if (dynamic_cast<Player*> (pal) == this->owner)
+	{
+		return;
+	}
 
 	if (Player* player = dynamic_cast<Player*> (pal))
 	{

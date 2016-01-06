@@ -105,6 +105,7 @@ public:
 
 	void createBoxStatic(b2World& World);
 	void createBoxDynamic(b2World & World);
+	void createBoxDynamicForPlayers(b2World & World);
 	void createBoxSenor(b2World & World);
 
 	virtual void startContact(b2Fixture* fixture);
