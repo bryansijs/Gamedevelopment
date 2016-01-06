@@ -100,8 +100,8 @@
                  "type":"Enemy",
                  "visible":true,
                  "width":64,
-                 "x":269,
-                 "y":364
+                 "x":242,
+                 "y":373
                 }],
          "opacity":1,
          "type":"objectgroup",

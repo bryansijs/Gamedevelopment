@@ -25,17 +25,19 @@ void MoveContainer::AddBehaviour(MoveBehaviour* behaviour)
 
 void MoveContainer::RemoveBehaviour(MoveBehaviour* behaviour)
 {
+
+	/*	for (int i = 0; i < behaviours.size(); i++)
+	{
+		if (behaviours.at(i) == behaviour)
+		{
+			//	behaviours.at(i) = nullptr;
+			behaviours.erase(behaviours.begin() + i);
+			break;
+		}
+	}*/
 	std::vector<MoveBehaviour*>::iterator it;
 	for (it = behaviours.begin(); it != behaviours.end(); it++)
 	{
-
-		if (behaviour == dynamic_cast< WanderMoveBehaviour* >(*it))
-		{
-			behaviours.erase(it);
-			break;
-		}
-
-
 		if ((*it) == behaviour)
 		{
 			behaviours.erase(it);

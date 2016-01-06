@@ -26,9 +26,8 @@ BaseEnemy::BaseEnemy(DrawContainer* dContainer, std::string img, MoveContainer* 
 	this->setDrawBehaviour({ new EnemyDrawBehaviour(this, 10, "./Resources/sprites/" + img) });
 	this->getDrawContainer()->AddBehaviour(this->getDrawBehaviour());
 
-
-	this->hpBar = new sf::RectangleShape(sf::Vector2f(100, 20));
-	this->hpBar->setFillColor(sf::Color(100, 100, 100, 128));
+//	this->hpBar = new sf::RectangleShape(sf::Vector2f(100, 20));
+//	this->hpBar->setFillColor(sf::Color(100, 100, 100, 128));
 }
 
 
