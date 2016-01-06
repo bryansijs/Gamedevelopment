@@ -9,6 +9,7 @@
 
 #include "NormalDrawBehaviour.h"
 #include "ShotMoveBehaviour.h"
+#include "FilterEnum.h"
 
 Bullet::Bullet(GameObjectContainer * gameObjectContainer, std::map<std::string, std::string>& properties, b2World * world, MoveContainer * moveContainer, DrawContainer * drawContainer, std::string texture) : GameObject{ drawContainer, gameObjectContainer, texture }
 {
@@ -24,6 +25,9 @@ Bullet::Bullet(GameObjectContainer * gameObjectContainer, std::map<std::string, 
 	this->setPosition(x, y);
 	this->setSize(8, 8);
 	this->createBoxDynamic(*world);
+	b2Filter fil = this->getBody()->GetFixtureList()->GetFilterData();
+	fil.maskBits = 0x0002; // dit is nu een enemy // 0x0004 is player
+	this->getBody()->GetFixtureList()->SetFilterData(fil);
 	this->getBody()->SetBullet(true);
 }
 
@@ -33,22 +37,24 @@ Bullet::~Bullet()
 
 void Bullet::startContact(b2Fixture * fixture)
 {
-	GameObject* pal = static_cast<Player*>(fixture->GetBody()->GetUserData());
-
 	if (fixture->IsSensor())return;
-
-	if (dynamic_cast<Player*> (pal))
-	{
-		if (dynamic_cast<Player*> (pal)->GetGodMode())
-		{
-			return;
-		}
-	}
+	GameObject* pal = static_cast<Player*>(fixture->GetBody()->GetUserData());
 
 	if (dynamic_cast<Unit*> (pal))
 	{
-		Unit* enemy = dynamic_cast<Unit*> (pal);
-		enemy->Damage(this->damage);
+		if (dynamic_cast<Player*> (pal))
+		{
+			if (dynamic_cast<Player*> (pal)->GetGodMode())
+			{
+				return;
+			}
+		}
+
+		if (this->getBody()->GetFixtureList()->GetFilterData().maskBits == fixture->GetFilterData().categoryBits)
+		{
+			Unit* enemy = dynamic_cast<Unit*> (pal);
+			enemy->Damage(this->damage);
+		}
 	}
 
 	Destroy();

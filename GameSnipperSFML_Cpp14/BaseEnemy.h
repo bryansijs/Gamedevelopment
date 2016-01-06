@@ -22,6 +22,10 @@ private:
 	void CreateVectors();
 	void startContact(b2Fixture * fixture);
 	void endContact(b2Fixture * fixture);
+
+
+	float shotRate = 0.5f;
+	float nextShot;
 public:
 	BaseEnemy();
 	~BaseEnemy();
@@ -42,7 +46,8 @@ public:
 	sf::ConvexShape& getLineOfSightConvex() { return *lineOfSightConvex; }
 	sf::RectangleShape& getMaxHpBar() { return *mhpBar; }
 	sf::RectangleShape& getHpBar() { return *hpBar; }
-	
+	void Attack();
+
 };
 
 

@@ -25,6 +25,7 @@ Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameO
 	this->SetAnimationStates(3);
 	this->setHealth(100);
 
+
 }
 
 
@@ -33,6 +34,8 @@ Player::Player()
 	this->SetMoveBehaviour ( new NormalMoveBehaviour(this) );
 	this->setDrawBehaviour(new PlayerDrawBehaviour(this, 10, "Player.png"));
 	this->setHealth(100);
+
+	
 }
 
 Player::~Player()

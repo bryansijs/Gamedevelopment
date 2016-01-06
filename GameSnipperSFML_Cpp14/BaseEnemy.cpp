@@ -10,6 +10,9 @@
 #include "MoveBehaviour.h"
 #include "EnemyDrawBehaviour.h"
 #include "DrawContainer.h"
+#include "AttackBehaviour.h"
+#include "MoveContainer.h"
+#include "GameObjectFactory.h"
 BaseEnemy::BaseEnemy()
 {
 }
@@ -31,6 +34,7 @@ BaseEnemy::BaseEnemy(DrawContainer* dContainer, std::string img, MoveContainer* 
 
 	this->hpBar = new sf::RectangleShape(sf::Vector2f(56, 10));
 	this->hpBar->setFillColor(sf::Color(255, 0, 0, 128));
+
 
 }
 
@@ -80,6 +84,11 @@ void BaseEnemy::CreateLineOfSight()
 	lineOfSightFixtureDef->isSensor = true;
 
 	this->getBody()->CreateFixture(lineOfSightFixtureDef);
+
+	b2Filter f = this->getBody()->GetFixtureList()->GetNext()->GetFilterData();
+
+	f.categoryBits = ENEMY;
+	this->getBody()->GetFixtureList()->GetNext()->SetFilterData(f);
 }
 
 void BaseEnemy::CreateVectors()
@@ -161,9 +170,19 @@ void BaseEnemy::Update()
 			{
 				if (c->IsTouching())
 					this->lineOfSightConvex->setFillColor(sf::Color(250, 0, 0, 128));
+
+				if (!dynamic_cast<AttackBehaviour*>(this->getMoveBehaviour()))
+				{
+					this->getMoveContainer()->RemoveBehaviour(this->getMoveBehaviour());
+					this->SetMoveBehaviour({ new AttackBehaviour(this) });
+					this->getMoveContainer()->AddBehaviour(this->getMoveBehaviour());
+				}
 			}
 		}
 	}
+
+	if (dynamic_cast<AttackBehaviour*>(this->getMoveBehaviour()))
+		Attack();
 }
 
 
@@ -176,4 +195,57 @@ void BaseEnemy::startContact(b2Fixture * fixture)
 void BaseEnemy::endContact(b2Fixture * fixture)
 {
 
+}
+
+void BaseEnemy::Attack()
+{
+if (Time::runningTime > nextShot)
+	{
+	nextShot = (float)Time::runningTime + (float)shotRate;
+
+	
+	std::string direction = "move-down";
+	float x = 0;
+	float y = 0;
+
+
+	if (direction == "move-up")
+	{
+		x = this->getBody()->GetPosition().x + this->getWidth() / 2;
+		y = this->getBody()->GetPosition().y - 10;
+	}
+	if (direction == "move-down")
+	{
+		x = this->getBody()->GetPosition().x + this->getWidth() / 2;
+		y = this->getBody()->GetPosition().y + this->getHeight() + 10;
+	}
+	if (direction == "move-left")
+	{
+		x = this->getBody()->GetPosition().x - 10;
+		y = this->getBody()->GetPosition().y + this->getHeight() / 2;
+	}
+	if (direction == "move-right")
+	{
+		x = this->getBody()->GetPosition().x + this->getWidth() + 10;
+		y = this->getBody()->GetPosition().y + this->getHeight() / 2;
+	}
+
+
+	GameObjectFactory gameObjectFactory{ this->getDrawContainer(), this->getMoveContainer(), this->getgameObjectContainer(), this->world };
+	std::map<std::string, std::string> properties = {
+		{ "type", "Projectile" },
+		{ "pType", "Bullet" },
+		{ "direction", direction },
+		{ "texture", "bullet-blue.png" },
+		{ "x", std::to_string(x) },
+		{ "y", std::to_string(y) },
+		{ "Category", std::to_string(_entityCategory::ENEMY) } };
+
+
+	GameObject* bullet = gameObjectFactory.Create(properties);
+	};
+
+
+
+	
 }

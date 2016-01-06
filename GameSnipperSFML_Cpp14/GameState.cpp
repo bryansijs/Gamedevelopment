@@ -60,7 +60,10 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	gameContext->level->Story(storylineManager);
 
 	gameContext->player->createBoxDynamic(*gameContext->world);
+	b2Filter f = gameContext->player->getBody()->GetFixtureList()->GetFilterData();
+	f.categoryBits = 0x0004;
 
+	gameContext->player->getBody()->GetFixtureList()->SetFilterData(f);
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
 
 	DoneLoading();

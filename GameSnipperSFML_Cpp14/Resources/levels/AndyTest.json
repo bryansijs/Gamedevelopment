@@ -48,60 +48,6 @@
                  "width":64,
                  "x":279,
                  "y":133
-                }, 
-                {
-                 "height":64,
-                 "id":15,
-                 "name":"Enemy",
-                 "properties":
-                    {
-                     "eType":"Basic",
-                     "image":"enemy1.png",
-                     "isCollidable":"1",
-                     "yIndex":"3"
-                    },
-                 "rotation":0,
-                 "type":"Enemy",
-                 "visible":true,
-                 "width":64,
-                 "x":98,
-                 "y":237
-                }, 
-                {
-                 "height":64,
-                 "id":16,
-                 "name":"Enemy",
-                 "properties":
-                    {
-                     "eType":"Basic",
-                     "image":"enemy1.png",
-                     "isCollidable":"1",
-                     "yIndex":"3"
-                    },
-                 "rotation":0,
-                 "type":"Enemy",
-                 "visible":true,
-                 "width":64,
-                 "x":434,
-                 "y":245
-                }, 
-                {
-                 "height":64,
-                 "id":17,
-                 "name":"Enemy",
-                 "properties":
-                    {
-                     "eType":"Basic",
-                     "image":"enemy1.png",
-                     "isCollidable":"1",
-                     "yIndex":"3"
-                    },
-                 "rotation":0,
-                 "type":"Enemy",
-                 "visible":true,
-                 "width":64,
-                 "x":242,
-                 "y":373
                 }],
          "opacity":1,
          "type":"objectgroup",
