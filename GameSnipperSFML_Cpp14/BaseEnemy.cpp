@@ -60,7 +60,6 @@ void BaseEnemy::setProperties(std::map<std::string, std::string>& properties)
 
 	this->setMaxHealth((properties.count("maxHealth")) ? std::stoi(properties["maxHealth"]) : 100);
 	this->setHealth((properties.count("maxHealth")) ? std::stoi(properties["maxHealth"]) : 100);
-
 }
 
 void BaseEnemy::CreateLineOfSight()
