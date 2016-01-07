@@ -33,6 +33,8 @@ WanderMoveBehaviour::WanderMoveBehaviour(GameObject* gameObject)
 		this->minMoveDistance = dynamic_cast<BaseEnemy*>(gameObject)->getMinWanderDistance();
 		this->defaultMoveDistance = dynamic_cast<BaseEnemy*>(gameObject)->getDefaultWanderDistance();
 	}
+
+
 }
 
 WanderMoveBehaviour::~WanderMoveBehaviour()
@@ -42,7 +44,7 @@ WanderMoveBehaviour::~WanderMoveBehaviour()
 void WanderMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 {
  	if (this->getGameObject()->isFlaggedForDelete)return;
-	if (checkVisible(viewPortPosition.x, viewPortPosition.y))
+	if (this->checkVisible(viewPortPosition.x, viewPortPosition.y))
 	{
 
 		if (currentMoveDistance >= moveDistance)
@@ -89,10 +91,6 @@ void WanderMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 
 }
 
-bool WanderMoveBehaviour::checkVisible(int screenX, int screenY)
-{
-	return (this->getGameObject()->getPosition().x > screenX && this->getGameObject()->getPosition().x < screenX + 960 && this->getGameObject()->getPosition().y > screenY && this->getGameObject()->getPosition().y < screenY + 640);
-}
 
 
 void WanderMoveBehaviour::MoveAway(BaseEnemy* obj)

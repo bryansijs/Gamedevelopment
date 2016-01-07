@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "NormalMoveBehaviour.h"
-
 #include "MoveAction.h"
-#include "Level.h"
 
 #include <SFML\System\Vector2.hpp>
 
@@ -19,19 +17,9 @@ NormalMoveBehaviour::~NormalMoveBehaviour()
 
 void NormalMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 {
-	if (checkVisible(viewPortPosition.x, viewPortPosition.y))
+	if (this->checkVisible(viewPortPosition.x, viewPortPosition.y))
 	{
 		moveAction = new MoveAction{ this->getGameObject(), 0.10f };
 		moveAction->Move({ "move-left" });
 	}
-}
-
-bool NormalMoveBehaviour::checkVisible(int screenX, int screenY)
-{
-	if (this->getGameObject()->getPosition().x > screenX && this->getGameObject()->getPosition().x < screenX + 960 && this->getGameObject()->getPosition().y > screenY && this->getGameObject()->getPosition().y < screenY + 640)
-	{
-		return true;
-	}
-	
-	return false;
 }

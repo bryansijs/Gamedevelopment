@@ -30,7 +30,7 @@ sf::Sprite NormalDrawBehaviour::getCurrentImage()
 		this->gameObject->getWidth(),
 		this->gameObject->getHeight()));
 
-	this->unitImage.setPosition(sf::Vector2f(gameObject->getBody()->GetPosition().x, gameObject->getBody()->GetPosition().y));
+	this->unitImage.setPosition(sf::Vector2f(gameObject->getBody()->GetPosition().x-16, gameObject->getBody()->GetPosition().y-16));
 
 	return this->unitImage;
 }

@@ -174,6 +174,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AttackBehaviour.h" />
     <ClInclude Include="AwesomiumHelper.h" />
     <ClInclude Include="BaseInput.h" />
     <ClInclude Include="Animation.h" />
@@ -190,6 +191,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="DrawBehaviour.h" />
     <ClInclude Include="DrawContainer.h" />
     <ClInclude Include="EndTile.h" />
+    <ClInclude Include="EnemyAttackActions.h" />
     <ClInclude Include="EnemyDrawBehaviour.h" />
     <ClInclude Include="EnemyFactory.h" />
     <ClInclude Include="FilterEnum.h" />
@@ -266,6 +268,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="WinState.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AttackBehaviour.cpp" />
     <ClCompile Include="AwesomiumHelper.cpp" />
     <ClCompile Include="BaseInput.cpp" />
     <ClCompile Include="Animation.cpp" />
@@ -279,8 +282,10 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="DrawBehaviour.cpp" />
     <ClCompile Include="DrawContainer.cpp" />
     <ClCompile Include="EndTile.cpp" />
+    <ClCompile Include="EnemyAttackActions.cpp" />
     <ClCompile Include="EnemyDrawBehaviour.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
+    <ClCompile Include="FilterEnum.cpp" />
     <ClCompile Include="FPSShow.cpp" />
     <ClCompile Include="GameActions.cpp" />
     <ClCompile Include="GameContext.cpp" />

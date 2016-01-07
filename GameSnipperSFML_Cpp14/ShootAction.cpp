@@ -13,7 +13,7 @@
 #include "Player.h"
 
 #include "GameObjectFactory.h"
-
+#include "FilterEnum.h"
 ShootAction::ShootAction()
 {
 }
@@ -59,8 +59,8 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 			{ "direction", direction },
 			{ "texture", "bullet-red.png" },
 			{ "x", std::to_string(x) },
-			{ "y", std::to_string(y) }
-		};
+			{ "y", std::to_string(y) },
+			{ "Category", "ENEMY"} };
 		GameObject* bullet = gameObjectFactory.Create(properties);
 	}
 }

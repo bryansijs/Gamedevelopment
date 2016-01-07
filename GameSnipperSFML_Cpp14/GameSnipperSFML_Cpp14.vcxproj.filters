@@ -489,6 +489,12 @@
     <ClInclude Include="EnemyDrawBehaviour.h">
       <Filter>Header Files\Behaviours\Draw</Filter>
     </ClInclude>
+    <ClInclude Include="AttackBehaviour.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyAttackActions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -748,6 +754,15 @@
     </ClCompile>
     <ClCompile Include="EnemyDrawBehaviour.cpp">
       <Filter>Source Files\Behaviours\Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackBehaviour.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FilterEnum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyAttackActions.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
