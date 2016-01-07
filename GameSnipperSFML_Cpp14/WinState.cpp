@@ -81,7 +81,7 @@ void WinState::Update()
 
 		if (winContext->event.type == sf::Event::TextEntered)
 		{
-			if (winContext->event.text.unicode < 128) {
+			if (winContext->event.text.unicode < 128 && winContext->amountNameChars < 3) {
 				char i = static_cast<char>(winContext->event.text.unicode);
 				addNameCharacter(new char(i));
 				winContext->scoreName += i;
@@ -89,7 +89,6 @@ void WinState::Update()
 			}
 			if(winContext->amountNameChars > 2)
 			{
-				//TODO: Safe
 				scoreManager->AddScore(500,winContext->scoreName);
 				scoreManager->Save();
 				ToMenu();
