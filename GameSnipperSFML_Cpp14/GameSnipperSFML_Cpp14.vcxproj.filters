@@ -202,6 +202,12 @@
     <Filter Include="Resource Files\Fonts">
       <UniqueIdentifier>{8e0a3160-507f-4e06-928c-a48635fe7699}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Model\Guns">
+      <UniqueIdentifier>{8b4310c2-058a-4eb6-80d7-e9dee5614529}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Guns">
+      <UniqueIdentifier>{2792518e-5b04-40bc-a1c6-b385dbcae222}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -459,6 +465,9 @@
     <ClInclude Include="WinContext.h">
       <Filter>Header Files\Context</Filter>
     </ClInclude>
+    <ClInclude Include="ScoreManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
     <ClInclude Include="AwesomiumHelper.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
@@ -483,17 +492,35 @@
     <ClInclude Include="tinydir.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Rifle.h">
+      <Filter>Header Files\Model\Guns</Filter>
+    </ClInclude>
+    <ClInclude Include="Pistol.h">
+      <Filter>Header Files\Model\Guns</Filter>
+    </ClInclude>
+    <ClInclude Include="Gun.h">
+      <Filter>Header Files\Model\Guns</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponFactory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackBehaviour.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DiscoverTile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Discovery.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="FilterEnum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EnemyDrawBehaviour.h">
       <Filter>Header Files\Behaviours\Draw</Filter>
     </ClInclude>
-    <ClInclude Include="AttackBehaviour.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyAttackActions.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Model\Units\Actions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -635,9 +662,6 @@
     <ClCompile Include="InteractiveFactory.cpp">
       <Filter>Source Files\Factories</Filter>
     </ClCompile>
-    <ClCompile Include="ItemFactory.cpp">
-      <Filter>Source Files\Factories</Filter>
-    </ClCompile>
     <ClCompile Include="GameObjectFactory.cpp">
       <Filter>Source Files\Factories</Filter>
     </ClCompile>
@@ -731,6 +755,9 @@
     <ClCompile Include="WinContext.cpp">
       <Filter>Source Files\Context</Filter>
     </ClCompile>
+    <ClCompile Include="ScoreManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
     <ClCompile Include="AwesomiumHelper.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
@@ -752,17 +779,38 @@
     <ClCompile Include="StoryTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyDrawBehaviour.cpp">
-      <Filter>Source Files\Behaviours\Draw</Filter>
+    <ClCompile Include="ItemFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="Gun.cpp">
+      <Filter>Source Files\Model\Guns</Filter>
+    </ClCompile>
+    <ClCompile Include="Rifle.cpp">
+      <Filter>Source Files\Model\Guns</Filter>
+    </ClCompile>
+    <ClCompile Include="Pistol.cpp">
+      <Filter>Source Files\Model\Guns</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
     </ClCompile>
     <ClCompile Include="AttackBehaviour.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DiscoverTile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Discovery.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FilterEnum.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyDrawBehaviour.cpp">
+      <Filter>Source Files\Behaviours\Draw</Filter>
+    </ClCompile>
     <ClCompile Include="EnemyAttackActions.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Model\Units\Actions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -799,6 +847,7 @@
     <None Include="Resources\menuHTML\win.html">
       <Filter>Resource Files\Html</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameSnipperSFML_Cpp14.rc">

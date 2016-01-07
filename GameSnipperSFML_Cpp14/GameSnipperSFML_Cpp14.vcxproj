@@ -109,7 +109,10 @@
       <Command>xcopy $(ProjectDir)DLL $(TargetDir) /E /Y /D
 
 cmd /x /c mkdir "$(TargetDir)Resources\"
-xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
+xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D
+
+xcopy /y /d  "$(ProjectDir)*.dll" $(TargetDir)
+xcopy /y /d  "$(ProjectDir)*.exe" $(TargetDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -144,13 +147,16 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>C:\Users\Bryan\Source\Repos\Gamedevelopment\GameSnipperSFML_Cpp14\library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Box2D-r.lib;sfml-graphics.lib;sfml-main.lib;sfml-audio.lib;sfml-system.lib;sfml-window.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>awesomium.lib;Box2D-r.lib;sfml-graphics.lib;sfml-main.lib;sfml-audio.lib;sfml-system.lib;sfml-window.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy $(ProjectDir)DLL $(TargetDir) /E /Y /D
 
 cmd /x /c mkdir "$(TargetDir)Resources\"
-xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
+xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D
+
+xcopy /y /d  "$(ProjectDir)*.dll" $(TargetDir)
+xcopy /y /d  "$(ProjectDir)*.exe" $(TargetDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -187,6 +193,8 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="ConsoleColor.h" />
     <ClInclude Include="Context.h" />
     <ClInclude Include="DebugBox2D.h" />
+    <ClInclude Include="DiscoverTile.h" />
+    <ClInclude Include="Discovery.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="DrawBehaviour.h" />
     <ClInclude Include="DrawContainer.h" />
@@ -202,12 +210,15 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="GameObjectFactory.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameTileFactory.h" />
+    <ClInclude Include="Gun.h" />
+    <ClInclude Include="WeaponFactory.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="InteractiveFactory.h" />
     <ClInclude Include="ItemFactory.h" />
     <ClInclude Include="JSConsole.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="KeyMapping.h" />
+    <ClInclude Include="KeyMappingExporter.h" />
     <ClInclude Include="KeyMappingImporter.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelImporter.h" />
@@ -225,6 +236,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="NormalMoveBehaviour.h" />
     <ClInclude Include="NormalState.h" />
     <ClInclude Include="PauseMenu.h" />
+    <ClInclude Include="Pistol.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerActions.h" />
     <ClInclude Include="PlayerDrawBehaviour.h" />
@@ -234,8 +246,10 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="resource1.h" />
     <ClInclude Include="resource2.h" />
     <ClInclude Include="Potion.h" />
+    <ClInclude Include="Rifle.h" />
     <ClInclude Include="RunnerEnemy.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="square.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="ShootAction.h" />
@@ -278,6 +292,8 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="CollisionListener.cpp" />
     <ClCompile Include="Context.cpp" />
     <ClCompile Include="DebugBox2D.cpp" />
+    <ClCompile Include="DiscoverTile.cpp" />
+    <ClCompile Include="Discovery.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="DrawBehaviour.cpp" />
     <ClCompile Include="DrawContainer.cpp" />
@@ -293,12 +309,15 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="GameObjectFactory.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameTileFactory.cpp" />
+    <ClCompile Include="Gun.cpp" />
+    <ClCompile Include="WeaponFactory.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="InteractiveFactory.cpp" />
     <ClCompile Include="ItemFactory.cpp" />
     <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="KeyMapping.cpp" />
+    <ClCompile Include="KeyMappingExporter.cpp" />
     <ClCompile Include="KeyMappingImporter.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelImporter.cpp" />
@@ -316,12 +335,15 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="NormalDrawBehaviour.cpp" />
     <ClCompile Include="NormalMoveBehaviour.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
+    <ClCompile Include="Pistol.cpp" />
     <ClCompile Include="PlayerActions.cpp" />
     <ClCompile Include="PlayerDrawBehaviour.cpp" />
     <ClCompile Include="Potion.cpp" />
     <ClCompile Include="ProjectileFactory.cpp" />
     <ClCompile Include="Random.cpp" />
+    <ClCompile Include="Rifle.cpp" />
     <ClCompile Include="RunnerEnemy.cpp" />
+    <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="SetupState.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="square.cpp" />
@@ -360,6 +382,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="WinState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="Resources\html-game\StoryLine.html" />
     <None Include="loading.html" />
     <None Include="Resources\key-mapping.json" />

@@ -11,6 +11,9 @@
 #include "GameObjectContainer.h"
 #include "ShotMoveBehaviour.h"
 #include "Player.h"
+#include "Gun.h"
+#include "Bullet.h"
+#include "GameContext.h"
 
 #include "GameObjectFactory.h"
 #include "FilterEnum.h"
@@ -22,45 +25,52 @@ ShootAction::~ShootAction()
 {
 }
  
-void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer, b2World* world, Player* player, std::string direction)
+void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer, b2World* world, Player* player, std::string direction, GameContext* gameContext)
 {
 	if (Time::runningTime > nextShot)
 	{
-		nextShot = (float)Time::runningTime + (float)shotRate;
+		Gun* gun = (Gun*)player->GetEquipedGun();
+
+		nextShot = (float)Time::runningTime + gun->GetFireRate();
 
 		float x = 0;
 		float y = 0;
 
 		if (direction == "move-up")
 		{
-			x = player->getBody()->GetPosition().x + player->getWidth() / 2;
-			y = player->getBody()->GetPosition().y - 10;
+			x = player->getBody()->GetPosition().x + -2;
+			y = player->getBody()->GetPosition().y + -40;
 		}
 		if (direction == "move-down")
 		{
-			x = player->getBody()->GetPosition().x + player->getWidth() / 2;
-			y = player->getBody()->GetPosition().y + player->getHeight() + 10;
+			x = player->getBody()->GetPosition().x + -2;
+			y = player->getBody()->GetPosition().y + 40;
 		}
 		if (direction == "move-left")
 		{
-			x = player->getBody()->GetPosition().x - 10;
-			y = player->getBody()->GetPosition().y + player->getHeight() / 2;
+			x = player->getBody()->GetPosition().x + -40;
+			y = player->getBody()->GetPosition().y + -2;
 		}
 		if (direction == "move-right")
 		{
-			x = player->getBody()->GetPosition().x + player->getWidth() + 10;
-			y = player->getBody()->GetPosition().y + player->getHeight() / 2;
+			x = player->getBody()->GetPosition().x + 40;
+			y = player->getBody()->GetPosition().y + -2;
 		}
 
-		GameObjectFactory gameObjectFactory{ drawContainer, moveContainer, gameObjectContainer, world };
+		std::string projectileType = gun->GetProjectileType();
+
+		ProjectileFactory projectileFactory;
 		std::map<std::string, std::string> properties = {
 			{ "type", "Projectile" },
-			{ "pType", "Bullet" },
+			{ "pType", projectileType },
 			{ "direction", direction },
 			{ "texture", "bullet-red.png" },
+			{ "damage", std::to_string(gun->GetDamage() * gameContext->damageMultiplier) },
 			{ "x", std::to_string(x) },
 			{ "y", std::to_string(y) },
-			{ "Category", "ENEMY"} };
-		GameObject* bullet = gameObjectFactory.Create(properties);
+			{ "Category", "ENEMY" }
+		};
+
+		Bullet* bullet = (Bullet*)projectileFactory.Create(properties, drawContainer, moveContainer, gameObjectContainer, world);
 	}
 }

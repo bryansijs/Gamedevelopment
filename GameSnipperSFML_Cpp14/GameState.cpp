@@ -23,7 +23,7 @@
 #include <string>
 #include "GameObjectContainer.h"
 
-GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager)
+GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager, ScoreManager* scoreManager, bool next)
 {
 	maincontext = context;
 	
@@ -42,24 +42,33 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 
 	this->stateManager = stateManager;
 	this->levelManager = levelmanager;
+	this->scoreManager = scoreManager;
 	//in constructor, usually
 
+
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer, gameContext->world);
-	gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
+	if (next)
+		gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
+	else
+		gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getCurrentLevel()));
 
 	gameContext->levelImporter->Prepare();
 
+	gameContext->levelImporter->updateLevel();
 	gameContext->level = gameContext->levelImporter->getLevel();
 	gameContext->levelImporter->Clear();
 
 	playerActions->SetContainers(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer);
 	playerActions->SetWorld(gameContext->world);
+	playerActions->SetContext(gameContext);
 
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
-	gameContext->level->End(context, stateManager, levelManager);
+
+	gameContext->level->End(context, stateManager, levelManager, scoreManager);
 	gameContext->level->Story(storylineManager);
 
-	gameContext->player->createBoxDynamic(*gameContext->world);
+	gameContext->player->createBoxDynamicForPlayers(*gameContext->world);
+
 	b2Filter f = gameContext->player->getBody()->GetFixtureList()->GetFilterData();
 	f.categoryBits = 0x0004;
 
@@ -145,6 +154,15 @@ void GameState::Update()
 	Time::deltaTime *= gameContext->gameSpeedMultiplier;
 	Time::runningTime += Time::deltaTime;
 
+	if (gameContext->player->getHealth() <= 0)
+	{
+		sf::Image screenshot = gameContext->context->window.capture();
+
+		LoseState* loseState = new LoseState(gameContext->context, stateManager, levelManager, screenshot, scoreManager);
+		stateManager->AddState(loseState);
+		stateManager->PopState();
+	}
+
 	gameContext->context->window.clear(sf::Color::White);
 
 	sf::Vector2f playerPosition(gameContext->player->getBody()->GetPosition().x, gameContext->player->getBody()->GetPosition().y);
@@ -158,8 +176,6 @@ void GameState::Update()
 	{
 		DestroyGameObjects();
 	//	gameContext->level->update();
-
-	
 	}
 
 	if (gameContext->level->getDoEvents()) {
@@ -185,16 +201,32 @@ void GameState::Update()
 
 			if (gameContext->event.type == sf::Event::KeyPressed)
 			{
-				if (Input::GetKeyDown("RBracket"))
+				if (Input::GetKeyDown(KeyMapping::GetKey("gamespeed-up")))
 				{
-					gameContext->gameSpeedMultiplier++;
+					if (gameContext->gameSpeedMultiplier < 2)
+					{
+						gameContext->gameSpeedMultiplier++;
+					}
 				}
 
-				if (Input::GetKeyDown("LBracket"))
+				if (Input::GetKeyDown(KeyMapping::GetKey("gamespeed-down")))
 				{
 					if (gameContext->gameSpeedMultiplier > 1)
 					{
 						gameContext->gameSpeedMultiplier--;
+					}
+				}
+
+				if (Input::GetKeyDown(KeyMapping::GetKey("damage-up")))
+				{
+					gameContext->damageMultiplier++;
+				}
+
+				if (Input::GetKeyDown(KeyMapping::GetKey("damage-down")))
+				{
+					if (gameContext->damageMultiplier > 1)
+					{
+						gameContext->damageMultiplier--;
 					}
 				}
 
@@ -231,13 +263,19 @@ void GameState::Update()
 		gameContext->player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	}
 
-	DebugBodies();
-
-
+	//DebugBodies();
 
 	if (!isPause)
 	{
-		this->gameContext->world->Step(1, 8, 3);
+		float speed = 1;
+		float count = 0;
+		float point = speed / Time::deltaTime;
+		while (point > count) {
+			this->gameContext->world->Step(Time::deltaTime, 6, 6);
+			count++;
+		}
+
+		DestroyGameObjects();
 
 		gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
 		gameContext->useContainer->Update();
@@ -254,10 +292,8 @@ void GameState::Update()
 	if (showFPS ) {
 		gameContext->fpsShow->draw(gameContext->context->window);
 	}
-
 	
 	if(isPause)
-
 	{
 		gameContext->pauze->draw(gameContext->context->window);
 	}
@@ -271,18 +307,8 @@ void GameState::Update()
 	if (!terminate) {
 		gameContext->context->window.setView(gameContext->view);
 	}
-	
-	gameContext->context->window.display();
-	DestroyGameObjects();
-	if (gameContext->player->getHealth() <= 0)
-	{
-		sf::Image screenshot = gameContext->context->window.capture();
-		screenshot.saveToFile("./Resources/menuHTML/images/hold.png");
 
-		LoseState* loseState = new LoseState(gameContext->context, stateManager, levelManager);
-		stateManager->AddState(loseState);
-		stateManager->StartNextState();
-	}
+	gameContext->context->window.display();
 
 	if (terminate)
 	{
@@ -306,6 +332,7 @@ void GameState::StartNextLevel()
 
 	gameContext->levelImporter->Prepare();
 
+	gameContext->levelImporter->updateLevel();
 	gameContext->level = gameContext->levelImporter->getLevel();
 	gameContext->levelImporter->Clear();
 
@@ -332,7 +359,7 @@ void GameState::MenuEnd(int option)
 			break;
 	case 1: {
 		terminate = true;
-		MenuState* menu = new MenuState{ gameContext->context, stateManager, levelManager };
+		MenuState* menu = new MenuState{ gameContext->context, stateManager, levelManager, scoreManager};
 		stateManager->AddState(menu);
 		stateManager->StartNextState();
 		break; }

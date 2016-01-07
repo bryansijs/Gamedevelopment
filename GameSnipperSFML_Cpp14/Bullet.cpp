@@ -8,7 +8,8 @@
 #include "NormalDrawBehaviour.h"
 #include "ShotMoveBehaviour.h"
 #include "FilterEnum.h"
-Bullet::Bullet(GameObjectContainer * gameObjectContainer, std::map<std::string, std::string>& properties, b2World * world, MoveContainer * moveContainer, DrawContainer * drawContainer, std::string texture) : GameObject{ drawContainer, gameObjectContainer, texture }
+
+Bullet::Bullet(GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, b2World* world, MoveContainer* moveContainer, DrawContainer* drawContainer, std::string texture) : GameObject{ drawContainer, gameObjectContainer, texture }
 {
 	this->setProperties(properties);
 
@@ -37,7 +38,10 @@ Bullet::~Bullet()
 {
 }
 
-
+void Bullet::SetContext(GameContext* context)
+{
+	this->context = context;
+}
 
 void Bullet::startContact(b2Fixture * fixture)
 {

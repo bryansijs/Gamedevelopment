@@ -7,10 +7,8 @@
 EnemyAttackActions::EnemyAttackActions(BaseEnemy* obj)
 {
 	this->obj = obj;
-	this->gameObjectFactory = new GameObjectFactory{ obj->getDrawContainer(), obj->getMoveContainer(), obj->getgameObjectContainer(), obj->theWorld() };
+	this->gameObjectFactory = new GameObjectFactory{ obj->getDrawContainer(), obj->getMoveContainer(), obj->getgameObjectContainer(), obj->theWorld(), nullptr };
 }
-
-
 
 EnemyAttackActions::~EnemyAttackActions()
 {
@@ -48,36 +46,24 @@ void EnemyAttackActions::SingleShot()
 
 	if (this->direction == "move-up")
 	{
-
 		y = obj->getBody()->GetPosition().y - 10;
 		x = obj->getBody()->GetPosition().x + obj->getWidth() / 2;
-
 	}
 	if (this->direction == "move-down")
 	{
-
 		y = obj->getBody()->GetPosition().y + obj->getHeight() + 10;
-
 		x = obj->getBody()->GetPosition().x + obj->getWidth() / 2;
-
-
 	}
 	if (this->direction == "move-left")
 	{
 		x = obj->getBody()->GetPosition().x - 10;
-
-
 		y = obj->getBody()->GetPosition().y + (obj->getHeight() / 2);
-
 	}
 	if (this->direction == "move-right")
 	{
 		x = obj->getBody()->GetPosition().x + obj->getWidth() + 10;
 		y = obj->getBody()->GetPosition().y + (obj->getHeight() / 2);
-
 	}
-
-
 
 	std::map<std::string, std::string> properties = {
 		{ "type", "Projectile" },
@@ -92,9 +78,8 @@ void EnemyAttackActions::SingleShot()
 	gameObjectFactory->Create(properties);
 }
 
-
-void EnemyAttackActions::DualShot() {
-
+void EnemyAttackActions::DualShot()
+{
 	float x = 0, x2 = 0, y = 0, y2 = 0;
 
 	if (this->direction == "move-up")

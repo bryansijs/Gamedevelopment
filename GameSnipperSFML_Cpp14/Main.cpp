@@ -1,36 +1,30 @@
 #include "stdafx.h"
-
 #include "UnitTestMain.h"
-
 #include <iostream>
-#include <cstdio>
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include <Box2d/Box2D.h>
-
 #include "Context.h"
 #include "MenuContext.h"
-
 #include "LevelImporter.h"
 #include "MenuState.h"
 #include "StateManager.h"
-#include "GameState.h"
+#include "ScoreManager.h"
 
 bool quitGame = false;
 
 using namespace std;
 
-int _tmain(int argc, _TCHAR* argv[])
+int _tmain(int artgc, _TCHAR* argv[])
+//int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)  // GameSnipperSFML properties/linker/system/subsystem op WINDOWS zetten dan word de console gehide
 {
 	try
 	{
+		ScoreManager* scoreManager = new ScoreManager();
 		StateManager* stateManager = new StateManager();
 		LevelManager* levelManager = new LevelManager();
 
 		UnitTestMain utm;
 
 		Context* context = new Context(960, 640);
-		MenuState* state = new MenuState(context, stateManager,levelManager);
+		MenuState* state = new MenuState(context, stateManager,levelManager,scoreManager);
 
 		stateManager->AddState(state);
 		stateManager->RunState();

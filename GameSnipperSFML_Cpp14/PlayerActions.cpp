@@ -35,6 +35,11 @@ void PlayerActions::SetWorld(b2World * world)
 	this->world = world;
 }
 
+void PlayerActions::SetContext(GameContext* context)
+{
+	this->context = context;
+}
+
 void PlayerActions::ProcessActions()
 {
 	bool standStill = true;
@@ -121,7 +126,7 @@ void PlayerActions::Move()
 void PlayerActions::Shoot()
 {
 	StandStillTimerReset();
-	shootAction.Shoot(drawContainer, moveContainer, gameObjectContainer, world, player, direction);
+	shootAction.Shoot(drawContainer, moveContainer, gameObjectContainer, world, player, direction, context);
 }
 
 
@@ -135,8 +140,8 @@ void PlayerActions::Use()
 		//std::cout << b <<  std::endl;
 		/*std::cout << "My current location x y " << player->getPosition().x << " " << player->getPosition().y << std::endl;*/
 
-		float playery = this->player->getBody()->GetPosition().y;
-		float playerx = this->player->getBody()->GetPosition().x;
+		float playery = this->player->getBody()->GetPosition().y -16;
+		float playerx = this->player->getBody()->GetPosition().x -16;
 
 		for (GameObject* object : this->player->getgameObjectContainer()->getObjects())
 		{
@@ -158,6 +163,25 @@ void PlayerActions::Use()
 			}
 		}
 		useAction = false;
+	}
+}
+
+void PlayerActions::Equip()
+{
+	std::string slot;
+
+	for (std::vector<int>::size_type i = 0; i != activeKeys.size(); i++) {
+		std::string map = KeyMapping::GetMap(activeKeys[i]);
+
+		if (map.find("equip") != std::string::npos)
+		{
+			slot = map;
+		}
+	}
+
+	if (!slot.empty())
+	{
+		player->EquipGun(slot.back() - '0');
 	}
 }
 

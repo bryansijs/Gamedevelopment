@@ -5,12 +5,9 @@
 
 Level::Level()
 {
+	this->DiscoverdLayers.push_back(0);
 }
 
-Level::Level(GameObjectContainer* gameObjectContainer)
-{
-	this->gameObjectContainer = gameObjectContainer;
-}
 
 Level::~Level()
 {
@@ -124,7 +121,16 @@ void Level::draw(sf::RenderWindow* window, sf::View* view)
 			if (groundTiles.at(i)->getBody() != nullptr) {
 				groundTiles.at(i)->sprite.setPosition(groundTiles.at(i)->getBody()->GetPosition().x, groundTiles.at(i)->getBody()->GetPosition().y);
 			}
-			window->draw(groundTiles.at(i)->sprite);
+			bool go = false;
+			for (int a : DiscoverdLayers) {
+				if (groundTiles.at(i)->LayerId == a) {
+					go = true;
+				}
+			}
+			if (go) {
+				window->draw(groundTiles.at(i)->sprite);
+			}
+
 		}
 		MoveView(*view, *window);
 	}
@@ -132,10 +138,23 @@ void Level::draw(sf::RenderWindow* window, sf::View* view)
 }
 
 void Level::drawRoof(sf::RenderWindow* window, sf::View* view) {
-	for (size_t i = 0; i < roofTiles.size(); i++)
-		if (roofTiles.at(i)->isVisible)
-			window->draw(roofTiles.at(i)->sprite);
-	MoveView(*view, *window);
+	for (size_t i = 0; i < roofTiles.size(); i++) {
+		if (roofTiles.at(i)->isVisible) {
+			bool go = false;
+			for (int a : DiscoverdLayers) {
+				if (groundTiles.at(i)->LayerId == a) {
+					go = true;
+				}
+			}
+			if (go) {
+				if (std::find(DiscoverdLayers.begin(), DiscoverdLayers.end(), roofTiles.at(i)->LayerId) != DiscoverdLayers.end()) {
+					window->draw(roofTiles.at(i)->sprite);
+				}
+			}
+		}
+
+		MoveView(*view, *window); //TODO GUUS
+	}
 }
 
 void Level::setLayerVisibility(int layerIndex, bool isVisible)
@@ -144,6 +163,18 @@ void Level::setLayerVisibility(int layerIndex, bool isVisible)
 	{
 		if (groundTiles.at(i)->tileLayer == layerIndex)
 			groundTiles.at(i)->isVisible = isVisible;
+	}
+}
+
+void Level::addDiscoverdLayer(int number)
+{
+	bool go = true;
+	for (int a : DiscoverdLayers) {
+		if (number == a)
+			go = false;
+	}
+	if (go) {
+		DiscoverdLayers.push_back(number);
 	}
 }
 
@@ -187,7 +218,7 @@ void Level::Start(GameObject* player, sf::Vector2u* size)
 	music.play();
 }
 
-void Level::End(Context* context, StateManager* stateManager, LevelManager* levelManager)
+void Level::End(Context* context, StateManager* stateManager, LevelManager* levelManager, ScoreManager* scoreManager)
 {
 	end = nullptr;
 
@@ -201,7 +232,7 @@ void Level::End(Context* context, StateManager* stateManager, LevelManager* leve
 
 	if (end != nullptr)
 	{
-		end->setContext(context, stateManager, levelManager);
+		end->setContext(context, stateManager, levelManager, scoreManager);
 	}
 }
 

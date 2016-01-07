@@ -52,8 +52,7 @@ void Unit::Damage(int amount)
 
 	if (health <= 0)
 	{
- 		this->Destroy();
-		return;
+		this->Destroy();
 	}
 
 	this->setHealth(this->getHealth() - amount);
