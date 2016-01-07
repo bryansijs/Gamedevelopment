@@ -202,12 +202,6 @@
     <Filter Include="Resource Files\Fonts">
       <UniqueIdentifier>{8e0a3160-507f-4e06-928c-a48635fe7699}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Model\Guns">
-      <UniqueIdentifier>{8b4310c2-058a-4eb6-80d7-e9dee5614529}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Model\Guns">
-      <UniqueIdentifier>{2792518e-5b04-40bc-a1c6-b385dbcae222}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -489,26 +483,8 @@
     <ClInclude Include="StoryTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tinydir.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Rifle.h">
-      <Filter>Header Files\Model\Guns</Filter>
-    </ClInclude>
-    <ClInclude Include="Pistol.h">
-      <Filter>Header Files\Model\Guns</Filter>
-    </ClInclude>
-    <ClInclude Include="Gun.h">
-      <Filter>Header Files\Model\Guns</Filter>
-    </ClInclude>
-    <ClInclude Include="WeaponFactory.h">
-      <Filter>Header Files\Factories</Filter>
-    </ClInclude>
-    <ClInclude Include="DiscoverTile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HUD.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="KeyMappingExporter.h">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -650,6 +626,9 @@
     <ClCompile Include="InteractiveFactory.cpp">
       <Filter>Source Files\Factories</Filter>
     </ClCompile>
+    <ClCompile Include="ItemFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
     <ClCompile Include="GameObjectFactory.cpp">
       <Filter>Source Files\Factories</Filter>
     </ClCompile>
@@ -767,26 +746,8 @@
     <ClCompile Include="StoryTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ItemFactory.cpp">
-      <Filter>Source Files\Factories</Filter>
-    </ClCompile>
-    <ClCompile Include="Gun.cpp">
-      <Filter>Source Files\Model\Guns</Filter>
-    </ClCompile>
-    <ClCompile Include="Rifle.cpp">
-      <Filter>Source Files\Model\Guns</Filter>
-    </ClCompile>
-    <ClCompile Include="Pistol.cpp">
-      <Filter>Source Files\Model\Guns</Filter>
-    </ClCompile>
-    <ClCompile Include="WeaponFactory.cpp">
-      <Filter>Source Files\Factories</Filter>
-    </ClCompile>
-    <ClCompile Include="DiscoverTile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HUD.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="KeyMappingExporter.cpp">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -823,8 +784,6 @@
     <None Include="Resources\menuHTML\win.html">
       <Filter>Resource Files\Html</Filter>
     </None>
-    <None Include="Resources\html-game\HUD.html" />
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameSnipperSFML_Cpp14.rc">
@@ -844,38 +803,10 @@
     <Image Include="Resources\menuHtml\images\menuBorder.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Resources\html-game\images\healthbar.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\html-game\images\healthbar_bg.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\html-game\images\item2.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\html-game\images\item3.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\html-game\images\key.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\html-game\images\gun.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\html-game\images\gun_active.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\html-game\images\rifle.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\html-game\images\rifle_active.png">
-      <Filter>Resource Files</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\menuHtml\font\moonhouse.ttf">
       <Filter>Resource Files\Fonts</Filter>
     </Font>
-    <Font Include="Resources\html-game\font\robotechgp.ttf" />
   </ItemGroup>
 </Project>

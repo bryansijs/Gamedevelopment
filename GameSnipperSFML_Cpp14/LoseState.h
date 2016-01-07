@@ -19,8 +19,10 @@ private:
 	Context* context;
 	LoseContext* loseContext;
 	LevelManager* levelManager;
+	sf::Image screenshot;
+	bool load = true;
 public:
-	LoseState(Context* context, StateManager* stateManager, LevelManager* levelManager, ScoreManager* scoreManager);
+	LoseState(Context* context, StateManager* stateManager, LevelManager* levelManager, sf::Image screenshot, ScoreManager* scoreManager);
 	~LoseState();
 
 	void Update();
