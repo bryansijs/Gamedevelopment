@@ -12,7 +12,7 @@
 #include "DrawContainer.h"
 #include "AttackBehaviour.h"
 #include "MoveContainer.h"
-#include "GameObjectFactory.h"
+#include "EnemyAttackActions.h"
 BaseEnemy::BaseEnemy()
 {
 }
@@ -65,6 +65,8 @@ void BaseEnemy::setProperties(std::map<std::string, std::string>& properties)
 	this->setMaxHealth((properties.count("maxHealth")) ? std::stoi(properties["maxHealth"]) : 100);
 	this->setHealth((properties.count("maxHealth")) ? std::stoi(properties["maxHealth"]) : 100);
 
+	this->setBulletTexture((properties.count("bullet")) ? std::string(properties["bullet"]) : "bullet-blue");
+	this->setBulletTextureBig((properties.count("bigbullet")) ? std::string(properties["bigbullet"]) : "bullet-big-red");
 }
 
 void BaseEnemy::CreateLineOfSight()
@@ -89,6 +91,7 @@ void BaseEnemy::CreateLineOfSight()
 
 	f.categoryBits = ENEMY;
 	this->getBody()->GetFixtureList()->GetNext()->SetFilterData(f);
+	this->Action = new EnemyAttackActions(this);
 }
 
 void BaseEnemy::CreateVectors()
@@ -116,7 +119,7 @@ void BaseEnemy::CreateVectors()
 	}	break;
 	case 3: {
 
-		desiredAngle = atan2f(0, -seeLength *2);
+		desiredAngle = atan2f(0, -seeLength * 2);
 		convexVert[0].Set(16, 16);
 		convexVert[1].Set(-seeWidth, -seeLength);
 		convexVert[2].Set(seeWidth, -seeLength);
@@ -134,15 +137,15 @@ void BaseEnemy::CreateVectors()
 
 void BaseEnemy::CreateVisibleLine()
 {
-	
+
 	this->lineOfSightConvex->setFillColor(sf::Color(255, 129, 0, 128));
 	this->lineOfSightConvex->setPosition(sf::Vector2f(this->getBody()->GetPosition().x, this->getBody()->GetPosition().y));
-	this->mhpBar->setPosition(sf::Vector2f(this->getBody()->GetPosition().x -16, this->getBody()->GetPosition().y - 30 ));
+	this->mhpBar->setPosition(sf::Vector2f(this->getBody()->GetPosition().x - 16, this->getBody()->GetPosition().y - 30));
 	this->hpBar->setPosition(sf::Vector2f(this->getBody()->GetPosition().x - 14, this->getBody()->GetPosition().y - 28));
 
 	//56 is de groote dus dit is gelijk aan maxhp;
 
-	float b =56.0f / (float)this->getMaxHealth();
+	float b = 56.0f / (float)this->getMaxHealth();
 	float c = (float)this->getHealth() * b;
 
 	this->hpBar->setSize(sf::Vector2f(c, 10));
@@ -157,7 +160,7 @@ void BaseEnemy::Update()
 	this->CreateVectors();
 	this->CreateVisibleLine();
 
-	
+
 	for (b2ContactEdge* ce = this->getBody()->GetContactList(); ce; ce = ce->next)
 	{
 
@@ -182,7 +185,35 @@ void BaseEnemy::Update()
 	}
 
 	if (dynamic_cast<AttackBehaviour*>(this->getMoveBehaviour()))
-		Attack();
+		Action->Attack();
+
+	if (patternAmount == 0)return;
+
+	if (this->patternCount >= patternAmount)
+	{
+		patternCount = 0;
+
+		patternIndex++;
+
+		if (patternIndex >= this->PatternSet.size())
+			patternIndex = 0;
+
+		std::map<std::string, float>::iterator it;
+		int i = 0;
+		for (it = PatternSet.begin(); it != PatternSet.end(); it++)
+		{
+			if (i == patternIndex) {
+				std::string patternInfo = it->first;
+
+				this->attackType = (patternInfo[0]-'0')* 10  + (patternInfo[1] - '0');
+				this->patternAmount = (patternInfo[2] - '0') * 10 + (patternInfo[3] - '0');
+				this->shotRate = it->second;
+				break;
+			}
+			i++;
+		}
+
+	}
 }
 
 
@@ -195,57 +226,4 @@ void BaseEnemy::startContact(b2Fixture * fixture)
 void BaseEnemy::endContact(b2Fixture * fixture)
 {
 
-}
-
-void BaseEnemy::Attack()
-{
-if (Time::runningTime > nextShot)
-	{
-	nextShot = (float)Time::runningTime + (float)shotRate;
-
-	
-	std::string direction = "move-down";
-	float x = 0;
-	float y = 0;
-
-
-	if (direction == "move-up")
-	{
-		x = this->getBody()->GetPosition().x + this->getWidth() / 2;
-		y = this->getBody()->GetPosition().y - 10;
-	}
-	if (direction == "move-down")
-	{
-		x = this->getBody()->GetPosition().x + this->getWidth() / 2;
-		y = this->getBody()->GetPosition().y + this->getHeight() + 10;
-	}
-	if (direction == "move-left")
-	{
-		x = this->getBody()->GetPosition().x - 10;
-		y = this->getBody()->GetPosition().y + this->getHeight() / 2;
-	}
-	if (direction == "move-right")
-	{
-		x = this->getBody()->GetPosition().x + this->getWidth() + 10;
-		y = this->getBody()->GetPosition().y + this->getHeight() / 2;
-	}
-
-
-	GameObjectFactory gameObjectFactory{ this->getDrawContainer(), this->getMoveContainer(), this->getgameObjectContainer(), this->world };
-	std::map<std::string, std::string> properties = {
-		{ "type", "Projectile" },
-		{ "pType", "Bullet" },
-		{ "direction", direction },
-		{ "texture", "bullet-blue.png" },
-		{ "x", std::to_string(x) },
-		{ "y", std::to_string(y) },
-		{ "Category", std::to_string(_entityCategory::ENEMY) } };
-
-
-	GameObject* bullet = gameObjectFactory.Create(properties);
-	};
-
-
-
-	
 }

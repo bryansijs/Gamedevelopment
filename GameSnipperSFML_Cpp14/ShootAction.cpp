@@ -60,7 +60,7 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 			{ "texture", "bullet-red.png" },
 			{ "x", std::to_string(x) },
 			{ "y", std::to_string(y) },
-			{ "Category", std::to_string(_entityCategory::PLAYER) } };
+			{ "Category", "ENEMY"} };
 		GameObject* bullet = gameObjectFactory.Create(properties);
 	}
 }

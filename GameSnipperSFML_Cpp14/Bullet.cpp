@@ -1,16 +1,12 @@
 #include "stdafx.h"
 #include "Bullet.h"
-
 #include "Player.h"
-
 #include "GameObjectContainer.h"
 #include "DrawContainer.h"
 #include "MoveContainer.h"
-
 #include "NormalDrawBehaviour.h"
 #include "ShotMoveBehaviour.h"
 #include "FilterEnum.h"
-
 Bullet::Bullet(GameObjectContainer * gameObjectContainer, std::map<std::string, std::string>& properties, b2World * world, MoveContainer * moveContainer, DrawContainer * drawContainer, std::string texture) : GameObject{ drawContainer, gameObjectContainer, texture }
 {
 	this->setProperties(properties);
@@ -22,11 +18,16 @@ Bullet::Bullet(GameObjectContainer * gameObjectContainer, std::map<std::string, 
 
 	int x = std::stoi(properties["x"]);
 	int y = std::stoi(properties["y"]);
+	int size = properties.count("size") ? std::stoi(properties["size"]) : 8;
+	this->damage = properties.count("damage") ? std::stoi(properties["damage"]) : 20;
 	this->setPosition(x, y);
-	this->setSize(8, 8);
+	this->setSize(size, size);
 	this->createBoxDynamic(*world);
 	b2Filter fil = this->getBody()->GetFixtureList()->GetFilterData();
-	fil.maskBits = 0x0002; // dit is nu een enemy // 0x0004 is player
+
+	fil.maskBits = FilterEnum::getValue(properties["Category"]);
+
+
 	this->getBody()->GetFixtureList()->SetFilterData(fil);
 	this->getBody()->SetBullet(true);
 }
