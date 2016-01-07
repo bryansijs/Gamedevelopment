@@ -318,9 +318,9 @@ void GameState::StartNextLevel()
 void GameState::StartWinState()
 {
 	sf::Image screenshot = gameContext->context->window.capture();
-	screenshot.saveToFile("./Resources/menuHTML/images/hold.png");
+	
 
-	WinState* winState = new WinState(gameContext->context, stateManager, levelManager, scoreManager);
+	WinState* winState = new WinState(gameContext->context, stateManager, levelManager, screenshot,scoreManager);
 	stateManager->AddState(winState);
 	stateManager->StartNextState();
 }
