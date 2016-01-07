@@ -52,9 +52,14 @@ void Bullet::startContact(b2Fixture * fixture)
 			{
 				return;
 			}
+		
 		}
 
-		if (this->getBody()->GetFixtureList()->GetFilterData().maskBits == fixture->GetFilterData().categoryBits)
+		bool collide =
+			(this->getBody()->GetFixtureList()->GetFilterData().maskBits & fixture->GetFilterData().categoryBits) != 0 &&
+			(this->getBody()->GetFixtureList()->GetFilterData().categoryBits & fixture->GetFilterData().maskBits) != 0;
+
+		if (collide)
 		{
 			Unit* enemy = dynamic_cast<Unit*> (pal);
 			enemy->Damage(this->damage);

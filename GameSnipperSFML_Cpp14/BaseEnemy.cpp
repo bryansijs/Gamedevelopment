@@ -187,7 +187,7 @@ void BaseEnemy::Update()
 	}
 
 	//if (dynamic_cast<AttackBehaviour*>(this->getMoveBehaviour()))
-	if (attackType)
+	if (Attacking)
 		Action->Attack();
 
 	if (patternAmount == 0)return;
