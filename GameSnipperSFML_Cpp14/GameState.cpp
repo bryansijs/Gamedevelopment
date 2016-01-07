@@ -21,6 +21,7 @@
 #include "Random.h"
 #include <vector>
 #include <string>
+#include "GameObjectContainer.h"
 
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager, ScoreManager* scoreManager)
 {
@@ -66,6 +67,10 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 
 	gameContext->player->createBoxDynamicForPlayers(*gameContext->world);
 
+	b2Filter f = gameContext->player->getBody()->GetFixtureList()->GetFilterData();
+	f.categoryBits = 0x0004;
+
+	gameContext->player->getBody()->GetFixtureList()->SetFilterData(f);
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
 
 	DoneLoading();
@@ -114,26 +119,35 @@ void GameState::DebugBodies()
 {
 	for (b2Body* b = gameContext->world->GetBodyList(); b; b = b->GetNext()) {
 
-		b2Shape::Type t = b->GetFixtureList()->GetType();
-		if (t == b2Shape::e_polygon)
-		{
-			b2PolygonShape* s = (b2PolygonShape*)b->GetFixtureList()->GetShape();
-			sf::ConvexShape convex;
-			int vertextCount = s->GetVertexCount();
-			convex.setPointCount(vertextCount);
-			convex.setFillColor(sf::Color(255, 255, 0, 128));
+	
 
-			convex.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
+		for (b2Fixture* fix = b->GetFixtureList(); fix; fix = fix->GetNext()) {
 
-			for (int i = 0; i < vertextCount; i++)
-				convex.setPoint(i, sf::Vector2f(s->GetVertex(i).x, s->GetVertex(i).y));
-			gameContext->context->window.draw(convex);
+			b2Shape::Type t = fix->GetType();
+			if (t == b2Shape::e_polygon)
+			{
+				b2PolygonShape* s = (b2PolygonShape*)fix->GetShape();
+				sf::ConvexShape convex;
+				int vertextCount = s->GetVertexCount();
+
+				if (vertextCount == 3) continue;
+
+				convex.setPointCount(vertextCount);
+				convex.setFillColor(sf::Color(255, 255, 0, 128));
+
+				convex.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
+
+				for (int i = 0; i < vertextCount; i++)
+					convex.setPoint(i, sf::Vector2f(s->GetVertex(i).x, s->GetVertex(i).y));
+				gameContext->context->window.draw(convex);
+			}
 		}
 	}
 }
 
 void GameState::Update()
 {
+	DestroyGameObjects();
 	Time::deltaTime = static_cast<float>(gameContext->deltaClock.restart().asSeconds());
 	Time::deltaTime *= gameContext->gameSpeedMultiplier;
 	Time::runningTime += Time::deltaTime;
@@ -156,7 +170,10 @@ void GameState::Update()
 
 	if (!isPause)
 	{
-		gameContext->level->update();
+		DestroyGameObjects();
+	//	gameContext->level->update();
+
+	
 	}
 
 	if (gameContext->level->getDoEvents()) {
@@ -243,7 +260,6 @@ void GameState::Update()
 
 	//DebugBodies();
 
-
 	if (!isPause)
 	{
 		float speed = 1;
@@ -253,16 +269,17 @@ void GameState::Update()
 			this->gameContext->world->Step(Time::deltaTime, 6, 6);
 			count++;
 		}
-		DestroyGameObjects();
-		gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
 
+		DestroyGameObjects();
+
+		gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
+		gameContext->useContainer->Update();
 		if (StorylineManager::Updated())
 		{
 			storyline->JavaScriptCall("TextUpdate", StorylineManager::GetText());
 		}
 
 	}
-	
 	gameContext->drawContainer->Draw(&gameContext->context->window, gameContext->level->GetViewPortPosition());
 	gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
 
@@ -287,37 +304,8 @@ void GameState::Update()
 	if (!terminate) {
 		gameContext->context->window.setView(gameContext->view);
 	}
-//<<<<<<< HEAD
-//
-	//for (b2Body* b = gameContext->world->GetBodyList(); b; b = b->GetNext()) {
 
-	//	b2Shape::Type t = b->GetFixtureList()->GetType();
-	//	if (t == b2Shape::e_polygon)
-	//	{
-	//		b2PolygonShape* s = (b2PolygonShape*)b->GetFixtureList()->GetShape();
-	//		sf::ConvexShape convex;
-	//		int vertextCount = s->GetVertexCount();
-	//		convex.setPointCount(vertextCount);
-	//		convex.setFillColor(sf::Color(255, 255, 100, 128));
-
-	//		convex.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
-
-	//		for (int i = 0; i < vertextCount; i++)
-	//			convex.setPoint(i, sf::Vector2f(s->GetVertex(i).x, s->GetVertex(i).y));
-
-
-	//		gameContext->context->window.draw(convex);
-	//	}
-	//}
-//
-//		sf::RectangleShape rectangle(sf::Vector2f(32, 32));
-//		rectangle.setPosition(sf::Vector2f(gameContext->player->getBody()->GetPosition().x, gameContext->player->getBody()->GetPosition().y));
-//		rectangle.setOutlineThickness(0);
-//		rectangle.setFillColor(sf::Color(230, 100, 50, 200));
-//		gameContext->context->window.draw(rectangle);
-	
 	gameContext->context->window.display();
-
 
 	if (gameContext->player->getHealth() <= 0)
 	{

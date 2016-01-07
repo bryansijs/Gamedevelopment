@@ -1,9 +1,11 @@
 #include "stdafx.h"
-#include "NormalDrawBehaviour.h"
+#include "EnemyDrawBehaviour.h"
+
+
 #include "BaseEnemy.h"
 #include <iostream>
 
-NormalDrawBehaviour::NormalDrawBehaviour(GameObject* gameObject, int refreshRate, std::string textureUrl)
+EnemyDrawBehaviour::EnemyDrawBehaviour(GameObject* gameObject, int refreshRate, std::string textureUrl)
 {
 	this->gameObject = gameObject;
 
@@ -13,16 +15,19 @@ NormalDrawBehaviour::NormalDrawBehaviour(GameObject* gameObject, int refreshRate
 	unitImage.setTexture(unitTexture);
 }
 
-NormalDrawBehaviour::~NormalDrawBehaviour()
+EnemyDrawBehaviour::~EnemyDrawBehaviour()
 {
 }
 
-void NormalDrawBehaviour::Draw(sf::RenderWindow *window, sf::Vector2f viewPortPosition)
+void EnemyDrawBehaviour::Draw(sf::RenderWindow *window, sf::Vector2f viewPortPosition)
 {
 	window->draw(getCurrentImage());
+	window->draw(dynamic_cast<BaseEnemy*>(this->gameObject)->getLineOfSightConvex());
+	window->draw(dynamic_cast<BaseEnemy*>(this->gameObject)->getMaxHpBar());
+	window->draw(dynamic_cast<BaseEnemy*>(this->gameObject)->getHpBar());
 }
 
-sf::Sprite NormalDrawBehaviour::getCurrentImage()
+sf::Sprite EnemyDrawBehaviour::getCurrentImage()
 {
 	this->unitImage.setTextureRect(sf::IntRect(
 		this->gameObject->getImageX(),
@@ -34,7 +39,4 @@ sf::Sprite NormalDrawBehaviour::getCurrentImage()
 
 	return this->unitImage;
 }
-
-
-
 

@@ -111,11 +111,7 @@ void Level::MoveView(sf::View& view, sf::Window& window)
 void Level::update()
 {
 
-	for (size_t i = 0; i < getGame_Objects().size(); i++)
-	{
-		if(getObject(i) != nullptr)
-		getObject(i)->Update();
-	}
+	
 }
 
 void Level::draw(sf::RenderWindow* window, sf::View* view)

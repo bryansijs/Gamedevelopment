@@ -10,6 +10,7 @@
 
 Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameObjectContainer* useContainer, b2World* world)
 {
+	this->setSpeed(250.0f);
 	this->setMoveContainer(moveContainer);
 	this->setDrawContainer(drawContainer);
 
@@ -48,6 +49,8 @@ Player::Player()
 	this->SetMoveBehaviour ( new NormalMoveBehaviour(this) );
 	this->setDrawBehaviour(new PlayerDrawBehaviour(this, 10, "Player.png"));
 	this->setHealth(100);
+
+	
 }
 
 Player::~Player()

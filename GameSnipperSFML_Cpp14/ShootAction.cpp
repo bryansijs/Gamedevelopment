@@ -16,7 +16,7 @@
 #include "GameContext.h"
 
 #include "GameObjectFactory.h"
-
+#include "FilterEnum.h"
 ShootAction::ShootAction()
 {
 }
@@ -67,10 +67,10 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 			{ "texture", "bullet-red.png" },
 			{ "damage", std::to_string(gun->GetDamage() * gameContext->damageMultiplier) },
 			{ "x", std::to_string(x) },
-			{ "y", std::to_string(y) }
+			{ "y", std::to_string(y) },
+			{ "Category", "ENEMY" }
 		};
 
 		Bullet* bullet = (Bullet*)projectileFactory.Create(properties, drawContainer, moveContainer, gameObjectContainer, world);
-		bullet->SetOwner(player);
 	}
 }

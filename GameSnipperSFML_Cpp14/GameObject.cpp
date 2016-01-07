@@ -7,16 +7,23 @@
 
 #include "NormalDrawBehaviour.h"
 #include "WanderMoveBehaviour.h"
+
+#include "NormalMoveBehaviour.h"
+
 #include "MoveBehaviour.h"
 #include <Box2D\Box2D.h>
 
 #include "Tile.h"
 #include "EndTile.h"
+#include "FilterEnum.h"
 
 void GameObject::Destroy()
 {
-	this->moveContainer->RemoveBehaviour(moveBehaviour);
+
 	this->drawContainer->RemoveBehaviour(drawBehaviour);
+
+	this->moveContainer->RemoveBehaviour(moveBehaviour);
+
 	this->gameObjectContainer->RemoveObject(this);
 
 	isFlaggedForDelete = true;
@@ -137,6 +144,7 @@ void GameObject::createBoxStatic(b2World& World)
 	boxFixtureDef.density = 100.f;
 	boxFixtureDef.friction = 0.0f;
 	boxFixtureDef.shape = &Shape;
+	boxFixtureDef.filter.categoryBits = _entityCategory::OBJECT;
 	Body->CreateFixture(&boxFixtureDef);
 	Body->SetUserData(this);
 }
@@ -191,6 +199,7 @@ void GameObject::createBoxDynamicForPlayers(b2World & World)
 	boxFixtureDef.density = 100.f;
 	boxFixtureDef.friction = 0.7f;
 	boxFixtureDef.shape = &Shape;
+	boxFixtureDef.filter.categoryBits = _entityCategory::OBJECT;
 	Body->CreateFixture(&boxFixtureDef);
 	Body->SetUserData(this);
 	this->world = &World;
@@ -220,6 +229,7 @@ void GameObject::createBoxSenor(b2World & World)
 	boxFixtureDef.shape = &Shape;
 	boxFixtureDef.isSensor = true;
 	Body->CreateFixture(&boxFixtureDef);
+	boxFixtureDef.filter.categoryBits = _entityCategory::OBJECT;
 	Body->SetUserData(this);
 }
 
