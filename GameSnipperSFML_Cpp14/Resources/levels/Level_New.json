@@ -268,7 +268,7 @@
                  "name":"Enemy",
                  "properties":
                     {
-                     "eType":"Runner",
+                     "eType":"Basic",
                      "image":"enemy2.png",
                      "isCollidable":"1"
                     },
@@ -285,8 +285,8 @@
                  "name":"Enemy",
                  "properties":
                     {
-                     "eType":"Tank",
-                     "image":"enemy3.png",
+                     "eType":"Basic",
+                     "image":"enemy1.png",
                      "isCollidable":"1"
                     },
                  "rotation":0,
