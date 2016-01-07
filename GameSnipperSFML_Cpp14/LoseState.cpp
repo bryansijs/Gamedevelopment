@@ -14,6 +14,7 @@
 #include "LoseState.h"
 #include "MenuState.h"
 #include "StateManager.h"
+#include "GameState.h"
 
 using namespace Awesomium;
 
@@ -103,9 +104,9 @@ void LoseState::ToMenu()
 	if (load)
 	{
 		loseContext->music->stop();
-		MenuState* menuState = new MenuState(loseContext->context, stateManager, levelManager, scoreManager);
+		GameState* gameState = new GameState(loseContext->context, stateManager, levelManager, scoreManager);
 
-		stateManager->AddState(menuState);
+		stateManager->AddState(gameState);
 		stateManager->StartNextState();
 		load = false;
 	}
