@@ -29,10 +29,6 @@ GameObject::GameObject(DrawContainer *drawContainer, std::string textureUrl)
 	this->drawContainer->AddBehaviour(this->drawBehaviour);
 }
 
-GameObject::GameObject(DrawContainer *drawContainer)
-{
-}
-
 GameObject::GameObject(GameObjectContainer *gameObjectContainer)
 {
 	this->gameObjectContainer = gameObjectContainer;
@@ -73,6 +69,11 @@ GameObject::GameObject(DrawContainer *drawContainer, GameObjectContainer *gameOb
 
 	this->gameObjectContainer = gameObjectContainer;
 	this->gameObjectContainer->AddObject(this);
+}
+
+GameObject::GameObject(DrawContainer *drawContainer)
+{
+	this->drawContainer = drawContainer;
 }
 
 GameObject::GameObject()
