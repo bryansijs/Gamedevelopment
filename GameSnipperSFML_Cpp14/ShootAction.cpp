@@ -65,11 +65,11 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 			{ "pType", projectileType },
 			{ "direction", direction },
 			{ "texture", "bullet-red.png" },
+			{ "damage", (player->Damage * gameContext->damageMultiplier) },
 			{ "x", std::to_string(x) },
 			{ "y", std::to_string(y) }
 		};
 		Bullet* bullet = (Bullet*)projectileFactory.Create(properties, drawContainer, moveContainer, gameObjectContainer, world);
 		bullet->SetOwner(player);
-		bullet->SetContext(gameContext);
 	}
 }
