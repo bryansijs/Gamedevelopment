@@ -210,6 +210,7 @@ xcopy /y /d  "$(ProjectDir)*.exe" $(TargetDir)</Command>
     <ClInclude Include="JSConsole.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="KeyMapping.h" />
+    <ClInclude Include="KeyMappingExporter.h" />
     <ClInclude Include="KeyMappingImporter.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelImporter.h" />
@@ -298,6 +299,7 @@ xcopy /y /d  "$(ProjectDir)*.exe" $(TargetDir)</Command>
     <ClCompile Include="jsoncpp.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="KeyMapping.cpp" />
+    <ClCompile Include="KeyMappingExporter.cpp" />
     <ClCompile Include="KeyMappingImporter.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelImporter.cpp" />
