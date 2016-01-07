@@ -2,6 +2,8 @@
 #include "BaseState.h"
 #include <Awesomium/WebCore.h>
 #include "LevelManager.h"
+#include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 #include "ScoreManager.h"
 
 class StateManager;
@@ -18,9 +20,11 @@ private:
 	Context* context;
 	WinContext* winContext;
 	LevelManager* levelManager;
+	sf::Image screenshot;
 	ScoreManager* scoreManager;
+	bool load = true;
 public:
-	WinState(Context* context, StateManager* stateManager, LevelManager* levelManager, ScoreManager* scoreManager);
+	WinState(Context* context, StateManager* stateManager, LevelManager* levelManager, sf::Image screenshot, ScoreManager* scoreManager);
 	~WinState();
 
 	void Update();

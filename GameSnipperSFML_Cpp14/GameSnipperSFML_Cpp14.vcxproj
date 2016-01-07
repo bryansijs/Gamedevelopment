@@ -109,7 +109,10 @@
       <Command>xcopy $(ProjectDir)DLL $(TargetDir) /E /Y /D
 
 cmd /x /c mkdir "$(TargetDir)Resources\"
-xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
+xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D
+
+xcopy /y /d  "$(ProjectDir)*.dll" $(TargetDir)
+xcopy /y /d  "$(ProjectDir)*.exe" $(TargetDir)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

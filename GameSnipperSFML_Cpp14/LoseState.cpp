@@ -17,11 +17,12 @@
 
 using namespace Awesomium;
 
-LoseState::LoseState(Context* context, StateManager* stateManager, LevelManager* levelManager, ScoreManager* scoreManager)
+LoseState::LoseState(Context* context, StateManager* stateManager, LevelManager* levelManager, sf::Image screenshot, ScoreManager* scoreManager)
 {
 	loseContext = new LoseContext(context);
 	this->stateManager = stateManager;
 	this->levelManager = levelManager;
+	this->screenshot = screenshot;
 	this->scoreManager = scoreManager;
 
 	sf::View view = loseContext->context->window.getView();
@@ -45,6 +46,7 @@ LoseState::LoseState(Context* context, StateManager* stateManager, LevelManager*
 	loseContext->sfx.loadFromFile("./Resources/sfx/defeat.ogg");
 	loseContext->music = new sf::Sound(loseContext->sfx);
 	loseContext->music->setVolume(50.0f);
+	loseContext->music->setLoop(true);
 	loseContext->music->play();
 }
 
@@ -88,19 +90,25 @@ void LoseState::Update()
 	}
 
 	sf::Sprite ui(loseContext->texture);
-	loseContext->texture.update(loseContext->pixels);
+	loseContext->texture.update(screenshot);
+	loseContext->context->window.draw(ui);
 
+	loseContext->texture.update(loseContext->pixels);
 	loseContext->context->window.draw(ui);
 	loseContext->context->window.display();
 }
 
 void LoseState::ToMenu()
 {
-	loseContext->music->stop();
-	MenuState* menuState = new MenuState(loseContext->context, stateManager, levelManager,scoreManager);
+	if (load)
+	{
+		loseContext->music->stop();
+		MenuState* menuState = new MenuState(loseContext->context, stateManager, levelManager, scoreManager);
 
-	stateManager->AddState(menuState);
-	stateManager->StartNextState();
+		stateManager->AddState(menuState);
+		stateManager->StartNextState();
+		load = false;
+	}
 }
 
 LoseState::~LoseState()
