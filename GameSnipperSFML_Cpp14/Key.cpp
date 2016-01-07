@@ -17,6 +17,7 @@ void Key::setProperties(std::map<std::string, std::string>& properties) {
 	this->setItemType(properties["iType"]);
 
 	this->isCollidable = (properties.count("isCollidable")) ? std::stoi(properties["isCollidable"]) : 0;
+	this->setVisibleId((properties.count("VisibleId")) ? std::stoi(properties["VisibleId"]) : 0);
 
 	int x, y, widht, height;
 	x = std::stoi(properties["x"]);
@@ -38,8 +39,11 @@ Key::Key(DrawContainer* container, std::string img, GameObjectContainer* gameObj
 
 void Key::doAction(Player* player)
 {
-	player->AddItem(this);
-	getDrawContainer()->RemoveBehaviour(this->getDrawBehaviour());
-	getgameObjectContainer()->RemoveObject(this);
-	this->~Key();
+	if (this->getDrawContainer()->checkIfidIsDiscoverd(this->getVisibleId())) {
+		player->AddItem(this);
+		getDrawContainer()->RemoveBehaviour(this->getDrawBehaviour());
+		getgameObjectContainer()->RemoveObject(this);
+		this->~Key();
+	}
+
 }

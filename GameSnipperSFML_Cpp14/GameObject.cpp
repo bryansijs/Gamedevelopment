@@ -7,16 +7,23 @@
 
 #include "NormalDrawBehaviour.h"
 #include "WanderMoveBehaviour.h"
+
+#include "NormalMoveBehaviour.h"
+
 #include "MoveBehaviour.h"
 #include <Box2D\Box2D.h>
 
 #include "Tile.h"
 #include "EndTile.h"
+#include "FilterEnum.h"
 
 void GameObject::Destroy()
 {
-	this->moveContainer->RemoveBehaviour(moveBehaviour);
+
 	this->drawContainer->RemoveBehaviour(drawBehaviour);
+
+	this->moveContainer->RemoveBehaviour(moveBehaviour);
+
 	this->gameObjectContainer->RemoveObject(this);
 
 	isFlaggedForDelete = true;
@@ -27,10 +34,6 @@ GameObject::GameObject(DrawContainer *drawContainer, std::string textureUrl)
 	this->drawContainer = drawContainer;
 	this->drawBehaviour = { new NormalDrawBehaviour(this, 10, "./Resources/sprites/" + textureUrl) };
 	this->drawContainer->AddBehaviour(this->drawBehaviour);
-}
-
-GameObject::GameObject(DrawContainer *drawContainer)
-{
 }
 
 GameObject::GameObject(GameObjectContainer *gameObjectContainer)
@@ -75,6 +78,11 @@ GameObject::GameObject(DrawContainer *drawContainer, GameObjectContainer *gameOb
 	this->gameObjectContainer->AddObject(this);
 }
 
+GameObject::GameObject(DrawContainer *drawContainer)
+{
+	this->drawContainer = drawContainer;
+}
+
 GameObject::GameObject()
 {
 }
@@ -114,24 +122,29 @@ void GameObject::SetMoveBehaviour(MoveBehaviour* moveBehaviour)
 void GameObject::createBoxStatic(b2World& World)
 {
 	myBodyDef.type = b2_staticBody;
-
 	Body = World.CreateBody(&myBodyDef);
+
+	b2MassData* ma{ new b2MassData() };
+	ma->center.Normalize();
+	ma->mass = 200000000;
+	Body->SetMassData(ma);
 
 	if (this->getHeight() < 1 || this->getWidth() < 1) {
 		Shape.SetAsBox((32.f / 2), (32.f / 2));
 	}
 	else {
 		b2Vec2 vertices[4];
-		vertices[0].Set(-16, -16);
-		vertices[1].Set(-16, this->getHeight() + -16);
-		vertices[2].Set(this->getWidth() + -16, this->getHeight() + -16);
-		vertices[3].Set(this->getWidth() + -16, -16);
+		vertices[0].Set(0, 0);
+		vertices[1].Set(0, this->getHeight());
+		vertices[2].Set(this->getWidth(), this->getHeight());
+		vertices[3].Set(this->getWidth(),0);
 		this->Shape.Set(vertices, 4);
 	}
 
 	boxFixtureDef.density = 100.f;
 	boxFixtureDef.friction = 0.0f;
 	boxFixtureDef.shape = &Shape;
+	boxFixtureDef.filter.categoryBits = _entityCategory::OBJECT;
 	Body->CreateFixture(&boxFixtureDef);
 	Body->SetUserData(this);
 }
@@ -139,6 +152,33 @@ void GameObject::createBoxStatic(b2World& World)
 void GameObject::createBoxDynamic(b2World & World)
 {
 
+	myBodyDef.type = b2_dynamicBody;
+
+	Body = World.CreateBody(&myBodyDef);
+
+	if (this->getHeight() < 1 || this->getWidth() < 1) {
+		Shape.SetAsBox((30.f / 2), (30.f / 2));
+	}
+	else {
+		b2Vec2 vertices[4];
+		vertices[0].Set(0,0);
+		vertices[1].Set(0, this->getHeight());
+		vertices[2].Set(this->getWidth(), this->getHeight());
+		vertices[3].Set(this->getWidth(), 0);
+		this->Shape.Set(vertices, 4);
+	}
+
+
+	boxFixtureDef.density = 100.f;
+	boxFixtureDef.friction = 0.7f;
+	boxFixtureDef.shape = &Shape;
+	Body->CreateFixture(&boxFixtureDef);
+	Body->SetUserData(this);
+	this->world = &World;
+}
+
+void GameObject::createBoxDynamicForPlayers(b2World & World)
+{
 	myBodyDef.type = b2_dynamicBody;
 
 	Body = World.CreateBody(&myBodyDef);
@@ -159,6 +199,7 @@ void GameObject::createBoxDynamic(b2World & World)
 	boxFixtureDef.density = 100.f;
 	boxFixtureDef.friction = 0.7f;
 	boxFixtureDef.shape = &Shape;
+	boxFixtureDef.filter.categoryBits = _entityCategory::OBJECT;
 	Body->CreateFixture(&boxFixtureDef);
 	Body->SetUserData(this);
 	this->world = &World;
@@ -170,16 +211,16 @@ void GameObject::createBoxSenor(b2World & World)
 	myBodyDef.type = b2_staticBody;
 
 	Body = World.CreateBody(&myBodyDef);
-
+	
 	if (this->getHeight() < 1 || this->getWidth() < 1) {
 		Shape.SetAsBox((32.f / 2), (32.f / 2));
 	}
 	else {
 		b2Vec2 vertices[4];
-		vertices[0].Set(-16, -16);
-		vertices[1].Set(-16, this->getHeight() + -16);
-		vertices[2].Set(this->getWidth() + -16, this->getHeight() + -16);
-		vertices[3].Set(this->getWidth() + -16, -16);
+		vertices[0].Set(0, 0);
+		vertices[1].Set(0, this->getHeight());
+		vertices[2].Set(this->getWidth(), this->getHeight());
+		vertices[3].Set(this->getWidth(), 0);
 		this->Shape.Set(vertices, 4);
 	}
 
@@ -188,6 +229,7 @@ void GameObject::createBoxSenor(b2World & World)
 	boxFixtureDef.shape = &Shape;
 	boxFixtureDef.isSensor = true;
 	Body->CreateFixture(&boxFixtureDef);
+	boxFixtureDef.filter.categoryBits = _entityCategory::OBJECT;
 	Body->SetUserData(this);
 }
 

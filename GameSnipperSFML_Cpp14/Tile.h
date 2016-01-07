@@ -1,8 +1,11 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include <Box2D/Box2D.h>
+#include "GameObject.h"
 
-class Tile
+class GameObject;
+
+class Tile : public GameObject
 {
 public:
 	Tile();
@@ -24,6 +27,7 @@ public:
 	bool isCollidable;
 	bool isVisible;
 	bool topTile = false;
+	int LayerId;
 
 	//b2BodyDef* bodyDef;
 	//b2BodyDef* enemyBodyDef;

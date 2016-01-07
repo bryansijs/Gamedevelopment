@@ -4,6 +4,8 @@
 #include <iterator> 
 #include "GameObjectContainer.h"
 #include "Door.h"
+#include "DrawContainer.h"
+
 Game_Switch::Game_Switch()
 {
 }
@@ -24,6 +26,7 @@ Game_Switch::~Game_Switch()
 	this->onState = (properties.count("onIndex")) ? std::stoi(properties["onIndex"]) : 2;
 	this->needKey = (properties.count("needKey")) ? std::stoi(properties["needKey"]) : 0;
 	this->isCollidable = (properties.count("isCollidable")) ? std::stoi(properties["isCollidable"]) : 0;
+	this->setVisibleId((properties.count("VisibleId")) ? std::stoi(properties["VisibleId"]) : 0);
 
 	this->xOfIndex = (properties.count("ofXIndex")) ? std::stoi(properties["ofXIndex"]) : -1;
 	this->setImageX((properties.count("xIndex")) ? std::stoi(properties["xIndex"]) : 0);
@@ -63,21 +66,21 @@ Game_Switch::Game_Switch(GameObjectContainer *gameObjectContainer, std::map<std:
 
 void Game_Switch::doAction(Player* player)
 {
-
-
-	if (needKey && !usedKey)
-	{
-		if (player->getKey() > 0) {
-			player->removeKey();
-			this->setImageX(xOfIndex);
-			this->usedKey = true;
+	if (this->getDrawContainer()->checkIfidIsDiscoverd(this->getVisibleId())) {
+		if (needKey && !usedKey)
+		{
+			if (player->getKey() > 0) {
+				player->removeKey();
+				this->setImageX(xOfIndex);
+				this->usedKey = true;
+			}
+			else
+				return;
 		}
-		else
-			return;
-	}
 
-	setState();
-	shouldUpdate = true;
+		setState();
+		shouldUpdate = true;
+	}
 }
 
 

@@ -11,6 +11,15 @@ GameObjectContainer::~GameObjectContainer()
 {
 }
 
+void GameObjectContainer::Update()
+{
+	for (size_t i = 0; i < useAbleObjects.size(); i++)
+	{
+		if (useAbleObjects.at(i) != nullptr)
+			useAbleObjects.at(i)->Update();
+	}
+}
+
 
 void GameObjectContainer::AddObject(GameObject* object)
 {
