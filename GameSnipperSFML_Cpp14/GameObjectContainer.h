@@ -8,7 +8,7 @@ class GameObjectContainer
 public:
 	GameObjectContainer();
 	~GameObjectContainer();
-
+	void Update();
 	void AddObject(GameObject* object);
 	void RemoveObject(GameObject* object);
 	std::vector<GameObject*> getObjects() { return useAbleObjects; }

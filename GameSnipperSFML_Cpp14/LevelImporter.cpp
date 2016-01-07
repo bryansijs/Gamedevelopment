@@ -37,7 +37,8 @@ void LevelImporter::PrepareTileSets()
 
 void LevelImporter::PrepareGameObjects()
 {
-	objectFactory = new GameObjectFactory(drawContainer,moveContainer, gameObjectContainer, this->world);
+	this->level = this->setLevel();
+	objectFactory = new GameObjectFactory(drawContainer,moveContainer, gameObjectContainer, this->world, level);
 	objectFactory->setTile(tiles);
 
 	for (Json::Value::iterator it = jsonRoot["layers"].begin(); it != jsonRoot["layers"].end(); ++it)
@@ -249,6 +250,10 @@ Tile* LevelImporter::addTile(int dataIndex, Json::Value& value, int x, int y)
 		{
 			musicName = value["properties"]["music"].asString();
 		}
+
+		if (props.isMember("LayerId")) {
+			insert_tile->LayerId = atoi(value["properties"]["LayerId"].asString().c_str());
+		}
 	}
 
 	return insert_tile;
@@ -323,10 +328,10 @@ void LevelImporter::Clear()
 	music.resetBuffer();
 }
 
-Level* LevelImporter::getLevel()
+Level* LevelImporter::setLevel()
 {
 	//TODO  in level moeten de tiles opgedeeld worden in ground en roof. 
-	Level* level = new Level(gameObjectContainer);
+	level->setGameObjectContainer(gameObjectContainer);
 	level->setGameObjects(game_objects);
 	level->setTileSets(tileSets);
 	level->groundTiles = this->groundTiles;
@@ -334,6 +339,23 @@ Level* LevelImporter::getLevel()
 	level->setMusic(music);
 	level->setHazardMap(hazardMap);
 
+	this->level = level;
+	return level;
+}
+
+void LevelImporter::updateLevel()
+{
+	level->setGameObjectContainer(gameObjectContainer);
+	level->setGameObjects(game_objects);
+	level->setTileSets(tileSets);
+	level->groundTiles = this->groundTiles;
+	level->roofTiles = this->roofTiles;
+	level->setMusic(music);
+	level->setHazardMap(hazardMap);
+}
+
+Level* LevelImporter::getLevel()
+{
 	return level;
 }
 
@@ -343,6 +365,7 @@ LevelImporter::LevelImporter(DrawContainer *drawContainer, MoveContainer *moveCo
 	this->gameObjectContainer = gameObjectContainer;
 	this->moveContainer = moveContainer;
 	this->world = world;
+	level = new Level();
 }
 
 

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Door.h"
-
+#include "DrawContainer.h"
 
 Door::Door()
 {
@@ -16,6 +16,8 @@ void Door::setProperties(std::map<std::string, std::string>& properties) {
 	this->keyNeed = (properties.count("keyNeed")) ? std::stoi(properties["keyNeed"]) : 0;
 	this->switchNeed = (properties.count("switchNeed")) ? std::stoi(properties["switchNeed"]) : 0;
 	this->isCollidable = (properties.count("isCollidable")) ? std::stoi(properties["isCollidable"]) : 0;
+	this->setVisibleId((properties.count("VisibleId")) ? std::stoi(properties["VisibleId"]) : 0);
+
 	this->isOpen = false;
 	if (useImage) {
 		this->setImageX((properties.count("xIndex")) ? std::stoi(properties["xIndex"]) : 0);
@@ -77,21 +79,23 @@ void Door::doAction()
 
 void Door::doAction(Player* player)
 {
-	if (this->isOpen = true)return;
+	if (this->getDrawContainer()->checkIfidIsDiscoverd(this->getVisibleId())) {
+		if (this->isOpen = true)return;
 
-	if (keyNeed && keyUsed == false)
-		if (player->getKey() > 0) {
-			player->removeKey();
-			this->keyUsed = true;
-		}
-		else
+		if (keyNeed && keyUsed == false)
+			if (player->getKey() > 0) {
+				player->removeKey();
+				this->keyUsed = true;
+			}
+			else
+				return;
+
+		if (switchNeed)
 			return;
 
-	if (switchNeed)
-		return;
-
-	shouldUpdate = true;
-	setOpen();
+		shouldUpdate = true;
+		setOpen();
+	}
 
 }
 

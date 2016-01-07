@@ -6,9 +6,11 @@
 #include "NormalMoveBehaviour.h"
 #include "PlayerDrawBehaviour.h"
 #include "EndTile.h"
+#include "GameObjectFactory.h"
 
 Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameObjectContainer* useContainer, b2World* world)
 {
+	this->setSpeed(250.0f);
 	this->setMoveContainer(moveContainer);
 	this->setDrawContainer(drawContainer);
 
@@ -23,14 +25,32 @@ Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameO
 
 	this->SetAnimationStates(3);
 	this->setHealth(100);
-}
 
+	WeaponFactory weaponFactory;
+	std::map<std::string, std::string> properties = {
+		{ "wType", "Pistol" },
+		{ "pType", "Bullet" }
+	};
+
+	this->AddGun((BaseItem*)weaponFactory.Create(properties, useContainer));
+
+	// Equip a second gun
+	std::map<std::string, std::string> rifleProperties = {
+		{ "wType", "Rifle" },
+		{ "pType", "Bullet" }
+	};
+
+	this->AddGun((BaseItem*)weaponFactory.Create(rifleProperties, useContainer));
+	this->EquipGun(1);
+}
 
 Player::Player()
 {
 	this->SetMoveBehaviour ( new NormalMoveBehaviour(this) );
 	this->setDrawBehaviour(new PlayerDrawBehaviour(this, 10, "Player.png"));
 	this->setHealth(100);
+
+	
 }
 
 Player::~Player()
@@ -63,6 +83,19 @@ bool Player::GetGodMode()
 	return this->godMode;
 }
 
+void Player::EquipGun(int slot)
+{
+	if (guns.size() >= slot)
+	{
+		equipedGun = guns[slot - 1];
+	}
+}
+
+BaseItem * Player::GetEquipedGun()
+{
+	return this->equipedGun;
+}
+
 void Player::startContact(b2Fixture* fixture)
 {
 
@@ -77,7 +110,7 @@ void Player::AddAmmo(BaseItem* item) {
 }
 
 void Player::AddGun(BaseItem* item) {
-
+	this->guns.push_back(item);
 }
 
 void Player::AddPotion(BaseItem* item) {
