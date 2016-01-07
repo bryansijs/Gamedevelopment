@@ -176,8 +176,6 @@ void GameState::Update()
 	{
 		DestroyGameObjects();
 	//	gameContext->level->update();
-
-	
 	}
 
 	if (gameContext->level->getDoEvents()) {

@@ -147,7 +147,9 @@ void Level::drawRoof(sf::RenderWindow* window, sf::View* view) {
 				}
 			}
 			if (go) {
-				window->draw(roofTiles.at(i)->sprite);
+				if (std::find(DiscoverdLayers.begin(), DiscoverdLayers.end(), roofTiles.at(i)->LayerId) != DiscoverdLayers.end()) {
+					window->draw(roofTiles.at(i)->sprite);
+				}
 			}
 		}
 

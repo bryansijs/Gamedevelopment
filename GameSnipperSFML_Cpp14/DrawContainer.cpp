@@ -20,7 +20,7 @@ void DrawContainer::Draw(sf::RenderWindow *window, sf::Vector2f viewPortPosition
 	{
 		if (std::find(Discoverdids.begin(), Discoverdids.end(), behaviour->getGameObject()->getVisibleId()) != Discoverdids.end()) {
 			behaviour->Draw(window, viewPortPosition);
-		}	
+		}
 	}
 }
 
