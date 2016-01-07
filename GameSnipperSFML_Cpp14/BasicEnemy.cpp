@@ -26,6 +26,7 @@ BasicEnemy::~BasicEnemy()
 
 void BasicEnemy::setPattern()
 {
-	this->PatternSet.insert(std::pair<std::string, float>("0009", 0.15f));
-	this->PatternSet.insert(std::pair<std::string, float>("9901", 5.0f));
+	this->PatternSet.insert(std::pair<std::string, float>("0009", 0.50f));
+	//this->PatternSet.insert(std::pair<std::string, float>("0009", 0.15f));
+	//this->PatternSet.insert(std::pair<std::string, float>("9901", 5.0f));
 }
