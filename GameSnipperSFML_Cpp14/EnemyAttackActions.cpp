@@ -3,6 +3,7 @@
 #include "Time.h"
 #include "BaseEnemy.h"
 #include "GameObjectFactory.h"
+#include "MoveBehaviour.h"
 EnemyAttackActions::EnemyAttackActions(BaseEnemy* obj)
 {
 	this->obj = obj;
@@ -21,7 +22,11 @@ void EnemyAttackActions::Attack()
 	if (Time::runningTime > obj->nextShot)
 	{
 		obj->nextShot = (float)Time::runningTime + (float)obj->shotRate;
-		this->direction = "move-down";// this->getMoveBehaviour()->getDirection().at(0);
+
+		if (obj->getMoveBehaviour()->getDirection().at(0) != "move-not");
+		{
+			this->direction = obj->getMoveBehaviour()->getDirection().at(0);
+		}
 
 		switch (this->obj->getAttacktType())
 		{
@@ -51,15 +56,15 @@ void EnemyAttackActions::SingleShot()
 	if (this->direction == "move-down")
 	{
 
-		y= obj->getBody()->GetPosition().y + obj->getHeight() + 10;
+		y = obj->getBody()->GetPosition().y + obj->getHeight() + 10;
 
-		x = obj->getBody()->GetPosition().x + obj->getWidth() /2;
-		
+		x = obj->getBody()->GetPosition().x + obj->getWidth() / 2;
+
 
 	}
 	if (this->direction == "move-left")
 	{
-		x= obj->getBody()->GetPosition().x - 10;
+		x = obj->getBody()->GetPosition().x - 10;
 
 
 		y = obj->getBody()->GetPosition().y + (obj->getHeight() / 2);
@@ -67,9 +72,9 @@ void EnemyAttackActions::SingleShot()
 	}
 	if (this->direction == "move-right")
 	{
-		x=obj->getBody()->GetPosition().x + obj->getWidth() + 10;
+		x = obj->getBody()->GetPosition().x + obj->getWidth() + 10;
 		y = obj->getBody()->GetPosition().y + (obj->getHeight() / 2);
-		
+
 	}
 
 
@@ -79,8 +84,8 @@ void EnemyAttackActions::SingleShot()
 		{ "pType", "Bullet" },
 		{ "direction", direction },
 		{ "texture",  obj->getBulletTextureBig() + ".png" },
-		{ "x", std::to_string(x-8) },
-		{ "y", std::to_string(y-8) },
+		{ "x", std::to_string(x - 8) },
+		{ "y", std::to_string(y - 8) },
 		{ "size", std::to_string(16) },
 		{ "damage" , std::to_string(obj->getBulletDamageBig())},
 		{ "Category", "PLAYER" } };
@@ -143,8 +148,8 @@ void EnemyAttackActions::DualShot() {
 	   { "pType", "Bullet" },
 	   { "direction", direction },
 	   { "texture", obj->getBulletTexture() + ".png" },
-	   { "x", std::to_string(x2-4) },
-	   { "y", std::to_string(y2-4) },
+	   { "x", std::to_string(x2 - 4) },
+	   { "y", std::to_string(y2 - 4) },
 	   { "size", std::to_string(8) },
 	   { "damage",  std::to_string(obj->getBulletDamage()) },
 	   { "Category", "PLAYER" } };

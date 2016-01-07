@@ -11,7 +11,7 @@ private:
 	sf::RectangleShape* hpBar;
 	b2PolygonShape  lineOfSightShape;
 	b2FixtureDef* lineOfSightFixtureDef;
-
+	bool Attacking = false;
 	int seeWidth,seeLength;
 	int attackType = 0;
 	int patternCount = 0, patternAmount = 0, patternIndex = 0;

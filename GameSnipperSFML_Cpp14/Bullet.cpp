@@ -2,6 +2,7 @@
 #include "Bullet.h"
 #include "Player.h"
 #include "GameObjectContainer.h"
+#include "Tile.h"
 #include "DrawContainer.h"
 #include "MoveContainer.h"
 #include "NormalDrawBehaviour.h"
@@ -25,7 +26,7 @@ Bullet::Bullet(GameObjectContainer * gameObjectContainer, std::map<std::string, 
 	this->createBoxDynamic(*world);
 	b2Filter fil = this->getBody()->GetFixtureList()->GetFilterData();
 
-	fil.maskBits = FilterEnum::getValue(properties["Category"]);
+	fil.maskBits = FilterEnum::getValue(properties["Category"]) | _entityCategory::TILE | _entityCategory::OBJECT;
 
 
 	this->getBody()->GetFixtureList()->SetFilterData(fil);
@@ -35,6 +36,8 @@ Bullet::Bullet(GameObjectContainer * gameObjectContainer, std::map<std::string, 
 Bullet::~Bullet()
 {
 }
+
+
 
 void Bullet::startContact(b2Fixture * fixture)
 {

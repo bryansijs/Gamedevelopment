@@ -6,7 +6,6 @@
 #include <Box2D\Dynamics\b2Body.h>
 #include <Box2D\Collision\b2Collision.h>
 #include "FilterEnum.h"
-#include "Tile.h"
 #include "MoveBehaviour.h"
 #include "EnemyDrawBehaviour.h"
 #include "DrawContainer.h"
@@ -172,19 +171,23 @@ void BaseEnemy::Update()
 			if (dynamic_cast<Player*>(obj))
 			{
 				if (c->IsTouching())
-					this->lineOfSightConvex->setFillColor(sf::Color(250, 0, 0, 128));
-
-				if (!dynamic_cast<AttackBehaviour*>(this->getMoveBehaviour()))
 				{
-					this->getMoveContainer()->RemoveBehaviour(this->getMoveBehaviour());
-					this->SetMoveBehaviour({ new AttackBehaviour(this) });
-					this->getMoveContainer()->AddBehaviour(this->getMoveBehaviour());
+					this->lineOfSightConvex->setFillColor(sf::Color(250, 0, 0, 128));
+					this->Attacking = true;
 				}
+
+				/*	if (!dynamic_cast<AttackBehaviour*>(this->getMoveBehaviour()))
+					{
+						this->getMoveContainer()->RemoveBehaviour(this->getMoveBehaviour());
+						this->SetMoveBehaviour({ new AttackBehaviour(this) });
+						this->getMoveContainer()->AddBehaviour(this->getMoveBehaviour());
+					}*/
 			}
 		}
 	}
 
-	if (dynamic_cast<AttackBehaviour*>(this->getMoveBehaviour()))
+	//if (dynamic_cast<AttackBehaviour*>(this->getMoveBehaviour()))
+	if (attackType)
 		Action->Attack();
 
 	if (patternAmount == 0)return;
@@ -205,7 +208,7 @@ void BaseEnemy::Update()
 			if (i == patternIndex) {
 				std::string patternInfo = it->first;
 
-				this->attackType = (patternInfo[0]-'0')* 10  + (patternInfo[1] - '0');
+				this->attackType = (patternInfo[0] - '0') * 10 + (patternInfo[1] - '0');
 				this->patternAmount = (patternInfo[2] - '0') * 10 + (patternInfo[3] - '0');
 				this->shotRate = it->second;
 				break;
