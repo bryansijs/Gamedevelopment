@@ -45,3 +45,15 @@ void Unit::setCurrentState(UnitState* newState)
 	//Verwijder uit lijst. 
 	this->currentState = newState;
 }
+
+void Unit::Damage(int amount)
+{
+	int health = this->getHealth() - amount;
+
+	if (health <= 0)
+	{
+		this->Destroy();
+	}
+
+	this->setHealth(this->getHealth() - amount);
+}

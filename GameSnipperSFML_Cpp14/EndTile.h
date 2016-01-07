@@ -4,6 +4,8 @@
 #include "StateManager.h"
 #include "LevelManager.h"
 
+class ScoreManager;
+
 class EndTile : public GameObject
 {
 public:
@@ -15,11 +17,12 @@ public:
 	
 	virtual void startContact(b2Fixture* fixture);
 	virtual void endContact(b2Fixture* fixture);
-	void setContext(Context* context, StateManager* stateManager, LevelManager* levelManager);
+	void setContext(Context* context, StateManager* stateManager, LevelManager* levelManager, ScoreManager* scoreManager);
 
 private:
 	Context* context;
 	StateManager* stateManager;
 	LevelManager* levelManager;
+	ScoreManager* scoreManager;
 };
 

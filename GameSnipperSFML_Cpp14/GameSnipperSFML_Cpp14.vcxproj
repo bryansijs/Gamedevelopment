@@ -186,6 +186,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="ConsoleColor.h" />
     <ClInclude Include="Context.h" />
     <ClInclude Include="DebugBox2D.h" />
+    <ClInclude Include="DiscoverTile.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="DrawBehaviour.h" />
     <ClInclude Include="DrawContainer.h" />
@@ -199,6 +200,8 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameTileFactory.h" />
     <ClInclude Include="HUD.h" />
+    <ClInclude Include="Gun.h" />
+    <ClInclude Include="WeaponFactory.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="InteractiveFactory.h" />
     <ClInclude Include="ItemFactory.h" />
@@ -222,6 +225,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="NormalMoveBehaviour.h" />
     <ClInclude Include="NormalState.h" />
     <ClInclude Include="PauseMenu.h" />
+    <ClInclude Include="Pistol.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerActions.h" />
     <ClInclude Include="PlayerDrawBehaviour.h" />
@@ -231,8 +235,10 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="resource1.h" />
     <ClInclude Include="resource2.h" />
     <ClInclude Include="Potion.h" />
+    <ClInclude Include="Rifle.h" />
     <ClInclude Include="RunnerEnemy.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="square.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="ShootAction.h" />
@@ -249,6 +255,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileSet.h" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="tinydir.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitState.h" />
     <ClInclude Include="UnitTest.h" />
@@ -273,6 +280,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="CollisionListener.cpp" />
     <ClCompile Include="Context.cpp" />
     <ClCompile Include="DebugBox2D.cpp" />
+    <ClCompile Include="DiscoverTile.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="DrawBehaviour.cpp" />
     <ClCompile Include="DrawContainer.cpp" />
@@ -286,6 +294,8 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameTileFactory.cpp" />
     <ClCompile Include="HUD.cpp" />
+    <ClCompile Include="Gun.cpp" />
+    <ClCompile Include="WeaponFactory.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="InteractiveFactory.cpp" />
     <ClCompile Include="ItemFactory.cpp" />
@@ -309,12 +319,15 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <ClCompile Include="NormalDrawBehaviour.cpp" />
     <ClCompile Include="NormalMoveBehaviour.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
+    <ClCompile Include="Pistol.cpp" />
     <ClCompile Include="PlayerActions.cpp" />
     <ClCompile Include="PlayerDrawBehaviour.cpp" />
     <ClCompile Include="Potion.cpp" />
     <ClCompile Include="ProjectileFactory.cpp" />
     <ClCompile Include="Random.cpp" />
+    <ClCompile Include="Rifle.cpp" />
     <ClCompile Include="RunnerEnemy.cpp" />
+    <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="SetupState.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="square.cpp" />
@@ -354,6 +367,7 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\html-game\HUD.html" />
+    <None Include="ClassDiagram.cd" />
     <None Include="Resources\html-game\StoryLine.html" />
     <None Include="loading.html" />
     <None Include="Resources\key-mapping.json" />

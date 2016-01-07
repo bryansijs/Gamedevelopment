@@ -3,12 +3,13 @@
 #include <vector>
 #include "KeyMapping.h"
 #include "GameState.h"
+#include "GameContext.h"
 
-GameActions::GameActions(GameState* gamestate)
+GameActions::GameActions(GameState* gamestate, GameContext* gameContext)
 {
 	GameActions::gamestate = gamestate;
+	GameActions::gameContext = gameContext;
 }
-
 
 GameActions::~GameActions()
 {
@@ -49,4 +50,15 @@ void GameActions::ExecuteActions()
 void GameActions::NextLevel()
 {
 	gamestate->StartNextLevel();
+}
+
+void GameActions::GodMode()
+{
+	if (gameContext->player->GetGodMode())
+	{
+		gameContext->player->DisableGodMode();
+		return;
+	}
+
+	gameContext->player->EnableGodMode();
 }

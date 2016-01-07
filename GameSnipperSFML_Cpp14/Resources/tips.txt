@@ -1,0 +1,4 @@
+Use the arrow keys to walk with your character.
+Use spacebar to shoot at your enemies.
+Press "ESC" to pause the game.
+Press "\" to see your FPS.

@@ -18,15 +18,21 @@
 #include <Awesomium/BitmapSurface.h>
 #include <Awesomium/STLHelpers.h>
 #include "HUD.h"
+#include "tinydir.h"
+#include "Random.h"
+#include <vector>
+#include <string>
 
-GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager)
+GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager, ScoreManager* scoreManager)
 {
 	maincontext = context;
 	
-	gameActions = new GameActions(this);
 	gameContext = new GameContext(context);
 
 	hud = new HUD{ gameContext };
+
+	gameActions = new GameActions(this, gameContext);
+
 	storyline = new AwesomiumHelper{ context->web_core, "file:///Resources/html-game/StoryLine.html", 960, 36 };
 	storylineManager = new StorylineManager();
 
@@ -40,24 +46,31 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 
 	this->stateManager = stateManager;
 	this->levelManager = levelmanager;
+	this->scoreManager = scoreManager;
 	//in constructor, usually
 
+
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer, gameContext->world);
-	gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
+	//gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
+	gameContext->levelImporter->Import(std::string("./Resources/levels/Level_New.json"));
 
 	gameContext->levelImporter->Prepare();
 
+	gameContext->levelImporter->updateLevel();
 	gameContext->level = gameContext->levelImporter->getLevel();
 	gameContext->levelImporter->Clear();
 
 	playerActions->SetContainers(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer);
 	playerActions->SetWorld(gameContext->world);
+	playerActions->SetContext(gameContext);
 
 	gameContext->level->Start(gameContext->player, &gameContext->context->window.getSize());
-	gameContext->level->End(context, stateManager, levelManager);
+
+	gameContext->level->End(context, stateManager, levelManager, scoreManager);
 	gameContext->level->Story(storylineManager);
 
-	gameContext->player->createBoxDynamic(*gameContext->world);
+	//gameContext->player->setPosition(gameContext->player->getPositionX() -16, gameContext->player->getPositionY() - 16);
+	gameContext->player->createBoxDynamicForPlayers(*gameContext->world);
 
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);
 
@@ -128,7 +141,15 @@ void GameState::DebugBodies()
 void GameState::Update()
 {
 	Time::deltaTime = static_cast<float>(gameContext->deltaClock.restart().asSeconds());
+	Time::deltaTime *= gameContext->gameSpeedMultiplier;
 	Time::runningTime += Time::deltaTime;
+
+	if (gameContext->player->getHealth() <= 0)
+	{
+		LoseState* loseState = new LoseState{ gameContext->context, stateManager, levelManager, scoreManager };
+		stateManager->AddState(loseState);
+		stateManager->PopState();
+	}
 
 	gameContext->context->window.clear(sf::Color::White);
 
@@ -167,6 +188,32 @@ void GameState::Update()
 
 			if (gameContext->event.type == sf::Event::KeyPressed)
 			{
+				if (Input::GetKeyDown(KeyMapping::GetKey("gamespeed-up")))
+				{
+					gameContext->gameSpeedMultiplier++;
+				}
+
+				if (Input::GetKeyDown(KeyMapping::GetKey("gamespeed-down")))
+				{
+					if (gameContext->gameSpeedMultiplier > 1)
+					{
+						gameContext->gameSpeedMultiplier--;
+					}
+				}
+
+				if (Input::GetKeyDown(KeyMapping::GetKey("damage-up")))
+				{
+					gameContext->damageMultiplier++;
+				}
+
+				if (Input::GetKeyDown(KeyMapping::GetKey("damage-down")))
+				{
+					if (gameContext->damageMultiplier > 1)
+					{
+						gameContext->damageMultiplier--;
+					}
+				}
+
 				if (Input::GetKeyDown("K")) {
 					StartNextLevel();
 				}
@@ -181,7 +228,6 @@ void GameState::Update()
 					if (isPause)
 						gameContext->setMenuPosition();
 				}
-
 
 				if (Input::GetKeyDown(KeyMapping::GetKey("fps"))) {
 					showFPS = !showFPS;
@@ -201,14 +247,18 @@ void GameState::Update()
 		gameContext->player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	}
 
-//DebugBodies();
-
+	//DebugBodies();
 
 
 	if (!isPause)
 	{
-		this->gameContext->world->Step(1, 8, 3);
-
+		float speed = 1;
+		float count = 0;
+		float point = speed / Time::deltaTime;
+		while (point > count) {
+			this->gameContext->world->Step(Time::deltaTime, 6, 6);
+			count++;
+		}
 		DestroyGameObjects();
 		gameContext->moveContainer->Update(gameContext->level->GetViewPortPosition());
 
@@ -248,15 +298,44 @@ void GameState::Update()
 	if (!terminate) {
 		gameContext->context->window.setView(gameContext->view);
 	}
+//<<<<<<< HEAD
+//
+	//for (b2Body* b = gameContext->world->GetBodyList(); b; b = b->GetNext()) {
+
+	//	b2Shape::Type t = b->GetFixtureList()->GetType();
+	//	if (t == b2Shape::e_polygon)
+	//	{
+	//		b2PolygonShape* s = (b2PolygonShape*)b->GetFixtureList()->GetShape();
+	//		sf::ConvexShape convex;
+	//		int vertextCount = s->GetVertexCount();
+	//		convex.setPointCount(vertextCount);
+	//		convex.setFillColor(sf::Color(255, 255, 100, 128));
+
+	//		convex.setPosition(sf::Vector2f(b->GetPosition().x, b->GetPosition().y));
+
+	//		for (int i = 0; i < vertextCount; i++)
+	//			convex.setPoint(i, sf::Vector2f(s->GetVertex(i).x, s->GetVertex(i).y));
+
+
+	//		gameContext->context->window.draw(convex);
+	//	}
+	//}
+//
+//		sf::RectangleShape rectangle(sf::Vector2f(32, 32));
+//		rectangle.setPosition(sf::Vector2f(gameContext->player->getBody()->GetPosition().x, gameContext->player->getBody()->GetPosition().y));
+//		rectangle.setOutlineThickness(0);
+//		rectangle.setFillColor(sf::Color(230, 100, 50, 200));
+//		gameContext->context->window.draw(rectangle);
 	
 	gameContext->context->window.display();
+
 
 	if (gameContext->player->getHealth() <= 0)
 	{
 		sf::Image screenshot = gameContext->context->window.capture();
 		screenshot.saveToFile("./Resources/menuHTML/images/hold.png");
 
-		LoseState* loseState = new LoseState(gameContext->context, stateManager, levelManager);
+		LoseState* loseState = new LoseState(gameContext->context, stateManager, levelManager, scoreManager);
 		stateManager->AddState(loseState);
 		stateManager->StartNextState();
 	}
@@ -283,6 +362,7 @@ void GameState::StartNextLevel()
 
 	gameContext->levelImporter->Prepare();
 
+	gameContext->levelImporter->updateLevel();
 	gameContext->level = gameContext->levelImporter->getLevel();
 	gameContext->levelImporter->Clear();
 
@@ -309,7 +389,7 @@ void GameState::MenuEnd(int option)
 			break;
 	case 1: {
 		terminate = true;
-		MenuState* menu = new MenuState{ gameContext->context, stateManager, levelManager };
+		MenuState* menu = new MenuState{ gameContext->context, stateManager, levelManager, scoreManager};
 		stateManager->AddState(menu);
 		stateManager->StartNextState();
 		break; }
@@ -325,23 +405,32 @@ void GameState::MenuEnd(int option)
 void GameState::Loading()
 {
 	gameContext->loading = true;
+	
+	loadingScreen = new AwesomiumHelper{ maincontext->web_core, "file:///Resources/menuHTML/loading.html", 960, 640 };
+	loadingScreen->JavaScriptCall("loadAd", GetAd());
+	loadingScreen->JavaScriptCall("loadTip", GetTip());
 
-	GetAd();
-
-	ReloadUI("file:///Resources/menuHTML/loading.html");
-	CreateTexture();
-	DrawUI();
+	DrawLoadingScreen();
 }
 
 void GameState::DoneLoading()
 {
-	ReloadUI("file:///Resources/menuHTML/doneLoading.html");
-	CreateTexture();
-	DrawUI();
+	loadingScreen = new AwesomiumHelper{ maincontext->web_core, "file:///Resources/menuHTML/doneLoading.html", 960, 640 };
+	loadingScreen->JavaScriptCall("loadAd", GetAd());
+	loadingScreen->JavaScriptCall("loadTip", GetTip());
+
+	DrawLoadingScreen();
 
 	while (gameContext->loading)
 	{
 		while (gameContext->context->window.pollEvent(gameContext->event)) {
+			if (gameContext->event.type == sf::Event::Closed)
+			{
+				gameContext->context->window.close();
+				stateManager->PopState();
+				return;
+			}
+
 			if (gameContext->event.type == sf::Event::KeyPressed)
 			{
 				gameContext->loading = false;
@@ -350,47 +439,72 @@ void GameState::DoneLoading()
 	}
 }
 
-void GameState::ReloadUI(char const* path)
+void GameState::DrawLoadingScreen()
 {
-	Awesomium::WebURL url(Awesomium::WSLit(path));
-	gameContext->webView->LoadURL(url);
-	gameContext->webView->SetTransparent(true);
-
-	while (gameContext->webView->IsLoading())
-	{
-		gameContext->web_core->Update();
-	}
-
-	Sleep(100);
-	gameContext->web_core->Update();
-}
-
-void GameState::DrawUI()
-{
-	sf::Sprite ui(gameContext->texture);
-	gameContext->texture.update(gameContext->pixels);
-	gameContext->context->window.draw(ui);
+	sf::Sprite loadingSprite = loadingScreen->GetSprite();
+	loadingSprite.setPosition(0, 0);
+	loadingView.setSize(960, 640);
+	loadingView.setCenter(480, 320);
+	gameContext->context->window.setView(loadingView);
+	gameContext->context->window.draw(loadingSprite);
 	gameContext->context->window.display();
 }
 
-void GameState::CreateTexture()
+std::string GameState::GetAd()
 {
-	gameContext->surface = static_cast<Awesomium::BitmapSurface*>(gameContext->webView->surface());
+	std::vector<std::string> ads = GetFilesInDirectory("./Resources/ads/");
 
-	gameContext->texture.create(960, 640);
-	gameContext->pixels = new sf::Uint8[gameContext->context->window.getSize().x * gameContext->context->window.getSize().y * 4];
-
-	const unsigned char* tempBuffer = gameContext->surface->buffer();
-
-	for (register int i = 0; i < 960 * 640 * 4; i += 4) {
-		gameContext->pixels[i] = tempBuffer[i + 2];
-		gameContext->pixels[i + 1] = tempBuffer[i + 1];
-		gameContext->pixels[i + 2] = tempBuffer[i];
-		gameContext->pixels[i + 3] = tempBuffer[i + 3];
+	if (ads.size() > 0)
+	{
+		return ads[Random::Number(0, (ads.size() - 1))];
 	}
+	
+	return "";
 }
 
-void GameState::GetAd()
+std::string GameState::GetTip()
 {
+	std::vector<std::string> tips;
 	
+	std::ifstream tipsFile;
+	tipsFile.open("./Resources/tips.txt");
+	if (tipsFile.is_open())
+	{
+		string line;
+		while (getline(tipsFile, line)) {
+			tips.push_back(line);
+		}
+	}
+
+	if (tips.size() > 0)
+	{
+		return tips[Random::Number(0, (tips.size() - 1))];
+	}
+	
+	return "";
+}
+
+std::vector<std::string> GameState::GetFilesInDirectory(const char* directory)
+{
+	std::vector<std::string> files;
+
+	tinydir_dir dir;
+	tinydir_open(&dir, directory);
+
+	while (dir.has_next)
+	{
+		tinydir_file file;
+		tinydir_readfile(&dir, &file);
+
+		if (!file.is_dir)
+		{
+			files.push_back(file.name);
+		}
+
+		tinydir_next(&dir);
+	}
+
+	tinydir_close(&dir);
+	
+	return files;
 }

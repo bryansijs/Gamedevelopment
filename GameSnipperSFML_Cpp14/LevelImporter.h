@@ -43,9 +43,10 @@ public:
 	void Prepare();
 	bool PrepareMusic(std::string musicName);
 	sf::Sound getMusic() { return music; };
-
 	void Clear();
-
+	Level* level;
+	Level* LevelImporter::setLevel();
+	void LevelImporter::updateLevel();
 	Level* LevelImporter::getLevel();
 
 private:

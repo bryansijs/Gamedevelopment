@@ -17,12 +17,13 @@
 
 using namespace Awesomium;
 
-MenuState::MenuState(Context* context, StateManager* stateManager, LevelManager* levelManager)
+MenuState::MenuState(Context* context, StateManager* stateManager, LevelManager* levelManager, ScoreManager* scoreManager)
 {
 	menuContext = new MenuContext(context);
 	this->stateManager = stateManager;
 	this->levelManager = levelManager;
-	menuActions = new MenuActions(stateManager, menuContext, levelManager);
+	this->scoreManager = scoreManager;
+	menuActions = new MenuActions(stateManager, menuContext, levelManager,scoreManager);
 
 	sf::View view = context->window.getView();
 	view.setSize(960, 640);

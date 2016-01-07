@@ -3,6 +3,11 @@
 
 #include "Time.h"
 
+ShotMoveBehaviour::ShotMoveBehaviour(GameObject* gameObject)
+{
+	this->gameObject = gameObject;
+}
+
 ShotMoveBehaviour::ShotMoveBehaviour(GameObject* gameObject, std::string shotDirection)
 {
 	this->gameObject = gameObject;
@@ -40,4 +45,9 @@ bool ShotMoveBehaviour::checkVisible(int screenX, int screenY)
 	//Wat moet ik doen wanneer ze niet meer visible zijn ook echt verwijderen ????
 	//Ik heb de kamer width en height nodig. 
 	return true;
+}
+
+void ShotMoveBehaviour::SetDirection(std::string direction)
+{
+	this->direction = direction;
 }
