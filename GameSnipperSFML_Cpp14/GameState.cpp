@@ -154,7 +154,9 @@ void GameState::Update()
 
 	if (gameContext->player->getHealth() <= 0)
 	{
-		LoseState* loseState = new LoseState{ gameContext->context, stateManager, levelManager, scoreManager };
+		sf::Image screenshot = gameContext->context->window.capture();
+
+		LoseState* loseState = new LoseState(gameContext->context, stateManager, levelManager, screenshot, scoreManager);
 		stateManager->AddState(loseState);
 		stateManager->PopState();
 	}
@@ -201,7 +203,10 @@ void GameState::Update()
 			{
 				if (Input::GetKeyDown(KeyMapping::GetKey("gamespeed-up")))
 				{
-					gameContext->gameSpeedMultiplier++;
+					if (gameContext->gameSpeedMultiplier < 2)
+					{
+						gameContext->gameSpeedMultiplier++;
+					}
 				}
 
 				if (Input::GetKeyDown(KeyMapping::GetKey("gamespeed-down")))
@@ -304,16 +309,6 @@ void GameState::Update()
 	}
 
 	gameContext->context->window.display();
-
-	if (gameContext->player->getHealth() <= 0)
-	{
-		sf::Image screenshot = gameContext->context->window.capture();
-		screenshot.saveToFile("./Resources/menuHTML/images/hold.png");
-
-		LoseState* loseState = new LoseState(gameContext->context, stateManager, levelManager, scoreManager);
-		stateManager->AddState(loseState);
-		stateManager->StartNextState();
-	}
 
 	if (terminate)
 	{

@@ -9,16 +9,16 @@ KeyMapping::~KeyMapping()
 {
 }
 
-multimap<string, string> KeyMapping::mapping;
+multimap<std::string, std::string> KeyMapping::mapping;
 
-void KeyMapping::AddKeyMap(string map, string key)
+void KeyMapping::AddKeyMap(std::string map, std::string key)
 {
-	mapping.insert(pair<string, string>(map, key));
+	mapping.insert(pair<std::string, std::string>(map, key));
 }
 
-void KeyMapping::RemoveKeyMap(string map, string key)
+void KeyMapping::RemoveKeyMap(std::string map, std::string key)
 {
-	multimap<string, string>::iterator it;
+	multimap<std::string, std::string>::iterator it;
 
 	for (it = mapping.begin(); it != mapping.end(); ++it)
 	{
@@ -30,14 +30,29 @@ void KeyMapping::RemoveKeyMap(string map, string key)
 	}
 }
 
-void KeyMapping::ReloadMapping(multimap<string, string> newMapping)
+void KeyMapping::ReloadMapping(multimap<std::string, std::string> newMapping)
 {
 	mapping = newMapping;
 }
 
-string KeyMapping::GetMap(string key)
+bool KeyMapping::KeyInUse(std::string key)
 {
-	multimap<string, string>::iterator it;
+	multimap<std::string, std::string>::iterator it;
+
+	for (it = mapping.begin(); it != mapping.end(); ++it)
+	{
+		if (it->second == key)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+std::string KeyMapping::GetMap(std::string key)
+{
+	multimap<std::string, std::string>::iterator it;
 
 	for (it = mapping.begin(); it != mapping.end(); ++it)
 	{
@@ -48,9 +63,9 @@ string KeyMapping::GetMap(string key)
 	}
 }
 
-string KeyMapping::GetKey(string map)
+std::string KeyMapping::GetKey(std::string map)
 {
-	multimap<string, string>::iterator it;
+	multimap<std::string, std::string>::iterator it;
 
 	for (it = mapping.begin(); it != mapping.end(); ++it)
 	{
@@ -61,7 +76,21 @@ string KeyMapping::GetKey(string map)
 	}
 }
 
-multimap<string, string> KeyMapping::GetMapping()
+void KeyMapping::ChangeKey(std::string map, std::string key)
+{
+	multimap<std::string, std::string>::iterator it;
+
+	for (it = mapping.begin(); it != mapping.end(); ++it)
+	{
+		if (it->first == map)
+		{
+			it->second = key;
+			return;
+		}
+	}
+}
+
+multimap<std::string, std::string> KeyMapping::GetMapping()
 {
 	return mapping;
 }
