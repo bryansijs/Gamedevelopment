@@ -287,10 +287,8 @@ void GameState::Update()
 	if (showFPS ) {
 		gameContext->fpsShow->draw(gameContext->context->window);
 	}
-
 	
 	if(isPause)
-
 	{
 		gameContext->pauze->draw(gameContext->context->window);
 	}
