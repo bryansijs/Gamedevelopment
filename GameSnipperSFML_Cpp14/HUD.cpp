@@ -4,6 +4,7 @@
 #include "AwesomiumHelper.h"
 #include "GameContext.h"
 #include "BaseItem.h"
+#include "Gun.h"
 
 HUD::HUD(GameContext* gamecontext)
 {
@@ -47,7 +48,7 @@ bool HUD::SetHealth(int value)
 bool HUD::SetItems(int keyAmount, std::map<BaseItem*, int> potions)
 {
 	// build item list
-	// key=0, potions1=potions1, potions2=potions2
+	// key=0, potions red=potions1, potions blue=potions2
 	std::string temp = "";
 	for (int i = 0; i < keyAmount; i++)
 	{
@@ -57,7 +58,6 @@ bool HUD::SetItems(int keyAmount, std::map<BaseItem*, int> potions)
 	for (auto &potion : potions)
 	{
 		std::string test = potion.first->getItemType();
-		// todo: switch potion types
 		temp = temp + ",1";
 	}
 	temp.erase(0,1);
@@ -73,9 +73,16 @@ bool HUD::SetItems(int keyAmount, std::map<BaseItem*, int> potions)
 
 bool HUD::SetWeapons()
 {
-	if (false)
+	Gun* current = static_cast<Gun*>(gamecontext->player->GetEquipedGun());
+	if (gun != current->GetName())
 	{
-		awesomium->JavaScriptCall("setHealth", health, false);
+		gun = current->GetName();
+
+		if(gun == "pistol")
+			awesomium->JavaScriptCall("setWeapon", 0, false);
+		if (gun == "rifle")
+			awesomium->JavaScriptCall("setWeapon", 1, false);
+
 		return true;
 	}
 	return false;

@@ -23,6 +23,7 @@ private:
 
 	int health = -1;
 	std::string items = "";
+	std::string gun = "pistol";
 
 	GameContext* gamecontext;
 };

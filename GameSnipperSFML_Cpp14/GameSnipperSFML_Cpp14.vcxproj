@@ -378,11 +378,15 @@ xcopy $(ProjectDir)Resources $(TargetDir)Resources /E /Y /D</Command>
     <None Include="Resources\menuHTML\win.html" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resources\html-game\images\gun.png" />
+    <Image Include="Resources\html-game\images\gun_active.png" />
     <Image Include="Resources\html-game\images\healthbar.png" />
     <Image Include="Resources\html-game\images\healthbar_bg.png" />
     <Image Include="Resources\html-game\images\item2.png" />
     <Image Include="Resources\html-game\images\item3.png" />
     <Image Include="Resources\html-game\images\key.png" />
+    <Image Include="Resources\html-game\images\rifle.png" />
+    <Image Include="Resources\html-game\images\rifle_active.png" />
     <Image Include="Resources\menuHtml\images\bg.png" />
     <Image Include="Resources\menuHtml\images\border.png" />
     <Image Include="Resources\menuHtml\images\cat.png" />

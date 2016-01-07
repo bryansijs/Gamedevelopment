@@ -49,15 +49,16 @@
 
         #bar_bottom {
             position:absolute;
-            bottom:8px;
+            top:596px;
             text-align: center;
-            left:0;
-            width:100%;
+            left:8px;
+            height: 36px;
         }
         #weapons {
             margin:0;
             float:none;
             display:inline-block;
+            display: block;
         }
 
         #healthBlock {
@@ -118,6 +119,32 @@
         #item_item3 {
             background: url('images/item3.png') no-repeat center top;
         }
+
+        .gun {
+            height: 18px;
+            width: 0;
+            background: url('images/gun.png') no-repeat 8px top;
+            float: left;
+            margin: 8px 0 0 0;
+            padding: 0;
+        }
+
+        #gun_pistol_active {
+            background: url('images/gun_active.png') no-repeat 8px top;
+            width: 28px;
+            padding: 0 0 0 8px;
+        }
+
+        #gun_rifle {
+            background: url('images/rifle.png') no-repeat 8px top;
+            width: 34px;
+            padding: 0 0 0 8px;
+        }
+
+        #gun_rifle_active {
+            background: url('images/rifle_active.png') no-repeat 8px top;
+            width: 0;
+        }
     </style>
 </head>
 <body>
@@ -146,16 +173,18 @@
         </div>
     </div>
 
-    <!--
-<div id="bar_bottom">
+    <div id="bar_bottom">
 
         <div class="hud" id="weapons">
             <div class="content">
-                
+                <div class="gun" id="gun_pistol"></div>
+                <div class="gun" id="gun_pistol_active"></div>
+                <div class="gun" id="gun_rifle"></div>
+                <div class="gun" id="gun_rifle_active"></div>
             </div>
         </div>
 
-    </div>-->
+    </div>
 
 <script>
 
@@ -233,6 +262,32 @@
             bar.style.backgroundColor = "#e5880e";
         else
             bar.style.backgroundColor = "#51d52d";
+    }
+
+    function setWeapon(value) {
+
+        if (value === 0) {
+            document.getElementById("gun_pistol").style.width = 0;
+            document.getElementById("gun_pistol_active").style.width = "28px";
+            document.getElementById("gun_rifle").style.width = "34px";
+            document.getElementById("gun_rifle_active").style.width = 0;
+
+            document.getElementById("gun_pistol").style.padding = 0;
+            document.getElementById("gun_pistol_active").style.padding = "0 0 0 8px";
+            document.getElementById("gun_rifle").style.padding = "0 0 0 8px";
+            document.getElementById("gun_rifle_active").style.padding = 0;
+        }
+        if (value === 1) {
+            document.getElementById("gun_pistol").style.width = "28px";
+            document.getElementById("gun_pistol_active").style.width = 0;
+            document.getElementById("gun_rifle").style.width = 0;
+            document.getElementById("gun_rifle_active").style.width = "34px";
+
+            document.getElementById("gun_pistol").style.padding = "0 0 0 8px";
+            document.getElementById("gun_pistol_active").style.padding = 0;
+            document.getElementById("gun_rifle").style.padding = 0;
+            document.getElementById("gun_rifle_active").style.padding = "0 0 0 8px";
+        }
     }
 
 </script>
