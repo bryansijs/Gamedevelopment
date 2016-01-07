@@ -4,6 +4,7 @@
 Rifle::Rifle(std::map<std::string, std::string>& properties, GameObjectContainer* gameObjectContainer) : Gun{ gameObjectContainer }
 {
 	this->fireRate = 0.1f;
+	this->damage = 5;
 }
 
 Rifle::~Rifle()

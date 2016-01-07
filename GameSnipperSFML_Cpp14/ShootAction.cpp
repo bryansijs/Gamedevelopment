@@ -44,7 +44,7 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 		if (direction == "move-down")
 		{
 			x = player->getBody()->GetPosition().x + -2;
-			y = player->getBody()->GetPosition().y + 30;
+			y = player->getBody()->GetPosition().y + 40;
 		}
 		if (direction == "move-left")
 		{
@@ -53,7 +53,7 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 		}
 		if (direction == "move-right")
 		{
-			x = player->getBody()->GetPosition().x + 30;
+			x = player->getBody()->GetPosition().x + 40;
 			y = player->getBody()->GetPosition().y + -2;
 		}
 
@@ -65,10 +65,11 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 			{ "pType", projectileType },
 			{ "direction", direction },
 			{ "texture", "bullet-red.png" },
-			{ "damage", (player->Damage * gameContext->damageMultiplier) },
+			{ "damage", std::to_string(gun->GetDamage() * gameContext->damageMultiplier) },
 			{ "x", std::to_string(x) },
 			{ "y", std::to_string(y) }
 		};
+
 		Bullet* bullet = (Bullet*)projectileFactory.Create(properties, drawContainer, moveContainer, gameObjectContainer, world);
 		bullet->SetOwner(player);
 	}
