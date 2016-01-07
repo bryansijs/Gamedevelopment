@@ -21,7 +21,14 @@ void ScoreManager::ReadScores()
 
 void ScoreManager::AddScore(int score, std::string naam)
 {
-	this->scores[naam] = score;
+	if(this->scores.find(naam) == this->scores.end())
+	{
+		this->scores[naam] = score;
+	}
+	else
+	{
+		this->scores[naam] = this->scores[naam] + score;
+	}
 }
 
 std::map<std::string,int> ScoreManager::GetScores()
