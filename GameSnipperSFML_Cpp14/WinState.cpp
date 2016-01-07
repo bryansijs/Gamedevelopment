@@ -16,6 +16,8 @@
 #include "WinState.h"
 #include "MenuState.h"
 #include "StateManager.h"
+#include "LevelManager.h"
+#include "GameState.h"
 
 using namespace Awesomium;
 
@@ -108,9 +110,9 @@ void WinState::ToMenu()
 	if (load)
 	{
 		winContext->music->stop();
-		MenuState* menuState = new MenuState(winContext->context, stateManager, levelManager, scoreManager);
+		GameState* gameState = new GameState(winContext->context, stateManager, levelManager, scoreManager, true);
 
-		stateManager->AddState(menuState);
+		stateManager->AddState(gameState);
 		stateManager->StartNextState();
 		load = false;
 	}

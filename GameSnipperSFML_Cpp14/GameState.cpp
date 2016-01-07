@@ -22,7 +22,7 @@
 #include <vector>
 #include <string>
 
-GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager, ScoreManager* scoreManager)
+GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager, ScoreManager* scoreManager, bool next)
 {
 	maincontext = context;
 	
@@ -46,7 +46,10 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 
 
 	gameContext->levelImporter = new LevelImporter(gameContext->drawContainer, gameContext->moveContainer, gameContext->useContainer, gameContext->world);
-	gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
+	if (next)
+		gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getNextLevelName()));
+	else
+		gameContext->levelImporter->Import(std::string("./Resources/levels/").append(this->levelManager->getCurrentLevel()));
 
 	gameContext->levelImporter->Prepare();
 
