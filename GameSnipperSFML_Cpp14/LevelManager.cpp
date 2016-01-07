@@ -54,6 +54,7 @@ void LevelManager::swapSequence(int first, int second)
 	std::string temp = allLevels[second];
 	allLevels[second] = allLevels[first];
 	allLevels[first] = temp;
+	currentLevelNumber = 0;
 }
 
 std::vector<std::string> LevelManager::getAllLevels()

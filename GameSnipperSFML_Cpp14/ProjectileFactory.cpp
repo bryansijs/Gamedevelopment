@@ -29,7 +29,7 @@ GameObject* ProjectileFactory::Create(std::map<std::string, std::string>& proper
 	return nullptr;
 }
 
-GameObject * ProjectileFactory::CreateBullet(std::map<std::string, std::string>& properties, DrawContainer* drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer, b2World* world)
+GameObject* ProjectileFactory::CreateBullet(std::map<std::string, std::string>& properties, DrawContainer* drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer, b2World* world)
 {
 	return new Bullet(gameObjectContainer, properties, world, moveContainer, drawContainer, properties["texture"]);
 }

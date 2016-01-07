@@ -32,16 +32,17 @@ private:
 	int yIndex = 0;
 	int width = 0;
 	int height = 0;
-
+	int visibleId;
+	float speed = 0.0f;
 	int animationStates;
 public:
 	GameObject(DrawContainer *drawContainer, std::string textureUrl);
-	GameObject(DrawContainer *drawContainer);
 	GameObject();
 	GameObject(GameObjectContainer *useContainer);
 	GameObject(GameObjectContainer *gameObjectContainer, MoveContainer *moveContainer, std::string textureUrl);
 	GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, std::string textureUrl);
 	GameObject(DrawContainer *drawContainer, GameObjectContainer *gameObjectContainer, MoveContainer *moveContainer, std::string textureUrl);
+	GameObject(DrawContainer *drawContainer);
 	~GameObject();
 
 	void SetAnimationStates(int states) { animationStates = states; };
@@ -63,13 +64,14 @@ public:
 
 	void setDrawContainer(DrawContainer* newDrawContainer) {this->drawContainer = newDrawContainer	;}
 	void setMoveContainer(MoveContainer* newMoveContainer) { this->moveContainer = newMoveContainer; }
+	void setVisibleId(int id) { this->visibleId = id; }
 
 	b2BodyDef getMyBodydef() { return myBodyDef; };
 	b2Body* getBody() { return Body; };
 	DrawContainer* getDrawContainer() { return this->drawContainer; }
 	MoveContainer* getMoveContainer() { return this->moveContainer; }
 	GameObjectContainer* getgameObjectContainer() { return this->gameObjectContainer; }
-
+	int getVisibleId() { return this->visibleId; }
 
 	DrawBehaviour* getDrawBehaviour() { return this->drawBehaviour; }
 	MoveBehaviour* getMoveBehaviour() { return this->moveBehaviour; }
@@ -105,6 +107,7 @@ public:
 
 	void createBoxStatic(b2World& World);
 	void createBoxDynamic(b2World & World);
+	void createBoxDynamicForPlayers(b2World & World);
 	void createBoxSenor(b2World & World);
 
 	virtual void startContact(b2Fixture* fixture);
@@ -113,6 +116,10 @@ public:
 	bool isFlaggedForDelete = false;
 
 	b2World* theWorld() { return this->world; }
+
+
+	void setSpeed(float speed) { this->speed = speed; }
+	float getspeed() { return speed; }
 protected:
 	b2BodyDef myBodyDef;
 	b2PolygonShape Shape;

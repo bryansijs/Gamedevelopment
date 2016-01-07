@@ -19,7 +19,7 @@ class AwesomiumHelper;
 class GameState: public BaseState
 {
 public:
-	GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager, ScoreManager* scoreManager);
+	GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager, ScoreManager* scoreManager, bool next = false);
 	~GameState();
 
 	void Update() override;

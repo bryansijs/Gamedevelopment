@@ -9,6 +9,7 @@
 #include "MoveAction.h"
 #include "ShootAction.h"
 #include "BaseInput.h"
+#include "GameContext.h"
 
 class Player;
 class MoveContainer;
@@ -27,9 +28,12 @@ public:
 	void SetContainers(DrawContainer *drawContainer, MoveContainer *moveContainer, GameObjectContainer *gameObjectContainer);
 	void SetWorld(b2World* world);
 
+	void SetContext(GameContext* context);
+
 	void Move();
 	void Shoot();
 	void Use();
+	void Equip();
 
 	bool used = false;
 	std::vector<void(PlayerActions::*)()> activeActions;
@@ -39,7 +43,8 @@ private:
 	std::map<std::string, void(PlayerActions::*)()> actions = {
 		{ "move", &PlayerActions::Move },
 		{ "shoot", &PlayerActions::Shoot },
-		{ "use", &PlayerActions::Use }
+		{ "use", &PlayerActions::Use },
+		{ "equip", &PlayerActions::Equip }
 	};
 
 	std::string direction = "move-down";
@@ -57,6 +62,7 @@ private:
 
 	Player *player;
 	b2World* world;
+	GameContext* context;
 
 	bool fired = false;
 	bool useAction = true;

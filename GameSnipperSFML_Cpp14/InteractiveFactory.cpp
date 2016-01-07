@@ -2,6 +2,7 @@
 #include "InteractiveFactory.h"
 #include "Game_Switch.h"
 #include "Door.h"
+#include "Discovery.h"
 
 InteractiveFactory::InteractiveFactory()
 {
@@ -35,6 +36,7 @@ GameObject* InteractiveFactory::CreateSwitch(std::map<std::string, std::string>&
 	else
 		return new Game_Switch(gameObjectContainer, properties, tileList, world);
 }
+
 GameObject* InteractiveFactory::CreateDoor(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer, b2World* world) {
 	std::string imgurl = properties["image"];
 
@@ -45,4 +47,9 @@ GameObject* InteractiveFactory::CreateDoor(std::map<std::string, std::string>& p
 }
 GameObject* InteractiveFactory::CreateKeyHole(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer, b2World* world) {
 	return nullptr;
+}
+
+GameObject * InteractiveFactory::CreateDiscoverObject(std::map<std::string, std::string>& properties, DrawContainer * container, GameObjectContainer * gameObjectContainer, b2World * world)
+{
+	return new Discovery(container, gameObjectContainer, properties, tileList, world);
 }

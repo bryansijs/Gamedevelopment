@@ -9,12 +9,14 @@
 #include "ItemFactory.h"
 #include "InteractiveFactory.h"
 #include "ProjectileFactory.h"
+#include "WeaponFactory.h"
 #include "Tile.h"
 
 class GameObject;
 class DrawContainer;
 class GameObjectContainer;
 class Tile;
+class Level;
 class GameObjectFactory
 {
 private:
@@ -28,6 +30,7 @@ private:
 		{ "GameTile", &GameObjectFactory::CreateTile },
 		{ "Item", &GameObjectFactory::CreateItem },
 		{ "Projectile", &GameObjectFactory::CreateProjectile },
+		{ "Weapon", &GameObjectFactory::CreateWeapon },
 	};
 
 	GameObject* CreateEnemy(std::map<std::string, std::string>& properties);
@@ -35,18 +38,22 @@ private:
 	GameObject* CreateTile(std::map<std::string, std::string>& properties);
 	GameObject* CreateItem(std::map<std::string, std::string>& properties);
 	GameObject* CreateProjectile(std::map<std::string, std::string>& properties);
+	GameObject* CreateWeapon(std::map<std::string, std::string>& properties);
 
 	GameTileFactory gametTileFactory;
 	EnemyFactory enemyFactory;
 	InteractiveFactory interactiveFactory;
 	ItemFactory itemFactory;
 	ProjectileFactory projectileFactory;
+	WeaponFactory weaponFactory;
+
 	std::vector<Tile*> tileList;
 	b2World* world;
+	Level* level;
 
 public:
 
-	GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer, b2World* world);
+	GameObjectFactory(DrawContainer *drawContainer, MoveContainer* moveContainer, GameObjectContainer* gameObjectContainer, b2World* world, Level* level);
 	GameObjectFactory();
 	~GameObjectFactory();
 

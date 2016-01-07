@@ -24,6 +24,7 @@ public:
 	int currentLevelPage;
 	bool inMenu = false;
 	bool inLevels = false;
+	bool inControls = false;
 	char const* pathToFile;
 
 	StateManager* stateManager;
