@@ -1108,7 +1108,8 @@
                     {
                      "Line1":"I'm locked here i must find a way out.",
                      "Line2":"I should be carefull....",
-                     "Lines":"2",
+                     "Line3":"Maybe I can hack that computer.....",
+                     "Lines":"3",
                      "sType":"StoryTile"
                     },
                  "rotation":0,
