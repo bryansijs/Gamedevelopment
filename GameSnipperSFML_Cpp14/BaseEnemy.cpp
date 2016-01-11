@@ -186,19 +186,15 @@ void BaseEnemy::Update()
 						return;
 					}
 				}
-				else
-				{
-					this->Attacking = false;
-				}
-
-				
 			}
 		}
 	}
 
-	//if (dynamic_cast<AttackBehaviour*>(this->getMoveBehaviour()))
 	if (Attacking)
-		//Action->Attack();
+	{
+		Action->Attack();
+		Attacking = false;
+	}
 
 	if (patternAmount == 0)return;
 

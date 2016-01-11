@@ -39,21 +39,43 @@ void FollowMoveBehaviour::setDirection()
 	x2 = dynamic_cast<BaseEnemy*>(gameObject)->getTarget()->getBody()->GetPosition().x;
 	y2 = dynamic_cast<BaseEnemy*>(gameObject)->getTarget()->getBody()->GetPosition().y;
 
-	if (x > x2 && y > y2)
+	if ((x - x2) > 5 && (y - y2) > 5 || (x - x2) > 5 && (y - y2) < -5 || (x - x2) < -5 && (y - y2) > 5 || (x - x2) < -5 && (y - y2) < -5)
 	{
-		mDircection = "move-upleft";
+		if ((x - x2) > 5 && (y - y2) > 5)
+		{
+			mDircection = "move-upleft";
+		}
+		else if ((x - x2) > 5 && (y - y2) < -5)
+		{
+			mDircection = "move-downleft";
+		}
+		else if ((x - x2) < -5 && (y - y2) > 5)
+		{
+			mDircection = "move-upright";
+		}
+		else if ((x - x2) < -5 && (y - y2) < -5)
+		{
+			mDircection = "move-downright";
+		}
 	}
-	else if (x > x2 && y < y2)
+	else
 	{
-		mDircection = "move-downleft";
-	}
-	else if (x < x2 && y > y2)
-	{
-		mDircection = "move-upright";
-	}
-	else if (x < x2 && y < y2)
-	{
-		mDircection = "move-downright";
+		if ((x - x2) >= 5)
+		{
+			mDircection = "move-left";
+		}
+		else if ((x - x2) <= -5)
+		{
+			mDircection = "move-right";
+		}
+		else if ((y - y2) >= 5)
+		{
+			mDircection = "move-up";
+		}
+		else if ((y - y2) <= -5)
+		{
+			mDircection = "move-down";
+		}
 	}
 
 	finalizeDirection();

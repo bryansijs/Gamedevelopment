@@ -20,10 +20,11 @@ void EnemyAttackActions::Attack()
 	if (Time::runningTime > obj->nextShot)
 	{
 		obj->nextShot = (float)Time::runningTime + (float)obj->shotRate;
+		std::string dir = obj->getMoveBehaviour()->getDirection().at(0);
 
-		if (obj->getMoveBehaviour()->getDirection().at(0) != "move-not");
+		if (dir != "move-not" && dir != "move-upright" && dir != "move-upleft" && dir != "move-downright" && dir != "move-downleft");
 		{
-			this->direction = obj->getMoveBehaviour()->getDirection().at(0);
+			this->direction = dir;
 		}
 
 		switch (this->obj->getAttacktType())
