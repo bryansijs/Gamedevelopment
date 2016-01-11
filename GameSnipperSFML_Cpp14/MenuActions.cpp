@@ -245,10 +245,10 @@ void MenuActions::ShowHighscore()
 	if(scoreManager->GetScores().size() < 1) return;
 	
 	scoreManager->Reload();
-	std::map<std::string, int>::iterator it;
-	std::map<std::string, int> map = scoreManager->GetScores();
-	for (it = map.begin(); it != map.end(); ++it) {
-		addHighScoreToMenu(menuContext->webView, menuContext->context->web_core, it->first.c_str(),it->second);
+	std::multimap<int, std::string>::reverse_iterator it;
+	std::multimap<int, std::string> map = scoreManager->GetScores();
+	for (it = map.rbegin(); it != map.rend(); ++it) {
+		addHighScoreToMenu(menuContext->webView, menuContext->context->web_core, it->second.c_str(),it->first);
 	}
 }
 
