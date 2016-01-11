@@ -522,6 +522,12 @@
     <ClInclude Include="EnemyAttackActions.h">
       <Filter>Header Files\Model\Units\Actions</Filter>
     </ClInclude>
+    <ClInclude Include="KeyMappingExporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowMoveBehaviour.h">
+      <Filter>Header Files\Behaviours\Move</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -811,6 +817,12 @@
     </ClCompile>
     <ClCompile Include="EnemyAttackActions.cpp">
       <Filter>Source Files\Model\Units\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyMappingExporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowMoveBehaviour.cpp">
+      <Filter>Source Files\Behaviours\Move</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
