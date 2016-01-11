@@ -16,13 +16,17 @@ private:
 	void ReloadPage();
 
 	StateManager* stateManager;
-
+	bool load = true;
 	Context* context;
 	WinContext* winContext;
 	LevelManager* levelManager;
 	sf::Image screenshot;
 	ScoreManager* scoreManager;
-	bool load = true;
+
+	void SetHighscore();
+	void addNameCharacter(const char* character);
+	void setScore(int score);
+
 public:
 	WinState(Context* context, StateManager* stateManager, LevelManager* levelManager, sf::Image screenshot, ScoreManager* scoreManager);
 	~WinState();

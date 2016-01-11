@@ -19,7 +19,11 @@ public:
 
 	Context* context;
 
+	int amountNameChars = 0;
+	std::string scoreName = "";
+
 	bool inMenu = false;
+	bool saved = false;
 	char const* pathToFile;
 
 	StateManager* stateManager;

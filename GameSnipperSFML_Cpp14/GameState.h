@@ -25,6 +25,7 @@ public:
 	void Update() override;
 	void Terminate() override;
 	void StartNextLevel();
+	void StartWinState();
 	bool showFPS = false;
 	bool isPause = false;
 private:
