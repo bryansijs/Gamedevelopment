@@ -55,6 +55,7 @@ public:
 	float nextShot;
 
 	Player* getTarget() { return target; }
+	void setTarget(Player* target) { this->target = target; }
 
 	int getAttacktType() { return attackType; }
 	void setAttackType(int attacktype) { this->attackType = attackType; }

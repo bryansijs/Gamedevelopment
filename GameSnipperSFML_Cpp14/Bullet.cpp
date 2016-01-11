@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Bullet.h"
 #include "Player.h"
+#include "BaseEnemy.h"
 #include "GameObjectContainer.h"
 #include "Tile.h"
 #include "DrawContainer.h"
@@ -8,11 +9,11 @@
 #include "NormalDrawBehaviour.h"
 #include "ShotMoveBehaviour.h"
 #include "FilterEnum.h"
+#include "FollowMoveBehaviour.h"
 
 Bullet::Bullet(GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, b2World* world, MoveContainer* moveContainer, DrawContainer* drawContainer, std::string texture) : GameObject{ drawContainer, gameObjectContainer, texture }
 {
 	this->setProperties(properties);
-
 	this->setMoveContainer(moveContainer);
 	ShotMoveBehaviour* moveBehaviour = new ShotMoveBehaviour(this, properties["direction"]);
 	this->SetMoveBehaviour(moveBehaviour);
@@ -65,8 +66,18 @@ void Bullet::startContact(b2Fixture * fixture)
 
 		if (collide)
 		{
-			Unit* enemy = dynamic_cast<Unit*> (pal);
-			enemy->Damage(this->damage);
+			Unit* unit = dynamic_cast<Unit*> (pal);
+			unit->Damage(this->damage);
+
+			if (dynamic_cast<BaseEnemy*> (pal))
+			{
+				BaseEnemy* enemy = dynamic_cast<BaseEnemy*> (pal);
+				enemy->setTarget(this->context->player);
+				enemy->getMoveContainer()->RemoveBehaviour(enemy->getMoveBehaviour());
+				enemy->SetMoveBehaviour({ new FollowMoveBehaviour(enemy) });
+				enemy->getMoveContainer()->AddBehaviour(enemy->getMoveBehaviour());
+			}
+			
 		}
 	}
 
