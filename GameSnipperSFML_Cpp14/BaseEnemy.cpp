@@ -178,25 +178,27 @@ void BaseEnemy::Update()
 					{
 						this->target = dynamic_cast<Player*>(obj);
 					}
+					if (!dynamic_cast<FollowMoveBehaviour*>(this->getMoveBehaviour()))
+					{
+						this->getMoveContainer()->RemoveBehaviour(this->getMoveBehaviour());
+						this->SetMoveBehaviour({ new FollowMoveBehaviour(this) });
+						this->getMoveContainer()->AddBehaviour(this->getMoveBehaviour());
+						return;
+					}
 				}
 				else
 				{
 					this->Attacking = false;
 				}
 
-				if (!dynamic_cast<FollowMoveBehaviour*>(this->getMoveBehaviour()))
-				{
-					this->getMoveContainer()->RemoveBehaviour(this->getMoveBehaviour());
-					this->SetMoveBehaviour({ new FollowMoveBehaviour(this) });
-					this->getMoveContainer()->AddBehaviour(this->getMoveBehaviour());
-				}
+				
 			}
 		}
 	}
 
 	//if (dynamic_cast<AttackBehaviour*>(this->getMoveBehaviour()))
 	if (Attacking)
-		Action->Attack();
+		//Action->Attack();
 
 	if (patternAmount == 0)return;
 

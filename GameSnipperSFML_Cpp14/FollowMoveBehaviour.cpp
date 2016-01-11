@@ -23,28 +23,38 @@ void FollowMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 	{
 		this->setDirection();
 	}
+
+	moveAction->Move(this->getDirection());
 }
 
 void FollowMoveBehaviour::setDirection()
 {
-	//float x = 0, y = 0, x2 = 0, y2 = 0;
+	float x = 0, y = 0, x2 = 0, y2 = 0;
 
-	////enemy position
-	//x = gameObject->getBody()->GetPosition().x;
-	//y = gameObject->getBody()->GetPosition().y;
+	//enemy position
+	x = gameObject->getBody()->GetPosition().x;
+	y = gameObject->getBody()->GetPosition().y;
 
-	////target "player" position
-	//x2 = dynamic_cast<BaseEnemy*>(gameObject)->getTarget()->getBody()->GetPosition().x;
-	//y2 = dynamic_cast<BaseEnemy*>(gameObject)->getTarget()->getBody()->GetPosition().y;
+	//target "player" position
+	x2 = dynamic_cast<BaseEnemy*>(gameObject)->getTarget()->getBody()->GetPosition().x;
+	y2 = dynamic_cast<BaseEnemy*>(gameObject)->getTarget()->getBody()->GetPosition().y;
 
-	/*if (x > x2 && y > y2)
+	if (x > x2 && y > y2)
 	{
-		mDircection = "move-down";
+		mDircection = "move-upleft";
 	}
-	else
+	else if (x > x2 && y < y2)
 	{
-		this->mDircection = "move-left";
-	}*/
+		mDircection = "move-downleft";
+	}
+	else if (x < x2 && y > y2)
+	{
+		mDircection = "move-upright";
+	}
+	else if (x < x2 && y < y2)
+	{
+		mDircection = "move-downright";
+	}
 
 	finalizeDirection();
 }
