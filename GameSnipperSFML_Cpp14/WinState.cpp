@@ -84,17 +84,20 @@ void WinState::Update()
 
 		if (winContext->event.type == sf::Event::TextEntered)
 		{
-			if (winContext->event.text.unicode < 128 && winContext->amountNameChars < 3) {
-				char i = static_cast<char>(winContext->event.text.unicode);
-				addNameCharacter(new char(i));
-				winContext->scoreName += i;
-				winContext->amountNameChars++;
-			}
-			if(winContext->amountNameChars > 2)
+			if (winContext->event.text.unicode <= 122 && winContext->event.text.unicode >= 97)
 			{
-				scoreManager->AddScore(500,winContext->scoreName);
-				scoreManager->Save();
-				ToMenu();
+				if (winContext->amountNameChars < 3) {
+					char i = static_cast<char>(winContext->event.text.unicode);
+					addNameCharacter(new char(i));
+					winContext->scoreName += i;
+					winContext->amountNameChars++;
+				}
+				if (winContext->amountNameChars > 2)
+				{
+					scoreManager->AddScore(500, winContext->scoreName);
+					scoreManager->Save();
+					ToMenu();
+				}
 			}
 		}
 	}
