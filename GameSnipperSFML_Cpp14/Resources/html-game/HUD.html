@@ -198,6 +198,13 @@
         var items = itemArray.split(',');
         var htmlObjects = [];
 
+        document.getElementById("item_key").style.width = "0";
+        document.getElementById("number_key").innerHTML = "";
+        document.getElementById("item_item2").style.width = "0";
+        document.getElementById("number_item2").innerHTML = "";
+        document.getElementById("item_item3").style.width = "0";
+        document.getElementById("number_item3").innerHTML = "";
+
         if(itemArray !== "") {
             title.innerHTML = "Items:";
             title.style.paddingRight = "5px";
