@@ -12,6 +12,7 @@
 #include "AttackBehaviour.h"
 #include "MoveContainer.h"
 #include "EnemyAttackActions.h"
+#include "FollowMoveBehaviour.h"
 BaseEnemy::BaseEnemy()
 {
 }
@@ -173,14 +174,22 @@ void BaseEnemy::Update()
 				{
 					this->lineOfSightConvex->setFillColor(sf::Color(250, 0, 0, 128));
 					this->Attacking = true;
+					if (this->target == nullptr)
+					{
+						this->target = dynamic_cast<Player*>(obj);
+					}
+				}
+				else
+				{
+					this->Attacking = false;
 				}
 
-				/*	if (!dynamic_cast<AttackBehaviour*>(this->getMoveBehaviour()))
-					{
-						this->getMoveContainer()->RemoveBehaviour(this->getMoveBehaviour());
-						this->SetMoveBehaviour({ new AttackBehaviour(this) });
-						this->getMoveContainer()->AddBehaviour(this->getMoveBehaviour());
-					}*/
+				if (!dynamic_cast<FollowMoveBehaviour*>(this->getMoveBehaviour()))
+				{
+					this->getMoveContainer()->RemoveBehaviour(this->getMoveBehaviour());
+					this->SetMoveBehaviour({ new FollowMoveBehaviour(this) });
+					this->getMoveContainer()->AddBehaviour(this->getMoveBehaviour());
+				}
 			}
 		}
 	}

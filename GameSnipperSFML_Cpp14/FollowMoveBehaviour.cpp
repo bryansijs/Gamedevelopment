@@ -27,7 +27,24 @@ void FollowMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 
 void FollowMoveBehaviour::setDirection()
 {
-	//get player direction and set to that direction.
+	//float x = 0, y = 0, x2 = 0, y2 = 0;
+
+	////enemy position
+	//x = gameObject->getBody()->GetPosition().x;
+	//y = gameObject->getBody()->GetPosition().y;
+
+	////target "player" position
+	//x2 = dynamic_cast<BaseEnemy*>(gameObject)->getTarget()->getBody()->GetPosition().x;
+	//y2 = dynamic_cast<BaseEnemy*>(gameObject)->getTarget()->getBody()->GetPosition().y;
+
+	/*if (x > x2 && y > y2)
+	{
+		mDircection = "move-down";
+	}
+	else
+	{
+		this->mDircection = "move-left";
+	}*/
 
 	finalizeDirection();
 }

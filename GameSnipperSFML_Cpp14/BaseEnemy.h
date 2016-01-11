@@ -1,5 +1,6 @@
 #pragma once
 #include "Unit.h"
+#include "Player.h"
 class EnemyAttackActions;
 class BaseEnemy : public Unit
 {
@@ -11,6 +12,7 @@ private:
 	sf::RectangleShape* hpBar;
 	b2PolygonShape  lineOfSightShape;
 	b2FixtureDef* lineOfSightFixtureDef;
+	Player* target;
 	bool Attacking = false;
 	int seeWidth,seeLength;
 	int attackType = 0;
@@ -51,6 +53,8 @@ public:
 	sf::RectangleShape& getHpBar() { return *hpBar; }
 	float shotRate = 0.5f;
 	float nextShot;
+
+	Player* getTarget() { return target; }
 
 	int getAttacktType() { return attackType; }
 	void setAttackType(int attacktype) { this->attackType = attackType; }
