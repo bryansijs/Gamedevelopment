@@ -1,0 +1,302 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- ReSharper disable once UnknownCssVendorExtension -->
+    <style>
+
+        @font-face {
+        font-family: robotechgp;
+        src: local("robotechgp"),
+        local("robotechgp"),
+        url(font/robotechgp.ttf);
+        font-weight: normal;
+    }
+
+        body {
+            background:#000000;
+            background:rgba(0,0,0,0);
+            height:100%;
+            width: 100%;
+            margin:0;
+            position: relative;
+        }
+
+        .hud {
+            background:#000;
+            background:rgba(0,0,0,0.7);
+            height:36px;
+            border:solid 1px #fff;
+            margin:8px 0 0 8px;
+            float:left;
+            padding:0 8px 0 0;
+            -ms-border-radius:1px;
+            border-radius:1px;
+        }
+
+        .title {
+            float:left;
+            color:#fff;
+            text-transform: uppercase;
+            font:bold 18px/36px robotechgp, Arial, Helvetica, sans-serif;
+            letter-spacing: 1px;
+            padding:0 5px 0 8px;
+        }
+        .content {
+            float:left;
+            overflow: hidden;
+        }
+
+        #bar_bottom {
+            position:absolute;
+            top:596px;
+            text-align: center;
+            left:8px;
+            height: 36px;
+        }
+        #weapons {
+            margin:0;
+            float:none;
+            display:inline-block;
+            display: block;
+        }
+
+        #healthBlock {
+            height:14px;
+            margin:11px 0 0;
+            overflow:hidden;
+            width:105px;
+            border-radius:1px;
+            position: relative;
+            background: url('images/healthbar_bg.png');
+        }
+
+        #healthValue {
+            position: absolute;
+            right:5px;
+            color:#000;
+            display:block;
+            top:0;
+            font:bold 10px/14px Arial, Helvetica, sans-serif;
+            z-index: 999;
+        }
+        #healthBar {
+            width:105px;
+            background: #51d52d url('images/healthbar.png');
+            height:14px;
+        }
+
+        #items .item {
+            width: 0; /* 26px */
+            text-align:center;
+            height:27px; /* 19 + 5 */
+            float:left;
+            margin:8px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #items .number {
+            position: absolute;
+            color:#fff;
+            font:bold 10px/14px Arial, Helvetica, sans-serif;
+            bottom:1px;
+            right:4px;
+        }
+
+        #items .title {
+            padding-right:0;
+        }
+
+        #item_key {
+            background: url('images/key.png') no-repeat center top;
+        }
+
+        #item_item2 {
+            background: url('images/item2.png') no-repeat center top;
+        }
+
+        #item_item3 {
+            background: url('images/item3.png') no-repeat center top;
+        }
+
+        .gun {
+            height: 18px;
+            width: 0;
+            background: url('images/gun.png') no-repeat 8px top;
+            float: left;
+            margin: 8px 0 0 0;
+            padding: 0;
+        }
+
+        #gun_pistol_active {
+            background: url('images/gun_active.png') no-repeat 8px top;
+            width: 28px;
+            padding: 0 0 0 8px;
+        }
+
+        #gun_rifle {
+            background: url('images/rifle.png') no-repeat 8px top;
+            width: 34px;
+            padding: 0 0 0 8px;
+        }
+
+        #gun_rifle_active {
+            background: url('images/rifle_active.png') no-repeat 8px top;
+            width: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="hud" id="health">
+        <div class="title">Health:</div>
+        <div class="content">
+            <div id="healthBlock">
+                <div id="healthValue">100</div>
+                <div id="healthBar"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hud" id="items">
+        <div class="title" id="itemsTitle">No Items</div>
+        <div class="content" id="itemsContent">
+            <div class="item" id="item_key">
+                <div class="number" id="number_key"></div>
+            </div>
+            <div class="item" id="item_item2">
+                <div class="number" id="number_item2"></div>
+            </div>
+            <div class="item" id="item_item3">
+                <div class="number" id="number_item3"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="bar_bottom">
+
+        <div class="hud" id="weapons">
+            <div class="content">
+                <div class="gun" id="gun_pistol"></div>
+                <div class="gun" id="gun_pistol_active"></div>
+                <div class="gun" id="gun_rifle"></div>
+                <div class="gun" id="gun_rifle_active"></div>
+            </div>
+        </div>
+
+    </div>
+
+<script>
+
+    // string input example: 0,0,1,2,1,0
+    // key = 0
+    // item2 = 1
+    // item3 = 2
+    function setItems(itemArray) {
+
+        var title = document.getElementById("itemsTitle");
+        var items = itemArray.split(',');
+        var htmlObjects = [];
+
+        document.getElementById("item_key").style.width = "0";
+        document.getElementById("number_key").innerHTML = "";
+        document.getElementById("item_item2").style.width = "0";
+        document.getElementById("number_item2").innerHTML = "";
+        document.getElementById("item_item3").style.width = "0";
+        document.getElementById("number_item3").innerHTML = "";
+
+        if(itemArray !== "") {
+            title.innerHTML = "Items:";
+            title.style.paddingRight = "5px";
+
+            for (var i = 0; i < items.length; i++) {
+                var index = parseInt(items[i]);
+
+                if (htmlObjects[index] != null)
+                    htmlObjects[index] = htmlObjects[index] + 1;
+                else
+                    htmlObjects[index] = 1;
+            }
+
+            for (var key in htmlObjects) {
+
+                var displayNumber = "";
+                if (htmlObjects[key] > 1) {
+                    displayNumber = htmlObjects[key] + "";
+                }
+
+                if (parseInt(key) === 0) {
+                     document.getElementById("item_key").style.width = "26px";
+                     document.getElementById("number_key").innerHTML = displayNumber;
+                }
+                if (parseInt(key) === 1) {
+                    document.getElementById("item_item2").style.width = "26px";
+                    document.getElementById("number_item2").innerHTML = displayNumber;
+                }
+                if (parseInt(key) === 2) {
+                    document.getElementById("item_item3").style.width = "26px";
+                    document.getElementById("number_item3").innerHTML = displayNumber;
+                }
+
+            }
+
+        }
+        else {
+            title.innerHTML = "No items";
+            title.style.paddingRight = "0px";
+        }
+       
+    }
+
+    function setHealth(value)
+    {
+        var number = document.getElementById("healthValue");
+        var bar = document.getElementById("healthBar");
+
+        if(value < 0)
+            value = 0;
+
+        number.innerHTML = value;
+
+        if(value > 100)
+            value = 100;
+
+        bar.style.width = 5 + value + "px";
+
+        if(value < 35)
+            bar.style.backgroundColor = "#de3d10";
+        else if(value < 65)
+            bar.style.backgroundColor = "#e5880e";
+        else
+            bar.style.backgroundColor = "#51d52d";
+    }
+
+    function setWeapon(value) {
+
+        if (value === 0) {
+            document.getElementById("gun_pistol").style.width = 0;
+            document.getElementById("gun_pistol_active").style.width = "28px";
+            document.getElementById("gun_rifle").style.width = "34px";
+            document.getElementById("gun_rifle_active").style.width = 0;
+
+            document.getElementById("gun_pistol").style.padding = 0;
+            document.getElementById("gun_pistol_active").style.padding = "0 0 0 8px";
+            document.getElementById("gun_rifle").style.padding = "0 0 0 8px";
+            document.getElementById("gun_rifle_active").style.padding = 0;
+        }
+        if (value === 1) {
+            document.getElementById("gun_pistol").style.width = "28px";
+            document.getElementById("gun_pistol_active").style.width = 0;
+            document.getElementById("gun_rifle").style.width = 0;
+            document.getElementById("gun_rifle_active").style.width = "34px";
+
+            document.getElementById("gun_pistol").style.padding = "0 0 0 8px";
+            document.getElementById("gun_pistol_active").style.padding = 0;
+            document.getElementById("gun_rifle").style.padding = 0;
+            document.getElementById("gun_rifle_active").style.padding = "0 0 0 8px";
+        }
+    }
+
+</script>
+</body>
+</html>

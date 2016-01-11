@@ -13,8 +13,10 @@ public:
 	AwesomiumHelper(WebCore* webcore, std::string path, int width, int height);
 	~AwesomiumHelper();
 	sf::Sprite GetSprite();
-	void JavaScriptCall(std::string functionName, int parameter);
-	void JavaScriptCall(std::string functionName, std::string parameter);
+	void JavaScriptCall(std::string functionName, int parameter, bool updateWebcore = true);
+	void JavaScriptCall(std::string functionName, std::string parameter, bool updateWebcore = true);
+	
+	void UpdateWebcore();
 private:
 	int width;
 	int height;

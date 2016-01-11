@@ -17,6 +17,7 @@
 #include <Awesomium/WebCore.h>
 #include <Awesomium/BitmapSurface.h>
 #include <Awesomium/STLHelpers.h>
+#include "HUD.h"
 #include "tinydir.h"
 #include "Random.h"
 #include <vector>
@@ -29,8 +30,12 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	maincontext = context;
 	
 	gameContext = new GameContext(context);
+
+	hud = new HUD{ gameContext };
+
 	gameActions = new GameActions(this, gameContext);
-	storyline = new AwesomiumHelper{ context->web_core, "file:///Resources/html-game/StoryLine.html", 1000, 50 };
+
+	storyline = new AwesomiumHelper{ context->web_core, "file:///Resources/html-game/StoryLine.html", 960, 36 };
 	storylineManager = new StorylineManager();
 
 	// Awesomium init
@@ -288,6 +293,7 @@ void GameState::Update()
 			storyline->JavaScriptCall("TextUpdate", StorylineManager::GetText());
 		}
 
+		hud->Update();
 	}
 	gameContext->drawContainer->Draw(&gameContext->context->window, gameContext->level->GetViewPortPosition());
 	gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
@@ -301,12 +307,16 @@ void GameState::Update()
 	{
 		gameContext->pauze->draw(gameContext->context->window);
 	}
-
+	
+	// draw storyline
 	sf::Sprite storylineSprite = storyline->GetSprite();
 	storylineSprite.setPosition(0, 540);
 	gameContext->context->window.setView(storyview);
 	gameContext->context->window.draw(storylineSprite);
 
+	// draw hud
+	gameContext->context->window.setView(hud->view);
+	gameContext->context->window.draw(hud->awesomium->GetSprite());
 
 	if (!terminate) {
 		gameContext->context->window.setView(gameContext->view);

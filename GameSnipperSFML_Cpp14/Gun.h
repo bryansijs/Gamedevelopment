@@ -1,7 +1,6 @@
 #pragma once
 
 #include "BaseItem.h"
-#include <iostream>
 
 class Gun : public BaseItem
 {
@@ -16,9 +15,12 @@ public:
 
 	float GetFireRate();
 	void SetFireRate(float fireRate);
+
+	std::string GetName() { return name; };
 private:
 	std::string projectileType;
 protected:
+	std::string name;
 	int damage = 20;
 	float fireRate = 0.5f;
 };

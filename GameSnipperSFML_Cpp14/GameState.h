@@ -3,6 +3,7 @@
 #include "LevelManager.h"
 #include "PlayerActions.h"
 #include "StorylineManager.h"
+#include "HUD.h"
 
 class ScoreManager;
 class StateManager;
@@ -38,6 +39,8 @@ private:
 
 	PlayerActions* playerActions;
 	GameActions* gameActions;
+
+	HUD* hud;
 
 	sf::View storyview;
 	sf::View loadingView;
