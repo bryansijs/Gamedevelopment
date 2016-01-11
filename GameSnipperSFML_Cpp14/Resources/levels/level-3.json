@@ -18,7 +18,6 @@
          "opacity":1,
          "properties":
             {
-             "LayerId":"5",
              "music":"level1.ogg"
             },
          "type":"tilelayer",
@@ -161,6 +160,7 @@
                  "name":"switch",
                  "properties":
                     {
+                     "VisibleId":"4",
                      "doorId":"1",
                      "iType":"Switch",
                      "image":"switches.png",
@@ -183,6 +183,7 @@
                  "name":"door",
                  "properties":
                     {
+                     "VisibleId":"4",
                      "closedIndex":"0",
                      "doorId":"1",
                      "iType":"Door",
@@ -267,7 +268,7 @@
                  "name":"Enemy",
                  "properties":
                     {
-                     "eType":"Runner",
+                     "eType":"Basic",
                      "image":"enemy2.png",
                      "isCollidable":"1"
                     },
@@ -284,8 +285,8 @@
                  "name":"Enemy",
                  "properties":
                     {
-                     "eType":"Tank",
-                     "image":"enemy3.png",
+                     "eType":"Basic",
+                     "image":"enemy1.png",
                      "isCollidable":"1"
                     },
                  "rotation":0,
@@ -420,6 +421,22 @@
                  "width":71,
                  "x":93,
                  "y":0
+                }, 
+                {
+                 "height":57,
+                 "id":37,
+                 "name":"SwitchDiscovery",
+                 "properties":
+                    {
+                     "VisibleId":"4",
+                     "iType":"DiscoverObject"
+                    },
+                 "rotation":0,
+                 "type":"Object",
+                 "visible":true,
+                 "width":31,
+                 "x":544,
+                 "y":1827
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -589,7 +606,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":37,
+ "nextobjectid":39,
  "orientation":"orthogonal",
  "properties":
     {

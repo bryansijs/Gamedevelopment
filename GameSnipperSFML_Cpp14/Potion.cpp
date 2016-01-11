@@ -20,6 +20,7 @@ void Potion::setProperties(std::map<std::string, std::string>& properties) {
 	this->setItemType(properties["iType"]);
 	this->setItemId((properties.count("itemId")) ? std::stoi(properties["itemId"]) : 0);
 	this->isCollidable = (properties.count("isCollidable")) ? std::stoi(properties["isCollidable"]) : 0;
+	this->setVisibleId((properties.count("VisibleId")) ? std::stoi(properties["VisibleId"]) : 0);
 
 	int x, y, widht, height;
 	x = std::stoi(properties["x"]);
@@ -41,8 +42,10 @@ Potion::Potion(DrawContainer* container, std::string img, GameObjectContainer* g
 
 void Potion::doAction(Player* player)
 {
-	player->AddItem(this);
-	getDrawContainer()->RemoveBehaviour(this->getDrawBehaviour());
-	getgameObjectContainer()->RemoveObject(this);
-	this->~Potion();
+	if (this->getDrawContainer()->checkIfidIsDiscoverd(this->getVisibleId())) {
+		player->AddItem(this);
+		getDrawContainer()->RemoveBehaviour(this->getDrawBehaviour());
+		getgameObjectContainer()->RemoveObject(this);
+		this->~Potion();
+	}
 }

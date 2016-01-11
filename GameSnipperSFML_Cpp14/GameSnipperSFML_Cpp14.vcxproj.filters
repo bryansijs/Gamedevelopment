@@ -208,6 +208,9 @@
     <Filter Include="Header Files\Model\Guns">
       <UniqueIdentifier>{2792518e-5b04-40bc-a1c6-b385dbcae222}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Images">
+      <UniqueIdentifier>{fe55bb68-1250-4c4b-a13c-2203c6dbf4b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -486,9 +489,6 @@
     <ClInclude Include="WinContext.h">
       <Filter>Header Files\Context</Filter>
     </ClInclude>
-    <ClInclude Include="StoryTile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="tinydir.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -507,8 +507,32 @@
     <ClInclude Include="DiscoverTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HUD.h">
+    <ClInclude Include="Discovery.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FilterEnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyDrawBehaviour.h">
+      <Filter>Header Files\Behaviours\Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyAttackActions.h">
+      <Filter>Header Files\Model\Units\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyMappingExporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="DiscoverTile.h">
+      <Filter>Header Files\Model\GameTiles</Filter>
+    </ClInclude>
+    <ClInclude Include="StoryTile.h">
+      <Filter>Header Files\Model\GameTiles</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackBehaviour.h">
+      <Filter>Header Files\Behaviours</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -764,9 +788,6 @@
     <ClCompile Include="LoseState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
-    <ClCompile Include="StoryTile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ItemFactory.cpp">
       <Filter>Source Files\Factories</Filter>
     </ClCompile>
@@ -785,8 +806,32 @@
     <ClCompile Include="DiscoverTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HUD.cpp">
+    <ClCompile Include="Discovery.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FilterEnum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyDrawBehaviour.cpp">
+      <Filter>Source Files\Behaviours\Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyAttackActions.cpp">
+      <Filter>Source Files\Model\Units\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyMappingExporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackBehaviour.cpp">
+      <Filter>Source Files\Behaviours</Filter>
+    </ClCompile>
+    <ClCompile Include="StoryTile.cpp">
+      <Filter>Source Files\Model\GameTiles</Filter>
+    </ClCompile>
+    <ClCompile Include="DiscoverTile.cpp">
+      <Filter>Source Files\Model\GameTiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -823,8 +868,10 @@
     <None Include="Resources\menuHTML\win.html">
       <Filter>Resource Files\Html</Filter>
     </None>
-    <None Include="Resources\html-game\HUD.html" />
     <None Include="ClassDiagram.cd" />
+    <None Include="Resources\html-game\HUD.html">
+      <Filter>Resource Files\Html</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameSnipperSFML_Cpp14.rc">
@@ -833,49 +880,51 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\menuHtml\images\bg.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Images</Filter>
     </Image>
     <Image Include="Resources\menuHtml\images\border.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Images</Filter>
     </Image>
     <Image Include="Resources\menuHtml\images\cat.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\menuHtml\images\menuBorder.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\html-game\images\healthbar.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\html-game\images\healthbar_bg.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\html-game\images\item2.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\html-game\images\item3.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\html-game\images\key.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Images</Filter>
     </Image>
     <Image Include="Resources\html-game\images\gun.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Images</Filter>
     </Image>
     <Image Include="Resources\html-game\images\gun_active.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Resources\html-game\images\healthbar.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Resources\html-game\images\healthbar_bg.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Resources\html-game\images\item2.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Resources\html-game\images\item3.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Resources\html-game\images\key.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="Resources\menuHtml\images\menuBorder.png">
+      <Filter>Resource Files\Images</Filter>
     </Image>
     <Image Include="Resources\html-game\images\rifle.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Images</Filter>
     </Image>
     <Image Include="Resources\html-game\images\rifle_active.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Images</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\menuHtml\font\moonhouse.ttf">
       <Filter>Resource Files\Fonts</Filter>
     </Font>
-    <Font Include="Resources\html-game\font\robotechgp.ttf" />
+    <Font Include="Resources\html-game\font\robotechgp.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
   </ItemGroup>
 </Project>

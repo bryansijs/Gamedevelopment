@@ -18,9 +18,11 @@ private:
 	GameObject* CreateSwitch(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer, b2World* world);
 	GameObject* CreateDoor(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer, b2World* world);
 	GameObject* CreateKeyHole(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer, b2World* world);
+	GameObject* CreateDiscoverObject(std::map<std::string, std::string>& properties, DrawContainer* container, GameObjectContainer* gameObjectContainer, b2World* world);
 	std::map<std::string, GameObject*(InteractiveFactory::*)(std::map<std::string, std::string>&, DrawContainer* , GameObjectContainer* , b2World* )> possibleObjects = {
 		{ "Switch", &InteractiveFactory::CreateSwitch },
 		{ "Door", &InteractiveFactory::CreateDoor },
 		{ "KeyHole", &InteractiveFactory::CreateKeyHole },
+		{ "DiscoverObject", &InteractiveFactory::CreateDiscoverObject },
 	};
 };

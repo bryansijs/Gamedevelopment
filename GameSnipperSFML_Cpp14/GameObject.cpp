@@ -7,16 +7,23 @@
 
 #include "NormalDrawBehaviour.h"
 #include "WanderMoveBehaviour.h"
+
+#include "NormalMoveBehaviour.h"
+
 #include "MoveBehaviour.h"
 #include <Box2D\Box2D.h>
 
 #include "Tile.h"
 #include "EndTile.h"
+#include "FilterEnum.h"
 
 void GameObject::Destroy()
 {
-	this->moveContainer->RemoveBehaviour(moveBehaviour);
+
 	this->drawContainer->RemoveBehaviour(drawBehaviour);
+
+	this->moveContainer->RemoveBehaviour(moveBehaviour);
+
 	this->gameObjectContainer->RemoveObject(this);
 
 	isFlaggedForDelete = true;
@@ -27,10 +34,6 @@ GameObject::GameObject(DrawContainer *drawContainer, std::string textureUrl)
 	this->drawContainer = drawContainer;
 	this->drawBehaviour = { new NormalDrawBehaviour(this, 10, "./Resources/sprites/" + textureUrl) };
 	this->drawContainer->AddBehaviour(this->drawBehaviour);
-}
-
-GameObject::GameObject(DrawContainer *drawContainer)
-{
 }
 
 GameObject::GameObject(GameObjectContainer *gameObjectContainer)
@@ -73,6 +76,11 @@ GameObject::GameObject(DrawContainer *drawContainer, GameObjectContainer *gameOb
 
 	this->gameObjectContainer = gameObjectContainer;
 	this->gameObjectContainer->AddObject(this);
+}
+
+GameObject::GameObject(DrawContainer *drawContainer)
+{
+	this->drawContainer = drawContainer;
 }
 
 GameObject::GameObject()
@@ -136,6 +144,7 @@ void GameObject::createBoxStatic(b2World& World)
 	boxFixtureDef.density = 100.f;
 	boxFixtureDef.friction = 0.0f;
 	boxFixtureDef.shape = &Shape;
+	boxFixtureDef.filter.categoryBits = _entityCategory::OBJECT;
 	Body->CreateFixture(&boxFixtureDef);
 	Body->SetUserData(this);
 }
@@ -190,6 +199,7 @@ void GameObject::createBoxDynamicForPlayers(b2World & World)
 	boxFixtureDef.density = 100.f;
 	boxFixtureDef.friction = 0.7f;
 	boxFixtureDef.shape = &Shape;
+	boxFixtureDef.filter.categoryBits = _entityCategory::OBJECT;
 	Body->CreateFixture(&boxFixtureDef);
 	Body->SetUserData(this);
 	this->world = &World;
@@ -219,6 +229,7 @@ void GameObject::createBoxSenor(b2World & World)
 	boxFixtureDef.shape = &Shape;
 	boxFixtureDef.isSensor = true;
 	Body->CreateFixture(&boxFixtureDef);
+	boxFixtureDef.filter.categoryBits = _entityCategory::OBJECT;
 	Body->SetUserData(this);
 }
 

@@ -5,7 +5,7 @@
 class Level;
 class LevelManager
 {
-	int currentLevelNumber = -1;
+	int currentLevelNumber = 0;
 	std::map<int,std::string> allLevels;
 	void LoadAllLevels();
 public:

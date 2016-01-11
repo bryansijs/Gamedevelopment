@@ -111,11 +111,7 @@ void Level::MoveView(sf::View& view, sf::Window& window)
 void Level::update()
 {
 
-	for (size_t i = 0; i < getGame_Objects().size(); i++)
-	{
-		if(getObject(i) != nullptr)
-		getObject(i)->Update();
-	}
+	
 }
 
 void Level::draw(sf::RenderWindow* window, sf::View* view)
@@ -151,7 +147,9 @@ void Level::drawRoof(sf::RenderWindow* window, sf::View* view) {
 				}
 			}
 			if (go) {
-				window->draw(roofTiles.at(i)->sprite);
+				if (std::find(DiscoverdLayers.begin(), DiscoverdLayers.end(), roofTiles.at(i)->LayerId) != DiscoverdLayers.end()) {
+					window->draw(roofTiles.at(i)->sprite);
+				}
 			}
 		}
 

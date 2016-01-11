@@ -22,6 +22,11 @@ void Gun::SetProjectileType(std::string projectileType)
 	this->projectileType = projectileType;
 }
 
+int Gun::GetDamage()
+{
+	return this->damage;
+}
+
 float Gun::GetFireRate()
 {
 	return this->fireRate;
