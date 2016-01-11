@@ -58,7 +58,10 @@ bool HUD::SetItems(int keyAmount, std::map<BaseItem*, int> potions)
 	for (auto &potion : potions)
 	{
 		std::string test = potion.first->getItemType();
-		temp = temp + ",1";
+		for (int i = 0; i < potion.second; i++)
+		{
+			temp = temp + ",1";
+		}
 	}
 	temp.erase(0,1);
 
