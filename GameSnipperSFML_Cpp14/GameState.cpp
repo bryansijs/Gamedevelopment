@@ -327,6 +327,20 @@ void GameState::Update()
 	if (terminate)
 	{
 		delete gameContext;
+		delete playerActions;
+		delete gameActions;
+		delete hud;
+		delete storyline;
+		delete loadingScreen;
+		delete storylineManager;
+
+		gameContext = nullptr;
+		playerActions = nullptr;
+		gameActions = nullptr;
+		hud = nullptr;
+		storyline = nullptr;
+		loadingScreen = nullptr;
+		storylineManager = nullptr;
 	}
 }
 

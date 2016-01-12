@@ -368,8 +368,12 @@ LevelImporter::LevelImporter(DrawContainer *drawContainer, MoveContainer *moveCo
 	level = new Level();
 }
 
-
 LevelImporter::~LevelImporter()
 {
+	delete objectFactory;
+	delete world;
+
+	objectFactory = nullptr;
+	world = nullptr;
 }
 #undef JSON_DLL

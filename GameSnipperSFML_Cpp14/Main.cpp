@@ -7,6 +7,7 @@
 #include "MenuState.h"
 #include "StateManager.h"
 #include "ScoreManager.h"
+#include "vld.h"
 
 bool quitGame = false;
 

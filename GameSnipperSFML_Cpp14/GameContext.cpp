@@ -39,5 +39,22 @@ GameContext::~GameContext()
 	delete player;
 	delete levelImporter;
 	delete level;
+	delete fpsShow;
+	delete collisionListener;
+
+	delete moveContainer;
+	delete drawContainer;
+	delete useContainer;
+
+	pauze = nullptr;
+	player = nullptr;
+	levelImporter = nullptr;
+	level = nullptr;
+	fpsShow = nullptr;
+	collisionListener = nullptr;
+
+	moveContainer = nullptr;
+	drawContainer = nullptr;
+	useContainer = nullptr;
 }
 
