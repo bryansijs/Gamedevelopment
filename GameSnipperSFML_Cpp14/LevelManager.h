@@ -10,6 +10,7 @@ class LevelManager
 	void LoadAllLevels();
 public:
 	void swapSequence(int first, int second);
+	bool isLastLevel();
 	std::vector<std::string> getAllLevels();
 	int getCurrentLevelIndex() { return currentLevelNumber; };
 	std::string getCurrentLevel();
