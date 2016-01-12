@@ -21,6 +21,9 @@ private:
 	int bulletDamage = 20, bulletDamageBig = 30;
 
 
+	float aggressiveRate = 2.0f;
+	float aggressive = 0.0f;
+
 	std::string bulletTexture, bulletTextureBig;
 
 	void CreateVisibleLine();

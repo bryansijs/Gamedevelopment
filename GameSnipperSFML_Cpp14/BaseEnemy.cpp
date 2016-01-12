@@ -13,6 +13,7 @@
 #include "MoveContainer.h"
 #include "EnemyAttackActions.h"
 #include "FollowMoveBehaviour.h"
+#include "WanderMoveBehaviour.h"
 BaseEnemy::BaseEnemy()
 {
 }
@@ -172,7 +173,7 @@ void BaseEnemy::Update()
 			{
 				if (c->IsTouching())
 				{
-					this->lineOfSightConvex->setFillColor(sf::Color(250, 0, 0, 128));
+					
 					this->Attacking = true;
 					if (this->target == nullptr)
 					{
@@ -192,9 +193,27 @@ void BaseEnemy::Update()
 
 	if (Attacking)
 	{
+		aggressive += aggressiveRate *  Time::deltaTime;
+
 		Action->Attack();
+		this->lineOfSightConvex->setFillColor(sf::Color(250, 0, 0, 128));
+	}
+	else
+	{
+		if (aggressive > 0.0f)
+			aggressive -= 1.0f * Time::deltaTime;
+	}
+
+	if (aggressive <= 0.0)
+	{
+		if (!dynamic_cast<WanderMoveBehaviour*>(this->getMoveBehaviour())) {
+			this->getMoveContainer()->RemoveBehaviour(this->getMoveBehaviour());
+			this->SetMoveBehaviour({ new WanderMoveBehaviour(this) });
+			this->getMoveContainer()->AddBehaviour(this->getMoveBehaviour());
+		}
 		Attacking = false;
 	}
+
 
 	if (patternAmount == 0)return;
 
