@@ -73,9 +73,8 @@ void Bullet::startContact(b2Fixture * fixture)
 			{
 				BaseEnemy* enemy = dynamic_cast<BaseEnemy*> (pal);
 				enemy->setTarget(this->context->player);
-				enemy->getMoveContainer()->RemoveBehaviour(enemy->getMoveBehaviour());
-				enemy->SetMoveBehaviour({ new FollowMoveBehaviour(enemy) });
-				enemy->getMoveContainer()->AddBehaviour(enemy->getMoveBehaviour());
+				enemy->setAttacking();
+				enemy->addAggressiveTime(20.0f);
 			}
 			
 		}

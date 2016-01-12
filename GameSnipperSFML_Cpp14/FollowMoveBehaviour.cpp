@@ -43,18 +43,34 @@ void FollowMoveBehaviour::setDirection()
 	{
 		if ((x - x2) > 5 && (y - y2) > 5)
 		{
+			if ((x - x2) - (y - y2) > 0)
+				this->setShotDirection("move-left");
+			else
+				this->setShotDirection("move-up");
 			mDircection = "move-upleft";
 		}
 		else if ((x - x2) > 5 && (y - y2) < -5)
 		{
+			if ((x - x2) + (y - y2) > 0)
+				this->setShotDirection("move-left");
+			else
+				this->setShotDirection("move-down");
 			mDircection = "move-downleft";
 		}
 		else if ((x - x2) < -5 && (y - y2) > 5)
 		{
+			if ((x - x2) + (y - y2) > 0)
+				this->setShotDirection("move-up");
+			else
+				this->setShotDirection("move-right");
 			mDircection = "move-upright";
 		}
 		else if ((x - x2) < -5 && (y - y2) < -5)
 		{
+			if ((x - x2) - (y - y2) > 0)
+				this->setShotDirection("move-down");
+			else
+				this->setShotDirection("move-right");
 			mDircection = "move-downright";
 		}
 	}

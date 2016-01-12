@@ -160,7 +160,7 @@ void BaseEnemy::Update()
 	this->CreateVectors();
 	this->CreateVisibleLine();
 
-
+	bool shouldCheck = true;
 	for (b2ContactEdge* ce = this->getBody()->GetContactList(); ce; ce = ce->next)
 	{
 
@@ -173,45 +173,72 @@ void BaseEnemy::Update()
 			{
 				if (c->IsTouching())
 				{
+					shouldCheck = false;
 					
 					this->Attacking = true;
 					if (this->target == nullptr)
 					{
 						this->target = dynamic_cast<Player*>(obj);
 					}
-					if (!dynamic_cast<FollowMoveBehaviour*>(this->getMoveBehaviour()))
-					{
-						this->getMoveContainer()->RemoveBehaviour(this->getMoveBehaviour());
-						this->SetMoveBehaviour({ new FollowMoveBehaviour(this) });
-						this->getMoveContainer()->AddBehaviour(this->getMoveBehaviour());
-						return;
-					}
 				}
 			}
 		}
 	}
 
+	updateBehaviour(shouldCheck);
+}
+
+
+
+void BaseEnemy::startContact(b2Fixture * fixture)
+{
+
+}
+
+void BaseEnemy::endContact(b2Fixture * fixture)
+{
+
+}
+
+void BaseEnemy::updateBehaviour(bool shouldCheck)
+{
 	if (Attacking)
 	{
-		aggressive += aggressiveRate *  Time::deltaTime;
+		if (!dynamic_cast<FollowMoveBehaviour*>(this->getMoveBehaviour()))
+		{
+			Aggressive = true;
+			aggressiveTime = aggressiveRate;
+			this->getMoveContainer()->RemoveBehaviour(this->getMoveBehaviour());
+			this->SetMoveBehaviour({ new FollowMoveBehaviour(this) });
+			this->getMoveContainer()->AddBehaviour(this->getMoveBehaviour());
+			return;
+		}
+	}
+
+	if (shouldCheck)
+	{
+		if (aggressiveTime > 0.0f)
+			aggressiveTime -= 1.0f * Time::deltaTime;
+	}
+
+	if (Aggressive)
+	{
+		if (!shouldCheck)
+			aggressiveTime += aggressiveRate *  Time::deltaTime;
 
 		Action->Attack();
+		Attacking = false;
 		this->lineOfSightConvex->setFillColor(sf::Color(250, 0, 0, 128));
 	}
-	else
-	{
-		if (aggressive > 0.0f)
-			aggressive -= 1.0f * Time::deltaTime;
-	}
 
-	if (aggressive <= 0.0)
+	if (aggressiveTime <= 0.0)
 	{
 		if (!dynamic_cast<WanderMoveBehaviour*>(this->getMoveBehaviour())) {
 			this->getMoveContainer()->RemoveBehaviour(this->getMoveBehaviour());
 			this->SetMoveBehaviour({ new WanderMoveBehaviour(this) });
 			this->getMoveContainer()->AddBehaviour(this->getMoveBehaviour());
 		}
-		Attacking = false;
+		Aggressive = false;
 	}
 
 
@@ -242,16 +269,4 @@ void BaseEnemy::Update()
 		}
 
 	}
-}
-
-
-
-void BaseEnemy::startContact(b2Fixture * fixture)
-{
-
-}
-
-void BaseEnemy::endContact(b2Fixture * fixture)
-{
-
 }

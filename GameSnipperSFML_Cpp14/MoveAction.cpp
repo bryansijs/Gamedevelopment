@@ -33,6 +33,7 @@ void MoveAction::Reset()
 
 void MoveAction::Move()
 {
+	velocity.x = velocity.y = 0;
 	for (std::vector<std::string>::iterator it = directions.begin(); it != directions.end(); ++it)
 	{
 		if (*it == "move-up")
