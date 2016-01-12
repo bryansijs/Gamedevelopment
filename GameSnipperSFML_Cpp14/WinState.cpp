@@ -16,6 +16,8 @@
 #include "WinState.h"
 #include "MenuState.h"
 #include "StateManager.h"
+#include "KeyMapping.h"
+#include <fstream>
 #include "LevelManager.h"
 #include "GameState.h"
 
@@ -61,7 +63,7 @@ void WinState::ReloadPage()
 	WebURL url(WSLit(winContext->pathToFile));
 	winContext->webView->LoadURL(url);
 	winContext->webView->SetTransparent(true);
-
+	setScore(50);
 	while (winContext->webView->IsLoading())
 	{
 		winContext->web_core->Update();
@@ -76,11 +78,27 @@ void WinState::Update()
 	winContext->context->window.clear();
 
 	while (winContext->context->window.pollEvent(winContext->event)) {
-		if (winContext->event.type == sf::Event::KeyPressed)
-		{
-			Input::EventOccured(winContext->event);
-
+		if (Input::GetKeyDown(KeyMapping::GetKey("escape"))) {
 			ToMenu();
+		}
+
+		if (winContext->event.type == sf::Event::TextEntered)
+		{
+			if (winContext->event.text.unicode <= 122 && winContext->event.text.unicode >= 97)
+			{
+				if (winContext->amountNameChars < 3) {
+					char i = static_cast<char>(winContext->event.text.unicode);
+					addNameCharacter(new char(i));
+					winContext->scoreName += i;
+					winContext->amountNameChars++;
+				}
+				if (winContext->amountNameChars > 2)
+				{
+					scoreManager->AddScore(500, winContext->scoreName);
+					scoreManager->Save();
+					ToMenu();
+				}
+			}
 		}
 	}
 
@@ -121,4 +139,43 @@ void WinState::ToMenu()
 WinState::~WinState()
 {
 	delete winContext;
+}
+
+
+void WinState::SetHighscore()
+{
+	std::cout << "excape";
+}
+
+void WinState::addNameCharacter(const char* character)
+{
+	JSValue window = winContext->webView->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));
+
+	if (window.IsObject())
+	{
+		JSArray args;
+		WebString string = WebString::CreateFromUTF8(character, 1);
+		JSValue val = JSValue(string);
+		args.Push(val);
+		window.ToObject().Invoke(WSLit("insertChar"), args);
+	}
+
+	Sleep(50);
+	winContext->web_core->Update();
+}
+
+void WinState::setScore(int score)
+{
+	JSValue window = winContext->webView->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));
+
+	if (window.IsObject())
+	{
+		JSArray args;
+		JSValue val = JSValue(score);
+		args.Push(val);
+		window.ToObject().Invoke(WSLit("insertScore"), args);
+	}
+
+	Sleep(50);
+	winContext->web_core->Update();
 }

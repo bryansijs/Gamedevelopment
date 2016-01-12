@@ -17,10 +17,12 @@
 #include <Awesomium/WebCore.h>
 #include <Awesomium/BitmapSurface.h>
 #include <Awesomium/STLHelpers.h>
+#include "HUD.h"
 #include "tinydir.h"
 #include "Random.h"
 #include <vector>
 #include <string>
+#include "WinState.h"
 #include "GameObjectContainer.h"
 
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager, ScoreManager* scoreManager, bool next)
@@ -28,8 +30,12 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	maincontext = context;
 	
 	gameContext = new GameContext(context);
+
+	hud = new HUD{ gameContext };
+
 	gameActions = new GameActions(this, gameContext);
-	storyline = new AwesomiumHelper{ context->web_core, "file:///Resources/html-game/StoryLine.html", 1000, 50 };
+
+	storyline = new AwesomiumHelper{ context->web_core, "file:///Resources/html-game/StoryLine.html", 960, 36 };
 	storylineManager = new StorylineManager();
 
 	// Awesomium init
@@ -233,6 +239,9 @@ void GameState::Update()
 				if (Input::GetKeyDown("K")) {
 					StartNextLevel();
 				}
+				if (Input::GetKeyDown("Y")) {
+					StartWinState();
+				}
 
 				if (isPause)
 					this->MenuEnd(gameContext->pauze->KeyHandler());
@@ -263,7 +272,7 @@ void GameState::Update()
 		gameContext->player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 	}
 
-	//DebugBodies();
+	DebugBodies();
 
 	if (!isPause)
 	{
@@ -284,6 +293,7 @@ void GameState::Update()
 			storyline->JavaScriptCall("TextUpdate", StorylineManager::GetText());
 		}
 
+		hud->Update();
 	}
 	gameContext->drawContainer->Draw(&gameContext->context->window, gameContext->level->GetViewPortPosition());
 	gameContext->level->drawRoof(&gameContext->context->window, &gameContext->view);
@@ -297,12 +307,16 @@ void GameState::Update()
 	{
 		gameContext->pauze->draw(gameContext->context->window);
 	}
-
+	
+	// draw storyline
 	sf::Sprite storylineSprite = storyline->GetSprite();
 	storylineSprite.setPosition(0, 540);
 	gameContext->context->window.setView(storyview);
 	gameContext->context->window.draw(storylineSprite);
 
+	// draw hud
+	gameContext->context->window.setView(hud->view);
+	gameContext->context->window.draw(hud->awesomium->GetSprite());
 
 	if (!terminate) {
 		gameContext->context->window.setView(gameContext->view);
@@ -347,6 +361,16 @@ void GameState::StartNextLevel()
 	gameContext->context->window.setView(gameContext->view);
 
 	Update();
+}
+
+void GameState::StartWinState()
+{
+	sf::Image screenshot = gameContext->context->window.capture();
+	
+
+	WinState* winState = new WinState(gameContext->context, stateManager, levelManager, screenshot,scoreManager);
+	stateManager->AddState(winState);
+	stateManager->StartNextState();
 }
 
 void GameState::MenuEnd(int option)

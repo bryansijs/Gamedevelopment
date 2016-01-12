@@ -211,6 +211,7 @@ xcopy /y /d  "$(ProjectDir)*.exe" $(TargetDir)</Command>
     <ClInclude Include="GameObjectFactory.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameTileFactory.h" />
+    <ClInclude Include="HUD.h" />
     <ClInclude Include="Gun.h" />
     <ClInclude Include="WeaponFactory.h" />
     <ClInclude Include="Input.h" />
@@ -311,6 +312,7 @@ xcopy /y /d  "$(ProjectDir)*.exe" $(TargetDir)</Command>
     <ClCompile Include="GameObjectFactory.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameTileFactory.cpp" />
+    <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Gun.cpp" />
     <ClCompile Include="WeaponFactory.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -384,6 +386,7 @@ xcopy /y /d  "$(ProjectDir)*.exe" $(TargetDir)</Command>
     <ClCompile Include="WinState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\html-game\HUD.html" />
     <None Include="ClassDiagram.cd" />
     <None Include="Resources\html-game\StoryLine.html" />
     <None Include="loading.html" />
@@ -395,12 +398,22 @@ xcopy /y /d  "$(ProjectDir)*.exe" $(TargetDir)</Command>
     <None Include="Resources\menuHTML\win.html" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resources\html-game\images\gun.png" />
+    <Image Include="Resources\html-game\images\gun_active.png" />
+    <Image Include="Resources\html-game\images\healthbar.png" />
+    <Image Include="Resources\html-game\images\healthbar_bg.png" />
+    <Image Include="Resources\html-game\images\item2.png" />
+    <Image Include="Resources\html-game\images\item3.png" />
+    <Image Include="Resources\html-game\images\key.png" />
+    <Image Include="Resources\html-game\images\rifle.png" />
+    <Image Include="Resources\html-game\images\rifle_active.png" />
     <Image Include="Resources\menuHtml\images\bg.png" />
     <Image Include="Resources\menuHtml\images\border.png" />
     <Image Include="Resources\menuHtml\images\cat.png" />
     <Image Include="Resources\menuHtml\images\menuBorder.png" />
   </ItemGroup>
   <ItemGroup>
+    <Font Include="Resources\html-game\font\robotechgp.ttf" />
     <Font Include="Resources\menuHtml\font\moonhouse.ttf" />
     <None Include="Resources\levels\Level_New.json" />
   </ItemGroup>

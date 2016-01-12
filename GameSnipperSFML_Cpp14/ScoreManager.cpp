@@ -2,6 +2,23 @@
 #include "ScoreManager.h"
 #include <iostream>
 #include <fstream>
+#include <algorithm>
+#include <iterator>
+
+template<typename A, typename B>
+std::pair<B, A> flip_pair(const std::pair<A, B> &p)
+{
+	return std::pair<B, A>(p.second, p.first);
+}
+
+template<typename A, typename B>
+std::multimap<B, A> flip_map(const std::map<A, B> &src)
+{
+	std::multimap<B, A> dst;
+	std::transform(src.begin(), src.end(), std::inserter(dst, dst.begin()),
+		flip_pair<A, B>);
+	return dst;
+}
 
 void ScoreManager::ReadScores()
 {
@@ -17,16 +34,26 @@ void ScoreManager::ReadScores()
 			scores[key] = value;
 		}
 	}
+	dst = flip_map(scores);
+
 }
+
 
 void ScoreManager::AddScore(int score, std::string naam)
 {
-	this->scores[naam] = score;
+	if(this->scores.find(naam) == this->scores.end())
+	{
+		this->scores[naam] = score;
+	}
+	else
+	{
+		this->scores[naam] = this->scores[naam] + score;
+	}
 }
 
-std::map<std::string,int> ScoreManager::GetScores()
+std::multimap<int, std::string> ScoreManager::GetScores()
 {
-	return this->scores;
+	return this->dst;
 }
 
 void ScoreManager::Save()
