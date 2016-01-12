@@ -12,6 +12,8 @@
 #include "AttackBehaviour.h"
 #include "MoveContainer.h"
 #include "EnemyAttackActions.h"
+#include "FollowMoveBehaviour.h"
+#include "WanderMoveBehaviour.h"
 BaseEnemy::BaseEnemy()
 {
 }
@@ -45,31 +47,37 @@ void BaseEnemy::setProperties(std::map<std::string, std::string>& properties)
 	int x, y, widht, height;
 	x = std::stoi(properties["x"]);
 	y = std::stoi(properties["y"]);
-	widht = std::stoi(properties["width"]);
-	height = std::stoi(properties["height"]);
+	widht = (std::stoi(properties["width"]) > 0) ? std::stoi(properties["width"]) : this->getWidth();
+	height = (std::stoi(properties["height"]) > 0) ? std::stoi(properties["height"]) : this->getHeight();
 
-	this->seeLength = (properties.count("seeLength")) ? std::stoi(properties["seeLength"]) : 250;
-	this->seeWidth = (properties.count("seeWidth")) ? std::stoi(properties["seeWidth"]) : 100;
+	this->setSeeLength((properties.count("seeLength")) ? std::stoi(properties["seeLength"]) : this->getSeeLength());
+	this->setSeeWidth((properties.count("seeWidth")) ? std::stoi(properties["seeWidth"]) : this->getSeeWidth());
 
 	this->setPosition(x, y);
 	this->setSize(widht, height);
 
 	this->setImageY((properties.count("yIndex")) ? std::stoi(properties["yIndex"]) : 0);
-	this->setSpeed((properties.count("speed")) ? std::stoi(properties["speed"]) : 40);
+	this->setSpeed((properties.count("speed")) ? std::stoi(properties["speed"]) : this->getspeed());
 
-	this->setMinWanderDistance((properties.count("minWander")) ? std::stoi(properties["minWander"]) : 10);
-	this->setMaxWanderDistance((properties.count("maxWander")) ? std::stoi(properties["maxWander"]) : 100);
-	this->setDefaultWanderDistance((properties.count("defaultWander")) ? std::stoi(properties["defaultWander"]) : 20);
+	this->setMinWanderDistance((properties.count("minWander")) ? std::stoi(properties["minWander"]) : getMinWanderDistance());
+	this->setMaxWanderDistance((properties.count("maxWander")) ? std::stoi(properties["maxWander"]) : getMaxWanderDistance());
+	this->setDefaultWanderDistance((properties.count("defaultWander")) ? std::stoi(properties["defaultWander"]) : getDefaultWanderDistance());
 
-	this->setMaxHealth((properties.count("maxHealth")) ? std::stoi(properties["maxHealth"]) : 100);
-	this->setHealth((properties.count("maxHealth")) ? std::stoi(properties["maxHealth"]) : 100);
+	this->setMaxHealth((properties.count("maxHealth")) ? std::stoi(properties["maxHealth"]) :this->getHealth());
+	this->setHealth((properties.count("maxHealth")) ? std::stoi(properties["maxHealth"]) : this->getHealth());
 
 	this->setBulletTexture((properties.count("bullet")) ? std::string(properties["bullet"]) : "bullet-blue");
 	this->setBulletTextureBig((properties.count("bigbullet")) ? std::string(properties["bigbullet"]) : "bullet-big-red");
+
+	this->setBulletDamage((properties.count("bulletDamage")) ? std::stoi(std::string(properties["bulletDamage"])) : this->getBulletDamage());
+	this->setBulletDamageBig((properties.count("bulletDamageBig")) ? std::stoi(std::string(properties["bulletDamageBig"])) : this->getBulletDamageBig());
 }
 
 void BaseEnemy::CreateLineOfSight()
 {
+	this->linearBodyDef = new b2BodyDef();
+	this->linearBody = this->world->CreateBody(linearBodyDef);
+
 	this->lineOfSightFixtureDef = new b2FixtureDef();
 	this->lineOfSightConvex = new sf::ConvexShape{};
 	this->lineOfSightConvex->setPointCount(3);
@@ -84,12 +92,12 @@ void BaseEnemy::CreateLineOfSight()
 	lineOfSightFixtureDef->friction = 0.3f;
 	lineOfSightFixtureDef->isSensor = true;
 
-	this->getBody()->CreateFixture(lineOfSightFixtureDef);
+	this->linearBody->CreateFixture(lineOfSightFixtureDef);
 
-	b2Filter f = this->getBody()->GetFixtureList()->GetNext()->GetFilterData();
+	b2Filter f = this->getBody()->GetFixtureList()->GetFilterData();
 
 	f.categoryBits = ENEMY;
-	this->getBody()->GetFixtureList()->GetNext()->SetFilterData(f);
+	this->getBody()->GetFixtureList()->SetFilterData(f);
 	this->Action = new EnemyAttackActions(this);
 }
 
@@ -129,7 +137,7 @@ void BaseEnemy::CreateVectors()
 		break;
 	}
 
-	this->getBody()->SetTransform(this->getBody()->GetPosition(), desiredAngle);
+	this->linearBody->SetTransform(this->getBody()->GetPosition(), desiredAngle);
 	this->lineOfSightShape.Set(this->vertices, 3);
 }
 
@@ -149,7 +157,6 @@ void BaseEnemy::CreateVisibleLine()
 
 	this->hpBar->setSize(sf::Vector2f(c, 10));
 
-
 	for (int i = 0; i < 3; i++)
 		this->lineOfSightConvex->setPoint(i, sf::Vector2f(convexVert[i].x, convexVert[i].y));
 }
@@ -159,8 +166,8 @@ void BaseEnemy::Update()
 	this->CreateVectors();
 	this->CreateVisibleLine();
 
-
-	for (b2ContactEdge* ce = this->getBody()->GetContactList(); ce; ce = ce->next)
+	bool shouldCheck = true;
+	for (b2ContactEdge* ce = this->linearBody->GetContactList(); ce; ce = ce->next)
 	{
 
 		b2Contact* c = ce->contact;
@@ -172,23 +179,74 @@ void BaseEnemy::Update()
 			{
 				if (c->IsTouching())
 				{
-					this->lineOfSightConvex->setFillColor(sf::Color(250, 0, 0, 128));
+					shouldCheck = false;
+					
 					this->Attacking = true;
-				}
-
-				/*	if (!dynamic_cast<AttackBehaviour*>(this->getMoveBehaviour()))
+					if (this->target == nullptr)
 					{
-						this->getMoveContainer()->RemoveBehaviour(this->getMoveBehaviour());
-						this->SetMoveBehaviour({ new AttackBehaviour(this) });
-						this->getMoveContainer()->AddBehaviour(this->getMoveBehaviour());
-					}*/
+						this->target = dynamic_cast<Player*>(obj);
+					}
+				}
 			}
 		}
 	}
 
-	//if (dynamic_cast<AttackBehaviour*>(this->getMoveBehaviour()))
+	updateBehaviour(shouldCheck);
+}
+
+
+
+void BaseEnemy::startContact(b2Fixture * fixture)
+{
+
+}
+
+void BaseEnemy::endContact(b2Fixture * fixture)
+{
+
+}
+
+void BaseEnemy::updateBehaviour(bool shouldCheck)
+{
 	if (Attacking)
+	{
+		if (!dynamic_cast<FollowMoveBehaviour*>(this->getMoveBehaviour()))
+		{
+			Aggressive = true;
+			aggressiveTime = aggressiveRate;
+			this->getMoveContainer()->RemoveBehaviour(this->getMoveBehaviour());
+			this->SetMoveBehaviour({ new FollowMoveBehaviour(this) });
+			this->getMoveContainer()->AddBehaviour(this->getMoveBehaviour());
+			return;
+		}
+	}
+
+	if (shouldCheck)
+	{
+		if (aggressiveTime > 0.0f)
+			aggressiveTime -= 1.0f * Time::deltaTime;
+	}
+
+	if (Aggressive)
+	{
+		if (!shouldCheck)
+			aggressiveTime += aggressiveRate *  Time::deltaTime;
+
 		Action->Attack();
+		Attacking = false;
+		this->lineOfSightConvex->setFillColor(sf::Color(250, 0, 0, 128));
+	}
+
+	if (aggressiveTime <= 0.0)
+	{
+		if (!dynamic_cast<WanderMoveBehaviour*>(this->getMoveBehaviour())) {
+			this->getMoveContainer()->RemoveBehaviour(this->getMoveBehaviour());
+			this->SetMoveBehaviour({ new WanderMoveBehaviour(this) });
+			this->getMoveContainer()->AddBehaviour(this->getMoveBehaviour());
+		}
+		Aggressive = false;
+	}
+
 
 	if (patternAmount == 0)return;
 
@@ -217,16 +275,4 @@ void BaseEnemy::Update()
 		}
 
 	}
-}
-
-
-
-void BaseEnemy::startContact(b2Fixture * fixture)
-{
-
-}
-
-void BaseEnemy::endContact(b2Fixture * fixture)
-{
-
 }

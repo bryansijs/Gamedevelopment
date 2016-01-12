@@ -33,6 +33,9 @@ void MoveAction::Reset()
 
 void MoveAction::Move()
 {
+	velocity.x = velocity.y = 0;
+	this->gameObject->getBody()->SetLinearVelocity(b2Vec2(0, 0));
+	this->gameObject->getBody()->SetAngularVelocity(0);
 	for (std::vector<std::string>::iterator it = directions.begin(); it != directions.end(); ++it)
 	{
 		if (*it == "move-up")

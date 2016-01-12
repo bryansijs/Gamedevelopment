@@ -20,11 +20,9 @@ void EnemyAttackActions::Attack()
 	if (Time::runningTime > obj->nextShot)
 	{
 		obj->nextShot = (float)Time::runningTime + (float)obj->shotRate;
-
-		if (obj->getMoveBehaviour()->getDirection().at(0) != "move-not");
-		{
-			this->direction = obj->getMoveBehaviour()->getDirection().at(0);
-		}
+		std::string dir = obj->getMoveBehaviour()->getDirection().at(0);
+		
+		this->direction = this->obj->getMoveBehaviour()->getShotDirection();
 
 		switch (this->obj->getAttacktType())
 		{
@@ -33,6 +31,10 @@ void EnemyAttackActions::Attack()
 			break;
 		case 1:
 			DualShot();
+			break;
+		case 2:
+			SingleShotBig();
+			break;
 		}
 
 		obj->setPatternCount(obj->getPatternCount() + 1);
@@ -69,14 +71,56 @@ void EnemyAttackActions::SingleShot()
 		{ "type", "Projectile" },
 		{ "pType", "Bullet" },
 		{ "direction", direction },
+		{ "texture",  obj->getBulletTexture() + ".png" },
+		{ "x", std::to_string(x - 8) },
+		{ "y", std::to_string(y - 8) },
+		{ "size", std::to_string(8) },
+		{ "damage" , std::to_string(obj->getBulletDamage())},
+		{ "Category", "PLAYER" } };
+	gameObjectFactory->Create(properties);
+}
+
+
+void EnemyAttackActions::SingleShotBig()
+{
+
+	float x = 0, x2 = 0, y = 0, y2 = 0;
+
+	if (this->direction == "move-up")
+	{
+		y = obj->getBody()->GetPosition().y - 10;
+		x = obj->getBody()->GetPosition().x + obj->getWidth() / 2;
+	}
+	if (this->direction == "move-down")
+	{
+		y = obj->getBody()->GetPosition().y + obj->getHeight() + 10;
+		x = obj->getBody()->GetPosition().x + obj->getWidth() / 2;
+	}
+	if (this->direction == "move-left")
+	{
+		x = obj->getBody()->GetPosition().x - 10;
+		y = obj->getBody()->GetPosition().y + (obj->getHeight() / 2);
+	}
+	if (this->direction == "move-right")
+	{
+		x = obj->getBody()->GetPosition().x + obj->getWidth() + 10;
+		y = obj->getBody()->GetPosition().y + (obj->getHeight() / 2);
+	}
+
+	std::map<std::string, std::string> properties = {
+		{ "type", "Projectile" },
+		{ "pType", "Bullet" },
+		{ "direction", direction },
 		{ "texture",  obj->getBulletTextureBig() + ".png" },
 		{ "x", std::to_string(x - 8) },
 		{ "y", std::to_string(y - 8) },
 		{ "size", std::to_string(16) },
-		{ "damage" , std::to_string(obj->getBulletDamageBig())},
+		{ "damage" , std::to_string(obj->getBulletDamageBig()) },
 		{ "Category", "PLAYER" } };
 	gameObjectFactory->Create(properties);
 }
+
+
 
 void EnemyAttackActions::DualShot()
 {
