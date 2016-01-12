@@ -11,6 +11,11 @@ Level::Level()
 
 Level::~Level()
 {
+	groundTiles.clear();
+	roofTiles.clear();
+	tileSets.clear();
+
+	game_objects.clear();
 }
 
 void  Level::updateViewPort(sf::Vector2i &worldPos)

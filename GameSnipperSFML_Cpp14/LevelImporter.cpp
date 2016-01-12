@@ -320,11 +320,6 @@ bool LevelImporter::Import(std::string JSON)
 
 void LevelImporter::Clear()
 {
-	game_objects.clear();
-	tileSets.clear();
-	groundTiles.clear();
-	roofTiles.clear();
-	tiles.clear();
 	music.resetBuffer();
 }
 
@@ -370,8 +365,43 @@ LevelImporter::LevelImporter(DrawContainer *drawContainer, MoveContainer *moveCo
 
 LevelImporter::~LevelImporter()
 {
+	for (std::vector<GameObject*>::size_type i = 0; i != game_objects.size(); i++) {
+		if (game_objects[i] != nullptr)
+		{
+			delete game_objects[i];
+		}
+	}
+
+	for (std::vector<Tile*>::size_type i = 0; i != groundTiles.size(); i++) {
+		if (groundTiles[i] != nullptr)
+		{
+			delete groundTiles[i];
+		}
+	}
+
+	for (std::vector<Tile*>::size_type i = 0; i != roofTiles.size(); i++) {
+		if (roofTiles[i] != nullptr)
+		{
+			delete roofTiles[i];
+		}
+	}
+
+	for (std::vector<TileSet*>::size_type i = 0; i != tileSets.size(); i++) {
+		if (tileSets[i] != nullptr)
+		{
+			delete tileSets[i];
+		}
+	}
+
 	delete objectFactory;
 	delete world;
+
+	groundTiles.clear();
+	roofTiles.clear();
+	tiles.clear();
+	tileSets.clear();
+
+	game_objects.clear();
 
 	objectFactory = nullptr;
 	world = nullptr;
