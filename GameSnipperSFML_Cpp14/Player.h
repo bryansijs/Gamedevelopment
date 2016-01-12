@@ -11,7 +11,8 @@ class Player : public Unit
 private:
 	int keyAmount = 0;
 	
-	std::map<BaseItem*, int> potions;
+	int potions = 0;
+//	std::map<BaseItem*, int> potions;
 	std::vector<BaseItem*> ammo;
 	std::vector<BaseItem*> guns;
 
@@ -37,7 +38,7 @@ public:
 	void removeKey(){keyAmount--;}
 	int getKey() { return keyAmount; }
 
-	std::map<BaseItem*, int> getPotions()
+	int getPotions()
 	{
 		return this->potions;
 	}
@@ -47,7 +48,7 @@ public:
 	void EnableGodMode();
 	void DisableGodMode();
 	bool GetGodMode();
-
+	void usePotion();
 	void EquipGun(int slot);
 	BaseItem* GetEquipedGun();
 

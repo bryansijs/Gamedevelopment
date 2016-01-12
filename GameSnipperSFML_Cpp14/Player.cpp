@@ -46,16 +46,16 @@ Player::Player(MoveContainer* moveContainer, DrawContainer* drawContainer, GameO
 
 Player::Player()
 {
-	this->SetMoveBehaviour ( new NormalMoveBehaviour(this) );
+	this->SetMoveBehaviour(new NormalMoveBehaviour(this));
 	this->setDrawBehaviour(new PlayerDrawBehaviour(this, 10, "Player.png"));
 	this->setHealth(100);
 
-	
+
 }
 
 Player::~Player()
 {
-	
+
 }
 
 void Player::AddItem(BaseItem* item) {
@@ -81,6 +81,21 @@ void Player::DisableGodMode()
 bool Player::GetGodMode()
 {
 	return this->godMode;
+}
+
+void Player::usePotion()
+{
+
+	if (potions < 1) return;
+
+	if (this->getHealth() < this->getMaxHealth())
+	{
+		int health = this->getHealth() + 20;
+		health = (health > getMaxHealth()) ? getMaxHealth() : health;
+		this->setHealth(health);
+
+		potions -= 1;
+	}
 }
 
 void Player::EquipGun(int slot)
@@ -115,7 +130,10 @@ void Player::AddGun(BaseItem* item) {
 
 void Player::AddPotion(BaseItem* item) {
 
-	std::map<BaseItem*, int>::iterator it;
+
+	potions += 1;
+
+/*	std::map<BaseItem*, int>::iterator it;
 	for (it = potions.begin(); it != potions.end(); it++) {
 		if (it->first->getItemId() == item->getItemId())
 		{
@@ -124,5 +142,5 @@ void Player::AddPotion(BaseItem* item) {
 		}
 	}
 
-	potions.insert(std::pair<BaseItem*, int>(item, 1));
+	potions.insert(std::pair<BaseItem*, int>(item, 1));*/
 }

@@ -85,6 +85,7 @@ private:
 		{ 3, "move-left" },
 		{ 4, "move-right" },
 		{ 5, "use" },
-		{ 6, "shoot" }
+		{ 6, "shoot" },
+		{ 7, "consume" }
 	};
 };
