@@ -50,24 +50,27 @@ void BaseEnemy::setProperties(std::map<std::string, std::string>& properties)
 	widht = std::stoi(properties["width"]);
 	height = std::stoi(properties["height"]);
 
-	this->seeLength = (properties.count("seeLength")) ? std::stoi(properties["seeLength"]) : 250;
-	this->seeWidth = (properties.count("seeWidth")) ? std::stoi(properties["seeWidth"]) : 100;
+	this->setSeeLengt((properties.count("seeLength")) ? std::stoi(properties["seeLength"]) : this->getSeeLength());
+	this->setSeeWidth((properties.count("seeWidth")) ? std::stoi(properties["seeWidth"]) : this->getSeeWidth());
 
 	this->setPosition(x, y);
 	this->setSize(widht, height);
 
 	this->setImageY((properties.count("yIndex")) ? std::stoi(properties["yIndex"]) : 0);
-	this->setSpeed((properties.count("speed")) ? std::stoi(properties["speed"]) : 40);
+	this->setSpeed((properties.count("speed")) ? std::stoi(properties["speed"]) : this->getspeed());
 
-	this->setMinWanderDistance((properties.count("minWander")) ? std::stoi(properties["minWander"]) : 10);
-	this->setMaxWanderDistance((properties.count("maxWander")) ? std::stoi(properties["maxWander"]) : 100);
-	this->setDefaultWanderDistance((properties.count("defaultWander")) ? std::stoi(properties["defaultWander"]) : 20);
+	this->setMinWanderDistance((properties.count("minWander")) ? std::stoi(properties["minWander"]) : getMinWanderDistance());
+	this->setMaxWanderDistance((properties.count("maxWander")) ? std::stoi(properties["maxWander"]) : getMaxWanderDistance());
+	this->setDefaultWanderDistance((properties.count("defaultWander")) ? std::stoi(properties["defaultWander"]) : getDefaultWanderDistance());
 
-	this->setMaxHealth((properties.count("maxHealth")) ? std::stoi(properties["maxHealth"]) : 100);
-	this->setHealth((properties.count("maxHealth")) ? std::stoi(properties["maxHealth"]) : 100);
+	this->setMaxHealth((properties.count("maxHealth")) ? std::stoi(properties["maxHealth"]) :this->getHealth());
+	this->setHealth((properties.count("maxHealth")) ? std::stoi(properties["maxHealth"]) : this->getHealth());
 
 	this->setBulletTexture((properties.count("bullet")) ? std::string(properties["bullet"]) : "bullet-blue");
 	this->setBulletTextureBig((properties.count("bigbullet")) ? std::string(properties["bigbullet"]) : "bullet-big-red");
+
+	this->setBulletDamage((properties.count("bulletDamage")) ? std::stoi(std::string(properties["bulletDamage"])) : this->getBulletDamage());
+	this->setBulletDamageBig((properties.count("bulletDamageBig")) ? std::stoi(std::string(properties["bulletDamageBig"])) : this->getBulletDamageBig());
 }
 
 void BaseEnemy::CreateLineOfSight()

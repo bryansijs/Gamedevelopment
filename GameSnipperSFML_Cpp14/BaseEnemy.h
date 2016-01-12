@@ -89,6 +89,14 @@ public:
 	int getBulletDamageBig() { return bulletDamageBig; }
 	void setBulletDamageBig(int bulletDamageBig) { this->bulletDamageBig = bulletDamageBig; }
 
+
+	int getSeeLength() { return this->seeLength; };
+	void setSeeLengt(int seeLength) { this->seeLength = seeLength; };
+
+	int getSeeWidth() { return this->seeWidth; }
+	void setSeeWidth(int seeWidth) { this->seeWidth = seeWidth; };
+
+
 	std::map<std::string, float> PatternSet;
 
 };

@@ -27,21 +27,21 @@ GameObject* EnemyFactory::Create(std::map<std::string, std::string> properties, 
 
 GameObject* EnemyFactory::CreateBasic(std::map<std::string, std::string>& properties, DrawContainer* container, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer, b2World* world)
 {
-	std::string imgurl = properties["image"];
+	std::string imgurl = (properties.count("image")) ?  properties["image"] : "basic.png";
 	
 	return new BasicEnemy(container, imgurl, mContainer, gameObjectContainer, properties, world);
 
 }
 
 GameObject* EnemyFactory::CreateRunner(std::map<std::string, std::string>&properties, DrawContainer* container, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer, b2World* world) {
-	std::string imgurl = properties["image"];
+	std::string imgurl = (properties.count("image")) ? properties["image"] : "runner.png";
 
 	return new RunnerEnemy(container, imgurl, mContainer, gameObjectContainer, properties, world);
 
 }
 
 GameObject* EnemyFactory::CreateTank(std::map<std::string, std::string>& properties, DrawContainer* container, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer, b2World* world) {
-	std::string imgurl = properties["image"];
+	std::string imgurl = (properties.count("image")) ? properties["image"] : "tank.png";
 
 	return new TankEnemy(container, imgurl, mContainer, gameObjectContainer, properties, world);
 

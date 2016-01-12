@@ -13,6 +13,7 @@ public:
 	BaseEnemy* obj;
 	void Attack();
 	void SingleShot();
+	void SingleShotBig();
 	void DualShot();
 	void TripleShot();
 

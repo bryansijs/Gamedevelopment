@@ -38,7 +38,6 @@
                  "properties":
                     {
                      "eType":"Basic",
-                     "image":"enemy1.png",
                      "isCollidable":"1",
                      "yIndex":"3"
                     },
@@ -50,22 +49,38 @@
                  "y":133
                 }, 
                 {
-                 "height":64,
+                 "height":48,
                  "id":18,
                  "name":"Enemy",
                  "properties":
                     {
-                     "eType":"Basic",
-                     "image":"enemy1.png",
+                     "eType":"Runner",
                      "isCollidable":"1",
                      "yIndex":"3"
                     },
                  "rotation":0,
                  "type":"Enemy",
                  "visible":true,
-                 "width":64,
+                 "width":36,
                  "x":470,
                  "y":234
+                }, 
+                {
+                 "height":54,
+                 "id":19,
+                 "name":"Enemy",
+                 "properties":
+                    {
+                     "eType":"Tank",
+                     "isCollidable":"1",
+                     "yIndex":"3"
+                    },
+                 "rotation":0,
+                 "type":"Enemy",
+                 "visible":true,
+                 "width":38,
+                 "x":70,
+                 "y":185
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -89,7 +104,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":19,
+ "nextobjectid":20,
  "orientation":"orthogonal",
  "properties":
     {
