@@ -66,7 +66,7 @@ public:
 	void setTarget(Player* target) { this->target = target; }
 
 	int getAttacktType() { return attackType; }
-	void setAttackType(int attacktype) { this->attackType = attackType; }
+	void setAttackType(int attacktype) { this->attackType = attacktype; }
 
 	int getPatternAmount() { return patternAmount; }
 	void setPatternAmount(int patternAmount) { this->patternAmount = patternAmount; }
@@ -91,11 +91,10 @@ public:
 
 
 	int getSeeLength() { return this->seeLength; };
-	void setSeeLengt(int seeLength) { this->seeLength = seeLength; };
+	void setSeeLength(int seeLength) { this->seeLength = seeLength; };
 
 	int getSeeWidth() { return this->seeWidth; }
 	void setSeeWidth(int seeWidth) { this->seeWidth = seeWidth; };
-
 
 	std::map<std::string, float> PatternSet;
 

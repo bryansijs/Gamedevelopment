@@ -5,7 +5,7 @@
 
 BasicEnemy::BasicEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, b2World* world) :BaseEnemy{ dContainer, img,mContainer, gameObjectContainer }
 {
-	
+	this->setSize(64, 64);
 
 	this->setSpeed(40.f);
 	this->setBulletDamageBig(20);
@@ -13,7 +13,7 @@ BasicEnemy::BasicEnemy(DrawContainer* dContainer, std::string img, MoveContainer
 	this->setMaxHealth(100);
 	this->setHealth(100);
 
-	this->setSeeLengt(200);
+	this->setSeeLength(200);
 	this->setSeeWidth(50);
 
 	this->setMaxWanderDistance(200);

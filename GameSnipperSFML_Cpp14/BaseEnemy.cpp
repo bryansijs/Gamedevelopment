@@ -47,10 +47,10 @@ void BaseEnemy::setProperties(std::map<std::string, std::string>& properties)
 	int x, y, widht, height;
 	x = std::stoi(properties["x"]);
 	y = std::stoi(properties["y"]);
-	widht = std::stoi(properties["width"]);
-	height = std::stoi(properties["height"]);
+	widht = (std::stoi(properties["width"]) > 0) ? std::stoi(properties["width"]) : this->getWidth();
+	height = (std::stoi(properties["height"]) > 0) ? std::stoi(properties["height"]) : this->getHeight();
 
-	this->setSeeLengt((properties.count("seeLength")) ? std::stoi(properties["seeLength"]) : this->getSeeLength());
+	this->setSeeLength((properties.count("seeLength")) ? std::stoi(properties["seeLength"]) : this->getSeeLength());
 	this->setSeeWidth((properties.count("seeWidth")) ? std::stoi(properties["seeWidth"]) : this->getSeeWidth());
 
 	this->setPosition(x, y);

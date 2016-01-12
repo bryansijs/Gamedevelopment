@@ -5,6 +5,7 @@
 
 TankEnemy::TankEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, b2World* world) :BaseEnemy{ dContainer, img,mContainer, gameObjectContainer }
 {
+	this->setSize(38, 54);
 	this->isCollidable = true;
 
 
@@ -15,7 +16,7 @@ TankEnemy::TankEnemy(DrawContainer* dContainer, std::string img, MoveContainer* 
 	this->setHealth(200);
 
 
-	this->setSeeLengt(400);
+	this->setSeeLength(400);
 	this->setSeeWidth(100);
 
 	this->setMaxWanderDistance(200);

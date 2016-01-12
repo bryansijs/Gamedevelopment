@@ -5,6 +5,7 @@
 
 RunnerEnemy::RunnerEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, b2World* world) :BaseEnemy{ dContainer, img,mContainer, gameObjectContainer }
 {
+	this->setSize(36, 48);
 	this->isCollidable = true;
 
 
@@ -17,7 +18,7 @@ RunnerEnemy::RunnerEnemy(DrawContainer* dContainer, std::string img, MoveContain
 
 
 
-	this->setSeeLengt(300);
+	this->setSeeLength(300);
 	this->setSeeWidth(25);
 
 	this->setMaxWanderDistance(300);
