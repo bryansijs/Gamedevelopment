@@ -208,7 +208,7 @@
          "opacity":1,
          "properties":
             {
-             "LayerId":"6",
+             "LayerId":"5",
              "isCollidable":"true"
             },
          "type":"tilelayer",
@@ -926,75 +926,22 @@
                  "type":"Object",
                  "visible":true,
                  "width":110.75,
-                 "x":1121.25,
-                 "y":1456
+                 "x":1337.25,
+                 "y":1317
                 }, 
                 {
-                 "height":64,
-                 "id":87,
-                 "name":"Enemy",
-                 "properties":
-                    {
-                     "eType":"Basic",
-                     "image":"enemy1.png",
-                     "isCollidable":"1"
-                    },
-                 "rotation":0,
-                 "type":"Enemy",
-                 "visible":true,
-                 "width":64,
-                 "x":423,
-                 "y":985
-                }, 
-                {
-                 "height":64,
-                 "id":88,
-                 "name":"Enemy",
-                 "properties":
-                    {
-                     "eType":"Basic",
-                     "image":"enemy1.png",
-                     "isCollidable":"1"
-                    },
-                 "rotation":0,
-                 "type":"Enemy",
-                 "visible":true,
-                 "width":64,
-                 "x":655,
-                 "y":1178
-                }, 
-                {
-                 "height":64,
-                 "id":89,
-                 "name":"Enemy",
-                 "properties":
-                    {
-                     "eType":"Basic",
-                     "image":"enemy1.png",
-                     "isCollidable":"1"
-                    },
-                 "rotation":0,
-                 "type":"Enemy",
-                 "visible":true,
-                 "width":64,
-                 "x":438,
-                 "y":1264
-                }, 
-                {
-                 "height":64,
+                 "height":48,
                  "id":92,
                  "name":"Enemy",
                  "properties":
                     {
                      "eType":"Runner",
-                     "image":"enemy2.png",
-                     "isCollidable":"1",
-                     "speed":"20"
+                     "isCollidable":"1"
                     },
                  "rotation":0,
                  "type":"Enemy",
                  "visible":true,
-                 "width":64,
+                 "width":36,
                  "x":1996,
                  "y":1295
                 }, 
@@ -1028,6 +975,41 @@
                  "width":87,
                  "x":358,
                  "y":459
+                }, 
+                {
+                 "height":64,
+                 "id":96,
+                 "name":"Enemy",
+                 "properties":
+                    {
+                     "eType":"Basic",
+                     "image":"enemy1.png",
+                     "isCollidable":"1"
+                    },
+                 "rotation":0,
+                 "type":"Enemy",
+                 "visible":true,
+                 "width":64,
+                 "x":495,
+                 "y":1431
+                }, 
+                {
+                 "height":64,
+                 "id":97,
+                 "name":"Enemy",
+                 "properties":
+                    {
+                     "eType":"Tank",
+                     "isCollidable":"1",
+                     "maxHealth":"500",
+                     "speed":"40"
+                    },
+                 "rotation":0,
+                 "type":"Enemy",
+                 "visible":true,
+                 "width":64,
+                 "x":460,
+                 "y":1112
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1068,7 +1050,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":95,
+ "nextobjectid":98,
  "orientation":"orthogonal",
  "properties":
     {
