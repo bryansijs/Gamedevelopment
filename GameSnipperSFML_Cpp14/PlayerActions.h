@@ -34,7 +34,7 @@ public:
 	void Shoot();
 	void Use();
 	void Equip();
-
+	void ConsumePotion();
 	bool used = false;
 	std::vector<void(PlayerActions::*)()> activeActions;
 private:
@@ -44,7 +44,8 @@ private:
 		{ "move", &PlayerActions::Move },
 		{ "shoot", &PlayerActions::Shoot },
 		{ "use", &PlayerActions::Use },
-		{ "equip", &PlayerActions::Equip }
+		{ "equip", &PlayerActions::Equip },
+		{ "consume", &PlayerActions::ConsumePotion }
 	};
 
 	std::string direction = "move-down";
@@ -66,6 +67,7 @@ private:
 
 	bool fired = false;
 	bool useAction = true;
+	bool consumeAction = true;
 	bool resetMove = true;
 
 	int notificationSwitch = 0;

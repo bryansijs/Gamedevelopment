@@ -45,7 +45,7 @@ bool HUD::SetHealth(int value)
 	return false;
 }
 
-bool HUD::SetItems(int keyAmount, std::map<BaseItem*, int> potions)
+bool HUD::SetItems(int keyAmount,int  potions)
 {
 	// build item list
 	// key=0, potions red=potions1, potions blue=potions2
@@ -55,14 +55,21 @@ bool HUD::SetItems(int keyAmount, std::map<BaseItem*, int> potions)
 		temp = temp + ",0";
 	}
 
-	for (auto &potion : potions)
+
+	for (int i = 0; i < potions; i++)
 	{
+		temp = temp + ",1";
+	}
+	/*for (auto &potion : potions)
+	{
+
+
 		std::string test = potion.first->getItemType();
 		for (int i = 0; i < potion.second; i++)
 		{
-			temp = temp + ",1";
+		
 		}
-	}
+	}*/
 	temp.erase(0,1);
 
 	if (temp != items)

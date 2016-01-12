@@ -64,7 +64,7 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 			{ "type", "Projectile" },
 			{ "pType", projectileType },
 			{ "direction", direction },
-			{ "texture", "bullet-red.png" },
+			{ "texture", gun->GetBulletTexture() },
 			{ "damage", std::to_string(gun->GetDamage() * gameContext->damageMultiplier) },
 			{ "x", std::to_string(x) },
 			{ "y", std::to_string(y) },
