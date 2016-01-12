@@ -61,12 +61,10 @@ bool LevelManager::isLastLevel()
 {
 	if(currentLevelNumber + 1 == allLevels.size())
 	{
+		currentLevelNumber = 0;
 		return true;
 	}
-	else
-	{
-		return false;
-	}
+	return false;
 }
 
 std::vector<std::string> LevelManager::getAllLevels()
