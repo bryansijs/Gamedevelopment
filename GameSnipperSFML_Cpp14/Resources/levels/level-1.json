@@ -322,7 +322,7 @@
              "isCollidable":"false"
             },
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":30,
          "x":0,
          "y":0
@@ -949,8 +949,8 @@
                  "type":"Object",
                  "visible":true,
                  "width":90,
-                 "x":420,
-                 "y":627.5
+                 "x":422,
+                 "y":628.5
                 }, 
                 {
                  "height":73,
