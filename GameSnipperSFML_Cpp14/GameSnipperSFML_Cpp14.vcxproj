@@ -203,6 +203,7 @@ xcopy /y /d  "$(ProjectDir)*.exe" $(TargetDir)</Command>
     <ClInclude Include="EnemyDrawBehaviour.h" />
     <ClInclude Include="EnemyFactory.h" />
     <ClInclude Include="FilterEnum.h" />
+    <ClInclude Include="FollowMoveBehaviour.h" />
     <ClInclude Include="FPSShow.h" />
     <ClInclude Include="GameActions.h" />
     <ClInclude Include="GameContext.h" />
@@ -303,6 +304,7 @@ xcopy /y /d  "$(ProjectDir)*.exe" $(TargetDir)</Command>
     <ClCompile Include="EnemyDrawBehaviour.cpp" />
     <ClCompile Include="EnemyFactory.cpp" />
     <ClCompile Include="FilterEnum.cpp" />
+    <ClCompile Include="FollowMoveBehaviour.cpp" />
     <ClCompile Include="FPSShow.cpp" />
     <ClCompile Include="GameActions.cpp" />
     <ClCompile Include="GameContext.cpp" />

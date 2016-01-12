@@ -72,5 +72,6 @@ void ShootAction::Shoot(DrawContainer* drawContainer, MoveContainer* moveContain
 		};
 
 		Bullet* bullet = (Bullet*)projectileFactory.Create(properties, drawContainer, moveContainer, gameObjectContainer, world);
+		bullet->SetContext(gameContext);
 	}
 }
