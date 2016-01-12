@@ -32,7 +32,7 @@ void AwesomiumHelper::ReloadPage()
 	{
 		webcore->Update();
 	}
-	Sleep(100);
+	Sleep(50);
 	webcore->Update();
 }
 
@@ -57,7 +57,7 @@ sf::Sprite AwesomiumHelper::GetSprite()
 	return sprite;
 }
 
-void AwesomiumHelper::JavaScriptCall(std::string functionName, std::string parameter)
+void AwesomiumHelper::JavaScriptCall(std::string functionName, std::string parameter, bool updateWebcore)
 {
 	JSValue window = webview->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));
 
@@ -71,12 +71,17 @@ void AwesomiumHelper::JavaScriptCall(std::string functionName, std::string param
 		window.ToObject().Invoke(WSLit(functionName.c_str()), args);
 	}
 
-	Sleep(50);
-	webcore->Update();
-
+	if (updateWebcore)
+		UpdateWebcore();
 }
 
-void AwesomiumHelper::JavaScriptCall(std::string functionName, int parameter)
+void AwesomiumHelper::UpdateWebcore()
+{
+	Sleep(50);
+	webcore->Update();
+}
+
+void AwesomiumHelper::JavaScriptCall(std::string functionName, int parameter, bool updateWebcore)
 {
 	JSValue window = webview->ExecuteJavascriptWithResult(WSLit("window"), WSLit(""));
 
@@ -87,6 +92,7 @@ void AwesomiumHelper::JavaScriptCall(std::string functionName, int parameter)
 		args.Push(val);
 		window.ToObject().Invoke(WSLit(functionName.c_str()), args);
 	}
-	Sleep(50);
-	webcore->Update();
+
+	if (updateWebcore)
+		UpdateWebcore();
 }

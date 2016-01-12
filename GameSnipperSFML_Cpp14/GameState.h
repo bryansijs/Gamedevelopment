@@ -3,6 +3,7 @@
 #include "LevelManager.h"
 #include "PlayerActions.h"
 #include "StorylineManager.h"
+#include "HUD.h"
 
 class ScoreManager;
 class StateManager;
@@ -25,6 +26,7 @@ public:
 	void Update() override;
 	void Terminate() override;
 	void StartNextLevel();
+	void StartWinState();
 	bool showFPS = false;
 	bool isPause = false;
 private:
@@ -37,6 +39,8 @@ private:
 
 	PlayerActions* playerActions;
 	GameActions* gameActions;
+
+	HUD* hud;
 
 	sf::View storyview;
 	sf::View loadingView;
