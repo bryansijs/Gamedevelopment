@@ -48,6 +48,24 @@
                  "width":64,
                  "x":279,
                  "y":133
+                }, 
+                {
+                 "height":64,
+                 "id":18,
+                 "name":"Enemy",
+                 "properties":
+                    {
+                     "eType":"Basic",
+                     "image":"enemy1.png",
+                     "isCollidable":"1",
+                     "yIndex":"3"
+                    },
+                 "rotation":0,
+                 "type":"Enemy",
+                 "visible":true,
+                 "width":64,
+                 "x":470,
+                 "y":234
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -71,7 +89,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":18,
+ "nextobjectid":19,
  "orientation":"orthogonal",
  "properties":
     {

@@ -72,6 +72,9 @@ void BaseEnemy::setProperties(std::map<std::string, std::string>& properties)
 
 void BaseEnemy::CreateLineOfSight()
 {
+	this->linearBodyDef = new b2BodyDef();
+	this->linearBody = this->world->CreateBody(linearBodyDef);
+
 	this->lineOfSightFixtureDef = new b2FixtureDef();
 	this->lineOfSightConvex = new sf::ConvexShape{};
 	this->lineOfSightConvex->setPointCount(3);
@@ -86,12 +89,12 @@ void BaseEnemy::CreateLineOfSight()
 	lineOfSightFixtureDef->friction = 0.3f;
 	lineOfSightFixtureDef->isSensor = true;
 
-	this->getBody()->CreateFixture(lineOfSightFixtureDef);
+	this->linearBody->CreateFixture(lineOfSightFixtureDef);
 
-	b2Filter f = this->getBody()->GetFixtureList()->GetNext()->GetFilterData();
+	b2Filter f = this->getBody()->GetFixtureList()->GetFilterData();
 
 	f.categoryBits = ENEMY;
-	this->getBody()->GetFixtureList()->GetNext()->SetFilterData(f);
+	this->getBody()->GetFixtureList()->SetFilterData(f);
 	this->Action = new EnemyAttackActions(this);
 }
 
@@ -131,7 +134,7 @@ void BaseEnemy::CreateVectors()
 		break;
 	}
 
-	this->getBody()->SetTransform(this->getBody()->GetPosition(), desiredAngle);
+	this->linearBody->SetTransform(this->getBody()->GetPosition(), desiredAngle);
 	this->lineOfSightShape.Set(this->vertices, 3);
 }
 
@@ -161,7 +164,7 @@ void BaseEnemy::Update()
 	this->CreateVisibleLine();
 
 	bool shouldCheck = true;
-	for (b2ContactEdge* ce = this->getBody()->GetContactList(); ce; ce = ce->next)
+	for (b2ContactEdge* ce = this->linearBody->GetContactList(); ce; ce = ce->next)
 	{
 
 		b2Contact* c = ce->contact;

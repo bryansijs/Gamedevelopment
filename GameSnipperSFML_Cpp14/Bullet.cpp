@@ -47,7 +47,8 @@ void Bullet::SetContext(GameContext* context)
 void Bullet::startContact(b2Fixture * fixture)
 {
 	if (fixture->IsSensor())return;
-	GameObject* pal = static_cast<Player*>(fixture->GetBody()->GetUserData());
+
+	GameObject* pal = static_cast<Unit*>(fixture->GetBody()->GetUserData());
 
 	if (dynamic_cast<Unit*> (pal))
 	{
@@ -55,6 +56,8 @@ void Bullet::startContact(b2Fixture * fixture)
 		{
 			if (dynamic_cast<Player*> (pal)->GetGodMode())
 			{
+
+				Destroy();
 				return;
 			}
 		
@@ -64,13 +67,16 @@ void Bullet::startContact(b2Fixture * fixture)
 			(this->getBody()->GetFixtureList()->GetFilterData().maskBits & fixture->GetFilterData().categoryBits) != 0 &&
 			(this->getBody()->GetFixtureList()->GetFilterData().categoryBits & fixture->GetFilterData().maskBits) != 0;
 
+
 		if (collide)
-		{
+		{     
+
 			Unit* unit = dynamic_cast<Unit*> (pal);
 			unit->Damage(this->damage);
 
 			if (dynamic_cast<BaseEnemy*> (pal))
 			{
+				
 				BaseEnemy* enemy = dynamic_cast<BaseEnemy*> (pal);
 				enemy->setTarget(this->context->player);
 				enemy->setAttacking();
@@ -79,6 +85,7 @@ void Bullet::startContact(b2Fixture * fixture)
 			
 		}
 	}
+
 
 	Destroy();
 }

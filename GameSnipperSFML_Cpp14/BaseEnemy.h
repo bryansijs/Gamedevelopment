@@ -7,6 +7,8 @@ class BaseEnemy : public Unit
 private:
 	b2Vec2 vertices[3];
 	b2Vec2 convexVert[3];
+	b2Body* linearBody; 
+	b2BodyDef* linearBodyDef;
 	sf::ConvexShape* lineOfSightConvex;
 	sf::RectangleShape* mhpBar;
 	sf::RectangleShape* hpBar;
