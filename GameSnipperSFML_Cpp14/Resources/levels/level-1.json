@@ -19,7 +19,7 @@
          "properties":
             {
              "LayerId":"0",
-             "music":"level1.ogg"
+             "music":"AMemoryAway.ogg"
             },
          "type":"tilelayer",
          "visible":true,

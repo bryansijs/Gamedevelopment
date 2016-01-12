@@ -5,6 +5,10 @@
          "height":64,
          "name":"Background",
          "opacity":1,
+         "properties":
+            {
+             "music":"DeserveToBeLoved.ogg"
+            },
          "type":"tilelayer",
          "visible":true,
          "width":72,
@@ -219,7 +223,8 @@
          "opacity":1,
          "properties":
             {
-             "LayerId":"0"
+             "LayerId":"0",
+             "onTop":"true"
             },
          "type":"tilelayer",
          "visible":true,
