@@ -936,8 +936,7 @@
                  "properties":
                     {
                      "eType":"Runner",
-                     "isCollidable":"1",
-                     "speed":"50"
+                     "isCollidable":"1"
                     },
                  "rotation":0,
                  "type":"Enemy",
@@ -1000,15 +999,16 @@
                  "name":"Enemy",
                  "properties":
                     {
-                     "eType":"Basic",
-                     "image":"enemy1.png",
-                     "isCollidable":"1"
+                     "eType":"Tank",
+                     "isCollidable":"1",
+                     "maxHealth":"500",
+                     "speed":"40"
                     },
                  "rotation":0,
                  "type":"Enemy",
                  "visible":true,
                  "width":64,
-                 "x":483,
+                 "x":460,
                  "y":1112
                 }],
          "opacity":1,
