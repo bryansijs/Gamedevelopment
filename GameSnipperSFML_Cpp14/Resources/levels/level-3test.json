@@ -207,9 +207,7 @@
                  "properties":
                     {
                      "eType":"Basic",
-                     "isCollidable":"1",
-                     "maxHealth":"800",
-                     "speed":"0"
+                     "isCollidable":"1"
                     },
                  "rotation":0,
                  "type":"Enemy",
