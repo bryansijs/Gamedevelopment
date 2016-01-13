@@ -163,6 +163,9 @@ void BaseEnemy::CreateVisibleLine()
 
 void BaseEnemy::Update()
 {
+
+	if (!this->getVisible())return;
+
 	this->CreateVectors();
 	this->CreateVisibleLine();
 

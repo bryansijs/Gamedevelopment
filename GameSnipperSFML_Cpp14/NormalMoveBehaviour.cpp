@@ -17,9 +17,10 @@ NormalMoveBehaviour::~NormalMoveBehaviour()
 
 void NormalMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 {
+
 	if (this->checkVisible(viewPortPosition.x, viewPortPosition.y))
 	{
-		moveAction = new MoveAction{ this->getGameObject(), 0.10f };
-		moveAction->Move({ "move-left" });
+	//	moveAction = new MoveAction{ this->getGameObject(), 0.10f };
+	//	moveAction->Move({ "move-left" });
 	}
 }

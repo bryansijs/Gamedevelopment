@@ -14,6 +14,7 @@ class Unit : public GameObject
 private:
 	int health = 100;
 	int maxHealth = 100;
+	bool isVisible = true;
 public:
 	UnitState* currentState;
 	Unit::Unit(DrawContainer* dContainer, std::string img);
@@ -31,5 +32,8 @@ public:
 	void setMaxHealth(int maxHealth) { this->maxHealth = maxHealth; }
 	int getMaxHealth() { return maxHealth; }
 	void Damage(int amount);
+
+	void setVisible(bool visible) { this->isVisible = visible;}
+	bool getVisible() { return this->isVisible; }
 };
 

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ShotMoveBehaviour.h"
-
+#include "Bullet.h";
 #include "Time.h"
 
 ShotMoveBehaviour::ShotMoveBehaviour(GameObject* gameObject)
@@ -20,6 +20,9 @@ ShotMoveBehaviour::~ShotMoveBehaviour()
 
 void ShotMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 {
+
+	
+
 	float speed = velocity * Time::deltaTime;
 
 	if (direction == "move-up")
@@ -38,13 +41,8 @@ void ShotMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 	{
 		this->getGameObject()->getBody()->SetLinearVelocity(b2Vec2(speed, 0));
 	}
-}
 
-bool ShotMoveBehaviour::checkVisible(int screenX, int screenY)
-{
-	//Wat moet ik doen wanneer ze niet meer visible zijn ook echt verwijderen ????
-	//Ik heb de kamer width en height nodig. 
-	return true;
+
 }
 
 void ShotMoveBehaviour::SetDirection(std::string direction)

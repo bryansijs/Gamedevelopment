@@ -19,7 +19,9 @@ void FollowMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 {
 	if (this->getGameObject()->isFlaggedForDelete)return;
 
-	if (this->checkVisible(viewPortPosition.x, viewPortPosition.y))
+	dynamic_cast<BaseEnemy*>(gameObject)->setVisible(this->checkVisible(viewPortPosition.x, viewPortPosition.y));
+
+	if (dynamic_cast<BaseEnemy*>(gameObject)->getVisible())
 	{
 		this->setDirection();
 	}
