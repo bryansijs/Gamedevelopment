@@ -87,10 +87,16 @@ void PlayerActions::ExecuteActions()
 	{
 		moveAction->Reset();
 	}
-	
+
 	if (Input::GetKeyUp(KeyMapping::GetKey("use")))
 	{
 		useAction = true;
+	}
+
+
+	if (Input::GetKeyUp(KeyMapping::GetKey("consume")))
+	{
+		consumeAction = true;
 	}
 
 	if (Input::GetKeyDown("U"))
@@ -129,6 +135,14 @@ void PlayerActions::Shoot()
 	shootAction.Shoot(drawContainer, moveContainer, gameObjectContainer, world, player, direction, context);
 }
 
+void PlayerActions::ConsumePotion()
+{
+	if (consumeAction)
+	{
+		player->usePotion();
+		consumeAction = false;
+	}
+}
 
 void PlayerActions::Use()
 {
@@ -140,8 +154,8 @@ void PlayerActions::Use()
 		//std::cout << b <<  std::endl;
 		/*std::cout << "My current location x y " << player->getPosition().x << " " << player->getPosition().y << std::endl;*/
 
-		float playery = this->player->getBody()->GetPosition().y -16;
-		float playerx = this->player->getBody()->GetPosition().x -16;
+		float playery = this->player->getBody()->GetPosition().y - 16;
+		float playerx = this->player->getBody()->GetPosition().x - 16;
 
 		for (GameObject* object : this->player->getgameObjectContainer()->getObjects())
 		{
@@ -156,7 +170,7 @@ void PlayerActions::Use()
 			float x = object->getPosition().x;
 			if (playery + 48 > y && playery - 48 < y)
 			{
-				if (playerx + 48  >x && playerx - 48 <x)
+				if (playerx + 48 > x && playerx - 48 < x)
 				{
 					object->doAction(player);
 				}
@@ -190,7 +204,7 @@ void PlayerActions::StandStill()
 	player->getBody()->SetLinearVelocity(b2Vec2(0, 0));
 
 	if (StandStillTimer > 0)
-	{		
+	{
 		StandStillTimer -= Time::deltaTime;
 		return;
 	}

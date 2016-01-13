@@ -5,7 +5,21 @@
 
 BasicEnemy::BasicEnemy(DrawContainer* dContainer, std::string img, MoveContainer* mContainer, GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, b2World* world) :BaseEnemy{ dContainer, img,mContainer, gameObjectContainer }
 {
-	
+	this->setSize(64, 64);
+
+	this->setSpeed(40.f);
+	this->setBulletDamageBig(20);
+	this->setBulletDamage(10);
+	this->setMaxHealth(100);
+	this->setHealth(100);
+
+	this->setSeeLength(200);
+	this->setSeeWidth(50);
+
+	this->setMaxWanderDistance(200);
+	this->setMinWanderDistance(50);
+	this->setDefaultWanderDistance(20);
+
 	this->isCollidable = true;
 
 	this->setProperties(properties);
@@ -27,6 +41,4 @@ BasicEnemy::~BasicEnemy()
 void BasicEnemy::setPattern()
 {
 	this->PatternSet.insert(std::pair<std::string, float>("0009", 0.50f));
-	//this->PatternSet.insert(std::pair<std::string, float>("0009", 0.15f));
-	//this->PatternSet.insert(std::pair<std::string, float>("9901", 5.0f));
 }

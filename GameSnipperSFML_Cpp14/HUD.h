@@ -18,7 +18,7 @@ public:
 	AwesomiumHelper* awesomium;
 private:
 	bool SetHealth(int value);
-	bool SetItems(int keyAmount, std::map<BaseItem*, int> potions);
+	bool SetItems(int keyAmount, int potions);
 	bool SetWeapons();
 
 	int health = -1;

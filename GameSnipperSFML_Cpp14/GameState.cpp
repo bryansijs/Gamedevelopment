@@ -147,6 +147,7 @@ void GameState::DebugBodies()
 
 				for (int i = 0; i < vertextCount; i++)
 					convex.setPoint(i, sf::Vector2f(s->GetVertex(i).x, s->GetVertex(i).y));
+
 				gameContext->context->window.draw(convex);
 			}
 		}

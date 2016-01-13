@@ -8,6 +8,7 @@ private:
 
 	std::vector<std::string> direction;
 	std::vector<std::string> directions;
+	std::string shotDirection;
 
 public:
 	virtual void Update(sf::Vector2f viewPortPosition);
@@ -44,6 +45,9 @@ public:
 	{
 		return directions.size();
 	}
+
+	std::string getShotDirection() { return shotDirection; }
+	void setShotDirection(std::string dir) { this->shotDirection = dir; }
 
 
 

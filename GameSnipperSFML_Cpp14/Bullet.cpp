@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Bullet.h"
 #include "Player.h"
+#include "BaseEnemy.h"
 #include "GameObjectContainer.h"
 #include "Tile.h"
 #include "DrawContainer.h"
@@ -8,11 +9,11 @@
 #include "NormalDrawBehaviour.h"
 #include "ShotMoveBehaviour.h"
 #include "FilterEnum.h"
+#include "FollowMoveBehaviour.h"
 
 Bullet::Bullet(GameObjectContainer* gameObjectContainer, std::map<std::string, std::string>& properties, b2World* world, MoveContainer* moveContainer, DrawContainer* drawContainer, std::string texture) : GameObject{ drawContainer, gameObjectContainer, texture }
 {
 	this->setProperties(properties);
-
 	this->setMoveContainer(moveContainer);
 	ShotMoveBehaviour* moveBehaviour = new ShotMoveBehaviour(this, properties["direction"]);
 	this->SetMoveBehaviour(moveBehaviour);
@@ -46,7 +47,8 @@ void Bullet::SetContext(GameContext* context)
 void Bullet::startContact(b2Fixture * fixture)
 {
 	if (fixture->IsSensor())return;
-	GameObject* pal = static_cast<Player*>(fixture->GetBody()->GetUserData());
+
+	GameObject* pal = static_cast<Unit*>(fixture->GetBody()->GetUserData());
 
 	if (dynamic_cast<Unit*> (pal))
 	{
@@ -54,6 +56,8 @@ void Bullet::startContact(b2Fixture * fixture)
 		{
 			if (dynamic_cast<Player*> (pal)->GetGodMode())
 			{
+
+				Destroy();
 				return;
 			}
 		
@@ -63,12 +67,25 @@ void Bullet::startContact(b2Fixture * fixture)
 			(this->getBody()->GetFixtureList()->GetFilterData().maskBits & fixture->GetFilterData().categoryBits) != 0 &&
 			(this->getBody()->GetFixtureList()->GetFilterData().categoryBits & fixture->GetFilterData().maskBits) != 0;
 
+
 		if (collide)
-		{
-			Unit* enemy = dynamic_cast<Unit*> (pal);
-			enemy->Damage(this->damage);
+		{     
+
+			Unit* unit = dynamic_cast<Unit*> (pal);
+			unit->Damage(this->damage);
+
+			if (dynamic_cast<BaseEnemy*> (pal))
+			{
+				
+				BaseEnemy* enemy = dynamic_cast<BaseEnemy*> (pal);
+				enemy->setTarget(this->context->player);
+				enemy->setAttacking();
+				enemy->addAggressiveTime(20.0f);
+			}
+			
 		}
 	}
+
 
 	Destroy();
 }

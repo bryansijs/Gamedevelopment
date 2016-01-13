@@ -21,10 +21,13 @@ EnemyDrawBehaviour::~EnemyDrawBehaviour()
 
 void EnemyDrawBehaviour::Draw(sf::RenderWindow *window, sf::Vector2f viewPortPosition)
 {
-	window->draw(getCurrentImage());
-	window->draw(dynamic_cast<BaseEnemy*>(this->gameObject)->getLineOfSightConvex());
-	window->draw(dynamic_cast<BaseEnemy*>(this->gameObject)->getMaxHpBar());
-	window->draw(dynamic_cast<BaseEnemy*>(this->gameObject)->getHpBar());
+	if (this->isVisible(viewPortPosition.x, viewPortPosition.y))
+	{
+		window->draw(getCurrentImage());
+		window->draw(dynamic_cast<BaseEnemy*>(this->gameObject)->getLineOfSightConvex());
+		window->draw(dynamic_cast<BaseEnemy*>(this->gameObject)->getMaxHpBar());
+		window->draw(dynamic_cast<BaseEnemy*>(this->gameObject)->getHpBar());
+	}
 }
 
 sf::Sprite EnemyDrawBehaviour::getCurrentImage()
@@ -35,7 +38,7 @@ sf::Sprite EnemyDrawBehaviour::getCurrentImage()
 		this->gameObject->getWidth(),
 		this->gameObject->getHeight()));
 
-	this->unitImage.setPosition(sf::Vector2f(gameObject->getBody()->GetPosition().x-16, gameObject->getBody()->GetPosition().y-16));
+	this->unitImage.setPosition(sf::Vector2f(gameObject->getBody()->GetPosition().x, gameObject->getBody()->GetPosition().y));
 
 	return this->unitImage;
 }

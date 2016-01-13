@@ -15,12 +15,13 @@ public:
 
 	float GetFireRate();
 	void SetFireRate(float fireRate);
-
+	std::string GetBulletTexture() { return bulletTexture; };
 	std::string GetName() { return name; };
 private:
 	std::string projectileType;
 protected:
 	std::string name;
+	std::string bulletTexture;
 	int damage = 20;
 	float fireRate = 0.5f;
 };
