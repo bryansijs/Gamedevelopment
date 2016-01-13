@@ -30,11 +30,11 @@ BaseEnemy::BaseEnemy(DrawContainer* dContainer, std::string img, MoveContainer* 
 	this->setDrawBehaviour({ new EnemyDrawBehaviour(this, 10, "./Resources/sprites/" + img) });
 	this->getDrawContainer()->AddBehaviour(this->getDrawBehaviour());
 
-	this->mhpBar = new sf::RectangleShape(sf::Vector2f(60, 14));
-	this->mhpBar->setFillColor(sf::Color(100, 100, 100, 128));
+	this->mhpBar = sf::RectangleShape(sf::Vector2f(60, 14));
+	this->mhpBar.setFillColor(sf::Color(100, 100, 100, 128));
 
-	this->hpBar = new sf::RectangleShape(sf::Vector2f(56, 10));
-	this->hpBar->setFillColor(sf::Color(255, 0, 0, 128));
+	this->hpBar = sf::RectangleShape(sf::Vector2f(56, 10));
+	this->hpBar.setFillColor(sf::Color(255, 0, 0, 128));
 
 
 }
@@ -63,7 +63,7 @@ void BaseEnemy::setProperties(std::map<std::string, std::string>& properties)
 	this->setMaxWanderDistance((properties.count("maxWander")) ? std::stoi(properties["maxWander"]) : getMaxWanderDistance());
 	this->setDefaultWanderDistance((properties.count("defaultWander")) ? std::stoi(properties["defaultWander"]) : getDefaultWanderDistance());
 
-	this->setMaxHealth((properties.count("maxHealth")) ? std::stoi(properties["maxHealth"]) :this->getHealth());
+	this->setMaxHealth((properties.count("maxHealth")) ? std::stoi(properties["maxHealth"]) : this->getHealth());
 	this->setHealth((properties.count("maxHealth")) ? std::stoi(properties["maxHealth"]) : this->getHealth());
 
 	this->setBulletTexture((properties.count("bullet")) ? std::string(properties["bullet"]) : "bullet-blue");
@@ -79,8 +79,8 @@ void BaseEnemy::CreateLineOfSight()
 	this->linearBody = this->world->CreateBody(linearBodyDef);
 
 	this->lineOfSightFixtureDef = new b2FixtureDef();
-	this->lineOfSightConvex = new sf::ConvexShape{};
-	this->lineOfSightConvex->setPointCount(3);
+	this->lineOfSightConvex = sf::ConvexShape{};
+	this->lineOfSightConvex.setPointCount(3);
 
 	vertices[0].Set(16, 16);
 	vertices[1].Set(seeWidth, seeLength);
@@ -145,27 +145,24 @@ void BaseEnemy::CreateVectors()
 void BaseEnemy::CreateVisibleLine()
 {
 
-	this->lineOfSightConvex->setFillColor(sf::Color(255, 129, 0, 128));
-	this->lineOfSightConvex->setPosition(sf::Vector2f(this->getBody()->GetPosition().x, this->getBody()->GetPosition().y));
-	this->mhpBar->setPosition(sf::Vector2f(this->getBody()->GetPosition().x - 16, this->getBody()->GetPosition().y - 30));
-	this->hpBar->setPosition(sf::Vector2f(this->getBody()->GetPosition().x - 14, this->getBody()->GetPosition().y - 28));
+	this->lineOfSightConvex.setFillColor(sf::Color(255, 129, 0, 128));
+	this->lineOfSightConvex.setPosition(sf::Vector2f(this->getBody()->GetPosition().x, this->getBody()->GetPosition().y));
+	this->mhpBar.setPosition(sf::Vector2f(this->getBody()->GetPosition().x - 16, this->getBody()->GetPosition().y - 30));
+	this->hpBar.setPosition(sf::Vector2f(this->getBody()->GetPosition().x - 14, this->getBody()->GetPosition().y - 28));
 
 	//56 is de groote dus dit is gelijk aan maxhp;
 
 	float b = 56.0f / (float)this->getMaxHealth();
 	float c = (float)this->getHealth() * b;
 
-	this->hpBar->setSize(sf::Vector2f(c, 10));
+	this->hpBar.setSize(sf::Vector2f(c, 10));
 
 	for (int i = 0; i < 3; i++)
-		this->lineOfSightConvex->setPoint(i, sf::Vector2f(convexVert[i].x, convexVert[i].y));
+		this->lineOfSightConvex.setPoint(i, sf::Vector2f(convexVert[i].x, convexVert[i].y));
 }
 
 void BaseEnemy::Update()
 {
-
-	//if (!this->getVisible())return;
-
 	this->CreateVectors();
 	this->CreateVisibleLine();
 
@@ -183,7 +180,7 @@ void BaseEnemy::Update()
 				if (c->IsTouching())
 				{
 					shouldCheck = false;
-					
+
 					this->Attacking = true;
 					if (this->target == nullptr)
 					{
@@ -237,7 +234,7 @@ void BaseEnemy::updateBehaviour(bool shouldCheck)
 
 		Action->Attack();
 		Attacking = false;
-		this->lineOfSightConvex->setFillColor(sf::Color(250, 0, 0, 128));
+		this->lineOfSightConvex.setFillColor(sf::Color(250, 0, 0, 128));
 	}
 
 	if (aggressiveTime <= 0.0)

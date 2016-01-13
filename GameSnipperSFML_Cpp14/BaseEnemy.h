@@ -1,26 +1,28 @@
 #pragma once
 #include "Unit.h"
 #include "Player.h"
+//#include "EnemyAttackActions.h"
+
 class EnemyAttackActions;
 class BaseEnemy : public Unit
 {
 private:
 	b2Vec2 vertices[3];
 	b2Vec2 convexVert[3];
-	b2Body* linearBody; 
+	b2Body* linearBody;
 	b2BodyDef* linearBodyDef;
-	sf::ConvexShape* lineOfSightConvex;
-	sf::RectangleShape* mhpBar;
-	sf::RectangleShape* hpBar;
+	sf::ConvexShape lineOfSightConvex;
+	sf::RectangleShape mhpBar;
+	sf::RectangleShape hpBar;
 	b2PolygonShape  lineOfSightShape;
 	b2FixtureDef* lineOfSightFixtureDef;
 	Player* target;
 	bool Attacking = false;
 	bool Aggressive = false;
-	int seeWidth,seeLength;
+	int seeWidth, seeLength;
 	int attackType = 0;
 	int patternCount = 0, patternAmount = 0, patternIndex = 0;
-	int minWanderDistance,maxWanderDistance, defaultWanderDistance;
+	int minWanderDistance, maxWanderDistance, defaultWanderDistance;
 	int bulletDamage = 20, bulletDamageBig = 30;
 
 
@@ -54,9 +56,9 @@ public:
 	int getMaxWanderDistance() { return maxWanderDistance; }
 	int getDefaultWanderDistance() { return defaultWanderDistance; }
 
-	sf::ConvexShape& getLineOfSightConvex() { return *lineOfSightConvex; }
-	sf::RectangleShape& getMaxHpBar() { return *mhpBar; }
-	sf::RectangleShape& getHpBar() { return *hpBar; }
+	sf::ConvexShape getLineOfSightConvex() { return lineOfSightConvex; }
+	sf::RectangleShape getMaxHpBar() { return mhpBar; }
+	sf::RectangleShape getHpBar() { return hpBar; }
 	float shotRate = 0.5f;
 	float nextShot;
 	void addAggressiveTime(float time) { aggressiveTime += time; }
@@ -79,7 +81,7 @@ public:
 
 	std::string getBulletTexture() { return this->bulletTexture; }
 	void setBulletTexture(std::string bulletTexture) { this->bulletTexture = bulletTexture; }
-	
+
 	std::string getBulletTextureBig() { return this->bulletTextureBig; }
 	void setBulletTextureBig(std::string bulletTextureBig) { this->bulletTextureBig = bulletTextureBig; }
 
