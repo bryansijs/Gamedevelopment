@@ -32,7 +32,7 @@ GameObject* EnemyFactory::CreateBasic(std::map<std::string, std::string>& proper
 	if (!properties.count("image"))
 	{
 		properties["width"] = std::to_string(0);
-		properties["heigth"] = std::to_string(0);
+		properties["height"] = std::to_string(0);
 	}
 	
 	return new BasicEnemy(container, imgurl, mContainer, gameObjectContainer, properties, world);
@@ -45,7 +45,7 @@ GameObject* EnemyFactory::CreateRunner(std::map<std::string, std::string>&proper
 	if (!properties.count("image"))
 	{
 		properties["width"] = std::to_string(0);
-		properties["heigth"] = std::to_string(0);
+		properties["height"] = std::to_string(0);
 	}
 
 	return new RunnerEnemy(container, imgurl, mContainer, gameObjectContainer, properties, world);
@@ -58,7 +58,7 @@ GameObject* EnemyFactory::CreateTank(std::map<std::string, std::string>& propert
 	if (!properties.count("image"))
 	{
 		properties["width"] = std::to_string(0);
-		properties["heigth"] = std::to_string(0);
+		properties["height"] = std::to_string(0);
 	}
 
 	return new TankEnemy(container, imgurl, mContainer, gameObjectContainer, properties, world);

@@ -20,6 +20,7 @@
 #include <fstream>
 #include "LevelManager.h"
 #include "GameState.h"
+#include "MenuState.h"
 
 using namespace Awesomium;
 
@@ -63,7 +64,7 @@ void WinState::ReloadPage()
 	WebURL url(WSLit(winContext->pathToFile));
 	winContext->webView->LoadURL(url);
 	winContext->webView->SetTransparent(true);
-	setScore(50);
+	setScore(500);
 	while (winContext->webView->IsLoading())
 	{
 		winContext->web_core->Update();
@@ -128,11 +129,22 @@ void WinState::ToMenu()
 	if (load)
 	{
 		winContext->music->stop();
-		GameState* gameState = new GameState(winContext->context, stateManager, levelManager, scoreManager, true);
+		if(levelManager->isLastLevel())
+		{
+			//TO Menu
+			MenuState* menuState = new MenuState(winContext->context, stateManager, levelManager, scoreManager);
+			stateManager->AddState(menuState);
+			stateManager->StartNextState();
+			load = false;
+		}
+		else
+		{
+			GameState* gameState = new GameState(winContext->context, stateManager, levelManager, scoreManager, true);
 
-		stateManager->AddState(gameState);
-		stateManager->StartNextState();
-		load = false;
+			stateManager->AddState(gameState);
+			stateManager->StartNextState();
+			load = false;
+		}
 	}
 }
 

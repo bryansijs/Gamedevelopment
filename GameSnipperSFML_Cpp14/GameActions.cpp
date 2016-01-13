@@ -47,11 +47,6 @@ void GameActions::ExecuteActions()
 	activeActions.clear();
 }
 
-void GameActions::NextLevel()
-{
-	gamestate->StartNextLevel();
-}
-
 void GameActions::GodMode()
 {
 	if (gameContext->player->GetGodMode())

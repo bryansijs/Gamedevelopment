@@ -99,11 +99,6 @@ void PlayerActions::ExecuteActions()
 		consumeAction = true;
 	}
 
-	if (Input::GetKeyDown("U"))
-	{
-		player->setHealth(0);
-	}
-
 	activeActions.clear();
 
 	resetMove = true;

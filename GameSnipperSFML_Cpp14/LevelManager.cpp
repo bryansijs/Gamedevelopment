@@ -57,6 +57,16 @@ void LevelManager::swapSequence(int first, int second)
 	currentLevelNumber = 0;
 }
 
+bool LevelManager::isLastLevel()
+{
+	if(currentLevelNumber + 1 == allLevels.size())
+	{
+		currentLevelNumber = 0;
+		return true;
+	}
+	return false;
+}
+
 std::vector<std::string> LevelManager::getAllLevels()
 {
 	std::vector<std::string> levels;

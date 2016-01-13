@@ -5,7 +5,7 @@
 
 std::string StorylineManager::current;
 std::queue<std::string> StorylineManager::messages;
-float StorylineManager::timer = 5;
+float StorylineManager::timer = 2;
 sf::Sound* StorylineManager::music;
 sf::SoundBuffer StorylineManager::sfx;
 
