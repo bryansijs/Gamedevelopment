@@ -67,12 +67,23 @@ void Bullet::startContact(b2Fixture * fixture)
 			(this->getBody()->GetFixtureList()->GetFilterData().maskBits & fixture->GetFilterData().categoryBits) != 0 &&
 			(this->getBody()->GetFixtureList()->GetFilterData().categoryBits & fixture->GetFilterData().maskBits) != 0;
 
-
 		if (collide)
 		{     
 
-			Unit* unit = dynamic_cast<Unit*> (pal);
-			unit->Damage(this->damage);
+ 			Unit* unit = dynamic_cast<Unit*> (pal);
+			
+			/*if (unit->getVisible())
+			{
+				Destroy();
+				if (dynamic_cast<BaseEnemy*> (unit))
+				{
+					unit->getBody()->SetLinearVelocity(b2Vec2(0, 0));
+				}
+
+				return;
+			}*/
+			
+   			unit->Damage(this->damage);
 
 			if (dynamic_cast<BaseEnemy*> (pal))
 			{

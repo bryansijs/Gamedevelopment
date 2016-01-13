@@ -11,7 +11,6 @@ public:
 	~ShotMoveBehaviour();
 
 	void Update(sf::Vector2f viewPortPosition);
-	bool checkVisible(int screenX, int screenY);
 
 	void SetDirection(std::string direction);
 private:

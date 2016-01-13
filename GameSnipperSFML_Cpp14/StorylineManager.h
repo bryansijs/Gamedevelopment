@@ -15,7 +15,7 @@ private:
 	static std::string current;
 	static std::queue<std::string> messages;
 	static float timer;
-	static void TimerReset() { timer = 7; };
+	static void TimerReset() { timer = 3; };
 
 	static sf::Sound* music;
 	static sf::SoundBuffer sfx;

@@ -44,8 +44,11 @@ WanderMoveBehaviour::~WanderMoveBehaviour()
 void WanderMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 {
  	if (this->getGameObject()->isFlaggedForDelete)return;
-	if (this->checkVisible(viewPortPosition.x, viewPortPosition.y))
-	{
+
+	//dynamic_cast<BaseEnemy*>(gameObject)->setVisible(this->checkVisible(viewPortPosition.x, viewPortPosition.y));
+
+	//if (dynamic_cast<BaseEnemy*>(gameObject)->getVisible())
+	//{
 
 		if (currentMoveDistance >= moveDistance)
 		{
@@ -69,13 +72,12 @@ void WanderMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 				this->MoveAway(dynamic_cast<BaseEnemy*>(obj));
 			}
 			if (dynamic_cast<Tile*>(obj))
-				{
-					if (c->IsTouching()) {
-						this->setDirection();
-					}
+			{
+				if (c->IsTouching()) {
+					this->setDirection();
 				}
-				
-	}
+			}	
+		}
 
 
 		moveAction->Move(this->getDirection());
@@ -86,7 +88,7 @@ void WanderMoveBehaviour::Update(sf::Vector2f viewPortPosition)
 
 		reverseTime += 100.0f * Time::deltaTime;
 
-	}
+	//}
 
 
 }
