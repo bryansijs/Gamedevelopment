@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "PlayerDrawBehaviour.h"
-
+#include "Player.h"
 PlayerDrawBehaviour::PlayerDrawBehaviour(GameObject* gameObject, int refreshRate, std::string textureUrl)
 {
 	this->gameObject = gameObject;
@@ -18,6 +18,10 @@ PlayerDrawBehaviour::~PlayerDrawBehaviour()
 void PlayerDrawBehaviour::Draw(sf::RenderWindow *window, sf::Vector2f viewPortPosition)
 {
 	window->draw(getCurrentImage());
+	if (dynamic_cast<Player*>(this->gameObject))
+	{
+		dynamic_cast<Player*>(this->gameObject)->setVisible(true);
+	}
 }
 
 sf::Sprite PlayerDrawBehaviour::getCurrentImage()
@@ -28,7 +32,7 @@ sf::Sprite PlayerDrawBehaviour::getCurrentImage()
 		this->gameObject->getWidth(),
 		this->gameObject->getHeight()));
 
-	this->unitImage.setPosition(sf::Vector2f(this->gameObject->getBody()->GetPosition().x -16, this->gameObject->getBody()->GetPosition().y -16));
+	this->unitImage.setPosition(sf::Vector2f(this->gameObject->getBody()->GetPosition().x - 16, this->gameObject->getBody()->GetPosition().y - 16));
 
 	return this->unitImage;
 }

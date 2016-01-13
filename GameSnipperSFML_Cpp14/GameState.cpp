@@ -24,6 +24,7 @@
 #include <string>
 #include "WinState.h"
 #include "GameObjectContainer.h"
+#include "FilterEnum.h"
 
 GameState::GameState(Context* context, StateManager* stateManager, LevelManager* levelmanager, ScoreManager* scoreManager, bool next)
 {
@@ -76,7 +77,7 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	gameContext->player->createBoxDynamicForPlayers(*gameContext->world);
 
 	b2Filter f = gameContext->player->getBody()->GetFixtureList()->GetFilterData();
-	f.categoryBits = 0x0004;
+	f.categoryBits = PLAYER;
 
 	gameContext->player->getBody()->GetFixtureList()->SetFilterData(f);
 	sf::FloatRect rect(gameContext->level->getViewPortX(), gameContext->level->getViewPortY(), gameContext->context->window.getSize().x, gameContext->context->window.getSize().y);

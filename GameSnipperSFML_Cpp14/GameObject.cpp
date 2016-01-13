@@ -135,9 +135,9 @@ void GameObject::createBoxStatic(b2World& World)
 	else {
 		b2Vec2 vertices[4];
 		vertices[0].Set(0, 0);
-		vertices[1].Set(0, this->getHeight());
-		vertices[2].Set(this->getWidth(), this->getHeight());
-		vertices[3].Set(this->getWidth(),0);
+		vertices[1].Set(0, this->getHeight() - 2);
+		vertices[2].Set(this->getWidth()-2, this->getHeight() -2 );
+		vertices[3].Set(this->getWidth() -2 ,0);
 		this->Shape.Set(vertices, 4);
 	}
 
