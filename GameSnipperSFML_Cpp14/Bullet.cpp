@@ -72,7 +72,7 @@ void Bullet::startContact(b2Fixture * fixture)
 
  			Unit* unit = dynamic_cast<Unit*> (pal);
 			
-			if (!unit->getVisible())
+			/*if (unit->getVisible())
 			{
 				Destroy();
 				if (dynamic_cast<BaseEnemy*> (unit))
@@ -81,7 +81,7 @@ void Bullet::startContact(b2Fixture * fixture)
 				}
 
 				return;
-			}
+			}*/
 			
    			unit->Damage(this->damage);
 
