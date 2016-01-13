@@ -238,13 +238,6 @@ void GameState::Update()
 					}
 				}
 
-				if (Input::GetKeyDown("K")) {
-					StartNextLevel();
-				}
-				if (Input::GetKeyDown("Y")) {
-					StartWinState();
-				}
-
 				if (isPause)
 					this->MenuEnd(gameContext->pauze->KeyHandler());
 
