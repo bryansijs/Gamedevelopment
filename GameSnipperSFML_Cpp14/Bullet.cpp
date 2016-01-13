@@ -75,6 +75,11 @@ void Bullet::startContact(b2Fixture * fixture)
 			if (!unit->getVisible())
 			{
 				Destroy();
+				if (dynamic_cast<BaseEnemy*> (unit))
+				{
+					unit->getBody()->SetLinearVelocity(b2Vec2(0, 0));
+				}
+
 				return;
 			}
 			
