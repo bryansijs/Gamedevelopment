@@ -22,7 +22,7 @@ int _tmain(int artgc, _TCHAR* argv[])
 		StateManager* stateManager = new StateManager();
 		LevelManager* levelManager = new LevelManager();
 
-		UnitTestMain utm;
+		//UnitTestMain utm;
 
 		Context* context = new Context(960, 640);
 		MenuState* state = new MenuState(context, stateManager,levelManager,scoreManager);

@@ -15,6 +15,7 @@ class MenuActions : public BaseInput
 {
 public:
 	MenuActions(StateManager* stateManager, MenuContext* menuContext, LevelManager* levelManager, ScoreManager* scoreManager);
+	~MenuActions();
 
 	void ExitGame();
 	void ReloadPage();

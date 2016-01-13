@@ -5,6 +5,9 @@
 class StorylineManager
 {
 public:
+	StorylineManager();
+	~StorylineManager();
+
 	static void Add(std::string message);
 	static bool Updated();
 	static std::string GetText();

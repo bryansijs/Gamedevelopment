@@ -20,6 +20,8 @@ AwesomiumHelper::AwesomiumHelper(WebCore* webcore, std::string path, int width, 
 
 AwesomiumHelper::~AwesomiumHelper()
 {
+	delete pixels;
+	delete surface;
 }
 
 void AwesomiumHelper::ReloadPage()

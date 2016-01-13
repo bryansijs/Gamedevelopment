@@ -39,9 +39,9 @@ public:
 	sf::View view;
 
 	void setMenuPosition();
-	PauseMenu* pauze = new PauseMenu{ 321,395 };
+	PauseMenu* pauze;
 
-	FPSShow* fpsShow = new FPSShow{};
+	FPSShow* fpsShow;
 
 	b2World* world;
 	CollisionListener* collisionListener;

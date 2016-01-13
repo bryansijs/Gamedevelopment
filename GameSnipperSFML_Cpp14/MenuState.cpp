@@ -56,7 +56,7 @@ MenuState::MenuState(Context* context, StateManager* stateManager, LevelManager*
 
 MenuState::~MenuState()
 {
-	delete menuContext;
+	
 }
 
 void MenuState::Terminate()
@@ -101,6 +101,7 @@ void MenuState::Update()
 
 	if (terminate)
 	{
-		delete this;
+		delete menuContext;
+		delete menuActions;
 	}
 }

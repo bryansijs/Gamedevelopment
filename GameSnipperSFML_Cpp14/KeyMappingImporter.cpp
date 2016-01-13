@@ -23,8 +23,14 @@ void KeyMappingImporter::Import(string json)
 	if (parsed)
 	{
 		GenerateMapping(jsonRoot);
+
+		inputFileStream.clear();
+		inputFileStream.close();
 		return;
 	}
+
+	inputFileStream.clear();
+	inputFileStream.close();
 
 	throw("Json could not be parsed.");
 }

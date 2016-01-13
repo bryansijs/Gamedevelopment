@@ -50,6 +50,7 @@ PauseMenu::PauseMenu(float width, float height)
 
 PauseMenu::~PauseMenu()
 {
+
 }
 
 void PauseMenu::draw(sf::RenderWindow &window)

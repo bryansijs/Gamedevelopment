@@ -1,0 +1,53 @@
+{ "height":5,
+ "layers":[
+        {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "height":5,
+         "name":"Tilelaag 1",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":5,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":5,
+         "name":"Objectlaag 1",
+         "objects":[
+                {
+                 "height":0,
+                 "id":1,
+                 "name":"startTile",
+                 "properties":
+                    {
+                     "sType":"StartTile"
+                    },
+                 "rotation":0,
+                 "type":"GameTile",
+                 "visible":true,
+                 "width":0,
+                 "x":79,
+                 "y":83
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":5,
+         "x":0,
+         "y":0
+        }],
+ "nextobjectid":2,
+ "orientation":"orthogonal",
+ "properties":
+    {
+
+    },
+ "renderorder":"right-down",
+ "tileheight":32,
+ "tilesets":[],
+ "tilewidth":32,
+ "version":1,
+ "width":5
+}

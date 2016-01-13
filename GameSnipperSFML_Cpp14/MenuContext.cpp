@@ -11,5 +11,8 @@ MenuContext::MenuContext(Context* context)
 
 MenuContext::~MenuContext()
 {
-	
+	delete music;
+	delete pixels;
+
+	delete surface;
 }

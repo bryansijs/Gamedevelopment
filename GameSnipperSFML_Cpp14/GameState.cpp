@@ -423,6 +423,9 @@ void GameState::Loading()
 
 void GameState::DoneLoading()
 {
+	delete loadingScreen;
+	loadingScreen = nullptr;
+
 	loadingScreen = new AwesomiumHelper{ maincontext->web_core, "file:///Resources/menuHTML/doneLoading.html", 960, 640 };
 	loadingScreen->JavaScriptCall("loadAd", GetAd());
 	loadingScreen->JavaScriptCall("loadTip", GetTip());

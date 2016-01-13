@@ -21,6 +21,11 @@ MenuActions::MenuActions(StateManager* stateManager, MenuContext* menuContext, L
 	MenuActions::scoreManager = scoreManager;
 }
 
+MenuActions::~MenuActions()
+{
+
+}
+
 void MenuActions::ProcessActions()
 {
 	map<string, void(MenuActions::*)()>::iterator it;

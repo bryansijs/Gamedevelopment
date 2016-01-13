@@ -16,6 +16,9 @@ GameContext::GameContext(Context* context)
 	b2Vec2 gravity(0.f, 0.0f);
 	collisionListener = { new CollisionListener() };
 
+	pauze = new PauseMenu{ 321,395 };
+	fpsShow = new FPSShow{};
+
 	world = { new b2World(gravity) };
 	world->SetContactListener(collisionListener);
 
@@ -45,6 +48,8 @@ GameContext::~GameContext()
 	delete moveContainer;
 	delete drawContainer;
 	delete useContainer;
+
+	delete surface;
 
 	pauze = nullptr;
 	player = nullptr;

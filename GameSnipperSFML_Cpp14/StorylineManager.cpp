@@ -9,6 +9,16 @@ float StorylineManager::timer = 5;
 sf::Sound* StorylineManager::music;
 sf::SoundBuffer StorylineManager::sfx;
 
+StorylineManager::StorylineManager()
+{
+}
+
+StorylineManager::~StorylineManager()
+{
+	delete music;
+	music = nullptr;
+}
+
 void StorylineManager::Add(std::string message)
 {
 	messages.push(message);

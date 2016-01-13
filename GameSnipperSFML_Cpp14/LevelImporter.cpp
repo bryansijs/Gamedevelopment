@@ -315,6 +315,9 @@ bool LevelImporter::Import(std::string JSON)
 		return false;
 	}
 
+	inputFileStream.clear();
+	inputFileStream.close();
+
 	return true;
 }
 
