@@ -12,8 +12,14 @@ public:
 	void SetContext(GameContext* context);
 	void startContact(b2Fixture* fixture);
 	void endContact(b2Fixture* fixture);
+
+
+	void setVisible(bool visible) { this->isVisible = visible; }
+	bool getVisible() { return this->isVisible; }
+	void Remove() { this->Destroy(); }
+
 private:
 	GameContext* context;
-
+	bool isVisible = false;
 	int damage = 20;
 };

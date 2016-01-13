@@ -21,7 +21,7 @@ TankEnemy::TankEnemy(DrawContainer* dContainer, std::string img, MoveContainer* 
 
 	this->setMaxWanderDistance(200);
 	this->setMinWanderDistance(50);
-	this->setDefaultWanderDistance(20);
+	this->setDefaultWanderDistance(20);  
 
 	this->setProperties(properties);
 	this->SetAnimationStates(4);
