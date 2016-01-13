@@ -73,13 +73,15 @@ Door::Door(DrawContainer* container, std::string img, GameObjectContainer* gameO
 
 void Door::doAction()
 {
-	shouldUpdate = true;
-	setOpen();
+	//if (this->getDrawBehaviour() != nullptr && this->getDrawContainer()->checkIfidIsDiscoverd(this->getVisibleId())) {
+		shouldUpdate = true;
+		setOpen();
+	//}
 }
 
 void Door::doAction(Player* player)
 {
-	if (this->getDrawContainer()->checkIfidIsDiscoverd(this->getVisibleId())) {
+	if (this->getDrawContainer() != nullptr && this->getDrawContainer()->checkIfidIsDiscoverd(this->getVisibleId())) {
 		if (this->isOpen = true)return;
 
 		if (keyNeed && keyUsed == false)

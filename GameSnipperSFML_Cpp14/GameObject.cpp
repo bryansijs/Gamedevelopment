@@ -188,10 +188,10 @@ void GameObject::createBoxDynamicForPlayers(b2World & World)
 	}
 	else {
 		b2Vec2 vertices[4];
-		vertices[0].Set(-16, -16);
-		vertices[1].Set(-16, this->getHeight() + -16);
-		vertices[2].Set(this->getWidth() + -16, this->getHeight() + -16);
-		vertices[3].Set(this->getWidth() + -16, -16);
+		vertices[0].Set(-15, -15);
+		vertices[1].Set(-15, this->getHeight()-1 + -15);
+		vertices[2].Set(this->getWidth()-1 + -15, this->getHeight()-1 + -15);
+		vertices[3].Set(this->getWidth()-1 + -15, -15);
 		this->Shape.Set(vertices, 4);
 	}
 

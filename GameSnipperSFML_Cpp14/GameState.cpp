@@ -90,8 +90,8 @@ GameState::GameState(Context* context, StateManager* stateManager, LevelManager*
 	storyview.setSize(960, 640);
 	storyview.setCenter(480, 320);
 
-	StorylineManager::Add("Let's find a way out!");
-	StorylineManager::Add("Use your arrow keys to walk");
+	//StorylineManager::Add("Let's find a way out!");
+	//StorylineManager::Add("Use your arrow keys to walk");
 }
 
 GameState::~GameState()
