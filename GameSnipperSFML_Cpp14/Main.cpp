@@ -13,8 +13,8 @@ bool quitGame = false;
 
 using namespace std;
 
-int _tmain(int artgc, _TCHAR* argv[])
-//int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)  // GameSnipperSFML properties/linker/system/subsystem op WINDOWS zetten dan word de console gehide
+//int _tmain(int artgc, _TCHAR* argv[])
+int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)  // GameSnipperSFML properties/linker/system/subsystem op WINDOWS zetten dan word de console gehide
 {
 	try
 	{

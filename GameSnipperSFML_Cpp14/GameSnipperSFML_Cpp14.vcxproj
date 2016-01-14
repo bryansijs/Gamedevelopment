@@ -142,7 +142,7 @@ xcopy /y /d  "$(ProjectDir)*.exe" $(TargetDir)</Command>
       <AdditionalUsingDirectories>C:\Users\Bryan\Source\Repos\Gamedevelopment\GameSnipperSFML_Cpp14\include;%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
